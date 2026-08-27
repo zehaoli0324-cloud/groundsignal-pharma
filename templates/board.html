@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--
+  企业情报看板模板 (board.html)
+  ask.py 渲染时替换花括号占位符（如 TITLE / NAME）。
+  修改样式/布局 = 直接改这个文件，无需改脚本。
+  占位符清单（均带双花括号，此处省略）:
+    TITLE / NAME / TYPE_LABEL / FETCHED / NEIGHBOR_COUNT / HERO_COLOR
+    FM_ROWS / SVG / REL_CARDS / BODY_SNIP / SRC / DATE
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; background:#eef2f7; color:#1e293b; padding:24px; }
+  .wrap { max-width:960px; margin:0 auto; }
+  .hero { background:linear-gradient(135deg,{{HERO_COLOR}},#1e293b); color:#fff; border-radius:16px; padding:28px 32px; margin-bottom:20px; }
+  .hero h1 { font-size:26px; margin-bottom:6px; }
+  .hero .sub { opacity:.85; font-size:14px; }
+  .tag { display:inline-block; background:rgba(255,255,255,.2); border-radius:20px; padding:2px 12px; font-size:12px; margin-right:6px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:720px) { .grid { grid-template-columns:1fr; } }
+  .card { background:#fff; border-radius:12px; padding:20px; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .card h2 { font-size:16px; margin-bottom:14px; padding-bottom:8px; border-bottom:2px solid #e2e8f0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  td { padding:6px 8px; border-bottom:1px solid #f1f5f9; vertical-align:top; }
+  td.k { width:90px; color:#64748b; font-weight:600; }
+  .rel-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+  .rel-card { display:block; text-decoration:none; color:inherit; border:1px solid #e2e8f0; border-left:4px solid var(--c,#94a3b8); border-radius:8px; padding:10px; transition:.15s; }
+  .rel-card:hover { box-shadow:0 2px 8px rgba(0,0,0,.12); transform:translateY(-1px); }
+  .rel-name { font-size:14px; font-weight:600; margin-bottom:2px; }
+  .rel-desc { font-size:11px; color:#64748b; line-height:1.4; }
+  .rel-dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px; }
+  .empty { color:#94a3b8; font-size:13px; }
+  .src { font-size:12px; color:#64748b; word-break:break-all; }
+  .body-snip { font-size:13px; line-height:1.7; color:#475569; background:#f8fafc; border-radius:8px; padding:12px; }
+  form.q { margin-bottom:20px; display:flex; gap:10px; }
+  form.q input { flex:1; padding:12px 16px; border-radius:10px; border:1px solid #cbd5e1; font-size:14px; }
+  form.q button { padding:12px 24px; background:#1e293b; color:#fff; border:none; border-radius:10px; cursor:pointer; font-size:14px; }
+  .foot { text-align:center; color:#94a3b8; font-size:12px; margin-top:24px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <form class="q" method="get" action="">
+    <input id="q" name="q" value="" placeholder="换个实体再查：输入公司/人物/产品/投资人名…">
+    <button type="submit">查询</button>
+  </form>
+  <div class="hero">
+    <h1>{{NAME}}</h1>
+    <div class="sub">
+      <span class="tag">{{TYPE_LABEL}}</span>
+      {{EVIDENCE}}
+      <span class="tag">采集于 {{FETCHED}}</span>
+      <span class="tag">{{NEIGHBOR_COUNT}} 个直接关联</span>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <h2>基本信息</h2>
+      <table>{{FM_ROWS}}</table>
+    </div>
+    <div class="card">
+      <h2>关系网络</h2>
+      {{SVG}}
+    </div>
+  </div>
+  <div class="card" style="margin-top:20px;">
+    <h2>直接关联（{{NEIGHBOR_COUNT}}）</h2>
+    <div class="rel-grid">{{REL_CARDS}}</div>
+  </div>
+  <div class="card" style="margin-top:20px;">
+    <h2>笔记内容摘要</h2>
+    <div class="body-snip">{{BODY_SNIP}}</div>
+  </div>
+  <div class="card" style="margin-top:20px;">
+    <h2>来源</h2>
+    <div class="src">{{SRC}}</div>
+  </div>
+  <div class="foot">由 ask.py 生成 · {{DATE}}</div>
+</div>
+</body>
+</html>

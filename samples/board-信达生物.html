@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--
+  企业情报看板模板 (board.html)
+  ask.py 渲染时替换花括号占位符（如 TITLE / NAME）。
+  修改样式/布局 = 直接改这个文件，无需改脚本。
+  占位符清单（均带双花括号，此处省略）:
+    TITLE / NAME / TYPE_LABEL / FETCHED / NEIGHBOR_COUNT / HERO_COLOR
+    FM_ROWS / SVG / REL_CARDS / BODY_SNIP / SRC / DATE
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>信达生物 · 企业情报看板</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; background:#eef2f7; color:#1e293b; padding:24px; }
+  .wrap { max-width:960px; margin:0 auto; }
+  .hero { background:linear-gradient(135deg,#3b82f6,#1e293b); color:#fff; border-radius:16px; padding:28px 32px; margin-bottom:20px; }
+  .hero h1 { font-size:26px; margin-bottom:6px; }
+  .hero .sub { opacity:.85; font-size:14px; }
+  .tag { display:inline-block; background:rgba(255,255,255,.2); border-radius:20px; padding:2px 12px; font-size:12px; margin-right:6px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:720px) { .grid { grid-template-columns:1fr; } }
+  .card { background:#fff; border-radius:12px; padding:20px; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .card h2 { font-size:16px; margin-bottom:14px; padding-bottom:8px; border-bottom:2px solid #e2e8f0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  td { padding:6px 8px; border-bottom:1px solid #f1f5f9; vertical-align:top; }
+  td.k { width:90px; color:#64748b; font-weight:600; }
+  .rel-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+  .rel-card { display:block; text-decoration:none; color:inherit; border:1px solid #e2e8f0; border-left:4px solid var(--c,#94a3b8); border-radius:8px; padding:10px; transition:.15s; }
+  .rel-card:hover { box-shadow:0 2px 8px rgba(0,0,0,.12); transform:translateY(-1px); }
+  .rel-name { font-size:14px; font-weight:600; margin-bottom:2px; }
+  .rel-desc { font-size:11px; color:#64748b; line-height:1.4; }
+  .rel-dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px; }
+  .empty { color:#94a3b8; font-size:13px; }
+  .src { font-size:12px; color:#64748b; word-break:break-all; }
+  .body-snip { font-size:13px; line-height:1.7; color:#475569; background:#f8fafc; border-radius:8px; padding:12px; }
+  form.q { margin-bottom:20px; display:flex; gap:10px; }
+  form.q input { flex:1; padding:12px 16px; border-radius:10px; border:1px solid #cbd5e1; font-size:14px; }
+  form.q button { padding:12px 24px; background:#1e293b; color:#fff; border:none; border-radius:10px; cursor:pointer; font-size:14px; }
+  .foot { text-align:center; color:#94a3b8; font-size:12px; margin-top:24px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <form class="q" method="get" action="">
+    <input id="q" name="q" value="" placeholder="换个实体再查：输入公司/人物/产品/投资人名…">
+    <button type="submit">查询</button>
+  </form>
+  <div class="hero">
+    <h1>信达生物</h1>
+    <div class="sub">
+      <span class="tag">公司</span>
+      <span class="tag" style="background:#10b981">证据:一手官方</span>
+      <span class="tag">采集于 2026-08-27</span>
+      <span class="tag">7 个直接关联</span>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <h2>基本信息</h2>
+      <table><tr><td class="k">行业</td><td>创新药（肿瘤/代谢）</td></tr><tr><td class="k">地区</td><td>江苏苏州</td></tr><tr><td class="k">采集时间</td><td>2026-08-27</td></tr></table>
+    </div>
+    <div class="card">
+      <h2>关系网络</h2>
+      <svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;background:#f8fafc;border-radius:12px;"><line x1="360" y1="210" x2="360" y2="60" stroke="#64748b" stroke-width="2" stroke-dasharray="4,3" opacity="0.7"/><circle cx="360" cy="60" r="26" fill="#64748b" opacity="0.15" stroke="#64748b" stroke-width="2"/><text x="360" y="64" text-anchor="middle" font-size="12" fill="#1e293b">00-总目录</text><line x1="360" y1="210" x2="477" y2="116" stroke="#e11d48" stroke-width="2" stroke-dasharray="4,3" opacity="0.7"/><circle cx="477" cy="116" r="26" fill="#e11d48" opacity="0.15" stroke="#e11d48" stroke-width="2"/><text x="477" y="120" text-anchor="middle" font-size="12" fill="#1e293b">2019-08-22</text><line x1="360" y1="210" x2="506" y2="243" stroke="#64748b" stroke-width="2" stroke-dasharray="4,3" opacity="0.7"/><circle cx="506" cy="243" r="26" fill="#64748b" opacity="0.15" stroke="#64748b" stroke-width="2"/><text x="506" y="247" text-anchor="middle" font-size="12" fill="#1e293b">2026-08-27</text><line x1="360" y1="210" x2="425" y2="345" stroke="#a855f7" stroke-width="2" stroke-dasharray="4,3" opacity="0.7"/><circle cx="425" cy="345" r="26" fill="#a855f7" opacity="0.15" stroke="#a855f7" stroke-width="2"/><text x="425" y="349" text-anchor="middle" font-size="12" fill="#1e293b">PD-1</text><line x1="360" y1="210" x2="295" y2="345" stroke="#10b981" stroke-width="2" stroke-dasharray="4,3" opacity="0.7"/><circle cx="295" cy="345" r="26" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="2"/><text x="295" y="349" text-anchor="middle" font-size="12" fill="#1e293b">信迪利单抗</text><line x1="360" y1="210" x2="214" y2="243" stroke="#10b981" stroke-width="2" stroke-dasharray="4,3" opacity="0.7"/><circle cx="214" cy="243" r="26" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="2"/><text x="214" y="247" text-anchor="middle" font-size="12" fill="#1e293b">玛仕度肽</text><line x1="360" y1="210" x2="243" y2="116" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4,3" opacity="0.7"/><circle cx="243" cy="116" r="26" fill="#3b82f6" opacity="0.15" stroke="#3b82f6" stroke-width="2"/><text x="243" y="120" text-anchor="middle" font-size="12" fill="#1e293b">礼来</text><circle cx="360" cy="210" r="44" fill="#1e293b"/><text x="360" y="208" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">信达生物</text><text x="360" y="226" text-anchor="middle" font-size="10" fill="#cbd5e1">7 个关联</text></svg>
+    </div>
+  </div>
+  <div class="card" style="margin-top:20px;">
+    <h2>直接关联（7）</h2>
+    <div class="rel-grid">
+        <a class="rel-card" href="#" style="--c:#64748b" onclick="document.getElementById('q').value='00-总目录';this.form.submit();">
+          <div class="rel-dot" style="background:#64748b"></div>
+          <div class="rel-name">00-总目录</div>
+          <div class="rel-desc">- 礼来 · 诺和诺德 · 辉瑞 · 恒瑞医药 · 百济神州 · 信达生物 · 君实生物</div>
+        </a>
+        <a class="rel-card" href="#" style="--c:#e11d48" onclick="document.getElementById('q').value='2019-08-22-信达礼来玛仕度肽授权';this.form.submit();">
+          <div class="rel-dot" style="background:#e11d48"></div>
+          <div class="rel-name">2019-08-22-信达礼来玛仕度肽授权</div>
+          <div class="rel-desc">**事件类型：LICENSING_DEAL · 主体：信达生物**</div>
+        </a>
+        <a class="rel-card" href="#" style="--c:#64748b" onclick="document.getElementById('q').value='2026-08-27-玛仕度肽-交叉关系发现';this.form.submit();">
+          <div class="rel-dot" style="background:#64748b"></div>
+          <div class="rel-name">2026-08-27-玛仕度肽-交叉关系发现</div>
+          <div class="rel-desc">| 信达生物 | 公司 | SUPPLY_CHAIN_LINK（已有关联） | 0.1 | 礼来 |</div>
+        </a>
+        <a class="rel-card" href="#" style="--c:#a855f7" onclick="document.getElementById('q').value='PD-1';this.form.submit();">
+          <div class="rel-dot" style="background:#a855f7"></div>
+          <div class="rel-name">PD-1</div>
+          <div class="rel-desc">- PD-1（信迪利单抗靶点）（来源: https://clinicaltrials.gov）</div>
+        </a>
+        <a class="rel-card" href="#" style="--c:#10b981" onclick="document.getElementById('q').value='信迪利单抗';this.form.submit();">
+          <div class="rel-dot" style="background:#10b981"></div>
+          <div class="rel-name">信迪利单抗</div>
+          <div class="rel-desc">- 信迪利单抗（核心产品：首个国产 PD-1，2018-12 中国获批）（来源: https://www.nmpa.go</div>
+        </a>
+        <a class="rel-card" href="#" style="--c:#10b981" onclick="document.getElementById('q').value='玛仕度肽';this.form.submit();">
+          <div class="rel-dot" style="background:#10b981"></div>
+          <div class="rel-name">玛仕度肽</div>
+          <div class="rel-desc">- 玛仕度肽（核心产品：GLP-1R/GCGR 双激动剂，减重）（来源: https://clinicaltrials.</div>
+        </a>
+        <a class="rel-card" href="#" style="--c:#3b82f6" onclick="document.getElementById('q').value='礼来';this.form.submit();">
+          <div class="rel-dot" style="background:#3b82f6"></div>
+          <div class="rel-name">礼来</div>
+          <div class="rel-desc">- 礼来（玛仕度肽中国权益授权方，2019-08）（来源: https://www.prnewswire.com）</div>
+        </a></div>
+  </div>
+  <div class="card" style="margin-top:20px;">
+    <h2>笔记内容摘要</h2>
+    <div class="body-snip"># 信达生物<br><br>**中国 Biotech 代表，信迪利单抗为首个国产 PD-1，玛仕度肽为 GLP-1 减重赛道国产第一梯队。**<br><br>## 关系<br><br>- 信迪利单抗（核心产品：首个国产 PD-1，2018-12 中国获批）（来源: https://www.nmpa.gov.cn）<br>- 玛仕度肽（核心产品：GLP-1R/GCGR 双激动剂，减重）（来源: https://clinicaltrials.gov）<br>- PD-1（信迪利单抗靶点）（来源: https://clinicaltrials.gov）<br>- 礼来（玛仕度肽中国权益授权方，2019-08）（来源: https://www.prnewswire.com）<br><br>## 元数据<br><br>- entity_id: 信达生物 | aliases: Innovent, 信达 | ticker: 01801.HK<br>- industry: 创新药（肿瘤/代谢） | region: 江苏苏州<br>- last_verified_at: 2026-08-27<br>- ticker: 01801.HK | 玛仕度肽 NDA 已递交中国药监局</div>
+  </div>
+  <div class="card" style="margin-top:20px;">
+    <h2>来源</h2>
+    <div class="src"><a href="https://www.innoventbio.com" target="_blank">https://www.innoventbio.com</a></div>
+  </div>
+  <div class="foot">由 ask.py 生成 · 2026-08-27</div>
+</div>
+</body>
+</html>

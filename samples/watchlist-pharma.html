@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watchlist · 变化摘要</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; background:#eef2f7; color:#1e293b; padding:24px; }
+  .wrap { max-width:960px; margin:0 auto; }
+  .hero { background:linear-gradient(135deg,#0f172a,#334155); color:#fff; border-radius:16px; padding:24px 32px; margin-bottom:20px; }
+  .hero h1 { font-size:24px; }
+  .hero .sub { opacity:.85; font-size:13px; margin-top:6px; }
+  .stat { display:flex; gap:16px; margin:12px 0 20px; }
+  .stat .box { background:#fff; border-radius:12px; padding:14px 20px; flex:1; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .stat .num { font-size:22px; font-weight:700; }
+  .stat .lbl { font-size:12px; color:#64748b; }
+  .ev-card { background:#fff; border-radius:12px; padding:16px 20px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.08); border-left:4px solid #cbd5e1; }
+  .ev-head { display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
+  .ev-type { color:#fff; border-radius:12px; padding:2px 10px; font-size:12px; }
+  .ev-date { font-size:12px; color:#64748b; }
+  .conf { font-size:12px; font-weight:600; }
+  .ev-src a { font-size:12px; color:#3b82f6; text-decoration:none; }
+  .ev-entity { font-size:15px; font-weight:600; margin-bottom:4px; }
+  .ev-body { font-size:13px; color:#475569; line-height:1.6; }
+  .ev-impact { font-size:12px; color:#64748b; margin-top:6px; }
+  .cap-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:720px) { .cap-grid { grid-template-columns:1fr; } }
+  .cap-card { background:#fff; border-radius:12px; padding:14px 16px; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .cap-body { font-size:12px; color:#64748b; line-height:1.5; margin-top:6px; }
+  .empty { color:#94a3b8; text-align:center; padding:40px; }
+  .foot { text-align:center; color:#94a3b8; font-size:12px; margin-top:24px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>Watchlist · 变化摘要</h1>
+    <div class="sub">Change Detection（非新闻汇总）· 生成 2026-08-27 · 来源：Obsidian 情报库事件层</div>
+  </div>
+  <div class="stat">
+    <div class="box"><div class="num">11</div><div class="lbl">事件</div></div>
+    <div class="box"><div class="num">2</div><div class="lbl">产能追踪项</div></div>
+    <div class="box"><div class="num">全部</div><div class="lbl">关注范围</div></div>
+  </div>
+  <h2 style="font-size:16px;margin:20px 0 12px;">最近事件</h2>
+  
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-type" style="background:#22c55e">获批上市</span>
+            <span class="ev-date">2024-06</span>
+            <span class="conf" style="color:#10b981">置信度 0.85</span>
+            <span class="ev-src"><a href="https://www.nmpa.gov.cn" target="_blank">来源</a></span>
+          </div>
+          <div class="ev-entity">[[诺和诺德]]</div>
+          <div class="ev-body"># 2024-06-司美格鲁肽减重中国获批  **事件类型：FDA_APPROVAL · 主体：[[诺和诺德]]**  - 时间：2024-06 | 置信度：0.85 - 内容：Wegovy 中国获批减重，玛仕度肽等国产 GLP-1 管线面临进口药上市竞争。 - 影响：GLP-1 减重适应症首次进入中国，国产 GLP-</div>
+          <div class="ev-impact">影响：GLP-1 减重适应症首次进入中国，国产 GLP-1 减重管线竞争加剧</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-type" style="background:#22c55e">获批上市</span>
+            <span class="ev-date">2024-04-05</span>
+            <span class="conf" style="color:#10b981">置信度 0.9</span>
+            <span class="ev-src"><a href="https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-ciltacabtagene-autoleucel-relapsed-or-refractory-multiple-myeloma" target="_blank">来源</a></span>
+          </div>
+          <div class="ev-entity">[[传奇生物]]</div>
+          <div class="ev-body"># 2024-04-05-Carvykti获批二线骨髓瘤  **事件类型：FDA_APPROVAL · 主体：[[传奇生物]]**  - 时间：2024-04-05 | 置信度：0.9 - 内容：CARTITUDE-4（NCT04181827）III 期数据支持二线获批，显著改善无进展生存期。 - 影响：BCMA CA</div>
+          <div class="ev-impact">影响：BCMA CAR-T 从末线推向二线治疗，多发性骨髓瘤治疗格局改变</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-type" style="background:#22c55e">获批上市</span>
+            <span class="ev-date">2024-03-13</span>
+            <span class="conf" style="color:#10b981">置信度 0.9</span>
+            <span class="ev-src"><a href="https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-tislelizumab-esophageal-squamous-cell-carcinoma" target="_blank">来源</a></span>
+          </div>
+          <div class="ev-entity">[[百济神州]]</div>
+          <div class="ev-body"># 2024-03-13-替雷利珠单抗FDA获批  **事件类型：FDA_APPROVAL · 主体：[[百济神州]]**  - 时间：2024-03-13 | 置信度：0.9 - 内容：RATIONALE-302（NCT03430843）III 期显示总生存显著优于化疗。 - 影响：替雷利珠单抗成为第二个获 FDA </div>
+          <div class="ev-impact">影响：替雷利珠单抗成为第二个获 FDA 批准的国产 PD-1</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-type" style="background:#22c55e">获批上市</span>
+            <span class="ev-date">2023-11-08</span>
+            <span class="conf" style="color:#10b981">置信度 0.95</span>
+            <span class="ev-src"><a href="https://www.fda.gov/news-events/press-announcements/fda-approves-new-medication-chronic-weight-management" target="_blank">来源</a></span>
+          </div>
+          <div class="ev-entity">[[礼来]]</div>
+          <div class="ev-body"># 2023-11-08-礼来Zepbound获批减重  **事件类型：FDA_APPROVAL · 主体：[[礼来]]**  - 时间：2023-11-08 | 置信度：0.95 - 内容：FDA 批准 Zepbound 上市，SURMOUNT 系列 III 期数据显示平均减重可达 20% 以上。 - 影响：替尔泊肽</div>
+          <div class="ev-impact">影响：替尔泊肽成为全球首个获批减重适应症的 GLP-1/GIP 双靶点药物，直接挑战司美格鲁肽 Wegovy</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-type" style="background:#22c55e">获批上市</span>
+            <span class="ev-date">2023-10-27</span>
+            <span class="conf" style="color:#10b981">置信度 0.9</span>
+            <span class="ev-src"><a href="https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-toripalimab-tpcs-nasopharyngeal-carcinoma" target="_blank">来源</a></span>
+          </div>
+          <div class="ev-entity">[[君实生物]]</div>
+          <div class="ev-body"># 2023-10-27-特瑞普利单抗FDA获批  **事件类型：FDA_APPROVAL · 主体：[[君实生物]]**  - 时间：2023-10-27 | 置信度：0.9 - 内容：基于 JUPITER-02 研究，鼻咽癌适应症为中国优势瘤种。 - 影响：特瑞普利单抗成为中国首个获 FDA 批准的 PD-1，国产</div>
+          <div class="ev-impact">影响：特瑞普利单抗成为中国首个获 FDA 批准的 PD-1，国产创新药出海标志事件</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-type" style="background:#22c55e">获批上市</span>
+            <span class="ev-date">2022-05-13</span>
+            <span class="conf" style="color:#10b981">置信度 0.95</span>
+            <span class="ev-src"><a href="https://www.fda.gov/news-events/press-announcements/fda-approves-novel-dual-targeted-treatment-type-2-diabetes" target="_blank">来源</a></span>
+          </div>
+          <div class="ev-entity">[[礼来]]</div>
+          <div class="ev-body"># 2022-05-13-礼来Mounjaro获批糖尿病  **事件类型：FDA_APPROVAL · 主体：[[礼来]]**  - 时间：2022-05-13 | 置信度：0.95 - 内容：Mounjaro 获批上市，SURPASS-2 显示 HbA1c 降幅优于司美格鲁肽 1mg。 - 影响：替尔泊肽首个适应症获</div>
+          <div class="ev-impact">影响：替尔泊肽首个适应症获批（2 型糖尿病），SURPASS 系列头对头击败司美格鲁肽</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-type" style="background:#22c55e">获批上市</span>
+            <span class="ev-date">2022-02-28</span>
+            <span class="conf" style="color:#10b981">置信度 0.95</span>
+            <span class="ev-src"><a href="https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-ciltacabtagene-autoleucel-relapsed-or-refractory-multiple-myeloma" target="_blank">来源</a></span>
+          </div>
+          <div class="ev-entity">[[传奇生物]]</div>
+          <div class="ev-body"># 2022-02-28-Carvykti获批末线骨髓瘤  **事件类型：FDA_APPROVAL · 主体：[[传奇生物]]**  - 时间：2022-02-28 | 置信度：0.95 - 内容：Carvykti 获批基于 CARTITUDE-1 单臂试验，总缓解率 97%。 - 影响：全球首个 BCMA CAR-T</div>
+          <div class="ev-impact">影响：全球首个 BCMA CAR-T 获批上市，传奇生物完成从 Biotech 到商业化公司跨越</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-type" style="background:#22c55e">获批上市</span>
+            <span class="ev-date">2021-06-22</span>
+            <span class="conf" style="color:#10b981">置信度 0.9</span>
+            <span class="ev-src"><a href="https://www.nmpa.gov.cn" target="_blank">来源</a></span>
+          </div>
+          <div class="ev-entity">[[复星医药]]</div>
+          <div class="ev-body"># 2021-06-22-奕凯达中国获批  **事件类型：FDA_APPROVAL · 主体：[[复星医药]]**  - 时间：2021-06-22 | 置信度：0.9 - 内容：基于 ZUMA-1（NCT02348216）桥接数据，开启中国细胞治疗商业化元年。 - 影响：阿基仑赛成为中国首个获批的 CAR-T 细胞治</div>
+          <div class="ev-impact">影响：阿基仑赛成为中国首个获批的 CAR-T 细胞治疗产品</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-type" style="background:#22c55e">获批上市</span>
+            <span class="ev-date">2019-11-14</span>
+            <span class="conf" style="color:#10b981">置信度 0.95</span>
+            <span class="ev-src"><a href="https://www.fda.gov" target="_blank">来源</a></span>
+          </div>
+          <div class="ev-entity">[[百济神州]]</div>
+          <div class="ev-body"># 2019-11-14-泽布替尼FDA获批  **事件类型：FDA_APPROVAL · 主体：[[百济神州]]**  - 时间：2019-11-14 | 置信度：0.95 - 内容：FDA 批准泽布替尼用于既往接受过至少一种治疗的套细胞淋巴瘤（MCL），基于 BGB-3111-AU-003 I/II 期单臂试验（总</div>
+          <div class="ev-impact">影响：泽布替尼成为中国首个获 FDA 批准的国产抗癌创新药</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-type" style="background:#8b5cf6">授权交易</span>
+            <span class="ev-date">2019-08-22</span>
+            <span class="conf" style="color:#10b981">置信度 0.85</span>
+            <span class="ev-src"><a href="https://www.prnewswire.com/news-releases/innovent-and-elililly" target="_blank">来源</a></span>
+          </div>
+          <div class="ev-entity">[[信达生物]]</div>
+          <div class="ev-body"># 2019-08-22-信达礼来玛仕度肽授权  **事件类型：LICENSING_DEAL · 主体：[[信达生物]]**  - 时间：2019-08-22 | 置信度：0.85 - 内容：礼来保留中国以外权益；信达负责中国临床开发与商业化。 - 影响：玛仕度肽中国权益交易：总额超 10 亿美元，国产 GLP-1 减</div>
+          <div class="ev-impact">影响：玛仕度肽中国权益交易：总额超 10 亿美元，国产 GLP-1 减重管线起步</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-head">
+            <span class="ev-type" style="background:#64748b"></span>
+            <span class="ev-date"></span>
+            
+            <span class="ev-src"></span>
+          </div>
+          <div class="ev-entity"></div>
+          <div class="ev-body"># {{title}}  **事件类型： · 主体：**  - 时间： | 置信度： - 内容： - 影响： - 来源：</div>
+          <div class="ev-impact">影响：</div>
+        </div>
+  <h2 style="font-size:16px;margin:20px 0 12px;">产能追踪速览</h2>
+  <div class="cap-grid"><div class="cap-card"><b>GLP-1-API-产能</b><div class="cap-body"># GLP-1 API 产能（2026）
+
+&gt; GLP-1 类药物供不应求，产能是全球减重药市场的核心瓶颈。关注 [[司美格鲁肽]] / [[替尔泊肽]] 供应链与扩产节奏。
+
+## 关键产能事实
+
+- 诺和诺德：2024-02 宣布以 110 亿美元收购 Catalent 三座灌装工厂，用于司美格鲁肽产能扩张（来源: https://www.reuters.com）
+- 礼来：2024-05 追</div></div><div class="cap-card"><b>CAR-T-产能</b><div class="cap-body"># CAR-T 商业化产能（2026）
+
+&gt; CAR-T 为个体化定制治疗，产能（病毒载体 + 细胞制备 + 质检）决定可及性。关注 [[西达基奥仑赛]] / [[阿基仑赛]] 生产布局。
+
+## 关键产能事实
+
+- 传奇生物：美国新泽西 Raritan 工厂 2022-05 投产，为 Carvykti 商业化生产核心基地（来源: https://www.legendbiotech.com）
+- </div></div></div>
+  <div class="foot">由 watchlist.py 生成 · 每条事件带置信度与来源（claim-evidence 模型）</div>
+</div>
+</body>
+</html>

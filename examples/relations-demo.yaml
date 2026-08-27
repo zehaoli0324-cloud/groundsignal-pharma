@@ -1,0 +1,53 @@
+# 示例：企业情报关系文件（ingest.py 输入）
+# 用法: python3 scripts/ingest.py <vault> -f examples/relations-demo.yaml
+
+entities:
+  - name: 富瀚微
+    type: company
+    code: 300613.SZ
+    industry: 集成电路设计（视觉/视频芯片）
+    region: 上海
+    desc: 视觉芯片设计公司（fabless），产品覆盖 ISP、IPC SoC、DVR/NVR、车载视频芯片。
+    source_url: https://emweb.securities.eastmoney.com/PC_HSF10/CoreConception/PageAjax?code=SZ300613
+
+  - name: 联想控股
+    type: investor
+    investor_type: 产业资本/战略投资
+    desc: 联想系母公司，通过旗下西藏东方企慧投资有限公司入股富瀚微。
+    source_url: http://finance.sina.com.cn/stock/relnews/cn/2020-09-04/doc-iivhuipp2406301.shtml
+
+  - name: 海康威视
+    type: company
+    code: 002415.SZ
+    industry: 安防/智能物联
+    region: 浙江杭州
+    desc: 全球安防龙头，富瀚微第一大客户。
+    source_url: https://news.hexun.com/2022-04-15/205734433.html
+
+  - name: 中芯国际
+    type: company
+    code: 688981.SH
+    industry: 晶圆代工
+    region: 上海
+    desc: 中国大陆最大晶圆代工厂，富瀚微与全志科技的共同代工供应商。
+
+relations:
+  - from: 联想控股
+    to: 富瀚微
+    type: 投资
+    desc: 2020-09 通过西藏东方企慧以 9.89 亿受让 9.9% 股份，现持股 15.6%
+
+  - from: 富瀚微
+    to: 海康威视
+    type: 供货
+    desc: 第一大客户，占营收 60%+
+
+  - from: 中芯国际
+    to: 富瀚微
+    type: 代工
+    desc: 流片/晶圆代工供应商
+
+  - from: 富瀚微
+    to: 全志科技
+    type: 竞争
+    desc: 端侧 AI 视频芯片赛道竞逐

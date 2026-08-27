@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>礼来 × 诺和诺德 · 关系全景看板</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; background:#eef2f7; color:#1e293b; padding:24px; }
+  .wrap { max-width:1240px; margin:0 auto; }
+  .hero { background:linear-gradient(135deg,#1e293b,#334155); color:#fff; border-radius:16px; padding:24px 32px; margin-bottom:20px; }
+  .hero h1 { font-size:24px; }
+  .hero .sub { opacity:.85; font-size:13px; margin-top:6px; }
+  .legend { display:flex; flex-wrap:wrap; gap:16px; background:#fff; border-radius:12px; padding:14px 20px; margin-bottom:20px; font-size:12px; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .legend .item { display:flex; align-items:center; gap:6px; }
+  .dot { width:12px; height:12px; border-radius:50%; display:inline-block; }
+  .line-demo { width:26px; height:0; border-top:2px solid; display:inline-block; }
+  .card { background:#fff; border-radius:12px; padding:20px; box-shadow:0 1px 3px rgba(0,0,0,.08); margin-top:20px; }
+  .card h2 { font-size:15px; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid #e2e8f0; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:900px) { .grid2 { grid-template-columns:1fr; } }
+  .stat { font-size:14px; line-height:2; }
+  .stat b { font-size:22px; }
+  .foot { text-align:center; color:#94a3b8; font-size:12px; margin-top:20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>礼来 × 诺和诺德 · 关系全景</h1>
+    <div class="sub">全上下游/投资/竞争网络 · 数据来自 Obsidian 情报库（共 54 节点）</div>
+  </div>
+  <div class="legend">
+    <span class="item"><span class="dot" style="background:#3b82f6"></span>公司</span>
+    <span class="item"><span class="dot" style="background:#f59e0b"></span>人物</span>
+    <span class="item"><span class="dot" style="background:#10b981"></span>产品</span>
+    <span class="item"><span class="dot" style="background:#8b5cf6"></span>投资人</span>
+    <span class="item"><span class="dot" style="background:#ef4444"></span>事件</span>
+    <span class="item"><span class="dot" style="background:#64748b"></span>分析</span>
+    <span class="item"><span class="line-demo" style="border-color:#ef4444"></span>竞争关系（cross-entity-scan 判定后可选标注）</span>
+    <span class="item"><span class="line-demo" style="border-color:#94a3b8"></span>中心关联（类型见 cross-entity-scan）</span>
+    <span class="item"><span class="line-demo" style="border-color:#3b82f6"></span>礼来 关联</span>
+    <span class="item"><span class="line-demo" style="border-color:#10b981"></span>诺和诺德 关联</span>
+    <span class="item"><span class="line-demo" style="border-color:#94a3b8"></span>共享关联</span>
+  </div>
+  <svg viewBox="0 0 1200 444" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;background:#f8fafc;border-radius:12px;"><circle cx="250" cy="222" r="40" fill="rgba(59,130,246,.14)" stroke="#3b82f6" stroke-width="2"/><text x="250" y="226" text-anchor="middle" font-size="12" fill="#1e293b" font-weight="700">礼来</text><title>礼来（公司）</title><circle cx="950" cy="222" r="40" fill="rgba(59,130,246,.14)" stroke="#3b82f6" stroke-width="2"/><text x="950" y="226" text-anchor="middle" font-size="12" fill="#1e293b" font-weight="700">诺和诺德</text><title>诺和诺德（公司）</title><line x1="250" y1="222" x2="950" y2="222" stroke="#94a3b8" stroke-width="2.5" opacity="0.55"/><circle cx="600" cy="60" r="20" fill="rgba(59,130,246,.14)" stroke="#3b82f6" stroke-width="2"/><text x="600" y="64" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">00-总目录</text><title>00-总目录（公司）</title><line x1="250" y1="222" x2="600" y2="60" stroke="#94a3b8" stroke-width="1.2" opacity="0.55"/><line x1="950" y1="222" x2="600" y2="60" stroke="#94a3b8" stroke-width="1.2" opacity="0.55"/><circle cx="600" cy="112" r="20" fill="rgba(59,130,246,.14)" stroke="#3b82f6" stroke-width="2"/><text x="600" y="116" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">2026-08-2…</text><title>2026-08-27-玛仕度肽-交叉关系发现（公司）</title><line x1="250" y1="222" x2="600" y2="112" stroke="#94a3b8" stroke-width="1.2" opacity="0.55"/><line x1="950" y1="222" x2="600" y2="112" stroke="#94a3b8" stroke-width="1.2" opacity="0.55"/><circle cx="600" cy="164" r="20" fill="rgba(100,116,139,.14)" stroke="#64748b" stroke-width="2"/><text x="600" y="168" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">GLP-1R</text><title>GLP-1R（target）</title><line x1="250" y1="222" x2="600" y2="164" stroke="#94a3b8" stroke-width="1.2" opacity="0.55"/><line x1="950" y1="222" x2="600" y2="164" stroke="#94a3b8" stroke-width="1.2" opacity="0.55"/><circle cx="130" cy="60" r="20" fill="rgba(100,116,139,.14)" stroke="#64748b" stroke-width="2"/><text x="130" y="64" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">2022-05-1…</text><title>2022-05-13-礼来Mounjaro获批糖尿病（event）</title><line x1="250" y1="222" x2="130" y2="60" stroke="#3b82f6" stroke-width="1.2" opacity="0.55"/><circle cx="130" cy="112" r="20" fill="rgba(100,116,139,.14)" stroke="#64748b" stroke-width="2"/><text x="130" y="116" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">2023-11-0…</text><title>2023-11-08-礼来Zepbound获批减重（event）</title><line x1="250" y1="222" x2="130" y2="112" stroke="#3b82f6" stroke-width="1.2" opacity="0.55"/><circle cx="130" cy="164" r="20" fill="rgba(100,116,139,.14)" stroke="#64748b" stroke-width="2"/><text x="130" y="168" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">GIPR</text><title>GIPR（target）</title><line x1="250" y1="222" x2="130" y2="164" stroke="#3b82f6" stroke-width="1.2" opacity="0.55"/><circle cx="130" cy="216" r="20" fill="rgba(59,130,246,.14)" stroke="#3b82f6" stroke-width="2"/><text x="130" y="220" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">信达生物</text><title>信达生物（公司）</title><line x1="250" y1="222" x2="130" y2="216" stroke="#3b82f6" stroke-width="1.2" opacity="0.55"/><circle cx="130" cy="268" r="20" fill="rgba(16,185,129,.14)" stroke="#10b981" stroke-width="2"/><text x="130" y="272" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">替尔泊肽</text><title>替尔泊肽（产品）</title><line x1="250" y1="222" x2="130" y2="268" stroke="#3b82f6" stroke-width="1.2" opacity="0.55"/><circle cx="130" cy="320" r="20" fill="rgba(16,185,129,.14)" stroke="#10b981" stroke-width="2"/><text x="130" y="324" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">玛仕度肽</text><title>玛仕度肽（产品）</title><line x1="250" y1="222" x2="130" y2="320" stroke="#3b82f6" stroke-width="1.2" opacity="0.55"/><circle cx="130" cy="372" r="20" fill="rgba(59,130,246,.14)" stroke="#3b82f6" stroke-width="2"/><text x="130" y="376" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">诺和诺德</text><title>诺和诺德（公司）</title><line x1="250" y1="222" x2="130" y2="372" stroke="#3b82f6" stroke-width="1.2" opacity="0.55"/><circle cx="1070" cy="60" r="20" fill="rgba(100,116,139,.14)" stroke="#64748b" stroke-width="2"/><text x="1070" y="64" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">2024-06-司…</text><title>2024-06-司美格鲁肽减重中国获批（event）</title><line x1="950" y1="222" x2="1070" y2="60" stroke="#10b981" stroke-width="1.2" opacity="0.55"/><circle cx="1070" cy="112" r="20" fill="rgba(16,185,129,.14)" stroke="#10b981" stroke-width="2"/><text x="1070" y="116" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">CDMO服务</text><title>CDMO服务（产品）</title><line x1="950" y1="222" x2="1070" y2="112" stroke="#10b981" stroke-width="1.2" opacity="0.55"/><circle cx="1070" cy="164" r="20" fill="rgba(16,185,129,.14)" stroke="#10b981" stroke-width="2"/><text x="1070" y="168" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">司美格鲁肽</text><title>司美格鲁肽（产品）</title><line x1="950" y1="222" x2="1070" y2="164" stroke="#10b981" stroke-width="1.2" opacity="0.55"/><circle cx="1070" cy="216" r="20" fill="rgba(59,130,246,.14)" stroke="#3b82f6" stroke-width="2"/><text x="1070" y="220" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">礼来</text><title>礼来（公司）</title><line x1="950" y1="222" x2="1070" y2="216" stroke="#10b981" stroke-width="1.2" opacity="0.55"/><circle cx="1070" cy="268" r="20" fill="rgba(59,130,246,.14)" stroke="#3b82f6" stroke-width="2"/><text x="1070" y="272" text-anchor="middle" font-size="10" fill="#1e293b" font-weight="400">药明康德</text><title>药明康德（公司）</title><line x1="950" y1="222" x2="1070" y2="268" stroke="#10b981" stroke-width="1.2" opacity="0.55"/></svg>
+  <div class="grid2">
+    <div class="card">
+      <h2>统计</h2>
+      <div class="stat">
+        礼来 直接关联：<b>10</b><br>
+        诺和诺德 直接关联：<b>8</b><br>
+        <span style="color:#ef4444">双方共享节点（重叠/间接竞争点）：<b>3</b></span><br>
+        礼来 独有：7 ｜ 诺和诺德 独有：5
+      </div>
+    </div>
+    <div class="card">
+      <h2>共享节点（供应链重叠 / 共同生态 / 共同竞品）</h2>
+      <div style="font-size:13px;line-height:2"><span style="color:#64748b">00-总目录</span> · <span style="color:#64748b">2026-08-27-玛仕度肽-交叉关系发现</span> · <span style="color:#64748b">GLP-1R</span></div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h2>礼来 独有关联</h2>
+      <div style="font-size:13px;line-height:2"><span style="color:#64748b">2022-05-13-礼来Mounjaro获批糖尿病</span> · <span style="color:#64748b">2023-11-08-礼来Zepbound获批减重</span> · <span style="color:#64748b">GIPR</span> · <span style="color:#3b82f6">信达生物</span> · <span style="color:#10b981">替尔泊肽</span> · <span style="color:#10b981">玛仕度肽</span> · <span style="color:#3b82f6">诺和诺德</span></div>
+    </div>
+    <div class="card">
+      <h2>诺和诺德 独有关联</h2>
+      <div style="font-size:13px;line-height:2"><span style="color:#64748b">2024-06-司美格鲁肽减重中国获批</span> · <span style="color:#10b981">CDMO服务</span> · <span style="color:#10b981">司美格鲁肽</span> · <span style="color:#3b82f6">礼来</span> · <span style="color:#3b82f6">药明康德</span></div>
+    </div>
+  </div>
+  <div class="foot">由 panorama.py 生成 · 数据采集自公开渠道（详见各节点来源）</div>
+</div>
+</body>
+</html>
