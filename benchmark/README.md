@@ -123,6 +123,30 @@ benchmark/cases/
 | Falsification / downside | ● | ●● | ●● | ●●● | ●●● | ● |
 | User-specific answer quality | ●●● | ●●● | ●●● | ●●● | ●●● | ●●● |
 
+## v0.4：Model Diagnosis Benchmark（已落地 2026-08-27）
+
+> 来源：GroundSignal Decision Intelligence Model Diagnosis v0.4（design-sources/ 有全文）。
+> 直接映射岗位要求："凭借专业积累，从知识准确性、推理质量、表达水准等多维度对模型回答形成优劣判断，说明问题及原因，从个案归纳共性体验问题与优化方向。"
+
+### 四大评估层（23 维，diagnostics/expert-diagnosis-rubric.md）
+
+- A Knowledge Quality：A1 事实 / A2 Freshness / A3 Evidence Sufficiency / A4 Source Hierarchy / A5 Claim Scope
+- B Reasoning Quality：B1 关系 / B2 因果结构 / B3 证据整合 / B4 反事实 / B5 优先级 / B6 不确定性 / B7 决策杠杆
+- C Expression Quality：C1 Decision-first / C2 信息层级 / C3 措辞精度 / C4 密度 / C5 受众适配 / C6 校准的警示
+- D User Utility：D1 决策契合 / D2 可辩护性 / D3 可行动性 / D4 非显然洞察 / D5 价值-风险不对称
+
+### 关键纪律
+
+- **Observed Failure ≠ Capability Gap**（失败可观察，能力缺口是假设，需多 case 支持）
+- 三类回答对比：A Knowledge-rich Judgment-poor / B Insightful but Overclaimed / C Decision-ready
+- 结果报告回答四件事：谁在哪些任务更好 / 为什么（bad case + 诊断）/ 用户感受到什么 / 怎么优化（data/SFT/prompt/retrieval/regression）
+
+### 当前诊断产物
+
+- diagnostics/model-capability-profile.md：双模型四层画像（唯一实测差异 = A2 Freshness，Track A）
+- diagnostics/failure-taxonomy.md：10 个 failure cluster 状态（9 个待 Track A/C 激活，1 个已激活）
+- diagnostics/optimization-cards/STALE_KNOWLEDGE.md：真实 Optimization Card（玛仕度肽 bad case）
+
 ## 与仓库的关系
 
 - Evidence Graph（pharma/）→ Model Query → Model Response → Rubric Eval → Failure Type → Training Example → Regression
