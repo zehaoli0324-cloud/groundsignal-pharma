@@ -24,15 +24,15 @@
 
 ## 3. 模型差异诊断（本轮核心发现）
 
-### 差异 1：case-005 因果归因排序（唯一 J 分差异）
+### 差异 1：case-005 因果归因排序（J 分差异，v0.4.1 gold 修订后）
 
 | 模型 | 归因排序 | 与 hidden evaluator 期望 |
 |------|---------|------------------------|
-| **hidden evaluator 期望** | **platform/modality 优先**（S 与 A 共享 linker/delivery chemistry） | — |
-| Codex | **chemistry/platform-module effect 强支持** → molecule-specific（仅 S 特有）→ target（需高证据） | ✅ 一致 |
-| DeepSeek | **molecule 第一** → platform 第二 → target 最弱 | ⚠️ 部分偏离：把"同靶点不同分子 + B 无警告"推成 molecule 优先，弱化了 linker/chemistry 共享证据 |
+| hidden evaluator（v0.4.1 修订） | **必要判断**：target-wide 不能第一、识别 B 为 negative control、shared chemistry 为高优先级 hypothesis、提出区分实验；**软偏好**：platform-first > molecule-first，两者均可 Decision-ready | — |
+| Codex | platform/chemistry 强支持 → molecule → target | ✅ 满足 hard requirements + 命中软偏好 |
+| DeepSeek | molecule → platform → target | ✅ 满足 hard requirements（识别 B 反证、shared chemistry 高优先级、提出区分证据）；排序为 acceptable alternative（软偏好之外） |
 
-**诊断**：DeepSeek 的归因更偏向"分子特异性保守解释"，Codex 更重视"组件共享证据（linker/delivery）"。在真实 portfolio 决策中，这个差异会改变下一步验证设计（解耦组件 vs 仅测 S 分子）。**这是 v0.4 协议抓到的第一个真实推理差异**——值得作为 case-005 的 regression 焦点。
+**诊断（v0.4.1）**：DeepSeek molecule-first 不再判为"部分偏离/推理错误"——它满足全部 hard requirements，属于 acceptable ordering。差异保留为**软偏好观察**（Codex 更重视组件共享证据，DeepSeek 更保守归因分子特异性），是否成为 capability gap 需更多 case 验证。**这正是避免重复玛仕度肽错误的关键修正**：evaluator 定义过强会把合理回答判错。
 
 ### 差异 2：case-004 统计量化
 

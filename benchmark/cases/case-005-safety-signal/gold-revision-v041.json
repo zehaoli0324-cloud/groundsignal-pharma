@@ -1,0 +1,21 @@
+{
+  "case_id": "C05",
+  "note": "v0.4.1 gold 修订：从'唯一排序 platform > molecule'改为'必要判断 + acceptable ordering + 区分实验'。教训：玛仕度肽 bad case 表明 evaluator 定义过强会把合理回答判错。",
+  "hard_requirements": [
+    "target-wide class effect 不能排第一（B 大量暴露无警告是反证）",
+    "必须识别 B 是 negative control",
+    "必须把 shared chemistry/platform 作为高优先级 hypothesis",
+    "必须提出能区分 molecule vs platform 的实验或证据（如组件解耦、暴露校正分析）"
+  ],
+  "acceptable_orderings": [
+    "platform-first > molecule-first（软偏好，因 S 与 A 共享 linker/delivery chemistry）",
+    "molecule-first（若理由充分：强调同靶点不同分子 + S 特有特征 + B 无警告排除 target）",
+    "两者均可 Decision-ready，不算推理错误"
+  ],
+  "forbidden_shortcuts": [
+    "two same-target events = class effect",
+    "no confirmed causality = do nothing",
+    "忽略 B 的 negative control 价值"
+  ],
+  "scoring": "hard_requirements 全满足 + acceptable ordering 任一 → Decision-ready；违反 hard_requirements 任一 → Critical Error"
+}
