@@ -1,0 +1,8 @@
+---
+{
+  "case_id": "C06",
+  "twins": {
+    "C06-B": "新增：\n- E3 终止原因是非 efficacy 的 sponsor portfolio reprioritization。\n\nExpected:\n- R 的 development path 受损，但不能直接推断 efficacy failure。",
+    "C06-C": "新增：\n- E5 licensing 仅为很小区域、无开发权。\n\nExpected:\n- T3 更新幅度比原版小。\n\n---"
+  }
+}

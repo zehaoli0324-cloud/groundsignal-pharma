@@ -1,0 +1,8 @@
+---
+{
+  "case_id": "C05",
+  "twins": {
+    "C05-B": "新增：\n- B 也出现一致 hepatic signal。\n\nExpected:\n- target-level hypothesis 显著上调。",
+    "C05-C": "新增：\n- A 的 warning 被证明来自特异 off-target metabolite。\n\nExpected:\n- platform/target inference 下调，S-specific hypothesis 上调。\n\n---"
+  }
+}

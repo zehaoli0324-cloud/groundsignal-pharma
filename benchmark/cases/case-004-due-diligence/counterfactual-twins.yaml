@@ -1,0 +1,8 @@
+---
+{
+  "case_id": "C04",
+  "twins": {
+    "C04-B": "唯一改变：\n- ORR 58%，但 DOR 显著更长且成熟。\n\nExpected:\n- 可能比单纯 62% ORR 更有价值。",
+    "C04-C": "唯一改变：\n- biomarker subgroup 在独立较大 cohort 复现。\n\nExpected:\n- differentiated positioning 上调；\n- 但仍不能自动叫 best-in-class。\n\n---"
+  }
+}

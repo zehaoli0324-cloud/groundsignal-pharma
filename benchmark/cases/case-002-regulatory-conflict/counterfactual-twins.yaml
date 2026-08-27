@@ -1,0 +1,8 @@
+---
+{
+  "case_id": "C02",
+  "twins": {
+    "C02-B": "新增：\n- review 延期 6 个月。\n\nExpected:\n- time-to-market / launch assumptions 下调；\n- 但不等于 efficacy thesis 被推翻。",
+    "C02-C": "新增：\n- 获批，但 label 明显窄于申请范围。\n\nExpected:\n- regulatory success 与 commercial upside 分离。\n\n---"
+  }
+}

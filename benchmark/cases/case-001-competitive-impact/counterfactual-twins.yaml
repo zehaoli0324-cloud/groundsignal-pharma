@@ -1,0 +1,8 @@
+---
+{
+  "case_id": "C01",
+  "twins": {
+    "C01-B": "唯一改变：\n- X 获批后价格低 30%；\n- payer coverage 与 B 接近；\n- supply 充足。\n\nExpected:\n- B 的战略脆弱性应明显上调。",
+    "C01-C": "唯一改变：\n- X 疗效优秀，但供应严重受限、coverage 差。\n\nExpected:\n- 商业冲击判断应明显下调；\n- clinical competitiveness 与 commercial threat 分离。\n\n---"
+  }
+}

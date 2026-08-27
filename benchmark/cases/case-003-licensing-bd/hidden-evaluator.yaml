@@ -1,0 +1,8 @@
+---
+{
+  "case_id": "C03",
+  "user_role": "BD Lead",
+  "hidden_evaluator": "",
+  "counterfactual_expectation": "见 twins 文件",
+  "must_notice": []
+}

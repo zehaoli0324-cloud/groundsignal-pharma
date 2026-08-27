@@ -1,0 +1,8 @@
+---
+{
+  "case_id": "C03",
+  "twins": {
+    "C03-B": "唯一改变：\n- A 的同 Target T Phase III 项目因 futility terminated。\n\nExpected:\n- A 排名应明显上升。",
+    "C03-C": "唯一改变：\n- B 刚刚 in-license 另一同 Target T ADC。\n\nExpected:\n- B strategic gap 减少，优先级应下降。\n\n---"
+  }
+}
