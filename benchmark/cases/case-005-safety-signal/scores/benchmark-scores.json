@@ -1,0 +1,24 @@
+{
+  "case_id": "case-005-safety-signal",
+  "model": "codex-cli-0.149.1/gpt-5-family",
+  "date": "2026-08-27",
+  "judge": "human-reviewer",
+  "protocol": "scoring-protocol v1",
+  "critical_errors": [],
+  "failure_types": [],
+  "notes": "不认定因果/类别效应；Competitor B 大量暴露无警告=反证；升 High 优先级但触发条件驱动分阶段战略调整",
+  "scores": {
+    "1_factual": 2,
+    "2_evidence": 2,
+    "3_temporal": 2,
+    "4_competitive": 2,
+    "5_decision": 2,
+    "6_prioritization": 2,
+    "7_uncertainty": 2,
+    "8_actionability": 2,
+    "9_density": 2,
+    "10_expression": 2
+  },
+  "total": 20,
+  "max": 20
+}

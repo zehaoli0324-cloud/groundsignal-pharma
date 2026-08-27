@@ -1,0 +1,24 @@
+{
+  "case_id": "case-001-competitive-impact",
+  "model": "codex-cli-0.149.1/gpt-5-family",
+  "date": "2026-08-27",
+  "judge": "human-reviewer",
+  "protocol": "scoring-protocol v1",
+  "critical_errors": [],
+  "failure_types": [],
+  "notes": "EJ 直接 A>B>C（同适应症同机制已上市/市场竞争/机制不同III期）；明确'不能仅监控同机制也不能无差别全列'；无头对头/价格/医保时不判断优效",
+  "scores": {
+    "1_factual": 2,
+    "2_evidence": 2,
+    "3_temporal": 2,
+    "4_competitive": 2,
+    "5_decision": 2,
+    "6_prioritization": 2,
+    "7_uncertainty": 2,
+    "8_actionability": 2,
+    "9_density": 2,
+    "10_expression": 2
+  },
+  "total": 20,
+  "max": 20
+}

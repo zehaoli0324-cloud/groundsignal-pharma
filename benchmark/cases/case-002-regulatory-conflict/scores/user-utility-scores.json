@@ -1,0 +1,20 @@
+{
+  "case_id": "case-002-regulatory-conflict",
+  "model": "codex-cli-0.149.1/gpt-5-family",
+  "date": "2026-08-27",
+  "judge": "human-reviewer",
+  "protocol": "scoring-protocol v1",
+  "critical_errors": [],
+  "failure_types": [],
+  "notes": "Tier 0 决定权 + under review 不能标已获批；媒体/聚合不能覆盖监管记录；事实与预期分离",
+  "scores": {
+    "U1_decision_fit": 2,
+    "U2_trust": 2,
+    "U3_prioritization": 2,
+    "U4_actionability": 2,
+    "U5_uncertainty": 2
+  },
+  "total": 10,
+  "max": 10,
+  "utility_level": "Decision-ready"
+}

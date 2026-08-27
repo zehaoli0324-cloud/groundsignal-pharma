@@ -1,0 +1,80 @@
+[
+  {
+    "case": "case-001-competitive-impact",
+    "session_id": "01a041ea",
+    "model": "GPT-5.",
+    "cli_version": "0.149.1",
+    "input_tokens": 16910,
+    "output_tokens": 2482,
+    "reasoning_tokens": 87,
+    "total_tokens": 19392,
+    "duration_ms": 62642,
+    "reasoning_encrypted": true,
+    "last_msg_preview": "## Executive Judgment\n\n不应把“所有 GLP-1 产品”无差别列为高优先级，也不能只监控同机制资产。建议将 **Asset A 列为最高优先级，Asset B 列为高优先级，As"
+  },
+  {
+    "case": "case-002-regulatory-conflict",
+    "session_id": "01a041eb",
+    "model": "GPT-5.",
+    "cli_version": "0.149.1",
+    "input_tokens": 15205,
+    "output_tokens": 1216,
+    "reasoning_tokens": 0,
+    "total_tokens": 16421,
+    "duration_ms": 34979,
+    "reasoning_encrypted": false,
+    "last_msg_preview": "## Executive Judgment\n\n当前应将该资产标记为 **“上市申请已受理 / under review”**，不能标为“已获批”。这是由监管机构数据库（Tier 0）直接确认的当前状态"
+  },
+  {
+    "case": "case-003-licensing-bd",
+    "session_id": "01a041eb",
+    "model": "GPT-5.",
+    "cli_version": "0.149.1",
+    "input_tokens": 15268,
+    "output_tokens": 2197,
+    "reasoning_tokens": 20,
+    "total_tokens": 17465,
+    "duration_ms": 59576,
+    "reasoning_encrypted": true,
+    "last_msg_preview": "## Executive Judgment\n\n优先顺序建议为 **B > A > C**。B 与 Asset Y 的战略互补性、ADC 持续引进记录及灵活交易先例最匹配，且不存在同靶点内部资产竞争，最"
+  },
+  {
+    "case": "case-004-due-diligence",
+    "session_id": "01a041ed",
+    "model": "GPT-5.",
+    "cli_version": "0.149.1",
+    "input_tokens": 15248,
+    "output_tokens": 2308,
+    "reasoning_tokens": 21,
+    "total_tokens": 17556,
+    "duration_ms": 58342,
+    "reasoning_encrypted": true,
+    "last_msg_preview": "## Executive Judgment\n\nAsset Z 的“best-in-class”目前只能视为**公司提出、尚未验证的 HYPOTHESIS，可信度偏低**；现有证据最多支持“在筛选后的单"
+  },
+  {
+    "case": "case-005-safety-signal",
+    "session_id": "01a041ee",
+    "model": "GPT-5.",
+    "cli_version": "0.149.1",
+    "input_tokens": 15254,
+    "output_tokens": 2574,
+    "reasoning_tokens": 23,
+    "total_tokens": 17828,
+    "duration_ms": 74590,
+    "reasoning_encrypted": true,
+    "last_msg_preview": "## Executive Judgment\n\n当前证据**不足以认定 Asset S 已“导致”肝损伤，也不足以认定存在靶点级类别效应**；更准确的表述是：Asset S 存在需要紧急澄清的严重肝毒性"
+  },
+  {
+    "case": "case-006-temporal-watchlist",
+    "session_id": "01a041ef",
+    "model": "GPT-5.",
+    "cli_version": "0.149.1",
+    "input_tokens": 15446,
+    "output_tokens": 1311,
+    "reasoning_tokens": 0,
+    "total_tokens": 16757,
+    "duration_ms": 34145,
+    "reasoning_encrypted": false,
+    "last_msg_preview": "### Executive Judgment\n\n最值得看的三件事依次是 **E1（Asset Q 新适应症获批，High）**、**E3（Asset R 关键性试验终止，High）**、**E5（As"
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "case_id": "case-003-licensing-bd",
+  "model": "codex-cli-0.149.1/gpt-5-family",
+  "date": "2026-08-27",
+  "judge": "human-reviewer",
+  "protocol": "scoring-protocol v1",
+  "critical_errors": [],
+  "failure_types": [],
+  "notes": "B>A>C 与 gold 一致；A 的 portfolio conflict（资源竞争/估值压价/交易搁置）识别；C 只有资金无战略需求",
+  "scores": {
+    "1_factual": 2,
+    "2_evidence": 2,
+    "3_temporal": 2,
+    "4_competitive": 2,
+    "5_decision": 2,
+    "6_prioritization": 2,
+    "7_uncertainty": 2,
+    "8_actionability": 2,
+    "9_density": 2,
+    "10_expression": 2
+  },
+  "total": 20,
+  "max": 20
+}

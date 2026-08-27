@@ -1,0 +1,24 @@
+{
+  "case_id": "case-006-temporal-watchlist",
+  "model": "codex-cli-0.149.1/gpt-5-family",
+  "date": "2026-08-27",
+  "judge": "human-reviewer",
+  "protocol": "scoring-protocol v1",
+  "critical_errors": [],
+  "failure_types": [],
+  "notes": "E1/E3/E5 Top3 与 gold 一致；E2/E4 去重；E9 未证实线索不占 Top3；E3 终止原因为主要不确定性",
+  "scores": {
+    "1_factual": 2,
+    "2_evidence": 2,
+    "3_temporal": 2,
+    "4_competitive": 2,
+    "5_decision": 2,
+    "6_prioritization": 2,
+    "7_uncertainty": 2,
+    "8_actionability": 2,
+    "9_density": 2,
+    "10_expression": 2
+  },
+  "total": 20,
+  "max": 20
+}
