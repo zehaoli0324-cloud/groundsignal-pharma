@@ -197,7 +197,9 @@ Relation Precision / Evidence quality / Entity Resolution / Temporal Validity / 
 | Detection Latency | 事件发生多久后系统知道？ | live 待 cron 运行数据 |
 | False Alert Rate | 推送中有多少没有商业意义？ | 待运行数据 |
 | Node Source Coverage | 多少结构化节点至少含一个可追溯来源？ | 节点级 100%（0 UNKNOWN） |
-| Claim Provenance Coverage | 多少原子 claim 有明确来源（Claim ID → Evidence）？ | pharma 102/102 = 100%（claim-audit.py） |
+| Claim Provenance Coverage | 多少原子 claim 有明确来源（Claim ID → Evidence）？ | pharma 已实施（claim-audit.py） |
+| Claim-Evidence Entailment | URL 是否真正支持 claim（≠ 有 URL）？ | 待测（玛仕度肽 bad case 已确认存在 mismatch） |
+| Temporal Validity / Stale Claim Rate | 仍标 VERIFIED 但已被 supersede 的 claim 占比？ | 待测（玛仕度肽 NDA→获批 1 例已修复，见 postmortems/） |
 
 诚实结论：**precision 较高，coverage 有限；live latency 与 false-alert 仍待证明。**
 
