@@ -178,7 +178,7 @@ python3 scripts/evidence-audit.py pharma --audit-dir 05-证据审计   # pharma�
 python3 scripts/evidence-audit.py demo                            # demo（V1）
 ```
 
-当前打标（2026-08-27）：pharma 36 VERIFIED / 11 SUPPORTED / 0 UNKNOWN；demo 26 SUPPORTED / 4 VERIFIED / 0 UNKNOWN。
+当前打标（2026-08-27）：pharma 36 VERIFIED / 11 SUPPORTED / 0 UNKNOWN；demo 26 SUPPORTED / 4 VERIFIED / 0 UNKNOWN。**这是节点级来源打标（source_url 域名可溯源），不是 claim 级审计；claim-level audit（Claim ID → Evidence ID）是下一步升级。**
 
 长期设计区分 `source_quality ≠ evidence_strength`（Reuters 是高质量来源，但"据悉可能获批"对"已经获批"的支撑强度仍然很低）。
 
@@ -193,7 +193,7 @@ Relation Precision / Evidence quality / Entity Resolution / Temporal Validity / 
 | Metric | Question | 当前值 |
 |--------|----------|--------|
 | Relation Recall | 应该知道的关系覆盖了多少？ | 待测 |
-| Event Recall | 重要事件抓到了多少？（2024-2026 医药 12 项基准） | **7/12 = 58%** |
+| Event Recall | 重要事件抓到了多少？（2024-2026 医药 12 项基准） | **8/12 = 67%** |
 | Detection Latency | 事件发生多久后系统知道？ | live 待 cron 运行数据 |
 | False Alert Rate | 推送中有多少没有商业意义？ | 待运行数据 |
 | Evidence Coverage | 多少 claim 能追溯到来源？ | pharma 100%（0 UNKNOWN） |

@@ -5,10 +5,10 @@
 | Metric | Question | 当前值 |
 |--------|----------|--------|
 | Relation Recall | 应该知道的关系覆盖多少？ | 待测（gold set 构建中） |
-| Event Recall | 重要事件抓到多少？ | **7/12 = 58%**（见下） |
+| Event Recall | 重要事件抓到多少？ | **8/12 = 67%**（见下） |
 | Detection Latency | 事件发生后多久知道？ | live 待 cron 数据 |
 | False Alert Rate | 推送中有多少无意义？ | 待 cron 运行 ≥2 周 |
-| Evidence Coverage | 多少 claim 能溯源？ | pharma 100%（0 UNKNOWN） |
+| Evidence Coverage | 多少节点能溯源到来源域名？ | 节点级 100%（0 UNKNOWN）；claim 级审计待实施 |
 
 ## Event Recall 基准集（2024-2026 医药重大事件 12 项）
 
@@ -27,9 +27,10 @@
 | 11 | 泽布替尼 CLL/SLL 获批（2023-01） | ❌ |
 | 12 | 信达玛仕度肽 III 期 DREAMS-2 达终点 | ❌ |
 
-**未覆盖 4 项 = 采集 backlog**（优先级排序：玛仕度肽 NDA/III 期 → 泽布替尼 CLL）。
+**覆盖 8 项 / 12 项 = 67%**。未覆盖 4 项 = 采集 backlog（优先级排序：玛仕度肽 NDA/III 期 → 泽布替尼 CLL）。
 
 ## 诚实结论
 
-- precision 高（证据可追溯、0 UNKNOWN），coverage 有限（58%），live latency 与 false-alert 待 cron 证明
+- precision 高（证据可追溯、0 UNKNOWN 节点），coverage 有限（67%），live latency 与 false-alert 待 cron 证明
 - 回溯覆盖 ≠ live 延迟：建库补录事件不能当卖点
+- **注意：Evidence Coverage 是节点级来源覆盖率（source_url 域名可溯源），不是 claim 级审计。** 一条 claim 一条审计（Claim ID → Evidence ID）是下一步升级，当前聚合关系行尚未逐条溯源
