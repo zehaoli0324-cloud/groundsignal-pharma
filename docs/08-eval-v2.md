@@ -33,4 +33,4 @@
 
 - precision 高（证据可追溯、0 UNKNOWN 节点），coverage 有限（67%），live latency 与 false-alert 待 cron 证明
 - 回溯覆盖 ≠ live 延迟：建库补录事件不能当卖点
-- **注意：Evidence Coverage 是节点级来源覆盖率（source_url 域名可溯源），不是 claim 级审计。** 一条 claim 一条审计（Claim ID → Evidence ID）是下一步升级，当前聚合关系行尚未逐条溯源
+- **注意：Evidence Coverage 分两层——节点级（source_url 域名可溯源）与 claim 级（原子 claim 逐条审计）。** 2026-08-27 起 claim-level audit 已实施（`scripts/claim-audit.py`）：pharma 102 条原子 claim 全部可溯源（70 VERIFIED / 32 SUPPORTED / 0 UNSUPPORTED）。demo 库关系行未带来源标注（v1 格式），claim 级支持率 0%，是已知短板。

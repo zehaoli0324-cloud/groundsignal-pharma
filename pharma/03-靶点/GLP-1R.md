@@ -14,9 +14,9 @@ fetched_at: 2026-08-27
 
 ## 相关药物
 
-- [[司美格鲁肽]]
-- [[替尔泊肽]]
-- [[玛仕度肽]]
+- [[司美格鲁肽]]（靶向关系）（来源: https://clinicaltrials.gov）
+- [[替尔泊肽]]（靶向关系）（来源: https://clinicaltrials.gov）
+- [[玛仕度肽]]（靶向关系）（来源: https://clinicaltrials.gov）
 
 ## 元数据
 

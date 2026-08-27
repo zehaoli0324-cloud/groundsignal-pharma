@@ -23,6 +23,13 @@ UNKNOWN 清零；SUPPORTED 集中在公司官网与行业媒体来源（合规�
 
 ## 已知短板（诚实）
 
-- 关系行来源引用：核心关系已带（来源: URL），聚合行需补
+- 关系行来源引用：pharma 靶点节点已补（claim-level 100%）；demo 关系行未带来源标注（v1 格式，claim 级 0%，已列入 backlog）
 - 时间信息：部分事件只有年份，需补到日期
 - 弱证据混入：授权交易金额为报道口径，未逐条验证
+
+## Claim-level Audit（2026-08-27 起）
+
+`python3 scripts/claim-audit.py pharma --audit-dir 05-证据审计`
+
+pharma：102 条原子 claim = 70 VERIFIED + 32 SUPPORTED + 0 UNSUPPORTED（100% 支持率）。
+demo：17 条关系 claim 全部无来源标注（v1 格式限制），需升级关系行格式。

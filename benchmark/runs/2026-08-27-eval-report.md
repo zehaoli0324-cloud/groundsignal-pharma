@@ -11,14 +11,14 @@
 | 1 | Factual correctness | 2 | 2 | 无事实错误 |
 | 2 | Evidence grounding | 2 | 2 | 全部基于快照，无编造 |
 | 3 | Temporal validity | 2 | 2 | 用最新状态 |
-| 4 | Competitive reasoning | 1.5 | 2 | DS Q2 直接判"直接竞争"，未强调 III 期 vs 已上市阶段不对等；Codex 主动区分"同机制对标 vs 市场重叠" |
+| 4 | Competitive reasoning | 1 | 2 | DS Q2 断言"直接竞争"后给出机制限定（anchor 1）；Codex 主动区分"同机制直接对标 vs 市场重叠"（anchor 2） |
 | 5 | Decision relevance | 2 | 2 | 回答用户任务 |
 | 6 | Prioritization | 2 | 2 | 都给出主/次级 watchlist 优先级 |
 | 7 | Uncertainty | 2 | 2 | Q4/Q5 证据不足明确表达 |
 | 8 | Actionability | 2 | 2 | 下一步可执行 |
 | 9 | Information density | 2 | 2 | 判断驱动，非堆新闻 |
 | 10 | Expression quality | 2 | 2 | 结构化、专业 |
-| | **总分** | **19.5/20** | **20/20** | |
+| | **总分** | **19/20** | **20/20** | 三档整数评分（scoring-protocol v1） |
 
 ## 失败类型标签
 
@@ -29,7 +29,7 @@
 
 ## 逐题亮点
 
-- Q5（"已证明对肥胖有效"是否成立）：两个模型都给出"有条件成立"——"III 期证明减重疗效"成立，"已获批"不成立。这是 evidence sufficiency 核心考点，双双通过 ✅
+- Q5（"已证明对肥胖有效"是否成立）：两个模型行为有差异但都合规——DeepSeek 明确"不成立"（监管语义），Codex 答"有条件成立"（科学语义成立、监管语义不成立）。**case-001 已据此把 Q5 拆分为 Q5a（科学疗效 claim，gold=可以）/ Q5b（监管确认 claim，gold=不可以），消除语义歧义。**
 - Q7（获批后答案如何变）：两个模型都正确区分"机制关系不变 vs 威胁等级变化"，且都指出"获批 ≠ 优于替尔泊肽"（Q4 不因获批改变）——这是最专业的考点，双双通过 ✅
 - Q3（机制邻位区分）：两个模型都正确识别 Asset X 与替尔泊肽的同靶点关系比与司美格鲁肽更直接 ✅
 

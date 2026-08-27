@@ -15,11 +15,22 @@
 | 9 | Information density | 是否高信息密度而非堆新闻？ | 是否罗列新闻而不是提炼判断 |
 | 10 | Expression quality | 是否像专业分析而非网页摘要？ | 语言是否结构化、有判断、不空洞 |
 
-## 评分
+## 评分（冻结：三档整数，禁止 0.5 分）
 
-- 每维 0-2 分（0=不可接受，1=部分，2=达标）
+- 每维 **0 / 1 / 2 三档整数**（禁止 0.5、1.5 等中间值）
+  - **2 = 达标**：完全满足该维定义，且有明确证据支持
+  - **1 = 部分**：部分满足，或满足但缺少关键限定/边界说明
+  - **0 = 不可接受**：不满足，或出现该维的 Critical Error
 - 1/4/7 维任一得 0 分 → 该答案整体判负（不可接受错误）
-- 输出格式：分维分数 + 一句话理由 + 失败类型标签
+- 判分必须对照 case 里的 **gold + 判分 anchors**，禁止凭印象打分
+- 盲评：评分时隐藏模型名，按 case_id + response_id 打分
+- 输出：结构化 JSON（见 scoring-protocol.md），报告由脚本生成，禁止手写最终报告
+
+## 判分 anchors 示例（Competitive reasoning，维 4）
+
+- 2 = 明确区分 market competitor / mechanistic direct comparator / development-stage asymmetry（如"同适应症但机制不同、阶段不对等，所以是部分竞争而非完全对等"）
+- 1 = 开头断言 direct competitor，但随后给出机制/阶段限定（如"是直接竞争，但靶点不同"——有区分但断言先行）
+- 0 = shared indication/target 直接等同于完全竞争（如"都做肥胖，所以直接竞争"，无任何限定）
 
 ## 失败类型标签（Failure Taxonomy）
 

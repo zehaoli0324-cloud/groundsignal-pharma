@@ -92,6 +92,30 @@ def rel_desc(note, target):
     return ''
 
 
+def parse_indications(note):
+    """从产品节点 frontmatter 解析适应症集合（indications: '2型糖尿病/肥胖'）"""
+    ind = note['fm'].get('indications', '')
+    if not ind:
+        return set()
+    return {x.strip() for x in re.split(r'[/,、;；]', ind) if x.strip()}
+
+
+def parse_stage(note):
+    """从 development_status 提取开发阶段（已上市/注册申报/III/II/临床前）"""
+    ds = note['fm'].get('development_status', '') + note['fm'].get('status', '')
+    if '已上市' in ds or '上市' in ds or 'approved' in ds.lower():
+        return 'MARKETED'
+    if 'NDA' in ds.upper() or '递交' in ds or '受理' in ds:
+        return 'REGULATORY'
+    if 'III' in ds or 'III 期' in ds or 'Ⅲ' in ds:
+        return 'PHASE3'
+    if 'II' in ds or 'II 期' in ds or 'Ⅱ' in ds:
+        return 'PHASE2'
+    if 'I' in ds:
+        return 'PHASE1'
+    return 'UNKNOWN'
+
+
 def classify(mode, new_base, old_base, shared, new_note, old_note, notes, direct):
     """启发式关系分类（不默认竞争）。mode: 'pharma' | 'semi'"""
     types = []
@@ -121,6 +145,14 @@ def classify(mode, new_base, old_base, shared, new_note, old_note, notes, direct
             if notes[s]['fm'].get('modality', '') == new_mod:
                 shared_modalities.append(s)
 
+    # indication overlap（适应症交集，真正的 indications 而非 shared_products）
+    new_ind_set = parse_indications(new_note)
+    old_ind_set = parse_indications(old_note)
+    shared_indications = (new_ind_set & old_ind_set) if new_ind_set and old_ind_set else set()
+    # 阶段
+    new_stage = parse_stage(new_note)
+    old_stage = parse_stage(old_note)
+
     # 直接关系行描述（授权/合作/试验/竞争）
     d_new = rel_desc(new_note, old_base) + rel_desc(old_note, new_base)
     licensing = ('授权' in d_new or '许可' in d_new or '引进' in d_new or 'LICENS' in d_new.upper())
@@ -133,15 +165,24 @@ def classify(mode, new_base, old_base, shared, new_note, old_note, notes, direct
         types.append('SUPPLY_CHAIN_LINK（已有关联）')
 
     if mode == 'pharma':
-        # 医药核心：共享靶点 ≠ 直接竞争（需叠加适应症/模式/阶段判断）
-        if shared_targets:
-            types.append('SHARED_TARGET' + ('+直接竞争' if (direct and '竞争' in d_new) else ''))
-        if shared_modalities:
+        # 医药核心：竞争 = target × indication × modality × stage 的矢量判断
+        has_target_overlap = bool(shared_targets)
+        has_ind_overlap = bool(shared_indications)
+        has_mod_overlap = bool(shared_modalities)
+        both_marketed = (new_stage == 'MARKETED' and old_stage == 'MARKETED')
+        if has_target_overlap and has_ind_overlap:
+            # 真正直接竞争（同靶点 + 同适应症）
+            if both_marketed:
+                types.append('DIRECT_COMMERCIAL_COMPETITOR')
+            else:
+                types.append('PIPELINE_COMPETITOR')
+        elif has_target_overlap:
+            types.append('MECHANISTIC_NEIGHBOR' + ('+SHARED_TARGET' if not has_ind_overlap else ''))
+        elif has_ind_overlap and not has_target_overlap:
+            # 同适应症不同机制 = 市场层面的竞争者（但非机制对等）
+            types.append('MARKET_COMPETITOR')
+        if has_mod_overlap and not any('COMPETITOR' in t for t in types):
             types.append('SHARED_MODALITY')
-        if shared_products and same_ind and not any('DIRECT_COMPETITOR' in t for t in types):
-            types.append('DIRECT_COMPETITOR')
-        elif shared_products:
-            types.append('PRODUCT_OVERLAP')
         if licensing:
             types.append('LICENSING_LINK')
         if collab:
@@ -178,7 +219,7 @@ def classify(mode, new_base, old_base, shared, new_note, old_note, notes, direct
     if mode == 'pharma':
         comp = {
             'target': min(1.0, len(shared_targets) / 1.5),
-            'indication': min(1.0, len(shared_products) / 1.5),
+            'indication': min(1.0, len(shared_indications) / 1.5),
             'modality': min(1.0, len(shared_modalities) / 1.5),
             'investor': min(1.0, len(shared_investors) / 1.5),
             'ecosystem': min(1.0, len(shared_analysis) / 2),

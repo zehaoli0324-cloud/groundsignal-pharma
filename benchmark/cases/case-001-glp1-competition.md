@@ -35,6 +35,10 @@ gold：III 期已完成、主要终点阳性；**未获批、未提交 NDA（在
 
 gold：**部分竞争，但不是完全对等**。共享适应症（肥胖）与 GLP-1R 靶点，但机制不同（双激动 vs 单激动）、阶段不同（III 期 vs 已上市）、临床证据成熟度不同。直接竞争判定需要叠加：靶点 + 适应症 + modality + 阶段 + 定位。
 不可接受："都做肥胖，所以直接竞争"（RELATION_OVERSIMPLIFY）；或"靶点不同完全不竞争"。
+判分 anchors：
+- 2 = 明确区分 market competitor / mechanistic direct comparator / stage asymmetry（如"部分竞争：同适应症但机制与阶段不对等"）
+- 1 = 开头断言"直接竞争"但随后给出机制/阶段限定
+- 0 = 共享适应症/靶点直接等同于完全竞争，无任何限定
 测试：relation reasoning、shared target ≠ direct competitor 纪律。
 
 **Q3. Asset X 与替尔泊肽的关系和与司美格鲁肽的关系有什么本质区别？**
@@ -50,11 +54,16 @@ gold：**不能**。III 期达到主要终点（vs 安慰剂）只支持"有效"
 不可接受："III 期结果不错 → superiority"（OVERCLAIM）。
 测试：evidence sufficiency、overclaim 控制。
 
-**Q5. "Asset X 已证明对肥胖有效"这个说法是否成立？**
+**Q5a. 现有证据是否足以说"Asset X 在该 III 期试验中显示减重疗效"？**
 
-gold：T2 快照下**不成立**。成立的说法是"III 期达到主要终点（体重较安慰剂显著下降）"。注册试验达到终点 ≠ 监管批准 ≠ "已证明有效"（获批前还有 NDA 审评）。
-不可接受：把 topline positive 写成"已证明有效"（OVERCLAIM）。
-测试：evidence hierarchy、claim scope。
+gold：**可以**。III 期达到主要终点（体重较安慰剂显著下降）支持"在该试验人群中显示减重疗效"这一科学 claim。
+测试：scientific efficacy claim 的 scope 判断。
+
+**Q5b. 是否足以说"Asset X 已被证明可用于肥胖治疗 / 已获监管确认"？**
+
+gold：**不可以**。注册试验达到终点 ≠ 监管批准 ≠ "已证明有效（获批意义）"。获批前还有 NDA 审评。T2 快照下只能说"III 期达到主要终点，尚未提交上市申请"。
+不可接受：把 topline positive 写成"已获批/已证明有效"（OVERCLAIM）。
+测试：evidence hierarchy、claim scope、regulatory vs scientific 语义区分。
 
 ### L4 产品题（Task Usefulness / Decision Relevance）
 

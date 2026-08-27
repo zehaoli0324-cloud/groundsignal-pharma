@@ -14,10 +14,10 @@ fetched_at: 2026-08-27
 
 ## 相关药物
 
-- [[信迪利单抗]]
-- [[替雷利珠单抗]]
-- [[卡瑞利珠单抗]]
-- [[特瑞普利单抗]]
+- [[信迪利单抗]]（靶向关系）（来源: https://clinicaltrials.gov）
+- [[替雷利珠单抗]]（靶向关系）（来源: https://clinicaltrials.gov）
+- [[卡瑞利珠单抗]]（靶向关系）（来源: https://clinicaltrials.gov）
+- [[特瑞普利单抗]]（靶向关系）（来源: https://clinicaltrials.gov）
 
 ## 元数据
 
