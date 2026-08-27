@@ -3,6 +3,7 @@ type: product
 entity_id: CRO服务
 canonical_name: CRO 服务（合同研究组织）
 company: 药明康德
+modality: service（研究外包）
 evidence: SUPPORTED
 source_url: "https://www.wuxiapptec.com"
 last_verified_at: 2026-08-27
@@ -20,5 +21,6 @@ fetched_at: 2026-08-27
 
 ## 元数据
 
+- modality: service（研究外包）
 - entity_id: CRO服务 | company: 药明康德 | type: product
 - last_verified_at: 2026-08-27

@@ -3,6 +3,7 @@ type: product
 entity_id: CDMO服务
 canonical_name: CDMO 服务（合同定制研发生产）
 company: 药明生物
+modality: service（生产外包）
 evidence: SUPPORTED
 source_url: "https://www.wuxibiologics.com"
 last_verified_at: 2026-08-27
@@ -21,5 +22,6 @@ fetched_at: 2026-08-27
 
 ## 元数据
 
+- modality: service（生产外包）
 - entity_id: CDMO服务 | company: 药明生物 | type: product
 - last_verified_at: 2026-08-27

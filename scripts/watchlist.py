@@ -40,6 +40,16 @@ EVENT_STYLE = {
     'SAFETY_SIGNAL': ('安全性信号', '#ef4444'),
     'CLINICAL_START': ('临床启动', '#14b8a6'),
     'M_A': ('并购', '#6366f1'),
+    'TRIAL_STATUS_CHANGE': ('试验状态变更', '#f59e0b'),
+    'TOPLINE_RESULT': ('顶线数据', '#8b5cf6'),
+    'REGULATORY_SUBMISSION': ('监管申报', '#3b82f6'),
+    'COMPLETE_RESPONSE_LETTER': ('CRL完全回复函', '#ef4444'),
+    'CLINICAL_HOLD': ('临床暂停', '#dc2626'),
+    'BOXED_WARNING_UPDATE': ('黑框警告更新', '#b91c1c'),
+    'PROGRAM_DISCONTINUATION': ('项目终止', '#7f1d1d'),
+    'LABEL_EXPANSION': ('标签扩展', '#0ea5e9'),
+    'MANUFACTURING_UPDATE': ('生产更新', '#84cc16'),
+    'BIOMARKER_UPDATE': ('生物标志物更新', '#14b8a6'),
 }
 CONF_COLOR = lambda c: '#10b981' if c >= 0.85 else ('#f59e0b' if c >= 0.7 else '#ef4444')
 

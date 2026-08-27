@@ -4,6 +4,7 @@ entity_id:
 canonical_name:
 company:
 target:
+modality:
 indications:
 development_status:
 evidence: UNKNOWN

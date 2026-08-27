@@ -231,6 +231,7 @@ samples/         示例输出（HTML+PNG）
 - `docs/08-eval-v2.md` — recall / latency / false-alert evaluation
 - `docs/09-user-validation.md` — user validation
 - `docs/10-commercial-validation.md` — commercial roadmap
+- `docs/11-clinical-safety-boundaries.md` — 临床安全边界（医药版反幻觉铁律：阳性≠获批、注册≠疗效、AE≠因果）
 
 ---
 

@@ -3,6 +3,7 @@ type: product
 entity_id: mRNA疫苗
 canonical_name: mRNA 疫苗（Comirnaty）
 company: 辉瑞
+modality: mRNA（RNA therapeutics）
 evidence: SUPPORTED
 source_url: "https://www.pfizer.com"
 last_verified_at: 2026-08-27
@@ -20,5 +21,6 @@ fetched_at: 2026-08-27
 
 ## 元数据
 
+- modality: mRNA（RNA therapeutics）
 - entity_id: mRNA疫苗 | company: 辉瑞 | type: product
 - last_verified_at: 2026-08-27
