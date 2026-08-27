@@ -1,0 +1,42 @@
+---
+{
+  "case_id": "case-002-regulatory-conflict",
+  "user_role": "监管情报 / 临床战略 / Competitive Intelligence",
+  "primary_capabilities": [
+    "source_hierarchy",
+    "contradiction_resolution",
+    "claim_scope",
+    "abstention",
+    "temporal_validity"
+  ],
+  "critical_errors": [
+    "把 trial completed 当作 approval。",
+    "用媒体/聚合站覆盖监管数据库。",
+    "把“预计/期待”转写成事实。",
+    "在没有批准记录时写“已获批”。",
+    "把所有来源简单投票，忽略 source hierarchy。"
+  ],
+  "anchors": {
+    "U1": {
+      "name": "",
+      "text": "2 = 第一行明确“受理/审评中，未获批”；1 = 结论正确但绕；0 = 状态错误/无法判断。"
+    },
+    "U2": {
+      "name": "",
+      "text": "2 = 明确每个来源能/不能支持什么；1 = 只说“监管更权威”；0 = 来源层级错误。"
+    },
+    "U3": {
+      "name": "",
+      "text": "2 = regulator decision 是唯一 P0 watch trigger；1 = 有重点但不够明确；0 = 所有来源等权。"
+    },
+    "U4": {
+      "name": "",
+      "text": "2 = 给出内部标准表述 + 下一监控字段；1 = “继续关注审批”；0 = 无行动输出。"
+    },
+    "U5": {
+      "name": "",
+      "text": "2 = 区分事实状态与时间预期；1 = 有保留但未拆开；0 = 把预期升级为事实。"
+    }
+  },
+  "gold_brief_notes": "详见 case.md 的 GroundSignal 理想 Intelligence Brief"
+}

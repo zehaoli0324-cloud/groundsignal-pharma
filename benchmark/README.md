@@ -1,4 +1,4 @@
-# GroundSignal Pharma — Decision Intelligence Benchmark v0.1
+# GroundSignal Pharma — Decision Intelligence Benchmark v0.1（v0.2 cases 已落地）
 
 > **给定真实世界医药证据，系统能不能帮助专业用户做出一个更好的判断？**
 
@@ -72,6 +72,56 @@ Case 固定："Drug X 是否已证明对肥胖有效？"
 
 v0.1 目标：3 类用户 × 4 case = 12 case，每 case 5-8 个问题 + 1 个完整决策任务 → 60-100 evaluation items。
 每个 case 同时产生：产品案例 / 模型考题 / Judge calibration sample / 训练数据（Bad vs Preferred）。
+
+## v0.2：6 个控制变量式 Case（已落地 2026-08-27）
+
+> 来源：GroundSignal Decision Intelligence 6 Cases v0.2。每个 Case 同时产出产品资产（Intelligence Brief）与 Eval 资产（questions + gold + critical errors + anchors）。
+> 这些 Case 是控制变量式 benchmark fixtures：Asset X / Company A 等证据快照用于冻结 gold，不代表当前真实世界事实。
+
+| Case | 用户角色 | 核心区分能力 | Snapshot |
+|------|---------|-------------|----------|
+| case-001-competitive-impact | 药企战略/CI | 竞争层级（同机制 vs 市场 vs pipeline）+ 排序 | C01-T1 |
+| case-002-regulatory-conflict | 监管情报/临床战略 | source hierarchy + 冲突消解 + abstention | C02-T1 |
+| case-003-licensing-bd | 药企 BD | strategic fit + partner 排序（B>A>C）+ 不编造意图 | C03-T1 |
+| case-004-due-diligence | VC/PE 投委会 | claim 拆解 + 跨试验不可比 + falsification | C04-T1 |
+| case-005-safety-signal | 临床开发/安全 | 信号≠因果≠类别效应 + 风险优先级 | C05-T1 |
+| case-006-temporal-watchlist | CI/管理层 | 12 事件压成 Top3 + 去重 + changed claim | C06-T1 |
+
+### 仓库结构（每 case 独立目录）
+
+```text
+benchmark/cases/
+  case-001-competitive-impact/
+    case.md                 # 用户任务 + 冻结快照 + 理想 Brief + eval items + anchors
+    gold-behavior.yaml      # pre-registered gold + critical errors + anchors
+    eval-items.json         # 模型评测项（L1-L4）
+    scores/                 # 盲评 score JSON（benchmark + user-utility 双份）
+  case-002-regulatory-conflict/ ... case-006-temporal-watchlist/
+  _archive/                 # v0.1 旧 case-001（git tag benchmark-v0.1 已存档）
+```
+
+### User Utility Rubric（U1-U5）
+
+产品可用性视角（rubrics/user-utility-rubric.md）：Decision Fit / Trust / Prioritization / Actionability / Uncertainty。
+5 维 × 0/1/2 + 总分解释（9-10 Decision-ready / 7-8 Analyst-useful / 5-6 Background-only / 0-4 Not useful）+ 任一 Critical User Error → Reject。
+与 10 维 benchmark rubric 并行输出。
+
+### 能力覆盖矩阵（12 能力 × 6 case）
+
+| 能力 | C01 | C02 | C03 | C04 | C05 | C06 |
+|------|:---:|:---:|:---:|:---:|:---:|:---:|
+| Factual correctness | ●● | ●● | ● | ● | ● | ●● |
+| Evidence grounding | ●● | ●●● | ●● | ●●● | ●●● | ●● |
+| Temporal validity | ●● | ●●● | ● | ● | ● | ●●● |
+| Relation reasoning | ●●● | ● | ●● | ● | ●● | ● |
+| Source hierarchy | ● | ●●● | ● | ●● | ●● | ●● |
+| Evidence sufficiency | ●● | ●● | ●● | ●●● | ●●● | ● |
+| Abstention / uncertainty | ●● | ●●● | ●● | ●●● | ●●● | ●● |
+| Prioritization | ●●● | ●● | ●●● | ●● | ●● | ●●● |
+| Actionability | ●● | ●● | ●●● | ●●● | ●●● | ●●● |
+| Change / impact propagation | ●● | ●● | ●● | ● | ●● | ●●● |
+| Falsification / downside | ● | ●● | ●● | ●●● | ●●● | ● |
+| User-specific answer quality | ●●● | ●●● | ●●● | ●●● | ●●● | ●●● |
 
 ## 与仓库的关系
 

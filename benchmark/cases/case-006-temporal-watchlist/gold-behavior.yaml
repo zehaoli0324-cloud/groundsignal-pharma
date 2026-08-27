@@ -1,0 +1,43 @@
+---
+{
+  "case_id": "case-006-temporal-watchlist",
+  "user_role": "Competitive Intelligence / 管理层",
+  "primary_capabilities": [
+    "temporal_reasoning",
+    "change_detection",
+    "deduplication",
+    "impact_propagation",
+    "precision_at_k",
+    "abstention"
+  ],
+  "critical_errors": [
+    "Top 3 中包含 E2/E4 这类重复传播，却漏掉 E1/E3/E5。",
+    "把 2024 旧新闻 repost 当成新事件。",
+    "把分析师 M&A speculation 当事实。",
+    "不区分“相关”与“改变判断”。",
+    "只做新闻摘要，不说明 changed claim / affected entity / next action。"
+  ],
+  "anchors": {
+    "U1": {
+      "name": "",
+      "text": "2 = exactly Top 3 + 为什么现在重要；1 = 选对大部分但没有 changed thesis；0 = 输出 12 条新闻摘要。"
+    },
+    "U2": {
+      "name": "",
+      "text": "2 = 正确处理时间、重复、source tier 和 speculation；1 = 一处轻微问题不影响 Top 3；0 = 旧闻当新闻/推测当事实。"
+    },
+    "U3": {
+      "name": "",
+      "text": "2 = E1/E3/E5 清晰居前并解释 hard state change > 重复报道；1 = Top 3 基本合理但权重逻辑不清；0 = 漏关键 hard event。"
+    },
+    "U4": {
+      "name": "",
+      "text": "2 = 每条 Top 3 都有 next-watch trigger；1 = 统一“持续跟踪”；0 = 无后续动作。"
+    },
+    "U5": {
+      "name": "",
+      "text": "2 = E9 降级为 hypothesis/lead，E6 标注探索性；1 = 谨慎但分类不清；0 = 升级为事实或核心 thesis。"
+    }
+  },
+  "gold_brief_notes": "详见 case.md 的 GroundSignal 理想 Intelligence Brief"
+}

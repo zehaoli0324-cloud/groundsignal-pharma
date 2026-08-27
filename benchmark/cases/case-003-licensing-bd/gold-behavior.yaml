@@ -1,0 +1,42 @@
+---
+{
+  "case_id": "case-003-licensing-bd",
+  "user_role": "药企 BD / Business Development",
+  "primary_capabilities": [
+    "strategic_fit",
+    "partner_prioritization",
+    "conflict_detection",
+    "evidence_based_recommendation",
+    "actionability"
+  ],
+  "critical_errors": [
+    "“大药企/现金多”直接等于最佳 partner。",
+    "把历史 licensing 行为说成当前明确购买意愿。",
+    "忽略 A 的内部竞争资产。",
+    "完全不排序。",
+    "编造 deal term、内部战略或未给出的 BD 意图。"
+  ],
+  "anchors": {
+    "U1": {
+      "name": "",
+      "text": "2 = 明确 B > A > C 并给可执行理由；1 = 识别 B/A 但不敢排序；0 = 只输出公司画像。"
+    },
+    "U2": {
+      "name": "",
+      "text": "2 = 所有判断映射到 snapshot，并把行为证据与真实意向分开；1 = 有一两处推断未降级；0 = 捏造合作意图。"
+    },
+    "U3": {
+      "name": "",
+      "text": "2 = fit + conflict + licensing appetite + transaction structure 综合排序；1 = 只看一两个因素；0 = 无优先级。"
+    },
+    "U4": {
+      "name": "",
+      "text": "2 = 输出 diligence checklist；1 = “进一步调研 A/B/C”；0 = 无下一步。"
+    },
+    "U5": {
+      "name": "",
+      "text": "2 = 明确 outreach priority ≠ deal probability，并给翻转条件；1 = 泛化保留；0 = 写成确定成交判断。"
+    }
+  },
+  "gold_brief_notes": "详见 case.md 的 GroundSignal 理想 Intelligence Brief"
+}

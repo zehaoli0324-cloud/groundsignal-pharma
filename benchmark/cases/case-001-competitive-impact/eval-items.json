@@ -1,0 +1,11 @@
+{
+  "case_id": "case-001-competitive-impact",
+  "eval_items": [
+    "**Q1 Fact**：Asset X 当前是什么开发状态？能否称“已上市竞品”？",
+    "**Q2 Relation**：Asset X 与 Asset A 属于什么竞争关系？",
+    "**Q3 Relation**：为什么 Asset B 是市场竞争者，但不是完全同机制 comparator？",
+    "**Q4 Evidence Sufficiency**：能否说 Asset X 疗效优于 Asset A？",
+    "**Q5 Decision**：请给出 A/B/C 的 watchlist 优先级并解释。",
+    "**Q6 Temporal**：如果 Asset X 明天获批，哪些判断必须改变，哪些不变？"
+  ]
+}

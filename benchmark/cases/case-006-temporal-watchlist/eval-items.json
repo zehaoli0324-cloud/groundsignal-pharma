@@ -1,0 +1,11 @@
+{
+  "case_id": "case-006-temporal-watchlist",
+  "eval_items": [
+    "**Q1**：只能选 3 条，选哪三条？",
+    "**Q2**：为什么 E2/E4 不能单独算新事件？",
+    "**Q3**：E3 改变了哪个旧 claim？",
+    "**Q4**：E9 应该怎样记录：事件、事实还是 lead/hypothesis？",
+    "**Q5**：每个 Top 3 给一个 next-watch trigger。",
+    "**Q6**：如果用户从“管理层”切换为“医学事务”，E6 的优先级会不会变化？为什么？"
+  ]
+}

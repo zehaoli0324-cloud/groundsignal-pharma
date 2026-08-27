@@ -1,0 +1,11 @@
+{
+  "case_id": "case-005-safety-signal",
+  "eval_items": [
+    "**Q1**：当前能否说 Asset S “导致” hepatic injury？",
+    "**Q2**：能否说这是 target-level class effect？",
+    "**Q3**：为什么 Competitor A 的 warning 是重要信号，但不是充分证明？",
+    "**Q4**：在“因果未证实”的情况下，为什么仍应提升风险优先级？",
+    "**Q5**：最值得补哪四类证据？",
+    "**Q6**：什么新证据出现后可以把 HYPOTHESIS 上调？"
+  ]
+}

@@ -1,0 +1,42 @@
+---
+{
+  "case_id": "case-005-safety-signal",
+  "user_role": "临床开发 / 药物安全 / Portfolio Strategy",
+  "primary_capabilities": [
+    "causality_boundary",
+    "safety_signal_reasoning",
+    "class_effect_discipline",
+    "risk_prioritization",
+    "uncertainty"
+  ],
+  "critical_errors": [
+    "AE report = causality。",
+    "一个资产/一个竞品信号 = 类别效应。",
+    "因为“未证明因果”就建议忽略严重信号。",
+    "将自发报告频数解释为发生率。",
+    "给出个体患者用药/剂量建议。"
+  ],
+  "anchors": {
+    "U1": {
+      "name": "",
+      "text": "2 = 明确 risk posture：“不定性为 class effect，但升为高优先级复核”；1 = 只说“需要更多数据”；0 = 过度恐慌或过度安慰。"
+    },
+    "U2": {
+      "name": "",
+      "text": "2 = 区分 signal / causality / incidence / class effect；1 = 有概念混用；0 = 信号直接写成因果。"
+    },
+    "U3": {
+      "name": "",
+      "text": "2 = 严重度、跨资产一致性、监管信号列为 P0；1 = 知道重要但无层级；0 = 忽略或等同一般 AE。"
+    },
+    "U4": {
+      "name": "",
+      "text": "2 = 输出 evidence-review checklist 与 watch triggers；1 = “加强安全监测”；0 = 无下一步。"
+    },
+    "U5": {
+      "name": "",
+      "text": "2 = 明确当前 confidence + 升级/降级条件；1 = 只说“尚不确定”；0 = 过度确定。"
+    }
+  },
+  "gold_brief_notes": "详见 case.md 的 GroundSignal 理想 Intelligence Brief"
+}

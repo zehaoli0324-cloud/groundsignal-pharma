@@ -1,0 +1,11 @@
+{
+  "case_id": "case-004-due-diligence",
+  "eval_items": [
+    "**Q1**：哪些 claim 是 OBSERVED，哪些只是 HYPOTHESIS？",
+    "**Q2**：62% vs 48% 能否支持 superiority？为什么？",
+    "**Q3**：什么证据最可能推翻 “best-in-class” thesis？",
+    "**Q4**：如果你是投委会成员，你会怎样写一段 3 句结论？",
+    "**Q5**：下一轮数据里最值得优先看哪三项？",
+    "**Q6**：如果 biomarker subgroup 在更大队列复现，哪些判断会升级，哪些仍不能升级？"
+  ]
+}

@@ -1,0 +1,42 @@
+---
+{
+  "case_id": "case-001-competitive-impact",
+  "user_role": "药企战略 / Competitive Intelligence",
+  "primary_capabilities": [
+    "competitive_reasoning",
+    "stage_asymmetry",
+    "prioritization",
+    "evidence_sufficiency",
+    "actionability"
+  ],
+  "critical_errors": [
+    "Phase III 阳性 → “已获批/已上市”。",
+    "shared target / shared indication → 无限定地判为完全直接竞争。",
+    "没有头对头数据却声称优于 Asset A。",
+    "用户问优先级，却只罗列 A/B/C。",
+    "编造 snapshot 中不存在的销售额/医保/价格。"
+  ],
+  "anchors": {
+    "U1": {
+      "name": "Decision Fit",
+      "text": "2 = 明确 A > B > C，并说明三者是不同层面的竞争；1 = 识别 A 最重要但排序不完整；0 = 只给竞品名单。"
+    },
+    "U2": {
+      "name": "Trust",
+      "text": "2 = 只使用 E1–E6，并明确“III 期≠上市”“无头对头≠优效”；1 = 事实正确但边界不完整；0 = 出现批准/优效 overclaim。"
+    },
+    "U3": {
+      "name": "Prioritization",
+      "text": "2 = 按机制、适应症、阶段/商业化状态综合排序；1 = 只看单一因素；0 = 等权罗列。"
+    },
+    "U4": {
+      "name": "Actionability",
+      "text": "2 = 给出申报/批准、头对头、安全、价格/供应等具体 triggers；1 = “持续关注临床和商业化”；0 = 无下一步。"
+    },
+    "U5": {
+      "name": "Uncertainty",
+      "text": "2 = 明确缺口及翻转条件；1 = 只说“信息有限”；0 = 把排序写成确定未来市场结果。"
+    }
+  },
+  "gold_brief_notes": "详见 case.md 的 GroundSignal 理想 Intelligence Brief"
+}

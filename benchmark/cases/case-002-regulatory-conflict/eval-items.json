@@ -1,0 +1,11 @@
+{
+  "case_id": "case-002-regulatory-conflict",
+  "eval_items": [
+    "**Q1**：当前监管状态是什么？",
+    "**Q2**：哪一条证据拥有最高决定权？为什么？",
+    "**Q3**：ClinicalTrials.gov 的 COMPLETED 能支持哪些 claim，不能支持哪些 claim？",
+    "**Q4**：如何处理 E5“已获批”的冲突？",
+    "**Q5**：给管理层一句可直接使用的表述。",
+    "**Q6**：什么新证据出现后 gold 才能从 “under review” 更新为 “approved”？"
+  ]
+}

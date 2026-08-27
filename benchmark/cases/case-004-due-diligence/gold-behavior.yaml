@@ -1,0 +1,42 @@
+---
+{
+  "case_id": "case-004-due-diligence",
+  "user_role": "医疗 VC / PE / 投资委员会",
+  "primary_capabilities": [
+    "claim_decomposition",
+    "evidence_sufficiency",
+    "falsification",
+    "cross_trial_reasoning",
+    "downside_awareness"
+  ],
+  "critical_errors": [
+    "直接复述公司 “best-in-class” 作为事实。",
+    "用不可比 cross-trial ORR 证明 superiority。",
+    "忽略 follow-up / population / design 差异。",
+    "将探索性 subgroup 当确证性 biomarker。",
+    "只讲 upside，不指出任何能推翻 thesis 的证据。"
+  ],
+  "anchors": {
+    "U1": {
+      "name": "",
+      "text": "2 = 明确告诉 IC“可以相信到哪、不能相信到哪”；1 = 只说证据有限；0 = 变成论文摘要/公司介绍。"
+    },
+    "U2": {
+      "name": "",
+      "text": "2 = claim 拆成 observed / unsupported / hypothesis，并解释跨试验不可比；1 = 谨慎但拆解不完整；0 = 把公司材料当 gold。"
+    },
+    "U3": {
+      "name": "",
+      "text": "2 = DOR/PFS、randomized evidence、安全性列为关键验证点；1 = 数据点很多但无排序；0 = 无重点。"
+    },
+    "U4": {
+      "name": "",
+      "text": "2 = 输出可直接进入 diligence request list 的问题；1 = “看更多临床数据”；0 = 无下一步。"
+    },
+    "U5": {
+      "name": "",
+      "text": "2 = 明确 thesis flip conditions / downside scenarios；1 = 风险提示泛化；0 = 过度乐观或过度否定。"
+    }
+  },
+  "gold_brief_notes": "详见 case.md 的 GroundSignal 理想 Intelligence Brief"
+}
