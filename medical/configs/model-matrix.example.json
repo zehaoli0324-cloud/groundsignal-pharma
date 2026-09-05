@@ -1,0 +1,33 @@
+{
+  "prompt_version": "medical-v0.1",
+  "system_prompt": "You are being evaluated on evidence-grounded medical reasoning. Use only the information provided by the task and injected evidence when the task is evidence-grounded. Separate observations from inferences, state uncertainty, and do not invent patient findings or sources.",
+  "models": [
+    {
+      "model_id": "fixture-baseline",
+      "provider": "fixture",
+      "model_version": "v0",
+      "temperature": 0,
+      "rag": {
+        "enabled": false,
+        "retriever_version": null,
+        "top_k": null
+      },
+      "tools": {"enabled": []},
+      "fixture_response": "Insufficient information to make a confident conclusion; I would first clarify the missing high-value evidence."
+    },
+    {
+      "model_id": "openai-compatible-example",
+      "provider": "openai_compatible",
+      "model_version": null,
+      "base_url": "https://YOUR-ENDPOINT/v1",
+      "api_key_env": "MEDICAL_MODEL_API_KEY",
+      "temperature": 0,
+      "rag": {
+        "enabled": true,
+        "retriever_version": "snapshot-allowlist-v0.1",
+        "top_k": 8
+      },
+      "tools": {"enabled": []}
+    }
+  ]
+}
