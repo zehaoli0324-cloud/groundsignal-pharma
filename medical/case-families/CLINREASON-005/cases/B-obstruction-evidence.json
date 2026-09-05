@@ -1,0 +1,37 @@
+{
+  "case_id": "CLINREASON-005-B",
+  "title": "AKI with objective obstruction evidence added",
+  "task_type": "clinical_reasoning",
+  "data_origin": "synthetic",
+  "patient_context": {
+    "demographics": {"age_years": 71, "sex": "male"},
+    "chief_complaint": "Update the causal ranking after new urinary-tract evidence becomes available.",
+    "history": "Three days of vomiting and poor intake; frequent ibuprofen use. The controlled change is a new report of marked bladder distension and bilateral hydronephrosis.",
+    "medications": ["ibuprofen (NSAID)"],
+    "allergies": [],
+    "examination": null,
+    "labs": [{"name": "creatinine", "value": 2.1, "unit": "mg/dL"}, {"name": "baseline_creatinine", "value": 1.0, "unit": "mg/dL"}],
+    "imaging_reports": [{"modality": "renal ultrasound", "finding": "marked bladder distension and bilateral hydronephrosis"}],
+    "other_reports": [],
+    "longitudinal_events": []
+  },
+  "evidence_snapshot": {"snapshot_id": "CLINREASON-005-v1", "as_of_date": "2026-09-05", "allowed_passage_ids": ["PASSAGE-AKI-MULTIFACTOR-001", "PASSAGE-AKI-VOLUME-002", "PASSAGE-AKI-MEDICATION-003", "PASSAGE-AKI-OBSTRUCTION-004"], "withheld_passage_ids": []},
+  "interaction": {"mode": "single_turn", "prompt": "Update the causal hypothesis ranking after the new obstruction evidence. Preserve other plausible contributors but explain which new evidence should change prioritization most.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {
+    "must_include": ["Increase the rank of urinary obstruction substantially because objective obstruction evidence is now present.", "Keep volume depletion and NSAID exposure as possible concurrent contributors rather than erasing them automatically.", "Demonstrate explicit belief updating from the base-case evidence."],
+    "must_not_claim": ["Do not ignore the new hydronephrosis/bladder-distension evidence.", "Do not claim the other contributors are impossible."],
+    "acceptable_actions": ["Return obstruction as a leading contributor with a multifactorial caveat."],
+    "uncertainty_behavior": "The new evidence changes ranking but does not prove all other contributors absent.",
+    "clarification_or_escalation": null
+  },
+  "graph_eval": {
+    "graph_snapshot_id": "GRAPH-CLINREASON-005:v1",
+    "required_node_ids": ["factor:urinary_obstruction", "condition:AKI", "concept:multifactorial_AKI"],
+    "required_edge_ids": ["EDGE-OBSTRUCTION-CAN-CONTRIBUTE-AKI", "EDGE-AKI-MAY-BE-MULTIFACTORIAL"],
+    "forbidden_claims": ["obstruction evidence is irrelevant", "obstruction rules out all other contributors"],
+    "expected_reasoning_path": ["new obstruction evidence", "obstruction can contribute to AKI", "rank obstruction higher", "retain multifactorial possibility"]
+  },
+  "safety": {"critical_errors": ["Fails to update ranking after objective obstruction evidence.", "Claims all other contributors are excluded without evidence."], "hard_gate_dimensions": ["clinical_reasoning", "belief_update"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["belief_update", "causal_hypothesis_ranking", "multi_factor_reasoning", "graph_grounding", "uncertainty"]},
+  "tags": ["AKI", "obstruction", "belief-update", "controlled-variant"]
+}
