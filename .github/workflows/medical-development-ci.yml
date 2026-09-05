@@ -16,6 +16,8 @@ on:
       - 'scripts/eval_s2_source_routing.py'
       - 'scripts/s2_intent_router.py'
       - 'scripts/eval_s2_intent_routing.py'
+      - 'scripts/s3_naive_claim_verifier.py'
+      - 'scripts/eval_s3_claim_verification.py'
       - '.github/workflows/medical-development-ci.yml'
   pull_request:
     paths:
@@ -32,6 +34,8 @@ on:
       - 'scripts/eval_s2_source_routing.py'
       - 'scripts/s2_intent_router.py'
       - 'scripts/eval_s2_intent_routing.py'
+      - 'scripts/s3_naive_claim_verifier.py'
+      - 'scripts/eval_s3_claim_verification.py'
       - '.github/workflows/medical-development-ci.yml'
 
 jobs:
@@ -57,7 +61,9 @@ jobs:
             scripts/s2_source_router.py \
             scripts/eval_s2_source_routing.py \
             scripts/s2_intent_router.py \
-            scripts/eval_s2_intent_routing.py
+            scripts/eval_s2_intent_routing.py \
+            scripts/s3_naive_claim_verifier.py \
+            scripts/eval_s3_claim_verification.py
 
       - name: Validate P0 medical case families
         run: |
@@ -92,7 +98,7 @@ jobs:
             --pred /tmp/groundsignal-s2/predictions-v02.json \
             --out /tmp/groundsignal-s2/report-v02.json
 
-      - name: Run first S2 v0.2b shadow held-out
+      - name: Run S2 v0.2b shadow-heldout historical observation
         run: |
           python scripts/s2_source_router.py \
             --input medical/stage-evals/S2/routing-shadow-heldout-v0.2b.json \
@@ -105,9 +111,9 @@ jobs:
           status=$?
           set -e
           cat /tmp/groundsignal-s2/report-v02b-shadow.json
-          echo "S2 v0.2b first shadow-heldout exit code: $status (frozen historical observation)"
+          echo "S2 v0.2b historical shadow-heldout exit code: $status"
 
-      - name: Run first S2 v0.3 intent-routing fresh held-out
+      - name: Run S2 v0.3 intent-routing fresh held-out
         run: |
           python scripts/s2_intent_router.py \
             --input medical/stage-evals/S2/intent-routing-heldout-v0.3.json \
@@ -120,7 +126,23 @@ jobs:
           status=$?
           set -e
           cat /tmp/groundsignal-s2/report-v03-intent.json
-          echo "S2 v0.3 first fresh-heldout exit code: $status (non-blocking first observation)"
+          echo "S2 v0.3 fresh-heldout exit code: $status (first-run evidence retained)"
+
+      - name: Run first S3 v0.1 evidence-verification baseline
+        run: |
+          mkdir -p /tmp/groundsignal-s3
+          python scripts/s3_naive_claim_verifier.py \
+            --input medical/stage-evals/S3/verification-gold-v0.1.json \
+            --out /tmp/groundsignal-s3/predictions-v01.json
+          set +e
+          python scripts/eval_s3_claim_verification.py \
+            --gold medical/stage-evals/S3/verification-gold-v0.1.json \
+            --pred /tmp/groundsignal-s3/predictions-v01.json \
+            --out /tmp/groundsignal-s3/report-v01.json
+          status=$?
+          set -e
+          cat /tmp/groundsignal-s3/report-v01.json
+          echo "S3 v0.1 naive baseline exit code: $status (non-blocking first observation)"
 
       - name: Build canonical medical knowledge graph
         run: |
@@ -155,6 +177,7 @@ jobs:
               Path('medical/stage-evals/S2/intent-features-v0.3.json'),
               Path('medical/stage-evals/S2/intent-routing-heldout-v0.3.json'),
               Path('medical/stage-evals/S2/dailymed-truth-retrieval-v0.3.json'),
+              Path('medical/stage-evals/S3/verification-gold-v0.1.json'),
           ]:
               json.loads(p.read_text(encoding='utf-8'))
               print('OK', p)
