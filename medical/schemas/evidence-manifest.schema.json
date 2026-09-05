@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "groundsignal://medical/evidence-manifest.schema.json",
+  "title": "GroundSignal Medical Evidence Manifest",
+  "type": "object",
+  "required": ["manifest_id", "as_of_date", "sources", "claims"],
+  "properties": {
+    "manifest_id": {"type": "string"},
+    "as_of_date": {"type": "string", "format": "date"},
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_id", "title", "source_type", "publisher", "url", "document_date", "authority_tier"],
+        "properties": {
+          "source_id": {"type": "string"},
+          "title": {"type": "string"},
+          "source_type": {"type": "string"},
+          "publisher": {"type": "string"},
+          "url": {"type": "string"},
+          "document_date": {"type": "string"},
+          "authority_tier": {"type": "string"},
+          "version_note": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim_id", "paraphrased_claim", "source_id", "locator", "evidence_role", "review_status"],
+        "properties": {
+          "claim_id": {"type": "string"},
+          "paraphrased_claim": {"type": "string"},
+          "source_id": {"type": "string"},
+          "locator": {"type": "string"},
+          "passage_id": {"type": ["string", "null"]},
+          "evidence_role": {"type": "string", "enum": ["direct_rule", "warning_signal", "triage_rule", "definition", "context", "comparative_evidence", "report_fact"]},
+          "claim_scope": {"type": ["string", "null"]},
+          "temporal_status": {"type": "string", "enum": ["current", "historical", "superseded", "unknown"]},
+          "review_status": {"type": "string", "enum": ["source_verified", "expert_review_needed", "expert_reviewed"]}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
