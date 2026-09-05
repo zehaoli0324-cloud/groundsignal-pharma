@@ -1,0 +1,83 @@
+{
+  "manifest_id": "evidence-CLINREASON-001-v1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {
+      "source_id": "SRC-MERCK-IRON-DEFICIENCY",
+      "title": "Iron Deficiency Anemia",
+      "source_type": "professional_reference",
+      "publisher": "Merck Manual Professional Edition",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/anemias-caused-by-deficient-erythropoiesis/iron-deficiency-anemia",
+      "document_date": "current-source-snapshot-2026-09-05",
+      "authority_tier": "professional_reference",
+      "version_note": "Paraphrased evidence only; no long source text stored."
+    },
+    {
+      "source_id": "SRC-MERCK-ANEMIA-CHRONIC-DISEASE",
+      "title": "Anemia of Chronic Disease",
+      "source_type": "professional_reference",
+      "publisher": "Merck Manual Professional Edition",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/anemias-caused-by-deficient-erythropoiesis/anemia-of-chronic-disease",
+      "document_date": "current-source-snapshot-2026-09-05",
+      "authority_tier": "professional_reference",
+      "version_note": "Paraphrased evidence only; no long source text stored."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLAIM-IDA-PATTERN-001",
+      "paraphrased_claim": "Iron deficiency is supported by low ferritin, increased iron-binding capacity and reduced transferrin saturation; low ferritin is particularly specific for iron deficiency outside major confounding contexts.",
+      "source_id": "SRC-MERCK-IRON-DEFICIENCY",
+      "locator": "Diagnosis of Iron Deficiency Anemia",
+      "passage_id": "PASSAGE-IDA-PATTERN-001",
+      "evidence_role": "definition",
+      "claim_scope": "typical iron-deficiency laboratory pattern",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-IRON-LOW-NONSPECIFIC-002",
+      "paraphrased_claim": "Low serum iron is not specific for iron deficiency because it can also occur in chronic inflammatory disease.",
+      "source_id": "SRC-MERCK-IRON-DEFICIENCY",
+      "locator": "Diagnosis of Iron Deficiency Anemia",
+      "passage_id": "PASSAGE-IRON-LOW-NONSPECIFIC-002",
+      "evidence_role": "context",
+      "claim_scope": "single-marker limitation",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-FERRITIN-INFLAMMATION-003",
+      "paraphrased_claim": "Ferritin is an acute-phase reactant and can be elevated in inflammatory states, so an apparently normal ferritin does not automatically exclude coexisting iron deficiency.",
+      "source_id": "SRC-MERCK-IRON-DEFICIENCY",
+      "locator": "Diagnosis of Iron Deficiency Anemia",
+      "passage_id": "PASSAGE-FERRITIN-INFLAMMATION-003",
+      "evidence_role": "context",
+      "claim_scope": "ferritin confounding by inflammation",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-ACD-PATTERN-004",
+      "paraphrased_claim": "Anemia of chronic disease/inflammation is considered in patients with chronic inflammatory illness and microcytic or normocytic anemia; iron studies typically require interpretation of ferritin, transferrin/iron-binding measures and reticulocyte context together.",
+      "source_id": "SRC-MERCK-ANEMIA-CHRONIC-DISEASE",
+      "locator": "Diagnosis",
+      "passage_id": "PASSAGE-ACD-PATTERN-004",
+      "evidence_role": "definition",
+      "claim_scope": "inflammation-associated anemia pattern",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-ACD-IDA-OVERLAP-005",
+      "paraphrased_claim": "In inflammatory states, iron deficiency can coexist with anemia of inflammation, and intermediate ferritin results may require additional markers or context rather than a single definitive label.",
+      "source_id": "SRC-MERCK-ANEMIA-CHRONIC-DISEASE",
+      "locator": "Diagnostic discussion of superimposed iron deficiency",
+      "passage_id": "PASSAGE-ACD-IDA-OVERLAP-005",
+      "evidence_role": "context",
+      "claim_scope": "mixed/overlap state uncertainty",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    }
+  ]
+}
