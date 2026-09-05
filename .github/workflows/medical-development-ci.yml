@@ -17,6 +17,7 @@ on:
       - 'scripts/s2_intent_router.py'
       - 'scripts/eval_s2_intent_routing.py'
       - 'scripts/s3_naive_claim_verifier.py'
+      - 'scripts/s3_structured_claim_verifier.py'
       - 'scripts/eval_s3_claim_verification.py'
       - '.github/workflows/medical-development-ci.yml'
   pull_request:
@@ -35,6 +36,7 @@ on:
       - 'scripts/s2_intent_router.py'
       - 'scripts/eval_s2_intent_routing.py'
       - 'scripts/s3_naive_claim_verifier.py'
+      - 'scripts/s3_structured_claim_verifier.py'
       - 'scripts/eval_s3_claim_verification.py'
       - '.github/workflows/medical-development-ci.yml'
 
@@ -63,6 +65,7 @@ jobs:
             scripts/s2_intent_router.py \
             scripts/eval_s2_intent_routing.py \
             scripts/s3_naive_claim_verifier.py \
+            scripts/s3_structured_claim_verifier.py \
             scripts/eval_s3_claim_verification.py
 
       - name: Validate P0 medical case families
@@ -128,21 +131,51 @@ jobs:
           cat /tmp/groundsignal-s2/report-v03-intent.json
           echo "S2 v0.3 fresh-heldout exit code: $status (first-run evidence retained)"
 
-      - name: Run first S3 v0.1 evidence-verification baseline
+      - name: Run historical S3 v0.1 naive baseline
         run: |
           mkdir -p /tmp/groundsignal-s3
           python scripts/s3_naive_claim_verifier.py \
             --input medical/stage-evals/S3/verification-gold-v0.1.json \
-            --out /tmp/groundsignal-s3/predictions-v01.json
+            --out /tmp/groundsignal-s3/predictions-naive-v01.json
           set +e
           python scripts/eval_s3_claim_verification.py \
             --gold medical/stage-evals/S3/verification-gold-v0.1.json \
-            --pred /tmp/groundsignal-s3/predictions-v01.json \
-            --out /tmp/groundsignal-s3/report-v01.json
+            --pred /tmp/groundsignal-s3/predictions-naive-v01.json \
+            --out /tmp/groundsignal-s3/report-naive-v01.json
           status=$?
           set -e
-          cat /tmp/groundsignal-s3/report-v01.json
-          echo "S3 v0.1 naive baseline exit code: $status (non-blocking first observation)"
+          cat /tmp/groundsignal-s3/report-naive-v01.json
+          echo "S3 naive baseline exit code: $status (frozen historical lower bound)"
+
+      - name: Run first S3 v0.2 structured verifier on v0.1 regression
+        run: |
+          python scripts/s3_structured_claim_verifier.py \
+            --input medical/stage-evals/S3/verification-gold-v0.1.json \
+            --out /tmp/groundsignal-s3/predictions-structured-regression.json
+          set +e
+          python scripts/eval_s3_claim_verification.py \
+            --gold medical/stage-evals/S3/verification-gold-v0.1.json \
+            --pred /tmp/groundsignal-s3/predictions-structured-regression.json \
+            --out /tmp/groundsignal-s3/report-structured-regression.json
+          status=$?
+          set -e
+          cat /tmp/groundsignal-s3/report-structured-regression.json
+          echo "S3 structured v0.1 regression exit code: $status (first observation)"
+
+      - name: Run first S3 v0.2 structured verifier fresh held-out
+        run: |
+          python scripts/s3_structured_claim_verifier.py \
+            --input medical/stage-evals/S3/verification-heldout-v0.2.json \
+            --out /tmp/groundsignal-s3/predictions-structured-heldout.json
+          set +e
+          python scripts/eval_s3_claim_verification.py \
+            --gold medical/stage-evals/S3/verification-heldout-v0.2.json \
+            --pred /tmp/groundsignal-s3/predictions-structured-heldout.json \
+            --out /tmp/groundsignal-s3/report-structured-heldout.json
+          status=$?
+          set -e
+          cat /tmp/groundsignal-s3/report-structured-heldout.json
+          echo "S3 structured v0.2 fresh-heldout exit code: $status (non-blocking first observation)"
 
       - name: Build canonical medical knowledge graph
         run: |
@@ -178,6 +211,7 @@ jobs:
               Path('medical/stage-evals/S2/intent-routing-heldout-v0.3.json'),
               Path('medical/stage-evals/S2/dailymed-truth-retrieval-v0.3.json'),
               Path('medical/stage-evals/S3/verification-gold-v0.1.json'),
+              Path('medical/stage-evals/S3/verification-heldout-v0.2.json'),
           ]:
               json.loads(p.read_text(encoding='utf-8'))
               print('OK', p)
