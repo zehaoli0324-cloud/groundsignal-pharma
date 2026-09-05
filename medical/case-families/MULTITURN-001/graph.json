@@ -1,0 +1,27 @@
+{
+  "graph_id": "GRAPH-MULTITURN-001",
+  "version": "v1",
+  "as_of_date": "2026-09-05",
+  "nodes": [
+    {"node_id": "slot:drug_identity", "node_type": "INFO_SLOT", "label": "exact medication identity", "value": null, "status": "OBSERVED", "source_passage_ids": []},
+    {"node_id": "slot:current_egfr", "node_type": "INFO_SLOT", "label": "current eGFR", "value": null, "status": "OBSERVED", "source_passage_ids": []},
+    {"node_id": "slot:use_state", "node_type": "INFO_SLOT", "label": "already taking versus considering initiation", "value": null, "status": "OBSERVED", "source_passage_ids": []},
+    {"node_id": "rule:mt_egfr_lt30", "node_type": "CONTRAINDICATION", "label": "metformin eGFR below 30 rule", "value": {"threshold": 30}, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-MT-METFORMIN-001"]},
+    {"node_id": "rule:mt_init_30_45", "node_type": "LABEL_RECOMMENDATION", "label": "metformin initiation not recommended at eGFR 30-45", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-MT-METFORMIN-002"]},
+    {"node_id": "rule:mt_continue_lt45", "node_type": "MONITORING_RULE", "label": "continuation below 45 requires benefit-risk reassessment", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-MT-METFORMIN-003"]}
+  ],
+  "edges": [
+    {"edge_id": "EDGE-DRUG-REQUIRED-BEFORE-RULE", "subject_id": "slot:drug_identity", "predicate": "REQUIRED_FOR", "object_id": "rule:mt_egfr_lt30", "status": "OBSERVED", "source_passage_ids": [], "review_status": "design_verified"},
+    {"edge_id": "EDGE-EGFR-REQUIRED-BEFORE-RULE", "subject_id": "slot:current_egfr", "predicate": "REQUIRED_FOR", "object_id": "rule:mt_egfr_lt30", "status": "OBSERVED", "source_passage_ids": [], "review_status": "design_verified"},
+    {"edge_id": "EDGE-USESTATE-DISAMBIGUATES", "subject_id": "slot:use_state", "predicate": "DISAMBIGUATES", "object_id": "rule:mt_init_30_45", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-MT-METFORMIN-002", "PASSAGE-MT-METFORMIN-003"], "review_status": "source_verified"}
+  ],
+  "evaluation_contract": {
+    "required_nodes": ["slot:drug_identity", "slot:current_egfr", "slot:use_state"],
+    "required_edges": ["EDGE-USESTATE-DISAMBIGUATES"],
+    "forbidden_edges": [
+      {"subject": "slot:unknown_egfr", "predicate": "SATISFIES", "object": "rule:mt_egfr_lt30"},
+      {"subject": "rule:mt_init_30_45", "predicate": "EQUIVALENT_TO", "object": "rule:mt_egfr_lt30"}
+    ],
+    "acceptable_paths": [["collect drug", "collect eGFR", "collect initiation/continuation state", "apply correct rule", "update when later turn changes state"]]
+  }
+}
