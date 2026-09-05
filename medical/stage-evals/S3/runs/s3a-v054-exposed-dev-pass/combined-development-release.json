@@ -1,0 +1,11 @@
+{
+  "version": "s3a-compositional-frame-v0.5.4",
+  "gate_checks": {
+    "all_exposed_proposition_suites": true,
+    "abstention_safety": true,
+    "trace_contract": true,
+    "unsafe_simplification_invariant": true
+  },
+  "release_gate": "PASS",
+  "fresh_validation": "NOT_RUN"
+}

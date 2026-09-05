@@ -1,0 +1,77 @@
+{
+  "benchmark_id": "S3a-scope-safety-heldout-v0.5.2",
+  "metrics": {
+    "gold_propositions": 73,
+    "predicted_propositions": 73,
+    "true_positive": 72,
+    "precision": 0.9863013698630136,
+    "recall": 0.9863013698630136,
+    "f1": 0.9863013698630136,
+    "critical_proposition_recall": 0.9818181818181818,
+    "polarity_accuracy_on_structural_matches": 1.0,
+    "polarity_structural_matches": 72,
+    "population_accuracy_on_semantic_matches": 1.0,
+    "population_semantic_matches": 72,
+    "condition_binding_accuracy_on_semantic_matches": 0.9863013698630136,
+    "condition_semantic_matches": 73,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": true,
+    "critical_recall": true,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": true
+  },
+  "release_gate": "PASS",
+  "failures": [
+    {
+      "item_id": "S3A52-037",
+      "text": "For a patient beginning therapy, initiation is not recommended below eGFR 42. By contrast, a patient already taking the medicine at the same eGFR should have benefit and risk reassessed rather than automatically discontinue.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "REASSESS_BENEFIT_RISK",
+          "object": "benefit_risk",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "EQ",
+              "value": 42
+            }
+          ],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "REASSESS_BENEFIT_RISK",
+          "benefit_risk",
+          [
+            [
+              [
+                "operator",
+                "LT"
+              ],
+              [
+                "value",
+                42
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          "existing_user",
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    }
+  ]
+}
