@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GroundSignal Medical Judge Label",
+  "type": "object",
+  "required": ["label_id", "source_case_id", "response_id", "dimension_scores", "critical_error", "review_status"],
+  "properties": {
+    "label_id": {"type": "string"},
+    "source_case_id": {"type": "string"},
+    "response_id": {"type": "string"},
+    "response_text": {"type": "string"},
+    "dimension_scores": {
+      "type": "object",
+      "properties": {
+        "factuality": {"type": "integer", "minimum": 0, "maximum": 2},
+        "evidence_sufficiency": {"type": "integer", "minimum": 0, "maximum": 2},
+        "temporal_validity": {"type": "integer", "minimum": 0, "maximum": 2},
+        "clinical_reasoning": {"type": "integer", "minimum": 0, "maximum": 2},
+        "uncertainty": {"type": "integer", "minimum": 0, "maximum": 2},
+        "task_usefulness": {"type": "integer", "minimum": 0, "maximum": 2},
+        "communication": {"type": "integer", "minimum": 0, "maximum": 2},
+        "safety": {"type": "integer", "minimum": 0, "maximum": 2}
+      },
+      "additionalProperties": true
+    },
+    "critical_error": {"type": "boolean"},
+    "critical_error_types": {"type": "array", "items": {"type": "string"}},
+    "failure_types": {"type": "array", "items": {"type": "string"}},
+    "evidence_passage_ids": {"type": "array", "items": {"type": "string"}},
+    "annotator_role": {"type": "string"},
+    "annotator_id_hash": {"type": ["string", "null"]},
+    "adjudication_status": {"type": "string", "enum": ["single", "agreed", "adjudicated", "unresolved"]},
+    "review_status": {"type": "string", "enum": ["candidate", "reviewed", "approved", "rejected"]},
+    "judge_version_target": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}
