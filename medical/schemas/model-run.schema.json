@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "groundsignal://medical/model-run.schema.json",
+  "title": "GroundSignal Model Run",
+  "type": "object",
+  "required": ["run_id", "case_id", "model_id", "provider", "prompt_version", "rag", "tools", "temperature", "snapshot_id", "response"],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "case_id": {"type": "string", "minLength": 1},
+    "model_id": {"type": "string", "minLength": 1},
+    "provider": {"type": "string", "minLength": 1},
+    "model_version": {"type": ["string", "null"]},
+    "prompt_version": {"type": "string", "minLength": 1},
+    "rag": {
+      "type": "object",
+      "required": ["enabled"],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "retriever_version": {"type": ["string", "null"]},
+        "top_k": {"type": ["integer", "null"], "minimum": 1},
+        "retrieved_passage_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "tools": {
+      "type": "object",
+      "required": ["enabled"],
+      "properties": {
+        "enabled": {"type": "array", "items": {"type": "string"}},
+        "trace": {"type": "array", "items": {"type": "object"}}
+      },
+      "additionalProperties": false
+    },
+    "temperature": {"type": "number", "minimum": 0},
+    "snapshot_id": {"type": "string", "minLength": 1},
+    "system_prompt": {"type": ["string", "null"]},
+    "user_prompt": {"type": ["string", "null"]},
+    "response": {"type": "string"},
+    "latency_ms": {"type": ["integer", "null"], "minimum": 0},
+    "usage": {"type": ["object", "null"]},
+    "created_at": {"type": ["string", "null"], "format": "date-time"}
+  },
+  "additionalProperties": false
+}
