@@ -1,0 +1,95 @@
+name: medical-development-ci
+
+on:
+  push:
+    paths:
+      - 'medical/**'
+      - 'scripts/model_harness.py'
+      - 'scripts/intervention_router.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/regression_gate.py'
+      - '.github/workflows/medical-development-ci.yml'
+  pull_request:
+    paths:
+      - 'medical/**'
+      - 'scripts/model_harness.py'
+      - 'scripts/intervention_router.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/regression_gate.py'
+      - '.github/workflows/medical-development-ci.yml'
+
+jobs:
+  vertical-slice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check
+        run: |
+          python -m py_compile \
+            scripts/model_harness.py \
+            scripts/intervention_router.py \
+            scripts/export_training_data.py \
+            scripts/regression_gate.py
+
+      - name: Validate JSON fixtures parse
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for p in [
+              Path('medical/examples/clinical-medication-safety-001.json'),
+              Path('medical/configs/model-matrix.fixture.json'),
+              Path('medical/configs/regression-policy.medication-safety-v0.1.json'),
+          ]:
+              json.loads(p.read_text(encoding='utf-8'))
+              print('OK', p)
+          for p in [
+              Path('medical/examples/evidence.jsonl'),
+              Path('medical/examples/eval-baseline.jsonl'),
+              Path('medical/examples/eval-candidate.jsonl'),
+          ]:
+              for i, line in enumerate(p.read_text(encoding='utf-8').splitlines(), 1):
+                  if line.strip():
+                      json.loads(line)
+              print('OK', p)
+          PY
+
+      - name: Run model harness fixture
+        run: |
+          mkdir -p /tmp/groundsignal
+          python scripts/model_harness.py \
+            --cases medical/examples/clinical-medication-safety-001.json \
+            --config medical/configs/model-matrix.fixture.json \
+            --evidence medical/examples/evidence.jsonl \
+            --out /tmp/groundsignal/runs.jsonl
+          test "$(wc -l < /tmp/groundsignal/runs.jsonl)" -eq 2
+
+      - name: Route baseline failure
+        run: |
+          python scripts/intervention_router.py \
+            --eval medical/examples/eval-baseline.jsonl \
+            --rules medical/configs/intervention-rules.json \
+            --out /tmp/groundsignal/routed.jsonl \
+            --summary /tmp/groundsignal/router-summary.json
+
+      - name: Export approved post-training candidate
+        run: |
+          python scripts/export_training_data.py \
+            --cases medical/examples/clinical-medication-safety-001.json \
+            --runs /tmp/groundsignal/runs.jsonl \
+            --eval medical/examples/eval-baseline.jsonl \
+            --out-dir /tmp/groundsignal/training
+          test "$(wc -l < /tmp/groundsignal/training/preference.jsonl)" -eq 1
+
+      - name: Regression release gate
+        run: |
+          python scripts/regression_gate.py \
+            --baseline medical/examples/eval-baseline.jsonl \
+            --candidate medical/examples/eval-candidate.jsonl \
+            --policy medical/configs/regression-policy.medication-safety-v0.1.json \
+            --out /tmp/groundsignal/regression-report.json
