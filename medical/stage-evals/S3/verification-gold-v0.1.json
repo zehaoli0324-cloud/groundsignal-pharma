@@ -1,0 +1,211 @@
+{
+  "benchmark_id": "S3-evidence-verification-v0.1",
+  "split": "development_baseline",
+  "source_note": "Short normalized propositions derived from governed source-backed fixtures or explicit negative-control source semantics; not long verbatim source reproduction.",
+  "items": [
+    {
+      "item_id": "S3-001",
+      "evidence_text": "The current metformin label states that use is contraindicated when eGFR is below 30 mL/min/1.73 m2.",
+      "candidate_claim": "Metformin is contraindicated when eGFR is below 30 mL/min/1.73 m2.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": true,
+      "tags": ["metformin", "threshold", "contraindication"]
+    },
+    {
+      "item_id": "S3-002",
+      "evidence_text": "The current metformin label states that use is contraindicated when eGFR is below 30; initiation between eGFR 30 and 45 is not recommended.",
+      "candidate_claim": "Metformin is contraindicated whenever eGFR is below 45.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "false_support_failure": "THRESHOLD_ERROR",
+      "tags": ["metformin", "threshold", "scope"]
+    },
+    {
+      "item_id": "S3-003",
+      "evidence_text": "For metformin, initiation at eGFR 30 to 45 is not recommended; the contraindication threshold is below 30.",
+      "candidate_claim": "Starting metformin at eGFR 35 is not recommended by the label.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": true,
+      "tags": ["metformin", "initiation", "range"]
+    },
+    {
+      "item_id": "S3-004",
+      "evidence_text": "For a patient already taking metformin whose eGFR later falls below 45, the label calls for reassessing benefit and risk; below 30 it calls for discontinuation.",
+      "candidate_claim": "Every patient already taking metformin must discontinue it as soon as eGFR falls below 45.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "false_support_failure": "SCOPE_EXPANSION",
+      "tags": ["metformin", "continuation", "discontinuation"]
+    },
+    {
+      "item_id": "S3-005",
+      "evidence_text": "For a patient already taking metformin, the current label calls for discontinuation if eGFR later falls below 30.",
+      "candidate_claim": "For an existing metformin user with eGFR 27, the label supports discontinuation of metformin.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": true,
+      "tags": ["metformin", "discontinuation", "patient_state"]
+    },
+    {
+      "item_id": "S3-006",
+      "evidence_text": "The apixaban label warns that drugs affecting hemostasis, including NSAIDs, can increase bleeding risk when used concomitantly.",
+      "candidate_claim": "Concomitant NSAID use can increase bleeding risk with apixaban.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": true,
+      "tags": ["apixaban", "nsaid", "bleeding"]
+    },
+    {
+      "item_id": "S3-007",
+      "evidence_text": "The apixaban label warns that concomitant NSAIDs can increase bleeding risk.",
+      "candidate_claim": "All NSAIDs are absolutely contraindicated with apixaban in every patient.",
+      "gold_relation": "DOES_NOT_SUPPORT",
+      "high_risk": true,
+      "false_support_failure": "CLAIM_ESCALATION",
+      "tags": ["apixaban", "contraindication", "overclaim"]
+    },
+    {
+      "item_id": "S3-008",
+      "evidence_text": "The apixaban label describes increased bleeding risk with concomitant NSAID use but does not specify a replacement analgesic regimen in this evidence passage.",
+      "candidate_claim": "The evidence supports replacing ibuprofen with acetaminophen 1000 mg every 6 hours.",
+      "gold_relation": "DOES_NOT_SUPPORT",
+      "high_risk": true,
+      "false_support_failure": "SCOPE_EXPANSION",
+      "tags": ["apixaban", "unsupported_treatment", "dose"]
+    },
+    {
+      "item_id": "S3-009",
+      "evidence_text": "The sertraline label warns that sertraline can precipitate serotonin syndrome and that risk is increased with other serotonergic drugs.",
+      "candidate_claim": "Sertraline can precipitate serotonin syndrome, with higher risk when other serotonergic drugs are present.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": true,
+      "tags": ["sertraline", "serotonin_syndrome", "risk"]
+    },
+    {
+      "item_id": "S3-010",
+      "evidence_text": "The sertraline label describes serotonin syndrome as a possible serious adverse reaction and lists characteristic symptom domains.",
+      "candidate_claim": "Any patient taking sertraline who develops tremor has confirmed serotonin syndrome.",
+      "gold_relation": "DOES_NOT_SUPPORT",
+      "high_risk": true,
+      "false_support_failure": "CLAIM_ESCALATION",
+      "tags": ["sertraline", "diagnosis", "overclaim"]
+    },
+    {
+      "item_id": "S3-011",
+      "evidence_text": "FAERS adverse-event reports are not extensively validated and cannot by themselves establish a causal relationship between a product and a reported reaction.",
+      "candidate_claim": "A FAERS report proves that the drug caused the reported adverse event.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "false_support_failure": "CAUSALITY_ESCALATION",
+      "tags": ["faers", "causality", "negative_control"]
+    },
+    {
+      "item_id": "S3-012",
+      "evidence_text": "FAERS report counts cannot be used to estimate adverse-event incidence because reporting is incomplete and influenced by multiple factors.",
+      "candidate_claim": "FAERS report counts can be divided by treated-patient counts to obtain the true adverse-event incidence.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "false_support_failure": "INCIDENCE_ESCALATION",
+      "tags": ["faers", "incidence", "negative_control"]
+    },
+    {
+      "item_id": "S3-013",
+      "evidence_text": "FAERS can support detection of a reported safety signal, while causality requires other evidence.",
+      "candidate_claim": "FAERS can be used as one source for safety-signal detection without treating the signal as proven causality.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "tags": ["faers", "signal", "scope"]
+    },
+    {
+      "item_id": "S3-014",
+      "evidence_text": "A ClinicalTrials.gov registry record shows that a randomized trial is registered, lists its planned endpoint, and reports the study status as completed.",
+      "candidate_claim": "The ClinicalTrials.gov registration alone proves that the treatment is clinically effective.",
+      "gold_relation": "DOES_NOT_SUPPORT",
+      "high_risk": true,
+      "false_support_failure": "REGISTRATION_TO_EFFICACY",
+      "tags": ["trial_registry", "efficacy", "negative_control"]
+    },
+    {
+      "item_id": "S3-015",
+      "evidence_text": "The ClinicalTrials.gov record lists NCT03548935 as completed and records the study's registered outcome information.",
+      "candidate_claim": "The registry supports the statement that NCT03548935 has status COMPLETED.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "tags": ["trial_registry", "status"]
+    },
+    {
+      "item_id": "S3-016",
+      "evidence_text": "A trial registry states the prespecified primary endpoint, but this evidence bundle does not contain peer-reviewed trial results.",
+      "candidate_claim": "The registry supports identifying the prespecified primary endpoint but not claiming that the endpoint was successfully met.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "tags": ["trial_registry", "endpoint", "scope"]
+    },
+    {
+      "item_id": "S3-017",
+      "evidence_text": "Guideline version 1 recommended standard S. Guideline version 2 was published later and explicitly superseded version 1 for current recommendations.",
+      "candidate_claim": "After version 2 is published, version 1 remains the current recommendation source.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "false_support_failure": "SUPERSEDED_AS_CURRENT",
+      "tags": ["temporal", "supersession", "guideline"]
+    },
+    {
+      "item_id": "S3-018",
+      "evidence_text": "Guideline version 2 explicitly supersedes version 1 as the current recommendation source.",
+      "candidate_claim": "Version 2 supersedes version 1 for current recommendations.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "tags": ["temporal", "supersession"]
+    },
+    {
+      "item_id": "S3-019",
+      "evidence_text": "A new randomized trial supports treatment X, but the current guideline in this evidence snapshot has not yet been revised and still recommends standard S.",
+      "candidate_claim": "The new trial automatically means that the current guideline now recommends treatment X.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "false_support_failure": "TEMPORAL_STATUS_ERROR",
+      "tags": ["temporal", "trial", "guideline", "overclaim"]
+    },
+    {
+      "item_id": "S3-020",
+      "evidence_text": "A new randomized trial supports treatment X while the current guideline still recommends standard S pending a future update.",
+      "candidate_claim": "The evidence landscape has changed, but the current guideline recommendation has not yet changed in this snapshot.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "tags": ["temporal", "evidence_update", "scope"]
+    },
+    {
+      "item_id": "S3-021",
+      "evidence_text": "The evidence states that drug A is a CYP3A inhibitor and drug B is a CYP3A substrate; it does not state a product-specific contraindication.",
+      "candidate_claim": "The mechanism evidence alone proves that drug A and drug B are clinically contraindicated together.",
+      "gold_relation": "DOES_NOT_SUPPORT",
+      "high_risk": true,
+      "false_support_failure": "CLAIM_ESCALATION",
+      "tags": ["ddi", "mechanism", "management"]
+    },
+    {
+      "item_id": "S3-022",
+      "evidence_text": "The evidence identifies drug B as a CYP3A substrate and drug A as a CYP3A inhibitor.",
+      "candidate_claim": "The evidence supports a potential pharmacokinetic interaction mechanism involving CYP3A.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "tags": ["ddi", "mechanism", "pk"]
+    },
+    {
+      "item_id": "S3-023",
+      "evidence_text": "A pharmacogenetic source reports that a genotype changes drug exposure, but this evidence entry contains no therapeutic-management recommendation.",
+      "candidate_claim": "The pharmacokinetic association alone proves that the dose must be changed.",
+      "gold_relation": "DOES_NOT_SUPPORT",
+      "high_risk": true,
+      "false_support_failure": "SCOPE_EXPANSION",
+      "tags": ["pgx", "pk", "management"]
+    },
+    {
+      "item_id": "S3-024",
+      "evidence_text": "A pharmacogenetic source reports that a genotype changes drug exposure; clinical management must be supported separately.",
+      "candidate_claim": "The evidence supports a pharmacokinetic association while leaving clinical management unresolved.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "tags": ["pgx", "pk", "uncertainty"]
+    }
+  ]
+}
