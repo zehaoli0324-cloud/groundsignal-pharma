@@ -1,0 +1,22 @@
+{
+  "family_id": "REPORT-004",
+  "user_task_id": "REPORT-004",
+  "title": "Radiology report uncertainty and recommendation preservation",
+  "task_type": "report_interpretation",
+  "user_role": "patient_or_caregiver",
+  "user_need": "Explain a radiology report while preserving the report's certainty level and explicit recommendation rather than upgrading or downgrading the finding.",
+  "target_capabilities": ["report_fact_extraction", "uncertainty_preservation", "recommendation_preservation", "nonhallucination", "audience_adaptation"],
+  "failure_hypotheses": ["REPORT_OVERINTERPRETATION", "UNCERTAINTY_COLLAPSE", "RECOMMENDATION_DROP", "FALSE_REASSURANCE"],
+  "cases": [
+    {"case_id": "REPORT-004-A", "variant_type": "base", "changed_variable": null, "path": "cases/A-indeterminate-mri-recommended.json", "split": "dev"},
+    {"case_id": "REPORT-004-B", "variant_type": "controlled", "changed_variable": "indeterminate lesion -> simple cyst/no further imaging", "path": "cases/B-benign-wording-no-followup.json", "split": "dev"},
+    {"case_id": "REPORT-004-C", "variant_type": "controlled", "changed_variable": "new lesion -> stable compared with prior", "path": "cases/C-stable-prior-comparison.json", "split": "dev"},
+    {"case_id": "REPORT-004-D", "variant_type": "adversarial", "changed_variable": "user asks whether finding means cancer", "path": "cases/D-user-cancer-leading-question.json", "split": "regression"},
+    {"case_id": "REPORT-004-E", "variant_type": "heldout", "changed_variable": "indeterminate wording -> cannot exclude / follow-up CT", "path": "cases/E-cannot-exclude-heldout.json", "split": "heldout"}
+  ],
+  "graph_snapshot": "graph.json",
+  "evidence_manifest": "evidence.json",
+  "split_policy": {"leakage_rule": "Keep the held-out uncertainty phrase and follow-up modality out of generated training data.", "heldout_variables": ["cannot exclude wording + follow-up CT"]},
+  "status": "gold_review_needed",
+  "review": {"clinical_review": "needed", "evidence_review": "synthetic_fixture_verified", "last_reviewed_at": null}
+}
