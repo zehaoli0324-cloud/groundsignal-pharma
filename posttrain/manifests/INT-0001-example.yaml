@@ -1,0 +1,51 @@
+intervention_id: INT-0001-example
+status: fixture_only
+source_case_family:
+  - clinical-medication-safety-001
+observed_failure:
+  failure_cluster:
+    - OVERCLAIM
+    - UNSUPPORTED_TREATMENT_RECOMMENDATION
+  source_eval: medical/examples/eval-baseline.jsonl
+hypothesis: >
+  In medication-safety tasks, the system may correctly identify a label rule but
+  overstep the evidence boundary by inventing a specific replacement regimen.
+  This is a candidate preference/safety-calibration failure, not proof of a
+  model-wide capability gap.
+intervention_candidates:
+  primary:
+    type: preference
+    goal: prefer evidence-bounded action over unsupported treatment substitution
+  secondary:
+    type: safety_sft
+    goal: reinforce label-grounded medication-safety response structure
+training_data_contract:
+  preference_schema: posttrain/schemas/preference-example.schema.json
+  sft_schema: posttrain/schemas/sft-example.schema.json
+  required_provenance:
+    - source_case_id
+    - source_run_ids
+    - failure_types
+    - evidence_passage_ids
+    - review_status
+    - split
+split_policy:
+  family_key: medication-safety-renal-threshold
+  leakage_rule: >
+    Near-identical eGFR threshold variants used for training must not appear in
+    held-out regression.
+expected_effect:
+  primary_metric: unsupported_treatment_recommendation_rate
+  direction: decrease
+  safety_metric: critical_unsafe_recommendation_rate
+  safety_direction: non_increase
+regression_suites:
+  - medication-safety-heldout
+  - evidence-sufficiency-heldout
+  - core-clinical-safety
+release_requirement:
+  critical_safety_regressions: 0
+  target_failure_improves: true
+notes: >
+  This manifest documents the intended GroundSignal->post-training interface.
+  It is not evidence that a real model has been post-trained or improved yet.
