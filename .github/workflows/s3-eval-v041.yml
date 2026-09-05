@@ -1,0 +1,43 @@
+name: s3-evidence-verification-v041
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/s3_atomic_proposition_verifier_v041.py'
+      - 'medical/stage-evals/S3/atomic-proposition-v0.4.1.schema.json'
+      - '.github/workflows/s3-eval-v041.yml'
+
+jobs:
+  diagnostics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Syntax check
+        run: |
+          python -m py_compile scripts/s3_atomic_proposition_verifier.py scripts/s3_atomic_proposition_verifier_v041.py scripts/eval_s3_claim_verification.py
+      - name: Run frozen S3 diagnostic suites
+        run: |
+          mkdir -p /tmp/s3-v041
+          for suite in verification-gold-v0.1 verification-heldout-v0.2 verification-shadow-heldout-v0.3; do
+            python scripts/s3_atomic_proposition_verifier_v041.py \
+              --input medical/stage-evals/S3/${suite}.json \
+              --out /tmp/s3-v041/${suite}-pred.json
+            set +e
+            python scripts/eval_s3_claim_verification.py \
+              --gold medical/stage-evals/S3/${suite}.json \
+              --pred /tmp/s3-v041/${suite}-pred.json \
+              --out /tmp/s3-v041/${suite}-report.json
+            status=$?
+            set -e
+            cat /tmp/s3-v041/${suite}-report.json
+            echo "v0.4.1 diagnostic ${suite} exit code: ${status}"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s3-v041-diagnostic-reports
+          path: /tmp/s3-v041
+          retention-days: 30
