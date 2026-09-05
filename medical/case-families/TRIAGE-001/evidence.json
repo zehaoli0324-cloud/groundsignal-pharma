@@ -1,0 +1,61 @@
+{
+  "manifest_id": "evidence-TRIAGE-001-v1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {
+      "source_id": "SRC-AHA-CHEST-PAIN-GUIDELINE-2021",
+      "title": "2021 Guideline for the Evaluation and Diagnosis of Chest Pain — Top Things to Know",
+      "source_type": "professional_guideline_summary",
+      "publisher": "American Heart Association",
+      "url": "https://professional.heart.org/en/science-news/2021-guideline-for-the-evaluation-and-diagnosis-of-chest-pain/top-things-to-know",
+      "document_date": "2021-10-28",
+      "authority_tier": "professional_guideline",
+      "version_note": "Source retrieved and checked during benchmark construction on 2026-09-05."
+    },
+    {
+      "source_id": "SRC-AHA-HEART-ATTACK-WARNING-2024",
+      "title": "Warning Signs of a Heart Attack",
+      "source_type": "professional_patient_guidance",
+      "publisher": "American Heart Association",
+      "url": "https://www.heart.org/en/health-topics/heart-attack/warning-signs-of-a-heart-attack",
+      "document_date": "2024-12-12",
+      "authority_tier": "professional_guidance",
+      "version_note": "Last reviewed date shown by source."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLAIM-CHEST-TRIAGE-001",
+      "paraphrased_claim": "Acute chest pain or equivalent symptoms warrant immediate medical care; emergency services are recommended because early evaluation should identify or exclude life-threatening causes.",
+      "source_id": "SRC-AHA-CHEST-PAIN-GUIDELINE-2021",
+      "locator": "Top Things to Know, item 3",
+      "passage_id": "PASSAGE-CHEST-TRIAGE-001",
+      "evidence_role": "triage_rule",
+      "claim_scope": "acute chest pain / chest-pain-equivalent escalation",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-CHEST-EQUIVALENTS-002",
+      "paraphrased_claim": "Potential anginal-equivalent symptoms include discomfort in the chest or upper body and shortness of breath; serious cardiac symptoms are not limited to classic chest pain.",
+      "source_id": "SRC-AHA-CHEST-PAIN-GUIDELINE-2021",
+      "locator": "Top Things to Know, item 1",
+      "passage_id": "PASSAGE-CHEST-EQUIVALENTS-002",
+      "evidence_role": "triage_rule",
+      "claim_scope": "anginal-equivalent symptom recognition",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-HEART-ATTACK-SIGNS-003",
+      "paraphrased_claim": "Chest discomfort, upper-body discomfort and shortness of breath are among warning symptoms for which the AHA advises calling emergency services rather than waiting for certainty.",
+      "source_id": "SRC-AHA-HEART-ATTACK-WARNING-2024",
+      "locator": "Warning signs / Don't delay",
+      "passage_id": "PASSAGE-HEART-ATTACK-SIGNS-003",
+      "evidence_role": "triage_rule",
+      "claim_scope": "patient-facing emergency warning signs",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    }
+  ]
+}
