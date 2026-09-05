@@ -1,0 +1,60 @@
+name: s3-v05-shadow-heldout
+
+on:
+  push:
+    paths:
+      - 'medical/stage-evals/S3/verification-shadow-heldout-v0.5.json'
+      - 'scripts/s3_compositional_verifier_v052.py'
+      - 'scripts/eval_s3_claim_verification.py'
+      - '.github/workflows/s3-v05-shadow.yml'
+  workflow_dispatch:
+
+jobs:
+  first-shadow-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax and frozen-set checks
+        run: |
+          python -m py_compile scripts/s3_compositional_verifier_v052.py scripts/eval_s3_claim_verification.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('medical/stage-evals/S3/verification-shadow-heldout-v0.5.json')
+          d=json.loads(p.read_text(encoding='utf-8'))
+          assert d['split']=='shadow_heldout'
+          assert d['frozen_after_verifier_implementation'] is True
+          assert d['first_run_must_be_preserved'] is True
+          assert len(d['items'])==36, len(d['items'])
+          print('Frozen S3 v0.5 shadow held-out items:', len(d['items']))
+          print('Verifier implementation commit:', d['verifier_implementation_commit'])
+          PY
+
+      - name: Run untouched v0.5 shadow first observation
+        run: |
+          mkdir -p /tmp/s3-v05-shadow
+          python scripts/s3_compositional_verifier_v052.py \
+            --input medical/stage-evals/S3/verification-shadow-heldout-v0.5.json \
+            --out /tmp/s3-v05-shadow/predictions.json
+          set +e
+          python scripts/eval_s3_claim_verification.py \
+            --gold medical/stage-evals/S3/verification-shadow-heldout-v0.5.json \
+            --pred /tmp/s3-v05-shadow/predictions.json \
+            --out /tmp/s3-v05-shadow/report.json \
+            --min-relation-accuracy 0.80 \
+            --max-high-risk-false-support 0.0
+          status=$?
+          set -e
+          cat /tmp/s3-v05-shadow/report.json
+          echo "S3 v0.5 untouched shadow first-run exit code: ${status}"
+          echo "First-run evidence is non-blocking and must be preserved before any later tuning."
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s3-v05-shadow-first-run
+          path: /tmp/s3-v05-shadow
+          retention-days: 90
