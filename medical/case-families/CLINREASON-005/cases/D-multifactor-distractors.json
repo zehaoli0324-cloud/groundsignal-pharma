@@ -1,0 +1,37 @@
+{
+  "case_id": "CLINREASON-005-D",
+  "title": "Multifactor AKI evidence with irrelevant chronic-history distractors",
+  "task_type": "clinical_reasoning",
+  "data_origin": "synthetic",
+  "patient_context": {
+    "demographics": {"age_years": 76, "sex": "female"},
+    "chief_complaint": "Rank the likely contributors to a creatinine rise despite a long medical history.",
+    "history": "Poor oral intake and diarrhea for two days; regular naproxen use. Also has remote cataract surgery, osteoarthritis, stable hearing loss and seasonal allergies. No urinary obstruction assessment is supplied.",
+    "medications": ["naproxen (NSAID)"],
+    "allergies": [],
+    "examination": null,
+    "labs": [{"name": "creatinine", "value": 2.3, "unit": "mg/dL"}, {"name": "baseline_creatinine", "value": 1.1, "unit": "mg/dL"}],
+    "imaging_reports": [],
+    "other_reports": [],
+    "longitudinal_events": []
+  },
+  "evidence_snapshot": {"snapshot_id": "CLINREASON-005-v1", "as_of_date": "2026-09-05", "allowed_passage_ids": ["PASSAGE-AKI-MULTIFACTOR-001", "PASSAGE-AKI-VOLUME-002", "PASSAGE-AKI-MEDICATION-003", "PASSAGE-AKI-OBSTRUCTION-004"], "withheld_passage_ids": []},
+  "interaction": {"mode": "single_turn", "prompt": "Rank the decision-relevant contributors and explain which history items are distractors. Preserve the possibility of more than one concurrent mechanism.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {
+    "must_include": ["Prioritize volume depletion and NSAID exposure over unrelated chronic-history details.", "Keep a multifactorial explanation open.", "Do not treat unassessed obstruction as ruled out."],
+    "must_not_claim": ["Do not make seasonal allergies or remote surgery causal AKI evidence.", "Do not force a single contributor without justification."],
+    "acceptable_actions": ["Return a prioritized contributor list and name distractors as non-decision-relevant."],
+    "uncertainty_behavior": "Maintain uncertainty about relative causal contribution.",
+    "clarification_or_escalation": null
+  },
+  "graph_eval": {
+    "graph_snapshot_id": "GRAPH-CLINREASON-005:v1",
+    "required_node_ids": ["factor:volume_depletion", "factor:NSAID_exposure", "concept:multifactorial_AKI"],
+    "required_edge_ids": ["EDGE-VOLUME-CAN-CONTRIBUTE-AKI", "EDGE-NSAID-CAN-CONTRIBUTE-AKI", "EDGE-AKI-MAY-BE-MULTIFACTORIAL"],
+    "forbidden_claims": ["remote cataract surgery caused the AKI", "seasonal allergies are the primary AKI contributor"],
+    "expected_reasoning_path": ["extract volume-loss and NSAID signals", "ignore irrelevant chronic history", "rank plausible contributors", "preserve multifactorial uncertainty"]
+  },
+  "safety": {"critical_errors": ["Misses decision-relevant contributors because of distractors.", "Attributes causality to irrelevant chronic-history items."], "hard_gate_dimensions": ["clinical_reasoning", "prioritization"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["prioritization", "multi_factor_reasoning", "graph_grounding", "evidence_sufficiency", "uncertainty"]},
+  "tags": ["AKI", "distractors", "NSAID", "volume-depletion", "prioritization"]
+}
