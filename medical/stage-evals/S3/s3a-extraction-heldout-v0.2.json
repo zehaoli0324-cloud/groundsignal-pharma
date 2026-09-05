@@ -1,0 +1,218 @@
+{
+  "benchmark_id": "S3a-proposition-extraction-heldout-v0.2",
+  "split": "heldout",
+  "frozen_after_extractor_implementation": true,
+  "extractor_version": "s3a-ontology-guided-v0.2.2",
+  "extractor_commit": "c71ef1a2d7d6aebd02a93d844a61222765210a20",
+  "evaluator_version": "s3a-population-aware-eval-v0.2",
+  "evaluator_commit": "50a9a7a2f4a5409297434cf0c29f05d1fa6780c5",
+  "first_run_must_be_preserved": true,
+  "evaluate_population": true,
+  "release_criteria": {
+    "min_f1": 0.90,
+    "min_critical_recall": 0.95,
+    "min_polarity_accuracy": 0.95,
+    "min_population_accuracy": 0.95,
+    "min_condition_accuracy": 0.95
+  },
+  "items": [
+    {
+      "item_id": "S3A2-001",
+      "role": "evidence",
+      "text": "For starting therapy, eGFR 32 to 44 lies in the not-recommended initiation range.",
+      "expected_propositions": [
+        {"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"RANGE","low":32,"high":44}],"population":"new_or_initiating_user","critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-002",
+      "role": "candidate",
+      "text": "A person beginning treatment with eGFR 41 is in the not-recommended initiation range.",
+      "expected_propositions": [
+        {"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":41}],"population":"new_or_initiating_user","critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-003",
+      "role": "evidence",
+      "text": "Among patients already on treatment, an eGFR below 46 calls for reassessment of benefit and risk.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":46}],"population":"existing_user","critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-004",
+      "role": "evidence",
+      "text": "Patients already receiving the medicine should discontinue it when eGFR is under 28.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":28}],"population":"existing_user","critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-005",
+      "role": "evidence",
+      "text": "Condition M alone is not a contraindication to use of treatment A.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-006",
+      "role": "evidence",
+      "text": "Condition N by itself does not render treatment A contraindicated.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-007",
+      "role": "evidence",
+      "text": "Spontaneous case reports may flag a safety signal that deserves further evaluation.",
+      "expected_propositions": [
+        {"subject":"spontaneous_report_system","predicate":"SUPPORTS_SIGNAL_DETECTION","object":"safety_signal","polarity":"POSITIVE","conditions":[],"population":null,"critical":false}
+      ]
+    },
+    {
+      "item_id": "S3A2-008",
+      "role": "evidence",
+      "text": "A single spontaneous report cannot determine whether the medicine caused the event.",
+      "expected_propositions": [
+        {"subject":"evidence","predicate":"ESTABLISHES_CAUSALITY","object":"causal_relation","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-009",
+      "role": "evidence",
+      "text": "Because there is no complete exposed-patient denominator, raw report counts cannot be translated into the true event incidence.",
+      "expected_propositions": [
+        {"subject":"report_count","predicate":"ESTIMATES_TRUE_INCIDENCE","object":"event_incidence","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-010",
+      "role": "candidate",
+      "text": "Raw report counts provide the true event incidence in treated patients.",
+      "expected_propositions": [
+        {"subject":"report_count","predicate":"ESTIMATES_TRUE_INCIDENCE","object":"event_incidence","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-011",
+      "role": "evidence",
+      "text": "The trial is COMPLETED and the record identifies its primary outcome.",
+      "expected_propositions": [
+        {"subject":"study","predicate":"HAS_STATUS","object":"completed","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"study","predicate":"HAS_PRIMARY_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"population":null,"critical":false}
+      ]
+    },
+    {
+      "item_id": "S3A2-012",
+      "role": "evidence",
+      "text": "The registry prespecifies a primary endpoint, but no efficacy result shows that the endpoint was reached.",
+      "expected_propositions": [
+        {"subject":"study","predicate":"HAS_PRIMARY_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"evidence","predicate":"ESTABLISHES_ENDPOINT_ACHIEVEMENT","object":"primary_endpoint","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-013",
+      "role": "candidate",
+      "text": "The primary endpoint was achieved.",
+      "expected_propositions": [
+        {"subject":"study","predicate":"ACHIEVES_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-014",
+      "role": "evidence",
+      "text": "Guideline N supersedes Guideline M and is now the operative current recommendation source.",
+      "expected_propositions": [
+        {"subject":"guideline n","predicate":"SUPERSEDES","object":"guideline m","polarity":"POSITIVE","conditions":[],"population":null,"critical":true},
+        {"subject":"guideline n","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"POSITIVE","conditions":[],"population":null,"critical":true},
+        {"subject":"guideline m","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-015",
+      "role": "evidence",
+      "text": "A randomized study favors option R, while the current guideline still recommends option P.",
+      "expected_propositions": [
+        {"subject":"trial","predicate":"SUPPORTS_OPTION","object":"r","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"current_guideline","predicate":"IS_CURRENT","object":"p","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-016",
+      "role": "evidence",
+      "text": "The genotype correlates with higher drug exposure, but the source offers no dosing instruction.",
+      "expected_propositions": [
+        {"subject":"genotype","predicate":"ASSOCIATED_WITH","object":"drug_exposure","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"mechanism_or_pk_evidence","predicate":"PROVIDES_MANAGEMENT_RULE","object":"drug_pair_or_patient","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-017",
+      "role": "evidence",
+      "text": "The pathology report categorizes finding X as benign.",
+      "expected_propositions": [
+        {"subject":"lesion","predicate":"CLASSIFIED_AS","object":"benign","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-018",
+      "role": "evidence",
+      "text": "The pathology summary labels finding Y as malignant.",
+      "expected_propositions": [
+        {"subject":"lesion","predicate":"CLASSIFIED_AS","object":"malignant","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-019",
+      "role": "evidence",
+      "text": "Biomarker K shows no association with outcome Z in this analysis.",
+      "expected_propositions": [
+        {"subject":"biomarker_k","predicate":"ASSOCIATED_WITH","object":"outcome_z","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-020",
+      "role": "evidence",
+      "text": "Biomarker L is associated with outcome V in this analysis.",
+      "expected_propositions": [
+        {"subject":"biomarker_l","predicate":"ASSOCIATED_WITH","object":"outcome_v","polarity":"POSITIVE","conditions":[],"population":null,"critical":false}
+      ]
+    },
+    {
+      "item_id": "S3A2-021",
+      "role": "candidate",
+      "text": "For an existing user at eGFR 27, the medicine should be discontinued.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":27}],"population":"existing_user","critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-022",
+      "role": "candidate",
+      "text": "For a newly starting patient at eGFR 42, initiation is not recommended.",
+      "expected_propositions": [
+        {"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":42}],"population":"new_or_initiating_user","critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-023",
+      "role": "evidence",
+      "text": "For people already taking the drug, benefit-risk reassessment is required below eGFR 43.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":43}],"population":"existing_user","critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A2-024",
+      "role": "evidence",
+      "text": "Treatment is contraindicated when eGFR is below 25.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":25}],"population":null,"critical":true}
+      ]
+    }
+  ]
+}
