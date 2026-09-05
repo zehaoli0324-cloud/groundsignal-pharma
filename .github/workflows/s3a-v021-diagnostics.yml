@@ -1,0 +1,41 @@
+name: s3a-v021-diagnostics
+
+on:
+  push:
+    paths:
+      - 'scripts/s3a_ontology_extractor_v021.py'
+      - 'medical/stage-evals/S3/s3a-extraction-gold-v0.1.json'
+      - 'scripts/eval_s3a_proposition_extraction.py'
+      - '.github/workflows/s3a-v021-diagnostics.yml'
+  workflow_dispatch:
+
+jobs:
+  diagnostics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run exposed S3a v0.1 diagnostic
+        run: |
+          python -m py_compile scripts/s3a_ontology_extractor_v021.py scripts/eval_s3a_proposition_extraction.py
+          mkdir -p /tmp/s3a-v021
+          python scripts/s3a_ontology_extractor_v021.py \
+            --input medical/stage-evals/S3/s3a-extraction-gold-v0.1.json \
+            --out /tmp/s3a-v021/predictions.json
+          set +e
+          python scripts/eval_s3a_proposition_extraction.py \
+            --gold medical/stage-evals/S3/s3a-extraction-gold-v0.1.json \
+            --pred /tmp/s3a-v021/predictions.json \
+            --out /tmp/s3a-v021/report.json \
+            --min-critical-recall 0.95
+          status=$?
+          set -e
+          cat /tmp/s3a-v021/report.json
+          echo "S3a v0.2.1 exposed diagnostic exit code: ${status}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s3a-v021-diagnostics
+          path: /tmp/s3a-v021
+          retention-days: 30
