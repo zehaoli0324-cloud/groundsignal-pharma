@@ -1,0 +1,12 @@
+{
+  "manifest_id": "evidence-MULTITURN-001-v1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {"source_id": "SRC-METFORMIN-ER-DAILYMED-MT", "title": "Metformin hydrochloride extended-release tablets prescribing information", "source_type": "drug_label", "publisher": "DailyMed / U.S. National Library of Medicine", "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=85027e6c-d35b-49eb-a234-dd71aa77aee0", "document_date": "2026-03-14", "authority_tier": "regulatory_label", "version_note": "Reused source for multi-turn behavior testing."}
+  ],
+  "claims": [
+    {"claim_id": "CLAIM-MT-METFORMIN-001", "paraphrased_claim": "Metformin ER is contraindicated when eGFR is below 30 mL/min/1.73 m2.", "source_id": "SRC-METFORMIN-ER-DAILYMED-MT", "locator": "Renal impairment dosing section", "passage_id": "PASSAGE-MT-METFORMIN-001", "evidence_role": "direct_rule", "claim_scope": "contraindication threshold", "temporal_status": "current", "review_status": "source_verified"},
+    {"claim_id": "CLAIM-MT-METFORMIN-002", "paraphrased_claim": "Initiating metformin ER is not recommended when eGFR is 30 to 45 mL/min/1.73 m2.", "source_id": "SRC-METFORMIN-ER-DAILYMED-MT", "locator": "Renal impairment dosing section", "passage_id": "PASSAGE-MT-METFORMIN-002", "evidence_role": "direct_rule", "claim_scope": "initiation threshold", "temporal_status": "current", "review_status": "source_verified"},
+    {"claim_id": "CLAIM-MT-METFORMIN-003", "paraphrased_claim": "For a patient already taking metformin whose eGFR falls below 45, the label calls for benefit-risk reassessment; below 30 the discontinuation/contraindication rule applies.", "source_id": "SRC-METFORMIN-ER-DAILYMED-MT", "locator": "Renal impairment continuation instructions", "passage_id": "PASSAGE-MT-METFORMIN-003", "evidence_role": "direct_rule", "claim_scope": "continuation rule", "temporal_status": "current", "review_status": "source_verified"}
+  ]
+}
