@@ -1,6 +1,6 @@
 # GroundSignal Medical — Stage Maturity Status
 
-> Date: 2026-09-05  
+> Date: 2026-09-06  
 > Lifecycle definition: `docs/15-system-stages.md`
 
 The system has **10 lifecycle stages**. Architecture completeness must not be confused with empirical validation completeness.
@@ -9,7 +9,7 @@ The system has **10 lifecycle stages**. Architecture completeness must not be co
 |---|---|---|---|---|
 | S1 | User Need / Workflow Discovery | Partial | 48 seed tasks, high-risk matrix, user-research plan | real interview/log validation and frequency weighting |
 | S2 | Knowledge Search & Source Routing | **Conditional pass / evaluated prototype** | v0.3 fresh routing 91.7%; 10-test live official retrieval; DailyMed version + passage vertical slice | broader passage-source diversity and terminology normalization |
-| S3 | Evidence Verification & Temporal Truth | **HARD FAIL end-to-end / S3b conditional pass / S3a architecture pivot** | complete failure history; independent S3a/S3b evals; S3b fresh v0.3 40/40 / HFSR 0; immutable S3a v0.2/v0.3 fresh failures | replace phrase-dominated S3a extraction with a materially stronger semantic-role/relation/argument architecture, freshly validate it, then re-test end-to-end S3 |
+| S3 | Evidence Verification & Temporal Truth | **HARD FAIL end-to-end / S3b conditional pass / S3a v0.4 development regression green** | complete failure history; independent S3a/S3b evals; S3b fresh v0.3 40/40 / HFSR 0; immutable S3a v0.2/v0.3 fresh failures; v0.4 semantic-frame architecture with exposed regressions 100% | brand-new fresh S3a validation of v0.4, then brand-new end-to-end S3 held-out |
 | S4 | Medical KG Construction / Update | Working prototype | case graphs + two reusable backbones + canonical builder | terminology normalization, persistent graph/index, update-impact engine, dedicated stage eval |
 | S5 | Controlled Case / Benchmark Factory | P0 complete | 12 families / 60 controlled cases / held-out design | clinical expert gold review + broader validated user-task coverage + dedicated stage eval |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | live multi-provider runs, production retriever/reranker, Agent executor, dedicated stage eval |
@@ -60,39 +60,15 @@ High-risk False-Support Rate         0.0%
 Release Gate                         PASS
 ```
 
-The structured suite covers numeric threshold algebra, `EXACT_DOMAIN` vs `SUFFICIENT_ONLY`, population/use-state scope, polarity, causality, incidence, temporal supersession, mixed claims, pharmacogenomics management boundaries and diagnostic-category polarity.
+S3b can be used only on reviewed/gold canonical propositions. It does not validate free-text-to-truth automation.
 
 Detailed report:
 
 - `medical/stage-evals/S3/S3B_V0.3_REPORT.md`
 
-Allowed use:
-
-```text
-reviewed/gold canonical propositions
-→ S3b deterministic audited verification
-```
-
-Not allowed:
-
-```text
-unvalidated free text
-→ automatic truth
-→ unrestricted KG insertion
-```
-
 ---
 
 ## S3a — active blocker
-
-### Initial lower bound
-
-```text
-Precision                    55.6%
-Recall                       47.6%
-F1                           51.3%
-Critical Proposition Recall  43.75%
-```
 
 ### Fresh v0.2 first run
 
@@ -111,13 +87,9 @@ Condition Binding Accuracy          100.00%
 Release Gate                          FAIL
 ```
 
-The v0.2 failures were used to implement generalized semantic canonicalization. On the **exposed** v0.1 and v0.2 regression suites, `s3a-ontology-guided-v0.2.3` subsequently reached 100% on all measured dimensions. Those numbers are regression evidence only.
-
 ### Fresh v0.3 first run — architecture rejection
 
-A new 30-item / 39-proposition held-out was frozen after `s3a-ontology-guided-v0.2.3` implementation commit `519d524d10f4e5e0b9aa505b9e27dc8f683106f9`.
-
-First-run workflow: `33977528229`.
+Workflow `33977528229`:
 
 ```text
 Gold propositions                         39
@@ -133,66 +105,69 @@ Condition Binding Accuracy              88.89%
 Release Gate                         HARD FAIL
 ```
 
-The fresh v0.3 set introduced new natural-language realizations such as:
-
-```text
-therapy commencement / commencing therapy
-maintained on medicine / established user
-does not amount to / insufficient to classify
-surface a safety signal / attribute causally
-spontaneous-report totals
-primary efficacy outcome / succeeded
-displaces guideline
-randomized experiment
-linked to exposure / dose-management advice
-deems / characterized as / describes as
-unrelated to / relationship between / no detectable association
-```
-
-The collapse from exposed regression 100% to fresh F1 30.8% shows that the current deterministic S3a approach remains **phrase-normalization dominated**.
+The collapse from exposed regression performance to fresh v0.3 showed that the previous direct phrase-normalization architecture was not a reliable semantic extractor.
 
 Detailed reports:
 
 - `medical/stage-evals/S3/S3A_V0.2_REPORT.md`
 - `medical/stage-evals/S3/S3A_V0.3_REPORT.md`
 
-### S3a architecture decision
+### S3a v0.4 — semantic-frame architecture development checkpoint
 
-Do **not** continue the loop:
+Implementation commit:
 
-```text
-new synonym fails
-→ add synonym
-→ old suites become 100%
-→ create another held-out
-```
+- `4cef42e749f0f53dc7de2e8bae77e640640ddcf6`
 
-The next S3a version must make a material architecture change:
+v0.4 changes the internal representation to:
 
 ```text
-lexical normalization
-→ semantic role detection
-→ relation/event classification
-→ subject/object + condition argument binding
-→ polarity/modality detection
-→ canonical proposition emission
-→ confidence / abstention
+free text
+→ clause segmentation
+→ semantic event / relation frames
+→ subject/object argument binding
+→ population/use-state binding
+→ numeric condition binding
+→ polarity + modality
+→ canonical proposition compilation
+→ unresolved-critical-content abstention
 ```
 
-Preferred direction:
+Each proposition now has an inspectable intermediate frame containing event type, arguments, polarity, conditions, population, modality, confidence and source span.
 
-> Hybrid constrained semantic extraction: a semantic model or language-understanding component proposes propositions under a closed predicate ontology; deterministic validators enforce predicate allowlists, argument types, polarity, conditions, evidence spans and mandatory abstention/review for unresolved high-risk semantics.
+Centralized grammar:
 
-The repository already contains an `openai_compatible` constrained semantic-extractor harness for this next stage when an appropriate model endpoint is available.
+- `medical/configs/s3a-semantic-frame-v0.4.json`
+
+Extractor:
+
+- `scripts/s3a_semantic_frame_extractor_v04.py`
+
+Regression workflow `33979442330`:
+
+```text
+exposed v0.1   21/21 propositions   F1 100%   PASS
+exposed v0.2   30/30 propositions   F1 100%   PASS
+exposed v0.3   39/39 propositions   F1 100%   PASS
+```
+
+For v0.2 and v0.3, polarity, population and condition-binding accuracy were also 100%. The semantic-frame trace contract passed. The general `medical-development-ci` workflow for the same implementation commit also completed successfully.
+
+These are **exposed regression results only**. They are not fresh evidence and do not change the S3 release state.
+
+Detailed report:
+
+- `medical/stage-evals/S3/S3A_V0.4_DEV_REPORT.md`
 
 ---
 
 ## Current S3 release decision
 
 ```text
-S3b structured truth engine = conditional pass
-S3a free-text extraction     = hard fail
-End-to-end S3                = hard fail
+S3b structured truth engine      = conditional pass
+S3a v0.4 exposed regression      = pass
+S3a v0.4 fresh validation        = not run
+S3a free-text release status     = hard fail / blocked
+End-to-end S3                    = hard fail
 ```
 
 Therefore unrestricted automatic free-text → Knowledge Graph truth insertion remains blocked.
@@ -200,10 +175,8 @@ Therefore unrestricted automatic free-text → Knowledge Graph truth insertion r
 Immediate order:
 
 ```text
-S3a architecture-level redesign
-→ exposed regression only during development
-→ brand-new fresh S3a held-out
-→ brand-new end-to-end S3 held-out
-→ S4 Knowledge-Graph Construction Eval
-→ S5 Case-Factory Eval
+freeze brand-new S3a held-out for v0.4
+→ preserve first observation
+→ if S3a passes, freeze brand-new end-to-end S3 held-out
+→ if end-to-end S3 passes, begin S4 dedicated eval
 ```
