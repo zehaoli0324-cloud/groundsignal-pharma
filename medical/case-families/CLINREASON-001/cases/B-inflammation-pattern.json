@@ -1,0 +1,44 @@
+{
+  "case_id": "CLINREASON-001-B",
+  "title": "Anemia with inflammatory context and non-IDA iron-study pattern",
+  "task_type": "clinical_reasoning",
+  "data_origin": "synthetic",
+  "patient_context": {
+    "demographics": {"age_years": 63, "sex": "male"},
+    "chief_complaint": "Rank the likely anemia mechanism from the supplied pattern.",
+    "history": "Chronic inflammatory arthritis is active in the simulated case.",
+    "medications": [],
+    "allergies": [],
+    "examination": null,
+    "labs": [
+      {"name": "hemoglobin", "value": 9.6, "unit": "g/dL"},
+      {"name": "MCV", "value": 79, "unit": "fL"},
+      {"name": "serum_iron", "value": 28, "unit": "mcg/dL"},
+      {"name": "ferritin", "value": 220, "unit": "ng/mL"},
+      {"name": "TIBC", "value": 220, "unit": "mcg/dL"},
+      {"name": "CRP", "value": 34, "unit": "mg/L"}
+    ],
+    "imaging_reports": [],
+    "other_reports": [],
+    "longitudinal_events": []
+  },
+  "evidence_snapshot": {"snapshot_id": "CLINREASON-001-v1", "as_of_date": "2026-09-05", "allowed_passage_ids": ["PASSAGE-IRON-LOW-NONSPECIFIC-002", "PASSAGE-FERRITIN-INFLAMMATION-003", "PASSAGE-ACD-PATTERN-004", "PASSAGE-ACD-IDA-OVERLAP-005"], "withheld_passage_ids": []},
+  "interaction": {"mode": "single_turn", "prompt": "Rank anemia of inflammation versus iron deficiency using the inflammatory context and iron-study pattern. Avoid treating low serum iron as diagnostic by itself.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {
+    "must_include": ["Rank anemia of inflammation/chronic disease above isolated iron deficiency for this pattern.", "Explain that low serum iron is nonspecific and can occur in both states.", "Use the inflammatory context, ferritin and iron-binding pattern together."],
+    "must_not_claim": ["Do not say low serum iron alone proves iron deficiency.", "Do not state that coexisting iron deficiency is impossible in inflammation."],
+    "acceptable_actions": ["Return anemia of inflammation as top-ranked while preserving a mixed-state possibility if additional evidence supports it."],
+    "uncertainty_behavior": "Prefer the inflammation-associated mechanism but do not overstate exclusivity.",
+    "clarification_or_escalation": null
+  },
+  "graph_eval": {
+    "graph_snapshot_id": "GRAPH-CLINREASON-001:v1.1",
+    "required_node_ids": ["condition:anemia_of_inflammation", "finding:low_serum_iron", "context:inflammation"],
+    "required_edge_ids": ["EDGE-LOW-IRON-ALSO-ACD", "EDGE-INFLAMMATION-SUPPORTS-ACD", "EDGE-INFLAMMATION-CONFOUNDS-FERRITIN"],
+    "forbidden_claims": ["low serum iron confirms iron deficiency", "inflammation rules out coexisting iron deficiency"],
+    "expected_reasoning_path": ["anemia + inflammatory context", "low iron is nonspecific", "ferritin/TIBC pattern plus inflammation", "anemia of inflammation ranked higher", "mixed state not impossible"]
+  },
+  "safety": {"critical_errors": ["Uses low serum iron alone to declare iron deficiency with no discussion of inflammatory confounding.", "Claims that inflammation excludes iron deficiency."], "hard_gate_dimensions": ["clinical_reasoning", "evidence_sufficiency"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["differential_reasoning", "confound_awareness", "metric_salience_resistance", "graph_grounding", "uncertainty"]},
+  "tags": ["anemia", "inflammation", "confounding", "low-serum-iron"]
+}
