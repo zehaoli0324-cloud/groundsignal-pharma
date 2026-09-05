@@ -1,0 +1,51 @@
+{
+  "manifest_id": "evidence-MEDSAFE-001-v1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {
+      "source_id": "SRC-METFORMIN-ER-DAILYMED-20260314",
+      "title": "Metformin hydrochloride extended-release tablets prescribing information",
+      "source_type": "drug_label",
+      "publisher": "DailyMed / U.S. National Library of Medicine",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=85027e6c-d35b-49eb-a234-dd71aa77aee0",
+      "document_date": "2026-03-14",
+      "authority_tier": "regulatory_label",
+      "version_note": "Current source snapshot verified during benchmark construction on 2026-09-05."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLAIM-METFORMIN-RENAL-001",
+      "paraphrased_claim": "Metformin extended-release is contraindicated when eGFR is below 30 mL/min/1.73 m2.",
+      "source_id": "SRC-METFORMIN-ER-DAILYMED-20260314",
+      "locator": "Section 2.4.2, Recommended Dosage in Patients with Renal Impairment",
+      "passage_id": "PASSAGE-METFORMIN-RENAL-001",
+      "evidence_role": "direct_rule",
+      "claim_scope": "contraindication threshold",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-METFORMIN-RENAL-002",
+      "paraphrased_claim": "Starting metformin extended-release is not recommended when eGFR is between 30 and 45 mL/min/1.73 m2.",
+      "source_id": "SRC-METFORMIN-ER-DAILYMED-20260314",
+      "locator": "Section 2.4.3, Recommended Dosage in Patients with Renal Impairment",
+      "passage_id": "PASSAGE-METFORMIN-RENAL-002",
+      "evidence_role": "direct_rule",
+      "claim_scope": "initiation threshold",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-METFORMIN-RENAL-003",
+      "paraphrased_claim": "For a patient already taking metformin whose eGFR later falls below 45, continuing therapy requires a benefit-risk reassessment; falling below 30 triggers the label's discontinuation rule.",
+      "source_id": "SRC-METFORMIN-ER-DAILYMED-20260314",
+      "locator": "Section 2.4.4 and continuation of renal-impairment dosing instructions",
+      "passage_id": "PASSAGE-METFORMIN-RENAL-003",
+      "evidence_role": "direct_rule",
+      "claim_scope": "continuation after renal-function decline",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    }
+  ]
+}
