@@ -1,0 +1,56 @@
+name: s3b-v022-scope-semantics
+
+on:
+  push:
+    paths:
+      - 'scripts/s3b_entailment_engine_v022.py'
+      - 'scripts/s3b_structured_entailment_runner_v022.py'
+      - 'medical/stage-evals/S3/s3b-scope-semantics-dev-v0.1.json'
+      - 'medical/stage-evals/S3/structured-proposition.schema.json'
+      - '.github/workflows/s3b-v022-diagnostics.yml'
+  workflow_dispatch:
+
+jobs:
+  diagnostics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Syntax and JSON checks
+        run: |
+          python -m py_compile scripts/s3b_entailment_engine_v022.py scripts/s3b_structured_entailment_runner_v022.py scripts/eval_s3b_structured_entailment.py
+          python - <<'PY'
+          import json
+          for p in [
+            'medical/stage-evals/S3/structured-proposition.schema.json',
+            'medical/stage-evals/S3/s3b-scope-semantics-dev-v0.1.json',
+          ]:
+              json.load(open(p, encoding='utf-8'))
+              print('OK', p)
+          PY
+      - name: Run S3b v0.2.2 on development and exposed regression suites
+        run: |
+          mkdir -p /tmp/s3b-v022
+          for suite in s3b-scope-semantics-dev-v0.1 s3b-entailment-gold-v0.1 s3b-entailment-heldout-v0.2; do
+            python scripts/s3b_structured_entailment_runner_v022.py \
+              --input medical/stage-evals/S3/${suite}.json \
+              --out /tmp/s3b-v022/${suite}-pred.json
+            set +e
+            python scripts/eval_s3b_structured_entailment.py \
+              --gold medical/stage-evals/S3/${suite}.json \
+              --pred /tmp/s3b-v022/${suite}-pred.json \
+              --out /tmp/s3b-v022/${suite}-report.json \
+              --min-relation-accuracy 0.90 \
+              --max-high-risk-false-support 0.0
+            status=$?
+            set -e
+            cat /tmp/s3b-v022/${suite}-report.json
+            echo "S3b v0.2.2 ${suite} exit code: ${status} (development/exposed only)"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s3b-v022-diagnostics
+          path: /tmp/s3b-v022
+          retention-days: 30
