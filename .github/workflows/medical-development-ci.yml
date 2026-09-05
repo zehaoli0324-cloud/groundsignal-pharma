@@ -11,6 +11,7 @@ on:
       - 'scripts/regression_gate.py'
       - 'scripts/validate_medical_case_families.py'
       - 'scripts/validate_medical_knowledge_sources.py'
+      - 'scripts/build_medical_knowledge_graph.py'
       - '.github/workflows/medical-development-ci.yml'
   pull_request:
     paths:
@@ -22,6 +23,7 @@ on:
       - 'scripts/regression_gate.py'
       - 'scripts/validate_medical_case_families.py'
       - 'scripts/validate_medical_knowledge_sources.py'
+      - 'scripts/build_medical_knowledge_graph.py'
       - '.github/workflows/medical-development-ci.yml'
 
 jobs:
@@ -42,7 +44,8 @@ jobs:
             scripts/export_training_data.py \
             scripts/regression_gate.py \
             scripts/validate_medical_case_families.py \
-            scripts/validate_medical_knowledge_sources.py
+            scripts/validate_medical_knowledge_sources.py \
+            scripts/build_medical_knowledge_graph.py
 
       - name: Validate P0 medical case families
         run: |
@@ -56,6 +59,19 @@ jobs:
         run: |
           python scripts/validate_medical_knowledge_sources.py
 
+      - name: Build canonical medical knowledge graph
+        run: |
+          python scripts/build_medical_knowledge_graph.py \
+            --out /tmp/groundsignal-medical-kg.json
+          python - <<'PY'
+          import json
+          p='/tmp/groundsignal-medical-kg.json'
+          d=json.load(open(p, encoding='utf-8'))
+          assert d['summary']['node_count'] > 0
+          assert d['summary']['edge_count'] > 0
+          print(json.dumps(d['summary'], ensure_ascii=False, indent=2))
+          PY
+
       - name: Validate vertical-slice JSON fixtures parse
         run: |
           python - <<'PY'
@@ -66,6 +82,7 @@ jobs:
               Path('medical/configs/model-matrix.fixture.json'),
               Path('medical/configs/regression-policy.medication-safety-v0.1.json'),
               Path('medical/knowledge-base/SOURCE_REGISTRY.json'),
+              Path('medical/knowledge-base/PHARMACOLOGY_BACKBONE_V0.1.json'),
           ]:
               json.loads(p.read_text(encoding='utf-8'))
               print('OK', p)
