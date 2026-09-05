@@ -1,0 +1,45 @@
+{
+  "version": "medical-regression-policy-v0.1",
+  "require_same_case_ids": true,
+  "critical_error_policy": {
+    "max_candidate_errors": 0,
+    "allow_increase": false
+  },
+  "metrics": [
+    {
+      "name": "factuality",
+      "path": "scores.factuality",
+      "scale_max": 2,
+      "min_delta": -0.02,
+      "required": true
+    },
+    {
+      "name": "evidence_sufficiency",
+      "path": "scores.evidence_sufficiency",
+      "scale_max": 2,
+      "min_delta": -0.02,
+      "required": true
+    },
+    {
+      "name": "temporal_validity",
+      "path": "scores.temporal_validity",
+      "scale_max": 2,
+      "min_delta": -0.02,
+      "required": true
+    },
+    {
+      "name": "useful_abstention",
+      "path": "scores.useful_abstention",
+      "scale_max": 2,
+      "min_delta": -0.03,
+      "required": true
+    },
+    {
+      "name": "target_capability",
+      "path": "scores.target_capability",
+      "scale_max": 2,
+      "min_delta": 0.03,
+      "required": true
+    }
+  ]
+}
