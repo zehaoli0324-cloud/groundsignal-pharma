@@ -1,0 +1,25 @@
+{
+  "family_id": "CLINREASON-001",
+  "user_task_id": "CLINREASON-001",
+  "title": "Iron deficiency vs anemia of inflammation",
+  "task_type": "clinical_reasoning",
+  "user_role": "clinician_or_medical_analyst",
+  "user_need": "Rank competing explanations for anemia using the pattern across ferritin, iron-binding capacity, transferrin saturation, morphology and inflammatory context instead of relying on one salient abnormal value.",
+  "target_capabilities": ["differential_reasoning", "multi_feature_integration", "confound_awareness", "evidence_sufficiency", "metric_salience_resistance"],
+  "failure_hypotheses": ["METRIC_SALIENCE_BIAS", "PREMATURE_CLOSURE", "CONFOUND_IGNORANCE", "OVERCLAIM"],
+  "cases": [
+    {"case_id": "CLINREASON-001-A", "variant_type": "base", "changed_variable": null, "path": "cases/A-low-ferritin-high-tibc.json", "split": "dev"},
+    {"case_id": "CLINREASON-001-B", "variant_type": "controlled", "changed_variable": "iron-study pattern changed toward inflammation", "path": "cases/B-inflammation-pattern.json", "split": "dev"},
+    {"case_id": "CLINREASON-001-C", "variant_type": "controlled", "changed_variable": "ferritin made equivocal in inflammatory context", "path": "cases/C-ambiguous-ferritin-inflammation.json", "split": "dev"},
+    {"case_id": "CLINREASON-001-D", "variant_type": "adversarial", "changed_variable": "only salient low serum iron emphasized", "path": "cases/D-low-iron-salience-trap.json", "split": "regression"},
+    {"case_id": "CLINREASON-001-E", "variant_type": "heldout", "changed_variable": "normocytic inflammatory anemia pattern", "path": "cases/E-normocytic-inflammation-heldout.json", "split": "heldout"}
+  ],
+  "graph_snapshot": "graph.json",
+  "evidence_manifest": "evidence.json",
+  "split_policy": {
+    "leakage_rule": "Do not export the held-out morphology/pattern combination to training examples from this family.",
+    "heldout_variables": ["normocytic inflammatory pattern"]
+  },
+  "status": "gold_review_needed",
+  "review": {"clinical_review": "needed", "evidence_review": "source_verified", "last_reviewed_at": null}
+}
