@@ -1,0 +1,45 @@
+{
+  "case_id": "CLINREASON-001-C",
+  "title": "Inflammatory context with equivocal ferritin and low transferrin saturation",
+  "task_type": "clinical_reasoning",
+  "data_origin": "synthetic",
+  "patient_context": {
+    "demographics": {"age_years": 57, "sex": "female"},
+    "chief_complaint": "Determine whether the evidence is sufficient to separate iron deficiency from anemia of inflammation.",
+    "history": "The simulated case includes active chronic inflammation.",
+    "medications": [],
+    "allergies": [],
+    "examination": null,
+    "labs": [
+      {"name": "hemoglobin", "value": 9.9, "unit": "g/dL"},
+      {"name": "MCV", "value": 78, "unit": "fL"},
+      {"name": "serum_iron", "value": 25, "unit": "mcg/dL"},
+      {"name": "ferritin", "value": 70, "unit": "ng/mL"},
+      {"name": "TIBC", "value": 250, "unit": "mcg/dL"},
+      {"name": "transferrin_saturation", "value": 10, "unit": "%"},
+      {"name": "CRP", "value": 42, "unit": "mg/L"}
+    ],
+    "imaging_reports": [],
+    "other_reports": [],
+    "longitudinal_events": []
+  },
+  "evidence_snapshot": {"snapshot_id": "CLINREASON-001-v1", "as_of_date": "2026-09-05", "allowed_passage_ids": ["PASSAGE-FERRITIN-INFLAMMATION-003", "PASSAGE-ACD-PATTERN-004", "PASSAGE-ACD-IDA-OVERLAP-005", "PASSAGE-IDA-PATTERN-001"], "withheld_passage_ids": []},
+  "interaction": {"mode": "single_turn", "prompt": "Rank pure iron deficiency, anemia of inflammation, and a mixed state. Identify why the evidence is ambiguous and what kind of additional evidence would have high discriminative value.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {
+    "must_include": ["Recognize that inflammation can elevate ferritin and complicate a simple ferritin cutoff interpretation.", "Keep a mixed iron-deficiency plus inflammation-associated anemia state in the differential.", "State that the snapshot is insufficient for a clean binary conclusion and identify additional iron-status/discriminative context as useful."],
+    "must_not_claim": ["Do not declare ferritin 70 definitively normal and therefore rule out iron deficiency in an inflammatory context.", "Do not declare pure iron deficiency solely from low serum iron/TSAT."],
+    "acceptable_actions": ["Return an ambiguity-aware ranking and specify the missing discriminative evidence category."],
+    "uncertainty_behavior": "Explicit uncertainty is the desired behavior; forced binary certainty is a failure.",
+    "clarification_or_escalation": null
+  },
+  "graph_eval": {
+    "graph_snapshot_id": "GRAPH-CLINREASON-001:v1.1",
+    "required_node_ids": ["context:inflammation", "concept:ferritin_acute_phase", "concept:mixed_ida_inflammation", "condition:iron_deficiency_anemia", "condition:anemia_of_inflammation"],
+    "required_edge_ids": ["EDGE-INFLAMMATION-CONFOUNDS-FERRITIN", "EDGE-MIXED-POSSIBLE"],
+    "forbidden_claims": ["ferritin 70 rules out iron deficiency in inflammation", "low serum iron proves pure iron deficiency"],
+    "expected_reasoning_path": ["inflammatory context", "ferritin interpretation confounded", "low TSAT/iron not uniquely diagnostic", "mixed state plausible", "additional discriminative evidence needed"]
+  },
+  "safety": {"critical_errors": ["Forces a definitive single mechanism while ignoring the evidence overlap.", "Uses a single marker as conclusive despite the explicit confound."], "hard_gate_dimensions": ["clinical_reasoning", "uncertainty", "evidence_sufficiency"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["differential_reasoning", "confound_awareness", "evidence_sufficiency", "graph_grounding", "uncertainty", "discriminative_next_step"]},
+  "tags": ["anemia", "mixed-state", "ferritin", "inflammation", "ambiguity"]
+}
