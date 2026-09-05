@@ -12,12 +12,47 @@ def host_matches(host, registered):
     return any(host == h or host.endswith('.' + h) for h in registered)
 
 
+def validate_backbone(path, registry_ids, errors, warnings):
+    modules = claims_n = 0
+    p = Path(path)
+    if not p.exists():
+        warnings.append(f'backbone not found: {p}')
+        return modules, claims_n
+    backbone = load_json(p)
+    seen_modules = set()
+    for module in backbone.get('modules', []):
+        modules += 1
+        mid = module.get('module_id')
+        if not mid:
+            errors.append(f'{p}: module missing module_id')
+        elif mid in seen_modules:
+            errors.append(f'{p}: duplicate module_id {mid}')
+        else:
+            seen_modules.add(mid)
+        sid = module.get('source_id')
+        if sid not in registry_ids:
+            errors.append(f'{p}: {mid} references unregistered source_id {sid}')
+        if not module.get('evidence_scope'):
+            errors.append(f'{p}: {mid} missing evidence_scope')
+        if not module.get('forbidden_inference'):
+            warnings.append(f'{p}: {mid} missing forbidden_inference')
+        claims = module.get('claims', [])
+        if not claims:
+            errors.append(f'{p}: {mid} has no claims')
+        for claim in claims:
+            claims_n += 1
+            for key in ('subject', 'predicate', 'object', 'locator', 'review_status'):
+                if not claim.get(key):
+                    errors.append(f'{p}: {mid} claim missing {key}')
+    return modules, claims_n
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--registry', default='medical/knowledge-base/SOURCE_REGISTRY.json')
     ap.add_argument('--registry-supplement', default='medical/knowledge-base/SOURCE_REGISTRY_SUPPLEMENT.json')
     ap.add_argument('--case-root', default='medical/case-families')
-    ap.add_argument('--backbone', default='medical/knowledge-base/PHARMACOLOGY_BACKBONE_V0.1.json')
+    ap.add_argument('--backbone', action='append', default=[])
     ap.add_argument('--strict-hosts', action='store_true')
     args = ap.parse_args()
 
@@ -91,37 +126,17 @@ def main():
                 if not src.get('document_date'):
                     warnings.append(f'{path}: source-verified {cid} source has no document_date')
 
+    backbones = args.backbone or [
+        'medical/knowledge-base/PHARMACOLOGY_BACKBONE_V0.1.json',
+        'medical/knowledge-base/ORGAN_SPECIAL_POP_SAFETY_BACKBONE_V0.1.json',
+    ]
     backbone_modules = backbone_claims = 0
-    backbone_path = Path(args.backbone)
-    if backbone_path.exists():
-        backbone = load_json(backbone_path)
-        seen_modules = set()
-        for module in backbone.get('modules', []):
-            backbone_modules += 1
-            mid = module.get('module_id')
-            if not mid:
-                errors.append(f'{backbone_path}: module missing module_id')
-            elif mid in seen_modules:
-                errors.append(f'{backbone_path}: duplicate module_id {mid}')
-            else:
-                seen_modules.add(mid)
-            sid = module.get('source_id')
-            if sid not in registry_ids:
-                errors.append(f'{backbone_path}: {mid} references unregistered source_id {sid}')
-            if not module.get('evidence_scope'):
-                errors.append(f'{backbone_path}: {mid} missing evidence_scope')
-            if not module.get('forbidden_inference'):
-                warnings.append(f'{backbone_path}: {mid} missing forbidden_inference')
-            claims = module.get('claims', [])
-            if not claims:
-                errors.append(f'{backbone_path}: {mid} has no claims')
-            for claim in claims:
-                backbone_claims += 1
-                for key in ('subject', 'predicate', 'object', 'locator', 'review_status'):
-                    if not claim.get(key):
-                        errors.append(f'{backbone_path}: {mid} claim missing {key}')
-    else:
-        warnings.append(f'backbone not found: {backbone_path}')
+    backbone_breakdown = {}
+    for path in backbones:
+        m, c = validate_backbone(path, registry_ids, errors, warnings)
+        backbone_modules += m
+        backbone_claims += c
+        backbone_breakdown[path] = {'modules': m, 'claims': c}
 
     print(json.dumps({
         'registry_sources': len(registered_sources),
@@ -130,6 +145,7 @@ def main():
         'case_claims': claim_count,
         'backbone_modules': backbone_modules,
         'backbone_claims': backbone_claims,
+        'backbone_breakdown': backbone_breakdown,
         'warnings': len(warnings),
         'errors': len(errors)
     }, ensure_ascii=False, indent=2))
