@@ -1,0 +1,15 @@
+{
+  "version": "s3a-compositional-frame-v0.5.3",
+  "first_fail_workflow": "33997403549",
+  "diagnostic_replay_workflow": "33997463136",
+  "parser_commit": "e602e5d20623dcef519a9e51475ebbc6ef32606d",
+  "gate_checks": {
+    "all_exposed_proposition_suites": false,
+    "abstention_safety": false,
+    "trace_contract": true,
+    "unsafe_simplification_invariant": true
+  },
+  "release_gate": "FAIL",
+  "fresh_validation": "NOT_RUN",
+  "note": "Deterministic replay performed without parser modification after the initial exposed-regression FAIL; first FAIL workflow remains the primary chronology record."
+}

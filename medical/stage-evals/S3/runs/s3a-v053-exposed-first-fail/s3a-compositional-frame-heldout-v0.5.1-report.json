@@ -1,0 +1,172 @@
+{
+  "benchmark_id": "S3a-compositional-frame-heldout-v0.5.1",
+  "metrics": {
+    "gold_propositions": 66,
+    "predicted_propositions": 65,
+    "true_positive": 62,
+    "precision": 0.9538461538461539,
+    "recall": 0.9393939393939394,
+    "f1": 0.9465648854961831,
+    "critical_proposition_recall": 0.9166666666666666,
+    "polarity_accuracy_on_structural_matches": 0.9841269841269841,
+    "polarity_structural_matches": 63,
+    "population_accuracy_on_semantic_matches": 0.96875,
+    "population_semantic_matches": 64,
+    "condition_binding_accuracy_on_semantic_matches": 0.9841269841269841,
+    "condition_semantic_matches": 63,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": true,
+    "critical_recall": false,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": true
+  },
+  "release_gate": "FAIL",
+  "failures": [
+    {
+      "item_id": "S3A51-005",
+      "text": "Initiation is not recommended below eGFR 45 for a new user, whereas an existing user below eGFR 45 should have benefit and risk reassessed.",
+      "missing_gold": [
+        {
+          "subject": "drug_initiation",
+          "predicate": "INITIATION_NOT_RECOMMENDED",
+          "object": "initiation",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 45
+            }
+          ],
+          "population": "new_or_initiating_user",
+          "critical": true
+        },
+        {
+          "subject": "drug_use",
+          "predicate": "REASSESS_BENEFIT_RISK",
+          "object": "benefit_risk",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 45
+            }
+          ],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_initiation",
+          "INITIATION_NOT_RECOMMENDED",
+          "initiation",
+          [
+            [
+              [
+                "operator",
+                "LT"
+              ],
+              [
+                "value",
+                45
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          null,
+          "POSITIVE"
+        ],
+        [
+          "drug_use",
+          "REASSESS_BENEFIT_RISK",
+          "benefit_risk",
+          [
+            [
+              [
+                "operator",
+                "LT"
+              ],
+              [
+                "value",
+                45
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A51-010",
+      "text": "Treatment is contraindicated when eGFR is below 25, but it is not contraindicated solely because the patient is older than 75 years.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "CONTRAINDICATED",
+          "object": "use",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 25
+            }
+          ],
+          "population": null,
+          "critical": true
+        },
+        {
+          "subject": "drug_use",
+          "predicate": "CONTRAINDICATED",
+          "object": "use",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "CONTRAINDICATED",
+          "use",
+          [
+            [
+              [
+                "operator",
+                "LT"
+              ],
+              [
+                "value",
+                25
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          null,
+          "NEGATIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    }
+  ]
+}

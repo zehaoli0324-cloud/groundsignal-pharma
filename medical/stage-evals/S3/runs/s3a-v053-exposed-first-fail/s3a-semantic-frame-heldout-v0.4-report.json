@@ -1,0 +1,384 @@
+{
+  "benchmark_id": "S3a-semantic-frame-heldout-v0.4",
+  "metrics": {
+    "gold_propositions": 56,
+    "predicted_propositions": 58,
+    "true_positive": 48,
+    "precision": 0.8275862068965517,
+    "recall": 0.8571428571428571,
+    "f1": 0.8421052631578947,
+    "critical_proposition_recall": 0.813953488372093,
+    "polarity_accuracy_on_structural_matches": 0.96,
+    "polarity_structural_matches": 50,
+    "population_accuracy_on_semantic_matches": 0.9230769230769231,
+    "population_semantic_matches": 52,
+    "condition_binding_accuracy_on_semantic_matches": 1.0,
+    "condition_semantic_matches": 48,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": false,
+    "critical_recall": false,
+    "polarity_accuracy": true,
+    "population_accuracy": false,
+    "condition_accuracy": true
+  },
+  "release_gate": "FAIL",
+  "failures": [
+    {
+      "item_id": "S3A4-006",
+      "text": "The fact that condition M is present is, without additional findings, inadequate grounds for declaring the treatment contraindicated.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "CONTRAINDICATED",
+          "object": "use",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "CONTRAINDICATED",
+          "use",
+          [],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A4-013",
+      "text": "The prespecified primary endpoint was attained.",
+      "missing_gold": [],
+      "extra_predicted_signatures": [
+        [
+          "study",
+          "HAS_PRIMARY_ENDPOINT",
+          "primary_endpoint",
+          [],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A4-015",
+      "text": "Although a randomized study supports approach C, the still-current guideline continues to recommend approach D.",
+      "missing_gold": [],
+      "extra_predicted_signatures": [
+        [
+          "trial",
+          "SUPPORTS_OPTION",
+          "approach",
+          [],
+          null,
+          "POSITIVE"
+        ],
+        [
+          "current_guideline",
+          "IS_CURRENT",
+          "approach",
+          [],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A4-021",
+      "text": "At eGFR below 25, patients already taking the drug should discontinue it, whereas patients being newly started should not initiate it.",
+      "missing_gold": [
+        {
+          "subject": "drug_initiation",
+          "predicate": "INITIATION_NOT_RECOMMENDED",
+          "object": "initiation",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 25
+            }
+          ],
+          "population": "new_or_initiating_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A4-022",
+      "text": "For an existing user with eGFR 42, reassess benefit and risk; for a new user with the same eGFR, initiation is not recommended.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "REASSESS_BENEFIT_RISK",
+          "object": "benefit_risk",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "EQ",
+              "value": 42
+            }
+          ],
+          "population": "existing_user",
+          "critical": true
+        },
+        {
+          "subject": "drug_initiation",
+          "predicate": "INITIATION_NOT_RECOMMENDED",
+          "object": "initiation",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "EQ",
+              "value": 42
+            }
+          ],
+          "population": "new_or_initiating_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "REASSESS_BENEFIT_RISK",
+          "benefit_risk",
+          [
+            [
+              [
+                "operator",
+                "EQ"
+              ],
+              [
+                "value",
+                42
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          null,
+          "POSITIVE"
+        ],
+        [
+          "drug_initiation",
+          "INITIATION_NOT_RECOMMENDED",
+          "initiation",
+          [
+            [
+              [
+                "operator",
+                "EQ"
+              ],
+              [
+                "value",
+                42
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A4-024",
+      "text": "For a continuing patient at eGFR 21, the drug should be discontinued.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "DISCONTINUE",
+          "object": "drug",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "EQ",
+              "value": 21
+            }
+          ],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "DISCONTINUE",
+          "drug",
+          [
+            [
+              [
+                "operator",
+                "EQ"
+              ],
+              [
+                "value",
+                21
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A4-025",
+      "text": "Neither the absence of symptoms nor condition N alone constitutes a contraindication to treatment.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "CONTRAINDICATED",
+          "object": "use",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "CONTRAINDICATED",
+          "use",
+          [],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A4-031",
+      "text": "For persons continuing treatment, eGFR under 41 warrants a renewed benefit-risk assessment, not automatic discontinuation.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "REASSESS_BENEFIT_RISK",
+          "object": "benefit_risk",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 41
+            }
+          ],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [],
+      "abstain": true,
+      "unresolved_spans": [
+        {
+          "text": "For persons continuing treatment, eGFR under 41 warrants a renewed benefit-risk assessment, not automatic discontinuation.",
+          "reason": "representable critical semantic family unresolved: BENEFIT_RISK_REASSESSMENT",
+          "potentially_critical": true,
+          "guard": "semantic_coverage"
+        }
+      ]
+    },
+    {
+      "item_id": "S3A4-032",
+      "text": "Initiation is discouraged for eGFR 34–45, while use becomes contraindicated only below eGFR 28.",
+      "missing_gold": [
+        {
+          "subject": "drug_initiation",
+          "predicate": "INITIATION_NOT_RECOMMENDED",
+          "object": "initiation",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "RANGE",
+              "low": 34,
+              "high": 45
+            }
+          ],
+          "population": "new_or_initiating_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_initiation",
+          "INITIATION_NOT_RECOMMENDED",
+          "initiation",
+          [
+            [
+              [
+                "high",
+                45
+              ],
+              [
+                "low",
+                34
+              ],
+              [
+                "operator",
+                "RANGE"
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A4-034",
+      "text": "The randomized trial lends support to option F, but this evidence has not yet changed the current guideline, which still recommends option E.",
+      "missing_gold": [],
+      "extra_predicted_signatures": [
+        [
+          "trial",
+          "SUPPORTS_OPTION",
+          "to",
+          [],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    }
+  ]
+}

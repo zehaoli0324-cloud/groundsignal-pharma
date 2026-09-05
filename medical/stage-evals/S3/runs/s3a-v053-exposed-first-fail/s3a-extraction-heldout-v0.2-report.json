@@ -1,0 +1,77 @@
+{
+  "benchmark_id": "S3a-proposition-extraction-heldout-v0.2",
+  "metrics": {
+    "gold_propositions": 30,
+    "predicted_propositions": 30,
+    "true_positive": 29,
+    "precision": 0.9666666666666667,
+    "recall": 0.9666666666666667,
+    "f1": 0.9666666666666667,
+    "critical_proposition_recall": 0.9565217391304348,
+    "polarity_accuracy_on_structural_matches": 1.0,
+    "polarity_structural_matches": 29,
+    "population_accuracy_on_semantic_matches": 0.9666666666666667,
+    "population_semantic_matches": 30,
+    "condition_binding_accuracy_on_semantic_matches": 1.0,
+    "condition_semantic_matches": 29,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": true,
+    "critical_recall": true,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": true
+  },
+  "release_gate": "PASS",
+  "failures": [
+    {
+      "item_id": "S3A2-022",
+      "text": "For a newly starting patient at eGFR 42, initiation is not recommended.",
+      "missing_gold": [
+        {
+          "subject": "drug_initiation",
+          "predicate": "INITIATION_NOT_RECOMMENDED",
+          "object": "initiation",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "EQ",
+              "value": 42
+            }
+          ],
+          "population": "new_or_initiating_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_initiation",
+          "INITIATION_NOT_RECOMMENDED",
+          "initiation",
+          [
+            [
+              [
+                "operator",
+                "EQ"
+              ],
+              [
+                "value",
+                42
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "benchmark_id": "S3a-proposition-extraction-heldout-v0.3",
+  "metrics": {
+    "gold_propositions": 39,
+    "predicted_propositions": 39,
+    "true_positive": 38,
+    "precision": 0.9743589743589743,
+    "recall": 0.9743589743589743,
+    "f1": 0.9743589743589743,
+    "critical_proposition_recall": 0.9642857142857143,
+    "polarity_accuracy_on_structural_matches": 0.9743589743589743,
+    "polarity_structural_matches": 39,
+    "population_accuracy_on_semantic_matches": 1.0,
+    "population_semantic_matches": 38,
+    "condition_binding_accuracy_on_semantic_matches": 1.0,
+    "condition_semantic_matches": 38,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": true,
+    "critical_recall": true,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": true
+  },
+  "release_gate": "PASS",
+  "failures": [
+    {
+      "item_id": "S3A3-006",
+      "text": "The presence of condition R by itself is insufficient to classify treatment A as contraindicated.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "CONTRAINDICATED",
+          "object": "use",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "CONTRAINDICATED",
+          "use",
+          [],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    }
+  ]
+}
