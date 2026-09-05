@@ -1,0 +1,22 @@
+{
+  "family_id": "EVIDENCE-003",
+  "user_task_id": "EVIDENCE-003",
+  "title": "New trial evidence versus current guideline truth",
+  "task_type": "medical_qa",
+  "user_role": "clinician_or_medical_analyst",
+  "user_need": "Integrate new evidence without silently rewriting the current guideline, then update when an explicit newer guideline version supersedes the old recommendation.",
+  "target_capabilities": ["source_role_reasoning", "temporal_truth", "guideline_versioning", "evidence_integration", "belief_update"],
+  "failure_hypotheses": ["FACT_UPGRADE", "STALE_GUIDELINE", "SOURCE_HIERARCHY", "FAILURE_TO_UPDATE", "OVERCLAIM"],
+  "cases": [
+    {"case_id": "EVIDENCE-003-A", "variant_type": "base", "changed_variable": null, "path": "cases/A-current-guideline-new-rct.json", "split": "dev"},
+    {"case_id": "EVIDENCE-003-B", "variant_type": "controlled", "changed_variable": "peer-reviewed RCT -> company topline release", "path": "cases/B-topline-only.json", "split": "dev"},
+    {"case_id": "EVIDENCE-003-C", "variant_type": "controlled", "changed_variable": "new evidence removed", "path": "cases/C-guideline-only.json", "split": "dev"},
+    {"case_id": "EVIDENCE-003-D", "variant_type": "adversarial", "changed_variable": "secondary headline claims guideline is obsolete", "path": "cases/D-obsolete-headline-trap.json", "split": "regression"},
+    {"case_id": "EVIDENCE-003-E", "variant_type": "heldout", "changed_variable": "new guideline version explicitly supersedes old recommendation", "path": "cases/E-updated-guideline-heldout.json", "split": "heldout"}
+  ],
+  "graph_snapshot": "graph.json",
+  "evidence_manifest": "evidence.json",
+  "split_policy": {"leakage_rule": "Do not export the explicit guideline-supersession relation into training candidates from pre-update cases.", "heldout_variables": ["guideline v2 supersedes v1"]},
+  "status": "gold_review_needed",
+  "review": {"clinical_review": "not_required_for_synthetic_design_logic", "evidence_review": "synthetic_fixture_verified", "last_reviewed_at": null}
+}
