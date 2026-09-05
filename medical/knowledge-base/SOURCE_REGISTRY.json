@@ -1,0 +1,185 @@
+{
+  "registry_version": "medical-source-registry-v0.1",
+  "as_of_date": "2026-09-05",
+  "principle": "Use the highest-authority source that directly supports the claim. Search results and secondary summaries are discovery aids, not automatic production truth.",
+  "sources": [
+    {
+      "source_id": "DAILYMED_SPL",
+      "name": "DailyMed Structured Product Labeling",
+      "host": "dailymed.nlm.nih.gov",
+      "authority_tier": 0,
+      "source_type": "regulatory_label",
+      "primary_for": ["current_us_label", "dose", "contraindication", "warning", "interaction", "special_population", "clinical_pharmacology", "patient_labeling"],
+      "retrieval": {"mode": "api_or_web", "api": "https://dailymed.nlm.nih.gov/dailymed/services/v2/", "versioned": true},
+      "verification_notes": "Prefer exact SPL setid/version/published date and section locator."
+    },
+    {
+      "source_id": "DRUGS_AT_FDA",
+      "name": "Drugs@FDA",
+      "host": "fda.gov",
+      "authority_tier": 0,
+      "source_type": "regulatory_approval_and_label",
+      "primary_for": ["us_approval_status", "approval_date", "label", "approval_letter", "review_documents"],
+      "retrieval": {"mode": "web_or_openfda", "api": "https://api.fda.gov/drug/drugsfda.json", "versioned": true},
+      "verification_notes": "Use for regulatory approval truth; do not infer approval from trial or company announcement."
+    },
+    {
+      "source_id": "FDA_DDI_TABLES",
+      "name": "FDA Drug Development and Drug Interactions tables",
+      "host": "fda.gov",
+      "authority_tier": 0,
+      "source_type": "clinical_pharmacology_reference",
+      "primary_for": ["cyp_substrate", "cyp_inhibitor", "cyp_inducer", "transporter_substrate", "transporter_inhibitor", "ddi_strength_examples"],
+      "retrieval": {"mode": "web", "versioned": true},
+      "verification_notes": "Tables are examples, not exhaustive lists. Preserve strength/classification and table context."
+    },
+    {
+      "source_id": "FDA_ICH_M12",
+      "name": "FDA / ICH M12 Drug Interaction Studies",
+      "host": "fda.gov",
+      "authority_tier": 0,
+      "source_type": "regulatory_guidance",
+      "primary_for": ["ddi_methodology", "enzyme_transporter_interaction_interpretation"],
+      "retrieval": {"mode": "web", "versioned": true},
+      "verification_notes": "Use for general DDI interpretation methodology rather than patient-specific dose instructions."
+    },
+    {
+      "source_id": "FDA_PGX",
+      "name": "FDA Pharmacogenetic Associations / Pharmacogenomic Biomarkers",
+      "host": "fda.gov",
+      "authority_tier": 0,
+      "source_type": "regulatory_pharmacogenomics",
+      "primary_for": ["gene_drug_association", "genotype_effect", "label_pgx", "management_recommendation_when_supported"],
+      "retrieval": {"mode": "web", "versioned": true},
+      "verification_notes": "Do not turn PK-only gene associations into efficacy/toxicity claims. Check drug label for management details."
+    },
+    {
+      "source_id": "FDA_SAFETY_COMMUNICATIONS",
+      "name": "FDA Drug Safety Communications",
+      "host": "fda.gov",
+      "authority_tier": 0,
+      "source_type": "regulatory_safety_update",
+      "primary_for": ["new_safety_issue", "label_change", "postmarketing_regulatory_action"],
+      "retrieval": {"mode": "web", "versioned": true},
+      "verification_notes": "Track publication date and whether communication led to label changes."
+    },
+    {
+      "source_id": "EMA_EPAR_SMPC",
+      "name": "EMA EPAR / Summary of Product Characteristics",
+      "host": "ema.europa.eu",
+      "authority_tier": 0,
+      "source_type": "eu_regulatory_product_information",
+      "primary_for": ["eu_authorisation", "eu_label", "indication", "dose", "interaction", "pregnancy", "pk", "pd"],
+      "retrieval": {"mode": "web", "versioned": true},
+      "verification_notes": "Capture EPAR/product-information update date and jurisdiction."
+    },
+    {
+      "source_id": "CDE_NMPA",
+      "name": "Center for Drug Evaluation, NMPA",
+      "host": "cde.org.cn",
+      "authority_tier": 0,
+      "source_type": "china_regulatory",
+      "primary_for": ["china_guidance", "review_status", "trial_permission", "listed_drug_information", "clinical_pharmacology_guidance"],
+      "retrieval": {"mode": "web", "versioned": true},
+      "verification_notes": "Preserve China jurisdiction and distinguish CDE review/acceptance from NMPA approval."
+    },
+    {
+      "source_id": "NHC_CHINA",
+      "name": "National Health Commission of the PRC",
+      "host": "nhc.gov.cn",
+      "authority_tier": 0,
+      "source_type": "china_clinical_guideline_pathway",
+      "primary_for": ["clinical_pathway", "national_clinical_management", "rational_medication_policy"],
+      "retrieval": {"mode": "web", "versioned": true},
+      "verification_notes": "Check publication year/version; clinical pathways may be older and should not silently override newer specialty guidance."
+    },
+    {
+      "source_id": "CLINICALTRIALS_GOV",
+      "name": "ClinicalTrials.gov",
+      "host": "clinicaltrials.gov",
+      "authority_tier": 1,
+      "source_type": "trial_registry",
+      "primary_for": ["trial_exists", "trial_status", "phase", "population", "intervention", "registered_endpoint", "dates"],
+      "retrieval": {"mode": "api", "api": "https://clinicaltrials.gov/api/v2/", "versioned": true},
+      "verification_notes": "Registration proves trial metadata, not efficacy or causality."
+    },
+    {
+      "source_id": "RXNORM",
+      "name": "RxNorm / RxNav",
+      "host": "lhncbc.nlm.nih.gov",
+      "authority_tier": 1,
+      "source_type": "drug_terminology",
+      "primary_for": ["ingredient_normalization", "brand_generic_mapping", "dose_form_identity", "rxnorm_identifier"],
+      "retrieval": {"mode": "api", "api": "https://rxnav.nlm.nih.gov/REST/", "versioned": true},
+      "verification_notes": "Use for identity/normalization, not as the clinical source of contraindication or dosing truth."
+    },
+    {
+      "source_id": "LOINC",
+      "name": "LOINC",
+      "host": "loinc.org",
+      "authority_tier": 1,
+      "source_type": "clinical_observation_terminology",
+      "primary_for": ["lab_test_normalization", "clinical_observation_normalization"],
+      "retrieval": {"mode": "download_or_api", "versioned": true},
+      "verification_notes": "Use to identify tests/observations; interpretation thresholds still require clinical sources."
+    },
+    {
+      "source_id": "PUBMED",
+      "name": "PubMed",
+      "host": "pubmed.ncbi.nlm.nih.gov",
+      "authority_tier": 2,
+      "source_type": "literature_index",
+      "primary_for": ["literature_discovery", "study_identification", "systematic_review_discovery"],
+      "retrieval": {"mode": "web_or_ncbi_api", "versioned": false},
+      "verification_notes": "PubMed is an index; clinical claims must be verified against article design/results and preferably guideline/regulatory context."
+    },
+    {
+      "source_id": "LIVERTOX",
+      "name": "NIH LiverTox",
+      "host": "ncbi.nlm.nih.gov",
+      "authority_tier": 1,
+      "source_type": "domain_safety_reference",
+      "primary_for": ["drug_induced_liver_injury", "hepatotoxicity_pattern", "dili_context"],
+      "retrieval": {"mode": "web", "versioned": true},
+      "verification_notes": "Use for DILI context; patient-specific management should still be anchored to current clinical guidance/label where applicable."
+    },
+    {
+      "source_id": "OPENFDA_FAERS",
+      "name": "openFDA / FAERS",
+      "host": "open.fda.gov",
+      "authority_tier": 2,
+      "source_type": "postmarketing_signal_data",
+      "primary_for": ["safety_signal_discovery"],
+      "retrieval": {"mode": "api", "api": "https://api.fda.gov/drug/event.json", "versioned": true},
+      "verification_notes": "Never use a report count to establish causality or incidence; reporting is incomplete and biased."
+    },
+    {
+      "source_id": "MEDLINEPLUS_DRUG",
+      "name": "MedlinePlus Drug Information",
+      "host": "medlineplus.gov",
+      "authority_tier": 2,
+      "source_type": "patient_medication_information",
+      "primary_for": ["patient_question_patterns", "patient_facing_use_instructions", "patient_counseling_context"],
+      "retrieval": {"mode": "web", "versioned": true},
+      "verification_notes": "Useful for patient-facing task design; high-risk prescribing truth should be checked against approved/current labels and guidelines."
+    },
+    {
+      "source_id": "WHO_EML",
+      "name": "WHO Model Lists of Essential Medicines",
+      "host": "who.int",
+      "authority_tier": 1,
+      "source_type": "global_medicine_guidance",
+      "primary_for": ["essential_medicine_status", "antibiotic_aware_context", "global_priority_medicines"],
+      "retrieval": {"mode": "web", "versioned": true},
+      "verification_notes": "Global prioritization source; not a substitute for jurisdiction-specific labeling or individual treatment guidance."
+    }
+  ],
+  "disallowed_as_production_truth_without_primary_verification": [
+    "generic_search_snippet",
+    "forum",
+    "social_media",
+    "commercial_blog",
+    "news_article_for_clinical_rule",
+    "llm_generated_summary"
+  ]
+}
