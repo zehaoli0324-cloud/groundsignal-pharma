@@ -1,0 +1,5 @@
+{
+  "provider": "deterministic_baseline",
+  "model_id": "s3a-regex-lower-bound-v0.5.4",
+  "description": "Deterministic lower-bound extractor retained for regression comparison. Not intended as the final semantic parser."
+}
