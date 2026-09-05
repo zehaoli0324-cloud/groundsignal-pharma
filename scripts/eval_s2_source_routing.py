@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, json, sys
+import argparse, json
 from collections import Counter
 from pathlib import Path
 
@@ -50,10 +50,14 @@ def main():
         top3 = ranked[:3]
         acceptable = set(row["acceptable_source_ids"])
         primary = row["expected_primary_source_id"]
+        acceptable_types = {types.get(x) for x in acceptable if types.get(x)}
 
         p1 = top1 == primary
         a3 = any(x in acceptable for x in top3)
-        t_ok = top1 is not None and types.get(top1) == row["expected_source_type"]
+        # An information need can legitimately allow multiple authority classes
+        # (e.g. DailyMed or Drugs@FDA for a current US label). Score type against
+        # the types of all explicitly acceptable source IDs, not one scalar label.
+        t_ok = top1 is not None and types.get(top1) in acceptable_types
         w = top1 is None or top1 not in acceptable
         secondary = top1 in set(row.get("forbidden_as_gold", []))
 
