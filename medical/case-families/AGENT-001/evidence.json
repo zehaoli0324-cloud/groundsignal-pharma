@@ -1,0 +1,14 @@
+{
+  "manifest_id": "evidence-AGENT-001-v1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {"source_id":"SRC-AGENT-METFORMIN-CURRENT","title":"Current metformin ER prescribing information","source_type":"drug_label","publisher":"DailyMed / U.S. National Library of Medicine","url":"https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=85027e6c-d35b-49eb-a234-dd71aa77aee0","document_date":"2026-03-14","authority_tier":"regulatory_label","version_note":"Current benchmark source."},
+    {"source_id":"SRC-AGENT-METFORMIN-STALE","title":"Synthetic older metformin label snapshot","source_type":"synthetic_historical_label","publisher":"GroundSignal","url":"groundsignal://medical/AGENT-001/metformin-stale","document_date":"2022-01-01","authority_tier":"historical_fixture","version_note":"Deliberately stale search-result fixture; not current truth."},
+    {"source_id":"SRC-AGENT-APIXABAN-CURRENT","title":"ELIQUIS (apixaban) Prescribing Information","source_type":"drug_label","publisher":"U.S. Food and Drug Administration","url":"https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/202155Orig1s039%2Cs040lbl.pdf","document_date":"2025","authority_tier":"regulatory_label","version_note":"Held-out current label source."}
+  ],
+  "claims": [
+    {"claim_id":"CLAIM-AGENT-METFORMIN-001","paraphrased_claim":"The current metformin ER label contains the renal threshold rule: eGFR below 30 is contraindicated, and continuation rules differ from initiation rules.","source_id":"SRC-AGENT-METFORMIN-CURRENT","locator":"Renal impairment dosing section","passage_id":"PASSAGE-AGENT-METFORMIN-CURRENT-001","evidence_role":"direct_rule","claim_scope":"current renal medication-safety rule","temporal_status":"current","review_status":"source_verified"},
+    {"claim_id":"CLAIM-AGENT-STALE-002","paraphrased_claim":"The stale fixture is intentionally older than the current label and must not be treated as current merely because it ranks first in search.","source_id":"SRC-AGENT-METFORMIN-STALE","locator":"Synthetic stale snapshot metadata","passage_id":"PASSAGE-AGENT-METFORMIN-STALE-002","evidence_role":"context","claim_scope":"temporal retrieval test","temporal_status":"superseded","review_status":"source_verified"},
+    {"claim_id":"CLAIM-AGENT-APIXABAN-003","paraphrased_claim":"The current apixaban label states that concomitant NSAID use increases bleeding risk and that apixaban itself can cause serious bleeding.","source_id":"SRC-AGENT-APIXABAN-CURRENT","locator":"Section 5.2 / Drug Interactions","passage_id":"PASSAGE-AGENT-APIXABAN-003","evidence_role":"direct_rule","claim_scope":"held-out NSAID interaction rule","temporal_status":"current","review_status":"source_verified"}
+  ]
+}
