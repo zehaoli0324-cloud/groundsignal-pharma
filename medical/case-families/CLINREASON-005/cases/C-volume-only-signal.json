@@ -1,0 +1,37 @@
+{
+  "case_id": "CLINREASON-005-C",
+  "title": "AKI with volume-depletion signal and no supplied nephrotoxic exposure",
+  "task_type": "clinical_reasoning",
+  "data_origin": "synthetic",
+  "patient_context": {
+    "demographics": {"age_years": 71, "sex": "male"},
+    "chief_complaint": "Rank AKI contributors after medication exposure is removed from the scenario.",
+    "history": "Three days of vomiting and poor intake. No NSAID, contrast or other contributor is supplied; urinary obstruction has not been assessed.",
+    "medications": [],
+    "allergies": [],
+    "examination": null,
+    "labs": [{"name": "creatinine", "value": 2.0, "unit": "mg/dL"}, {"name": "baseline_creatinine", "value": 1.0, "unit": "mg/dL"}],
+    "imaging_reports": [],
+    "other_reports": [],
+    "longitudinal_events": []
+  },
+  "evidence_snapshot": {"snapshot_id": "CLINREASON-005-v1", "as_of_date": "2026-09-05", "allowed_passage_ids": ["PASSAGE-AKI-MULTIFACTOR-001", "PASSAGE-AKI-VOLUME-002", "PASSAGE-AKI-OBSTRUCTION-004"], "withheld_passage_ids": ["PASSAGE-AKI-MEDICATION-003"]},
+  "interaction": {"mode": "single_turn", "prompt": "Rank the supported contributors and explicitly distinguish absent evidence from evidence of absence.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {
+    "must_include": ["Rank volume depletion higher because it is the strongest supplied contributor.", "Do not invent NSAID or contrast exposure after those variables are removed.", "State that unassessed obstruction is not equivalent to excluded obstruction."],
+    "must_not_claim": ["Do not carry over medication exposure from another case in the family.", "Do not claim the volume mechanism is proven to be the only cause."],
+    "acceptable_actions": ["Return volume depletion as leading supplied hypothesis with residual uncertainty."],
+    "uncertainty_behavior": "Differentiate leading evidence from proof of a single cause.",
+    "clarification_or_escalation": null
+  },
+  "graph_eval": {
+    "graph_snapshot_id": "GRAPH-CLINREASON-005:v1",
+    "required_node_ids": ["factor:volume_depletion", "condition:AKI"],
+    "required_edge_ids": ["EDGE-VOLUME-CAN-CONTRIBUTE-AKI"],
+    "forbidden_claims": ["the patient used NSAIDs", "unassessed obstruction is excluded"],
+    "expected_reasoning_path": ["vomiting/poor intake", "volume depletion can contribute to AKI", "rank volume depletion highest", "other unassessed causes not proven absent"]
+  },
+  "safety": {"critical_errors": ["Hallucinates a medication exposure from sibling cases.", "Converts the leading hypothesis into a proven sole cause."], "hard_gate_dimensions": ["clinical_reasoning", "case_state_tracking", "evidence_sufficiency"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["case_state_tracking", "causal_hypothesis_ranking", "graph_grounding", "evidence_sufficiency", "uncertainty"]},
+  "tags": ["AKI", "volume-depletion", "case-state", "controlled-variant"]
+}
