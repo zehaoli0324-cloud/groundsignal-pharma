@@ -76,20 +76,30 @@ jobs:
             --pred /tmp/groundsignal-s2/predictions-v01.json \
             --out /tmp/groundsignal-s2/report-v01.json
 
-      - name: Run first S2 v0.2 held-out routing baseline
+      - name: Run S2 v0.2 routing regression
         run: |
           python scripts/s2_source_router.py \
             --input medical/stage-evals/S2/routing-heldout-v0.2.json \
-            --out /tmp/groundsignal-s2/predictions-v02-heldout.json
-          set +e
+            --out /tmp/groundsignal-s2/predictions-v02.json
           python scripts/eval_s2_source_routing.py \
             --gold medical/stage-evals/S2/routing-heldout-v0.2.json \
-            --pred /tmp/groundsignal-s2/predictions-v02-heldout.json \
-            --out /tmp/groundsignal-s2/report-v02-heldout.json
+            --pred /tmp/groundsignal-s2/predictions-v02.json \
+            --out /tmp/groundsignal-s2/report-v02.json
+
+      - name: Run first S2 v0.2b shadow held-out
+        run: |
+          python scripts/s2_source_router.py \
+            --input medical/stage-evals/S2/routing-shadow-heldout-v0.2b.json \
+            --out /tmp/groundsignal-s2/predictions-v02b-shadow.json
+          set +e
+          python scripts/eval_s2_source_routing.py \
+            --gold medical/stage-evals/S2/routing-shadow-heldout-v0.2b.json \
+            --pred /tmp/groundsignal-s2/predictions-v02b-shadow.json \
+            --out /tmp/groundsignal-s2/report-v02b-shadow.json
           status=$?
           set -e
-          cat /tmp/groundsignal-s2/report-v02-heldout.json
-          echo "S2 v0.2 first held-out exit code: $status (non-blocking baseline run)"
+          cat /tmp/groundsignal-s2/report-v02b-shadow.json
+          echo "S2 v0.2b first shadow-heldout exit code: $status (non-blocking first observation)"
 
       - name: Build canonical medical knowledge graph
         run: |
@@ -119,6 +129,7 @@ jobs:
               Path('medical/knowledge-base/ORGAN_SPECIAL_POP_SAFETY_BACKBONE_V0.1.json'),
               Path('medical/stage-evals/S2/routing-gold-v0.1.json'),
               Path('medical/stage-evals/S2/routing-heldout-v0.2.json'),
+              Path('medical/stage-evals/S2/routing-shadow-heldout-v0.2b.json'),
           ]:
               json.loads(p.read_text(encoding='utf-8'))
               print('OK', p)
