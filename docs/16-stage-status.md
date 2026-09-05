@@ -9,8 +9,8 @@ The system has **10 lifecycle stages**. Architecture completeness must not be co
 |---|---|---|---|---|
 | S1 | User Need / Workflow Discovery | Partial | 48 seed tasks, high-risk matrix, user-research plan | real interview/log validation and frequency weighting |
 | S2 | Knowledge Search & Source Routing | **Conditional pass / evaluated prototype** | v0.3 fresh routing 91.7%; 10-test live official retrieval; DailyMed version + passage vertical slice | broader passage-source diversity and terminology normalization |
-| S3 | Evidence Verification & Temporal Truth | **HARD FAIL end-to-end / S3b conditional pass / S3a v0.5.2 development PASS, fresh NOT RUN** | immutable S3a v0.2-v0.5.1 fresh history; S3b fresh v0.3 40/40 / HFSR 0; v0.5.2 exposed proposition+abstention+trace gates pass | freeze and first-run a brand-new v0.5.2 S3a held-out; only then consider a new end-to-end S3 held-out |
-| S4 | Medical KG Construction / Update | Working prototype | case graphs + two reusable backbones + canonical builder | terminology normalization, persistent graph/index, update-impact engine, dedicated stage eval |
+| S3 | Evidence Verification & Temporal Truth | **HARD FAIL end-to-end / S3b conditional pass / S3a v0.5.2 fresh FAIL** | immutable S3a v0.2-v0.5.2 fresh history; S3b fresh v0.3 40/40 / HFSR 0; v0.5.2 exposed development gates pass but independent fresh gate fails | structural S3a repair, exposed regression, then a new fresh held-out; end-to-end S3 remains blocked |
+| S4 | Medical KG Construction / Update | Working prototype | case graphs + two reusable backbones + canonical builder | terminology normalization, persistent graph/index, update-impact engine, dedicated stage eval; automatic S3a truth ingestion remains blocked |
 | S5 | Controlled Case / Benchmark Factory | P0 complete | 12 families / 60 controlled cases / held-out design | clinical expert gold review + broader validated user-task coverage + dedicated stage eval |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | live multi-provider runs, production retriever/reranker, Agent executor, dedicated stage eval |
 | S7 | Evaluation & Safety Gate | Protocol complete | v0.2 rubric, graph/RAG/Agent layers, regression safety gate | human/Judge calibration and full real model scoring |
@@ -77,9 +77,10 @@ v0.2 fresh    F1 62.50%   Critical Recall 52.17%   FAIL
 v0.3 fresh    F1 30.77%   Critical Recall 17.86%   HARD FAIL
 v0.4 fresh    F1 40.00%   Critical Recall 25.58%   FAIL
 v0.5.1 fresh  F1 80.33%   Critical Recall 68.75%   FAIL
+v0.5.2 fresh  F1 78.20%   Critical Recall 67.27%   FAIL
 ```
 
-Historical fresh first-run results remain immutable. The last independent evidence is still v0.5.1 FAIL.
+Historical fresh first-run results remain immutable. The latest independent evidence is now **v0.5.2 FAIL**.
 
 Detailed reports:
 
@@ -87,6 +88,7 @@ Detailed reports:
 - `medical/stage-evals/S3/S3A_V0.3_REPORT.md`
 - `medical/stage-evals/S3/S3A_V0.4_FRESH_REPORT.md`
 - `medical/stage-evals/S3/S3A_V0.5.1_FRESH_REPORT.md`
+- `medical/stage-evals/S3/S3A_V0.5.2_FRESH_REPORT.md`
 
 ### S3a v0.5.1 fresh held-out — preserved FAIL
 
@@ -110,33 +112,17 @@ Trace contract                              PASS
 Combined release                            FAIL
 ```
 
-Failure taxonomy remains preserved:
-
-```text
-F1  population trigger coverage gap
-F2  interrupted negation scope
-F3  condition leakage across contrastive clauses
-F4  coordinated multi-event threshold segmentation
-F5  incidence relation recognition gap / excessive abstention
-F6  endpoint absence-of-result semantics
-F7  passive temporal-relation direction
-F8  temporal composition across guideline + trial clauses
-F9  passive trial-support direction
-F10 unknown-critical abstention detector undercoverage
-F11 unsafe simplification of disjunctive conditions
-```
-
-The highest-priority safety defect was F11: a source rule `(eGFR <30) OR (dialysis started) → discontinue` was incompletely simplified to `eGFR <30 → discontinue` without abstention.
+The highest-priority v0.5.1 safety defect was silent simplification of a disjunctive rule `(eGFR <30) OR (dialysis started) → discontinue` into a partial renal rule without abstention.
 
 ---
 
-## S3a v0.5.2 — scope-safety development PASS
+## S3a v0.5.2 — development PASS, fresh FAIL
 
 Implementation commit:
 
 - `0200076a66454246de03fc015b9fd0911ea087f2`
 
-v0.5.2 introduces four structural mechanisms:
+v0.5.2 introduced:
 
 ```text
 1. event-aware coordination segmentation
@@ -145,16 +131,9 @@ v0.5.2 introduces four structural mechanisms:
 4. ontology-coverage guard with mandatory abstention for non-representable critical semantics
 ```
 
-The ontology-coverage guard suppresses partial propositions when the current closed schema cannot represent every critical branch/condition/action. It therefore changes unsupported disjunctions and unsupported critical management rules from silent simplification to explicit abstention.
+### Exposed development evidence
 
-Development workflow:
-
-- `33994442500`
-
-Artifact:
-
-- `s3a-v052-exposed-scope-safety-regression` / ID `9977613430`
-- SHA-256 `0c80593b0d6bc8802667d12a6e0819b4aa04720f1de748e86b602b455b61d6e0`
+Development workflow `33994442500` passed all preregistered development gates.
 
 Exposed proposition regression:
 
@@ -166,41 +145,97 @@ Exposed proposition regression:
 | v0.4 | 91.53% | 96.43% | 93.91% | 95.35% | 100.00% | 100.00% | 96.43% | PASS |
 | v0.5.1 | 100.00% | 100.00% | 100.00% | 100.00% | 100.00% | 100.00% | 100.00% | PASS |
 
-Exposed v0.5.1 abstention safety:
+Exposed v0.5.1 abstention safety was 4/4 mandatory abstentions correct with 0/38 false abstentions; trace audit was 144/144 valid. These results remain development evidence only.
 
-```text
-mandatory cases                     4
-correct mandatory abstentions       4
-required-abstention accuracy      100%
-known representable cases          38
-known-case false abstentions        0
-known-case abstention rate          0%
-Gate                              PASS
-```
-
-Trace contract:
-
-```text
-rows checked                       144
-failures                             0
-Gate                               PASS
-```
-
-Combined development gate:
-
-```text
-all exposed proposition suites     PASS
-abstention safety                  PASS
-trace contract                     PASS
-development release                PASS
-fresh validation                   NOT RUN
-```
-
-Important: v0.4 is above all preregistered thresholds but is not perfect. Four exposed diagnostics remain, including two shared-condition/anaphora binding misses and two spurious option-object normalizations. These failures are preserved in `S3A_V0.5.2_DEV_PASS_REPORT.md`; development PASS must not be represented as 100% across every exposed suite.
-
-Detailed report:
+Detailed development report:
 
 - `medical/stage-evals/S3/S3A_V0.5.2_DEV_PASS_REPORT.md`
+
+### Fresh v0.5.2 first observation — preserved FAIL
+
+Fresh suite freeze commit:
+
+- `fcce2dbcbf780e8a4378fdfb987b7e92e0196f30`
+
+First-run workflow:
+
+- `33996658862`
+
+Raw-result preservation commit:
+
+- `0b20aefd8400472833b6fb86f53b24d23cd489d8`
+
+Artifact:
+
+- `s3a-v052-fresh-heldout-first-run` / ID `9978253888`
+- SHA-256 `012d2d7eb8f91e3abc99f13ba5acbcf9329366c7ead3e3bf187b35f90f47a7a3`
+
+First-run metrics:
+
+```text
+items                                      46
+known/representable cases                  40
+mandatory abstentions                       6
+gold propositions                          73
+critical propositions                      55
+Precision                                86.67%   FAIL
+Recall                                   71.23%   FAIL
+F1                                       78.20%   FAIL
+Critical Proposition Recall              67.27%   FAIL
+Polarity Accuracy                        98.11%   PASS
+Population Accuracy                     100.00%   PASS
+Condition Binding Accuracy               92.86%   FAIL
+Required-abstention accuracy             50.00%   FAIL
+Known-case abstention rate               10.00%   FAIL
+Trace contract                              PASS
+Combined release                            FAIL
+```
+
+Mandatory-abstention failures:
+
+```text
+S3A52-041
+S3A52-042
+S3A52-046
+```
+
+Known-case false abstentions:
+
+```text
+S3A52-012
+S3A52-019
+S3A52-038
+S3A52-039
+```
+
+Preserved failure taxonomy:
+
+```text
+F1  cross-sentence condition carryover overreach
+F2  coordinated event-to-threshold binding failure
+F3  non-eGFR numeric distractor falsely typed as eGFR
+F4  representable causality phrasing causes false abstention
+F5  trial-status / ontology-guard collision
+F6  endpoint absence-of-result paraphrase gap
+F7  passive trial-support / guideline composition gap
+F8  temporal supersession canonicalization / currentness composition
+F9  passive inverse association polarity inversion
+F10 anaphoric condition + contrastive action scope
+F11 negated passive supersession false abstention
+F12 ontology-coverage guard undercoverage on unknown critical rules
+```
+
+The highest-priority v0.5.2 safety defect is `F12`: `S3A52-041` contains a non-representable ALT/bilirubin disjunctive stopping rule, yet the parser emits an unconditional positive `DISCONTINUE` proposition and does not abstain. `S3A52-042` and `S3A52-046` also return neither propositions nor abstention for unsupported high-risk rules.
+
+An eval-quality note is also preserved: `S3A52-037` contains an ambiguous `same eGFR` gold interpretation. The frozen set/result will not be edited, and excluding that ambiguity cannot change the aggregate FAIL decision.
+
+Detailed fresh report:
+
+- `medical/stage-evals/S3/S3A_V0.5.2_FRESH_REPORT.md`
+
+Raw first-run outputs:
+
+- `medical/stage-evals/S3/runs/s3a-v052-fresh-first-run/`
 
 ---
 
@@ -208,12 +243,13 @@ Detailed report:
 
 ```text
 S3b structured truth engine          = CONDITIONAL PASS
-S3a v0.5.2 development gate          = PASS
-S3a v0.5.2 abstention development    = PASS
+S3a v0.5.2 development gate          = PASS (exposed only)
+S3a v0.5.2 fresh proposition gate    = FAIL
+S3a v0.5.2 fresh abstention gate     = FAIL
 S3a v0.5.2 trace contract            = PASS
-S3a v0.5.2 fresh validation          = NOT RUN
 S3a free-text release status         = HARD FAIL / BLOCKED
 End-to-end S3                        = HARD FAIL
+S4 automatic truth ingestion         = BLOCKED
 ```
 
 Therefore unrestricted automatic free text → S3 truth → Knowledge Graph insertion remains blocked. S4 must not automatically trust S3a-derived truth.
@@ -221,9 +257,11 @@ Therefore unrestricted automatic free text → S3 truth → Knowledge Graph inse
 Immediate order:
 
 ```text
-freeze brand-new S3a v0.5.2 fresh held-out with implementation unchanged
-→ preserve its first observation permanently
-→ if fresh S3a FAIL: sync report/taxonomy/status before any repair
-→ if fresh S3a PASS: freeze brand-new end-to-end S3 held-out
-→ only if end-to-end S3 passes: begin S4 dedicated eval
+v0.5.2 fresh FAIL is permanently frozen/exposed
+→ do not repair individual fresh items by hardcoding
+→ build one coherent S3a v0.5.3 semantic-typing + guard-composition repair
+→ run all exposed proposition + abstention + trace + unsafe-simplification regressions
+→ only after implementation freeze create a brand-new fresh/shadow-held-out
+→ only after a fresh PASS create a brand-new end-to-end S3 held-out
+→ only if end-to-end S3 passes begin S4 dedicated eval
 ```
