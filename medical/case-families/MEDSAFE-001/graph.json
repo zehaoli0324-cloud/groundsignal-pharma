@@ -1,0 +1,29 @@
+{
+  "graph_id": "GRAPH-MEDSAFE-001",
+  "version": "v1",
+  "as_of_date": "2026-09-05",
+  "nodes": [
+    {"node_id": "med:metformin_er", "node_type": "MEDICATION", "label": "metformin extended-release", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-METFORMIN-RENAL-001", "PASSAGE-METFORMIN-RENAL-002", "PASSAGE-METFORMIN-RENAL-003"]},
+    {"node_id": "rule:egfr_lt_30", "node_type": "CONTRAINDICATION", "label": "eGFR below 30 mL/min/1.73 m2", "value": {"operator": "<", "threshold": 30, "unit": "mL/min/1.73 m2"}, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-METFORMIN-RENAL-001"]},
+    {"node_id": "rule:egfr_30_45_initiation", "node_type": "LABEL_RECOMMENDATION", "label": "initiation not recommended at eGFR 30-45", "value": {"lower_inclusive": 30, "upper_inclusive": 45}, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-METFORMIN-RENAL-002"]},
+    {"node_id": "rule:egfr_lt_45_continue_reassess", "node_type": "MONITORING_RULE", "label": "benefit-risk reassessment when eGFR falls below 45 during treatment", "value": {"operator": "<", "threshold": 45}, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-METFORMIN-RENAL-003"]},
+    {"node_id": "passage:metformin_renal_001", "node_type": "EVIDENCE_PASSAGE", "label": "Metformin renal threshold passage", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-METFORMIN-RENAL-001"]}
+  ],
+  "edges": [
+    {"edge_id": "EDGE-METFORMIN-CONTRA-30", "subject_id": "med:metformin_er", "predicate": "CONTRAINDICATED_IN", "object_id": "rule:egfr_lt_30", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-METFORMIN-RENAL-001"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-METFORMIN-INIT-30-45", "subject_id": "med:metformin_er", "predicate": "INITIATION_NOT_RECOMMENDED_IN", "object_id": "rule:egfr_30_45_initiation", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-METFORMIN-RENAL-002"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-METFORMIN-REASSESS-45", "subject_id": "med:metformin_er", "predicate": "REQUIRES_BENEFIT_RISK_REASSESSMENT_IN", "object_id": "rule:egfr_lt_45_continue_reassess", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-METFORMIN-RENAL-003"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-RULE-SUPPORTED-BY", "subject_id": "rule:egfr_lt_30", "predicate": "SUPPORTED_BY", "object_id": "passage:metformin_renal_001", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-METFORMIN-RENAL-001"], "review_status": "source_verified"}
+  ],
+  "evaluation_contract": {
+    "required_nodes": ["med:metformin_er", "rule:egfr_lt_30"],
+    "required_edges": ["EDGE-METFORMIN-CONTRA-30"],
+    "forbidden_edges": [
+      {"subject": "rule:egfr_lt_30", "predicate": "REQUIRES", "object": "med:insulin"},
+      {"subject": "rule:egfr_30_45_initiation", "predicate": "EQUIVALENT_TO", "object": "rule:egfr_lt_30"}
+    ],
+    "acceptable_paths": [
+      ["case_lab:eGFR", "SATISFIES_THRESHOLD", "rule:egfr_lt_30", "CONTRAINDICATION_FOR", "med:metformin_er"]
+    ]
+  }
+}
