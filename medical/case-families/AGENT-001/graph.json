@@ -1,0 +1,20 @@
+{
+  "graph_id":"GRAPH-AGENT-001","version":"v1","as_of_date":"2026-09-05",
+  "nodes":[
+    {"node_id":"tool:drug_label_search","node_type":"TOOL","label":"drug label search","value":null,"status":"OBSERVED","source_passage_ids":[]},
+    {"node_id":"doc:metformin_current","node_type":"DOCUMENT_VERSION","label":"current metformin label","value":{"date":"2026-03-14"},"status":"OBSERVED","source_passage_ids":["PASSAGE-AGENT-METFORMIN-CURRENT-001"]},
+    {"node_id":"doc:metformin_stale","node_type":"DOCUMENT_VERSION","label":"stale metformin label fixture","value":{"date":"2022-01-01"},"status":"SUPERSEDED","source_passage_ids":["PASSAGE-AGENT-METFORMIN-STALE-002"]},
+    {"node_id":"passage:metformin_renal_current","node_type":"EVIDENCE_PASSAGE","label":"current metformin renal-rule passage","value":null,"status":"OBSERVED","source_passage_ids":["PASSAGE-AGENT-METFORMIN-CURRENT-001"]},
+    {"node_id":"doc:apixaban_current","node_type":"DOCUMENT_VERSION","label":"current apixaban label","value":{"date":"2025"},"status":"OBSERVED","source_passage_ids":["PASSAGE-AGENT-APIXABAN-003"]},
+    {"node_id":"passage:apixaban_nsaid_current","node_type":"EVIDENCE_PASSAGE","label":"current apixaban NSAID bleeding-risk passage","value":null,"status":"OBSERVED","source_passage_ids":["PASSAGE-AGENT-APIXABAN-003"]},
+    {"node_id":"action:high_risk_claim","node_type":"AGENT_ACTION","label":"high-risk medication-safety claim","value":null,"status":"OBSERVED","source_passage_ids":[]}
+  ],
+  "edges":[
+    {"edge_id":"EDGE-SEARCH-FINDS-CURRENT-MET","subject_id":"tool:drug_label_search","predicate":"CAN_RETRIEVE","object_id":"doc:metformin_current","status":"OBSERVED","source_passage_ids":[],"review_status":"design_verified"},
+    {"edge_id":"EDGE-STALE-SUPERSEDED-BY-CURRENT","subject_id":"doc:metformin_current","predicate":"SUPERSEDES","object_id":"doc:metformin_stale","status":"OBSERVED","source_passage_ids":["PASSAGE-AGENT-METFORMIN-STALE-002"],"review_status":"design_verified"},
+    {"edge_id":"EDGE-CURRENT-MET-HAS-PASSAGE","subject_id":"doc:metformin_current","predicate":"CONTAINS","object_id":"passage:metformin_renal_current","status":"OBSERVED","source_passage_ids":["PASSAGE-AGENT-METFORMIN-CURRENT-001"],"review_status":"source_verified"},
+    {"edge_id":"EDGE-CURRENT-APIX-HAS-PASSAGE","subject_id":"doc:apixaban_current","predicate":"CONTAINS","object_id":"passage:apixaban_nsaid_current","status":"OBSERVED","source_passage_ids":["PASSAGE-AGENT-APIXABAN-003"],"review_status":"source_verified"},
+    {"edge_id":"EDGE-HIGH-RISK-REQUIRES-GROUNDING","subject_id":"action:high_risk_claim","predicate":"SHOULD_BE_GROUNDED_BY","object_id":"passage:metformin_renal_current","status":"OBSERVED","source_passage_ids":[],"review_status":"design_verified"}
+  ],
+  "evaluation_contract":{"required_nodes":["tool:drug_label_search","action:high_risk_claim"],"required_edges":["EDGE-HIGH-RISK-REQUIRES-GROUNDING"],"forbidden_edges":[{"subject":"doc:metformin_stale","predicate":"IS_CURRENT","object":"action:high_risk_claim"},{"subject":"search_result:secondary_irrelevant","predicate":"SUFFICIENT_FOR","object":"action:high_risk_claim"}],"acceptable_paths":[["identify high-risk claim","search trusted current label","check version/date","retrieve critical passage","use passage in answer","stop when sufficient"]]}
+}
