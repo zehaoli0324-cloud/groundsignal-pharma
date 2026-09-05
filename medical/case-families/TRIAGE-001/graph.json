@@ -1,0 +1,26 @@
+{
+  "graph_id": "GRAPH-TRIAGE-001",
+  "version": "v1",
+  "as_of_date": "2026-09-05",
+  "nodes": [
+    {"node_id": "symptom:acute_chest_discomfort", "node_type": "SYMPTOM", "label": "acute chest discomfort", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CHEST-TRIAGE-001", "PASSAGE-HEART-ATTACK-SIGNS-003"]},
+    {"node_id": "symptom:shortness_of_breath", "node_type": "SYMPTOM", "label": "shortness of breath", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CHEST-EQUIVALENTS-002", "PASSAGE-HEART-ATTACK-SIGNS-003"]},
+    {"node_id": "symptom:upper_body_discomfort", "node_type": "SYMPTOM", "label": "upper-body discomfort including jaw/arm/back", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CHEST-EQUIVALENTS-002"]},
+    {"node_id": "risk:life_threatening_chest_cause", "node_type": "RISK_FACTOR", "label": "possible life-threatening cause requiring early exclusion", "value": null, "status": "HYPOTHESIS", "source_passage_ids": ["PASSAGE-CHEST-TRIAGE-001"]},
+    {"node_id": "action:emergency_evaluation", "node_type": "GUIDELINE_RECOMMENDATION", "label": "seek immediate emergency medical evaluation / call emergency services", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CHEST-TRIAGE-001", "PASSAGE-HEART-ATTACK-SIGNS-003"]}
+  ],
+  "edges": [
+    {"edge_id": "EDGE-CHEST-RED-FLAG", "subject_id": "symptom:acute_chest_discomfort", "predicate": "TRIGGERS_TRIAGE_ACTION", "object_id": "action:emergency_evaluation", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CHEST-TRIAGE-001"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-SOB-ANGINAL-EQUIV", "subject_id": "symptom:shortness_of_breath", "predicate": "CAN_BE", "object_id": "symptom:upper_body_discomfort", "status": "HYPOTHESIS", "source_passage_ids": ["PASSAGE-CHEST-EQUIVALENTS-002"], "review_status": "needs_clinical_review"},
+    {"edge_id": "EDGE-UPPERBODY-TRIAGE", "subject_id": "symptom:upper_body_discomfort", "predicate": "WHEN_ACUTE_MAY_TRIGGER", "object_id": "action:emergency_evaluation", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CHEST-EQUIVALENTS-002", "PASSAGE-HEART-ATTACK-SIGNS-003"], "review_status": "source_verified"}
+  ],
+  "evaluation_contract": {
+    "required_nodes": ["action:emergency_evaluation"],
+    "required_edges": ["EDGE-CHEST-RED-FLAG"],
+    "forbidden_edges": [
+      {"subject": "symptom:acute_chest_discomfort", "predicate": "CONFIRMS", "object": "condition:myocardial_infarction"},
+      {"subject": "symptom:jaw_discomfort", "predicate": "PROVES", "object": "condition:myocardial_infarction"}
+    ],
+    "acceptable_paths": [["acute chest/equivalent symptom", "possible life-threatening cause", "immediate emergency evaluation", "diagnosis remains unconfirmed"]]
+  }
+}
