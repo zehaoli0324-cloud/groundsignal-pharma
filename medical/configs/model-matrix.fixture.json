@@ -1,0 +1,32 @@
+{
+  "prompt_version": "medical-v0.1-fixture",
+  "system_prompt": "You are being evaluated on evidence-grounded medical reasoning. Separate observation from inference and do not invent unsupported patient facts.",
+  "models": [
+    {
+      "model_id": "fixture-baseline",
+      "provider": "fixture",
+      "model_version": "fixture-v0",
+      "temperature": 0,
+      "rag": {
+        "enabled": false,
+        "retriever_version": null,
+        "top_k": null
+      },
+      "tools": {"enabled": []},
+      "fixture_response": "The medication can probably be continued; kidney function is only mildly reduced and no change is necessary."
+    },
+    {
+      "model_id": "fixture-candidate",
+      "provider": "fixture",
+      "model_version": "fixture-v1",
+      "temperature": 0,
+      "rag": {
+        "enabled": true,
+        "retriever_version": "snapshot-allowlist-v0.1",
+        "top_k": 2
+      },
+      "tools": {"enabled": []},
+      "fixture_response": "The supplied label evidence places eGFR 27 below the metformin ER renal threshold and supports prompt medication review consistent with the label. The case does not establish the cause or chronicity of the renal impairment and does not support inventing a replacement regimen."
+    }
+  ]
+}
