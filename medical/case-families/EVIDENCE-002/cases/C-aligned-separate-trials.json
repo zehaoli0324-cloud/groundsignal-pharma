@@ -1,0 +1,14 @@
+{
+  "case_id": "EVIDENCE-002-C",
+  "title": "Aligned population, endpoint and follow-up but still separate trials",
+  "task_type": "medical_qa",
+  "data_origin": "synthetic",
+  "patient_context": {"demographics": null, "chief_complaint": "The separate studies now use the same population, endpoint and follow-up. Is A proven superior because 62% exceeds 48%?", "history": "Controlled fixture: design dimensions are aligned across two independent trials, but participants were not randomized within one direct A-versus-B comparison.", "medications": [], "allergies": [], "examination": null, "labs": [], "imaging_reports": [], "other_reports": [], "longitudinal_events": []},
+  "evidence_snapshot": {"snapshot_id": "EVIDENCE-002-v1", "as_of_date": "2026-09-05", "allowed_passage_ids": ["PASSAGE-XTRIAL-ALIGNED-003"], "withheld_passage_ids": ["PASSAGE-HEADTOHEAD-004"]},
+  "interaction": {"mode": "single_turn", "prompt": "Assess how much stronger the indirect comparison becomes when major design dimensions align, while distinguishing aligned separate studies from randomized head-to-head evidence.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {"must_include": ["Recognize that alignment improves interpretability of the descriptive difference.", "Still distinguish separate trial contexts from direct randomized comparison.", "Avoid categorical superiority language unless the fixture provides direct comparative evidence."], "must_not_claim": ["Do not describe the studies as head-to-head.", "Do not respond with blanket 'nothing can ever be compared' language that ignores improved alignment."], "acceptable_actions": ["Describe A's numerically higher result as stronger indirect evidence but not direct proof of superiority."], "uncertainty_behavior": "Reduce uncertainty relative to unmatched trials but preserve the direct-versus-indirect distinction.", "clarification_or_escalation": null},
+  "graph_eval": {"graph_snapshot_id": "GRAPH-EVIDENCE-002:v1", "required_node_ids": ["comparison:indirect"], "required_edge_ids": ["EDGE-SEPARATE-TRIALS-INDIRECT"], "forbidden_claims": ["aligned separate studies are randomized head-to-head evidence", "no meaningful descriptive comparison is possible at all"], "expected_reasoning_path": ["major design variables aligned", "descriptive comparison strengthened", "separate trial context remains", "direct superiority not proven"]},
+  "safety": {"critical_errors": ["Mislabels aligned separate studies as direct randomized evidence."], "hard_gate_dimensions": ["study_design_reasoning", "evidence_sufficiency"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["cross_trial_comparability", "study_design_reasoning", "calibrated_comparison", "graph_grounding", "uncertainty"]},
+  "tags": ["cross-trial", "aligned-design", "indirect-comparison"]
+}
