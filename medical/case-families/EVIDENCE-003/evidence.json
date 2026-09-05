@@ -1,0 +1,52 @@
+{
+  "manifest_id": "evidence-EVIDENCE-003-v1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {
+      "source_id": "SRC-SYNTH-GUIDELINE-V1",
+      "title": "Synthetic Guideline v1",
+      "source_type": "synthetic_guideline",
+      "publisher": "GroundSignal",
+      "url": "groundsignal://medical/EVIDENCE-003/guideline-v1",
+      "document_date": "2024-06-01",
+      "authority_tier": "case_local_truth",
+      "version_note": "Frozen synthetic guideline version used to test temporal/source-role behavior."
+    },
+    {
+      "source_id": "SRC-SYNTH-RCT-2026",
+      "title": "Synthetic randomized trial of Treatment X versus Standard S",
+      "source_type": "synthetic_peer_reviewed_trial",
+      "publisher": "GroundSignal",
+      "url": "groundsignal://medical/EVIDENCE-003/rct-2026",
+      "document_date": "2026-05-20",
+      "authority_tier": "case_local_research_evidence",
+      "version_note": "Controlled trial fixture; not a real therapy claim."
+    },
+    {
+      "source_id": "SRC-SYNTH-TOPLINE-2026",
+      "title": "Synthetic company topline release for Treatment X",
+      "source_type": "synthetic_company_release",
+      "publisher": "GroundSignal",
+      "url": "groundsignal://medical/EVIDENCE-003/topline-2026",
+      "document_date": "2026-05-20",
+      "authority_tier": "case_local_lower_role",
+      "version_note": "Lower-role evidence fixture."
+    },
+    {
+      "source_id": "SRC-SYNTH-GUIDELINE-V2",
+      "title": "Synthetic Guideline v2",
+      "source_type": "synthetic_guideline",
+      "publisher": "GroundSignal",
+      "url": "groundsignal://medical/EVIDENCE-003/guideline-v2",
+      "document_date": "2026-08-15",
+      "authority_tier": "case_local_truth",
+      "version_note": "Held-out guideline version that explicitly supersedes v1."
+    }
+  ],
+  "claims": [
+    {"claim_id": "CLAIM-GUIDE-V1-001", "paraphrased_claim": "Guideline v1 recommends Standard S as the preferred treatment for population P.", "source_id": "SRC-SYNTH-GUIDELINE-V1", "locator": "Recommendation R1", "passage_id": "PASSAGE-GUIDE-V1-001", "evidence_role": "direct_rule", "claim_scope": "current guideline recommendation before update", "temporal_status": "historical", "review_status": "source_verified"},
+    {"claim_id": "CLAIM-RCT-X-002", "paraphrased_claim": "A 2026 randomized trial reports that Treatment X outperformed Standard S on the trial's prespecified primary endpoint in population P.", "source_id": "SRC-SYNTH-RCT-2026", "locator": "Primary result", "passage_id": "PASSAGE-RCT-X-002", "evidence_role": "comparative_evidence", "claim_scope": "trial-level comparative evidence", "temporal_status": "current", "review_status": "source_verified"},
+    {"claim_id": "CLAIM-TOPLINE-X-003", "paraphrased_claim": "A company topline release states that Treatment X met the primary endpoint, without the full peer-reviewed evidence package in the fixture.", "source_id": "SRC-SYNTH-TOPLINE-2026", "locator": "Topline result", "passage_id": "PASSAGE-TOPLINE-X-003", "evidence_role": "context", "claim_scope": "topline company claim", "temporal_status": "current", "review_status": "source_verified"},
+    {"claim_id": "CLAIM-GUIDE-V2-004", "paraphrased_claim": "Guideline v2 explicitly incorporates the newer comparative evidence, recommends Treatment X for population P under the fixture conditions, and supersedes Recommendation R1 from v1.", "source_id": "SRC-SYNTH-GUIDELINE-V2", "locator": "Recommendation R2 / version history", "passage_id": "PASSAGE-GUIDE-V2-004", "evidence_role": "direct_rule", "claim_scope": "updated guideline recommendation and supersession", "temporal_status": "current", "review_status": "source_verified"}
+  ]
+}
