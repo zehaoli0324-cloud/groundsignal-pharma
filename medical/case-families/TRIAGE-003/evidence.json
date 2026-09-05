@@ -1,0 +1,62 @@
+{
+  "manifest_id": "evidence-TRIAGE-003-v1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {
+      "source_id": "SRC-CDC-STROKE-SIGNS-2026",
+      "title": "Signs and Symptoms of Stroke",
+      "source_type": "public_health_guidance",
+      "publisher": "U.S. Centers for Disease Control and Prevention",
+      "url": "https://www.cdc.gov/stroke/signs-symptoms/index.html",
+      "document_date": "2026-05-19",
+      "authority_tier": "government_public_health",
+      "version_note": "Current CDC source retrieved during benchmark construction on 2026-09-05."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLAIM-STROKE-WEAKNESS-001",
+      "paraphrased_claim": "Sudden numbness or weakness of the face, arm or leg, especially on one side, is a stroke warning sign.",
+      "source_id": "SRC-CDC-STROKE-SIGNS-2026",
+      "locator": "Signs and symptoms",
+      "passage_id": "PASSAGE-STROKE-WEAKNESS-001",
+      "evidence_role": "triage_rule",
+      "claim_scope": "focal weakness warning sign",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-STROKE-SPEECH-002",
+      "paraphrased_claim": "Sudden confusion, trouble speaking or difficulty understanding speech is a stroke warning sign.",
+      "source_id": "SRC-CDC-STROKE-SIGNS-2026",
+      "locator": "Signs and symptoms",
+      "passage_id": "PASSAGE-STROKE-SPEECH-002",
+      "evidence_role": "triage_rule",
+      "claim_scope": "speech/language warning sign",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-STROKE-HEADACHE-003",
+      "paraphrased_claim": "A sudden severe headache with no known cause is a stroke warning sign in the CDC symptom set.",
+      "source_id": "SRC-CDC-STROKE-SIGNS-2026",
+      "locator": "Signs and symptoms",
+      "passage_id": "PASSAGE-STROKE-HEADACHE-003",
+      "evidence_role": "triage_rule",
+      "claim_scope": "sudden severe unexplained headache warning sign",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-STROKE-ACTION-004",
+      "paraphrased_claim": "The CDC advises immediate emergency action when stroke warning signs are present and emphasizes that every minute counts.",
+      "source_id": "SRC-CDC-STROKE-SIGNS-2026",
+      "locator": "When to seek emergency help / B.E. F.A.S.T.",
+      "passage_id": "PASSAGE-STROKE-ACTION-004",
+      "evidence_role": "triage_rule",
+      "claim_scope": "emergency response to stroke warning signs",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    }
+  ]
+}
