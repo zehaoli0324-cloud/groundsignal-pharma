@@ -1,0 +1,88 @@
+{
+  "benchmark_id": "S2-live-retrieval-v0.2",
+  "as_of_date": "2026-09-05",
+  "purpose": "Live retrieval evaluation against authoritative public APIs. Infrastructure failures are recorded separately from semantic retrieval failures.",
+  "tests": [
+    {
+      "test_id": "S2L-001",
+      "source_id": "DAILYMED_SPL",
+      "adapter": "dailymed_spls",
+      "query": {"drug_name": "metformin", "name_type": "generic"},
+      "expect": {"title_contains_any": ["METFORMIN"], "min_results": 1, "require_setid": true, "require_published_date": true},
+      "high_risk": true
+    },
+    {
+      "test_id": "S2L-002",
+      "source_id": "DAILYMED_SPL",
+      "adapter": "dailymed_spls",
+      "query": {"drug_name": "apixaban", "name_type": "generic"},
+      "expect": {"title_contains_any": ["APIXABAN", "ELIQUIS"], "min_results": 1, "require_setid": true, "require_published_date": true},
+      "high_risk": true
+    },
+    {
+      "test_id": "S2L-003",
+      "source_id": "DAILYMED_SPL",
+      "adapter": "dailymed_spls",
+      "query": {"drug_name": "sertraline", "name_type": "generic"},
+      "expect": {"title_contains_any": ["SERTRALINE", "ZOLOFT"], "min_results": 1, "require_setid": true, "require_published_date": true},
+      "high_risk": true
+    },
+    {
+      "test_id": "S2L-004",
+      "source_id": "DRUGS_AT_FDA",
+      "adapter": "openfda_drugsfda",
+      "query": {"application_number": "NDA217806"},
+      "expect": {"application_number": "NDA217806", "min_results": 1},
+      "high_risk": false
+    },
+    {
+      "test_id": "S2L-005",
+      "source_id": "DRUGS_AT_FDA",
+      "adapter": "openfda_drugsfda",
+      "query": {"application_number": "NDA215866"},
+      "expect": {"application_number": "NDA215866", "min_results": 1},
+      "high_risk": false
+    },
+    {
+      "test_id": "S2L-006",
+      "source_id": "CLINICALTRIALS_GOV",
+      "adapter": "clinicaltrials_study",
+      "query": {"nct_id": "NCT03548935"},
+      "expect": {"nct_id": "NCT03548935", "overall_status": "COMPLETED"},
+      "high_risk": false
+    },
+    {
+      "test_id": "S2L-007",
+      "source_id": "RXNORM",
+      "adapter": "rxnorm_rxcui",
+      "query": {"name": "Lipitor"},
+      "expect": {"min_ids": 1},
+      "high_risk": false
+    },
+    {
+      "test_id": "S2L-008",
+      "source_id": "RXNORM",
+      "adapter": "rxnorm_rxcui",
+      "query": {"name": "Coumadin"},
+      "expect": {"min_ids": 1},
+      "high_risk": false
+    },
+    {
+      "test_id": "S2L-009",
+      "source_id": "PUBMED",
+      "adapter": "pubmed_esearch",
+      "query": {"term": "Once-Weekly Semaglutide in Adults with Overweight or Obesity[Title]", "retmax": 5},
+      "expect": {"pmid": "33567185"},
+      "high_risk": false
+    },
+    {
+      "test_id": "S2L-010",
+      "source_id": "OPENFDA_FAERS",
+      "adapter": "openfda_faers",
+      "query": {"generic_name": "warfarin"},
+      "expect": {"min_total": 1},
+      "semantic_warning": "A positive FAERS result proves report existence/signal availability only; it does not establish causality or incidence.",
+      "high_risk": false
+    }
+  ]
+}
