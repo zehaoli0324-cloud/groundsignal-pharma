@@ -1,0 +1,27 @@
+{
+  "graph_id": "GRAPH-REPORT-001",
+  "version": "v1",
+  "as_of_date": "2026-09-05",
+  "nodes": [
+    {"node_id": "finding:low_hemoglobin", "node_type": "LAB_PATTERN", "label": "low hemoglobin", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CBC-RBC-002"]},
+    {"node_id": "finding:low_wbc", "node_type": "LAB_PATTERN", "label": "low white-cell count", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CBC-WBC-003"]},
+    {"node_id": "finding:high_wbc", "node_type": "LAB_PATTERN", "label": "high white-cell count", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CBC-WBC-003"]},
+    {"node_id": "concept:possible_anemia", "node_type": "CLINICAL_CONCEPT", "label": "anemia is one possible interpretation of low red-cell/hemoglobin values", "value": null, "status": "HYPOTHESIS", "source_passage_ids": ["PASSAGE-CBC-RBC-002"]},
+    {"node_id": "concept:cbc_nonspecific", "node_type": "CLINICAL_CONCEPT", "label": "CBC abnormalities are nonspecific and require context", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CBC-NONSPECIFIC-001"]}
+  ],
+  "edges": [
+    {"edge_id": "EDGE-LOW-HB-MAY-INDICATE-ANEMIA", "subject_id": "finding:low_hemoglobin", "predicate": "MAY_SUPPORT", "object_id": "concept:possible_anemia", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CBC-RBC-002"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-LOW-WBC-NONSPECIFIC", "subject_id": "finding:low_wbc", "predicate": "REQUIRES_CONTEXT_UNDER", "object_id": "concept:cbc_nonspecific", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CBC-WBC-003", "PASSAGE-CBC-NONSPECIFIC-001"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-HIGH-WBC-NONSPECIFIC", "subject_id": "finding:high_wbc", "predicate": "REQUIRES_CONTEXT_UNDER", "object_id": "concept:cbc_nonspecific", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-CBC-WBC-003", "PASSAGE-CBC-NONSPECIFIC-001"], "review_status": "source_verified"}
+  ],
+  "evaluation_contract": {
+    "required_nodes": ["concept:cbc_nonspecific"],
+    "required_edges": [],
+    "forbidden_edges": [
+      {"subject": "finding:low_wbc", "predicate": "CONFIRMS", "object": "condition:cancer"},
+      {"subject": "finding:high_wbc", "predicate": "CONFIRMS", "object": "condition:infection"},
+      {"subject": "finding:low_hemoglobin", "predicate": "CONFIRMS_CAUSE", "object": "condition:iron_deficiency"}
+    ],
+    "acceptable_paths": [["extract abnormal CBC facts", "give broad possible interpretation", "state CBC-alone limitation", "identify needed context rather than overdiagnose"]]
+  }
+}
