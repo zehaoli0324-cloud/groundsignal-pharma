@@ -1,0 +1,27 @@
+{
+  "graph_id": "GRAPH-TRIAGE-003",
+  "version": "v1",
+  "as_of_date": "2026-09-05",
+  "nodes": [
+    {"node_id": "symptom:sudden_unilateral_weakness", "node_type": "SYMPTOM", "label": "sudden unilateral weakness", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-STROKE-WEAKNESS-001"]},
+    {"node_id": "symptom:sudden_speech_difficulty", "node_type": "SYMPTOM", "label": "sudden speech difficulty", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-STROKE-SPEECH-002"]},
+    {"node_id": "symptom:sudden_severe_headache", "node_type": "SYMPTOM", "label": "sudden severe headache with no known cause", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-STROKE-HEADACHE-003"]},
+    {"node_id": "concept:stroke_warning_sign", "node_type": "CLINICAL_CONCEPT", "label": "stroke warning sign", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-STROKE-WEAKNESS-001", "PASSAGE-STROKE-SPEECH-002", "PASSAGE-STROKE-HEADACHE-003"]},
+    {"node_id": "action:stroke_emergency_escalation", "node_type": "GUIDELINE_RECOMMENDATION", "label": "immediate emergency response for stroke warning signs", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-STROKE-ACTION-004"]}
+  ],
+  "edges": [
+    {"edge_id": "EDGE-WEAKNESS-STROKE-WARNING", "subject_id": "symptom:sudden_unilateral_weakness", "predicate": "IS_WARNING_SIGN_FOR", "object_id": "concept:stroke_warning_sign", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-STROKE-WEAKNESS-001"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-SPEECH-STROKE-WARNING", "subject_id": "symptom:sudden_speech_difficulty", "predicate": "IS_WARNING_SIGN_FOR", "object_id": "concept:stroke_warning_sign", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-STROKE-SPEECH-002"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-HEADACHE-STROKE-WARNING", "subject_id": "symptom:sudden_severe_headache", "predicate": "IS_WARNING_SIGN_FOR", "object_id": "concept:stroke_warning_sign", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-STROKE-HEADACHE-003"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-STROKE-WARNING-ACTION", "subject_id": "concept:stroke_warning_sign", "predicate": "TRIGGERS_TRIAGE_ACTION", "object_id": "action:stroke_emergency_escalation", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-STROKE-ACTION-004"], "review_status": "source_verified"}
+  ],
+  "evaluation_contract": {
+    "required_nodes": ["concept:stroke_warning_sign", "action:stroke_emergency_escalation"],
+    "required_edges": ["EDGE-STROKE-WARNING-ACTION"],
+    "forbidden_edges": [
+      {"subject": "symptom:sudden_unilateral_weakness", "predicate": "CONFIRMS", "object": "condition:stroke"},
+      {"subject": "symptom:sudden_severe_headache", "predicate": "CONFIRMS", "object": "condition:stroke"}
+    ],
+    "acceptable_paths": [["warning symptom", "stroke warning-sign concept", "EMERGENCY_ESCALATION", "diagnosis remains unconfirmed"]]
+  }
+}
