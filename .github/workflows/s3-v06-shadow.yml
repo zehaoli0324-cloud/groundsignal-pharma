@@ -1,0 +1,66 @@
+name: s3-v06-shadow-heldout
+
+on:
+  push:
+    paths:
+      - 'medical/stage-evals/S3/verification-shadow-heldout-v0.6.json'
+      - 'scripts/s3_compositional_verifier_v054.py'
+      - 'scripts/eval_s3_claim_verification.py'
+      - '.github/workflows/s3-v06-shadow.yml'
+  workflow_dispatch:
+
+jobs:
+  first-shadow-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate frozen v0.6 contract
+        run: |
+          python -m py_compile scripts/s3_compositional_verifier_v054.py scripts/eval_s3_claim_verification.py
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          d=json.loads(Path('medical/stage-evals/S3/verification-shadow-heldout-v0.6.json').read_text(encoding='utf-8'))
+          assert d['split']=='shadow_heldout'
+          assert d['frozen_after_verifier_implementation'] is True
+          assert d['first_run_must_be_preserved'] is True
+          assert d['verifier_version']=='s3-compositional-proposition-v0.5.4'
+          assert d['verifier_implementation_commit']=='98923941b40ead8a5ed983862fe9755efb805631'
+          assert len(d['items'])==40, len(d['items'])
+          ids=[x['item_id'] for x in d['items']]
+          assert len(ids)==len(set(ids))
+          labels=Counter(x['gold_relation'] for x in d['items'])
+          print('Frozen items:', len(d['items']))
+          print('Gold distribution:', dict(labels))
+          print('High-risk items:', sum(bool(x.get('high_risk')) for x in d['items']))
+          PY
+
+      - name: Run untouched v0.6 first observation
+        run: |
+          mkdir -p /tmp/s3-v06-shadow
+          python scripts/s3_compositional_verifier_v054.py \
+            --input medical/stage-evals/S3/verification-shadow-heldout-v0.6.json \
+            --out /tmp/s3-v06-shadow/predictions.json
+          set +e
+          python scripts/eval_s3_claim_verification.py \
+            --gold medical/stage-evals/S3/verification-shadow-heldout-v0.6.json \
+            --pred /tmp/s3-v06-shadow/predictions.json \
+            --out /tmp/s3-v06-shadow/report.json \
+            --min-relation-accuracy 0.80 \
+            --max-high-risk-false-support 0.0
+          status=$?
+          set -e
+          cat /tmp/s3-v06-shadow/report.json
+          echo "S3 v0.6 untouched shadow first-run exit code: ${status}"
+          echo "Preserve this result before any subsequent verifier tuning."
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s3-v06-shadow-first-run
+          path: /tmp/s3-v06-shadow
+          retention-days: 90
