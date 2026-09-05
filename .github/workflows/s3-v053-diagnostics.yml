@@ -1,0 +1,50 @@
+name: s3-v053-compositional-diagnostics
+
+on:
+  push:
+    paths:
+      - 'scripts/s3_compositional_verifier_v053.py'
+      - '.github/workflows/s3-v053-diagnostics.yml'
+  workflow_dispatch:
+
+jobs:
+  diagnostics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Syntax check
+        run: |
+          python -m py_compile scripts/s3_compositional_verifier_v053.py scripts/eval_s3_claim_verification.py
+      - name: Run all exposed S3 suites as diagnostics
+        run: |
+          mkdir -p /tmp/s3-v053
+          for suite in \
+            verification-gold-v0.1 \
+            verification-heldout-v0.2 \
+            verification-shadow-heldout-v0.3 \
+            verification-shadow-heldout-v0.4 \
+            verification-shadow-heldout-v0.5; do
+              echo "=== ${suite} ==="
+              python scripts/s3_compositional_verifier_v053.py \
+                --input medical/stage-evals/S3/${suite}.json \
+                --out /tmp/s3-v053/${suite}-pred.json
+              set +e
+              python scripts/eval_s3_claim_verification.py \
+                --gold medical/stage-evals/S3/${suite}.json \
+                --pred /tmp/s3-v053/${suite}-pred.json \
+                --out /tmp/s3-v053/${suite}-report.json \
+                --min-relation-accuracy 0.80 \
+                --max-high-risk-false-support 0.0
+              status=$?
+              set -e
+              cat /tmp/s3-v053/${suite}-report.json
+              echo "v0.5.3 diagnostic ${suite} exit code: ${status}"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s3-v053-diagnostic-reports
+          path: /tmp/s3-v053
+          retention-days: 30
