@@ -1,0 +1,478 @@
+{
+  "benchmark_id": "S3a-scope-safety-heldout-v0.5.2",
+  "split": "heldout",
+  "frozen_after_extractor_implementation": true,
+  "extractor_version": "s3a-compositional-frame-v0.5.2",
+  "extractor_commit": "0200076a66454246de03fc015b9fd0911ea087f2",
+  "extractor_blob_sha": "fff81db9d9e80bc608f5b4dce3c0503a6207421b",
+  "development_report_commit": "6d7f5271d72783a5772308d37ae2646c1844f992",
+  "evaluator_version": "s3a-population-aware-eval-v0.2+abstention-gate-v0.1",
+  "evaluator_commit": "50a9a7a2f4a5409297434cf0c29f05d1fa6780c5",
+  "first_run_must_be_preserved": true,
+  "evaluate_population": true,
+  "provenance_note": "Controlled synthetic capability-level cases created only after v0.5.2 implementation and exposed development gates were frozen. These are not real user logs, expert-reviewed clinical gold, model-training data, or clinical validation.",
+  "design_note": "Fresh suite stresses nested/contrastive scope, cross-sentence population carryover, passive plus negated relations, multiple numeric distractors, modality and exception scope, temporal composition, and conservative abstention for critical semantics outside the closed proposition ontology. Wording is newly constructed rather than copied from prior exposed suites.",
+  "release_criteria": {
+    "min_f1": 0.90,
+    "min_critical_recall": 0.95,
+    "min_polarity_accuracy": 0.95,
+    "min_population_accuracy": 0.95,
+    "min_condition_accuracy": 0.95,
+    "min_required_abstention_accuracy": 1.00,
+    "max_known_case_abstention_rate": 0.05,
+    "trace_contract_required": true
+  },
+  "items": [
+    {
+      "item_id": "S3A52-001",
+      "role": "evidence",
+      "text": "In patients not yet treated, starting therapy is not recommended when eGFR is below 43; a sodium value of 132 mmol/L in the same paragraph is unrelated.",
+      "expected_propositions": [{"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":43}],"population":"new_or_initiating_user","critical":true}],
+      "expected_abstain": false,
+      "tags": ["population","threshold","numeric_distractor"]
+    },
+    {
+      "item_id": "S3A52-002",
+      "role": "candidate",
+      "text": "A treatment-naive patient with eGFR 41 is in the group for whom initiation is not recommended.",
+      "expected_propositions": [{"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":41}],"population":"new_or_initiating_user","critical":true}],
+      "expected_abstain": false,
+      "tags": ["population","point_condition","candidate"]
+    },
+    {
+      "item_id": "S3A52-003",
+      "role": "evidence",
+      "text": "For people already receiving the medicine, reassess benefit versus risk once eGFR falls under 47, not when the unrelated heart rate falls under 50 beats per minute.",
+      "expected_propositions": [{"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":47}],"population":"existing_user","critical":true}],
+      "expected_abstain": false,
+      "tags": ["population","numeric_distractor","condition_scope"]
+    },
+    {
+      "item_id": "S3A52-004",
+      "role": "evidence",
+      "text": "Those already on treatment should stop it below eGFR 27. They should not stop it merely because age exceeds 82 years.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":27}],"population":"existing_user","critical":true},
+        {"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"NEGATIVE","conditions":[],"population":"existing_user","critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["cross_sentence_population","mixed_polarity","numeric_distractor"]
+    },
+    {
+      "item_id": "S3A52-005",
+      "role": "evidence",
+      "text": "For a new starter, eGFR from 36 through 44 is a range in which initiation is not recommended; for someone continuing therapy, the same renal value instead calls for benefit-risk review.",
+      "expected_propositions": [
+        {"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"RANGE","low":36,"high":44}],"population":"new_or_initiating_user","critical":true},
+        {"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[],"population":"existing_user","critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["competing_population","anaphora","range"]
+    },
+    {
+      "item_id": "S3A52-006",
+      "role": "evidence",
+      "text": "Existing users require reassessment below eGFR 46 and discontinuation only below 29; hemoglobin 10.1 g/dL does not define either renal action.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":46}],"population":"existing_user","critical":true},
+        {"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":29}],"population":"existing_user","critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["competing_thresholds","shared_population","numeric_distractor"]
+    },
+    {
+      "item_id": "S3A52-007",
+      "role": "candidate",
+      "text": "An established user at eGFR 32 should not discontinue the drug on the basis of that value alone.",
+      "expected_propositions": [{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"NEGATIVE","conditions":[{"variable":"egfr","operator":"EQ","value":32}],"population":"existing_user","critical":true}],
+      "expected_abstain": false,
+      "tags": ["negative_action","point_condition","population"]
+    },
+    {
+      "item_id": "S3A52-008",
+      "role": "evidence",
+      "text": "Treatment is not, despite the warning elsewhere in the label, contraindicated solely because condition M is present.",
+      "expected_propositions": [{"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}],
+      "expected_abstain": false,
+      "tags": ["interrupted_negation","contraindication"]
+    },
+    {
+      "item_id": "S3A52-009",
+      "role": "evidence",
+      "text": "The document states a contraindication at eGFR below 24, yet explicitly says that advanced age by itself is not a contraindication.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":24}],"population":null,"critical":true},
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["mixed_polarity","contrastive_scope"]
+    },
+    {
+      "item_id": "S3A52-010",
+      "role": "evidence",
+      "text": "Although eGFR below 45 requires benefit-risk review for an existing user, a platelet count below 100 does not by itself trigger discontinuation.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":45}],"population":"existing_user","critical":true},
+        {"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"NEGATIVE","conditions":[],"population":"existing_user","critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["contrastive_scope","condition_leakage","numeric_distractor"]
+    },
+    {
+      "item_id": "S3A52-011",
+      "role": "evidence",
+      "text": "Spontaneous case reports can flag a safety signal for investigation, but the reports alone do not demonstrate that the product caused the event.",
+      "expected_propositions": [
+        {"subject":"spontaneous_report_system","predicate":"SUPPORTS_SIGNAL_DETECTION","object":"safety_signal","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"evidence","predicate":"ESTABLISHES_CAUSALITY","object":"causal_relation","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["signal","causality","contrastive_scope"]
+    },
+    {
+      "item_id": "S3A52-012",
+      "role": "evidence",
+      "text": "Temporal proximity may justify follow-up; it must not be treated as proof of causation on its own.",
+      "expected_propositions": [{"subject":"evidence","predicate":"ESTABLISHES_CAUSALITY","object":"causal_relation","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}],
+      "expected_abstain": false,
+      "tags": ["modality","causality","negation"]
+    },
+    {
+      "item_id": "S3A52-013",
+      "role": "evidence",
+      "text": "With no reliable denominator for exposed patients, the count of reports cannot estimate true event incidence.",
+      "expected_propositions": [{"subject":"report_count","predicate":"ESTIMATES_TRUE_INCIDENCE","object":"event_incidence","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}],
+      "expected_abstain": false,
+      "tags": ["incidence","denominator","negation"]
+    },
+    {
+      "item_id": "S3A52-014",
+      "role": "candidate",
+      "text": "The spontaneous-report count estimates the true incidence of the event.",
+      "expected_propositions": [{"subject":"report_count","predicate":"ESTIMATES_TRUE_INCIDENCE","object":"event_incidence","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}],
+      "expected_abstain": false,
+      "tags": ["incidence","candidate","positive_claim"]
+    },
+    {
+      "item_id": "S3A52-015",
+      "role": "evidence",
+      "text": "A cluster of reports is useful for detecting a signal. Neither rechallenge nor timing, as described here, establishes causality.",
+      "expected_propositions": [
+        {"subject":"spontaneous_report_system","predicate":"SUPPORTS_SIGNAL_DETECTION","object":"safety_signal","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"evidence","predicate":"ESTABLISHES_CAUSALITY","object":"causal_relation","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["cross_sentence","signal","coordinated_negation"]
+    },
+    {
+      "item_id": "S3A52-016",
+      "role": "evidence",
+      "text": "There are 387 reports, including 71 serious cases. Those numbers support signal review but do not provide an incidence estimate without an exposed-population denominator.",
+      "expected_propositions": [
+        {"subject":"spontaneous_report_system","predicate":"SUPPORTS_SIGNAL_DETECTION","object":"safety_signal","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"report_count","predicate":"ESTIMATES_TRUE_INCIDENCE","object":"event_incidence","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["numeric_distractor","incidence","signal"]
+    },
+    {
+      "item_id": "S3A52-017",
+      "role": "evidence",
+      "text": "The registry marks the study COMPLETED and names a primary endpoint; however, the supplied record contains no result showing that endpoint success was achieved.",
+      "expected_propositions": [
+        {"subject":"study","predicate":"HAS_STATUS","object":"completed","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"study","predicate":"HAS_PRIMARY_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"evidence","predicate":"ESTABLISHES_ENDPOINT_ACHIEVEMENT","object":"primary_endpoint","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["trial_status","endpoint","absence_of_result"]
+    },
+    {
+      "item_id": "S3A52-018",
+      "role": "evidence",
+      "text": "The prespecified primary endpoint was achieved according to the posted result.",
+      "expected_propositions": [{"subject":"study","predicate":"ACHIEVES_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}],
+      "expected_abstain": false,
+      "tags": ["endpoint","positive"]
+    },
+    {
+      "item_id": "S3A52-019",
+      "role": "evidence",
+      "text": "The trial is SUSPENDED. Its primary endpoint remains listed, but suspension is not evidence that the endpoint was achieved.",
+      "expected_propositions": [
+        {"subject":"study","predicate":"HAS_STATUS","object":"suspended","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"study","predicate":"HAS_PRIMARY_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"evidence","predicate":"ESTABLISHES_ENDPOINT_ACHIEVEMENT","object":"primary_endpoint","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["trial_status","endpoint","negated_inference"]
+    },
+    {
+      "item_id": "S3A52-020",
+      "role": "evidence",
+      "text": "A primary outcome is declared in the record. No posted efficacy result demonstrates that it was met.",
+      "expected_propositions": [
+        {"subject":"study","predicate":"HAS_PRIMARY_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"evidence","predicate":"ESTABLISHES_ENDPOINT_ACHIEVEMENT","object":"primary_endpoint","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["cross_sentence","endpoint","anaphora"]
+    },
+    {
+      "item_id": "S3A52-021",
+      "role": "evidence",
+      "text": "The study remains RECRUITING, with a defined primary endpoint; an enrollment target of 240 does not constitute an efficacy result.",
+      "expected_propositions": [
+        {"subject":"study","predicate":"HAS_STATUS","object":"recruiting","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"study","predicate":"HAS_PRIMARY_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"evidence","predicate":"ESTABLISHES_ENDPOINT_ACHIEVEMENT","object":"primary_endpoint","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["trial_status","numeric_distractor","absence_of_result"]
+    },
+    {
+      "item_id": "S3A52-022",
+      "role": "candidate",
+      "text": "The primary endpoint has been met.",
+      "expected_propositions": [{"subject":"study","predicate":"ACHIEVES_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}],
+      "expected_abstain": false,
+      "tags": ["candidate","endpoint"]
+    },
+    {
+      "item_id": "S3A52-023",
+      "role": "evidence",
+      "text": "Guideline L was replaced by Guideline M, and M is now the operative recommendation source.",
+      "expected_propositions": [
+        {"subject":"guideline m","predicate":"SUPERSEDES","object":"guideline l","polarity":"POSITIVE","conditions":[],"population":null,"critical":true},
+        {"subject":"guideline m","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"POSITIVE","conditions":[],"population":null,"critical":true},
+        {"subject":"guideline l","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["passive_relation","temporal","currentness"]
+    },
+    {
+      "item_id": "S3A52-024",
+      "role": "evidence",
+      "text": "Guideline N remains the current recommendation source; Guideline M is explicitly no longer current.",
+      "expected_propositions": [
+        {"subject":"guideline n","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"POSITIVE","conditions":[],"population":null,"critical":true},
+        {"subject":"guideline m","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["currentness","mixed_polarity"]
+    },
+    {
+      "item_id": "S3A52-025",
+      "role": "evidence",
+      "text": "Option T is supported by a randomized trial, while the currently operative guideline continues to recommend option S.",
+      "expected_propositions": [
+        {"subject":"trial","predicate":"SUPPORTS_OPTION","object":"t","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"current_guideline","predicate":"IS_CURRENT","object":"s","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["passive_relation","trial_vs_guideline"]
+    },
+    {
+      "item_id": "S3A52-026",
+      "role": "evidence",
+      "text": "A randomized trial favors option U. That finding does not by itself make the trial the current guideline, which still recommends option S.",
+      "expected_propositions": [
+        {"subject":"trial","predicate":"SUPPORTS_OPTION","object":"u","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"current_guideline","predicate":"IS_CURRENT","object":"s","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["cross_sentence","trial_vs_guideline","negated_inference"]
+    },
+    {
+      "item_id": "S3A52-027",
+      "role": "evidence",
+      "text": "Guideline R superseded Guideline Q. A later trial supports option V, but the supplied evidence does not state that another guideline has replaced R.",
+      "expected_propositions": [
+        {"subject":"guideline r","predicate":"SUPERSEDES","object":"guideline q","polarity":"POSITIVE","conditions":[],"population":null,"critical":true},
+        {"subject":"guideline r","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"POSITIVE","conditions":[],"population":null,"critical":true},
+        {"subject":"guideline q","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true},
+        {"subject":"trial","predicate":"SUPPORTS_OPTION","object":"v","polarity":"POSITIVE","conditions":[],"population":null,"critical":false}
+      ],
+      "expected_abstain": false,
+      "tags": ["cross_sentence","temporal_composition","trial_distractor"]
+    },
+    {
+      "item_id": "S3A52-028",
+      "role": "candidate",
+      "text": "Guideline Q is the current operative recommendation source.",
+      "expected_propositions": [{"subject":"guideline q","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}],
+      "expected_abstain": false,
+      "tags": ["candidate","stale_currentness"]
+    },
+    {
+      "item_id": "S3A52-029",
+      "role": "evidence",
+      "text": "The genotype is associated with greater drug exposure, yet the source gives no patient-management recommendation.",
+      "expected_propositions": [
+        {"subject":"genotype","predicate":"ASSOCIATED_WITH","object":"drug_exposure","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"mechanism_or_pk_evidence","predicate":"PROVIDES_MANAGEMENT_RULE","object":"drug_pair_or_patient","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["pgx","management_boundary"]
+    },
+    {
+      "item_id": "S3A52-030",
+      "role": "evidence",
+      "text": "Increased exposure is associated with the genotype; no dosing or therapeutic-management rule is provided by that association.",
+      "expected_propositions": [
+        {"subject":"genotype","predicate":"ASSOCIATED_WITH","object":"drug_exposure","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"mechanism_or_pk_evidence","predicate":"PROVIDES_MANAGEMENT_RULE","object":"drug_pair_or_patient","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["inverse_relation","pgx","management_boundary"]
+    },
+    {
+      "item_id": "S3A52-031",
+      "role": "evidence",
+      "text": "Biomarker J is associated with outcome K, whereas biomarker L is explicitly not associated with outcome M.",
+      "expected_propositions": [
+        {"subject":"biomarker_j","predicate":"ASSOCIATED_WITH","object":"outcome_k","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"biomarker_l","predicate":"ASSOCIATED_WITH","object":"outcome_m","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["association","mixed_polarity"]
+    },
+    {
+      "item_id": "S3A52-032",
+      "role": "evidence",
+      "text": "Outcome P was not found to be associated with biomarker O.",
+      "expected_propositions": [{"subject":"biomarker_o","predicate":"ASSOCIATED_WITH","object":"outcome_p","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}],
+      "expected_abstain": false,
+      "tags": ["passive_inverse_relation","association","negation"]
+    },
+    {
+      "item_id": "S3A52-033",
+      "role": "evidence",
+      "text": "The pathology summary classifies the lesion as benign, despite a later molecular comment that does not alter that classification.",
+      "expected_propositions": [{"subject":"lesion","predicate":"CLASSIFIED_AS","object":"benign","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}],
+      "expected_abstain": false,
+      "tags": ["diagnosis","distractor"]
+    },
+    {
+      "item_id": "S3A52-034",
+      "role": "evidence",
+      "text": "In the final pathology interpretation, the lesion is classified as malignant.",
+      "expected_propositions": [{"subject":"lesion","predicate":"CLASSIFIED_AS","object":"malignant","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}],
+      "expected_abstain": false,
+      "tags": ["passive_relation","diagnosis"]
+    },
+    {
+      "item_id": "S3A52-035",
+      "role": "evidence",
+      "text": "The finding is characterized as indeterminate, not malignant.",
+      "expected_propositions": [{"subject":"lesion","predicate":"CLASSIFIED_AS","object":"indeterminate","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}],
+      "expected_abstain": false,
+      "tags": ["diagnosis","contrast"]
+    },
+    {
+      "item_id": "S3A52-036",
+      "role": "evidence",
+      "text": "For an existing user, reassess benefit-risk below eGFR 48. If kidney function later falls below 26, discontinue the medicine; the second sentence refers to the same existing user.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":48}],"population":"existing_user","critical":true},
+        {"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":26}],"population":"existing_user","critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["cross_sentence_population","competing_thresholds","anaphora"]
+    },
+    {
+      "item_id": "S3A52-037",
+      "role": "evidence",
+      "text": "For a patient beginning therapy, initiation is not recommended below eGFR 42. By contrast, a patient already taking the medicine at the same eGFR should have benefit and risk reassessed rather than automatically discontinue.",
+      "expected_propositions": [
+        {"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":42}],"population":"new_or_initiating_user","critical":true},
+        {"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":42}],"population":"existing_user","critical":true},
+        {"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"NEGATIVE","conditions":[],"population":"existing_user","critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["cross_sentence","competing_population","anaphora","mixed_action"]
+    },
+    {
+      "item_id": "S3A52-038",
+      "role": "evidence",
+      "text": "The study is ACTIVE, NOT RECRUITING, and lists a primary endpoint. The number 18 refers to study sites; no supplied result establishes endpoint achievement.",
+      "expected_propositions": [
+        {"subject":"study","predicate":"HAS_STATUS","object":"active_not_recruiting","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"study","predicate":"HAS_PRIMARY_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"population":null,"critical":false},
+        {"subject":"evidence","predicate":"ESTABLISHES_ENDPOINT_ACHIEVEMENT","object":"primary_endpoint","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["trial_status","numeric_distractor","endpoint"]
+    },
+    {
+      "item_id": "S3A52-039",
+      "role": "evidence",
+      "text": "Guideline W is not superseded by Guideline X; W remains the operative recommendation source.",
+      "expected_propositions": [
+        {"subject":"guideline x","predicate":"SUPERSEDES","object":"guideline w","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true},
+        {"subject":"guideline w","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["passive_negated_relation","temporal","currentness"]
+    },
+    {
+      "item_id": "S3A52-040",
+      "role": "evidence",
+      "text": "Option Y is not supported by the randomized trial, whereas the current guideline still recommends option S.",
+      "expected_propositions": [
+        {"subject":"trial","predicate":"SUPPORTS_OPTION","object":"y","polarity":"NEGATIVE","conditions":[],"population":null,"critical":true},
+        {"subject":"current_guideline","predicate":"IS_CURRENT","object":"s","polarity":"POSITIVE","conditions":[],"population":null,"critical":true}
+      ],
+      "expected_abstain": false,
+      "tags": ["passive_negated_relation","trial_vs_guideline"]
+    },
+    {
+      "item_id": "S3A52-041",
+      "role": "evidence",
+      "text": "Permanently stop therapy if alanine aminotransferase exceeds eight times the upper limit of normal or if bilirubin simultaneously exceeds three times the upper limit of normal.",
+      "expected_propositions": [],
+      "expected_abstain": true,
+      "tags": ["unsupported_condition_variable","disjunction","critical_unknown"]
+    },
+    {
+      "item_id": "S3A52-042",
+      "role": "evidence",
+      "text": "Continue treatment only when both oxygen saturation is at least 94% and systolic blood pressure is above 90 mmHg; otherwise hold the next dose.",
+      "expected_propositions": [],
+      "expected_abstain": true,
+      "tags": ["unsupported_condition_variables","nested_conjunction","unsupported_action","critical_unknown"]
+    },
+    {
+      "item_id": "S3A52-043",
+      "role": "evidence",
+      "text": "Avoid Drug C unless the patient is receiving continuous ECG monitoring, except when the cardiology service has documented a specific override.",
+      "expected_propositions": [],
+      "expected_abstain": true,
+      "tags": ["conditional_exception","drug_interaction","critical_unknown"]
+    },
+    {
+      "item_id": "S3A52-044",
+      "role": "evidence",
+      "text": "Reduce the dose to one quarter when the patient is a CYP2D6 poor metabolizer, but use the standard dose when a validated phenoconversion test is negative.",
+      "expected_propositions": [],
+      "expected_abstain": true,
+      "tags": ["unsupported_management_action","pgx","conditional_exception","critical_unknown"]
+    },
+    {
+      "item_id": "S3A52-045",
+      "role": "evidence",
+      "text": "If either dialysis has begun or urine output remains below 0.3 mL/kg/h for 24 hours, discontinue the medicine.",
+      "expected_propositions": [],
+      "expected_abstain": true,
+      "tags": ["disjunction","unsupported_condition_variable","critical_unknown"]
+    },
+    {
+      "item_id": "S3A52-046",
+      "role": "evidence",
+      "text": "Treatment may continue despite grade 2 toxicity unless fever develops, in which case it must be withheld until the fever resolves.",
+      "expected_propositions": [],
+      "expected_abstain": true,
+      "tags": ["modality","exception_scope","unsupported_action","critical_unknown"]
+    }
+  ]
+}
