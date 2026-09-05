@@ -71,7 +71,7 @@
       "test_id": "S2L-009",
       "source_id": "PUBMED",
       "adapter": "pubmed_esearch",
-      "query": {"term": "Once-Weekly Semaglutide in Adults with Overweight or Obesity[Title]", "retmax": 5},
+      "query": {"term": "10.1056/NEJMoa2032183[doi]", "retmax": 5},
       "expect": {"pmid": "33567185"},
       "high_risk": false
     },
