@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "groundsignal://medical/case-family.schema.json",
+  "title": "GroundSignal Medical Case Family",
+  "type": "object",
+  "required": ["family_id", "user_task_id", "task_type", "target_capabilities", "cases", "graph_snapshot", "evidence_manifest", "split_policy", "status"],
+  "properties": {
+    "family_id": {"type": "string", "minLength": 1},
+    "user_task_id": {"type": "string", "minLength": 1},
+    "title": {"type": "string"},
+    "task_type": {"type": "string"},
+    "user_role": {"type": "string"},
+    "user_need": {"type": "string"},
+    "target_capabilities": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "failure_hypotheses": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "cases": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["case_id", "variant_type", "path"],
+        "properties": {
+          "case_id": {"type": "string"},
+          "variant_type": {"type": "string", "enum": ["base", "controlled", "adversarial", "multi_turn", "agent", "heldout"]},
+          "changed_variable": {"type": ["string", "null"]},
+          "path": {"type": "string"},
+          "split": {"type": "string", "enum": ["dev", "train_candidate", "heldout", "regression"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "graph_snapshot": {"type": "string"},
+    "evidence_manifest": {"type": "string"},
+    "split_policy": {
+      "type": "object",
+      "required": ["leakage_rule"],
+      "properties": {
+        "leakage_rule": {"type": "string"},
+        "heldout_variables": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "status": {"type": "string", "enum": ["design", "evidence_ready", "gold_review_needed", "eval_ready", "validated"]},
+    "review": {
+      "type": "object",
+      "properties": {
+        "clinical_review": {"type": "string"},
+        "evidence_review": {"type": "string"},
+        "last_reviewed_at": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
