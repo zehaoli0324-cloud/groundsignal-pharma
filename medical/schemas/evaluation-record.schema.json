@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "groundsignal://medical/evaluation-record.schema.json",
+  "title": "GroundSignal Medical Evaluation Record",
+  "type": "object",
+  "required": ["case_id", "model_id", "scores", "critical_errors", "failure_types"],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": ["string", "null"]},
+    "model_id": {"type": "string", "minLength": 1},
+    "rubric_version": {"type": ["string", "null"]},
+    "judge_version": {"type": ["string", "null"]},
+    "scores": {
+      "type": "object",
+      "additionalProperties": {"type": "number", "minimum": 0, "maximum": 2}
+    },
+    "critical_errors": {"type": "array", "items": {"type": "string"}},
+    "failure_types": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "supported_passage_ids": {"type": "array", "items": {"type": "string"}},
+        "unsupported_claims": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "notes": {"type": "array", "items": {"type": "string"}},
+    "training_candidate": {
+      "type": ["object", "null"],
+      "properties": {
+        "type": {"type": "string", "enum": ["sft", "preference", "none"]},
+        "review_status": {"type": "string", "enum": ["draft", "approved", "rejected"]},
+        "failure_type": {"type": ["string", "null"]},
+        "ideal_response": {"type": ["string", "null"]},
+        "chosen": {"type": ["string", "null"]},
+        "rejected": {"type": ["string", "null"]},
+        "reviewed_by": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
