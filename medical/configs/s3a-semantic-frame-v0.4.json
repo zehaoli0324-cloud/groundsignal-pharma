@@ -1,0 +1,230 @@
+{
+  "config_id": "s3a-semantic-frame-v0.4",
+  "purpose": "Centralized semantic-role and relation grammar for exposed S3a development/regression.",
+  "population_patterns": {
+    "new_or_initiating_user": [
+      "\\bnew patient\\b",
+      "\\bnewly starting\\b",
+      "\\bstarting therapy\\b",
+      "\\bbeginning treatment\\b",
+      "\\bcommencing therapy\\b",
+      "\\btherapy commencement\\b",
+      "\\btreatment initiation\\b",
+      "\\bstarting treatment\\b",
+      "\\bpatient commencing\\b",
+      "\\bcommencing the medicine\\b"
+    ],
+    "existing_user": [
+      "\\bexisting user\\b",
+      "\\balready on treatment\\b",
+      "\\balready receiving\\b",
+      "\\balready taking\\b",
+      "\\bmaintained on (?:the )?(?:medicine|drug|treatment)\\b",
+      "\\bestablished user\\b",
+      "\\bcontinuing (?:the )?(?:medicine|drug|treatment)\\b",
+      "\\bcurrently taking\\b"
+    ]
+  },
+  "event_triggers": {
+    "initiation_restriction": [
+      "\\binitiation\\b[^.;]{0,100}\\bnot recommended\\b",
+      "\\bnot[- ]recommended initiation\\b",
+      "\\bnot[- ]recommended initiation range\\b",
+      "\\brule against initiation\\b",
+      "\\binitiation is not recommended\\b"
+    ],
+    "benefit_risk_reassessment": [
+      "\\breassess(?:ed|ment|ing)?\\b[^.;]{0,60}\\b(?:benefit|risk)\\b",
+      "\\bbenefit(?:\\s+and|-)\\s*risk\\b[^.;]{0,60}\\breassess",
+      "\\bbenefit[- ]risk (?:review|reassessment)\\b",
+      "\\breassessment of benefit and risk\\b",
+      "\\bbenefit-risk review\\b"
+    ],
+    "discontinuation": [
+      "\\bdiscontinu(?:e|ed|ation)\\b",
+      "\\bshould stop\\b",
+      "\\bstop the (?:medicine|drug|treatment)\\b",
+      "\\bstopping\\b"
+    ],
+    "signal_detection": [
+      "\\bidentify\\b",
+      "\\bdetect\\b",
+      "\\bdetection\\b",
+      "\\bflag\\b",
+      "\\bsurface\\b",
+      "\\bprompt investigation\\b",
+      "\\braise\\b",
+      "\\bcontribute\\b"
+    ],
+    "endpoint_declaration": [
+      "\\b(?:primary\\s+)?(?:endpoint|outcome)\\b[^.;]{0,60}\\b(?:named|identified|prespecified|specified|listed|defined)\\b",
+      "\\b(?:names|identifies|prespecifies|specifies|lists|gives)\\b[^.;]{0,60}\\bprimary\\b[^.;]{0,30}\\b(?:endpoint|outcome)\\b",
+      "\\bprimary\\b[^.;]{0,30}\\b(?:endpoint|outcome)\\b[^.;]{0,40}\\bdefinition\\b"
+    ],
+    "current_source": [
+      "\\bcurrent\\b",
+      "\\boperative\\b",
+      "\\bbecomes the current\\b",
+      "\\bnow the operative\\b"
+    ],
+    "association_positive": [
+      "\\bassociated\\b",
+      "\\bassociation\\b",
+      "\\bcorrelat(?:e|es|ed|ion)\\b",
+      "\\blink(?:ed|s)?\\b",
+      "\\brelationship\\b",
+      "\\bhigher\\b",
+      "\\bincreased\\b"
+    ],
+    "diagnostic_classification": [
+      "\\bclassif(?:y|ies|ied|ication)\\b",
+      "\\bcategoriz(?:e|es|ed)\\b",
+      "\\blabel(?:s|ed)?\\b",
+      "\\bdeem(?:s|ed)?\\b",
+      "\\bcharacteriz(?:e|es|ed)\\b",
+      "\\bdescrib(?:e|es|ed)\\b"
+    ]
+  },
+  "negation_patterns": {
+    "contraindication": [
+      "\\bnot (?:a )?contraindication\\b",
+      "\\bnot contraindicated\\b",
+      "\\bdoes not (?:constitute|make|render|amount to)\\b[^.;]{0,50}\\bcontraindicat",
+      "\\binsufficient to classify\\b[^.;]{0,50}\\bcontraindicat",
+      "\\bno contraindication\\b",
+      "\\bnot contraindicated merely\\b"
+    ],
+    "discontinuation": [
+      "\\bnot\\b[^.;]{0,30}\\b(?:discontinu|stop)",
+      "\\bwithout\\b[^.;]{0,30}\\b(?:discontinu|stop)"
+    ],
+    "causality": [
+      "\\bcannot\\b[^.;]{0,100}\\b(?:caus|attribut|determine|distinguish|establish|prove)",
+      "\\bnot sufficient\\b[^.;]{0,100}\\b(?:caus|attribut)",
+      "\\bcausal attribution\\b[^.;]{0,50}\\b(?:cannot|unestablished|unproven)",
+      "\\bdoes not\\b[^.;]{0,80}\\b(?:establish|prove)\\b[^.;]{0,50}\\bcaus"
+    ],
+    "incidence": [
+      "\\bcannot\\b[^.;]{0,100}\\b(?:incidence|translated|yield|estimate)",
+      "\\bdo not\\b[^.;]{0,100}\\b(?:incidence|establish|estimate)",
+      "\\bdoes not\\b[^.;]{0,100}\\b(?:incidence|establish|estimate)",
+      "\\bwithout\\b[^.;]{0,80}\\bdenominator\\b",
+      "\\blacks?\\b[^.;]{0,80}\\bdenominator\\b",
+      "\\bno complete\\b[^.;]{0,80}\\bdenominator\\b"
+    ],
+    "endpoint_achievement": [
+      "\\bno\\b[^.;]{0,60}\\b(?:result|finding|evidence)\\b[^.;]{0,100}\\b(?:met|achieved|reached|succeeded)\\b",
+      "\\b(?:does not|cannot)\\b[^.;]{0,60}\\b(?:show|establish|confirm)\\b[^.;]{0,80}\\b(?:met|achieved|reached|succeeded)\\b",
+      "\\bno result establishes\\b[^.;]{0,80}\\b(?:met|achieved)\\b"
+    ],
+    "management_rule": [
+      "\\bno\\b[^.;]{0,40}\\b(?:dose|dosing|therapeutic|management)\\b[^.;]{0,40}\\b(?:recommendation|instruction|advice|rule)\\b",
+      "\\bno dose-management advice\\b",
+      "\\bno therapeutic dose rule\\b"
+    ]
+  },
+  "positive_patterns": {
+    "causality": [
+      "\\b(?:establishes?|proves?|confirms?)\\b[^.;]{0,60}\\bcaus(?:e|ed|al|ality)\\b"
+    ],
+    "incidence": [
+      "\\b(?:provide|provides|give|gives|yield|yields|estimate|estimates)\\b[^.;]{0,80}\\b(?:true )?(?:event )?incidence\\b"
+    ],
+    "endpoint_achievement": [
+      "\\b(?:endpoint|outcome)\\b[^.;]{0,50}\\b(?:was|is|has been)?\\s*(?:successfully\\s+)?(?:met|achieved|reached|succeeded)\\b",
+      "\\bprimary\\b[^.;]{0,40}\\b(?:endpoint|outcome)\\b[^.;]{0,40}\\bsucceeded\\b"
+    ]
+  },
+  "domain_markers": {
+    "report_system": [
+      "\\bspontaneous\\b",
+      "\\bsurveillance report\\b",
+      "\\bpharmacovigilance report\\b",
+      "\\bcase report\\b"
+    ],
+    "causality": [
+      "\\bcausal\\b",
+      "\\bcausation\\b",
+      "\\bcaused\\b",
+      "\\bcause\\b",
+      "\\battribut"
+    ],
+    "report_count": [
+      "\\breport counts?\\b",
+      "\\braw report counts?\\b",
+      "\\breport totals?\\b",
+      "\\bnumber of spontaneous reports\\b",
+      "\\bspontaneous-report totals?\\b"
+    ],
+    "incidence": [
+      "\\bincidence\\b",
+      "\\bevent rate\\b"
+    ],
+    "study": [
+      "\\bstudy\\b",
+      "\\btrial\\b",
+      "\\bregistry\\b"
+    ],
+    "primary_endpoint": [
+      "\\bprimary(?: efficacy)? endpoint\\b",
+      "\\bprimary(?: efficacy)? outcome\\b"
+    ]
+  },
+  "study_status_patterns": {
+    "active_not_recruiting": [
+      "\\bactive,\\s*not recruiting\\b",
+      "\\bactive not recruiting\\b"
+    ],
+    "completed": [
+      "\\bcompleted\\b"
+    ],
+    "recruiting": [
+      "\\brecruiting\\b"
+    ],
+    "terminated": [
+      "\\bterminated\\b"
+    ]
+  },
+  "diagnostic_categories": [
+    "benign",
+    "malignant",
+    "indeterminate"
+  ],
+  "critical_markers": [
+    "contraindicat",
+    "discontinu",
+    "\\bstop\\b",
+    "benefit[- ]risk",
+    "reassess",
+    "causal",
+    "causation",
+    "caused",
+    "incidence",
+    "primary .*?(?:endpoint|outcome)",
+    "guideline",
+    "dose",
+    "dosing",
+    "management",
+    "benign",
+    "malignant",
+    "indeterminate",
+    "biomarker",
+    "association",
+    "unrelated"
+  ],
+  "critical_event_types": [
+    "INITIATION_RESTRICTION",
+    "CONTRAINDICATION",
+    "BENEFIT_RISK_REASSESSMENT",
+    "DISCONTINUATION",
+    "CAUSALITY_ESTABLISHMENT",
+    "INCIDENCE_ESTIMATION",
+    "ENDPOINT_ACHIEVEMENT_EVIDENCE",
+    "ENDPOINT_ACHIEVEMENT",
+    "SUPERSESSION",
+    "CURRENTNESS",
+    "MANAGEMENT_RULE_AVAILABILITY",
+    "DIAGNOSTIC_CLASSIFICATION",
+    "ASSOCIATION"
+  ]
+}

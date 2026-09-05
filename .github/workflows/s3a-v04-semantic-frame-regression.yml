@@ -1,0 +1,87 @@
+name: s3a-v04-semantic-frame-regression
+
+on:
+  push:
+    paths:
+      - "scripts/s3a_semantic_frame_extractor_v04.py"
+      - "medical/configs/s3a-semantic-frame-v0.4.json"
+      - ".github/workflows/s3a-v04-semantic-frame-regression.yml"
+  workflow_dispatch:
+
+jobs:
+  exposed-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Syntax and architecture contract
+        run: |
+          python -m py_compile \
+            scripts/s3a_semantic_frame_extractor_v04.py \
+            scripts/eval_s3a_proposition_extraction_v02.py
+          python - <<'PY'
+          import json
+          cfg=json.load(open("medical/configs/s3a-semantic-frame-v0.4.json", encoding="utf-8"))
+          assert cfg["config_id"] == "s3a-semantic-frame-v0.4"
+          assert "population_patterns" in cfg
+          assert "event_triggers" in cfg
+          assert "negation_patterns" in cfg
+          print("S3a v0.4 semantic-frame contract OK")
+          PY
+
+      - name: Run exposed S3a regressions
+        run: |
+          mkdir -p /tmp/s3a-v04
+          failed=0
+          for suite in \
+            s3a-extraction-gold-v0.1 \
+            s3a-extraction-heldout-v0.2 \
+            s3a-extraction-heldout-v0.3
+          do
+            python scripts/s3a_semantic_frame_extractor_v04.py \
+              --input medical/stage-evals/S3/${suite}.json \
+              --out /tmp/s3a-v04/${suite}-predictions.json
+
+            set +e
+            python scripts/eval_s3a_proposition_extraction_v02.py \
+              --gold medical/stage-evals/S3/${suite}.json \
+              --pred /tmp/s3a-v04/${suite}-predictions.json \
+              --out /tmp/s3a-v04/${suite}-report.json \
+              --min-f1 0.90 \
+              --min-critical-recall 0.95 \
+              --min-polarity-accuracy 0.95 \
+              --min-population-accuracy 0.95 \
+              --min-condition-accuracy 0.95
+            status=$?
+            set -e
+            echo "===== ${suite} ====="
+            cat /tmp/s3a-v04/${suite}-report.json
+            if [ "${status}" -ne 0 ]; then
+              failed=1
+            fi
+          done
+
+          python - <<'PY'
+          import json, glob
+          for p in glob.glob("/tmp/s3a-v04/*-predictions.json"):
+              d=json.load(open(p, encoding="utf-8"))
+              assert d["predictions"]
+              for row in d["predictions"]:
+                  assert "semantic_frames" in row
+                  assert "predicted_propositions" in row
+                  for f in row["semantic_frames"]:
+                      assert {"event_type","subject","object","polarity","modality","source_span"} <= set(f)
+          print("Frame/proposition trace contract OK")
+          PY
+
+          exit ${failed}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s3a-v04-semantic-frame-regression
+          path: /tmp/s3a-v04
+          retention-days: 90
