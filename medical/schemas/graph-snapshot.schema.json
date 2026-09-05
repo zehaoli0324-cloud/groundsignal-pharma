@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "groundsignal://medical/graph-snapshot.schema.json",
+  "title": "GroundSignal Medical Graph Snapshot",
+  "type": "object",
+  "required": ["graph_id", "version", "as_of_date", "nodes", "edges", "evaluation_contract"],
+  "properties": {
+    "graph_id": {"type": "string"},
+    "version": {"type": "string"},
+    "as_of_date": {"type": "string", "format": "date"},
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["node_id", "node_type", "label", "status"],
+        "properties": {
+          "node_id": {"type": "string"},
+          "node_type": {"type": "string"},
+          "label": {"type": "string"},
+          "value": {},
+          "status": {"type": "string", "enum": ["OBSERVED", "DERIVED", "HYPOTHESIS", "DISPUTED", "SUPERSEDED", "UNKNOWN"]},
+          "source_passage_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        },
+        "additionalProperties": false
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["edge_id", "subject_id", "predicate", "object_id", "status"],
+        "properties": {
+          "edge_id": {"type": "string"},
+          "subject_id": {"type": "string"},
+          "predicate": {"type": "string"},
+          "object_id": {"type": "string"},
+          "status": {"type": "string", "enum": ["OBSERVED", "DERIVED", "HYPOTHESIS", "DISPUTED", "SUPERSEDED", "UNKNOWN"]},
+          "source_passage_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "review_status": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "evaluation_contract": {
+      "type": "object",
+      "required": ["required_nodes", "required_edges", "forbidden_edges"],
+      "properties": {
+        "required_nodes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "required_edges": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "forbidden_edges": {"type": "array", "items": {"type": "object"}},
+        "acceptable_paths": {"type": "array", "items": {"type": "array", "items": {"type": "string"}}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
