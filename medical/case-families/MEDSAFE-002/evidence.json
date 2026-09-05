@@ -1,0 +1,51 @@
+{
+  "manifest_id": "evidence-MEDSAFE-002-v1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {
+      "source_id": "SRC-ELIQUIS-FDA-2025",
+      "title": "ELIQUIS (apixaban) Prescribing Information",
+      "source_type": "drug_label",
+      "publisher": "U.S. Food and Drug Administration",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/202155Orig1s039%2Cs040lbl.pdf",
+      "document_date": "2025",
+      "authority_tier": "regulatory_label",
+      "version_note": "FDA label source retrieved during benchmark construction on 2026-09-05."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLAIM-APIXABAN-BLEED-001",
+      "paraphrased_claim": "Apixaban increases bleeding risk and can cause serious bleeding.",
+      "source_id": "SRC-ELIQUIS-FDA-2025",
+      "locator": "Section 5.2 Bleeding",
+      "passage_id": "PASSAGE-APIXABAN-BLEED-001",
+      "evidence_role": "warning_signal",
+      "claim_scope": "bleeding risk from apixaban",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-APIXABAN-NSAID-002",
+      "paraphrased_claim": "Concomitant drugs that affect hemostasis, including NSAIDs, increase bleeding risk with apixaban.",
+      "source_id": "SRC-ELIQUIS-FDA-2025",
+      "locator": "Section 5.2 Bleeding; see Drug Interactions 7.3",
+      "passage_id": "PASSAGE-APIXABAN-NSAID-002",
+      "evidence_role": "direct_rule",
+      "claim_scope": "concomitant NSAID bleeding risk",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-APIXABAN-COUNSEL-003",
+      "paraphrased_claim": "Patients should tell clinicians about nonprescription products such as aspirin or NSAIDs before taking new drugs, and unusual bleeding warrants prompt medical attention.",
+      "source_id": "SRC-ELIQUIS-FDA-2025",
+      "locator": "Section 17 Patient Counseling Information and Section 5.2",
+      "passage_id": "PASSAGE-APIXABAN-COUNSEL-003",
+      "evidence_role": "triage_rule",
+      "claim_scope": "counseling and escalation around bleeding/new OTC drugs",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    }
+  ]
+}
