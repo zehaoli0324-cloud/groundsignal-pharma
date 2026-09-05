@@ -1,0 +1,111 @@
+name: s3a-v04-fresh-heldout
+
+on:
+  push:
+    paths:
+      - "medical/stage-evals/S3/s3a-semantic-frame-heldout-v0.4.json"
+      - ".github/workflows/s3a-v04-fresh-heldout.yml"
+  workflow_dispatch:
+
+jobs:
+  first-fresh-observation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate frozen S3a v0.4 contract
+        run: |
+          python -m py_compile \
+            scripts/s3a_semantic_frame_extractor_v04.py \
+            scripts/eval_s3a_proposition_extraction_v02.py
+          python - <<'PY'
+          import json
+          from collections import Counter
+          p="medical/stage-evals/S3/s3a-semantic-frame-heldout-v0.4.json"
+          d=json.load(open(p, encoding="utf-8"))
+          assert d["split"] == "heldout"
+          assert d["frozen_after_extractor_implementation"] is True
+          assert d["first_run_must_be_preserved"] is True
+          assert d["extractor_version"] == "s3a-semantic-frame-v0.4.0"
+          assert d["extractor_commit"] == "4cef42e749f0f53dc7de2e8bae77e640640ddcf6"
+          assert d["development_report_commit"] == "85b00fdd55deb4dca03f93f1fc5ac6665953d332"
+          assert d["evaluator_commit"] == "50a9a7a2f4a5409297434cf0c29f05d1fa6780c5"
+          assert d["evaluate_population"] is True
+          assert len(d["items"]) == 36
+          ids=[x["item_id"] for x in d["items"]]
+          assert len(ids) == len(set(ids))
+          print("Frozen items:", len(ids))
+          print("Expected propositions:", sum(len(x["expected_propositions"]) for x in d["items"]))
+          print("Critical propositions:", sum(sum(bool(p.get("critical")) for p in x["expected_propositions"]) for x in d["items"]))
+          print("Roles:", dict(Counter(x["role"] for x in d["items"])))
+          print("Design tags:", dict(Counter(t for x in d["items"] for t in x.get("tags", []))))
+          PY
+
+      - name: Run untouched S3a v0.4 first observation
+        run: |
+          mkdir -p /tmp/s3a-v04-fresh
+          python scripts/s3a_semantic_frame_extractor_v04.py \
+            --input medical/stage-evals/S3/s3a-semantic-frame-heldout-v0.4.json \
+            --out /tmp/s3a-v04-fresh/predictions.json
+
+          set +e
+          python scripts/eval_s3a_proposition_extraction_v02.py \
+            --gold medical/stage-evals/S3/s3a-semantic-frame-heldout-v0.4.json \
+            --pred /tmp/s3a-v04-fresh/predictions.json \
+            --out /tmp/s3a-v04-fresh/report.json \
+            --min-f1 0.90 \
+            --min-critical-recall 0.95 \
+            --min-polarity-accuracy 0.95 \
+            --min-population-accuracy 0.95 \
+            --min-condition-accuracy 0.95
+          status=$?
+          set -e
+          echo "${status}" > /tmp/s3a-v04-fresh/evaluator-exit-code.txt
+          cat /tmp/s3a-v04-fresh/report.json
+          echo "S3a v0.4 fresh heldout first-run evaluator exit code: ${status}"
+          echo "Preserve this observation before any S3a v0.4 tuning."
+
+      - name: Validate semantic-frame trace
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          p="/tmp/s3a-v04-fresh/predictions.json"
+          d=json.load(open(p, encoding="utf-8"))
+          assert len(d["predictions"]) == 36
+          missing=[]
+          for row in d["predictions"]:
+              if "semantic_frames" not in row or "predicted_propositions" not in row:
+                  missing.append(row.get("item_id"))
+                  continue
+              for f in row["semantic_frames"]:
+                  required={"event_type","subject","object","polarity","modality","source_span"}
+                  if not required <= set(f):
+                      missing.append(row.get("item_id"))
+                      break
+          assert not missing, missing
+          print("Semantic-frame trace contract OK")
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s3a-v04-fresh-heldout-first-run
+          path: /tmp/s3a-v04-fresh
+          retention-days: 90
+
+      - name: Enforce release gate
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          p="/tmp/s3a-v04-fresh/report.json"
+          d=json.load(open(p, encoding="utf-8"))
+          print("release_gate =", d["release_gate"])
+          if d["release_gate"] != "PASS":
+              raise SystemExit(2)
+          PY
