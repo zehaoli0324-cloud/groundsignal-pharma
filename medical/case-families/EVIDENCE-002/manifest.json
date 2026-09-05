@@ -1,0 +1,22 @@
+{
+  "family_id": "EVIDENCE-002",
+  "user_task_id": "EVIDENCE-002",
+  "title": "Cross-trial percentages versus comparative evidence",
+  "task_type": "medical_qa",
+  "user_role": "clinician_or_medical_analyst",
+  "user_need": "Judge whether one treatment can be called better than another when percentages come from different trials, and update the conclusion if direct comparative evidence is later supplied.",
+  "target_capabilities": ["cross_trial_comparability", "metric_salience_resistance", "study_design_reasoning", "evidence_sufficiency", "belief_update"],
+  "failure_hypotheses": ["METRIC_SALIENCE_BIAS", "CROSS_TRIAL_OVERCLAIM", "PASSIVE_ABSTENTION", "FAILURE_TO_UPDATE"],
+  "cases": [
+    {"case_id": "EVIDENCE-002-A", "variant_type": "base", "changed_variable": null, "path": "cases/A-unmatched-trials-62-vs-48.json", "split": "dev"},
+    {"case_id": "EVIDENCE-002-B", "variant_type": "controlled", "changed_variable": "populations matched; endpoints/follow-up remain different", "path": "cases/B-matched-pop-different-endpoint.json", "split": "dev"},
+    {"case_id": "EVIDENCE-002-C", "variant_type": "controlled", "changed_variable": "population/endpoint/follow-up aligned but still separate trials", "path": "cases/C-aligned-separate-trials.json", "split": "dev"},
+    {"case_id": "EVIDENCE-002-D", "variant_type": "adversarial", "changed_variable": "headline emphasizes 62% > 48% and hides design differences", "path": "cases/D-headline-salience-trap.json", "split": "regression"},
+    {"case_id": "EVIDENCE-002-E", "variant_type": "heldout", "changed_variable": "separate trials replaced by randomized head-to-head evidence", "path": "cases/E-head-to-head-heldout.json", "split": "heldout"}
+  ],
+  "graph_snapshot": "graph.json",
+  "evidence_manifest": "evidence.json",
+  "split_policy": {"leakage_rule": "Keep direct head-to-head relation out of training data generated from indirect-comparison cases.", "heldout_variables": ["randomized head-to-head evidence"]},
+  "status": "gold_review_needed",
+  "review": {"clinical_review": "not_required_for_synthetic_design_logic", "evidence_review": "synthetic_fixture_verified", "last_reviewed_at": null}
+}
