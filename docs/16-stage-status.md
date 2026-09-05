@@ -9,7 +9,7 @@ The system has **10 lifecycle stages**, but maturity differs by stage. Architect
 |---|---|---|---|---|
 | S1 | User Need / Workflow Discovery | Partial | 48 seed tasks, high-risk matrix, user-research plan | real interview/log validation and frequency weighting |
 | S2 | Knowledge Search & Source Routing | **Conditional pass / evaluated prototype** | v0.3 fresh intent held-out 91.7%; 10-test live official-source retrieval; real DailyMed current-version consistency + critical-passage Recall@1 on 3 high-risk examples | broader passage-source diversity, larger open-language routing sets, terminology normalization |
-| S3 | Evidence Verification & Temporal Truth | **Evaluated FAIL / v0.5.4 candidate ready for new held-out** | five generations of fresh stage eval; compositional atomic-proposition verifier; immutable v0.5 first-run report; all exposed suites recovered to zero high-risk false support | pass a genuinely new post-v0.5.4 untouched held-out with Accuracy >=80% and High-risk False-Support Rate = 0 |
+| S3 | Evidence Verification & Temporal Truth | **Evaluated HARD FAIL / split redesign required** | v0.1–v0.6 fresh evaluation history; immutable v0.5/v0.6 first-run reports; strong exposed-suite regression control; deterministic threshold/polarity/aggregation logic | independently validate S3a semantic proposition extraction and S3b structured entailment, then re-test end-to-end on a new untouched set |
 | S4 | Medical KG Construction / Update | Working prototype | case graphs + two reusable backbones + canonical builder | RxNorm/LOINC normalization, persistent graph DB/index, update impact engine, dedicated stage eval |
 | S5 | Controlled Case / Benchmark Factory | P0 complete | 12 families / 60 controlled cases / held-out design | clinical expert gold review + broader validated user-task coverage + dedicated stage eval |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible model runner, evidence injection, CI fixture | production retriever/reranker, live multi-provider runs, real Agent executor, dedicated stage eval |
@@ -43,16 +43,11 @@ v0.3 fresh intent/source held-out       Primary@1 91.7%  PASS
 
 Two v0.3 routing misses remain preserved: LOINC observation normalization and RxNorm drug normalization. S2 is therefore a **conditional pass**, not a claim of comprehensive medical search.
 
-Detailed reports:
-
-- `medical/stage-evals/S2/V0.2_REPORT.md`
-- `medical/stage-evals/S2/V0.3_REPORT.md`
-
 ---
 
-## S3 checkpoint through v0.5.4
+## S3 checkpoint through v0.6
 
-**S3 = Stage 3, Evidence Verification & Temporal Truth（证据验证与时间真值）** tests whether an already-retrieved evidence passage actually supports a candidate medical claim.
+**S3 = Stage 3, Evidence Verification & Temporal Truth（证据验证与时间真值）** asks whether an already-retrieved evidence passage supports a candidate medical claim.
 
 Hard release criteria:
 
@@ -61,114 +56,24 @@ Relation Accuracy >= 80%
 High-risk False-Support Rate = 0
 ```
 
-### v0.1 — lexical lower bound
+### Fresh-test history
 
 ```text
-24 items
-Relation Accuracy                 58.3%
-High-risk False-Support Rate       8.3%
-Release Gate                      FAIL
+v0.1 lexical baseline            Accuracy 58.3%   HFSR  8.3%   FAIL
+v0.2 fresh semantic held-out     Accuracy 50.0%   HFSR 15.4%   FAIL
+v0.3 fresh ClaimFrame shadow     Accuracy 50.0%   HFSR 58.3%   HARD FAIL
+v0.4 fresh atomic shadow         Accuracy 60.0%   HFSR 14.3%   FAIL
+v0.5 fresh compositional shadow  Accuracy 75.0%   HFSR  6.25%  FAIL
+v0.6 fresh post-v0.5.4 shadow    Accuracy 40.0%   HFSR 17.6%   HARD FAIL
 ```
 
-Critical failure: `eGFR <45 → reassess` was incorrectly used to support `eGFR <45 → discontinue`.
+`HFSR = High-risk False-Support Rate（高风险错误支持率）`.
 
-### v0.2 — semantic cue verifier
+The history is intentionally preserved because regression-only scores repeatedly looked strong while genuinely new language exposed unsafe generalization.
 
-```text
-known regression accuracy         91.7%
-fresh held-out accuracy           50.0%
-fresh high-risk false support     15.4%
-Release Gate                      FAIL
-```
+### v0.5.4 regression recovery before v0.6
 
-Fresh testing exposed temporal-direction and causal-polarity failures hidden by the regression result.
-
-### v0.3 — directional ClaimFrame
-
-The implementation was frozen before a new 24-item shadow set.
-
-```text
-fresh shadow accuracy             50.0%
-high-risk false support           58.3% (7/12)
-Release Gate                      HARD FAIL
-```
-
-Root cause: directional schema alone was insufficient because the extractor still attached actions, conditions and negation to the wrong clauses.
-
-### v0.4 — atomic propositions
-
-Architecture changed to:
-
-```text
-passage
-→ clause segmentation
-→ atomic propositions
-→ polarity-preserving proposition frames
-→ candidate proposition frames
-```
-
-A new 30-item untouched shadow was frozen only after implementation.
-
-```text
-fresh shadow accuracy             60.0%
-high-risk false support           14.3% (2/14)
-Release Gate                      FAIL
-```
-
-The key new failure was `COMPOSITION_EARLY_RETURN`: one supported subclaim caused the whole mixed claim to be returned as `DIRECT_SUPPORT`, while an unsupported causal or diagnostic extension was ignored.
-
-### v0.5 — compositional proposition entailment
-
-The verifier changed to:
-
-```text
-candidate claim
-→ P1, P2, ... Pn
-→ each proposition independently:
-   SUPPORTED / CONTRADICTED / UNSUPPORTED
-→ aggregate the full set
-→ DIRECT / PARTIAL / CONTRADICTS / DOES_NOT_SUPPORT
-```
-
-A new 36-item v0.5 untouched shadow was frozen after `v0.5.2` implementation. Its first run is preserved permanently.
-
-#### v0.5 untouched first run
-
-```text
-items                              36
-Relation Accuracy                 75.0%
-high-risk negative items            16
-High-risk False-Support Count        1
-High-risk False-Support Rate       6.25%
-Release Gate                      FAIL
-```
-
-The critical false-support case was explicit polarity:
-
-```text
-evidence: treatment A is NOT contraindicated solely because of condition B
-claim:    condition B alone makes treatment A contraindicated
-prediction: DIRECT_SUPPORT
-truth:      CONTRADICTS
-```
-
-Other errors concentrated in bounded negative summaries, omitted mixed-claim extensions, endpoint-achievement scope, incidence normalization and mutually-exclusive report categories.
-
-First-run evidence is recorded in:
-
-- `medical/stage-evals/S3/V0.5_REPORT.md`
-
-It must never be re-described as regression-only or overwritten by later tuned results.
-
-### v0.5.3 / v0.5.4 diagnostic recovery
-
-After the v0.5 set became exposed, it was used **only as development/regression evidence**.
-
-`v0.5.3` fixed most v0.5 failures but regressed renal-threshold safety, demonstrating why all historical safety suites must remain in the regression matrix.
-
-`v0.5.4` restored threshold relation algebra and repaired negated subgroup-ranking extraction.
-
-Current **exposed-suite** results for `s3-compositional-proposition-v0.5.4`:
+Before the v0.6 set was frozen, `s3-compositional-proposition-v0.5.4` had the following **exposed-suite** results:
 
 ```text
 v0.1 diagnostic             100.0%   high-risk false support 0
@@ -178,64 +83,113 @@ v0.4 diagnostic             100.0%   high-risk false support 0
 v0.5 exposed regression     100.0%   high-risk false support 0
 ```
 
-These numbers show regression recovery, **not fresh generalization**.
+These numbers correctly demonstrate regression control, but v0.6 proves they do **not** demonstrate free-text semantic generalization.
 
-The important technical changes now include:
+### v0.6 untouched first run
 
-- clause-scoped atomic propositions;
-- subject/predicate/object direction;
-- condition/action binding;
-- eGFR threshold relation algebra;
-- positive vs negative polarity;
-- absence-of-evidence vs explicit contradiction;
-- mutually-exclusive categorical contradiction;
-- candidate decomposition before whole-claim aggregation;
-- `PARTIAL_SUPPORT` for mixed correct + unsupported claims;
-- conservative handling of unresolved high-risk propositions.
+The 40-item v0.6 shadow set was frozen at commit `56c8a7b8af98fec284006edbeebe837199fea5fa`, after verifier implementation commit `98923941b40ead8a5ed983862fe9755efb805631`.
 
-### Current S3 release decision
-
-S3 remains **FAIL** because the latest genuinely untouched set (v0.5 first run) failed the safety gate.
-
-`v0.5.4` is now a **candidate verifier**, not a validated release.
-
-Next release attempt:
+First-run workflow: `33974863676`.
 
 ```text
-freeze a completely new post-v0.5.4 untouched held-out
-→ run v0.5.4 exactly once before any tuning
-→ preserve the first-run result
-→ require Accuracy >= 80%
-→ require High-risk False-Support Rate = 0
+items                                      40
+Relation Accuracy                        40.0%
+high-risk negative items                   17
+High-risk False-Support Count                3
+High-risk False-Support Rate             17.6%
+Release Gate                              HARD FAIL
 ```
 
-If that fresh set passes, S3 may be upgraded only to:
+Critical false-support classes:
 
-**Conditional pass / candidate for reviewed KG truth insertion**
+1. `MISSING_CONDITION_OVERCLAIM` — a management action was asserted despite the decision-critical eGFR being unmeasured;
+2. `NEGATION_POLARITY_ERROR` — `does not constitute a contraindication` was promoted to a positive contraindication;
+3. `PGX_TO_MANAGEMENT_ESCALATION` — an exposure association plus no dosing rule was promoted to a mandatory dosing claim.
 
-It should still not be described as fully solved or as an unrestricted automatic medical-truth generator.
+Detailed first-run report:
 
-Detailed historical reports:
+- `medical/stage-evals/S3/V0.6_REPORT.md`
+
+### Architectural conclusion from v0.6
+
+The dominant problem is now identifiable: one end-to-end number mixes **semantic extraction** with **truth logic**.
+
+Many v0.6 failures contain `no_candidate_propositions` or an incorrect canonical proposition. In those cases the deterministic threshold/polarity/temporal logic never receives the right structure.
+
+S3 is therefore split into two independently observable sub-stages:
+
+```text
+S3a — Semantic Proposition Extraction
+free-text evidence / candidate claim
+→ canonical atomic propositions
+
+S3b — Structured Proposition Entailment
+canonical evidence propositions
++ canonical candidate propositions
+→ SUPPORTED / CONTRADICTED / UNSUPPORTED per proposition
+→ DIRECT / PARTIAL / CONTRADICTS / DOES_NOT_SUPPORT
+```
+
+The intended measurement becomes:
+
+```text
+S3a:
+- proposition precision / recall / F1
+- critical-proposition recall
+- polarity accuracy
+- condition/action binding accuracy
+- subject/object direction accuracy
+
+S3b:
+- relation accuracy
+- high-risk false-support rate
+- threshold algebra accuracy
+- temporal-direction accuracy
+- absence-vs-contradiction accuracy
+- mixed-claim aggregation accuracy
+
+End-to-end S3:
+- only re-tested after S3a and S3b each have independent evidence
+```
+
+### Current release decision
+
+S3 remains **HARD FAIL** and is **not eligible for automatic KG truth insertion**.
+
+The immediate next step is not another lexical patch to v0.6. Instead:
+
+```text
+build S3a extraction gold + evaluator
+→ build S3b structured-entailment gold + evaluator
+→ identify which sub-stage limits performance
+→ improve that sub-stage
+→ freeze a new end-to-end untouched set only after the split-stage gates pass
+```
+
+Historical first-run reports:
 
 - `medical/stage-evals/S3/V0.1_BASELINE_REPORT.md`
 - `medical/stage-evals/S3/V0.2_REPORT.md`
 - `medical/stage-evals/S3/V0.3_REPORT.md`
 - `medical/stage-evals/S3/V0.4_REPORT.md`
 - `medical/stage-evals/S3/V0.5_REPORT.md`
+- `medical/stage-evals/S3/V0.6_REPORT.md`
 
 ---
 
 ## Overall project checkpoint
 
 - **S2** can conditionally provide controlled authoritative evidence bundles downstream.
-- **S3** has repeatedly prevented strong regression performance from being mistaken for safe fresh generalization; the v0.5.4 implementation now needs a new untouched release test.
-- **S4** must not automatically trust S3 machine-approved claims until S3 passes a genuinely new held-out safety gate.
+- **S3** has a valuable failure history: fresh sets repeatedly reveal problems hidden by regression success. v0.6 now localizes the architectural ambiguity to semantic extraction versus deterministic entailment.
+- **S4** must not automatically trust machine-approved S3 claims while S3 remains failed.
 
 Immediate order:
 
 ```text
-S3 new post-v0.5.4 untouched held-out
-→ if PASS: S4 Knowledge-Graph Construction Eval
+S3a extraction eval
+→ S3b structured entailment eval
+→ new end-to-end S3 held-out after sub-stage stabilization
+→ S4 Knowledge-Graph Construction Eval
 → S5 Case-Factory Eval
 ```
 
