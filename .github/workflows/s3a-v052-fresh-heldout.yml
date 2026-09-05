@@ -1,0 +1,225 @@
+name: s3a-v052-fresh-heldout
+
+on:
+  push:
+    paths:
+      - "medical/stage-evals/S3/s3a-scope-safety-heldout-v0.5.2.json"
+      - ".github/workflows/s3a-v052-fresh-heldout.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  first-fresh-observation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate immutable v0.5.2 fresh contract
+        run: |
+          python -m py_compile \
+            scripts/s3a_compositional_frame_parser_v052.py \
+            scripts/eval_s3a_proposition_extraction_v02.py
+
+          parser_blob="$(git hash-object scripts/s3a_compositional_frame_parser_v052.py)"
+          parser_last_commit="$(git log -1 --format=%H -- scripts/s3a_compositional_frame_parser_v052.py)"
+          suite_freeze_commit="$(git log -1 --format=%H -- medical/stage-evals/S3/s3a-scope-safety-heldout-v0.5.2.json)"
+          test "${parser_blob}" = "fff81db9d9e80bc608f5b4dce3c0503a6207421b"
+          test "${parser_last_commit}" = "0200076a66454246de03fc015b9fd0911ea087f2"
+          test "${suite_freeze_commit}" = "fcce2dbcbf780e8a4378fdfb987b7e92e0196f30"
+          test ! -e medical/stage-evals/S3/runs/s3a-v052-fresh-first-run
+
+          python - <<'PY'
+          import json
+          from collections import Counter
+          p="medical/stage-evals/S3/s3a-scope-safety-heldout-v0.5.2.json"
+          d=json.load(open(p, encoding="utf-8"))
+          assert d["split"] == "heldout"
+          assert d["frozen_after_extractor_implementation"] is True
+          assert d["first_run_must_be_preserved"] is True
+          assert d["extractor_version"] == "s3a-compositional-frame-v0.5.2"
+          assert d["extractor_commit"] == "0200076a66454246de03fc015b9fd0911ea087f2"
+          assert d["extractor_blob_sha"] == "fff81db9d9e80bc608f5b4dce3c0503a6207421b"
+          assert d["development_report_commit"] == "6d7f5271d72783a5772308d37ae2646c1844f992"
+          assert d["evaluator_commit"] == "50a9a7a2f4a5409297434cf0c29f05d1fa6780c5"
+          assert d["evaluate_population"] is True
+          assert len(d["items"]) == 46
+          ids=[x["item_id"] for x in d["items"]]
+          assert len(ids) == len(set(ids))
+          req=[x for x in d["items"] if x.get("expected_abstain")]
+          known=[x for x in d["items"] if not x.get("expected_abstain")]
+          assert len(req) == 6
+          assert len(known) == 40
+          assert all(not x["expected_propositions"] for x in req)
+          expected=sum(len(x["expected_propositions"]) for x in d["items"])
+          critical=sum(sum(bool(p.get("critical")) for p in x["expected_propositions"]) for x in d["items"])
+          print("Frozen items:", len(ids))
+          print("Known representable cases:", len(known))
+          print("Mandatory abstentions:", len(req))
+          print("Expected propositions:", expected)
+          print("Critical propositions:", critical)
+          print("Roles:", dict(Counter(x["role"] for x in d["items"])))
+          print("Design tags:", dict(Counter(t for x in d["items"] for t in x.get("tags", []))))
+          PY
+
+      - name: Run untouched v0.5.2 first observation
+        run: |
+          mkdir -p /tmp/s3a-v052-fresh
+          python scripts/s3a_compositional_frame_parser_v052.py \
+            --input medical/stage-evals/S3/s3a-scope-safety-heldout-v0.5.2.json \
+            --out /tmp/s3a-v052-fresh/predictions.json
+
+          set +e
+          python scripts/eval_s3a_proposition_extraction_v02.py \
+            --gold medical/stage-evals/S3/s3a-scope-safety-heldout-v0.5.2.json \
+            --pred /tmp/s3a-v052-fresh/predictions.json \
+            --out /tmp/s3a-v052-fresh/proposition-report.json \
+            --min-f1 0.90 \
+            --min-critical-recall 0.95 \
+            --min-polarity-accuracy 0.95 \
+            --min-population-accuracy 0.95 \
+            --min-condition-accuracy 0.95
+          status=$?
+          set -e
+          echo "${status}" > /tmp/s3a-v052-fresh/proposition-evaluator-exit-code.txt
+
+      - name: Evaluate fresh abstention safety
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          gold=json.load(open("medical/stage-evals/S3/s3a-scope-safety-heldout-v0.5.2.json", encoding="utf-8"))
+          pred=json.load(open("/tmp/s3a-v052-fresh/predictions.json", encoding="utf-8"))
+          pm={x["item_id"]:x for x in pred["predictions"]}
+          req=[x for x in gold["items"] if x.get("expected_abstain")]
+          known=[x for x in gold["items"] if not x.get("expected_abstain")]
+          req_ok=[]; req_fail=[]
+          for x in req:
+              row=pm.get(x["item_id"], {})
+              ok=bool(row.get("abstain")) and not row.get("predicted_propositions")
+              (req_ok if ok else req_fail).append(x["item_id"])
+          known_abst=[x["item_id"] for x in known if bool(pm.get(x["item_id"], {}).get("abstain"))]
+          req_acc=len(req_ok)/len(req) if req else 1.0
+          known_rate=len(known_abst)/len(known) if known else 0.0
+          criteria=gold["release_criteria"]
+          report={
+              "required_abstention_cases":len(req),
+              "required_abstention_correct":len(req_ok),
+              "required_abstention_accuracy":req_acc,
+              "required_abstention_failures":req_fail,
+              "known_cases":len(known),
+              "known_case_abstentions":known_abst,
+              "known_case_abstention_rate":known_rate,
+              "gate_checks":{
+                  "required_abstention_accuracy":req_acc >= criteria["min_required_abstention_accuracy"],
+                  "known_case_abstention_rate":known_rate <= criteria["max_known_case_abstention_rate"]
+              }
+          }
+          report["release_gate"]="PASS" if all(report["gate_checks"].values()) else "FAIL"
+          open("/tmp/s3a-v052-fresh/abstention-report.json","w",encoding="utf-8").write(json.dumps(report,ensure_ascii=False,indent=2)+"\n")
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+
+      - name: Validate v0.5.2 trace contract
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/s3a-v052-fresh/predictions.json", encoding="utf-8"))
+          missing=[]
+          for row in d["predictions"]:
+              if not {"scope_nodes","semantic_frames","predicted_propositions","abstain","unresolved_spans"} <= set(row):
+                  missing.append({"item_id":row.get("item_id"),"reason":"row_contract"})
+                  continue
+              for node in row["scope_nodes"]:
+                  if not {"node_id","text","condition_source"} <= set(node):
+                      missing.append({"item_id":row.get("item_id"),"reason":"scope_node_contract"})
+                      break
+              for frame in row["semantic_frames"]:
+                  required={"event_type","subject","object","polarity","modality","source_span","trigger_family","scope_trace"}
+                  if not required <= set(frame):
+                      missing.append({"item_id":row.get("item_id"),"reason":"frame_contract"})
+                      break
+          report={"rows":len(d["predictions"]),"failures":missing,"release_gate":"PASS" if not missing else "FAIL"}
+          open("/tmp/s3a-v052-fresh/trace-report.json","w",encoding="utf-8").write(json.dumps(report,ensure_ascii=False,indent=2)+"\n")
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+
+      - name: Combine fresh release gates and write manifest
+        if: always()
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          prop=json.load(open("/tmp/s3a-v052-fresh/proposition-report.json", encoding="utf-8"))
+          abst=json.load(open("/tmp/s3a-v052-fresh/abstention-report.json", encoding="utf-8"))
+          trace=json.load(open("/tmp/s3a-v052-fresh/trace-report.json", encoding="utf-8"))
+          gates={
+              "proposition_gate":prop["release_gate"]=="PASS",
+              "abstention_gate":abst["release_gate"]=="PASS",
+              "trace_gate":trace["release_gate"]=="PASS"
+          }
+          out={"benchmark_id":"S3a-scope-safety-heldout-v0.5.2","gate_checks":gates,"release_gate":"PASS" if all(gates.values()) else "FAIL"}
+          Path("/tmp/s3a-v052-fresh/combined-release.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          dataset=Path("medical/stage-evals/S3/s3a-scope-safety-heldout-v0.5.2.json").read_bytes()
+          manifest={
+              "benchmark_id":"S3a-scope-safety-heldout-v0.5.2",
+              "suite_freeze_commit":"fcce2dbcbf780e8a4378fdfb987b7e92e0196f30",
+              "workflow_source_commit":os.environ["GITHUB_SHA"],
+              "github_run_id":os.environ["GITHUB_RUN_ID"],
+              "extractor_version":"s3a-compositional-frame-v0.5.2",
+              "extractor_commit":"0200076a66454246de03fc015b9fd0911ea087f2",
+              "extractor_blob_sha":"fff81db9d9e80bc608f5b4dce3c0503a6207421b",
+              "evaluator_commit":"50a9a7a2f4a5409297434cf0c29f05d1fa6780c5",
+              "dataset_sha256":hashlib.sha256(dataset).hexdigest(),
+              "first_observation_must_be_preserved":True,
+              "release_gate":out["release_gate"]
+          }
+          Path("/tmp/s3a-v052-fresh/manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          print(json.dumps(manifest,ensure_ascii=False,indent=2))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s3a-v052-fresh-heldout-first-run
+          path: /tmp/s3a-v052-fresh
+          retention-days: 90
+
+      - name: Persist immutable first-run raw outputs to repository
+        if: always()
+        run: |
+          result_dir="medical/stage-evals/S3/runs/s3a-v052-fresh-first-run"
+          test ! -e "${result_dir}"
+          mkdir -p "${result_dir}"
+          cp /tmp/s3a-v052-fresh/predictions.json "${result_dir}/predictions.json"
+          cp /tmp/s3a-v052-fresh/proposition-report.json "${result_dir}/proposition-report.json"
+          cp /tmp/s3a-v052-fresh/abstention-report.json "${result_dir}/abstention-report.json"
+          cp /tmp/s3a-v052-fresh/trace-report.json "${result_dir}/trace-report.json"
+          cp /tmp/s3a-v052-fresh/combined-release.json "${result_dir}/combined-release.json"
+          cp /tmp/s3a-v052-fresh/manifest.json "${result_dir}/manifest.json"
+          cp /tmp/s3a-v052-fresh/proposition-evaluator-exit-code.txt "${result_dir}/proposition-evaluator-exit-code.txt"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${result_dir}"
+          git commit -m "S3a v0.5.2 eval: preserve fresh first-run raw results"
+          git push
+
+      - name: Enforce combined fresh release gate
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/s3a-v052-fresh/combined-release.json", encoding="utf-8"))
+          print("combined release_gate =", d["release_gate"])
+          if d["release_gate"] != "PASS":
+              raise SystemExit(2)
+          PY
