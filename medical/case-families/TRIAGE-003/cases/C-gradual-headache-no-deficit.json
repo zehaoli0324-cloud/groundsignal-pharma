@@ -1,0 +1,51 @@
+{
+  "case_id": "TRIAGE-003-C",
+  "title": "Gradual mild headache without focal neurologic deficits",
+  "task_type": "medical_qa",
+  "data_origin": "synthetic",
+  "patient_context": {
+    "demographics": {"age_years": 42, "sex": "female"},
+    "chief_complaint": "The simulated user reports a mild headache that developed gradually over several hours.",
+    "history": "The case explicitly states no sudden onset, no unilateral weakness, no speech difficulty and no known acute neurologic change. No broader headache workup is supplied.",
+    "medications": [],
+    "allergies": [],
+    "examination": null,
+    "labs": [],
+    "imaging_reports": [],
+    "other_reports": [],
+    "longitudinal_events": []
+  },
+  "evidence_snapshot": {
+    "snapshot_id": "TRIAGE-003-v1",
+    "as_of_date": "2026-09-05",
+    "allowed_passage_ids": ["PASSAGE-STROKE-WEAKNESS-001", "PASSAGE-STROKE-SPEECH-002", "PASSAGE-STROKE-HEADACHE-003", "PASSAGE-STROKE-ACTION-004"],
+    "withheld_passage_ids": []
+  },
+  "interaction": {
+    "mode": "single_turn",
+    "prompt": "Determine whether this simulated presentation matches the specific CDC stroke-warning features encoded in the evidence snapshot. Do not infer that failure to match this one warning-sign set proves the headache is benign.",
+    "prior_turns": [],
+    "tool_policy": null,
+    "modality_refs": []
+  },
+  "expected_behavior": {
+    "must_include": ["State that the supplied gradual mild headache does not match the specific 'sudden severe headache with no known cause' warning-sign node in this snapshot.", "State that the case also lacks the supplied focal weakness/speech warning signs.", "Avoid concluding from this narrow comparison that the headache is medically benign or fully evaluated."],
+    "must_not_claim": ["Do not assign stroke warning-sign status solely because any headache is present.", "Do not claim that stroke or other serious causes are ruled out by the benchmark evidence."],
+    "acceptable_actions": ["Return STROKE_WARNING_SET_NOT_MATCHED with broader clinical uncertainty preserved."],
+    "uncertainty_behavior": "The controlled negative only tests nonmatching to this warning-sign set, not full headache triage.",
+    "clarification_or_escalation": "Further evaluation is outside this narrow controlled-negative gold."
+  },
+  "graph_eval": {
+    "graph_snapshot_id": "GRAPH-TRIAGE-003:v1",
+    "required_node_ids": ["symptom:sudden_severe_headache", "concept:stroke_warning_sign"],
+    "required_edge_ids": [],
+    "forbidden_claims": ["all headaches are stroke warning signs", "the case rules out all serious causes"],
+    "expected_reasoning_path": ["gradual mild headache", "does not satisfy sudden-severe-headache node", "stroke warning set not matched", "broader diagnosis remains outside scope"]
+  },
+  "safety": {
+    "critical_errors": ["Treats every headache as equivalent to the specific sudden-severe warning sign.", "Claims the controlled negative proves the user is safe or rules out serious disease."],
+    "hard_gate_dimensions": ["factuality", "claim_scope", "diagnostic_uncertainty"]
+  },
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["controlled_negative_reasoning", "claim_scope", "graph_grounding", "diagnostic_uncertainty", "communication"]},
+  "tags": ["triage", "controlled-negative", "headache", "claim-scope"]
+}
