@@ -1,0 +1,172 @@
+name: s3a-v051-fresh-heldout
+
+on:
+  push:
+    paths:
+      - "medical/stage-evals/S3/s3a-compositional-frame-heldout-v0.5.1.json"
+      - ".github/workflows/s3a-v051-fresh-heldout.yml"
+  workflow_dispatch:
+
+jobs:
+  first-fresh-observation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate frozen S3a v0.5.1 contract
+        run: |
+          python -m py_compile \
+            scripts/s3a_compositional_frame_parser_v051.py \
+            scripts/eval_s3a_proposition_extraction_v02.py
+          python - <<'PY'
+          import json
+          from collections import Counter
+          p="medical/stage-evals/S3/s3a-compositional-frame-heldout-v0.5.1.json"
+          d=json.load(open(p, encoding="utf-8"))
+          assert d["split"] == "heldout"
+          assert d["frozen_after_extractor_implementation"] is True
+          assert d["first_run_must_be_preserved"] is True
+          assert d["extractor_version"] == "s3a-compositional-frame-v0.5.1"
+          assert d["extractor_commit"] == "0a3fe9ee29187cfb7e381da0f41bb1ae93875937"
+          assert d["development_report_commit"] == "8dd48ff850057a08318180ad31625df8da7e349b"
+          assert d["evaluator_commit"] == "50a9a7a2f4a5409297434cf0c29f05d1fa6780c5"
+          assert d["evaluate_population"] is True
+          assert len(d["items"]) == 42
+          ids=[x["item_id"] for x in d["items"]]
+          assert len(ids) == len(set(ids))
+          assert sum(len(x["expected_propositions"]) for x in d["items"]) == 66
+          assert sum(sum(bool(p.get("critical")) for p in x["expected_propositions"]) for x in d["items"]) == 48
+          assert sum(bool(x.get("expected_abstain")) for x in d["items"]) == 4
+          print("Frozen items:", len(ids))
+          print("Expected propositions: 66")
+          print("Critical propositions: 48")
+          print("Required-abstention cases: 4")
+          print("Roles:", dict(Counter(x["role"] for x in d["items"])))
+          print("Design tags:", dict(Counter(t for x in d["items"] for t in x.get("tags", []))))
+          PY
+
+      - name: Run untouched S3a v0.5.1 first observation
+        run: |
+          mkdir -p /tmp/s3a-v051-fresh
+          python scripts/s3a_compositional_frame_parser_v051.py \
+            --input medical/stage-evals/S3/s3a-compositional-frame-heldout-v0.5.1.json \
+            --out /tmp/s3a-v051-fresh/predictions.json
+
+          set +e
+          python scripts/eval_s3a_proposition_extraction_v02.py \
+            --gold medical/stage-evals/S3/s3a-compositional-frame-heldout-v0.5.1.json \
+            --pred /tmp/s3a-v051-fresh/predictions.json \
+            --out /tmp/s3a-v051-fresh/proposition-report.json \
+            --min-f1 0.90 \
+            --min-critical-recall 0.95 \
+            --min-polarity-accuracy 0.95 \
+            --min-population-accuracy 0.95 \
+            --min-condition-accuracy 0.95
+          status=$?
+          set -e
+          echo "${status}" > /tmp/s3a-v051-fresh/proposition-evaluator-exit-code.txt
+          cat /tmp/s3a-v051-fresh/proposition-report.json
+          echo "S3a v0.5.1 fresh proposition evaluator exit code: ${status}"
+
+      - name: Evaluate abstention safety gate
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          gold=json.load(open("medical/stage-evals/S3/s3a-compositional-frame-heldout-v0.5.1.json", encoding="utf-8"))
+          pred=json.load(open("/tmp/s3a-v051-fresh/predictions.json", encoding="utf-8"))
+          pm={x["item_id"]:x for x in pred["predictions"]}
+          req=[x for x in gold["items"] if x.get("expected_abstain")]
+          known=[x for x in gold["items"] if not x.get("expected_abstain")]
+          req_ok=[]
+          req_fail=[]
+          for x in req:
+              row=pm.get(x["item_id"], {})
+              ok=bool(row.get("abstain")) and not row.get("predicted_propositions")
+              (req_ok if ok else req_fail).append(x["item_id"])
+          known_abst=[x["item_id"] for x in known if bool(pm.get(x["item_id"], {}).get("abstain"))]
+          req_acc=len(req_ok)/len(req) if req else 1.0
+          known_rate=len(known_abst)/len(known) if known else 0.0
+          criteria=gold["release_criteria"]
+          report={
+              "required_abstention_cases":len(req),
+              "required_abstention_correct":len(req_ok),
+              "required_abstention_accuracy":req_acc,
+              "required_abstention_failures":req_fail,
+              "known_cases":len(known),
+              "known_case_abstentions":known_abst,
+              "known_case_abstention_rate":known_rate,
+              "gate_checks":{
+                  "required_abstention_accuracy":req_acc >= criteria["min_required_abstention_accuracy"],
+                  "known_case_abstention_rate":known_rate <= criteria["max_known_case_abstention_rate"]
+              }
+          }
+          report["release_gate"]="PASS" if all(report["gate_checks"].values()) else "FAIL"
+          open("/tmp/s3a-v051-fresh/abstention-report.json","w",encoding="utf-8").write(json.dumps(report,ensure_ascii=False,indent=2)+"\n")
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+
+      - name: Validate v0.5.1 trace contract
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/s3a-v051-fresh/predictions.json", encoding="utf-8"))
+          missing=[]
+          for row in d["predictions"]:
+              if not {"scope_nodes","semantic_frames","predicted_propositions","abstain","unresolved_spans"} <= set(row):
+                  missing.append({"item_id":row.get("item_id"),"reason":"row_contract"})
+                  continue
+              for node in row["scope_nodes"]:
+                  if not {"node_id","text","condition_source"} <= set(node):
+                      missing.append({"item_id":row.get("item_id"),"reason":"scope_node_contract"})
+                      break
+              for frame in row["semantic_frames"]:
+                  required={"event_type","subject","object","polarity","modality","source_span","trigger_family","scope_trace"}
+                  if not required <= set(frame):
+                      missing.append({"item_id":row.get("item_id"),"reason":"frame_contract"})
+                      break
+          report={"rows":len(d["predictions"]),"failures":missing,"release_gate":"PASS" if not missing else "FAIL"}
+          open("/tmp/s3a-v051-fresh/trace-report.json","w",encoding="utf-8").write(json.dumps(report,ensure_ascii=False,indent=2)+"\n")
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+
+      - name: Combine release gates
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          prop=json.load(open("/tmp/s3a-v051-fresh/proposition-report.json", encoding="utf-8"))
+          abst=json.load(open("/tmp/s3a-v051-fresh/abstention-report.json", encoding="utf-8"))
+          trace=json.load(open("/tmp/s3a-v051-fresh/trace-report.json", encoding="utf-8"))
+          gates={
+              "proposition_gate":prop["release_gate"]=="PASS",
+              "abstention_gate":abst["release_gate"]=="PASS",
+              "trace_gate":trace["release_gate"]=="PASS"
+          }
+          out={"benchmark_id":"S3a-compositional-frame-heldout-v0.5.1","gate_checks":gates,"release_gate":"PASS" if all(gates.values()) else "FAIL"}
+          open("/tmp/s3a-v051-fresh/combined-release.json","w",encoding="utf-8").write(json.dumps(out,ensure_ascii=False,indent=2)+"\n")
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s3a-v051-fresh-heldout-first-run
+          path: /tmp/s3a-v051-fresh
+          retention-days: 90
+
+      - name: Enforce combined release gate
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/s3a-v051-fresh/combined-release.json", encoding="utf-8"))
+          print("combined release_gate =", d["release_gate"])
+          if d["release_gate"] != "PASS":
+              raise SystemExit(2)
+          PY
