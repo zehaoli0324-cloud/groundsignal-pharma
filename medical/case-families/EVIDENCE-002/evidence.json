@@ -1,0 +1,62 @@
+{
+  "manifest_id": "evidence-EVIDENCE-002-v1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {
+      "source_id": "SRC-SYNTH-EVIDENCE-002",
+      "title": "GroundSignal synthetic comparative-trial fixtures",
+      "source_type": "synthetic_trial_documents",
+      "publisher": "GroundSignal",
+      "url": "groundsignal://medical/EVIDENCE-002/synthetic-trials",
+      "document_date": "2026-09-05",
+      "authority_tier": "case_local_truth",
+      "version_note": "Synthetic controlled evidence designed to isolate comparative-reasoning behavior; not a claim about real therapies."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLAIM-XTRIAL-A-001",
+      "paraphrased_claim": "Trial A reports a 62% response rate for Treatment A in previously treated participants using endpoint definition EA at week 12.",
+      "source_id": "SRC-SYNTH-EVIDENCE-002",
+      "locator": "Trial A fixture",
+      "passage_id": "PASSAGE-XTRIAL-A-001",
+      "evidence_role": "comparative_evidence",
+      "claim_scope": "within-trial Treatment A result",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-XTRIAL-B-002",
+      "paraphrased_claim": "Trial B reports a 48% response rate for Treatment B in treatment-naive participants using endpoint definition EB at week 24.",
+      "source_id": "SRC-SYNTH-EVIDENCE-002",
+      "locator": "Trial B fixture",
+      "passage_id": "PASSAGE-XTRIAL-B-002",
+      "evidence_role": "comparative_evidence",
+      "claim_scope": "within-trial Treatment B result",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-XTRIAL-ALIGNED-003",
+      "paraphrased_claim": "A controlled fixture aligns population, endpoint definition and follow-up duration across two separate trials while retaining separate randomization contexts and no direct A-versus-B assignment.",
+      "source_id": "SRC-SYNTH-EVIDENCE-002",
+      "locator": "Aligned separate-trials fixture",
+      "passage_id": "PASSAGE-XTRIAL-ALIGNED-003",
+      "evidence_role": "comparative_evidence",
+      "claim_scope": "indirect comparison with design alignment",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-HEADTOHEAD-004",
+      "paraphrased_claim": "The held-out fixture is a randomized head-to-head trial assigning the same target population to Treatment A or Treatment B with the same endpoint and follow-up; A achieves 62% and B 48%, and the fixture states that the prespecified between-group comparison supports superiority of A on that endpoint.",
+      "source_id": "SRC-SYNTH-EVIDENCE-002",
+      "locator": "Head-to-head held-out fixture",
+      "passage_id": "PASSAGE-HEADTOHEAD-004",
+      "evidence_role": "comparative_evidence",
+      "claim_scope": "endpoint-specific direct comparative conclusion",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    }
+  ]
+}
