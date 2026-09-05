@@ -9,7 +9,7 @@ The system has **10 lifecycle stages**. Architecture completeness must not be co
 |---|---|---|---|---|
 | S1 | User Need / Workflow Discovery | Partial | 48 seed tasks, high-risk matrix, user-research plan | real interview/log validation and frequency weighting |
 | S2 | Knowledge Search & Source Routing | **Conditional pass / evaluated prototype** | v0.3 fresh routing 91.7%; 10-test live official retrieval; DailyMed version + passage vertical slice | broader passage-source diversity and terminology normalization |
-| S3 | Evidence Verification & Temporal Truth | **HARD FAIL end-to-end / S3b conditional pass / S3a v0.4 development regression green** | complete failure history; independent S3a/S3b evals; S3b fresh v0.3 40/40 / HFSR 0; immutable S3a v0.2/v0.3 fresh failures; v0.4 semantic-frame architecture with exposed regressions 100% | brand-new fresh S3a validation of v0.4, then brand-new end-to-end S3 held-out |
+| S3 | Evidence Verification & Temporal Truth | **HARD FAIL end-to-end / S3b conditional pass / S3a v0.4 fresh FAIL** | complete failure history; independent S3a/S3b evals; S3b fresh v0.3 40/40 / HFSR 0; immutable S3a v0.2/v0.3/v0.4 fresh failures; v0.4 semantic-frame trace is auditable | material S3a v0.5 frame-parser redesign; then brand-new fresh S3a validation and brand-new end-to-end S3 held-out |
 | S4 | Medical KG Construction / Update | Working prototype | case graphs + two reusable backbones + canonical builder | terminology normalization, persistent graph/index, update-impact engine, dedicated stage eval |
 | S5 | Controlled Case / Benchmark Factory | P0 complete | 12 families / 60 controlled cases / held-out design | clinical expert gold review + broader validated user-task coverage + dedicated stage eval |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | live multi-provider runs, production retriever/reranker, Agent executor, dedicated stage eval |
@@ -87,7 +87,7 @@ Condition Binding Accuracy          100.00%
 Release Gate                          FAIL
 ```
 
-### Fresh v0.3 first run — architecture rejection
+### Fresh v0.3 first run — direct phrase-normalization architecture rejected
 
 Workflow `33977528229`:
 
@@ -105,20 +105,20 @@ Condition Binding Accuracy              88.89%
 Release Gate                         HARD FAIL
 ```
 
-The collapse from exposed regression performance to fresh v0.3 showed that the previous direct phrase-normalization architecture was not a reliable semantic extractor.
+This failure triggered the v0.4 semantic-frame architecture pivot.
 
 Detailed reports:
 
 - `medical/stage-evals/S3/S3A_V0.2_REPORT.md`
 - `medical/stage-evals/S3/S3A_V0.3_REPORT.md`
 
-### S3a v0.4 — semantic-frame architecture development checkpoint
+### S3a v0.4 development checkpoint
 
 Implementation commit:
 
 - `4cef42e749f0f53dc7de2e8bae77e640640ddcf6`
 
-v0.4 changes the internal representation to:
+Architecture:
 
 ```text
 free text
@@ -132,16 +132,6 @@ free text
 → unresolved-critical-content abstention
 ```
 
-Each proposition now has an inspectable intermediate frame containing event type, arguments, polarity, conditions, population, modality, confidence and source span.
-
-Centralized grammar:
-
-- `medical/configs/s3a-semantic-frame-v0.4.json`
-
-Extractor:
-
-- `scripts/s3a_semantic_frame_extractor_v04.py`
-
 Regression workflow `33979442330`:
 
 ```text
@@ -150,13 +140,60 @@ exposed v0.2   30/30 propositions   F1 100%   PASS
 exposed v0.3   39/39 propositions   F1 100%   PASS
 ```
 
-For v0.2 and v0.3, polarity, population and condition-binding accuracy were also 100%. The semantic-frame trace contract passed. The general `medical-development-ci` workflow for the same implementation commit also completed successfully.
-
-These are **exposed regression results only**. They are not fresh evidence and do not change the S3 release state.
+Those numbers are exposed regression evidence only.
 
 Detailed report:
 
 - `medical/stage-evals/S3/S3A_V0.4_DEV_REPORT.md`
+
+### S3a v0.4 fresh first run — FAIL
+
+A brand-new 36-item / 56-proposition suite was frozen after the v0.4 implementation and development checkpoint. It includes 43 critical propositions and tests unseen event wording, long-distance negation/modality, shared numeric conditions, competing population scopes, argument-order inversion, temporal supersession, mixed evidence-strength statements, cross-sentence composition and distractor clauses.
+
+Freeze/run commit:
+
+- `c2e43432d92f573d3f023c4e649ac96e5782ed5a`
+
+First-run workflow:
+
+- `33982583817`
+
+Immutable first-run result:
+
+```text
+Gold propositions                         56
+Predicted propositions                    24
+True positives                            16
+Precision                              66.67%
+Recall                                 28.57%
+F1                                     40.00%
+Critical Proposition Recall            25.58%
+Polarity Accuracy                      80.00%
+Population Accuracy                    94.12%
+Condition Binding Accuracy            100.00%
+Release Gate                            FAIL
+```
+
+The semantic-frame trace contract passed, which means internal events remain auditable. However, the fresh test shows that frame recognition/generalization is still too trigger/grammar dominated.
+
+Failure taxonomy:
+
+```text
+A. event/relation detection gaps               dominant recall failure
+B. negation + modality scope errors            safety-critical wrong-positive polarity
+C. population/use-state frame-scope leakage    94.12%, below gate
+D. argument extraction/canonicalization        generic head-word/object loss
+E. directed temporal/supersession grammar      inverse/passive relation failures
+F. multi-proposition/cross-clause composition  shared condition/population failures
+G. safe abstention                              preferable to guessing but lowers recall
+H. numeric condition binding                   100% on semantic matches; not primary bottleneck
+```
+
+Detailed report:
+
+- `medical/stage-evals/S3/S3A_V0.4_FRESH_REPORT.md`
+
+This v0.4 held-out is now exposed and must never be presented as fresh again.
 
 ---
 
@@ -164,19 +201,22 @@ Detailed report:
 
 ```text
 S3b structured truth engine      = conditional pass
-S3a v0.4 exposed regression      = pass
-S3a v0.4 fresh validation        = not run
-S3a free-text release status     = hard fail / blocked
-End-to-end S3                    = hard fail
+S3a v0.4 exposed regression      = pass (not fresh evidence)
+S3a v0.4 fresh validation        = FAIL
+S3a free-text release status     = HARD FAIL / BLOCKED
+End-to-end S3                    = HARD FAIL
 ```
 
 Therefore unrestricted automatic free-text → Knowledge Graph truth insertion remains blocked.
 
+The failure indicates that threshold parsing is not the main issue: condition binding was 100% on semantic matches. The next architecture should focus upstream on event recognition, argument direction, negation/modality, per-frame population scope and cross-clause composition.
+
 Immediate order:
 
 ```text
-freeze brand-new S3a held-out for v0.4
-→ preserve first observation
-→ if S3a passes, freeze brand-new end-to-end S3 held-out
+S3a v0.5 compositional frame-parser redesign
+→ run exposed v0.1/v0.2/v0.3/v0.4 regressions only during development
+→ freeze a brand-new S3a held-out only after v0.5 implementation is frozen
+→ if fresh S3a passes, freeze brand-new end-to-end S3 held-out
 → if end-to-end S3 passes, begin S4 dedicated eval
 ```
