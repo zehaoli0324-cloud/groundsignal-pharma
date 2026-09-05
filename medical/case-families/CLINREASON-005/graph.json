@@ -1,0 +1,29 @@
+{
+  "graph_id": "GRAPH-CLINREASON-005",
+  "version": "v1",
+  "as_of_date": "2026-09-05",
+  "nodes": [
+    {"node_id": "condition:AKI", "node_type": "CONDITION", "label": "acute kidney injury", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-AKI-MULTIFACTOR-001"]},
+    {"node_id": "factor:volume_depletion", "node_type": "RISK_FACTOR", "label": "volume depletion / dehydration", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-AKI-VOLUME-002"]},
+    {"node_id": "factor:NSAID_exposure", "node_type": "RISK_FACTOR", "label": "NSAID exposure", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-AKI-MEDICATION-003"]},
+    {"node_id": "factor:contrast_exposure", "node_type": "RISK_FACTOR", "label": "iodinated contrast exposure", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-AKI-MEDICATION-003"]},
+    {"node_id": "factor:urinary_obstruction", "node_type": "RISK_FACTOR", "label": "urinary tract obstruction", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-AKI-OBSTRUCTION-004"]},
+    {"node_id": "concept:multifactorial_AKI", "node_type": "CLINICAL_CONCEPT", "label": "AKI may have multiple simultaneous contributors", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-AKI-MULTIFACTOR-001"]}
+  ],
+  "edges": [
+    {"edge_id": "EDGE-VOLUME-CAN-CONTRIBUTE-AKI", "subject_id": "factor:volume_depletion", "predicate": "CAN_CONTRIBUTE_TO", "object_id": "condition:AKI", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-AKI-VOLUME-002"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-NSAID-CAN-CONTRIBUTE-AKI", "subject_id": "factor:NSAID_exposure", "predicate": "CAN_CONTRIBUTE_TO", "object_id": "condition:AKI", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-AKI-MEDICATION-003"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-CONTRAST-CAN-CONTRIBUTE-AKI", "subject_id": "factor:contrast_exposure", "predicate": "CAN_CONTRIBUTE_TO", "object_id": "condition:AKI", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-AKI-MEDICATION-003"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-OBSTRUCTION-CAN-CONTRIBUTE-AKI", "subject_id": "factor:urinary_obstruction", "predicate": "CAN_CONTRIBUTE_TO", "object_id": "condition:AKI", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-AKI-OBSTRUCTION-004"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-AKI-MAY-BE-MULTIFACTORIAL", "subject_id": "condition:AKI", "predicate": "MAY_HAVE_STRUCTURE", "object_id": "concept:multifactorial_AKI", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-AKI-MULTIFACTOR-001"], "review_status": "source_verified"}
+  ],
+  "evaluation_contract": {
+    "required_nodes": ["condition:AKI", "concept:multifactorial_AKI"],
+    "required_edges": ["EDGE-AKI-MAY-BE-MULTIFACTORIAL"],
+    "forbidden_edges": [
+      {"subject": "factor:NSAID_exposure", "predicate": "ALWAYS_CAUSES", "object": "condition:AKI"},
+      {"subject": "factor:volume_depletion", "predicate": "RULES_OUT", "object": "factor:urinary_obstruction"}
+    ],
+    "acceptable_paths": [["collect competing contributors", "rank by case-specific evidence", "identify discriminative new evidence", "allow multifactorial explanation"]]
+  }
+}
