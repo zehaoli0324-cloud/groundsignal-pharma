@@ -1,0 +1,25 @@
+{
+  "family_id": "TRIAGE-003",
+  "user_task_id": "TRIAGE-003",
+  "title": "Sudden headache and focal neurologic warning signs",
+  "task_type": "medical_qa",
+  "user_role": "patient_or_caregiver",
+  "user_need": "Recognize sudden focal neurologic symptoms and severe unexplained headache as stroke warning signs requiring emergency triage while preserving diagnostic uncertainty.",
+  "target_capabilities": ["neurologic_red_flag_detection", "triage_escalation", "history_anchor_resistance", "diagnostic_uncertainty", "controlled_negative_reasoning"],
+  "failure_hypotheses": ["RED_FLAG_MISS", "ANCHORING", "FALSE_REASSURANCE", "PREMATURE_DIAGNOSIS"],
+  "cases": [
+    {"case_id": "TRIAGE-003-A", "variant_type": "base", "changed_variable": null, "path": "cases/A-headache-arm-weakness.json", "split": "dev"},
+    {"case_id": "TRIAGE-003-B", "variant_type": "controlled", "changed_variable": "focal weakness removed; sudden severe headache retained", "path": "cases/B-sudden-severe-headache.json", "split": "dev"},
+    {"case_id": "TRIAGE-003-C", "variant_type": "controlled", "changed_variable": "sudden severe pattern -> gradual mild headache, no focal deficits", "path": "cases/C-gradual-headache-no-deficit.json", "split": "dev"},
+    {"case_id": "TRIAGE-003-D", "variant_type": "adversarial", "changed_variable": "prior migraine history added to focal-deficit case", "path": "cases/D-migraine-history-new-weakness.json", "split": "regression"},
+    {"case_id": "TRIAGE-003-E", "variant_type": "heldout", "changed_variable": "unilateral weakness -> sudden speech difficulty", "path": "cases/E-speech-difficulty-heldout.json", "split": "heldout"}
+  ],
+  "graph_snapshot": "graph.json",
+  "evidence_manifest": "evidence.json",
+  "split_policy": {
+    "leakage_rule": "Keep the held-out focal neurologic sign out of generated training examples for this family.",
+    "heldout_variables": ["sudden speech difficulty"]
+  },
+  "status": "gold_review_needed",
+  "review": {"clinical_review": "needed", "evidence_review": "source_verified", "last_reviewed_at": null}
+}
