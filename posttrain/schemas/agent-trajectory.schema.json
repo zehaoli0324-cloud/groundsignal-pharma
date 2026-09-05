@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GroundSignal Medical Agent Trajectory",
+  "type": "object",
+  "required": ["trajectory_id", "source_case_id", "steps", "final_answer", "outcome", "review_status", "split"],
+  "properties": {
+    "trajectory_id": {"type": "string"},
+    "source_case_id": {"type": "string"},
+    "model_id": {"type": "string"},
+    "graph_version": {"type": ["string", "null"]},
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step_index", "action_type"],
+        "properties": {
+          "step_index": {"type": "integer", "minimum": 1},
+          "action_type": {"type": "string", "enum": ["clarify", "tool_call", "retrieve", "reason", "answer", "stop"]},
+          "tool_name": {"type": ["string", "null"]},
+          "query": {"type": ["string", "null"]},
+          "input": {},
+          "output": {},
+          "evidence_passage_ids": {"type": "array", "items": {"type": "string"}},
+          "step_failure_types": {"type": "array", "items": {"type": "string"}}
+        },
+        "additionalProperties": true
+      }
+    },
+    "final_answer": {"type": "string"},
+    "outcome": {"type": "string", "enum": ["preferred", "rejected", "mixed"]},
+    "failure_types": {"type": "array", "items": {"type": "string"}},
+    "critical_error": {"type": "boolean"},
+    "review_status": {"type": "string", "enum": ["candidate", "reviewed", "approved", "rejected"]},
+    "split": {"type": "string", "enum": ["train", "dev", "heldout"]},
+    "regression_suites": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}
