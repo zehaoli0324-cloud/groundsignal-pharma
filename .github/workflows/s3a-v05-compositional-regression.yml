@@ -1,0 +1,91 @@
+name: s3a-v05-compositional-regression
+
+on:
+  push:
+    paths:
+      - "scripts/s3a_compositional_frame_parser_v05.py"
+      - "medical/stage-evals/S3/S3A_V0.5_DESIGN.md"
+      - ".github/workflows/s3a-v05-compositional-regression.yml"
+  workflow_dispatch:
+
+jobs:
+  exposed-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Syntax check
+        run: |
+          python -m py_compile \
+            scripts/s3a_compositional_frame_parser_v05.py \
+            scripts/s3a_semantic_frame_extractor_v04.py \
+            scripts/eval_s3a_proposition_extraction_v02.py
+
+      - name: Run exposed v0.1-v0.4 regressions
+        run: |
+          mkdir -p /tmp/s3a-v05
+          declare -a suites=(
+            "s3a-extraction-gold-v0.1.json"
+            "s3a-extraction-heldout-v0.2.json"
+            "s3a-extraction-heldout-v0.3.json"
+            "s3a-semantic-frame-heldout-v0.4.json"
+          )
+          failed=0
+          for suite in "${suites[@]}"; do
+            stem="${suite%.json}"
+            python scripts/s3a_compositional_frame_parser_v05.py \
+              --input "medical/stage-evals/S3/${suite}" \
+              --out "/tmp/s3a-v05/${stem}-predictions.json"
+            set +e
+            python scripts/eval_s3a_proposition_extraction_v02.py \
+              --gold "medical/stage-evals/S3/${suite}" \
+              --pred "/tmp/s3a-v05/${stem}-predictions.json" \
+              --out "/tmp/s3a-v05/${stem}-report.json" \
+              --min-f1 0.90 \
+              --min-critical-recall 0.95 \
+              --min-polarity-accuracy 0.95 \
+              --min-population-accuracy 0.95 \
+              --min-condition-accuracy 0.95
+            status=$?
+            set -e
+            echo "${suite} evaluator_exit=${status}"
+            cat "/tmp/s3a-v05/${stem}-report.json"
+            if [ "${status}" -ne 0 ]; then failed=1; fi
+          done
+          echo "${failed}" > /tmp/s3a-v05/aggregate-failed.txt
+
+      - name: Validate v0.5 trace contract
+        if: always()
+        run: |
+          python - <<'PY'
+          import glob, json
+          problems=[]
+          for p in glob.glob('/tmp/s3a-v05/*-predictions.json'):
+              d=json.load(open(p, encoding='utf-8'))
+              for row in d['predictions']:
+                  if 'scope_nodes' not in row or 'semantic_frames' not in row or 'predicted_propositions' not in row:
+                      problems.append((p,row.get('item_id'),'missing top-level trace'))
+                      continue
+                  for f in row['semantic_frames']:
+                      req={'event_type','subject','object','polarity','modality','source_span'}
+                      if not req <= set(f): problems.append((p,row.get('item_id'),'missing frame keys'))
+                      if 'scope_trace' not in f: problems.append((p,row.get('item_id'),'missing scope_trace'))
+          assert not problems, problems
+          print('S3a v0.5 compositional trace contract OK')
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s3a-v05-exposed-regression
+          path: /tmp/s3a-v05
+          retention-days: 90
+
+      - name: Enforce exposed regression gate
+        if: always()
+        run: |
+          test "$(cat /tmp/s3a-v05/aggregate-failed.txt)" = "0"
