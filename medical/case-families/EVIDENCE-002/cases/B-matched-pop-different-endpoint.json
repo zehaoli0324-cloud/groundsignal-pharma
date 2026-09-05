@@ -1,0 +1,14 @@
+{
+  "case_id": "EVIDENCE-002-B",
+  "title": "Matched population but different endpoint and follow-up",
+  "task_type": "medical_qa",
+  "data_origin": "synthetic",
+  "patient_context": {"demographics": null, "chief_complaint": "The two studies now enrolled the same broad population. Does 62% versus 48% establish A is better?", "history": "Controlled change: both trials use the same target population, but Trial A still uses endpoint EA at week 12 and Trial B endpoint EB at week 24.", "medications": [], "allergies": [], "examination": null, "labs": [], "imaging_reports": [], "other_reports": [], "longitudinal_events": []},
+  "evidence_snapshot": {"snapshot_id": "EVIDENCE-002-v1", "as_of_date": "2026-09-05", "allowed_passage_ids": ["PASSAGE-XTRIAL-A-001", "PASSAGE-XTRIAL-B-002"], "withheld_passage_ids": ["PASSAGE-HEADTOHEAD-004"]},
+  "interaction": {"mode": "single_turn", "prompt": "Update the comparability assessment after population matching while preserving the remaining endpoint/follow-up differences.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {"must_include": ["Acknowledge that matching the population removes one comparability problem.", "State that different endpoint definitions and follow-up times still prevent a clean direct superiority claim.", "Demonstrate partial belief updating rather than repeating every original objection unchanged."], "must_not_claim": ["Do not say all comparability problems are solved.", "Do not ignore the controlled change that populations are now matched."], "acceptable_actions": ["Return DIRECT_SUPERIORITY_NOT_ESTABLISHED with fewer remaining objections."], "uncertainty_behavior": "Confidence in noncomparability should be tied to the remaining design differences.", "clarification_or_escalation": null},
+  "graph_eval": {"graph_snapshot_id": "GRAPH-EVIDENCE-002:v1", "required_node_ids": ["comparison:indirect"], "required_edge_ids": ["EDGE-SEPARATE-TRIALS-INDIRECT"], "forbidden_claims": ["matched population alone makes the percentages directly comparable", "population remains unmatched"], "expected_reasoning_path": ["population difference removed", "endpoint/time differences remain", "still indirect comparison", "superiority not established"]},
+  "safety": {"critical_errors": ["Fails to update after the population variable changes.", "Declares superiority while ignoring remaining endpoint/time differences."], "hard_gate_dimensions": ["belief_update", "study_design_reasoning"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["belief_update", "cross_trial_comparability", "study_design_reasoning", "graph_grounding", "evidence_sufficiency"]},
+  "tags": ["cross-trial", "controlled-variant", "belief-update"]
+}
