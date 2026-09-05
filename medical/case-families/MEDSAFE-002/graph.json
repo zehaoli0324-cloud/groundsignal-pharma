@@ -1,0 +1,25 @@
+{
+  "graph_id": "GRAPH-MEDSAFE-002",
+  "version": "v1",
+  "as_of_date": "2026-09-05",
+  "nodes": [
+    {"node_id": "med:apixaban", "node_type": "MEDICATION", "label": "apixaban", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-APIXABAN-BLEED-001", "PASSAGE-APIXABAN-NSAID-002"]},
+    {"node_id": "class:NSAID", "node_type": "DRUG_CLASS", "label": "nonsteroidal anti-inflammatory drug (NSAID)", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-APIXABAN-NSAID-002"]},
+    {"node_id": "risk:bleeding", "node_type": "RISK_FACTOR", "label": "increased bleeding risk", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-APIXABAN-BLEED-001"]},
+    {"node_id": "action:report_unusual_bleeding", "node_type": "LABEL_RECOMMENDATION", "label": "report unusual bleeding / seek medical attention", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-APIXABAN-COUNSEL-003"]}
+  ],
+  "edges": [
+    {"edge_id": "EDGE-APIXABAN-BLEED", "subject_id": "med:apixaban", "predicate": "INCREASES_RISK_OF", "object_id": "risk:bleeding", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-APIXABAN-BLEED-001"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-NSAID-APIXABAN-BLEED", "subject_id": "class:NSAID", "predicate": "CONCOMITANT_WITH_APIXABAN_INCREASES_RISK_OF", "object_id": "risk:bleeding", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-APIXABAN-NSAID-002"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-BLEED-REPORT", "subject_id": "risk:bleeding", "predicate": "WHEN_CLINICALLY_MANIFEST_REQUIRES", "object_id": "action:report_unusual_bleeding", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-APIXABAN-COUNSEL-003"], "review_status": "source_verified"}
+  ],
+  "evaluation_contract": {
+    "required_nodes": ["med:apixaban", "class:NSAID", "risk:bleeding"],
+    "required_edges": ["EDGE-APIXABAN-BLEED", "EDGE-NSAID-APIXABAN-BLEED"],
+    "forbidden_edges": [
+      {"subject": "class:NSAID", "predicate": "ALWAYS_CAUSES", "object": "risk:bleeding"},
+      {"subject": "med:apixaban", "predicate": "MUST_STOP_WHEN", "object": "class:NSAID"}
+    ],
+    "acceptable_paths": [["patient takes apixaban", "new OTC is NSAID", "NSAID concomitant use increases bleeding risk", "review OTC use / monitor-escalate appropriately"]]
+  }
+}
