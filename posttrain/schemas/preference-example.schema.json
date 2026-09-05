@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GroundSignal Medical Preference Example",
+  "type": "object",
+  "required": ["example_id", "prompt", "chosen", "rejected", "source_case_id", "failure_types", "review_status", "split"],
+  "properties": {
+    "example_id": {"type": "string"},
+    "prompt": {"type": "string"},
+    "context": {"type": ["string", "null"]},
+    "chosen": {"type": "string"},
+    "rejected": {"type": "string"},
+    "source_case_id": {"type": "string"},
+    "source_run_ids": {"type": "array", "items": {"type": "string"}},
+    "failure_types": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "preference_reason": {"type": "string"},
+    "evidence_passage_ids": {"type": "array", "items": {"type": "string"}},
+    "graph_version": {"type": ["string", "null"]},
+    "critical_error_in_rejected": {"type": "boolean"},
+    "review_status": {"type": "string", "enum": ["candidate", "reviewed", "approved", "rejected"]},
+    "split": {"type": "string", "enum": ["train", "dev", "heldout"]},
+    "builder_version": {"type": "string"},
+    "regression_suites": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}
