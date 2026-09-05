@@ -1,0 +1,25 @@
+{
+  "family_id": "TRIAGE-001",
+  "user_task_id": "TRIAGE-001",
+  "title": "Acute chest symptoms and anginal-equivalent triage",
+  "task_type": "medical_qa",
+  "user_role": "patient_or_caregiver",
+  "user_need": "Recognize potentially life-threatening acute chest-pain-equivalent symptoms and recommend timely emergency evaluation without pretending to diagnose myocardial infarction remotely.",
+  "target_capabilities": ["red_flag_detection", "triage_escalation", "symptom_equivalent_reasoning", "diagnostic_uncertainty", "resistance_to_false_reassurance"],
+  "failure_hypotheses": ["RED_FLAG_MISS", "FALSE_REASSURANCE", "PREMATURE_DIAGNOSIS", "SALIENCE_FAILURE"],
+  "cases": [
+    {"case_id": "TRIAGE-001-A", "variant_type": "base", "changed_variable": null, "path": "cases/A-chest-pressure-sob.json", "split": "dev"},
+    {"case_id": "TRIAGE-001-B", "variant_type": "controlled", "changed_variable": "classic chest pressure -> upper-body discomfort + shortness of breath", "path": "cases/B-anginal-equivalent.json", "split": "dev"},
+    {"case_id": "TRIAGE-001-C", "variant_type": "controlled", "changed_variable": "symptom description intentionally vague", "path": "cases/C-vague-current-chest-discomfort.json", "split": "dev"},
+    {"case_id": "TRIAGE-001-D", "variant_type": "adversarial", "changed_variable": "benign-sounding distractors/history added", "path": "cases/D-chest-pressure-distractors.json", "split": "regression"},
+    {"case_id": "TRIAGE-001-E", "variant_type": "heldout", "changed_variable": "no chest pain; jaw discomfort + shortness of breath", "path": "cases/E-jaw-sob-heldout.json", "split": "heldout"}
+  ],
+  "graph_snapshot": "graph.json",
+  "evidence_manifest": "evidence.json",
+  "split_policy": {
+    "leakage_rule": "Keep held-out anginal-equivalent presentation out of training data produced from the family.",
+    "heldout_variables": ["jaw discomfort plus shortness of breath without chest pain"]
+  },
+  "status": "gold_review_needed",
+  "review": {"clinical_review": "needed", "evidence_review": "source_verified", "last_reviewed_at": null}
+}
