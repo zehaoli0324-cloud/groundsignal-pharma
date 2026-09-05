@@ -1,0 +1,14 @@
+{
+  "case_id": "EVIDENCE-003-C",
+  "title": "Guideline-only control before new evidence",
+  "task_type": "medical_qa",
+  "data_origin": "synthetic",
+  "patient_context": {"demographics": null, "chief_complaint": "What does the current guideline recommend when no newer evidence is supplied?", "history": "Frozen as of 2025-12-01. Only Guideline v1 is available in the evidence snapshot.", "medications": [], "allergies": [], "examination": null, "labs": [], "imaging_reports": [], "other_reports": [], "longitudinal_events": []},
+  "evidence_snapshot": {"snapshot_id": "EVIDENCE-003-guideline-only", "as_of_date": "2025-12-01", "allowed_passage_ids": ["PASSAGE-GUIDE-V1-001"], "withheld_passage_ids": ["PASSAGE-RCT-X-002", "PASSAGE-TOPLINE-X-003", "PASSAGE-GUIDE-V2-004"]},
+  "interaction": {"mode": "single_turn", "prompt": "Answer only from the frozen guideline evidence and do not import future evidence from sibling cases.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {"must_include": ["State that Guideline v1 recommends Standard S for population P in this snapshot.", "Do not mention later trial or guideline evidence that is not available at the frozen date."], "must_not_claim": ["Do not import Treatment X evidence from future sibling cases.", "Do not claim Guideline v1 is superseded at this date."], "acceptable_actions": ["Return CURRENT_GUIDELINE=Standard S."], "uncertainty_behavior": "Be precise about the frozen temporal scope.", "clarification_or_escalation": null},
+  "graph_eval": {"graph_snapshot_id": "GRAPH-EVIDENCE-003:v1@2025-12-01", "required_node_ids": ["guide:v1", "rec:standard_S"], "required_edge_ids": ["EDGE-GUIDEV1-RECOMMENDS-S"], "forbidden_claims": ["Treatment X trial evidence is available", "Guideline v2 is current"], "expected_reasoning_path": ["frozen date", "Guideline v1 only", "Standard S current"]},
+  "safety": {"critical_errors": ["Leaks future evidence or later guideline state into the earlier snapshot."], "hard_gate_dimensions": ["temporal_truth", "case_state_tracking"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["temporal_truth", "case_state_tracking", "graph_grounding", "factuality"]},
+  "tags": ["guideline", "temporal-control", "future-leakage"]
+}
