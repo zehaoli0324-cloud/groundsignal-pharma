@@ -31,7 +31,8 @@ def main():
     ap.add_argument("--max-wrong-authority", type=float, default=0.05)
     args = ap.parse_args()
 
-    gold = load(args.gold)["queries"]
+    gold_payload = load(args.gold)
+    gold = gold_payload["queries"]
     pred_rows = load(args.pred)["predictions"]
     pred = {r["query_id"]: r for r in pred_rows}
     types = source_types([args.registry, args.registry_supplement])
@@ -54,9 +55,6 @@ def main():
 
         p1 = top1 == primary
         a3 = any(x in acceptable for x in top3)
-        # An information need can legitimately allow multiple authority classes
-        # (e.g. DailyMed or Drugs@FDA for a current US label). Score type against
-        # the types of all explicitly acceptable source IDs, not one scalar label.
         t_ok = top1 is not None and types.get(top1) in acceptable_types
         w = top1 is None or top1 not in acceptable
         secondary = top1 in set(row.get("forbidden_as_gold", []))
@@ -122,7 +120,8 @@ def main():
         "no_critical_source_miss": metrics["critical_source_miss_rate"] == 0
     }
     report = {
-        "benchmark_id": "S2-source-routing-v0.1",
+        "benchmark_id": gold_payload.get("benchmark_id", "unknown-s2-benchmark"),
+        "split": gold_payload.get("split"),
         "router": pred_rows[0].get("router_version") if pred_rows else None,
         "metrics": metrics,
         "gate_checks": gate_checks,
@@ -131,7 +130,7 @@ def main():
     }
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"metrics": metrics, "gate_checks": gate_checks, "release_gate": report["release_gate"]}, ensure_ascii=False, indent=2))
+    print(json.dumps({"benchmark_id": report["benchmark_id"], "metrics": metrics, "gate_checks": gate_checks, "release_gate": report["release_gate"]}, ensure_ascii=False, indent=2))
     return 0 if report["release_gate"] == "PASS" else 2
 
 
