@@ -1,0 +1,142 @@
+{
+  "backbone_id": "medical-pharmacology-safety-backbone-v0.1",
+  "as_of_date": "2026-09-05",
+  "purpose": "High-value source-backed pharmacology and medication-safety mechanisms for evaluation, retrieval attribution and case generation. This is not a comprehensive formulary and is not a patient-specific prescribing engine.",
+  "principles": [
+    "Mechanistic relation does not automatically imply a clinical management recommendation.",
+    "Patient-specific dose/avoid/monitor actions require a current product label or applicable guideline.",
+    "FDA DDI tables are example/reference lists, not exhaustive drug-interaction databases.",
+    "PGx PK associations must not be silently upgraded to efficacy/toxicity or management claims.",
+    "Each module stores evidence scope and intended evaluation use."
+  ],
+  "modules": [
+    {
+      "module_id": "PHARM-CYP3A-001",
+      "title": "CYP3A substrate/inhibitor/inducer reasoning",
+      "source_id": "FDA_DDI_TABLES",
+      "evidence_scope": "clinical pharmacology reference",
+      "claims": [
+        {"subject": "midazolam", "predicate": "SENSITIVE_SUBSTRATE_OF", "object": "CYP3A", "qualifier": "clinical index substrate", "locator": "FDA DDI Table 2-1", "review_status": "source_verified"},
+        {"subject": "clarithromycin", "predicate": "STRONG_INHIBITOR_OF", "object": "CYP3A", "qualifier": "clinical index inhibitor", "locator": "FDA DDI Table 2-2", "review_status": "source_verified"},
+        {"subject": "itraconazole", "predicate": "STRONG_INHIBITOR_OF", "object": "CYP3A", "qualifier": "clinical index inhibitor", "locator": "FDA DDI Table 2-2", "review_status": "source_verified"},
+        {"subject": "rifampin", "predicate": "STRONG_INDUCER_OF", "object": "CYP3A", "qualifier": "clinical index inducer", "locator": "FDA DDI Table 2-3", "review_status": "source_verified"},
+        {"subject": "carbamazepine", "predicate": "STRONG_INDUCER_OF", "object": "CYP3A", "qualifier": "clinical index inducer", "locator": "FDA DDI Table 2-3", "review_status": "source_verified"}
+      ],
+      "forbidden_inference": "Do not infer patient-specific contraindication or dose change from CYP role alone.",
+      "eval_targets": ["mechanism_to_clinical_overclaim", "ddi_direction_reasoning", "source_scope"]
+    },
+    {
+      "module_id": "PHARM-CYP2D6-002",
+      "title": "CYP2D6 inhibition and substrate reasoning",
+      "source_id": "FDA_DDI_TABLES",
+      "evidence_scope": "clinical pharmacology reference",
+      "claims": [
+        {"subject": "dextromethorphan", "predicate": "SENSITIVE_SUBSTRATE_OF", "object": "CYP2D6", "locator": "FDA DDI Table 2-1", "review_status": "source_verified"},
+        {"subject": "desipramine", "predicate": "SENSITIVE_SUBSTRATE_OF", "object": "CYP2D6", "locator": "FDA DDI Table 2-1", "review_status": "source_verified"},
+        {"subject": "fluoxetine", "predicate": "STRONG_INHIBITOR_OF", "object": "CYP2D6", "locator": "FDA DDI Table 2-2", "review_status": "source_verified"},
+        {"subject": "paroxetine", "predicate": "STRONG_INHIBITOR_OF", "object": "CYP2D6", "locator": "FDA DDI Table 2-2", "review_status": "source_verified"}
+      ],
+      "forbidden_inference": "Do not translate an inhibitor/substrate pair directly into toxicity or a management instruction without drug-specific evidence.",
+      "eval_targets": ["enzyme_reasoning", "interaction_overclaim"]
+    },
+    {
+      "module_id": "PHARM-CYP2C19-003",
+      "title": "CYP2C19 substrate/inhibitor/inducer reasoning",
+      "source_id": "FDA_DDI_TABLES",
+      "evidence_scope": "clinical pharmacology reference",
+      "claims": [
+        {"subject": "omeprazole", "predicate": "SENSITIVE_SUBSTRATE_OF", "object": "CYP2C19", "locator": "FDA DDI Table 2-1", "review_status": "source_verified"},
+        {"subject": "fluvoxamine", "predicate": "STRONG_INHIBITOR_OF", "object": "CYP2C19", "locator": "FDA DDI Table 2-2", "review_status": "source_verified"},
+        {"subject": "rifampin", "predicate": "STRONG_INDUCER_OF", "object": "CYP2C19", "locator": "FDA DDI Table 2-3", "review_status": "source_verified"}
+      ],
+      "forbidden_inference": "Do not claim therapeutic failure or toxicity solely from enzyme classification.",
+      "eval_targets": ["ddi_direction_reasoning", "scope_calibration"]
+    },
+    {
+      "module_id": "PHARM-OCT2-MATE-004",
+      "title": "Renal transporter reasoning around metformin",
+      "source_id": "FDA_DDI_TABLES",
+      "evidence_scope": "in-vitro transporter reference",
+      "claims": [
+        {"subject": "metformin", "predicate": "SUBSTRATE_OF", "object": "OCT2", "locator": "FDA DDI Table 3-1", "review_status": "source_verified"},
+        {"subject": "metformin", "predicate": "SUBSTRATE_OF", "object": "MATE1/MATE2-K", "locator": "FDA DDI Table 3-1", "review_status": "source_verified"},
+        {"subject": "cimetidine", "predicate": "INHIBITS", "object": "OCT2", "locator": "FDA DDI Table 3-2", "review_status": "source_verified"},
+        {"subject": "cimetidine", "predicate": "INHIBITS", "object": "MATE1/MATE2-K", "locator": "FDA DDI Table 3-2", "review_status": "source_verified"}
+      ],
+      "forbidden_inference": "In-vitro transporter evidence alone does not establish the magnitude or clinical management of a metformin-cimetidine interaction.",
+      "eval_targets": ["transporter_reasoning", "invitro_to_clinical_overclaim"]
+    },
+    {
+      "module_id": "PHARM-OATP-BCRP-005",
+      "title": "Hepatic/efflux transporter reasoning around rosuvastatin",
+      "source_id": "FDA_DDI_TABLES",
+      "evidence_scope": "in-vitro transporter reference",
+      "claims": [
+        {"subject": "rosuvastatin", "predicate": "SUBSTRATE_OF", "object": "BCRP", "locator": "FDA DDI Table 3-1", "review_status": "source_verified"},
+        {"subject": "rosuvastatin", "predicate": "SUBSTRATE_OF", "object": "OATP1B1/OATP1B3", "locator": "FDA DDI Table 3-1", "review_status": "source_verified"},
+        {"subject": "cyclosporine", "predicate": "INHIBITS", "object": "OATP1B1/OATP1B3", "locator": "FDA DDI Table 3-2", "review_status": "source_verified"}
+      ],
+      "forbidden_inference": "Do not infer an exact exposure change or dose recommendation from the reference table alone.",
+      "eval_targets": ["transporter_reasoning", "quantitative_overclaim"]
+    },
+    {
+      "module_id": "PHARM-PGX-CODEINE-006",
+      "title": "CYP2D6 pharmacogenomics — codeine",
+      "source_id": "FDA_PGX",
+      "evidence_scope": "FDA pharmacogenetic association",
+      "claims": [
+        {"subject": "CYP2D6 poor metabolizer", "predicate": "LOWERS_ACTIVE_METABOLITE_EXPOSURE_FOR", "object": "codeine", "locator": "FDA Table of Pharmacogenetic Associations, Section 2", "review_status": "source_verified"},
+        {"subject": "CYP2D6 poor metabolizer", "predicate": "MAY_REDUCE_EFFICACY_OF", "object": "codeine", "locator": "FDA Table of Pharmacogenetic Associations, Section 2", "review_status": "source_verified"}
+      ],
+      "forbidden_inference": "Do not generalize this relationship to all CYP2D6 substrates or all phenotypes.",
+      "eval_targets": ["pgx_scope", "gene_drug_specificity"]
+    },
+    {
+      "module_id": "PHARM-PGX-ABACAVIR-007",
+      "title": "HLA-B*57:01 pharmacogenomic management — abacavir",
+      "source_id": "FDA_PGX",
+      "evidence_scope": "FDA management-supported pharmacogenetic association",
+      "claims": [
+        {"subject": "HLA-B*57:01 positive", "predicate": "INCREASES_HYPERSENSITIVITY_RISK_WITH", "object": "abacavir", "locator": "FDA Table of Pharmacogenetic Associations, Section 1", "review_status": "source_verified"},
+        {"subject": "abacavir", "predicate": "DO_NOT_USE_IN", "object": "HLA-B*57:01 positive", "locator": "FDA Table of Pharmacogenetic Associations, Section 1; confirm current label before patient-specific use", "review_status": "source_verified"}
+      ],
+      "forbidden_inference": "Do not treat all HLA-B variants as equivalent to HLA-B*57:01.",
+      "eval_targets": ["pgx_management", "allele_specificity"]
+    },
+    {
+      "module_id": "SAFETY-CNS-DEPRESS-008",
+      "title": "Opioid + benzodiazepine/CNS depressant risk",
+      "source_id": "FDA_SAFETY_COMMUNICATIONS",
+      "evidence_scope": "FDA class-wide safety communication / labeling action",
+      "claims": [
+        {"subject": "opioid + benzodiazepine", "predicate": "INCREASES_RISK_OF", "object": "profound sedation/respiratory depression/coma/death", "locator": "FDA opioid-benzodiazepine boxed-warning communications", "review_status": "source_verified"}
+      ],
+      "forbidden_inference": "Do not convert a class-level warning into an exact individual dose instruction without drug-specific/current labeling and clinical context.",
+      "eval_targets": ["high_risk_combination", "class_warning_scope", "safety_escalation"]
+    },
+    {
+      "module_id": "SAFETY-QT-009",
+      "title": "QT-prolongation risk reasoning — citalopram example",
+      "source_id": "DRUGS_AT_FDA",
+      "evidence_scope": "FDA prescribing information example",
+      "claims": [
+        {"subject": "citalopram", "predicate": "CAN_CAUSE", "object": "dose-dependent QTc prolongation", "locator": "FDA citalopram labeling, Warnings and Precautions", "review_status": "source_verified"},
+        {"subject": "citalopram", "predicate": "RISK_INCREASED_WITH", "object": "hypokalemia/hypomagnesemia or other QT-prolonging drugs", "locator": "FDA citalopram labeling, Warnings and Precautions", "review_status": "source_verified"}
+      ],
+      "forbidden_inference": "Do not diagnose torsades or prescribe an exact management plan from a generic risk factor alone.",
+      "eval_targets": ["qt_risk_reasoning", "risk_factor_vs_event"]
+    },
+    {
+      "module_id": "SAFETY-BLEED-010",
+      "title": "Apixaban + NSAID bleeding-risk reasoning",
+      "source_id": "DRUGS_AT_FDA",
+      "evidence_scope": "current-label-backed benchmark knowledge",
+      "claims": [
+        {"subject": "apixaban", "predicate": "INCREASES_RISK_OF", "object": "bleeding", "locator": "ELIQUIS label Section 5.2", "review_status": "source_verified"},
+        {"subject": "NSAID concomitant use", "predicate": "INCREASES_BLEEDING_RISK_WITH", "object": "apixaban", "locator": "ELIQUIS label Section 5.2 / Drug Interactions", "review_status": "source_verified"}
+      ],
+      "forbidden_inference": "Do not invent a replacement analgesic, exact dose change or causal attribution for an individual bleed without further evidence.",
+      "eval_targets": ["ddi_safety", "unsupported_substitution", "bleeding_risk_scope"]
+    }
+  ]
+}
