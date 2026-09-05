@@ -1,0 +1,199 @@
+{
+  "benchmark_id": "S2-intent-routing-heldout-v0.3",
+  "split": "fresh_heldout",
+  "frozen_before_first_run": true,
+  "queries": [
+    {
+      "query_id": "S2I-001",
+      "query": "我要把尿白蛋白/肌酐比作为结构化 observation 存进数据库，需要标准编码，不是问结果高低怎么解释。",
+      "expected_intent": "OBSERVATION_TERMINOLOGY_NORMALIZATION",
+      "expected_primary_source_id": "LOINC",
+      "acceptable_source_ids": ["LOINC"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-002",
+      "query": "Nexium、esomeprazole 和 esomeprazole magnesium 想统一成规范药物概念和成分，应该走哪个标准系统？",
+      "expected_intent": "DRUG_TERMINOLOGY_NORMALIZATION",
+      "expected_primary_source_id": "RXNORM",
+      "acceptable_source_ids": ["RXNORM"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-003",
+      "query": "我需要确认这个药是否真的已经获 FDA 上市批准，而不是只看到注册性三期研究。",
+      "expected_intent": "US_APPROVAL_STATUS",
+      "expected_primary_source_id": "DRUGS_AT_FDA",
+      "acceptable_source_ids": ["DRUGS_AT_FDA"],
+      "high_risk": true
+    },
+    {
+      "query_id": "S2I-004",
+      "query": "NCT04505774 现在是什么招募状态，注册的 primary endpoint 是什么？",
+      "expected_intent": "TRIAL_REGISTRY_STATUS",
+      "expected_primary_source_id": "CLINICALTRIALS_GOV",
+      "acceptable_source_ids": ["CLINICALTRIALS_GOV"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-005",
+      "query": "我只想查美国官方自发不良事件上报系统里有没有这个药的报告信号，不把报告数量当因果证据。",
+      "expected_intent": "SAFETY_SIGNAL_SURVEILLANCE",
+      "expected_primary_source_id": "OPENFDA_FAERS",
+      "acceptable_source_ids": ["OPENFDA_FAERS"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-006",
+      "query": "我想看 transporter-mediated drug interaction 的一般研究设计和结果解释原则，不是查某个药是不是底物。",
+      "expected_intent": "DDI_METHOD_GUIDANCE",
+      "expected_primary_source_id": "FDA_ICH_M12",
+      "acceptable_source_ids": ["FDA_ICH_M12"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-007",
+      "query": "rifampin 算不算 CYP3A strong inducer？我要查官方 substrate/inhibitor/inducer reference table。",
+      "expected_intent": "DDI_MECHANISM_LOOKUP",
+      "expected_primary_source_id": "FDA_DDI_TABLES",
+      "acceptable_source_ids": ["FDA_DDI_TABLES"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-008",
+      "query": "美国处方药现在还应该用 pregnancy category C 这种字母妊娠分级吗？我要现行 labeling rule。",
+      "expected_intent": "US_PLLR_GUIDANCE",
+      "expected_primary_source_id": "FDA_PLLR",
+      "acceptable_source_ids": ["FDA_PLLR"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-009",
+      "query": "产品标签里 QTc 风险应该按什么 FDA 通用原则呈现？这里问的是 labeling guidance，不是某一个药的 QT 数据。",
+      "expected_intent": "US_QTC_LABELING_GUIDANCE",
+      "expected_primary_source_id": "FDA_QTC_LABELING_2025",
+      "acceptable_source_ids": ["FDA_QTC_LABELING_2025"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-010",
+      "query": "肾功能不全患者的 PK study 和 dose-development 一般方法学，我想追 FDA guidance，不是问具体某个药减多少。",
+      "expected_intent": "US_RENAL_PK_GUIDANCE",
+      "expected_primary_source_id": "FDA_RENAL_IMPAIRMENT_GUIDANCE",
+      "acceptable_source_ids": ["FDA_RENAL_IMPAIRMENT_GUIDANCE"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-011",
+      "query": "Need the FDA draft study-design guidance for hepatic impairment PK/PD, and the answer must preserve that it is draft guidance.",
+      "expected_intent": "US_HEPATIC_PK_GUIDANCE",
+      "expected_primary_source_id": "FDA_HEPATIC_IMPAIRMENT_2026_DRAFT",
+      "acceptable_source_ids": ["FDA_HEPATIC_IMPAIRMENT_2026_DRAFT"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-012",
+      "query": "HLA-B*57:01 和 abacavir 的 pharmacogenomic management 信息应该优先查哪类 FDA 来源？",
+      "expected_intent": "PHARMACOGENOMICS",
+      "expected_primary_source_id": "FDA_PGX",
+      "acceptable_source_ids": ["FDA_PGX", "DAILYMED_SPL"],
+      "high_risk": true
+    },
+    {
+      "query_id": "S2I-013",
+      "query": "我要核对 glipizide 当前美国 prescribing information 对 severe hypoglycemia 的原始警告，不要患者科普网页。",
+      "expected_intent": "US_PRODUCT_LABEL_CURRENT",
+      "expected_primary_source_id": "DAILYMED_SPL",
+      "acceptable_source_ids": ["DAILYMED_SPL", "DRUGS_AT_FDA"],
+      "high_risk": true
+    },
+    {
+      "query_id": "S2I-014",
+      "query": "胸部不适伴气短，我是在构建 benchmark，想找 American Heart Association 的专业胸痛/等价症状指导作为来源。",
+      "expected_intent": "CARDIOVASCULAR_GUIDANCE",
+      "expected_primary_source_id": "AHA_GUIDANCE",
+      "acceptable_source_ids": ["AHA_GUIDANCE"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-015",
+      "query": "一侧无力和说话不清这种 stroke warning signs，我需要 CDC 范围内的官方警示来源。",
+      "expected_intent": "PUBLIC_HEALTH_GUIDANCE",
+      "expected_primary_source_id": "CDC_CLINICAL_PUBLIC_HEALTH",
+      "acceptable_source_ids": ["CDC_CLINICAL_PUBLIC_HEALTH"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-016",
+      "query": "AKI 常见病因想补一个 National Kidney Foundation 的肾脏专科背景来源；具体药物剂量我会另外回说明书。",
+      "expected_intent": "KIDNEY_CLINICAL_REFERENCE",
+      "expected_primary_source_id": "NKF_CLINICAL_REFERENCE",
+      "acceptable_source_ids": ["NKF_CLINICAL_REFERENCE", "PUBMED"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-017",
+      "query": "我要中国国家层面的临床路径文件，不是 CDE 的药品受理或审评进度。",
+      "expected_intent": "CHINA_NATIONAL_CLINICAL_PATHWAY",
+      "expected_primary_source_id": "NHC_CHINA",
+      "acceptable_source_ids": ["NHC_CHINA"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-018",
+      "query": "某创新药在中国目前是已经获批还是仍处于 CDE 审评阶段？我要中国监管状态。",
+      "expected_intent": "CHINA_REGULATORY_STATUS",
+      "expected_primary_source_id": "CDE_NMPA",
+      "acceptable_source_ids": ["CDE_NMPA"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-019",
+      "query": "For the European indication and current SmPC wording, I want the regulator product information rather than a U.S. label.",
+      "expected_intent": "EU_PRODUCT_INFORMATION",
+      "expected_primary_source_id": "EMA_EPAR_SMPC",
+      "acceptable_source_ids": ["EMA_EPAR_SMPC"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-020",
+      "query": "公司 slide 说疗效更好，但我先要找同行评议的 randomized-trial paper，而不是公司新闻。",
+      "expected_intent": "PEER_REVIEWED_LITERATURE",
+      "expected_primary_source_id": "PUBMED",
+      "acceptable_source_ids": ["PUBMED"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-021",
+      "query": "这个药的 drug-induced liver injury 背景和已知肝毒性模式，我想先查 NIH curated reference。",
+      "expected_intent": "DILI_REFERENCE",
+      "expected_primary_source_id": "LIVERTOX",
+      "acceptable_source_ids": ["LIVERTOX", "DAILYMED_SPL", "PUBMED"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-022",
+      "query": "FDA 刚发布药物安全警告和 label-change notice，我要追监管原始 safety communication。",
+      "expected_intent": "REGULATORY_SAFETY_UPDATE",
+      "expected_primary_source_id": "FDA_SAFETY_COMMUNICATIONS",
+      "acceptable_source_ids": ["FDA_SAFETY_COMMUNICATIONS", "DRUGS_AT_FDA", "DAILYMED_SPL"],
+      "high_risk": true
+    },
+    {
+      "query_id": "S2I-023",
+      "query": "我需要分别确认 FDA 是否批准这个适应症、美国自发不良事件系统有没有安全信号、以及 PubMed 有没有临床论文，三个来源都要。",
+      "expected_intent": "MULTI_SOURCE_APPROVAL_SIGNAL_LITERATURE",
+      "expected_primary_source_id": "DRUGS_AT_FDA",
+      "acceptable_source_ids": ["DRUGS_AT_FDA", "OPENFDA_FAERS", "PUBMED"],
+      "high_risk": false
+    },
+    {
+      "query_id": "S2I-024",
+      "query": "我想系统了解慢性炎症和贫血之间有哪些临床研究证据，先找医学文献即可。",
+      "expected_intent": "PEER_REVIEWED_LITERATURE",
+      "expected_primary_source_id": "PUBMED",
+      "acceptable_source_ids": ["PUBMED"],
+      "high_risk": false
+    }
+  ]
+}
