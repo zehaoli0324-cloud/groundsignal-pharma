@@ -1,0 +1,51 @@
+{
+  "manifest_id": "evidence-REPORT-001-v1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {
+      "source_id": "SRC-MEDLINEPLUS-CBC-2026",
+      "title": "Complete Blood Count (CBC)",
+      "source_type": "government_health_reference",
+      "publisher": "MedlinePlus / U.S. National Library of Medicine",
+      "url": "https://medlineplus.gov/lab-tests/complete-blood-count-cbc/",
+      "document_date": "current-source-snapshot-2026-09-05",
+      "authority_tier": "government_health_reference",
+      "version_note": "Paraphrased benchmark claims only."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLAIM-CBC-NONSPECIFIC-001",
+      "paraphrased_claim": "Abnormal CBC values can have many causes and do not by themselves establish a diagnosis; history, symptoms and sometimes additional tests are needed.",
+      "source_id": "SRC-MEDLINEPLUS-CBC-2026",
+      "locator": "What do the results mean? / Is there anything else I need to know?",
+      "passage_id": "PASSAGE-CBC-NONSPECIFIC-001",
+      "evidence_role": "context",
+      "claim_scope": "CBC interpretation limits",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-CBC-RBC-002",
+      "paraphrased_claim": "Abnormal red-cell, hemoglobin or hematocrit values can be associated with several conditions, including anemia, but the CBC alone does not specify the cause.",
+      "source_id": "SRC-MEDLINEPLUS-CBC-2026",
+      "locator": "What do the results mean?",
+      "passage_id": "PASSAGE-CBC-RBC-002",
+      "evidence_role": "context",
+      "claim_scope": "red-cell abnormalities",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-CBC-WBC-003",
+      "paraphrased_claim": "Low or high white-cell counts can occur for multiple reasons, including disease processes or medication effects; the count is not a standalone etiologic diagnosis.",
+      "source_id": "SRC-MEDLINEPLUS-CBC-2026",
+      "locator": "What do the results mean?",
+      "passage_id": "PASSAGE-CBC-WBC-003",
+      "evidence_role": "context",
+      "claim_scope": "white-cell abnormalities",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    }
+  ]
+}
