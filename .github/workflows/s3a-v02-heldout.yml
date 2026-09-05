@@ -1,0 +1,66 @@
+name: s3a-v02-heldout
+
+on:
+  push:
+    paths:
+      - 'medical/stage-evals/S3/s3a-extraction-heldout-v0.2.json'
+      - 'scripts/s3a_ontology_extractor_v022.py'
+      - 'scripts/s3a_ontology_extractor_v021.py'
+      - 'scripts/eval_s3a_proposition_extraction_v02.py'
+      - '.github/workflows/s3a-v02-heldout.yml'
+  workflow_dispatch:
+
+jobs:
+  first-heldout-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate frozen S3a v0.2 contract
+        run: |
+          python -m py_compile scripts/s3a_ontology_extractor_v021.py scripts/s3a_ontology_extractor_v022.py scripts/eval_s3a_proposition_extraction_v02.py
+          python - <<'PY'
+          import json
+          p='medical/stage-evals/S3/s3a-extraction-heldout-v0.2.json'
+          d=json.load(open(p, encoding='utf-8'))
+          assert d['split']=='heldout'
+          assert d['frozen_after_extractor_implementation'] is True
+          assert d['first_run_must_be_preserved'] is True
+          assert d['extractor_version']=='s3a-ontology-guided-v0.2.2'
+          assert d['extractor_commit']=='c71ef1a2d7d6aebd02a93d844a61222765210a20'
+          assert d['evaluator_commit']=='50a9a7a2f4a5409297434cf0c29f05d1fa6780c5'
+          assert d['evaluate_population'] is True
+          assert len(d['items'])==24
+          ids=[x['item_id'] for x in d['items']]
+          assert len(ids)==len(set(ids))
+          print('Frozen S3a items:', len(ids))
+          print('Expected propositions:', sum(len(x['expected_propositions']) for x in d['items']))
+          PY
+      - name: Run untouched S3a v0.2 first observation
+        run: |
+          mkdir -p /tmp/s3a-v02-heldout
+          python scripts/s3a_ontology_extractor_v022.py \
+            --input medical/stage-evals/S3/s3a-extraction-heldout-v0.2.json \
+            --out /tmp/s3a-v02-heldout/predictions.json
+          set +e
+          python scripts/eval_s3a_proposition_extraction_v02.py \
+            --gold medical/stage-evals/S3/s3a-extraction-heldout-v0.2.json \
+            --pred /tmp/s3a-v02-heldout/predictions.json \
+            --out /tmp/s3a-v02-heldout/report.json \
+            --min-f1 0.90 \
+            --min-critical-recall 0.95 \
+            --min-polarity-accuracy 0.95 \
+            --min-population-accuracy 0.95 \
+            --min-condition-accuracy 0.95
+          status=$?
+          set -e
+          cat /tmp/s3a-v02-heldout/report.json
+          echo "S3a v0.2 fresh heldout first-run exit code: ${status}"
+          echo "Preserve this result before any extractor tuning."
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s3a-v02-heldout-first-run
+          path: /tmp/s3a-v02-heldout
+          retention-days: 90
