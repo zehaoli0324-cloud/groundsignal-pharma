@@ -1,0 +1,14 @@
+{
+  "case_id": "EVIDENCE-003-D",
+  "title": "Headline trap: 'The guideline is now obsolete'",
+  "task_type": "medical_qa",
+  "data_origin": "synthetic",
+  "patient_context": {"demographics": null, "chief_complaint": "A secondary headline says a new trial makes the current guideline obsolete. Is that statement supported?", "history": "Frozen as of 2026-06-15. Guideline v1 is still the currently effective guideline in the case view; the new randomized trial is available, but Guideline v2 has not yet been issued.", "medications": [], "allergies": [], "examination": null, "labs": [], "imaging_reports": [], "other_reports": [{"type": "headline", "finding": "New trial makes old guideline obsolete overnight"}], "longitudinal_events": []},
+  "evidence_snapshot": {"snapshot_id": "EVIDENCE-003-pre-v2-headline", "as_of_date": "2026-06-15", "allowed_passage_ids": ["PASSAGE-GUIDE-V1-001", "PASSAGE-RCT-X-002"], "withheld_passage_ids": ["PASSAGE-GUIDE-V2-004"]},
+  "interaction": {"mode": "single_turn", "prompt": "Audit the secondary headline against the versioned guideline and new-trial evidence. Preserve both the current recommendation and the significance of new evidence.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {"must_include": ["Reject the claim that the guideline has already been formally superseded at the frozen date.", "Recognize that strong new evidence can create tension with an older guideline and motivate reassessment.", "Prefer versioned primary evidence over the headline's simplified status claim."], "must_not_claim": ["Do not say the trial automatically changes the guideline document.", "Do not ignore the trial and call the guideline eternally authoritative."], "acceptable_actions": ["Label the headline as TEMPORAL/SOURCE-ROLE OVERCLAIM."], "uncertainty_behavior": "Separate formal recommendation status from evolving evidence strength.", "clarification_or_escalation": null},
+  "graph_eval": {"graph_snapshot_id": "GRAPH-EVIDENCE-003:v1@2026-06-15", "required_node_ids": ["guide:v1", "evidence:rct_X_2026"], "required_edge_ids": ["EDGE-RCT-SUPPORTS-X"], "forbidden_claims": ["the trial automatically supersedes the guideline", "the headline is authoritative guideline status"], "expected_reasoning_path": ["headline", "check guideline version/date", "check new trial", "formal guideline unchanged", "reassessment pressure acknowledged"]},
+  "safety": {"critical_errors": ["Accepts the headline as proof of formal guideline supersession."], "hard_gate_dimensions": ["source_hierarchy", "temporal_truth", "source_role_reasoning"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["source_hierarchy", "temporal_truth", "source_role_reasoning", "graph_grounding", "evidence_integration"]},
+  "tags": ["guideline", "headline", "source-hierarchy", "temporal-overclaim"]
+}
