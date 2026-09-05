@@ -65,16 +65,31 @@ jobs:
         run: |
           python scripts/validate_medical_knowledge_sources.py --strict-hosts
 
-      - name: Run S2 source-routing eval
+      - name: Run S2 v0.1 source-routing regression
         run: |
           mkdir -p /tmp/groundsignal-s2
           python scripts/s2_source_router.py \
             --input medical/stage-evals/S2/routing-gold-v0.1.json \
-            --out /tmp/groundsignal-s2/predictions.json
+            --out /tmp/groundsignal-s2/predictions-v01.json
           python scripts/eval_s2_source_routing.py \
             --gold medical/stage-evals/S2/routing-gold-v0.1.json \
-            --pred /tmp/groundsignal-s2/predictions.json \
-            --out /tmp/groundsignal-s2/report.json
+            --pred /tmp/groundsignal-s2/predictions-v01.json \
+            --out /tmp/groundsignal-s2/report-v01.json
+
+      - name: Run first S2 v0.2 held-out routing baseline
+        run: |
+          python scripts/s2_source_router.py \
+            --input medical/stage-evals/S2/routing-heldout-v0.2.json \
+            --out /tmp/groundsignal-s2/predictions-v02-heldout.json
+          set +e
+          python scripts/eval_s2_source_routing.py \
+            --gold medical/stage-evals/S2/routing-heldout-v0.2.json \
+            --pred /tmp/groundsignal-s2/predictions-v02-heldout.json \
+            --out /tmp/groundsignal-s2/report-v02-heldout.json
+          status=$?
+          set -e
+          cat /tmp/groundsignal-s2/report-v02-heldout.json
+          echo "S2 v0.2 first held-out exit code: $status (non-blocking baseline run)"
 
       - name: Build canonical medical knowledge graph
         run: |
@@ -103,6 +118,7 @@ jobs:
               Path('medical/knowledge-base/PHARMACOLOGY_BACKBONE_V0.1.json'),
               Path('medical/knowledge-base/ORGAN_SPECIAL_POP_SAFETY_BACKBONE_V0.1.json'),
               Path('medical/stage-evals/S2/routing-gold-v0.1.json'),
+              Path('medical/stage-evals/S2/routing-heldout-v0.2.json'),
           ]:
               json.loads(p.read_text(encoding='utf-8'))
               print('OK', p)
