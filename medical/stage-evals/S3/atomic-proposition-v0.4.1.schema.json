@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://groundsignal.local/schemas/s3-atomic-proposition-v0.4.1.json",
+  "title": "S3 Atomic Proposition v0.4.1",
+  "type": "object",
+  "required": ["subject", "predicate", "object", "polarity", "conditions", "source_clause"],
+  "properties": {
+    "subject": {"type": "string"},
+    "predicate": {"enum": ["INITIATION_NOT_RECOMMENDED","CONTRAINDICATED","REASSESS_BENEFIT_RISK","DISCONTINUE","INCREASES_RISK","PROVIDES_ABSOLUTE_PROHIBITION","CONFIRMS_DIAGNOSIS","SUPPORTS_SIGNAL_DETECTION","ESTABLISHES_CAUSALITY","ESTIMATES_TRUE_INCIDENCE","DEMONSTRATES_EFFICACY","HAS_STATUS","HAS_PRIMARY_ENDPOINT","SUPERSEDES","IS_CURRENT","GUIDELINE_RECOMMENDS","NEW_EVIDENCE_SUPPORTS","PROVIDES_MANAGEMENT_RULE","ASSOCIATED_WITH","POTENTIAL_PK_INTERACTION","CLASSIFIED_AS","RECOMMENDS_FOLLOWUP","PROVES_SUPERIORITY","UNKNOWN"]},
+    "object": {"type": ["string", "number", "null"]},
+    "polarity": {"enum": ["POSITIVE", "NEGATIVE", "UNKNOWN"]},
+    "conditions": {"type": "array", "items": {"type": "object", "required": ["variable", "operator"], "properties": {"variable": {"type": "string"}, "operator": {"enum": ["LT","LE","GT","GE","EQ","RANGE","UNKNOWN"]}, "value": {"type": ["number", "string", "null"]}, "low": {"type": ["number", "null"]}, "high": {"type": ["number", "null"]}, "unit": {"type": ["string", "null"]}}, "additionalProperties": false}},
+    "population": {"type": ["string", "null"]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "source_clause": {"type": "string"}
+  },
+  "additionalProperties": false
+}
