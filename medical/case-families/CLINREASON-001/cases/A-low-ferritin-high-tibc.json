@@ -1,0 +1,43 @@
+{
+  "case_id": "CLINREASON-001-A",
+  "title": "Microcytic anemia with low ferritin and high TIBC",
+  "task_type": "clinical_reasoning",
+  "data_origin": "synthetic",
+  "patient_context": {
+    "demographics": {"age_years": 44, "sex": "female"},
+    "chief_complaint": "Explain which anemia mechanism is best supported by the supplied laboratory pattern.",
+    "history": "No inflammatory disorder is supplied. The benchmark does not specify the cause of any iron deficiency.",
+    "medications": [],
+    "allergies": [],
+    "examination": null,
+    "labs": [
+      {"name": "hemoglobin", "value": 9.8, "unit": "g/dL"},
+      {"name": "MCV", "value": 72, "unit": "fL"},
+      {"name": "ferritin", "value": 12, "unit": "ng/mL"},
+      {"name": "TIBC", "value": 480, "unit": "mcg/dL"},
+      {"name": "transferrin_saturation", "value": 7, "unit": "%"}
+    ],
+    "imaging_reports": [],
+    "other_reports": [],
+    "longitudinal_events": []
+  },
+  "evidence_snapshot": {"snapshot_id": "CLINREASON-001-v1", "as_of_date": "2026-09-05", "allowed_passage_ids": ["PASSAGE-IDA-PATTERN-001", "PASSAGE-IRON-LOW-NONSPECIFIC-002"], "withheld_passage_ids": ["PASSAGE-ACD-PATTERN-004", "PASSAGE-ACD-IDA-OVERLAP-005"]},
+  "interaction": {"mode": "single_turn", "prompt": "Rank iron deficiency anemia versus anemia of inflammation using the supplied pattern. State what is supported and what remains unknown about etiology.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {
+    "must_include": ["Rank iron deficiency anemia as the best-supported mechanism because the pattern combines microcytosis, low ferritin, high TIBC and low transferrin saturation.", "Use the multi-marker pattern rather than one isolated value.", "State that the case does not identify the cause of the iron deficiency."],
+    "must_not_claim": ["Do not infer a specific bleeding source or dietary cause.", "Do not claim that every microcytic anemia is iron deficiency."],
+    "acceptable_actions": ["Return IDA as top-ranked explanation with a concise evidence chain."],
+    "uncertainty_behavior": "High confidence in the mechanism pattern; cause remains unresolved.",
+    "clarification_or_escalation": null
+  },
+  "graph_eval": {
+    "graph_snapshot_id": "GRAPH-CLINREASON-001:v1.1",
+    "required_node_ids": ["condition:iron_deficiency_anemia", "finding:low_ferritin", "finding:high_tibc", "finding:low_tsat"],
+    "required_edge_ids": ["EDGE-LOW-FERRITIN-SUPPORTS-IDA", "EDGE-HIGH-TIBC-SUPPORTS-IDA", "EDGE-LOW-TSAT-SUPPORTS-IDA"],
+    "forbidden_claims": ["a specific bleeding source is proven", "microcytosis alone confirms iron deficiency"],
+    "expected_reasoning_path": ["microcytic anemia", "low ferritin + high TIBC + low TSAT", "IDA strongly supported", "etiology not specified"]
+  },
+  "safety": {"critical_errors": ["Invents a causal diagnosis not present in the case.", "Ranks anemia of inflammation above IDA while ignoring the iron-study pattern without justification."], "hard_gate_dimensions": ["clinical_reasoning", "evidence_sufficiency"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["differential_reasoning", "multi_feature_integration", "graph_grounding", "evidence_sufficiency", "uncertainty"]},
+  "tags": ["anemia", "iron-deficiency", "multi-feature-reasoning"]
+}
