@@ -4,22 +4,26 @@ on:
   push:
     paths:
       - 'medical/**'
+      - 'posttrain/**'
       - 'scripts/model_harness.py'
       - 'scripts/intervention_router.py'
       - 'scripts/export_training_data.py'
       - 'scripts/regression_gate.py'
+      - 'scripts/validate_medical_case_families.py'
       - '.github/workflows/medical-development-ci.yml'
   pull_request:
     paths:
       - 'medical/**'
+      - 'posttrain/**'
       - 'scripts/model_harness.py'
       - 'scripts/intervention_router.py'
       - 'scripts/export_training_data.py'
       - 'scripts/regression_gate.py'
+      - 'scripts/validate_medical_case_families.py'
       - '.github/workflows/medical-development-ci.yml'
 
 jobs:
-  vertical-slice:
+  medical-platform-integrity:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,9 +38,18 @@ jobs:
             scripts/model_harness.py \
             scripts/intervention_router.py \
             scripts/export_training_data.py \
-            scripts/regression_gate.py
+            scripts/regression_gate.py \
+            scripts/validate_medical_case_families.py
 
-      - name: Validate JSON fixtures parse
+      - name: Validate P0 medical case families
+        run: |
+          python scripts/validate_medical_case_families.py \
+            --expect-families 12 \
+            --expect-cases 60 \
+            --expect-cases-per-family 5 \
+            --rubric-version medical-clinical-v0.2
+
+      - name: Validate vertical-slice JSON fixtures parse
         run: |
           python - <<'PY'
           import json
@@ -53,7 +66,7 @@ jobs:
               Path('medical/examples/eval-baseline.jsonl'),
               Path('medical/examples/eval-candidate.jsonl'),
           ]:
-              for i, line in enumerate(p.read_text(encoding='utf-8').splitlines(), 1):
+              for line in p.read_text(encoding='utf-8').splitlines():
                   if line.strip():
                       json.loads(line)
               print('OK', p)
