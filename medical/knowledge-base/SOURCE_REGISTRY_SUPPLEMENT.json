@@ -1,5 +1,5 @@
 {
-  "registry_version": "medical-source-registry-supplement-v0.1",
+  "registry_version": "medical-source-registry-supplement-v0.2",
   "as_of_date": "2026-09-05",
   "sources": [
     {
@@ -37,6 +37,42 @@
       "source_type": "clinical_reference",
       "primary_for": ["clinical_background", "differential_context", "lab_pattern_reference"],
       "verification_notes": "Useful for clinical reasoning background; high-risk prescribing or release-gating gold should prefer regulator/guideline sources."
+    },
+    {
+      "source_id": "FDA_RENAL_IMPAIRMENT_GUIDANCE",
+      "name": "FDA renal impairment pharmacokinetics and dose-development guidance",
+      "hosts": ["fda.gov"],
+      "authority_tier": 0,
+      "source_type": "regulatory_guidance",
+      "primary_for": ["renal_impairment_pk", "renal_dose_development_methodology", "exposure_response_reasoning"],
+      "verification_notes": "Use as general methodology; patient-level dose actions still require current product labeling/applicable guideline."
+    },
+    {
+      "source_id": "FDA_HEPATIC_IMPAIRMENT_2026_DRAFT",
+      "name": "FDA 2026 draft hepatic impairment PK/PD guidance",
+      "hosts": ["fda.gov"],
+      "authority_tier": 0,
+      "source_type": "draft_regulatory_guidance",
+      "primary_for": ["hepatic_impairment_pk", "hepatic_impairment_pd", "study_design"],
+      "verification_notes": "Draft guidance; preserve draft status and never treat as an implemented patient-specific management rule."
+    },
+    {
+      "source_id": "FDA_PLLR",
+      "name": "FDA Pregnancy and Lactation Labeling Rule and resources",
+      "hosts": ["fda.gov"],
+      "authority_tier": 0,
+      "source_type": "regulatory_labeling_rule",
+      "primary_for": ["pregnancy_label_structure", "lactation_label_structure", "reproductive_potential_labeling"],
+      "verification_notes": "Use for current U.S. prescription-label structure; product-specific pregnancy/lactation risk still comes from the current product label and evidence."
+    },
+    {
+      "source_id": "FDA_QTC_LABELING_2025",
+      "name": "FDA QTc Information in Human Prescription Drug and Biological Product Labeling Guidance (2025)",
+      "hosts": ["fda.gov"],
+      "authority_tier": 0,
+      "source_type": "regulatory_guidance",
+      "primary_for": ["qtc_labeling", "qtc_drug_interaction_labeling", "concentration_dependent_qt_context"],
+      "verification_notes": "Use for QTc labeling principles; product-specific risk and management require the current label/clinical context."
     }
   ]
 }
