@@ -1,0 +1,78 @@
+name: s3-split-evaluation
+
+on:
+  push:
+    paths:
+      - 'medical/stage-evals/S3/s3a-extraction-gold-v0.1.json'
+      - 'medical/stage-evals/S3/s3b-entailment-gold-v0.1.json'
+      - 'scripts/s3a_extract_runner.py'
+      - 'scripts/eval_s3a_proposition_extraction.py'
+      - 'scripts/s3b_structured_entailment_runner.py'
+      - 'scripts/eval_s3b_structured_entailment.py'
+      - '.github/workflows/s3-split-eval.yml'
+  workflow_dispatch:
+
+jobs:
+  split-eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax and fixture validation
+        run: |
+          python -m py_compile \
+            scripts/s3a_extract_runner.py \
+            scripts/eval_s3a_proposition_extraction.py \
+            scripts/s3b_structured_entailment_runner.py \
+            scripts/eval_s3b_structured_entailment.py
+          python - <<'PY'
+          import json
+          for p in [
+            'medical/stage-evals/S3/s3a-extraction-gold-v0.1.json',
+            'medical/stage-evals/S3/s3b-entailment-gold-v0.1.json',
+          ]:
+              d=json.load(open(p, encoding='utf-8'))
+              assert d['items']
+              print(p, len(d['items']))
+          PY
+
+      - name: Run S3a semantic proposition extraction evaluation
+        run: |
+          mkdir -p /tmp/s3-split
+          python scripts/s3a_extract_runner.py \
+            --input medical/stage-evals/S3/s3a-extraction-gold-v0.1.json \
+            --out /tmp/s3-split/s3a-predictions.json
+          set +e
+          python scripts/eval_s3a_proposition_extraction.py \
+            --gold medical/stage-evals/S3/s3a-extraction-gold-v0.1.json \
+            --pred /tmp/s3-split/s3a-predictions.json \
+            --out /tmp/s3-split/s3a-report.json \
+            --min-critical-recall 0.95
+          status=$?
+          set -e
+          echo "S3a exit code: ${status}"
+
+      - name: Run S3b structured proposition entailment evaluation
+        run: |
+          python scripts/s3b_structured_entailment_runner.py \
+            --input medical/stage-evals/S3/s3b-entailment-gold-v0.1.json \
+            --out /tmp/s3-split/s3b-predictions.json
+          set +e
+          python scripts/eval_s3b_structured_entailment.py \
+            --gold medical/stage-evals/S3/s3b-entailment-gold-v0.1.json \
+            --pred /tmp/s3-split/s3b-predictions.json \
+            --out /tmp/s3-split/s3b-report.json \
+            --min-relation-accuracy 0.90 \
+            --max-high-risk-false-support 0.0
+          status=$?
+          set -e
+          echo "S3b exit code: ${status}"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s3-split-eval-v01
+          path: /tmp/s3-split
+          retention-days: 90
