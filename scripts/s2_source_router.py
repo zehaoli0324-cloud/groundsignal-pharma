@@ -2,7 +2,7 @@
 import argparse, json, re
 from pathlib import Path
 
-ROUTER_VERSION = "deterministic-s2-v0.2.0"
+ROUTER_VERSION = "deterministic-s2-v0.2.1"
 
 
 def has_any(q, terms):
@@ -24,13 +24,15 @@ def route(query: str):
     if approval_signal_lit:
         return ranked("DRUGS_AT_FDA", "OPENFDA_FAERS", "PUBMED")
 
-    # Jurisdiction-specific authorities.
+    # Jurisdiction-specific authorities. Clinical pathways must be resolved
+    # before the broader China regulatory-status rule because a pathway query
+    # can mention terms such as "drug review status" only to negate them.
     if has_any(q, ["eu product information", "ema", "epar", "sm-pc", "smpc", "欧洲", "欧盟"]):
         return ranked("EMA_EPAR_SMPC")
+    if has_any(q, ["中国", "china", "国家层面", "国家"]) and has_any(q, ["临床路径", "clinical pathway", "national pathway"]):
+        return ranked("NHC_CHINA", "CDE_NMPA")
     if has_any(q, ["中国", "china", "cde", "nmpa"]) and has_any(q, ["受理", "审评", "review", "获批", "批准", "监管", "guidance"]):
         return ranked("CDE_NMPA")
-    if has_any(q, ["中国", "china", "国家层面", "国家"] ) and has_any(q, ["临床路径", "clinical pathway", "national pathway"]):
-        return ranked("NHC_CHINA", "CDE_NMPA")
 
     # Regulatory approval outranks trial registration when approval status is the question.
     if has_any(q, [
@@ -115,7 +117,7 @@ def route(query: str):
         "最新美国说明书", "最新版原始标签", "最新官方来源", "最新说明书", "说明书", "原始标签", "处方信息"
     ]
     brand_or_label_drugs = ["eliquis", "zoloft", "metformin", "二甲双胍", "apixaban", "sertraline", "glipizide", "naloxone"]
-    if has_any(q, label_terms) or (has_any(q, brand_or_label_drugs) and has_any(q, ["风险", "warning", "警告", "eGFR".lower(), "出血"])):
+    if has_any(q, label_terms) or (has_any(q, brand_or_label_drugs) and has_any(q, ["风险", "warning", "警告", "egfr", "出血"])):
         if has_any(q, ["eliquis", "apixaban", "fda"]):
             return ranked("DRUGS_AT_FDA", "DAILYMED_SPL")
         return ranked("DAILYMED_SPL", "DRUGS_AT_FDA")
