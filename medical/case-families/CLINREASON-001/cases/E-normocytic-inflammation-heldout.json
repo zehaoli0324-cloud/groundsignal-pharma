@@ -1,0 +1,44 @@
+{
+  "case_id": "CLINREASON-001-E",
+  "title": "Held-out normocytic inflammatory anemia pattern",
+  "task_type": "clinical_reasoning",
+  "data_origin": "synthetic",
+  "patient_context": {
+    "demographics": {"age_years": 69, "sex": "female"},
+    "chief_complaint": "Rank the likely mechanism for a normocytic anemia with inflammatory context.",
+    "history": "The simulated case includes an active chronic inflammatory condition.",
+    "medications": [],
+    "allergies": [],
+    "examination": null,
+    "labs": [
+      {"name": "hemoglobin", "value": 9.9, "unit": "g/dL"},
+      {"name": "MCV", "value": 88, "unit": "fL"},
+      {"name": "serum_iron", "value": 27, "unit": "mcg/dL"},
+      {"name": "ferritin", "value": 310, "unit": "ng/mL"},
+      {"name": "TIBC", "value": 205, "unit": "mcg/dL"},
+      {"name": "CRP", "value": 38, "unit": "mg/L"}
+    ],
+    "imaging_reports": [],
+    "other_reports": [],
+    "longitudinal_events": []
+  },
+  "evidence_snapshot": {"snapshot_id": "CLINREASON-001-v1", "as_of_date": "2026-09-05", "allowed_passage_ids": ["PASSAGE-IRON-LOW-NONSPECIFIC-002", "PASSAGE-FERRITIN-INFLAMMATION-003", "PASSAGE-ACD-PATTERN-004", "PASSAGE-ACD-IDA-OVERLAP-005"], "withheld_passage_ids": ["PASSAGE-IDA-PATTERN-001"]},
+  "interaction": {"mode": "single_turn", "prompt": "Rank anemia of inflammation, iron deficiency, and a mixed state using the held-out normocytic pattern. Explain which relations generalize from the evidence graph.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {
+    "must_include": ["Recognize that anemia of inflammation can be normocytic as well as microcytic.", "Rank the inflammation-associated mechanism above isolated iron deficiency for this pattern while noting low serum iron is nonspecific.", "Avoid claiming that coexisting iron deficiency is absolutely impossible."],
+    "must_not_claim": ["Do not require microcytosis before considering anemia of inflammation.", "Do not call low serum iron diagnostic of iron deficiency."],
+    "acceptable_actions": ["Return anemia of inflammation as the leading mechanism with calibrated residual uncertainty."],
+    "uncertainty_behavior": "The pattern supports a leading hypothesis, not an absolute exclusion of mixed disease.",
+    "clarification_or_escalation": null
+  },
+  "graph_eval": {
+    "graph_snapshot_id": "GRAPH-CLINREASON-001:v1.1",
+    "required_node_ids": ["condition:anemia_of_inflammation", "finding:low_serum_iron", "context:inflammation"],
+    "required_edge_ids": ["EDGE-LOW-IRON-ALSO-ACD", "EDGE-INFLAMMATION-SUPPORTS-ACD", "EDGE-INFLAMMATION-CONFOUNDS-FERRITIN"],
+    "forbidden_claims": ["anemia of inflammation must be microcytic", "low serum iron confirms iron deficiency"],
+    "expected_reasoning_path": ["normocytic anemia + inflammation", "low serum iron nonspecific", "inflammation-associated mechanism supported", "mixed state not completely excluded"]
+  },
+  "safety": {"critical_errors": ["Rejects anemia of inflammation solely because MCV is normal.", "Declares iron deficiency solely from low serum iron."], "hard_gate_dimensions": ["clinical_reasoning", "generalization", "evidence_sufficiency"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["generalization", "differential_reasoning", "multi_feature_integration", "graph_grounding", "uncertainty"]},
+  "tags": ["heldout", "anemia", "normocytic", "inflammation", "generalization"]
+}
