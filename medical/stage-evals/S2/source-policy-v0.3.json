@@ -1,0 +1,101 @@
+{
+  "policy_version": "s2-source-policy-v0.3",
+  "intents": {
+    "US_PRODUCT_LABEL_CURRENT": {
+      "description": "Current U.S. product-specific prescribing information or label rule",
+      "ranked_source_ids": ["DAILYMED_SPL", "DRUGS_AT_FDA"]
+    },
+    "US_APPROVAL_STATUS": {
+      "description": "FDA approval status, approval date, or approved indication",
+      "ranked_source_ids": ["DRUGS_AT_FDA", "DAILYMED_SPL", "CLINICALTRIALS_GOV"]
+    },
+    "TRIAL_REGISTRY_STATUS": {
+      "description": "Trial registration metadata, NCT identity, recruitment status, or registered endpoint",
+      "ranked_source_ids": ["CLINICALTRIALS_GOV", "PUBMED"]
+    },
+    "DRUG_TERMINOLOGY_NORMALIZATION": {
+      "description": "Normalize brand/generic/ingredient/dose-form drug concepts",
+      "ranked_source_ids": ["RXNORM"]
+    },
+    "OBSERVATION_TERMINOLOGY_NORMALIZATION": {
+      "description": "Normalize laboratory or clinical observation identity/code",
+      "ranked_source_ids": ["LOINC"]
+    },
+    "SAFETY_SIGNAL_SURVEILLANCE": {
+      "description": "Spontaneous adverse-event reporting or safety-signal lookup without causal inference",
+      "ranked_source_ids": ["OPENFDA_FAERS", "FDA_SAFETY_COMMUNICATIONS"]
+    },
+    "REGULATORY_SAFETY_UPDATE": {
+      "description": "FDA safety communication or regulatory label-change notice",
+      "ranked_source_ids": ["FDA_SAFETY_COMMUNICATIONS", "DRUGS_AT_FDA", "DAILYMED_SPL"]
+    },
+    "PEER_REVIEWED_LITERATURE": {
+      "description": "Peer-reviewed publication or randomized-trial paper discovery",
+      "ranked_source_ids": ["PUBMED"]
+    },
+    "DILI_REFERENCE": {
+      "description": "Drug-induced liver injury background or curated hepatotoxicity reference",
+      "ranked_source_ids": ["LIVERTOX", "DAILYMED_SPL", "PUBMED"]
+    },
+    "DDI_METHOD_GUIDANCE": {
+      "description": "General enzyme/transporter-mediated drug-interaction study design and interpretation methodology",
+      "ranked_source_ids": ["FDA_ICH_M12", "FDA_DDI_TABLES"]
+    },
+    "DDI_MECHANISM_LOOKUP": {
+      "description": "Specific CYP/transporter substrate, inhibitor, or inducer lookup",
+      "ranked_source_ids": ["FDA_DDI_TABLES", "FDA_ICH_M12"]
+    },
+    "PHARMACOGENOMICS": {
+      "description": "Pharmacogenetic/pharmacogenomic association or management source",
+      "ranked_source_ids": ["FDA_PGX", "DAILYMED_SPL", "DRUGS_AT_FDA"]
+    },
+    "US_PLLR_GUIDANCE": {
+      "description": "Pregnancy and Lactation Labeling Rule or current U.S. pregnancy/lactation label structure",
+      "ranked_source_ids": ["FDA_PLLR"]
+    },
+    "US_QTC_LABELING_GUIDANCE": {
+      "description": "General FDA QTc labeling guidance rather than a product-specific label",
+      "ranked_source_ids": ["FDA_QTC_LABELING_2025"]
+    },
+    "US_RENAL_PK_GUIDANCE": {
+      "description": "General FDA renal-impairment pharmacokinetic/dose-development methodology",
+      "ranked_source_ids": ["FDA_RENAL_IMPAIRMENT_GUIDANCE"]
+    },
+    "US_HEPATIC_PK_GUIDANCE": {
+      "description": "General FDA hepatic-impairment PK/PD study methodology",
+      "ranked_source_ids": ["FDA_HEPATIC_IMPAIRMENT_2026_DRAFT"]
+    },
+    "CARDIOVASCULAR_GUIDANCE": {
+      "description": "Professional cardiovascular guideline or red-flag guidance",
+      "ranked_source_ids": ["AHA_GUIDANCE"]
+    },
+    "PUBLIC_HEALTH_GUIDANCE": {
+      "description": "CDC-scoped public-health guidance, warning signs, prevention, or surveillance",
+      "ranked_source_ids": ["CDC_CLINICAL_PUBLIC_HEALTH"]
+    },
+    "KIDNEY_CLINICAL_REFERENCE": {
+      "description": "Kidney-disease clinical background/reference rather than product-specific dosing",
+      "ranked_source_ids": ["NKF_CLINICAL_REFERENCE", "PUBMED"]
+    },
+    "EU_PRODUCT_INFORMATION": {
+      "description": "European regulator product information / EPAR / SmPC",
+      "ranked_source_ids": ["EMA_EPAR_SMPC"]
+    },
+    "CHINA_REGULATORY_STATUS": {
+      "description": "China drug acceptance/review/approval or CDE/NMPA regulatory information",
+      "ranked_source_ids": ["CDE_NMPA"]
+    },
+    "CHINA_NATIONAL_CLINICAL_PATHWAY": {
+      "description": "China national-level clinical pathway",
+      "ranked_source_ids": ["NHC_CHINA"]
+    },
+    "MULTI_SOURCE_APPROVAL_SIGNAL_LITERATURE": {
+      "description": "Question explicitly requires approval truth, spontaneous safety signal, and literature evidence",
+      "ranked_source_ids": ["DRUGS_AT_FDA", "OPENFDA_FAERS", "PUBMED"]
+    },
+    "GENERIC_MEDICAL_LITERATURE": {
+      "description": "Fallback medical literature discovery when no governed specialized intent is confidently identified",
+      "ranked_source_ids": ["PUBMED"]
+    }
+  }
+}
