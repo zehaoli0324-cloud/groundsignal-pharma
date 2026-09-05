@@ -18,6 +18,7 @@ on:
       - 'scripts/eval_s2_intent_routing.py'
       - 'scripts/s3_naive_claim_verifier.py'
       - 'scripts/s3_structured_claim_verifier.py'
+      - 'scripts/s3_claimframe_verifier.py'
       - 'scripts/eval_s3_claim_verification.py'
       - '.github/workflows/medical-development-ci.yml'
   pull_request:
@@ -37,6 +38,7 @@ on:
       - 'scripts/eval_s2_intent_routing.py'
       - 'scripts/s3_naive_claim_verifier.py'
       - 'scripts/s3_structured_claim_verifier.py'
+      - 'scripts/s3_claimframe_verifier.py'
       - 'scripts/eval_s3_claim_verification.py'
       - '.github/workflows/medical-development-ci.yml'
 
@@ -66,6 +68,7 @@ jobs:
             scripts/eval_s2_intent_routing.py \
             scripts/s3_naive_claim_verifier.py \
             scripts/s3_structured_claim_verifier.py \
+            scripts/s3_claimframe_verifier.py \
             scripts/eval_s3_claim_verification.py
 
       - name: Validate P0 medical case families
@@ -147,7 +150,7 @@ jobs:
           cat /tmp/groundsignal-s3/report-naive-v01.json
           echo "S3 naive baseline exit code: $status (frozen historical lower bound)"
 
-      - name: Run first S3 v0.2 structured verifier on v0.1 regression
+      - name: Run historical S3 v0.2 structured verifier regression
         run: |
           python scripts/s3_structured_claim_verifier.py \
             --input medical/stage-evals/S3/verification-gold-v0.1.json \
@@ -160,9 +163,9 @@ jobs:
           status=$?
           set -e
           cat /tmp/groundsignal-s3/report-structured-regression.json
-          echo "S3 structured v0.1 regression exit code: $status (first observation)"
+          echo "S3 structured v0.1 regression exit code: $status"
 
-      - name: Run first S3 v0.2 structured verifier fresh held-out
+      - name: Run historical S3 v0.2 fresh-heldout observation
         run: |
           python scripts/s3_structured_claim_verifier.py \
             --input medical/stage-evals/S3/verification-heldout-v0.2.json \
@@ -175,7 +178,39 @@ jobs:
           status=$?
           set -e
           cat /tmp/groundsignal-s3/report-structured-heldout.json
-          echo "S3 structured v0.2 fresh-heldout exit code: $status (non-blocking first observation)"
+          echo "S3 structured v0.2 held-out exit code: $status (frozen historical observation)"
+
+      - name: Run first S3 v0.3 ClaimFrame verifier on prior diagnostic sets
+        run: |
+          for suite in verification-gold-v0.1 verification-heldout-v0.2; do
+            python scripts/s3_claimframe_verifier.py \
+              --input medical/stage-evals/S3/${suite}.json \
+              --out /tmp/groundsignal-s3/${suite}-claimframe-pred.json
+            set +e
+            python scripts/eval_s3_claim_verification.py \
+              --gold medical/stage-evals/S3/${suite}.json \
+              --pred /tmp/groundsignal-s3/${suite}-claimframe-pred.json \
+              --out /tmp/groundsignal-s3/${suite}-claimframe-report.json
+            status=$?
+            set -e
+            cat /tmp/groundsignal-s3/${suite}-claimframe-report.json
+            echo "S3 v0.3 ClaimFrame ${suite} exit code: $status (diagnostic/regression only)"
+          done
+
+      - name: Run first S3 v0.3 untouched shadow held-out
+        run: |
+          python scripts/s3_claimframe_verifier.py \
+            --input medical/stage-evals/S3/verification-shadow-heldout-v0.3.json \
+            --out /tmp/groundsignal-s3/predictions-claimframe-shadow-v03.json
+          set +e
+          python scripts/eval_s3_claim_verification.py \
+            --gold medical/stage-evals/S3/verification-shadow-heldout-v0.3.json \
+            --pred /tmp/groundsignal-s3/predictions-claimframe-shadow-v03.json \
+            --out /tmp/groundsignal-s3/report-claimframe-shadow-v03.json
+          status=$?
+          set -e
+          cat /tmp/groundsignal-s3/report-claimframe-shadow-v03.json
+          echo "S3 v0.3 first shadow-heldout exit code: $status (non-blocking first observation; do not post-hoc tune this result)"
 
       - name: Build canonical medical knowledge graph
         run: |
@@ -210,8 +245,10 @@ jobs:
               Path('medical/stage-evals/S2/intent-features-v0.3.json'),
               Path('medical/stage-evals/S2/intent-routing-heldout-v0.3.json'),
               Path('medical/stage-evals/S2/dailymed-truth-retrieval-v0.3.json'),
+              Path('medical/stage-evals/S3/claim-frame.schema.json'),
               Path('medical/stage-evals/S3/verification-gold-v0.1.json'),
               Path('medical/stage-evals/S3/verification-heldout-v0.2.json'),
+              Path('medical/stage-evals/S3/verification-shadow-heldout-v0.3.json'),
           ]:
               json.loads(p.read_text(encoding='utf-8'))
               print('OK', p)
