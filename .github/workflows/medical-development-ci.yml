@@ -12,6 +12,8 @@ on:
       - 'scripts/validate_medical_case_families.py'
       - 'scripts/validate_medical_knowledge_sources.py'
       - 'scripts/build_medical_knowledge_graph.py'
+      - 'scripts/s2_source_router.py'
+      - 'scripts/eval_s2_source_routing.py'
       - '.github/workflows/medical-development-ci.yml'
   pull_request:
     paths:
@@ -24,6 +26,8 @@ on:
       - 'scripts/validate_medical_case_families.py'
       - 'scripts/validate_medical_knowledge_sources.py'
       - 'scripts/build_medical_knowledge_graph.py'
+      - 'scripts/s2_source_router.py'
+      - 'scripts/eval_s2_source_routing.py'
       - '.github/workflows/medical-development-ci.yml'
 
 jobs:
@@ -45,7 +49,9 @@ jobs:
             scripts/regression_gate.py \
             scripts/validate_medical_case_families.py \
             scripts/validate_medical_knowledge_sources.py \
-            scripts/build_medical_knowledge_graph.py
+            scripts/build_medical_knowledge_graph.py \
+            scripts/s2_source_router.py \
+            scripts/eval_s2_source_routing.py
 
       - name: Validate P0 medical case families
         run: |
@@ -58,6 +64,17 @@ jobs:
       - name: Validate medical knowledge source metadata
         run: |
           python scripts/validate_medical_knowledge_sources.py --strict-hosts
+
+      - name: Run S2 source-routing eval
+        run: |
+          mkdir -p /tmp/groundsignal-s2
+          python scripts/s2_source_router.py \
+            --input medical/stage-evals/S2/routing-gold-v0.1.json \
+            --out /tmp/groundsignal-s2/predictions.json
+          python scripts/eval_s2_source_routing.py \
+            --gold medical/stage-evals/S2/routing-gold-v0.1.json \
+            --pred /tmp/groundsignal-s2/predictions.json \
+            --out /tmp/groundsignal-s2/report.json
 
       - name: Build canonical medical knowledge graph
         run: |
@@ -84,6 +101,8 @@ jobs:
               Path('medical/knowledge-base/SOURCE_REGISTRY.json'),
               Path('medical/knowledge-base/SOURCE_REGISTRY_SUPPLEMENT.json'),
               Path('medical/knowledge-base/PHARMACOLOGY_BACKBONE_V0.1.json'),
+              Path('medical/knowledge-base/ORGAN_SPECIAL_POP_SAFETY_BACKBONE_V0.1.json'),
+              Path('medical/stage-evals/S2/routing-gold-v0.1.json'),
           ]:
               json.loads(p.read_text(encoding='utf-8'))
               print('OK', p)
