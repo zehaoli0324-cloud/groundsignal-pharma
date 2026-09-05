@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GroundSignal Medical SFT Example",
+  "type": "object",
+  "required": ["example_id", "instruction", "ideal_response", "source_case_id", "failure_types", "evidence_passage_ids", "review_status", "split"],
+  "properties": {
+    "example_id": {"type": "string"},
+    "instruction": {"type": "string"},
+    "context": {"type": ["string", "null"]},
+    "ideal_response": {"type": "string"},
+    "source_case_id": {"type": "string"},
+    "source_run_ids": {"type": "array", "items": {"type": "string"}},
+    "failure_types": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "evidence_passage_ids": {"type": "array", "items": {"type": "string"}},
+    "graph_version": {"type": ["string", "null"]},
+    "intended_intervention": {"type": "string", "enum": ["reasoning_sft", "safety_sft", "clarification_sft", "uncertainty_sft", "audience_sft", "knowledge_sft", "other"]},
+    "review_status": {"type": "string", "enum": ["candidate", "reviewed", "approved", "rejected"]},
+    "reviewer_notes": {"type": ["string", "null"]},
+    "split": {"type": "string", "enum": ["train", "dev", "heldout"]},
+    "builder_version": {"type": "string"},
+    "regression_suites": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}
