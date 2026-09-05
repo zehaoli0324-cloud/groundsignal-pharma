@@ -1,0 +1,31 @@
+{
+  "graph_id": "GRAPH-EVIDENCE-003",
+  "version": "v1",
+  "as_of_date": "2026-09-05",
+  "nodes": [
+    {"node_id": "guide:v1", "node_type": "DOCUMENT_VERSION", "label": "Synthetic Guideline v1", "value": {"date": "2024-06-01"}, "status": "SUPERSEDED", "source_passage_ids": ["PASSAGE-GUIDE-V1-001"]},
+    {"node_id": "guide:v2", "node_type": "DOCUMENT_VERSION", "label": "Synthetic Guideline v2", "value": {"date": "2026-08-15"}, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-GUIDE-V2-004"]},
+    {"node_id": "rec:standard_S", "node_type": "GUIDELINE_RECOMMENDATION", "label": "Standard S preferred for population P", "value": null, "status": "SUPERSEDED", "source_passage_ids": ["PASSAGE-GUIDE-V1-001"]},
+    {"node_id": "rec:treatment_X", "node_type": "GUIDELINE_RECOMMENDATION", "label": "Treatment X recommended for population P under v2 conditions", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-GUIDE-V2-004"]},
+    {"node_id": "evidence:rct_X_2026", "node_type": "TRIAL", "label": "2026 randomized comparative trial", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RCT-X-002"]},
+    {"node_id": "evidence:topline_X_2026", "node_type": "EVIDENCE_PASSAGE", "label": "2026 company topline result", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-TOPLINE-X-003"]}
+  ],
+  "edges": [
+    {"edge_id": "EDGE-GUIDEV1-RECOMMENDS-S", "subject_id": "guide:v1", "predicate": "CONTAINS_RECOMMENDATION", "object_id": "rec:standard_S", "status": "SUPERSEDED", "source_passage_ids": ["PASSAGE-GUIDE-V1-001"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-RCT-SUPPORTS-X", "subject_id": "evidence:rct_X_2026", "predicate": "SUPPORTS_NEW_EVIDENCE_FOR", "object_id": "rec:treatment_X", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RCT-X-002"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-GUIDEV2-RECOMMENDS-X", "subject_id": "guide:v2", "predicate": "CONTAINS_RECOMMENDATION", "object_id": "rec:treatment_X", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-GUIDE-V2-004"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-GUIDEV2-SUPERSEDES-V1", "subject_id": "guide:v2", "predicate": "SUPERSEDES", "object_id": "guide:v1", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-GUIDE-V2-004"], "review_status": "source_verified"}
+  ],
+  "evaluation_contract": {
+    "required_nodes": ["guide:v1", "guide:v2", "evidence:rct_X_2026", "rec:treatment_X"],
+    "required_edges": ["EDGE-RCT-SUPPORTS-X", "EDGE-GUIDEV2-SUPERSEDES-V1"],
+    "forbidden_edges": [
+      {"subject": "evidence:rct_X_2026", "predicate": "AUTOMATICALLY_REWRITES", "object": "guide:v1"},
+      {"subject": "evidence:topline_X_2026", "predicate": "SUPERSEDES", "object": "guide:v1"}
+    ],
+    "acceptable_paths": [
+      ["new trial", "new evidence may challenge current recommendation", "guideline remains current until version update"],
+      ["guideline v2", "explicit supersession", "current recommendation changes"]
+    ]
+  }
+}
