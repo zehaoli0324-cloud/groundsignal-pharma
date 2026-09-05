@@ -1,0 +1,111 @@
+{
+  "benchmark_id": "S3a-proposition-extraction-v0.1",
+  "purpose": "Isolate free-text to canonical-proposition extraction from downstream entailment.",
+  "items": [
+    {
+      "item_id": "S3A-001",
+      "role": "evidence",
+      "text": "For treatment initiation, eGFR 30 through 45 is not recommended; use is contraindicated when eGFR is less than 30.",
+      "expected_propositions": [
+        {"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"RANGE","low":30,"high":45}],"critical":true},
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":30}],"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A-002",
+      "role": "candidate",
+      "text": "For a new patient with eGFR 44, initiation is not recommended.",
+      "expected_propositions": [
+        {"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":44}],"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A-003",
+      "role": "evidence",
+      "text": "For an existing user under eGFR 45, benefit and risk should be reassessed; discontinuation is specified only under 30.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":45}],"critical":true},
+        {"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":30}],"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A-004",
+      "role": "evidence",
+      "text": "Condition K by itself does not constitute a contraindication to treatment A.",
+      "expected_propositions": [
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"NEGATIVE","conditions":[],"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A-005",
+      "role": "evidence",
+      "text": "Spontaneous reports can identify a possible safety signal, but one report cannot distinguish causal attribution from temporal association.",
+      "expected_propositions": [
+        {"subject":"spontaneous_report_system","predicate":"SUPPORTS_SIGNAL_DETECTION","object":"safety_signal","polarity":"POSITIVE","conditions":[],"critical":false},
+        {"subject":"evidence","predicate":"ESTABLISHES_CAUSALITY","object":"causal_relation","polarity":"NEGATIVE","conditions":[],"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A-006",
+      "role": "evidence",
+      "text": "Because the database lacks a complete exposed-patient denominator, raw report counts cannot yield the true event incidence.",
+      "expected_propositions": [
+        {"subject":"report_count","predicate":"ESTIMATES_TRUE_INCIDENCE","object":"event_incidence","polarity":"NEGATIVE","conditions":[],"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A-007",
+      "role": "evidence",
+      "text": "The study is COMPLETED and its primary endpoint is named, but no result establishes that the endpoint was met.",
+      "expected_propositions": [
+        {"subject":"study","predicate":"HAS_STATUS","object":"completed","polarity":"POSITIVE","conditions":[],"critical":false},
+        {"subject":"study","predicate":"HAS_PRIMARY_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"critical":false},
+        {"subject":"evidence","predicate":"ESTABLISHES_ENDPOINT_ACHIEVEMENT","object":"primary_endpoint","polarity":"NEGATIVE","conditions":[],"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A-008",
+      "role": "evidence",
+      "text": "Guideline H replaces Guideline G as the operative current recommendation source.",
+      "expected_propositions": [
+        {"subject":"guideline h","predicate":"SUPERSEDES","object":"guideline g","polarity":"POSITIVE","conditions":[],"critical":true},
+        {"subject":"guideline h","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"POSITIVE","conditions":[],"critical":true},
+        {"subject":"guideline g","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"NEGATIVE","conditions":[],"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A-009",
+      "role": "evidence",
+      "text": "A new randomized trial favors Q, but the unchanged current guideline still recommends P.",
+      "expected_propositions": [
+        {"subject":"trial","predicate":"SUPPORTS_OPTION","object":"q","polarity":"POSITIVE","conditions":[],"critical":false},
+        {"subject":"current_guideline","predicate":"IS_CURRENT","object":"p","polarity":"POSITIVE","conditions":[],"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A-010",
+      "role": "evidence",
+      "text": "A genotype is associated with increased drug exposure, but the source gives no therapeutic dose recommendation.",
+      "expected_propositions": [
+        {"subject":"genotype","predicate":"ASSOCIATED_WITH","object":"drug_exposure","polarity":"POSITIVE","conditions":[],"critical":false},
+        {"subject":"mechanism_or_pk_evidence","predicate":"PROVIDES_MANAGEMENT_RULE","object":"drug_pair_or_patient","polarity":"NEGATIVE","conditions":[],"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A-011",
+      "role": "evidence",
+      "text": "The pathology summary classifies finding X as benign.",
+      "expected_propositions": [
+        {"subject":"lesion","predicate":"CLASSIFIED_AS","object":"benign","polarity":"POSITIVE","conditions":[],"critical":true}
+      ]
+    },
+    {
+      "item_id": "S3A-012",
+      "role": "evidence",
+      "text": "Biomarker J is explicitly not associated with outcome W in this analysis.",
+      "expected_propositions": [
+        {"subject":"biomarker_j","predicate":"ASSOCIATED_WITH","object":"outcome_w","polarity":"NEGATIVE","conditions":[],"critical":true}
+      ]
+    }
+  ]
+}
