@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "groundsignal://medical/clinical-case.schema.json",
+  "title": "GroundSignal Clinical Case",
+  "type": "object",
+  "required": ["case_id", "task_type", "patient_context", "evidence_snapshot", "interaction", "expected_behavior", "safety", "scoring"],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "title": {"type": ["string", "null"]},
+    "task_type": {
+      "type": "string",
+      "enum": ["medical_qa", "clinical_reasoning", "medication_safety", "report_interpretation", "longitudinal", "multi_turn", "agent", "multimodal_ready"]
+    },
+    "data_origin": {
+      "type": "string",
+      "enum": ["synthetic", "public_deidentified", "licensed_deidentified"]
+    },
+    "patient_context": {
+      "type": "object",
+      "required": ["chief_complaint"],
+      "properties": {
+        "demographics": {"type": ["object", "null"]},
+        "chief_complaint": {"type": "string"},
+        "history": {"type": ["string", "null"]},
+        "medications": {"type": "array", "items": {"type": "string"}},
+        "allergies": {"type": "array", "items": {"type": "string"}},
+        "examination": {"type": ["string", "null"]},
+        "labs": {"type": "array", "items": {"type": "object"}},
+        "imaging_reports": {"type": "array", "items": {"type": "object"}},
+        "other_reports": {"type": "array", "items": {"type": "object"}},
+        "longitudinal_events": {"type": "array", "items": {"type": "object"}}
+      },
+      "additionalProperties": false
+    },
+    "evidence_snapshot": {
+      "type": "object",
+      "required": ["snapshot_id", "allowed_passage_ids"],
+      "properties": {
+        "snapshot_id": {"type": "string"},
+        "as_of_date": {"type": ["string", "null"], "format": "date"},
+        "allowed_passage_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "withheld_passage_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      },
+      "additionalProperties": false
+    },
+    "interaction": {
+      "type": "object",
+      "required": ["mode", "prompt"],
+      "properties": {
+        "mode": {"type": "string", "enum": ["single_turn", "multi_turn"]},
+        "prompt": {"type": "string"},
+        "prior_turns": {"type": "array", "items": {"type": "object"}},
+        "tool_policy": {"type": ["object", "null"]},
+        "modality_refs": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "expected_behavior": {
+      "type": "object",
+      "required": ["must_include", "must_not_claim", "uncertainty_behavior"],
+      "properties": {
+        "must_include": {"type": "array", "items": {"type": "string"}},
+        "must_not_claim": {"type": "array", "items": {"type": "string"}},
+        "acceptable_actions": {"type": "array", "items": {"type": "string"}},
+        "uncertainty_behavior": {"type": "string"},
+        "clarification_or_escalation": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "safety": {
+      "type": "object",
+      "required": ["critical_errors"],
+      "properties": {
+        "critical_errors": {"type": "array", "items": {"type": "string"}},
+        "hard_gate_dimensions": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "scoring": {
+      "type": "object",
+      "required": ["rubric_version"],
+      "properties": {
+        "rubric_version": {"type": "string"},
+        "judge_version": {"type": ["string", "null"]},
+        "dimensions": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "tags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+  },
+  "additionalProperties": false
+}
