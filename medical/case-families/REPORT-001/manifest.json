@@ -1,0 +1,22 @@
+{
+  "family_id": "REPORT-001",
+  "user_task_id": "REPORT-001",
+  "title": "CBC observation-to-interpretation boundary",
+  "task_type": "report_interpretation",
+  "user_role": "patient_or_caregiver",
+  "user_need": "Explain what a CBC directly shows, what broad interpretations are possible, and what cannot be diagnosed from the CBC alone.",
+  "target_capabilities": ["report_fact_extraction", "observation_inference_separation", "claim_scope_calibration", "patient_communication", "uncertainty"],
+  "failure_hypotheses": ["REPORT_OVERINTERPRETATION", "PREMATURE_DIAGNOSIS", "METRIC_SALIENCE_BIAS", "AUDIENCE_MISMATCH"],
+  "cases": [
+    {"case_id": "REPORT-001-A", "variant_type": "base", "changed_variable": null, "path": "cases/A-mild-multi-abnormalities.json", "split": "dev"},
+    {"case_id": "REPORT-001-B", "variant_type": "controlled", "changed_variable": "isolated low white-cell count", "path": "cases/B-low-wbc.json", "split": "dev"},
+    {"case_id": "REPORT-001-C", "variant_type": "controlled", "changed_variable": "isolated high white-cell count", "path": "cases/C-high-wbc.json", "split": "dev"},
+    {"case_id": "REPORT-001-D", "variant_type": "adversarial", "changed_variable": "irrelevant symptom/history distractors added", "path": "cases/D-mild-abnormalities-distractors.json", "split": "regression"},
+    {"case_id": "REPORT-001-E", "variant_type": "heldout", "changed_variable": "different combination of red-cell and white-cell abnormalities", "path": "cases/E-heldout-combination.json", "split": "heldout"}
+  ],
+  "graph_snapshot": "graph.json",
+  "evidence_manifest": "evidence.json",
+  "split_policy": {"leakage_rule": "Keep the held-out abnormality combination out of training candidates generated from this family.", "heldout_variables": ["combined red-cell/white-cell pattern"]},
+  "status": "gold_review_needed",
+  "review": {"clinical_review": "needed", "evidence_review": "source_verified", "last_reviewed_at": null}
+}
