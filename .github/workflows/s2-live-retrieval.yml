@@ -5,8 +5,11 @@ on:
   push:
     paths:
       - 'medical/stage-evals/S2/live-retrieval-v0.2.json'
+      - 'medical/stage-evals/S2/dailymed-truth-retrieval-v0.3.json'
       - 'scripts/s2_live_retrieval.py'
       - 'scripts/eval_s2_live_retrieval.py'
+      - 'scripts/s2_dailymed_truth_retrieval.py'
+      - 'scripts/eval_s2_dailymed_truth_retrieval.py'
       - '.github/workflows/s2-live-retrieval.yml'
 
 jobs:
@@ -23,34 +26,55 @@ jobs:
         run: |
           python -m py_compile \
             scripts/s2_live_retrieval.py \
-            scripts/eval_s2_live_retrieval.py
+            scripts/eval_s2_live_retrieval.py \
+            scripts/s2_dailymed_truth_retrieval.py \
+            scripts/eval_s2_dailymed_truth_retrieval.py
 
-      - name: Run authoritative live retrieval
+      - name: Run authoritative live retrieval v0.2
         run: |
           mkdir -p /tmp/groundsignal-s2-live
           python scripts/s2_live_retrieval.py \
             --suite medical/stage-evals/S2/live-retrieval-v0.2.json \
-            --out /tmp/groundsignal-s2-live/runs.json
+            --out /tmp/groundsignal-s2-live/runs-v02.json
 
-      - name: Evaluate live retrieval
+      - name: Evaluate live retrieval v0.2
         run: |
           set +e
           python scripts/eval_s2_live_retrieval.py \
             --suite medical/stage-evals/S2/live-retrieval-v0.2.json \
-            --runs /tmp/groundsignal-s2-live/runs.json \
-            --out /tmp/groundsignal-s2-live/report.json
+            --runs /tmp/groundsignal-s2-live/runs-v02.json \
+            --out /tmp/groundsignal-s2-live/report-v02.json
           status=$?
           set -e
-          cat /tmp/groundsignal-s2-live/report.json
-          echo "Live retrieval semantic gate exit code: $status"
-          # Do not make repository integrity depend on third-party availability.
-          # The report itself preserves whether a failure is infrastructure-side or semantic-side.
+          cat /tmp/groundsignal-s2-live/report-v02.json
+          echo "Live retrieval v0.2 semantic gate exit code: $status"
 
-      - name: Upload live report
+      - name: Run DailyMed current-version and critical-passage retrieval v0.3
+        run: |
+          python scripts/s2_dailymed_truth_retrieval.py \
+            --suite medical/stage-evals/S2/dailymed-truth-retrieval-v0.3.json \
+            --out /tmp/groundsignal-s2-live/runs-v03-truth.json
+
+      - name: Evaluate DailyMed current-version and passage retrieval v0.3
+        run: |
+          set +e
+          python scripts/eval_s2_dailymed_truth_retrieval.py \
+            --suite medical/stage-evals/S2/dailymed-truth-retrieval-v0.3.json \
+            --runs /tmp/groundsignal-s2-live/runs-v03-truth.json \
+            --out /tmp/groundsignal-s2-live/report-v03-truth.json
+          status=$?
+          set -e
+          cat /tmp/groundsignal-s2-live/report-v03-truth.json
+          echo "DailyMed truth-retrieval v0.3 exit code: $status"
+          # Third-party availability is reported separately; do not make repository integrity flaky.
+
+      - name: Upload live reports
         uses: actions/upload-artifact@v4
         with:
           name: s2-live-retrieval-report
           path: |
-            /tmp/groundsignal-s2-live/runs.json
-            /tmp/groundsignal-s2-live/report.json
+            /tmp/groundsignal-s2-live/runs-v02.json
+            /tmp/groundsignal-s2-live/report-v02.json
+            /tmp/groundsignal-s2-live/runs-v03-truth.json
+            /tmp/groundsignal-s2-live/report-v03-truth.json
           retention-days: 30
