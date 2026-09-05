@@ -1,0 +1,42 @@
+{
+  "registry_version": "medical-source-registry-supplement-v0.1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {
+      "source_id": "AHA_GUIDANCE",
+      "name": "American Heart Association guidance and professional guideline pages",
+      "hosts": ["heart.org", "professional.heart.org"],
+      "authority_tier": 1,
+      "source_type": "professional_society_guidance",
+      "primary_for": ["cardiovascular_guideline", "cardiovascular_red_flags", "patient_warning_signs"],
+      "verification_notes": "Check exact guideline/publication date and distinguish professional guideline from patient-facing educational material."
+    },
+    {
+      "source_id": "CDC_CLINICAL_PUBLIC_HEALTH",
+      "name": "U.S. Centers for Disease Control and Prevention",
+      "hosts": ["cdc.gov"],
+      "authority_tier": 1,
+      "source_type": "national_public_health_guidance",
+      "primary_for": ["public_health_guidance", "warning_signs", "prevention", "surveillance"],
+      "verification_notes": "Use within CDC scope; not a substitute for product-specific prescribing information."
+    },
+    {
+      "source_id": "NKF_CLINICAL_REFERENCE",
+      "name": "National Kidney Foundation",
+      "hosts": ["kidney.org"],
+      "authority_tier": 1,
+      "source_type": "specialty_clinical_reference",
+      "primary_for": ["kidney_disease_context", "aki_context", "kidney_patient_guidance"],
+      "verification_notes": "For dose/contraindication rules prefer current product label or formal guideline when available."
+    },
+    {
+      "source_id": "MERCK_MANUAL",
+      "name": "Merck Manual Professional Edition",
+      "hosts": ["merckmanuals.com"],
+      "authority_tier": 2,
+      "source_type": "clinical_reference",
+      "primary_for": ["clinical_background", "differential_context", "lab_pattern_reference"],
+      "verification_notes": "Useful for clinical reasoning background; high-risk prescribing or release-gating gold should prefer regulator/guideline sources."
+    }
+  ]
+}
