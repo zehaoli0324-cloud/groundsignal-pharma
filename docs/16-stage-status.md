@@ -9,7 +9,7 @@ The system has **10 lifecycle stages**, but maturity differs by stage. This file
 |---|---|---|---|---|
 | S1 | User Need / Workflow Discovery | Partial | 48 seed tasks, high-risk matrix, user-research plan | real interview/log validation and frequency weighting |
 | S2 | Knowledge Search & Source Routing | **Conditional pass / evaluated prototype** | source governance; v0.1/v0.2 routing regressions; v0.3 fresh intent held-out 91.7%; 10-test live record retrieval; real DailyMed version consistency + critical-passage Recall@1 on 3 high-risk examples | broader source-family passage retrieval, larger fresh-language routing sets, robust concept-type inference, ambiguous-jurisdiction routing |
-| S3 | Evidence Verification & Temporal Truth | **Evaluated FAIL / redesign required** | v0.1 24-item evidence-verification benchmark; naive lower bound; structured semantic verifier; fresh v0.2 24-item held-out; explicit false-support safety gate | directional ClaimFrame extraction, zero high-risk false support on a new untouched held-out, broader expert-reviewed evidence relations |
+| S3 | Evidence Verification & Temporal Truth | **Evaluated HARD FAIL / v0.4 redesign in progress** | v0.1 lexical baseline; v0.2 semantic-cue verifier; v0.3 directional ClaimFrame schema; three frozen diagnostic/held-out suites; explicit false-support safety gate | clause-scoped atomic proposition parsing, polarity-preserving negative relations, safe threshold/action binding, zero high-risk false support on a new untouched held-out |
 | S4 | Medical KG Construction / Update | Working prototype | case graphs + two reusable backbones + canonical builder | RxNorm/LOINC normalization, persistent graph DB/index, update impact engine, dedicated stage eval |
 | S5 | Controlled Case / Benchmark Factory | P0 complete | 12 families / 60 controlled cases / held-out design | clinical expert gold review + broader validated user-task coverage + dedicated stage eval |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible model runner, evidence injection, CI fixture | production retriever/reranker, live multi-provider runs, real Agent executor, dedicated stage eval |
@@ -74,9 +74,9 @@ Detailed reports:
 
 ---
 
-## S3 checkpoint after v0.2
+## S3 checkpoint after v0.3
 
-**S3 = Stage 3, Evidence Verification & Temporal Truth（证据验证与时间真值）** evaluates whether the system interprets an already-retrieved evidence passage correctly.
+**S3 = Stage 3, Evidence Verification & Temporal Truth（证据验证与时间真值）** evaluates whether an already-retrieved evidence passage actually supports a candidate medical claim.
 
 ### v0.1 naive lexical baseline
 
@@ -97,7 +97,9 @@ claim:    eGFR <45 → must discontinue
 
 The lexical verifier incorrectly returned `DIRECT_SUPPORT`.
 
-### v0.2 structured semantic verifier on known regression set
+### v0.2 structured semantic verifier
+
+On the already-known v0.1 regression set:
 
 ```text
 relation accuracy                    91.7%
@@ -105,11 +107,7 @@ high-risk false-support rate          0.0%
 release gate                          PASS
 ```
 
-However, this set had already influenced the verifier design and is therefore only regression evidence.
-
-### v0.2 fresh held-out
-
-A separate 24-item held-out set was frozen after implementation and before first run.
+On its separate 24-item fresh held-out:
 
 ```text
 relation accuracy                    50.0%
@@ -119,17 +117,62 @@ high-risk false-support rate          15.4%
 release gate                          FAIL
 ```
 
-Two dangerous false-support failures were observed:
+This exposed temporal-direction and causality-polarity failures.
 
-1. **temporal supersession** — `Guideline B supersedes A` was incorrectly used to support the claim that A remains current;
-2. **observational association → causality** — evidence explicitly saying causality was not established was incorrectly used to support a causal claim.
+### v0.3 directional ClaimFrame verifier
 
-This shows that unordered semantic cue labels are still insufficient. The next verifier needs directional `ClaimFrame` structure with subject/predicate/object, condition, modality, causal polarity and temporal direction.
+v0.3 introduced explicit directional fields:
+
+```text
+subject → predicate → object
+condition
+modality
+causal status
+temporal status
+polarity
+```
+
+The verifier was committed first (`e10efe81533766e3fd586c07f2cd4f4365c5e82b`). Only afterward was the new untouched 24-item shadow-heldout frozen (`ba1f60d56cd5421fcb7c00d41551b2a3e87525b1`).
+
+First shadow-heldout run:
+
+```text
+relation accuracy                    50.0%
+high-risk negative items              12
+high-risk false-support count           7
+high-risk false-support rate          58.3%
+release gate                          FAIL
+```
+
+This is a **hard failure** and is worse than v0.2 on the safety metric.
+
+The result does not show that directional structure is useless. It shows that the **extractor feeding the directional frame is unsafe**.
+
+Main root causes:
+
+1. `CLAUSE_ACTION_BINDING_ERROR` — a broad text window attaches the wrong action to a nearby numeric threshold in compound sentences;
+2. `NEGATION_POLARITY_LOSS` — phrases such as “does not provide a contraindication rule” can still create positive contraindication features;
+3. `UNSAFE_POSITIVE_FALLBACK` — high frame/lexical overlap can still promote an unresolved claim to `DIRECT_SUPPORT`;
+4. incomplete causal-polarity parsing;
+5. negative clinical-management evidence is not represented as an explicit negative predicate.
+
+Examples of dangerous v0.3 false support include:
+
+```text
+eGFR 34 → incorrectly treated as contraindicated
+existing user eGFR 41 → incorrectly treated as requiring discontinuation
+risk increase → incorrectly upgraded to absolute prohibition
+possible syndrome → incorrectly upgraded to confirmed diagnosis
+raw spontaneous-report count → incorrectly upgraded to true incidence
+trial registration → incorrectly upgraded to efficacy
+CYP3A mechanism → incorrectly upgraded to clinical contraindication
+```
 
 Detailed reports:
 
 - `medical/stage-evals/S3/V0.1_BASELINE_REPORT.md`
 - `medical/stage-evals/S3/V0.2_REPORT.md`
+- `medical/stage-evals/S3/V0.3_REPORT.md`
 
 ### S3 release rule
 
@@ -139,7 +182,33 @@ S3 must not automatically approve Knowledge Graph truth while:
 High-risk False-Support Rate > 0
 ```
 
-Current fresh held-out result is 15.4%, therefore S3 is explicitly **not ready for automatic KG truth insertion**.
+Current untouched v0.3 shadow-heldout result:
+
+```text
+58.3% → HARD FAIL
+```
+
+Therefore S3 is explicitly **not ready for automatic KG truth insertion**.
+
+### S3 v0.4 redesign target
+
+The next architecture is:
+
+```text
+Evidence passage
+→ clause segmentation
+→ atomic propositions
+→ polarity-preserving proposition frames
+→ candidate proposition frames
+→ fieldwise/constraint comparison
+```
+
+Important safety rules:
+
+- bind a numeric condition only to the action in the same atomic proposition;
+- a negated clause must produce negative polarity, never a positive modality;
+- unresolved high-risk structural mismatch defaults to `DOES_NOT_SUPPORT` or human review, never `DIRECT_SUPPORT`;
+- v0.3 shadow-heldout is now frozen as diagnostic/regression evidence and must not be renamed as untouched held-out after tuning.
 
 ---
 
@@ -147,18 +216,18 @@ Current fresh held-out result is 15.4%, therefore S3 is explicitly **not ready f
 
 The 10-stage lifecycle has an implemented end-to-end scaffold.
 
-- **S2** is the first stage with a full eval → bug diagnosis → fix → held-out/regression → live evidence-retrieval story and can conditionally provide controlled evidence bundles downstream.
-- **S3** now has its own real eval and has successfully blocked an apparently strong regression-only verifier from contaminating downstream truth.
+- **S2** has a complete eval → diagnosis → fix → held-out/regression → live retrieval story and can conditionally provide controlled evidence bundles downstream.
+- **S3** now has three generations of independent stage eval and is correctly blocking unsafe machine-generated truth from entering the Knowledge Graph.
 
-The immediate truth-pipeline order remains:
+The immediate truth-pipeline order is:
 
 ```text
-S3 verifier redesign + fresh shadow held-out
+S3 v0.4 atomic-proposition redesign + new untouched shadow held-out
 → S4 Knowledge-Graph Construction Eval
 → S5 Case-Factory Eval
 ```
 
-S4 should not treat S3 machine-approved claims as automatic gold until S3's high-risk false-support gate passes on a new untouched held-out set.
+S4 must not treat S3 machine-approved claims as automatic gold until S3 passes its high-risk false-support gate on a genuinely new untouched held-out set.
 
 ## After upstream stage evals
 
