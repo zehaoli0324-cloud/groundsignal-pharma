@@ -16,14 +16,18 @@ USER_AGENT = "GroundSignal-Medical-S2-Eval/0.3 (research evaluation; contact via
 NS = {"h": "urn:hl7-org:v3"}
 
 
-def request_text(url: str, accept: str, timeout: int = 20):
-    req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": accept})
+def request_text(url: str, accept: str | None = None, timeout: int = 20):
+    # DailyMed v2 chooses representation from the URL suffix (.json/.xml).
+    # Sending a narrow Accept header caused HTTP 406 on history/XML endpoints,
+    # so only advertise */* unless a future adapter proves stricter negotiation is required.
+    headers = {"User-Agent": USER_AGENT, "Accept": accept or "*/*"}
+    req = Request(url, headers=headers)
     with urlopen(req, timeout=timeout) as resp:
         return resp.read().decode("utf-8"), getattr(resp, "status", 200)
 
 
 def request_json(url: str):
-    text, status = request_text(url, "application/json")
+    text, status = request_text(url)
     return json.loads(text), status
 
 
@@ -75,7 +79,7 @@ def run_test(test: dict):
     xml_url = f"https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/{setid}.xml"
     started = time.time()
     history_doc, history_status = request_json(history_url)
-    xml_text, xml_status = request_text(xml_url, "application/xml,text/xml")
+    xml_text, xml_status = request_text(xml_url)
     history = ((history_doc.get("data") or {}).get("history") or [])
     latest = latest_history_entry(history) if history else None
     xml_version, sections = section_rows(xml_text)
@@ -134,10 +138,10 @@ def main():
     for test in suite["tests"]:
         row = safe_run(test)
         rows.append(row)
-        print(test["test_id"], row["execution_status"], row.get("version_consistent"), row.get("latency_ms"))
+        print(test["test_id"], row["execution_status"], row.get("http_status"), row.get("version_consistent"), row.get("latency_ms"), row.get("error"))
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps({"benchmark_id": suite["benchmark_id"], "runner_version": "s2-dailymed-truth-v0.3.0", "results": rows}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    out.write_text(json.dumps({"benchmark_id": suite["benchmark_id"], "runner_version": "s2-dailymed-truth-v0.3.1", "results": rows}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":
