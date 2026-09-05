@@ -1,0 +1,9 @@
+{
+  "benchmark_id": "S3a-scope-safety-heldout-v0.5.2",
+  "gate_checks": {
+    "proposition_gate": false,
+    "abstention_gate": false,
+    "trace_gate": true
+  },
+  "release_gate": "FAIL"
+}

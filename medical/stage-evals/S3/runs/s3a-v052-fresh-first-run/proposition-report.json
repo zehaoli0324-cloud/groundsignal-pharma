@@ -1,0 +1,535 @@
+{
+  "benchmark_id": "S3a-scope-safety-heldout-v0.5.2",
+  "metrics": {
+    "gold_propositions": 73,
+    "predicted_propositions": 60,
+    "true_positive": 52,
+    "precision": 0.8666666666666667,
+    "recall": 0.7123287671232876,
+    "f1": 0.7819548872180451,
+    "critical_proposition_recall": 0.6727272727272727,
+    "polarity_accuracy_on_structural_matches": 0.9811320754716981,
+    "polarity_structural_matches": 53,
+    "population_accuracy_on_semantic_matches": 1.0,
+    "population_semantic_matches": 52,
+    "condition_binding_accuracy_on_semantic_matches": 0.9285714285714286,
+    "condition_semantic_matches": 56,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": false,
+    "critical_recall": false,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": false
+  },
+  "release_gate": "FAIL",
+  "failures": [
+    {
+      "item_id": "S3A52-004",
+      "text": "Those already on treatment should stop it below eGFR 27. They should not stop it merely because age exceeds 82 years.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "DISCONTINUE",
+          "object": "drug",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "DISCONTINUE",
+          "drug",
+          [
+            [
+              [
+                "operator",
+                "LT"
+              ],
+              [
+                "value",
+                27
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          "existing_user",
+          "NEGATIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A52-006",
+      "text": "Existing users require reassessment below eGFR 46 and discontinuation only below 29; hemoglobin 10.1 g/dL does not define either renal action.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "REASSESS_BENEFIT_RISK",
+          "object": "benefit_risk",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 46
+            }
+          ],
+          "population": "existing_user",
+          "critical": true
+        },
+        {
+          "subject": "drug_use",
+          "predicate": "DISCONTINUE",
+          "object": "drug",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 29
+            }
+          ],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "DISCONTINUE",
+          "drug",
+          [
+            [
+              [
+                "operator",
+                "LT"
+              ],
+              [
+                "value",
+                46
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          "existing_user",
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A52-010",
+      "text": "Although eGFR below 45 requires benefit-risk review for an existing user, a platelet count below 100 does not by itself trigger discontinuation.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "DISCONTINUE",
+          "object": "drug",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "DISCONTINUE",
+          "drug",
+          [
+            [
+              [
+                "operator",
+                "LT"
+              ],
+              [
+                "value",
+                100
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          "existing_user",
+          "NEGATIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A52-012",
+      "text": "Temporal proximity may justify follow-up; it must not be treated as proof of causation on its own.",
+      "missing_gold": [
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_CAUSALITY",
+          "object": "causal_relation",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [],
+      "abstain": true,
+      "unresolved_spans": [
+        {
+          "text": "Temporal proximity may justify follow-up; it must not be treated as proof of causation on its own.",
+          "reason": "representable critical semantic family unresolved: CAUSALITY_ESTABLISHMENT",
+          "potentially_critical": true,
+          "guard": "semantic_coverage"
+        }
+      ]
+    },
+    {
+      "item_id": "S3A52-019",
+      "text": "The trial is SUSPENDED. Its primary endpoint remains listed, but suspension is not evidence that the endpoint was achieved.",
+      "missing_gold": [
+        {
+          "subject": "study",
+          "predicate": "HAS_STATUS",
+          "object": "suspended",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "critical": false
+        },
+        {
+          "subject": "study",
+          "predicate": "HAS_PRIMARY_ENDPOINT",
+          "object": "primary_endpoint",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "critical": false
+        },
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_ENDPOINT_ACHIEVEMENT",
+          "object": "primary_endpoint",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [],
+      "abstain": true,
+      "unresolved_spans": [
+        {
+          "text": "The trial is SUSPENDED. Its primary endpoint remains listed, but suspension is not evidence that the endpoint was achieved.",
+          "reason": "critical management action is outside closed action ontology",
+          "potentially_critical": true,
+          "guard": "ontology_coverage"
+        }
+      ]
+    },
+    {
+      "item_id": "S3A52-021",
+      "text": "The study remains RECRUITING, with a defined primary endpoint; an enrollment target of 240 does not constitute an efficacy result.",
+      "missing_gold": [
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_ENDPOINT_ACHIEVEMENT",
+          "object": "primary_endpoint",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A52-025",
+      "text": "Option T is supported by a randomized trial, while the currently operative guideline continues to recommend option S.",
+      "missing_gold": [
+        {
+          "subject": "trial",
+          "predicate": "SUPPORTS_OPTION",
+          "object": "t",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "critical": false
+        },
+        {
+          "subject": "current_guideline",
+          "predicate": "IS_CURRENT",
+          "object": "s",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A52-027",
+      "text": "Guideline R superseded Guideline Q. A later trial supports option V, but the supplied evidence does not state that another guideline has replaced R.",
+      "missing_gold": [
+        {
+          "subject": "guideline r",
+          "predicate": "SUPERSEDES",
+          "object": "guideline q",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        },
+        {
+          "subject": "guideline r",
+          "predicate": "IS_CURRENT",
+          "object": "recommendation_source",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        },
+        {
+          "subject": "guideline q",
+          "predicate": "IS_CURRENT",
+          "object": "recommendation_source",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "guideline r",
+          "SUPERSEDES",
+          "guideline q.",
+          [],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A52-032",
+      "text": "Outcome P was not found to be associated with biomarker O.",
+      "missing_gold": [
+        {
+          "subject": "biomarker_o",
+          "predicate": "ASSOCIATED_WITH",
+          "object": "outcome_p",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "biomarker_o",
+          "ASSOCIATED_WITH",
+          "outcome_p",
+          [],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A52-037",
+      "text": "For a patient beginning therapy, initiation is not recommended below eGFR 42. By contrast, a patient already taking the medicine at the same eGFR should have benefit and risk reassessed rather than automatically discontinue.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "REASSESS_BENEFIT_RISK",
+          "object": "benefit_risk",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "EQ",
+              "value": 42
+            }
+          ],
+          "population": "existing_user",
+          "critical": true
+        },
+        {
+          "subject": "drug_use",
+          "predicate": "DISCONTINUE",
+          "object": "drug",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "REASSESS_BENEFIT_RISK",
+          "benefit_risk",
+          [
+            [
+              [
+                "operator",
+                "LT"
+              ],
+              [
+                "value",
+                42
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          "existing_user",
+          "POSITIVE"
+        ],
+        [
+          "drug_use",
+          "DISCONTINUE",
+          "drug",
+          [
+            [
+              [
+                "operator",
+                "LT"
+              ],
+              [
+                "value",
+                42
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          "existing_user",
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A52-038",
+      "text": "The study is ACTIVE, NOT RECRUITING, and lists a primary endpoint. The number 18 refers to study sites; no supplied result establishes endpoint achievement.",
+      "missing_gold": [
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_ENDPOINT_ACHIEVEMENT",
+          "object": "primary_endpoint",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [],
+      "abstain": true,
+      "unresolved_spans": [
+        {
+          "text": "The study is ACTIVE, NOT RECRUITING, and lists a primary endpoint. The number 18 refers to study sites; no supplied result establishes endpoint achievement.",
+          "reason": "representable critical semantic family unresolved: ENDPOINT_ACHIEVEMENT_EVIDENCE",
+          "potentially_critical": true,
+          "guard": "semantic_coverage"
+        }
+      ]
+    },
+    {
+      "item_id": "S3A52-039",
+      "text": "Guideline W is not superseded by Guideline X; W remains the operative recommendation source.",
+      "missing_gold": [
+        {
+          "subject": "guideline x",
+          "predicate": "SUPERSEDES",
+          "object": "guideline w",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        },
+        {
+          "subject": "guideline w",
+          "predicate": "IS_CURRENT",
+          "object": "recommendation_source",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [],
+      "abstain": true,
+      "unresolved_spans": [
+        {
+          "text": "Guideline W is not superseded by Guideline X; W remains the operative recommendation source.",
+          "reason": "representable critical semantic family unresolved: SUPERSESSION",
+          "potentially_critical": true,
+          "guard": "semantic_coverage"
+        }
+      ]
+    },
+    {
+      "item_id": "S3A52-040",
+      "text": "Option Y is not supported by the randomized trial, whereas the current guideline still recommends option S.",
+      "missing_gold": [
+        {
+          "subject": "trial",
+          "predicate": "SUPPORTS_OPTION",
+          "object": "y",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A52-041",
+      "text": "Permanently stop therapy if alanine aminotransferase exceeds eight times the upper limit of normal or if bilirubin simultaneously exceeds three times the upper limit of normal.",
+      "missing_gold": [],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "DISCONTINUE",
+          "drug",
+          [],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    }
+  ]
+}

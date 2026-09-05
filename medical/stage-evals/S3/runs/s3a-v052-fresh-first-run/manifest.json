@@ -1,0 +1,13 @@
+{
+  "benchmark_id": "S3a-scope-safety-heldout-v0.5.2",
+  "suite_freeze_commit": "fcce2dbcbf780e8a4378fdfb987b7e92e0196f30",
+  "workflow_source_commit": "09942c67e7b7961e7252ae86b26f77a88c94f262",
+  "github_run_id": "33996658862",
+  "extractor_version": "s3a-compositional-frame-v0.5.2",
+  "extractor_commit": "0200076a66454246de03fc015b9fd0911ea087f2",
+  "extractor_blob_sha": "fff81db9d9e80bc608f5b4dce3c0503a6207421b",
+  "evaluator_commit": "50a9a7a2f4a5409297434cf0c29f05d1fa6780c5",
+  "dataset_sha256": "f931bef62f63b6775cb8d81b8d8766c4586aa30e5dc533f1b2fcb62a019cbd39",
+  "first_observation_must_be_preserved": true,
+  "release_gate": "FAIL"
+}
