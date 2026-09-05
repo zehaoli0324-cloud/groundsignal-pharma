@@ -1,261 +1,139 @@
 {
-  "backbone_version": "organ-special-pop-safety-v0.1",
+  "backbone_id": "medical-organ-special-pop-safety-backbone-v0.1",
   "as_of_date": "2026-09-05",
-  "principle": "General regulatory guidance defines evaluation and labeling structure; patient-level management still requires the current product label and applicable guideline unless an explicit product-specific rule is included here.",
+  "purpose": "Reusable source-backed organ-function, special-population, and high-risk safety knowledge for evaluation and case generation. General regulatory guidance defines evidence structure; product-specific management still requires a current label/guideline.",
+  "principles": [
+    "General renal/hepatic guidance is methodology truth, not a patient-specific dose engine.",
+    "Pregnancy/lactation labeling must preserve current PLLR narrative semantics rather than obsolete letter categories.",
+    "Risk/warning relations must not be silently upgraded to diagnosis or universal management rules.",
+    "Product-specific label claims remain formulation/version scoped."
+  ],
   "modules": [
     {
-      "module_id": "RENAL-IMPAIRMENT-001",
-      "title": "Renal impairment dosing principle",
-      "source": {
-        "source_id": "FDA_RENAL_IMPAIRMENT_GUIDANCE",
-        "title": "Pharmacokinetics in Patients with Impaired Renal Function / Developing Dosage Recommendations",
-        "url": "https://www.fda.gov/media/78573/download",
-        "authority_tier": 0,
-        "source_type": "regulatory_guidance",
-        "document_status": "final_guidance"
-      },
+      "module_id": "ORGAN-RENAL-001",
+      "title": "Renal impairment: exposure-response based dosing principle",
+      "source_id": "FDA_RENAL_IMPAIRMENT_GUIDANCE",
+      "evidence_scope": "FDA renal-impairment dose-development methodology",
       "claims": [
-        {
-          "claim_id": "RENAL-001-C1",
-          "claim": "Dose recommendations in renal impairment should be based on the relationship among renal function, drug exposure, and exposure-response rather than on renal impairment alone.",
-          "locator": "Developing Dosage Recommendations in Patients with Impaired Renal Function",
-          "evidence_role": "methodology_rule",
-          "claim_scope": "general renal dose-development principle",
-          "review_status": "source_verified"
-        },
-        {
-          "claim_id": "RENAL-001-C2",
-          "claim": "A change in pharmacokinetics with renal impairment does not automatically imply that a dose change is required for every drug.",
-          "locator": "Developing Dosage Recommendations in Patients with Impaired Renal Function",
-          "evidence_role": "anti_overclaim_rule",
-          "claim_scope": "general renal PK-to-management boundary",
-          "review_status": "source_verified"
-        }
+        {"subject":"renal impairment","predicate":"CAN_CHANGE","object":"drug exposure","locator":"Developing Dosage Recommendations in Patients with Impaired Renal Function","review_status":"source_verified"},
+        {"subject":"renal dosing recommendation","predicate":"SHOULD_INTEGRATE","object":"renal function + exposure + exposure-response","locator":"Developing Dosage Recommendations in Patients with Impaired Renal Function","review_status":"source_verified"},
+        {"subject":"renal PK change","predicate":"DOES_NOT_ALWAYS_REQUIRE","object":"dose change","locator":"Developing Dosage Recommendations in Patients with Impaired Renal Function","review_status":"source_verified"}
       ],
-      "forbidden_inference": ["renal impairment -> automatic dose reduction for every drug", "near a renal threshold -> treat as beyond the threshold"]
+      "forbidden_inference":"Do not infer universal dose reduction from renal impairment or treat a value near a threshold as if it crossed the threshold.",
+      "eval_targets":["organ_function_reasoning","threshold_blur","pk_to_management_overclaim"]
     },
     {
-      "module_id": "HEPATIC-IMPAIRMENT-001",
-      "title": "Hepatic impairment PK/PD evaluation principle",
-      "source": {
-        "source_id": "FDA_HEPATIC_IMPAIRMENT_2026_DRAFT",
-        "title": "Pharmacokinetics in Patients with Impaired Hepatic Function: Study Design, Data Analysis, and Impact on Dosing and Labeling",
-        "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/pharmacokinetics-patients-impaired-hepatic-function-study-design-data-analysis-and-impact-dosing-and",
-        "authority_tier": 0,
-        "source_type": "regulatory_guidance",
-        "document_status": "draft_guidance_2026"
-      },
+      "module_id": "ORGAN-HEPATIC-002",
+      "title": "Hepatic impairment: PK/PD evaluation principle",
+      "source_id": "FDA_HEPATIC_IMPAIRMENT_2026_DRAFT",
+      "evidence_scope": "FDA 2026 draft hepatic-impairment PK/PD methodology; not implementation guidance",
       "claims": [
-        {
-          "claim_id": "HEPATIC-001-C1",
-          "claim": "Hepatic impairment may alter a drug's PK and, where relevant, PD; dedicated evaluation can inform dosing and labeling.",
-          "locator": "Purpose / scope of draft guidance",
-          "evidence_role": "methodology_rule",
-          "claim_scope": "general hepatic-impairment development principle",
-          "review_status": "source_verified"
-        }
+        {"subject":"hepatic impairment","predicate":"CAN_CHANGE","object":"drug PK","locator":"Purpose and scope of 2026 draft guidance","review_status":"source_verified"},
+        {"subject":"hepatic impairment","predicate":"MAY_REQUIRE_EVALUATION_OF","object":"drug PD","locator":"Purpose and scope of 2026 draft guidance","review_status":"source_verified"},
+        {"subject":"hepatic impairment study","predicate":"CAN_INFORM","object":"dosing and labeling","locator":"Purpose and scope of 2026 draft guidance","review_status":"source_verified"}
       ],
-      "forbidden_inference": ["hepatic impairment -> universal dose reduction", "draft guidance -> patient-specific management rule"]
+      "forbidden_inference":"Draft methodology does not itself establish a product-specific dose reduction or contraindication.",
+      "eval_targets":["hepatic_reasoning","guidance_status_awareness","methodology_to_management_overclaim"]
     },
     {
-      "module_id": "PREGNANCY-PLLR-001",
+      "module_id": "SPECIAL-PREGNANCY-003",
       "title": "Pregnancy labeling under PLLR",
-      "source": {
-        "source_id": "FDA_PLLR",
-        "title": "Pregnancy and Lactation Labeling Final Rule",
-        "url": "https://www.fda.gov/vaccines-blood-biologics/biologics-rules/pregnancy-and-lactation-labeling-final-rule",
-        "authority_tier": 0,
-        "source_type": "regulatory_labeling_rule",
-        "document_status": "final_rule"
-      },
+      "source_id": "FDA_PLLR",
+      "evidence_scope": "FDA pregnancy/lactation labeling rule",
       "claims": [
-        {
-          "claim_id": "PLLR-001-C1",
-          "claim": "Prescription-drug pregnancy labeling uses narrative Risk Summary, Clinical Considerations, and Data rather than the former A/B/C/D/X pregnancy categories.",
-          "locator": "Pregnancy subsection 8.1 / removal of pregnancy letter categories",
-          "evidence_role": "label_structure_rule",
-          "claim_scope": "US prescription-drug pregnancy labeling",
-          "review_status": "source_verified"
-        }
+        {"subject":"current US prescription pregnancy labeling","predicate":"USES","object":"Risk Summary + Clinical Considerations + Data","locator":"Pregnancy subsection 8.1","review_status":"source_verified"},
+        {"subject":"current US prescription pregnancy labeling","predicate":"DOES_NOT_USE","object":"A/B/C/D/X pregnancy categories","locator":"PLLR removal of pregnancy letter categories","review_status":"source_verified"}
       ],
-      "forbidden_inference": ["old pregnancy letter category -> current FDA risk classification", "pregnancy exposure -> automatic contraindication without product-specific evidence"]
+      "forbidden_inference":"Do not treat an obsolete pregnancy letter category as current FDA risk truth or convert pregnancy exposure into an automatic contraindication without product-specific evidence.",
+      "eval_targets":["pregnancy_label_temporality","obsolete_category_detection","special_population_scope"]
     },
     {
-      "module_id": "LACTATION-PLLR-001",
+      "module_id": "SPECIAL-LACTATION-004",
       "title": "Lactation labeling under PLLR",
-      "source": {
-        "source_id": "FDA_PLLR",
-        "title": "Pregnancy and Lactation Labeling Final Rule",
-        "url": "https://www.fda.gov/vaccines-blood-biologics/biologics-rules/pregnancy-and-lactation-labeling-final-rule",
-        "authority_tier": 0,
-        "source_type": "regulatory_labeling_rule",
-        "document_status": "final_rule"
-      },
+      "source_id": "FDA_PLLR",
+      "evidence_scope": "FDA lactation labeling rule",
       "claims": [
-        {
-          "claim_id": "PLLR-001-C2",
-          "claim": "The Lactation subsection may address drug presence in human milk and potential effects on the breastfed infant, and must be interpreted product by product.",
-          "locator": "Lactation subsection 8.2",
-          "evidence_role": "label_structure_rule",
-          "claim_scope": "US prescription-drug lactation labeling",
-          "review_status": "source_verified"
-        }
+        {"subject":"Lactation subsection 8.2","predicate":"MAY_CONTAIN","object":"drug presence in human milk","locator":"Lactation subsection 8.2","review_status":"source_verified"},
+        {"subject":"Lactation subsection 8.2","predicate":"MAY_CONTAIN","object":"potential effects on breastfed infant","locator":"Lactation subsection 8.2","review_status":"source_verified"}
       ],
-      "forbidden_inference": ["drug present in milk -> proven infant harm", "no lactation data -> proven safety"]
+      "forbidden_inference":"Drug presence in milk does not by itself prove infant harm; absence of data does not prove safety.",
+      "eval_targets":["lactation_scope","absence_of_evidence","risk_overclaim"]
     },
     {
-      "module_id": "REPRODUCTIVE-POTENTIAL-001",
+      "module_id": "SPECIAL-REPRO-005",
       "title": "Females and males of reproductive potential",
-      "source": {
-        "source_id": "FDA_PLLR",
-        "title": "Pregnancy and Lactation Labeling Final Rule",
-        "url": "https://www.fda.gov/vaccines-blood-biologics/biologics-rules/pregnancy-and-lactation-labeling-final-rule",
-        "authority_tier": 0,
-        "source_type": "regulatory_labeling_rule",
-        "document_status": "final_rule"
-      },
+      "source_id": "FDA_PLLR",
+      "evidence_scope": "FDA reproductive-potential labeling rule",
       "claims": [
-        {
-          "claim_id": "PLLR-001-C3",
-          "claim": "Label subsection 8.3 can include pregnancy testing, contraception recommendations, and infertility information when clinically relevant.",
-          "locator": "Females and Males of Reproductive Potential subsection 8.3",
-          "evidence_role": "label_structure_rule",
-          "claim_scope": "US reproductive-potential labeling",
-          "review_status": "source_verified"
-        }
+        {"subject":"label subsection 8.3","predicate":"MAY_INCLUDE","object":"pregnancy testing","locator":"Females and Males of Reproductive Potential subsection 8.3","review_status":"source_verified"},
+        {"subject":"label subsection 8.3","predicate":"MAY_INCLUDE","object":"contraception recommendations","locator":"Females and Males of Reproductive Potential subsection 8.3","review_status":"source_verified"},
+        {"subject":"label subsection 8.3","predicate":"MAY_INCLUDE","object":"infertility information","locator":"Females and Males of Reproductive Potential subsection 8.3","review_status":"source_verified"}
       ],
-      "forbidden_inference": ["reproductive-potential warning -> pregnancy contraindication"]
+      "forbidden_inference":"A reproductive-potential warning is not automatically a pregnancy contraindication.",
+      "eval_targets":["reproductive_label_scope","warning_vs_contraindication"]
     },
     {
-      "module_id": "QTC-LABELING-001",
-      "title": "QTc labeling and concentration-dependent risk",
-      "source": {
-        "source_id": "FDA_QTC_LABELING_2025",
-        "title": "QTc Information in Human Prescription Drug and Biological Product Labeling",
-        "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/qtc-information-human-prescription-drug-and-biological-product-labeling",
-        "authority_tier": 0,
-        "source_type": "regulatory_guidance",
-        "document_status": "final_guidance_2025"
-      },
+      "module_id": "SAFETY-QTC-LABEL-006",
+      "title": "QTc labeling principles",
+      "source_id": "FDA_QTC_LABELING_2025",
+      "evidence_scope": "FDA final QTc labeling guidance",
       "claims": [
-        {
-          "claim_id": "QTC-001-C1",
-          "claim": "Clinically relevant QTc information should be communicated in product labeling, including clinically significant prolongation, insufficient characterization, and relevant interaction contexts.",
-          "locator": "Purpose and scope",
-          "evidence_role": "labeling_rule",
-          "claim_scope": "general QTc labeling principle",
-          "review_status": "source_verified"
-        }
+        {"subject":"clinically relevant QTc information","predicate":"SHOULD_BE_INCLUDED_IN","object":"prescription product labeling","locator":"Purpose and scope","review_status":"source_verified"},
+        {"subject":"QTc drug-interaction information","predicate":"MAY_DEPEND_ON","object":"co-medication QT risk or concentration increase","locator":"Drug Interactions labeling recommendations","review_status":"source_verified"}
       ],
-      "forbidden_inference": ["any QT signal -> torsades diagnosis", "QT-related class membership -> identical risk across all drugs", "general QT guidance -> product-specific stop rule"]
+      "forbidden_inference":"Do not diagnose torsades from a generic QT signal or apply a universal stop rule without product-specific labeling/context.",
+      "eval_targets":["qt_risk_reasoning","interaction_scope","risk_vs_event"]
     },
     {
-      "module_id": "SEROTONIN-SYNDROME-001",
-      "title": "Sertraline and serotonin syndrome",
-      "source": {
-        "source_id": "DAILYMED_SERTRALINE_2026",
-        "title": "Sertraline prescribing information",
-        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e1864a7e-44b9-4399-9554-0c18b46fbdd6",
-        "authority_tier": 0,
-        "source_type": "regulatory_label",
-        "document_status": "current_label_snapshot_2026"
-      },
+      "module_id": "SAFETY-SEROTONIN-007",
+      "title": "Sertraline / serotonin syndrome warning",
+      "source_id": "DAILYMED_SPL",
+      "evidence_scope": "current sertraline prescribing-information warning",
       "claims": [
-        {
-          "claim_id": "SEROTONIN-001-C1",
-          "claim": "Sertraline can precipitate serotonin syndrome, and risk increases with concomitant serotonergic drugs or drugs that impair serotonin metabolism.",
-          "locator": "Section 5.2 Serotonin Syndrome",
-          "evidence_role": "warning_rule",
-          "claim_scope": "sertraline serotonin-syndrome warning",
-          "review_status": "source_verified"
-        },
-        {
-          "claim_id": "SEROTONIN-001-C2",
-          "claim": "Serotonin-syndrome symptoms span mental-status, autonomic, neuromuscular, seizure, and gastrointestinal findings; no single nonspecific symptom alone establishes the syndrome.",
-          "locator": "Section 5.2 Serotonin Syndrome",
-          "evidence_role": "syndrome_pattern",
-          "claim_scope": "sertraline label symptom pattern",
-          "review_status": "source_verified"
-        }
+        {"subject":"sertraline","predicate":"CAN_PRECIPITATE","object":"serotonin syndrome","locator":"Sertraline label Section 5.2 Serotonin Syndrome","review_status":"source_verified"},
+        {"subject":"other serotonergic drugs","predicate":"INCREASE_RISK_OF","object":"serotonin syndrome with sertraline","locator":"Sertraline label Section 5.2","review_status":"source_verified"},
+        {"subject":"serotonin syndrome","predicate":"MAY_HAVE_PATTERN","object":"mental-status + autonomic + neuromuscular + seizure + GI findings","locator":"Sertraline label Section 5.2","review_status":"source_verified"}
       ],
-      "forbidden_inference": ["one serotonergic symptom -> confirms serotonin syndrome", "two serotonergic drugs -> patient definitely has serotonin syndrome"]
+      "forbidden_inference":"One nonspecific symptom does not confirm serotonin syndrome; co-use of serotonergic drugs does not prove the syndrome is present.",
+      "eval_targets":["toxidrome_pattern","risk_vs_diagnosis","multi_feature_reasoning"]
     },
     {
-      "module_id": "HYPOGLYCEMIA-001",
-      "title": "Sulfonylurea severe hypoglycemia risk",
-      "source": {
-        "source_id": "DAILYMED_GLIPIZIDE_ER_2026",
-        "title": "Glipizide extended-release prescribing information",
-        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=03151cb5-d32b-4484-8f2a-8c5d24c7f6f1",
-        "authority_tier": 0,
-        "source_type": "regulatory_label",
-        "document_status": "current_label_snapshot_2026"
-      },
+      "module_id": "SAFETY-HYPOGLYCEMIA-008",
+      "title": "Glipizide severe hypoglycemia risk",
+      "source_id": "DAILYMED_SPL",
+      "evidence_scope": "current glipizide extended-release prescribing information",
       "claims": [
-        {
-          "claim_id": "HYPO-001-C1",
-          "claim": "Sulfonylureas including glipizide can produce severe hypoglycemia, and combination with other antidiabetic medication can increase hypoglycemia risk.",
-          "locator": "Section 5.1 Hypoglycemia",
-          "evidence_role": "warning_rule",
-          "claim_scope": "glipizide hypoglycemia risk",
-          "review_status": "source_verified"
-        }
+        {"subject":"glipizide","predicate":"CAN_CAUSE","object":"severe hypoglycemia","locator":"Glipizide ER label Section 5.1 Hypoglycemia","review_status":"source_verified"},
+        {"subject":"other antidiabetic medication with glipizide","predicate":"CAN_INCREASE_RISK_OF","object":"hypoglycemia","locator":"Glipizide ER label Section 5.1","review_status":"source_verified"}
       ],
-      "forbidden_inference": ["glipizide use -> current hypoglycemia diagnosis", "risk factor -> confirmed event"]
+      "forbidden_inference":"Glipizide exposure or a risk factor does not itself establish that the patient is currently hypoglycemic.",
+      "eval_targets":["hypoglycemia_risk","risk_vs_event","combination_safety"]
     },
     {
-      "module_id": "ACETAMINOPHEN-LIVER-001",
-      "title": "Acetaminophen severe liver-injury warning",
-      "source": {
-        "source_id": "DAILYMED_ACETAMINOPHEN_2026",
-        "title": "Acetaminophen 500 mg OTC Drug Facts",
-        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=59773893-09a8-47a2-943a-e9ea9da4458a&version=24",
-        "authority_tier": 0,
-        "source_type": "otc_regulatory_label",
-        "document_status": "current_label_snapshot_2026"
-      },
+      "module_id": "SAFETY-APAP-LIVER-009",
+      "title": "Acetaminophen liver warning",
+      "source_id": "DAILYMED_SPL",
+      "evidence_scope": "2026 DailyMed OTC acetaminophen 500 mg Drug Facts warning",
       "claims": [
-        {
-          "claim_id": "APAP-001-C1",
-          "claim": "The OTC label warns that severe liver damage may occur with more than 4,000 mg acetaminophen in 24 hours, with other acetaminophen-containing drugs, or with heavy daily alcohol use while taking the product.",
-          "locator": "Drug Facts — Liver warning",
-          "evidence_role": "warning_rule",
-          "claim_scope": "specific OTC acetaminophen 500 mg product warning",
-          "review_status": "source_verified"
-        }
+        {"subject":"acetaminophen >4000 mg/24h","predicate":"INCREASES_RISK_OF","object":"severe liver damage","locator":"Drug Facts — Liver warning","review_status":"source_verified"},
+        {"subject":"multiple acetaminophen-containing products","predicate":"INCREASES_RISK_OF","object":"severe liver damage","locator":"Drug Facts — Liver warning","review_status":"source_verified"},
+        {"subject":"heavy daily alcohol use while taking acetaminophen","predicate":"INCREASES_RISK_OF","object":"severe liver damage","locator":"Drug Facts — Liver warning","review_status":"source_verified"}
       ],
-      "forbidden_inference": ["acetaminophen use -> DILI diagnosis", "label warning -> incidence estimate", "OTC product warning -> universal formulation-independent prescription rule"]
+      "forbidden_inference":"Acetaminophen use alone does not diagnose DILI; a product warning is not an incidence estimate and remains formulation/product scoped.",
+      "eval_targets":["dose_warning_scope","duplicate_ingredient_detection","dili_overclaim"]
     },
     {
-      "module_id": "OPIOID-RESPIRATORY-001",
-      "title": "Opioid-induced respiratory depression and naloxone reversal",
-      "source": {
-        "source_id": "DAILYMED_NALOXONE_2026",
-        "title": "Naloxone hydrochloride injection prescribing information",
-        "url": "https://www.dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b1303f15-c48b-a44d-b28a-72f370094e02",
-        "authority_tier": 0,
-        "source_type": "regulatory_label",
-        "document_status": "current_label_snapshot"
-      },
+      "module_id": "SAFETY-OPIOID-RESP-010",
+      "title": "Opioid respiratory depression and naloxone boundary",
+      "source_id": "DAILYMED_SPL",
+      "evidence_scope": "naloxone prescribing information",
       "claims": [
-        {
-          "claim_id": "OPIOID-001-C1",
-          "claim": "Naloxone is indicated for complete or partial reversal of opioid depression including respiratory depression and for suspected or known acute opioid overdose.",
-          "locator": "Indications and Usage",
-          "evidence_role": "management_rule",
-          "claim_scope": "naloxone indication for opioid-induced depression/overdose",
-          "review_status": "source_verified"
-        },
-        {
-          "claim_id": "OPIOID-001-C2",
-          "claim": "Naloxone is not effective for respiratory depression caused by non-opioid drugs, so response to naloxone cannot be generalized to all causes of respiratory depression.",
-          "locator": "Respiratory Depression Due to Other Drugs",
-          "evidence_role": "boundary_rule",
-          "claim_scope": "naloxone mechanism/indication boundary",
-          "review_status": "source_verified"
-        }
+        {"subject":"naloxone","predicate":"INDICATED_FOR_REVERSAL_OF","object":"opioid-induced respiratory depression","locator":"Naloxone label Indications and Usage","review_status":"source_verified"},
+        {"subject":"naloxone","predicate":"INDICATED_FOR","object":"suspected or known acute opioid overdose","locator":"Naloxone label Indications and Usage","review_status":"source_verified"},
+        {"subject":"naloxone","predicate":"NOT_EFFECTIVE_FOR","object":"respiratory depression due to non-opioid drugs","locator":"Respiratory Depression Due to Other Drugs","review_status":"source_verified"}
       ],
-      "forbidden_inference": ["respiratory depression -> must be opioid toxicity", "naloxone nonresponse -> rules out opioid exposure"]
+      "forbidden_inference":"Respiratory depression does not prove opioid toxicity, and naloxone nonresponse does not by itself rule out opioid exposure.",
+      "eval_targets":["toxicology_boundary","mechanism_specificity","reversal_agent_scope"]
     }
   ]
 }
