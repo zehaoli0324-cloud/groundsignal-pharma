@@ -9,7 +9,7 @@ The system has **10 lifecycle stages**, but maturity differs by stage. This file
 |---|---|---|---|---|
 | S1 | User Need / Workflow Discovery | Partial | 48 seed tasks, high-risk matrix, user-research plan | real interview/log validation and frequency weighting |
 | S2 | Knowledge Search & Source Routing | **Conditional pass / evaluated prototype** | source governance; v0.1/v0.2 routing regressions; v0.3 fresh intent held-out 91.7%; 10-test live record retrieval; real DailyMed version consistency + critical-passage Recall@1 on 3 high-risk examples | broader source-family passage retrieval, larger fresh-language routing sets, robust concept-type inference, ambiguous-jurisdiction routing |
-| S3 | Evidence Verification & Temporal Truth | Strong prototype, dedicated eval next | passage/locator/scope/time/review contracts and source-backed fixtures | atomic-claim extraction eval, entailment/scope/threshold/negation/temporal/contradiction metrics, more domain review |
+| S3 | Evidence Verification & Temporal Truth | **Evaluated FAIL / redesign required** | v0.1 24-item evidence-verification benchmark; naive lower bound; structured semantic verifier; fresh v0.2 24-item held-out; explicit false-support safety gate | directional ClaimFrame extraction, zero high-risk false support on a new untouched held-out, broader expert-reviewed evidence relations |
 | S4 | Medical KG Construction / Update | Working prototype | case graphs + two reusable backbones + canonical builder | RxNorm/LOINC normalization, persistent graph DB/index, update impact engine, dedicated stage eval |
 | S5 | Controlled Case / Benchmark Factory | P0 complete | 12 families / 60 controlled cases / held-out design | clinical expert gold review + broader validated user-task coverage + dedicated stage eval |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible model runner, evidence injection, CI fixture | production retriever/reranker, live multi-provider runs, real Agent executor, dedicated stage eval |
@@ -20,7 +20,7 @@ The system has **10 lifecycle stages**, but maturity differs by stage. This file
 
 ## S2 checkpoint after v0.3
 
-**S2 = Stage 2, Knowledge Search & Source Routing（知识搜索与来源路由）** is now independently observable at four layers:
+**S2 = Stage 2, Knowledge Search & Source Routing（知识搜索与来源路由）** is independently observable at four layers:
 
 ```text
 Intent recognition
@@ -72,21 +72,93 @@ Detailed reports:
 - `medical/stage-evals/S2/V0.2_REPORT.md`
 - `medical/stage-evals/S2/V0.3_REPORT.md`
 
-## Overall project checkpoint
+---
 
-The 10-stage lifecycle has an implemented end-to-end scaffold, and **S2 is now the first stage with a full eval → bug diagnosis → fix → held-out/regression → live evidence retrieval story**.
+## S3 checkpoint after v0.2
 
-S2 is strong enough to hand controlled evidence bundles to S3 while continuing S2 regression in parallel.
+**S3 = Stage 3, Evidence Verification & Temporal Truth（证据验证与时间真值）** evaluates whether the system interprets an already-retrieved evidence passage correctly.
 
-The immediate truth-pipeline order is now:
+### v0.1 naive lexical baseline
 
 ```text
-S3 Evidence Verification Eval
+24 items
+relation accuracy                    58.3%
+high-risk false-support rate          8.3%
+high-risk false-support count         1
+release gate                          FAIL
+```
+
+The critical failure was a metformin action/scope error:
+
+```text
+evidence: eGFR <45 → reassess benefit/risk
+claim:    eGFR <45 → must discontinue
+```
+
+The lexical verifier incorrectly returned `DIRECT_SUPPORT`.
+
+### v0.2 structured semantic verifier on known regression set
+
+```text
+relation accuracy                    91.7%
+high-risk false-support rate          0.0%
+release gate                          PASS
+```
+
+However, this set had already influenced the verifier design and is therefore only regression evidence.
+
+### v0.2 fresh held-out
+
+A separate 24-item held-out set was frozen after implementation and before first run.
+
+```text
+relation accuracy                    50.0%
+high-risk negative items              13
+high-risk false-support count           2
+high-risk false-support rate          15.4%
+release gate                          FAIL
+```
+
+Two dangerous false-support failures were observed:
+
+1. **temporal supersession** — `Guideline B supersedes A` was incorrectly used to support the claim that A remains current;
+2. **observational association → causality** — evidence explicitly saying causality was not established was incorrectly used to support a causal claim.
+
+This shows that unordered semantic cue labels are still insufficient. The next verifier needs directional `ClaimFrame` structure with subject/predicate/object, condition, modality, causal polarity and temporal direction.
+
+Detailed reports:
+
+- `medical/stage-evals/S3/V0.1_BASELINE_REPORT.md`
+- `medical/stage-evals/S3/V0.2_REPORT.md`
+
+### S3 release rule
+
+S3 must not automatically approve Knowledge Graph truth while:
+
+```text
+High-risk False-Support Rate > 0
+```
+
+Current fresh held-out result is 15.4%, therefore S3 is explicitly **not ready for automatic KG truth insertion**.
+
+---
+
+## Overall project checkpoint
+
+The 10-stage lifecycle has an implemented end-to-end scaffold.
+
+- **S2** is the first stage with a full eval → bug diagnosis → fix → held-out/regression → live evidence-retrieval story and can conditionally provide controlled evidence bundles downstream.
+- **S3** now has its own real eval and has successfully blocked an apparently strong regression-only verifier from contaminating downstream truth.
+
+The immediate truth-pipeline order remains:
+
+```text
+S3 verifier redesign + fresh shadow held-out
 → S4 Knowledge-Graph Construction Eval
 → S5 Case-Factory Eval
 ```
 
-S2 remains continuously monitored and should expand passage/version tests across more source families rather than blocking all downstream work until it becomes a comprehensive medical search engine.
+S4 should not treat S3 machine-approved claims as automatic gold until S3's high-risk false-support gate passes on a new untouched held-out set.
 
 ## After upstream stage evals
 
