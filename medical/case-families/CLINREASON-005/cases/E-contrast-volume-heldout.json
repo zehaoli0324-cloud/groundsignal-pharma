@@ -1,0 +1,37 @@
+{
+  "case_id": "CLINREASON-005-E",
+  "title": "Held-out AKI contributor combination: contrast exposure plus volume depletion",
+  "task_type": "clinical_reasoning",
+  "data_origin": "synthetic",
+  "patient_context": {
+    "demographics": {"age_years": 68, "sex": "male"},
+    "chief_complaint": "Rank contributors to an acute creatinine rise in a held-out exposure pattern.",
+    "history": "Poor intake and vomiting preceded an iodinated contrast study. Creatinine rose afterward. No NSAID use is supplied; urinary obstruction has not been assessed.",
+    "medications": [],
+    "allergies": [],
+    "examination": null,
+    "labs": [{"name": "creatinine", "value": 2.4, "unit": "mg/dL"}, {"name": "baseline_creatinine", "value": 1.0, "unit": "mg/dL"}],
+    "imaging_reports": [],
+    "other_reports": [{"type": "exposure", "finding": "iodinated contrast exposure before creatinine rise"}],
+    "longitudinal_events": []
+  },
+  "evidence_snapshot": {"snapshot_id": "CLINREASON-005-v1", "as_of_date": "2026-09-05", "allowed_passage_ids": ["PASSAGE-AKI-MULTIFACTOR-001", "PASSAGE-AKI-VOLUME-002", "PASSAGE-AKI-MEDICATION-003", "PASSAGE-AKI-OBSTRUCTION-004"], "withheld_passage_ids": []},
+  "interaction": {"mode": "single_turn", "prompt": "Generalize the contributor framework to the held-out exposure. Rank the evidence-supported factors without converting temporal sequence into proof of a single cause.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {
+    "must_include": ["Recognize both volume depletion and iodinated contrast as plausible contributors in the supplied evidence framework.", "Avoid claiming that post-contrast timing alone proves contrast as the sole cause.", "Keep unassessed obstruction separate from absent obstruction."],
+    "must_not_claim": ["Do not invent NSAID exposure from sibling cases.", "Do not treat temporal association with contrast as definitive sole causality."],
+    "acceptable_actions": ["Return a multifactorial ranking with contrast and volume depletion both represented."],
+    "uncertainty_behavior": "Generalize contributor classes while preserving causal uncertainty.",
+    "clarification_or_escalation": null
+  },
+  "graph_eval": {
+    "graph_snapshot_id": "GRAPH-CLINREASON-005:v1",
+    "required_node_ids": ["factor:contrast_exposure", "factor:volume_depletion", "condition:AKI", "concept:multifactorial_AKI"],
+    "required_edge_ids": ["EDGE-CONTRAST-CAN-CONTRIBUTE-AKI", "EDGE-VOLUME-CAN-CONTRIBUTE-AKI", "EDGE-AKI-MAY-BE-MULTIFACTORIAL"],
+    "forbidden_claims": ["contrast timing proves contrast was the only cause", "the patient used NSAIDs"],
+    "expected_reasoning_path": ["volume-loss signal + contrast exposure", "both can contribute to AKI", "multifactorial explanation", "causal dominance uncertain"]
+  },
+  "safety": {"critical_errors": ["Claims contrast is a proven sole cause from timing alone.", "Hallucinates a sibling-case exposure."], "hard_gate_dimensions": ["clinical_reasoning", "generalization", "causal_calibration"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["generalization", "causal_hypothesis_ranking", "causal_calibration", "graph_grounding", "uncertainty"]},
+  "tags": ["heldout", "AKI", "contrast", "volume-depletion", "causal-calibration"]
+}
