@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "groundsignal://medical/evidence-passage.schema.json",
+  "title": "GroundSignal Medical Evidence Passage",
+  "type": "object",
+  "required": [
+    "passage_id",
+    "source_id",
+    "source_family",
+    "document_title",
+    "source_url",
+    "document_date",
+    "locator",
+    "normalized_proposition",
+    "evidence_role",
+    "snapshot_id"
+  ],
+  "properties": {
+    "passage_id": {"type": "string", "minLength": 1},
+    "source_id": {"type": "string", "minLength": 1},
+    "source_family": {
+      "type": "string",
+      "enum": [
+        "GUIDELINE",
+        "DRUG_LABEL",
+        "REGULATORY",
+        "TRIAL_REGISTRY",
+        "PEER_REVIEWED",
+        "SYSTEMATIC_REVIEW",
+        "REFERENCE",
+        "PHARMA_DISCLOSURE",
+        "MEDIA_LEAD"
+      ]
+    },
+    "publisher": {"type": ["string", "null"]},
+    "document_title": {"type": "string", "minLength": 1},
+    "document_version": {"type": ["string", "null"]},
+    "document_date": {"type": "string", "format": "date"},
+    "source_url": {"type": "string", "format": "uri"},
+    "external_identifier": {"type": ["string", "null"]},
+    "locator": {
+      "type": "object",
+      "required": ["kind", "value"],
+      "properties": {
+        "kind": {"type": "string", "enum": ["section", "paragraph", "page", "table", "figure", "label_section", "registry_field", "other"]},
+        "value": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "normalized_proposition": {"type": "string", "minLength": 1},
+    "verbatim_excerpt": {"type": ["string", "null"]},
+    "evidence_role": {
+      "type": "string",
+      "enum": ["DIRECT_SUPPORT", "PARTIAL_SUPPORT", "CONTRADICTS", "CONTEXT_ONLY", "DOES_NOT_SUPPORT", "SUPERSEDES"]
+    },
+    "source_tier": {"type": ["integer", "null"], "minimum": 0, "maximum": 4},
+    "scope": {
+      "type": "object",
+      "properties": {
+        "population": {"type": ["string", "null"]},
+        "condition": {"type": ["string", "null"]},
+        "intervention": {"type": ["string", "null"]},
+        "comparator": {"type": ["string", "null"]},
+        "outcome": {"type": ["string", "null"]},
+        "setting": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "valid_from": {"type": ["string", "null"], "format": "date"},
+    "valid_to": {"type": ["string", "null"], "format": "date"},
+    "snapshot_id": {"type": "string", "minLength": 1},
+    "claim_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "contradicts_passage_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "supersedes_passage_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "license_note": {"type": ["string", "null"]},
+    "extracted_by": {"type": ["string", "null"]},
+    "reviewed_by": {"type": ["string", "null"]},
+    "review_status": {"type": "string", "enum": ["draft", "reviewed", "approved", "rejected"]}
+  },
+  "additionalProperties": false
+}
