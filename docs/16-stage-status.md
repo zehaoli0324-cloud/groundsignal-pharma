@@ -9,7 +9,7 @@ The system has **10 lifecycle stages**, but maturity differs by stage. Architect
 |---|---|---|---|---|
 | S1 | User Need / Workflow Discovery | Partial | 48 seed tasks, high-risk matrix, user-research plan | real interview/log validation and frequency weighting |
 | S2 | Knowledge Search & Source Routing | **Conditional pass / evaluated prototype** | v0.3 fresh intent held-out 91.7%; 10-test live official-source retrieval; real DailyMed current-version consistency + critical-passage Recall@1 on 3 high-risk examples | broader passage-source diversity, larger open-language routing sets, terminology normalization |
-| S3 | Evidence Verification & Temporal Truth | **Evaluated HARD FAIL / bottleneck localized to S3a** | v0.1–v0.6 fresh history; S3a/S3b split evaluation; S3b initial 12/12 structured diagnostic; constrained semantic-extractor harness; immutable first-run reports | improve and freshly validate S3a semantic extraction; validate S3b on a larger untouched structured set; then re-test end-to-end S3 |
+| S3 | Evidence Verification & Temporal Truth | **HARD FAIL end-to-end / S3b conditional pass / S3a blocking** | full v0.1–v0.6 failure history; S3 split; S3b v0.3 fresh structured held-out 40/40 with HFSR 0; constrained semantic-extractor harness | improve and freshly validate S3a semantic proposition extraction, then re-test end-to-end S3 on a new untouched set |
 | S4 | Medical KG Construction / Update | Working prototype | case graphs + two reusable backbones + canonical builder | RxNorm/LOINC normalization, persistent graph DB/index, update impact engine, dedicated stage eval |
 | S5 | Controlled Case / Benchmark Factory | P0 complete | 12 families / 60 controlled cases / held-out design | clinical expert gold review + broader validated user-task coverage + dedicated stage eval |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible model runner, evidence injection, CI fixture | production retriever/reranker, live multi-provider runs, real Agent executor, dedicated stage eval |
@@ -45,9 +45,9 @@ Two v0.3 routing misses remain preserved: LOINC observation normalization and Rx
 
 ---
 
-## S3 checkpoint through split evaluation v0.1
+## S3 checkpoint
 
-**S3 = Stage 3, Evidence Verification & Temporal Truth（证据验证与时间真值）** asks whether an already-retrieved evidence passage supports a candidate medical claim.
+**S3 = Stage 3, Evidence Verification & Temporal Truth（证据验证与时间真值）** asks whether already-retrieved evidence supports a candidate medical claim.
 
 End-to-end hard release criteria remain:
 
@@ -56,7 +56,7 @@ Relation Accuracy >= 80%
 High-risk False-Support Rate = 0
 ```
 
-### Fresh end-to-end history
+### End-to-end fresh history
 
 ```text
 v0.1 lexical baseline            Accuracy 58.3%   HFSR  8.3%   FAIL
@@ -67,52 +67,13 @@ v0.5 fresh compositional shadow  Accuracy 75.0%   HFSR  6.25%  FAIL
 v0.6 fresh post-v0.5.4 shadow    Accuracy 40.0%   HFSR 17.6%   HARD FAIL
 ```
 
-`HFSR = High-risk False-Support Rate（高风险错误支持率）`.
-
-The history is intentionally preserved because regression-only scores repeatedly looked strong while genuinely new language exposed unsafe generalization.
-
-### v0.5.4 exposed regression before v0.6
-
-```text
-v0.1 diagnostic             100.0%   HFSR 0
-v0.2 diagnostic              91.7%   HFSR 0
-v0.3 diagnostic             100.0%   HFSR 0
-v0.4 diagnostic             100.0%   HFSR 0
-v0.5 exposed regression     100.0%   HFSR 0
-```
-
-These numbers demonstrate regression control, not free-text generalization. The new v0.6 untouched set subsequently fell to 40.0% accuracy with 17.6% HFSR.
-
-### v0.6 untouched first run
-
-The 40-item v0.6 shadow set was frozen at commit `56c8a7b8af98fec284006edbeebe837199fea5fa`, after verifier implementation commit `98923941b40ead8a5ed983862fe9755efb805631`.
-
-First-run workflow: `33974863676`.
-
-```text
-items                                      40
-Relation Accuracy                        40.0%
-high-risk negative items                   17
-High-risk False-Support Count                3
-High-risk False-Support Rate             17.6%
-Release Gate                              HARD FAIL
-```
-
-Critical false-support classes:
-
-1. `MISSING_CONDITION_OVERCLAIM`;
-2. `NEGATION_POLARITY_ERROR`;
-3. `PGX_TO_MANAGEMENT_ESCALATION`.
-
-Detailed first-run report:
-
-- `medical/stage-evals/S3/V0.6_REPORT.md`
+The fresh history is preserved because regression-only scores repeatedly looked strong while new language exposed unsafe extraction/generalization.
 
 ---
 
 ## S3 split architecture
 
-v0.6 showed that one end-to-end score mixed two materially different capabilities:
+v0.6 showed that one end-to-end score mixed two different capabilities:
 
 ```text
 S3a — Semantic Proposition Extraction
@@ -126,11 +87,7 @@ canonical evidence propositions
 → DIRECT / PARTIAL / CONTRADICTS / DOES_NOT_SUPPORT
 ```
 
-Design:
-
-- `medical/stage-evals/S3/S3_SPLIT_DESIGN.md`
-
-### S3a v0.1 — semantic proposition extraction
+### S3a current status — blocking
 
 Initial 12-item / 21-proposition diagnostic:
 
@@ -143,85 +100,93 @@ polarity accuracy on structural matches  90.9% (10/11)
 release gate                              FAIL
 ```
 
-This is the current primary bottleneck. More than half of safety-critical propositions were not recovered in the required canonical structure.
-
 Representative failures:
 
-- `does not constitute a contraindication` → positive contraindication;
+- `does not constitute a contraindication` → wrong positive polarity;
 - safety-signal + causal limitation → propositions missing;
-- `no result establishes endpoint was met` → incorrect endpoint-achievement representation;
-- guideline replacement/currentness → missing propositions;
-- pathology benign category → missing proposition;
+- `no result establishes endpoint was met` → incorrect achievement proposition;
+- guideline replacement/currentness → propositions missing;
+- pathology benign category → proposition missing;
 - explicit `not associated` → generic positive association.
 
-### S3b v0.1 — structured proposition entailment
+A constrained semantic-extractor harness exists with a deterministic lower bound and an `openai_compatible` model backend. Model outputs are constrained by a predicate registry, schema validation and abstention/human-review behavior for unresolved critical semantics.
 
-The free-text parser was bypassed and manually standardized propositions were supplied directly.
+### S3b v0.3 — conditional pass
 
-```text
-items                                      12
-Relation Accuracy                       100.0%
-high-risk negative items                   10
-High-risk False-Support Count                0
-High-risk False-Support Rate              0.0%
-release gate                              PASS
-```
+S3b now has a fresh structured held-out release result independent of free-text extraction.
 
-The 12-item structured slice includes threshold algebra, action scope, explicit negation, causal polarity, incidence polarity, supersession/currentness, PGx management overclaim, diagnostic category conflict, partial support, and subgroup-ranking absence.
-
-This is useful localization evidence, **not sufficient proof that S3b is universally solved**. A larger independently frozen S3b held-out is still required.
-
-Full split report:
-
-- `medical/stage-evals/S3/S3_SPLIT_V0.1_REPORT.md`
-
----
-
-## S3a semantic-extractor redesign
-
-The regex-style parser is retained only as a reproducible lower bound. A constrained semantic-extraction interface now exists:
+Frozen suite:
 
 ```text
-free text
-→ semantic extractor
-→ canonical predicate registry
-→ structured proposition validation
-→ critical unresolved semantic content?
-     yes → abstain + human review
-     no  → S3b deterministic entailment
+40 items
+DIRECT_SUPPORT      12
+CONTRADICTS         11
+DOES_NOT_SUPPORT    10
+PARTIAL_SUPPORT      7
+high-risk items     27
 ```
 
-Implemented interfaces:
+It explicitly covers:
 
-- `medical/stage-evals/S3/proposition-registry-v0.1.json`
-- `medical/stage-evals/S3/semantic-extractor-output.schema.json`
-- `medical/stage-evals/S3/S3A_SEMANTIC_EXTRACTOR_PROMPT.md`
-- `scripts/s3_semantic_extractor.py`
-- `medical/configs/s3-semantic-extractor.baseline.json`
-- `medical/configs/s3-semantic-extractor.openai-compatible.example.json`
+- LT/LTE/GT/GTE/RANGE/EQ conditions;
+- `EXACT_DOMAIN` vs `SUFFICIENT_ONLY` closure semantics;
+- population/use-state scope;
+- positive/negative action polarity;
+- causality and incidence boundaries;
+- temporal currentness and supersession direction;
+- mixed claims and partial support;
+- pharmacogenomics exposure vs dosing management;
+- diagnostic category polarity;
+- subgroup/ranking overclaim;
+- missing-condition and absence-of-evidence behavior.
 
-The harness supports:
+First-run workflow: `33976929442`.
 
-1. `deterministic_baseline` — current parser as lower bound/regression;
-2. `openai_compatible` — constrained model-based semantic extraction.
+```text
+Relation Accuracy                 100.0%
+High-risk negative items             22
+High-risk False-Support Count         0
+High-risk False-Support Rate         0.0%
+Release Gate                         PASS
+```
 
-CI reproduces the deterministic lower-bound S3a metrics exactly. No real model-based S3a run has yet been claimed; that requires an actual configured model endpoint/API credential.
+Detailed report:
+
+- `medical/stage-evals/S3/S3B_V0.3_REPORT.md`
+
+Interpretation:
+
+> S3b is a **conditional pass** when given already-normalized canonical propositions with explicit polarity, population and condition semantics. It is not evidence that end-to-end S3 is solved.
+
+Allowed current use:
+
+```text
+reviewed / gold canonical propositions
+→ S3b deterministic audited verification allowed
+```
+
+Blocked current use:
+
+```text
+unvalidated free-text extraction
+→ automatic S3b decision
+→ unrestricted KG truth insertion
+```
 
 ### Current S3 release decision
 
-S3 remains **HARD FAIL** and is **not eligible for automatic KG truth insertion**.
+End-to-end S3 remains **HARD FAIL** because S3a is still below its extraction safety gate.
 
-The development priority is now explicit:
+Immediate priority:
 
 ```text
-1. independently validate S3b on a larger fresh structured held-out
-2. run / improve model-based S3a semantic extraction
-3. freeze a fresh S3a held-out only after extractor design is fixed
-4. only after S3a and S3b gates pass, freeze a new end-to-end S3 held-out
-5. then consider reviewed KG truth insertion
+S3a semantic extraction redesign/development
+→ fresh S3a held-out
+→ if S3a passes, freeze a new end-to-end S3 held-out
+→ only then consider reviewed automatic KG truth insertion
 ```
 
-Historical first-run reports:
+Historical reports include:
 
 - `medical/stage-evals/S3/V0.1_BASELINE_REPORT.md`
 - `medical/stage-evals/S3/V0.2_REPORT.md`
@@ -229,20 +194,23 @@ Historical first-run reports:
 - `medical/stage-evals/S3/V0.4_REPORT.md`
 - `medical/stage-evals/S3/V0.5_REPORT.md`
 - `medical/stage-evals/S3/V0.6_REPORT.md`
+- `medical/stage-evals/S3/S3_SPLIT_V0.1_REPORT.md`
+- `medical/stage-evals/S3/S3B_V0.2_REPORT.md`
+- `medical/stage-evals/S3/S3B_V0.3_REPORT.md`
 
 ---
 
 ## Overall project checkpoint
 
 - **S2** can conditionally provide controlled authoritative evidence bundles downstream.
-- **S3** has localized the current bottleneck: free-text semantic extraction is weak, while an initial structured truth-logic slice passes when supplied correct propositions.
-- **S4** must not automatically trust machine-approved S3 claims while end-to-end S3 remains failed.
+- **S3b** has now passed a 40-item fresh structured release suite with zero high-risk false support.
+- **S3a** remains the active S3 bottleneck, so end-to-end S3 is still failed.
+- **S4** must not automatically trust free-text-derived machine claims until S3a and a new end-to-end S3 release test pass.
 
 Immediate order:
 
 ```text
-larger fresh S3b structured held-out
-→ model-based S3a development + fresh S3a held-out
+S3a extraction improvement + fresh held-out
 → new end-to-end S3 held-out
 → S4 Knowledge-Graph Construction Eval
 → S5 Case-Factory Eval
