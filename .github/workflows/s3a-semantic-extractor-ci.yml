@@ -1,0 +1,59 @@
+name: s3a-semantic-extractor-ci
+
+on:
+  push:
+    paths:
+      - 'scripts/s3_semantic_extractor.py'
+      - 'medical/stage-evals/S3/proposition-registry-v0.1.json'
+      - 'medical/stage-evals/S3/semantic-extractor-output.schema.json'
+      - 'medical/stage-evals/S3/S3A_SEMANTIC_EXTRACTOR_PROMPT.md'
+      - 'medical/configs/s3-semantic-extractor.baseline.json'
+      - '.github/workflows/s3a-semantic-extractor-ci.yml'
+  workflow_dispatch:
+
+jobs:
+  baseline-and-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax and JSON contracts
+        run: |
+          python -m py_compile scripts/s3_semantic_extractor.py scripts/eval_s3a_proposition_extraction.py
+          python - <<'PY'
+          import json
+          for p in [
+              'medical/stage-evals/S3/proposition-registry-v0.1.json',
+              'medical/stage-evals/S3/semantic-extractor-output.schema.json',
+              'medical/configs/s3-semantic-extractor.baseline.json',
+          ]:
+              json.load(open(p, encoding='utf-8'))
+              print('OK', p)
+          PY
+
+      - name: Reproduce deterministic S3a lower bound through new harness
+        run: |
+          mkdir -p /tmp/s3a-semantic
+          python scripts/s3_semantic_extractor.py \
+            --input medical/stage-evals/S3/s3a-extraction-gold-v0.1.json \
+            --config medical/configs/s3-semantic-extractor.baseline.json \
+            --out /tmp/s3a-semantic/predictions.json
+          set +e
+          python scripts/eval_s3a_proposition_extraction.py \
+            --gold medical/stage-evals/S3/s3a-extraction-gold-v0.1.json \
+            --pred /tmp/s3a-semantic/predictions.json \
+            --out /tmp/s3a-semantic/report.json \
+            --min-critical-recall 0.95
+          status=$?
+          set -e
+          cat /tmp/s3a-semantic/report.json
+          echo "Deterministic lower-bound exit code: ${status} (expected non-blocking diagnostic)"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s3a-semantic-extractor-baseline
+          path: /tmp/s3a-semantic
+          retention-days: 30
