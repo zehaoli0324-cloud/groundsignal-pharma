@@ -1,0 +1,32 @@
+{
+  "graph_id": "GRAPH-EVIDENCE-002",
+  "version": "v1",
+  "as_of_date": "2026-09-05",
+  "nodes": [
+    {"node_id": "tx:A", "node_type": "TREATMENT", "label": "Treatment A", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-XTRIAL-A-001", "PASSAGE-HEADTOHEAD-004"]},
+    {"node_id": "tx:B", "node_type": "TREATMENT", "label": "Treatment B", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-XTRIAL-B-002", "PASSAGE-HEADTOHEAD-004"]},
+    {"node_id": "trial:A", "node_type": "TRIAL", "label": "Trial A", "value": {"response_rate": 0.62, "population": "previously treated", "endpoint": "EA", "week": 12}, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-XTRIAL-A-001"]},
+    {"node_id": "trial:B", "node_type": "TRIAL", "label": "Trial B", "value": {"response_rate": 0.48, "population": "treatment-naive", "endpoint": "EB", "week": 24}, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-XTRIAL-B-002"]},
+    {"node_id": "comparison:indirect", "node_type": "COMPARISON_CONTEXT", "label": "indirect cross-trial comparison", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-XTRIAL-A-001", "PASSAGE-XTRIAL-B-002", "PASSAGE-XTRIAL-ALIGNED-003"]},
+    {"node_id": "comparison:head_to_head", "node_type": "COMPARISON_CONTEXT", "label": "randomized direct head-to-head comparison", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-HEADTOHEAD-004"]},
+    {"node_id": "claim:A_better_endpoint_specific", "node_type": "COMPARATIVE_CLAIM", "label": "A superior to B on the prespecified endpoint in the held-out head-to-head fixture", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-HEADTOHEAD-004"]}
+  ],
+  "edges": [
+    {"edge_id": "EDGE-A-RESULT-IN-TRIALA", "subject_id": "tx:A", "predicate": "HAS_RESULT_IN", "object_id": "trial:A", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-XTRIAL-A-001"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-B-RESULT-IN-TRIALB", "subject_id": "tx:B", "predicate": "HAS_RESULT_IN", "object_id": "trial:B", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-XTRIAL-B-002"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-SEPARATE-TRIALS-INDIRECT", "subject_id": "trial:A", "predicate": "COMPARED_ONLY_INDIRECTLY_WITH", "object_id": "trial:B", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-XTRIAL-A-001", "PASSAGE-XTRIAL-B-002"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-HEADTOHEAD-SUPPORTS-ENDPOINT-SUPERIORITY", "subject_id": "comparison:head_to_head", "predicate": "SUPPORTS", "object_id": "claim:A_better_endpoint_specific", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-HEADTOHEAD-004"], "review_status": "source_verified"}
+  ],
+  "evaluation_contract": {
+    "required_nodes": ["tx:A", "tx:B", "comparison:indirect", "comparison:head_to_head"],
+    "required_edges": ["EDGE-SEPARATE-TRIALS-INDIRECT"],
+    "forbidden_edges": [
+      {"subject": "tx:A", "predicate": "SUPERIOR_TO", "object": "tx:B", "condition": "based only on separate-trial percentages"},
+      {"subject": "claim:A_better_endpoint_specific", "predicate": "IMPLIES", "object": "claim:A_better_in_all_respects"}
+    ],
+    "acceptable_paths": [
+      ["separate trial results", "check population/endpoint/follow-up/design", "indirect comparison cannot establish direct superiority"],
+      ["head-to-head randomization", "same endpoint/population", "prespecified between-group comparison", "endpoint-specific superiority supported"]
+    ]
+  }
+}
