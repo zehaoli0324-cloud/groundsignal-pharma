@@ -1,0 +1,65 @@
+{
+  "version": "intervention-router-v0.1",
+  "rules": {
+    "STALE_KNOWLEDGE": {
+      "primary": ["retrieval_temporal_truth"],
+      "secondary": ["knowledge_refresh_data"],
+      "metrics": ["temporal_validity", "stale_claim_rate", "freshness_accuracy"]
+    },
+    "KNOWLEDGE_MISSING": {
+      "primary": ["retrieval_coverage"],
+      "secondary": ["midtrain_or_domain_data"],
+      "metrics": ["factual_coverage", "evidence_recall_at_k"]
+    },
+    "RETRIEVAL_MISS": {
+      "primary": ["retrieval_index_query_reranker"],
+      "secondary": ["query_rewrite_training"],
+      "metrics": ["evidence_recall_at_k", "mrr", "answer_grounding"]
+    },
+    "SOURCE_HIERARCHY": {
+      "primary": ["source_aware_retrieval", "hard_negative_data"],
+      "secondary": ["sft_source_hierarchy"],
+      "metrics": ["source_hierarchy_accuracy", "claim_evidence_entailment"]
+    },
+    "REASONING_FAILURE": {
+      "primary": ["sft_reasoning_data"],
+      "secondary": ["task_decomposition_prompt"],
+      "metrics": ["heldout_reasoning_score", "falsification_score"]
+    },
+    "OVERCLAIM": {
+      "primary": ["preference_overclaim_pairs"],
+      "secondary": ["uncertainty_policy_prompt"],
+      "metrics": ["claim_scope_accuracy", "calibration", "overclaim_rate"]
+    },
+    "UNSAFE_MEDICATION": {
+      "primary": ["safety_hard_gate", "expert_review"],
+      "secondary": ["medication_safety_training_data"],
+      "metrics": ["critical_medication_error_rate", "unsafe_recommendation_rate"]
+    },
+    "BAD_TOOL_CALL": {
+      "primary": ["agent_trajectory_data", "tool_schema_policy"],
+      "secondary": ["tool_selection_prompt"],
+      "metrics": ["tool_success_rate", "invalid_tool_call_rate", "unsafe_tool_call_rate"]
+    },
+    "PASSIVE_ABSTENTION": {
+      "primary": ["preference_uncertain_but_actionable"],
+      "secondary": ["clarification_policy_prompt"],
+      "metrics": ["useful_abstention", "clarification_value"]
+    },
+    "JUDGE_INCONSISTENCY": {
+      "primary": ["judge_calibration", "human_adjudication"],
+      "secondary": ["judge_anchor_expansion"],
+      "metrics": ["judge_human_agreement", "inter_judge_agreement"]
+    },
+    "EXPRESSION_HIERARCHY": {
+      "primary": ["preference_response_structure"],
+      "secondary": ["response_template"],
+      "metrics": ["decision_first_rate", "user_utility"]
+    },
+    "AUDIENCE_MISMATCH": {
+      "primary": ["persona_conditioned_sft_or_preference"],
+      "secondary": ["audience_prompt_conditioning"],
+      "metrics": ["audience_fit", "user_utility"]
+    }
+  }
+}
