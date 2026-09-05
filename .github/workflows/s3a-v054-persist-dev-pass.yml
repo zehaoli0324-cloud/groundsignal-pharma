@@ -1,0 +1,149 @@
+name: s3a-v054-persist-dev-pass
+
+on:
+  push:
+    paths:
+      - ".github/workflows/s3a-v054-persist-dev-pass.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  persist-development-pass:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen parser and run exposed suites
+        run: |
+          set -e
+          parser_commit="$(git log -1 --format=%H -- scripts/s3a_compositional_frame_parser_v054.py)"
+          test "${parser_commit}" = "33dde2507afb8d34d47f3103ee0bfbfaf716ec5f"
+          out="medical/stage-evals/S3/runs/s3a-v054-exposed-dev-pass"
+          mkdir -p "${out}"
+          declare -a suites=(
+            "s3a-extraction-gold-v0.1.json"
+            "s3a-extraction-heldout-v0.2.json"
+            "s3a-extraction-heldout-v0.3.json"
+            "s3a-semantic-frame-heldout-v0.4.json"
+            "s3a-compositional-frame-heldout-v0.5.1.json"
+            "s3a-scope-safety-heldout-v0.5.2.json"
+          )
+          failed=0
+          for suite in "${suites[@]}"; do
+            stem="${suite%.json}"
+            python scripts/s3a_compositional_frame_parser_v054.py \
+              --input "medical/stage-evals/S3/${suite}" \
+              --out "${out}/${stem}-predictions.json"
+            set +e
+            python scripts/eval_s3a_proposition_extraction_v02.py \
+              --gold "medical/stage-evals/S3/${suite}" \
+              --pred "${out}/${stem}-predictions.json" \
+              --out "${out}/${stem}-report.json" \
+              --min-f1 0.90 --min-critical-recall 0.95 \
+              --min-polarity-accuracy 0.95 --min-population-accuracy 0.95 \
+              --min-condition-accuracy 0.95
+            status=$?
+            set -e
+            echo "${status}" > "${out}/${stem}-evaluator-exit.txt"
+            if [ "${status}" -ne 0 ]; then failed=1; fi
+          done
+          echo "${failed}" > "${out}/proposition-failed.txt"
+
+      - name: Persist safety and combined reports
+        run: |
+          python - <<'PY'
+          import glob,json,hashlib,os,subprocess
+          from pathlib import Path
+          root=Path('medical/stage-evals/S3')
+          out=root/'runs/s3a-v054-exposed-dev-pass'
+          suites=['s3a-compositional-frame-heldout-v0.5.1.json','s3a-scope-safety-heldout-v0.5.2.json']
+          reports=[]; overall=True
+          for suite in suites:
+              stem=suite[:-5]
+              gold=json.load(open(root/suite,encoding='utf-8'))
+              pred=json.load(open(out/(stem+'-predictions.json'),encoding='utf-8'))
+              pm={x['item_id']:x for x in pred['predictions']}
+              req=[x for x in gold['items'] if x.get('expected_abstain')]
+              known=[x for x in gold['items'] if not x.get('expected_abstain')]
+              req_ok=[]; req_fail=[]
+              for x in req:
+                  r=pm.get(x['item_id'],{})
+                  ok=bool(r.get('abstain')) and not r.get('predicted_propositions')
+                  (req_ok if ok else req_fail).append(x['item_id'])
+              known_abst=[x['item_id'] for x in known if bool(pm.get(x['item_id'],{}).get('abstain'))]
+              req_acc=len(req_ok)/len(req) if req else 1.0
+              known_rate=len(known_abst)/len(known) if known else 0.0
+              crit=gold['release_criteria']
+              checks={'required_abstention_accuracy':req_acc>=crit['min_required_abstention_accuracy'],
+                      'known_case_abstention_rate':known_rate<=crit['max_known_case_abstention_rate'],
+                      'no_partial_truth_on_required_abstention':not req_fail}
+              rep={'suite':suite,'required_abstention_cases':len(req),'required_abstention_correct':len(req_ok),
+                   'required_abstention_accuracy':req_acc,'required_abstention_failures':req_fail,
+                   'known_cases':len(known),'known_case_abstentions':known_abst,'known_case_abstention_rate':known_rate,
+                   'gate_checks':checks,'release_gate':'PASS' if all(checks.values()) else 'FAIL'}
+              reports.append(rep); overall &= rep['release_gate']=='PASS'
+          abst={'suites':reports,'release_gate':'PASS' if overall else 'FAIL'}
+          (out/'abstention-report.json').write_text(json.dumps(abst,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          problems=[]; rows=0
+          for p in out.glob('*-predictions.json'):
+              d=json.load(open(p,encoding='utf-8'))
+              for row in d['predictions']:
+                  rows+=1
+                  if not {'scope_nodes','semantic_frames','predicted_propositions','abstain','unresolved_spans'} <= set(row):
+                      problems.append([p.name,row.get('item_id'),'row_contract']); continue
+                  for node in row['scope_nodes']:
+                      if not {'node_id','text','condition_source'} <= set(node):
+                          problems.append([p.name,row.get('item_id'),'scope_node_contract']); break
+                  for f in row['semantic_frames']:
+                      req={'event_type','subject','object','polarity','modality','source_span','trigger_family','scope_trace'}
+                      if not req <= set(f) or not f.get('trigger_family') or not isinstance(f.get('scope_trace'),dict) or not f.get('scope_trace'):
+                          problems.append([p.name,row.get('item_id'),'frame_contract']); break
+          trace={'rows':rows,'failures':problems,'release_gate':'PASS' if not problems else 'FAIL'}
+          (out/'trace-report.json').write_text(json.dumps(trace,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          gold=json.load(open(root/'s3a-scope-safety-heldout-v0.5.2.json',encoding='utf-8'))
+          pred=json.load(open(out/'s3a-scope-safety-heldout-v0.5.2-predictions.json',encoding='utf-8'))
+          pm={x['item_id']:x for x in pred['predictions']}
+          bad=[]
+          for x in gold['items']:
+              if not x.get('expected_abstain'): continue
+              r=pm.get(x['item_id'],{})
+              if (not r.get('abstain')) or r.get('predicted_propositions'):
+                  bad.append({'item_id':x['item_id'],'abstain':r.get('abstain'),'predicted_propositions':r.get('predicted_propositions',[])})
+          unsafe={'required_abstention_items':sum(bool(x.get('expected_abstain')) for x in gold['items']),
+                  'unsafe_simplifications':bad,'release_gate':'PASS' if not bad else 'FAIL'}
+          (out/'unsafe-simplification-report.json').write_text(json.dumps(unsafe,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          prop_ok=(out/'proposition-failed.txt').read_text().strip()=='0'
+          gates={'all_exposed_proposition_suites':prop_ok,'abstention_safety':abst['release_gate']=='PASS',
+                 'trace_contract':trace['release_gate']=='PASS','unsafe_simplification_invariant':unsafe['release_gate']=='PASS'}
+          combined={'version':'s3a-compositional-frame-v0.5.4','gate_checks':gates,
+                    'release_gate':'PASS' if all(gates.values()) else 'FAIL','fresh_validation':'NOT_RUN'}
+          (out/'combined-development-release.json').write_text(json.dumps(combined,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          manifest={'version':'s3a-compositional-frame-v0.5.4',
+                    'parser_commit':'33dde2507afb8d34d47f3103ee0bfbfaf716ec5f',
+                    'workflow_source_commit':os.environ.get('GITHUB_SHA'),
+                    'github_run_id':os.environ.get('GITHUB_RUN_ID'),
+                    'release_gate':combined['release_gate'],
+                    'fresh_validation':'NOT_RUN'}
+          (out/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(combined,ensure_ascii=False,indent=2))
+          if combined['release_gate']!='PASS': raise SystemExit(2)
+          PY
+
+      - name: Commit immutable development-pass outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add medical/stage-evals/S3/runs/s3a-v054-exposed-dev-pass
+          git commit -m "S3a v0.5.4 eval: preserve exposed development-pass metrics"
+          git push
