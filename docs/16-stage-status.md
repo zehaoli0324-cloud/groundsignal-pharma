@@ -9,7 +9,7 @@ The system has **10 lifecycle stages**. Architecture completeness must not be co
 |---|---|---|---|---|
 | S1 | User Need / Workflow Discovery | Partial | 48 seed tasks, high-risk matrix, user-research plan | real interview/log validation and frequency weighting |
 | S2 | Knowledge Search & Source Routing | **Conditional pass / evaluated prototype** | v0.3 fresh routing 91.7%; 10-test live official retrieval; DailyMed version + passage vertical slice | broader passage-source diversity and terminology normalization |
-| S3 | Evidence Verification & Temporal Truth | **HARD FAIL end-to-end / S3b conditional pass / S3a v0.5.1 development PASS** | immutable S3a v0.2/v0.3/v0.4 fresh failures; S3b fresh v0.3 40/40 / HFSR 0; v0.5.1 exposed v0.1-v0.4 all 100%; trace contract PASS | freeze a brand-new S3a held-out against the unchanged v0.5.1 implementation; if it passes, run a brand-new end-to-end S3 held-out |
+| S3 | Evidence Verification & Temporal Truth | **HARD FAIL end-to-end / S3b conditional pass / S3a v0.5.1 fresh FAIL** | immutable S3a v0.2-v0.5.1 fresh history; S3b fresh v0.3 40/40 / HFSR 0; v0.5.1 exposed regressions 100%; fresh v0.5.1 F1 80.33%; trace PASS | repair compositional scope + passive direction + ontology-coverage abstention; pass exposed gates, then freeze a new untouched S3a held-out |
 | S4 | Medical KG Construction / Update | Working prototype | case graphs + two reusable backbones + canonical builder | terminology normalization, persistent graph/index, update-impact engine, dedicated stage eval |
 | S5 | Controlled Case / Benchmark Factory | P0 complete | 12 families / 60 controlled cases / held-out design | clinical expert gold review + broader validated user-task coverage + dedicated stage eval |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | live multi-provider runs, production retriever/reranker, Agent executor, dedicated stage eval |
@@ -60,7 +60,7 @@ High-risk False-Support Rate         0.0%
 Release Gate                         PASS
 ```
 
-S3b can be used only on reviewed/gold canonical propositions. It does not validate free-text-to-truth automation.
+S3b may be used only on reviewed/gold canonical propositions. It does not validate free-text-to-truth automation.
 
 Detailed report:
 
@@ -73,78 +73,30 @@ Detailed report:
 ### Immutable fresh history
 
 ```text
-v0.2 fresh: F1 62.50%   Critical Recall 52.17%   FAIL
-v0.3 fresh: F1 30.77%   Critical Recall 17.86%   HARD FAIL
-v0.4 fresh: F1 40.00%   Critical Recall 25.58%   FAIL
+v0.2 fresh    F1 62.50%   Critical Recall 52.17%   FAIL
+v0.3 fresh    F1 30.77%   Critical Recall 17.86%   HARD FAIL
+v0.4 fresh    F1 40.00%   Critical Recall 25.58%   FAIL
+v0.5.1 fresh  F1 80.33%   Critical Recall 68.75%   FAIL
 ```
 
-The v0.4 fresh suite also measured:
+The v0.5.1 fresh run is a substantial improvement over v0.4 but remains below release thresholds.
 
-```text
-Polarity Accuracy             80.00%
-Population Accuracy           94.12%
-Condition Binding Accuracy   100.00%
-```
-
-These fresh failures are immutable. They localized the main S3a problem to semantic event recognition, scope resolution, argument direction, population binding and cross-clause composition rather than threshold arithmetic alone.
-
-Detailed reports:
+Detailed historical reports:
 
 - `medical/stage-evals/S3/S3A_V0.2_REPORT.md`
 - `medical/stage-evals/S3/S3A_V0.3_REPORT.md`
 - `medical/stage-evals/S3/S3A_V0.4_FRESH_REPORT.md`
-
-### S3a v0.5.0 — compositional architecture, development FAIL
-
-Implementation commit:
-
-- `35d484cb4b385363b06d048ef64628ef654aa991`
-
-v0.5 introduced:
-
-```text
-free text
-→ sentence segmentation
-→ clause / scope graph
-→ sentence shared-context inventory
-→ frame-local population + condition binding
-→ semantic event-family recognition
-→ directed argument canonicalization
-→ local negation + modality
-→ canonical frame
-→ proposition compilation
-→ unresolved-critical abstention
-```
-
-Regression workflow `33985834584` found three localized development failures:
-
-```text
-A. CONDITION_SCOPE_INHERITANCE_ERROR
-B. NEGATION_SCOPE_GAP
-C. LEGACY_TRACE_ADAPTER_GAP
-```
-
-No fresh held-out was created from v0.5.0.
-
-Detailed report:
-
 - `medical/stage-evals/S3/S3A_V0.5_DEV_FAIL_REPORT.md`
+- `medical/stage-evals/S3/S3A_V0.5.1_DEV_PASS_REPORT.md`
+- `medical/stage-evals/S3/S3A_V0.5.1_FRESH_REPORT.md`
 
-### S3a v0.5.1 — development PASS, not fresh evidence
+### S3a v0.5.1 development checkpoint
 
-Frozen implementation commit:
+Frozen implementation:
 
 - `0a3fe9ee29187cfb7e381da0f41bb1ae93875937`
 
-Regression workflow:
-
-- `33988726656`
-
-Artifact:
-
-- `s3a-v051-exposed-regression` / artifact ID `9975956882`
-
-Observed exposed metrics:
+Exposed regression workflow `33988726656`:
 
 | Exposed suite | F1 | Critical Recall | Polarity | Population | Condition | Gate |
 |---|---:|---:|---:|---:|---:|---|
@@ -153,46 +105,103 @@ Observed exposed metrics:
 | v0.3 | 100% | 100% | 100% | 100% | 100% | PASS |
 | v0.4 | 100% | 100% | 100% | 100% | 100% | PASS |
 
-The v0.5.1 trace contract also passed. Every output retains `scope_nodes`, `condition_source`, `semantic_frames`, `trigger_family`, `scope_trace`, frame semantics and compiled propositions.
+Trace contract: **PASS**.
 
-v0.5.1 repaired the prior failures structurally:
+This remains regression evidence only.
+
+### S3a v0.5.1 fresh held-out — FAIL
+
+Fresh suite frozen after the implementation and development checkpoint:
 
 ```text
-1. clause-local bare comparative can recover an elided eGFR variable only when the sentence establishes eGFR context;
-2. clause-local conditions override sentence-level inheritance, with explicit condition provenance;
-3. target-local copular/passive negation handles `is/was not <target>` and `is/was not a/an <target>`;
-4. every v0.4 fallback frame is adapted into the v0.5.1 provenance/trace schema before emission.
+suite freeze commit      dea61a9d4aac76303ea0f77bef4617016019cd70
+workflow commit          60cea24679875cba0b60e2427b098ae8a3acb540
+first-run workflow       33991678951
+artifact ID              9976815765
+items                    42
+expected propositions    66
+critical propositions    48
+mandatory abstentions     4
 ```
 
-Detailed audit report:
+First observation:
 
-- `medical/stage-evals/S3/S3A_V0.5.1_DEV_PASS_REPORT.md`
+```text
+Precision                              87.50%
+Recall                                 74.24%
+F1                                     80.33%   FAIL
+Critical Proposition Recall            68.75%   FAIL
+Polarity Accuracy                      98.00%   PASS
+Population Accuracy                    94.23%   FAIL
+Condition Binding Accuracy             98.00%   PASS
+Required-abstention accuracy           25.00%   FAIL
+Known-case abstention rate             13.16%   FAIL
+Trace contract                            PASS
+Combined release                          FAIL
+```
 
-This is **exposed regression evidence only**. It does not change the free-text release status.
+The first-run result is immutable. The v0.5.1 fresh suite is now exposed regression data.
+
+Key failure taxonomy:
+
+```text
+F1  population trigger coverage gap
+F2  interrupted negation scope
+F3  condition leakage across contrastive clauses
+F4  coordinated multi-event threshold segmentation
+F5  incidence relation recognition gap / excessive abstention
+F6  endpoint absence-of-result semantics
+F7  passive temporal-relation direction
+F8  temporal composition across guideline + trial clauses
+F9  passive trial-support direction
+F10 unknown-critical abstention detector undercoverage
+F11 unsafe simplification of disjunctive conditions
+```
+
+The highest-priority safety defect is F11. A source rule of the form:
+
+```text
+(eGFR <30) OR (dialysis started) → discontinue
+```
+
+was simplified to:
+
+```text
+eGFR <30 → discontinue
+```
+
+without abstention. The current closed condition representation cannot encode the full disjunction, so silent branch deletion is not acceptable.
+
+Full report:
+
+- `medical/stage-evals/S3/S3A_V0.5.1_FRESH_REPORT.md`
 
 ---
 
 ## Current S3 release decision
 
 ```text
-S3b structured truth engine      = CONDITIONAL PASS
-S3a v0.5.1 exposed regression    = PASS
-S3a v0.5.1 trace contract        = PASS
-S3a v0.5.1 fresh validation      = NOT RUN
-S3a free-text release status     = HARD FAIL / BLOCKED
-End-to-end S3                    = HARD FAIL
+S3b structured truth engine          = CONDITIONAL PASS
+S3a v0.5.1 exposed regression        = PASS
+S3a v0.5.1 trace contract            = PASS
+S3a v0.5.1 fresh proposition gate    = FAIL
+S3a v0.5.1 abstention safety gate    = FAIL
+S3a free-text release status         = HARD FAIL / BLOCKED
+End-to-end S3                        = HARD FAIL
 ```
 
-Therefore unrestricted automatic free-text → Knowledge Graph truth insertion remains blocked.
+Therefore unrestricted automatic free text → S3 truth → Knowledge Graph insertion remains blocked. S4 must not automatically trust S3a-derived truth.
 
 Immediate order:
 
 ```text
-freeze brand-new S3a v0.5.1 fresh held-out without modifying implementation
-→ preserve first observation permanently
-→ if fresh S3a FAIL: sync failure report/status before any repair
-→ if fresh S3a PASS: freeze a brand-new end-to-end S3 held-out
-→ only if end-to-end S3 passes: begin S4 dedicated eval
+S3a v0.5.2 scope-safety architectural repair
+→ event-aware coordination segmentation
+→ conservative condition/population inheritance
+→ passive/inverse argument normalization
+→ ontology-coverage guard + mandatory abstention for non-representable critical semantics
+→ rerun all exposed v0.1-v0.5.1 proposition + abstention + trace regressions
+→ only if every development gate passes, freeze another brand-new S3a held-out
+→ if fresh S3a passes, freeze brand-new end-to-end S3 held-out
+→ only if end-to-end S3 passes, begin S4 dedicated eval
 ```
-
-The next fresh S3a suite should test capability-level generalization: multiple numeric variables, competing elided-variable candidates, nested/coordinated negation, modality, conjunction/disjunction scope, competing populations, passive/inverse relations, shared arguments, distractors and safe abstention on unknown critical semantics.
