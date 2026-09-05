@@ -1,0 +1,22 @@
+{
+  "family_id": "AGENT-001",
+  "user_task_id": "AGENT-001",
+  "title": "Retrieve current label before a high-risk medication claim",
+  "task_type": "agent",
+  "user_role": "medical_agent",
+  "user_need": "Use a trusted current drug-label source before making a high-risk medication-safety claim, recover from stale/irrelevant retrievals, use the critical passage, and stop once sufficient evidence is obtained.",
+  "target_capabilities": ["tool_selection", "query_formulation", "source_hierarchy", "temporal_retrieval", "tool_result_utilization", "stop_correctness"],
+  "failure_hypotheses": ["NO_TOOL_BEFORE_HIGH_RISK_CLAIM", "BAD_TOOL_SELECTION", "BAD_QUERY", "STALE_RETRIEVAL", "TOOL_RESULT_IGNORED", "OVERSEARCH"],
+  "cases": [
+    {"case_id": "AGENT-001-A", "variant_type": "agent", "changed_variable": null, "path": "cases/A-current-label-required.json", "split": "dev"},
+    {"case_id": "AGENT-001-B", "variant_type": "controlled", "changed_variable": "first retrieval is stale label", "path": "cases/B-stale-label-first.json", "split": "dev"},
+    {"case_id": "AGENT-001-C", "variant_type": "controlled", "changed_variable": "first retrieval is irrelevant secondary source", "path": "cases/C-irrelevant-result-first.json", "split": "dev"},
+    {"case_id": "AGENT-001-D", "variant_type": "adversarial", "changed_variable": "critical passage found immediately; test over-search", "path": "cases/D-sufficient-evidence-stop.json", "split": "regression"},
+    {"case_id": "AGENT-001-E", "variant_type": "heldout", "changed_variable": "metformin renal rule -> apixaban NSAID label rule", "path": "cases/E-apixaban-nsaid-heldout.json", "split": "heldout"}
+  ],
+  "graph_snapshot": "graph.json",
+  "evidence_manifest": "evidence.json",
+  "split_policy": {"leakage_rule": "Keep the held-out drug/risk pair out of trajectory training examples generated from metformin cases.", "heldout_variables": ["apixaban plus NSAID label retrieval"]},
+  "status": "gold_review_needed",
+  "review": {"clinical_review": "needed_for_final-answer-gold", "evidence_review": "source_verified", "last_reviewed_at": null}
+}
