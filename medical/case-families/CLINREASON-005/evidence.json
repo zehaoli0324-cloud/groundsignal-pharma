@@ -1,0 +1,62 @@
+{
+  "manifest_id": "evidence-CLINREASON-005-v1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {
+      "source_id": "SRC-NKF-AKI-CAUSES-2026",
+      "title": "Acute Kidney Injury (AKI): Causes, Symptoms, and Treatment",
+      "source_type": "professional_patient_reference",
+      "publisher": "National Kidney Foundation",
+      "url": "https://www.kidney.org/kidney-topics/acute-kidney-injury-aki",
+      "document_date": "current-source-snapshot-2026-09-05",
+      "authority_tier": "specialty_foundation_reference",
+      "version_note": "Paraphrased benchmark claims only."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLAIM-AKI-MULTIFACTOR-001",
+      "paraphrased_claim": "AKI can have many causes and may result from a combination of factors rather than one isolated mechanism.",
+      "source_id": "SRC-NKF-AKI-CAUSES-2026",
+      "locator": "Causes",
+      "passage_id": "PASSAGE-AKI-MULTIFACTOR-001",
+      "evidence_role": "context",
+      "claim_scope": "multifactorial AKI reasoning",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-AKI-VOLUME-002",
+      "paraphrased_claim": "Reduced effective perfusion or volume depletion such as dehydration can contribute to AKI.",
+      "source_id": "SRC-NKF-AKI-CAUSES-2026",
+      "locator": "Causes / related conditions",
+      "passage_id": "PASSAGE-AKI-VOLUME-002",
+      "evidence_role": "context",
+      "claim_scope": "volume-depletion contributor",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-AKI-MEDICATION-003",
+      "paraphrased_claim": "Medications and substances including NSAIDs, some blood-pressure medicines and iodinated contrast can contribute to AKI, often in combination with other risk factors.",
+      "source_id": "SRC-NKF-AKI-CAUSES-2026",
+      "locator": "Causes / medications and other substances",
+      "passage_id": "PASSAGE-AKI-MEDICATION-003",
+      "evidence_role": "context",
+      "claim_scope": "medication/substance contributors",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    },
+    {
+      "claim_id": "CLAIM-AKI-OBSTRUCTION-004",
+      "paraphrased_claim": "Urinary tract obstruction is among conditions that can contribute to acute kidney injury and may require drainage when blockage is the cause.",
+      "source_id": "SRC-NKF-AKI-CAUSES-2026",
+      "locator": "Causes and Treatment",
+      "passage_id": "PASSAGE-AKI-OBSTRUCTION-004",
+      "evidence_role": "context",
+      "claim_scope": "obstructive contributor",
+      "temporal_status": "current",
+      "review_status": "source_verified"
+    }
+  ]
+}
