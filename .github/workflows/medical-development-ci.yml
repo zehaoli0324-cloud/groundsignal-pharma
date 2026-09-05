@@ -14,6 +14,8 @@ on:
       - 'scripts/build_medical_knowledge_graph.py'
       - 'scripts/s2_source_router.py'
       - 'scripts/eval_s2_source_routing.py'
+      - 'scripts/s2_intent_router.py'
+      - 'scripts/eval_s2_intent_routing.py'
       - '.github/workflows/medical-development-ci.yml'
   pull_request:
     paths:
@@ -28,6 +30,8 @@ on:
       - 'scripts/build_medical_knowledge_graph.py'
       - 'scripts/s2_source_router.py'
       - 'scripts/eval_s2_source_routing.py'
+      - 'scripts/s2_intent_router.py'
+      - 'scripts/eval_s2_intent_routing.py'
       - '.github/workflows/medical-development-ci.yml'
 
 jobs:
@@ -51,7 +55,9 @@ jobs:
             scripts/validate_medical_knowledge_sources.py \
             scripts/build_medical_knowledge_graph.py \
             scripts/s2_source_router.py \
-            scripts/eval_s2_source_routing.py
+            scripts/eval_s2_source_routing.py \
+            scripts/s2_intent_router.py \
+            scripts/eval_s2_intent_routing.py
 
       - name: Validate P0 medical case families
         run: |
@@ -99,7 +105,22 @@ jobs:
           status=$?
           set -e
           cat /tmp/groundsignal-s2/report-v02b-shadow.json
-          echo "S2 v0.2b first shadow-heldout exit code: $status (non-blocking first observation)"
+          echo "S2 v0.2b first shadow-heldout exit code: $status (frozen historical observation)"
+
+      - name: Run first S2 v0.3 intent-routing fresh held-out
+        run: |
+          python scripts/s2_intent_router.py \
+            --input medical/stage-evals/S2/intent-routing-heldout-v0.3.json \
+            --out /tmp/groundsignal-s2/predictions-v03-intent.json
+          set +e
+          python scripts/eval_s2_intent_routing.py \
+            --gold medical/stage-evals/S2/intent-routing-heldout-v0.3.json \
+            --pred /tmp/groundsignal-s2/predictions-v03-intent.json \
+            --out /tmp/groundsignal-s2/report-v03-intent.json
+          status=$?
+          set -e
+          cat /tmp/groundsignal-s2/report-v03-intent.json
+          echo "S2 v0.3 first fresh-heldout exit code: $status (non-blocking first observation)"
 
       - name: Build canonical medical knowledge graph
         run: |
@@ -130,6 +151,10 @@ jobs:
               Path('medical/stage-evals/S2/routing-gold-v0.1.json'),
               Path('medical/stage-evals/S2/routing-heldout-v0.2.json'),
               Path('medical/stage-evals/S2/routing-shadow-heldout-v0.2b.json'),
+              Path('medical/stage-evals/S2/source-policy-v0.3.json'),
+              Path('medical/stage-evals/S2/intent-features-v0.3.json'),
+              Path('medical/stage-evals/S2/intent-routing-heldout-v0.3.json'),
+              Path('medical/stage-evals/S2/dailymed-truth-retrieval-v0.3.json'),
           ]:
               json.loads(p.read_text(encoding='utf-8'))
               print('OK', p)
