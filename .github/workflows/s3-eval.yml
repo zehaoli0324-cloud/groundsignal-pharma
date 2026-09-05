@@ -1,0 +1,66 @@
+name: s3-evidence-verification
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'medical/stage-evals/S3/**'
+      - 'scripts/s3_*.py'
+      - '.github/workflows/s3-eval.yml'
+
+jobs:
+  s3-eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax and JSON checks
+        run: |
+          python -m py_compile \
+            scripts/s3_naive_claim_verifier.py \
+            scripts/s3_structured_claim_verifier.py \
+            scripts/s3_claimframe_verifier.py \
+            scripts/s3_atomic_proposition_verifier.py \
+            scripts/eval_s3_claim_verification.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for p in [
+              Path('medical/stage-evals/S3/claim-frame.schema.json'),
+              Path('medical/stage-evals/S3/atomic-proposition.schema.json'),
+              Path('medical/stage-evals/S3/verification-gold-v0.1.json'),
+              Path('medical/stage-evals/S3/verification-heldout-v0.2.json'),
+              Path('medical/stage-evals/S3/verification-shadow-heldout-v0.3.json'),
+          ]:
+              json.loads(p.read_text(encoding='utf-8'))
+              print('OK', p)
+          PY
+
+      - name: Run v0.4 atomic verifier on frozen diagnostic suites
+        run: |
+          mkdir -p /tmp/s3-v04
+          for suite in verification-gold-v0.1 verification-heldout-v0.2 verification-shadow-heldout-v0.3; do
+            echo "=== ${suite} ==="
+            python scripts/s3_atomic_proposition_verifier.py \
+              --input medical/stage-evals/S3/${suite}.json \
+              --out /tmp/s3-v04/${suite}-pred.json
+            set +e
+            python scripts/eval_s3_claim_verification.py \
+              --gold medical/stage-evals/S3/${suite}.json \
+              --pred /tmp/s3-v04/${suite}-pred.json \
+              --out /tmp/s3-v04/${suite}-report.json
+            status=$?
+            set -e
+            cat /tmp/s3-v04/${suite}-report.json
+            echo "v0.4 diagnostic ${suite} exit code: ${status}"
+          done
+
+      - name: Upload S3 v0.4 development reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: s3-v04-development-reports
+          path: /tmp/s3-v04
+          retention-days: 30
