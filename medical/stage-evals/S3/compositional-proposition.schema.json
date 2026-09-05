@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://groundsignal.local/schemas/s3-compositional-proposition-v0.5.json",
+  "title": "S3 Compositional Proposition Verdict",
+  "type": "object",
+  "required": ["proposition", "verdict", "safety_class", "evidence_matches"],
+  "properties": {
+    "proposition": {"type": "object"},
+    "verdict": {"enum": ["SUPPORTED", "CONTRADICTED", "UNSUPPORTED"]},
+    "safety_class": {"enum": ["CAUSAL", "DIAGNOSTIC", "MANAGEMENT", "DOSE", "TEMPORAL", "EFFICACY", "OTHER"]},
+    "evidence_matches": {"type": "array", "items": {"type": "object"}},
+    "reason": {"type": "string"}
+  },
+  "additionalProperties": true
+}
