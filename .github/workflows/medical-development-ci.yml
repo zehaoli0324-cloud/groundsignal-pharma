@@ -57,7 +57,7 @@ jobs:
 
       - name: Validate medical knowledge source metadata
         run: |
-          python scripts/validate_medical_knowledge_sources.py
+          python scripts/validate_medical_knowledge_sources.py --strict-hosts
 
       - name: Build canonical medical knowledge graph
         run: |
@@ -82,6 +82,7 @@ jobs:
               Path('medical/configs/model-matrix.fixture.json'),
               Path('medical/configs/regression-policy.medication-safety-v0.1.json'),
               Path('medical/knowledge-base/SOURCE_REGISTRY.json'),
+              Path('medical/knowledge-base/SOURCE_REGISTRY_SUPPLEMENT.json'),
               Path('medical/knowledge-base/PHARMACOLOGY_BACKBONE_V0.1.json'),
           ]:
               json.loads(p.read_text(encoding='utf-8'))
