@@ -1,0 +1,56 @@
+name: s2-live-retrieval
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'medical/stage-evals/S2/live-retrieval-v0.2.json'
+      - 'scripts/s2_live_retrieval.py'
+      - 'scripts/eval_s2_live_retrieval.py'
+      - '.github/workflows/s2-live-retrieval.yml'
+
+jobs:
+  live-retrieval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check
+        run: |
+          python -m py_compile \
+            scripts/s2_live_retrieval.py \
+            scripts/eval_s2_live_retrieval.py
+
+      - name: Run authoritative live retrieval
+        run: |
+          mkdir -p /tmp/groundsignal-s2-live
+          python scripts/s2_live_retrieval.py \
+            --suite medical/stage-evals/S2/live-retrieval-v0.2.json \
+            --out /tmp/groundsignal-s2-live/runs.json
+
+      - name: Evaluate live retrieval
+        run: |
+          set +e
+          python scripts/eval_s2_live_retrieval.py \
+            --suite medical/stage-evals/S2/live-retrieval-v0.2.json \
+            --runs /tmp/groundsignal-s2-live/runs.json \
+            --out /tmp/groundsignal-s2-live/report.json
+          status=$?
+          set -e
+          cat /tmp/groundsignal-s2-live/report.json
+          echo "Live retrieval semantic gate exit code: $status"
+          # Do not make repository integrity depend on third-party availability.
+          # The report itself preserves whether a failure is infrastructure-side or semantic-side.
+
+      - name: Upload live report
+        uses: actions/upload-artifact@v4
+        with:
+          name: s2-live-retrieval-report
+          path: |
+            /tmp/groundsignal-s2-live/runs.json
+            /tmp/groundsignal-s2-live/report.json
+          retention-days: 30
