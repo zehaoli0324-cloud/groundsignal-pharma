@@ -1,0 +1,56 @@
+name: s3a-v023-diagnostics
+
+on:
+  push:
+    paths:
+      - 'scripts/s3a_ontology_extractor_v023.py'
+      - 'scripts/s3a_ontology_extractor_v022.py'
+      - 'scripts/s3a_ontology_extractor_v021.py'
+      - 'medical/stage-evals/S3/s3a-extraction-gold-v0.1.json'
+      - 'medical/stage-evals/S3/s3a-extraction-heldout-v0.2.json'
+      - 'scripts/eval_s3a_proposition_extraction_v02.py'
+      - '.github/workflows/s3a-v023-diagnostics.yml'
+  workflow_dispatch:
+
+jobs:
+  diagnostics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Syntax check
+        run: |
+          python -m py_compile \
+            scripts/s3a_ontology_extractor_v021.py \
+            scripts/s3a_ontology_extractor_v022.py \
+            scripts/s3a_ontology_extractor_v023.py \
+            scripts/eval_s3a_proposition_extraction_v02.py
+      - name: Run exposed S3a regressions
+        run: |
+          mkdir -p /tmp/s3a-v023
+          for suite in s3a-extraction-gold-v0.1 s3a-extraction-heldout-v0.2; do
+            python scripts/s3a_ontology_extractor_v023.py \
+              --input medical/stage-evals/S3/${suite}.json \
+              --out /tmp/s3a-v023/${suite}-pred.json
+            set +e
+            python scripts/eval_s3a_proposition_extraction_v02.py \
+              --gold medical/stage-evals/S3/${suite}.json \
+              --pred /tmp/s3a-v023/${suite}-pred.json \
+              --out /tmp/s3a-v023/${suite}-report.json \
+              --min-f1 0.90 \
+              --min-critical-recall 0.95 \
+              --min-polarity-accuracy 0.95 \
+              --min-population-accuracy 0.95 \
+              --min-condition-accuracy 0.95
+            status=$?
+            set -e
+            cat /tmp/s3a-v023/${suite}-report.json
+            echo "S3a v0.2.3 ${suite} diagnostic exit code: ${status}"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s3a-v023-diagnostics
+          path: /tmp/s3a-v023
+          retention-days: 30
