@@ -1,0 +1,35 @@
+{
+  "graph_id": "GRAPH-CLINREASON-001",
+  "version": "v1",
+  "as_of_date": "2026-09-05",
+  "nodes": [
+    {"node_id": "condition:iron_deficiency_anemia", "node_type": "CONDITION", "label": "iron deficiency anemia", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IDA-PATTERN-001"]},
+    {"node_id": "condition:anemia_of_inflammation", "node_type": "CONDITION", "label": "anemia of chronic disease/inflammation", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-ACD-PATTERN-004"]},
+    {"node_id": "finding:low_ferritin", "node_type": "LAB_PATTERN", "label": "low ferritin", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IDA-PATTERN-001"]},
+    {"node_id": "finding:high_tibc", "node_type": "LAB_PATTERN", "label": "increased iron-binding capacity", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IDA-PATTERN-001"]},
+    {"node_id": "finding:low_tsat", "node_type": "LAB_PATTERN", "label": "low transferrin saturation", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IDA-PATTERN-001"]},
+    {"node_id": "finding:low_serum_iron", "node_type": "LAB_PATTERN", "label": "low serum iron", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IRON-LOW-NONSPECIFIC-002"]},
+    {"node_id": "context:inflammation", "node_type": "HISTORY_ITEM", "label": "inflammatory context", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-FERRITIN-INFLAMMATION-003", "PASSAGE-ACD-PATTERN-004"]},
+    {"node_id": "concept:ferritin_acute_phase", "node_type": "CLINICAL_CONCEPT", "label": "ferritin can rise as an acute-phase reactant", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-FERRITIN-INFLAMMATION-003"]},
+    {"node_id": "concept:mixed_ida_inflammation", "node_type": "DIFFERENTIAL", "label": "coexisting iron deficiency and inflammation-associated anemia", "value": null, "status": "HYPOTHESIS", "source_passage_ids": ["PASSAGE-ACD-IDA-OVERLAP-005"]}
+  ],
+  "edges": [
+    {"edge_id": "EDGE-LOW-FERRITIN-SUPPORTS-IDA", "subject_id": "finding:low_ferritin", "predicate": "SUPPORTS", "object_id": "condition:iron_deficiency_anemia", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IDA-PATTERN-001"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-HIGH-TIBC-SUPPORTS-IDA", "subject_id": "finding:high_tibc", "predicate": "SUPPORTS", "object_id": "condition:iron_deficiency_anemia", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IDA-PATTERN-001"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-LOW-TSAT-SUPPORTS-IDA", "subject_id": "finding:low_tsat", "predicate": "SUPPORTS", "object_id": "condition:iron_deficiency_anemia", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IDA-PATTERN-001"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-LOW-IRON-NONSPECIFIC", "subject_id": "finding:low_serum_iron", "predicate": "CAN_OCCUR_IN", "object_id": "condition:iron_deficiency_anemia", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IRON-LOW-NONSPECIFIC-002"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-LOW-IRON-ALSO-ACD", "subject_id": "finding:low_serum_iron", "predicate": "CAN_OCCUR_IN", "object_id": "condition:anemia_of_inflammation", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IRON-LOW-NONSPECIFIC-002"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-INFLAMMATION-CONFOUNDS-FERRITIN", "subject_id": "context:inflammation", "predicate": "CAN_CONF0UND", "object_id": "concept:ferritin_acute_phase", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-FERRITIN-INFLAMMATION-003"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-INFLAMMATION-SUPPORTS-ACD", "subject_id": "context:inflammation", "predicate": "SUPPORTS_CONTEXT_FOR", "object_id": "condition:anemia_of_inflammation", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-ACD-PATTERN-004"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-MIXED-POSSIBLE", "subject_id": "context:inflammation", "predicate": "DOES_NOT_EXCLUDE", "object_id": "concept:mixed_ida_inflammation", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-ACD-IDA-OVERLAP-005"], "review_status": "source_verified"}
+  ],
+  "evaluation_contract": {
+    "required_nodes": ["condition:iron_deficiency_anemia", "condition:anemia_of_inflammation", "finding:low_serum_iron", "context:inflammation"],
+    "required_edges": ["EDGE-LOW-IRON-NONSPECIFIC", "EDGE-LOW-IRON-ALSO-ACD", "EDGE-INFLAMMATION-CONFOUNDS-FERRITIN"],
+    "forbidden_edges": [
+      {"subject": "finding:low_serum_iron", "predicate": "CONFIRMS", "object": "condition:iron_deficiency_anemia"},
+      {"subject": "context:inflammation", "predicate": "RULES_OUT", "object": "condition:iron_deficiency_anemia"}
+    ],
+    "acceptable_paths": [["integrate ferritin/TIBC/TSAT/morphology/inflammation", "rank IDA vs inflammation vs mixed state", "state what extra evidence would discriminate when ambiguous"]]
+  }
+}
