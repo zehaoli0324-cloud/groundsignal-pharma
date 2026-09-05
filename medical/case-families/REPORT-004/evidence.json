@@ -1,0 +1,22 @@
+{
+  "manifest_id": "evidence-REPORT-004-v1",
+  "as_of_date": "2026-09-05",
+  "sources": [
+    {
+      "source_id": "SRC-SYNTH-RADIOLOGY-REPORT-004",
+      "title": "GroundSignal synthetic radiology-report fixtures",
+      "source_type": "synthetic_case_document",
+      "publisher": "GroundSignal",
+      "url": "groundsignal://medical/REPORT-004/synthetic-reports",
+      "document_date": "2026-09-05",
+      "authority_tier": "case_local_truth",
+      "version_note": "Synthetic report text is the frozen source of truth for report-faithfulness evaluation; it is not a clinical guideline."
+    }
+  ],
+  "claims": [
+    {"claim_id": "CLAIM-RAD-IND-001", "paraphrased_claim": "The base report describes a 1.2 cm liver lesion as indeterminate and recommends MRI for further characterization.", "source_id": "SRC-SYNTH-RADIOLOGY-REPORT-004", "locator": "Fixture A impression", "passage_id": "PASSAGE-RAD-IND-001", "evidence_role": "report_fact", "claim_scope": "indeterminate finding and explicit recommendation", "temporal_status": "current", "review_status": "source_verified"},
+    {"claim_id": "CLAIM-RAD-BENIGN-002", "paraphrased_claim": "The controlled benign fixture describes a simple cyst and explicitly says no further imaging is recommended for that finding.", "source_id": "SRC-SYNTH-RADIOLOGY-REPORT-004", "locator": "Fixture B impression", "passage_id": "PASSAGE-RAD-BENIGN-002", "evidence_role": "report_fact", "claim_scope": "benign wording and no-follow-up recommendation", "temporal_status": "current", "review_status": "source_verified"},
+    {"claim_id": "CLAIM-RAD-STABLE-003", "paraphrased_claim": "The comparison fixture says the lesion is unchanged from a prior examination; stability is an observation, not a diagnosis of benignity unless the report says so.", "source_id": "SRC-SYNTH-RADIOLOGY-REPORT-004", "locator": "Fixture C comparison/impression", "passage_id": "PASSAGE-RAD-STABLE-003", "evidence_role": "report_fact", "claim_scope": "temporal stability wording", "temporal_status": "current", "review_status": "source_verified"},
+    {"claim_id": "CLAIM-RAD-CANNOT-EXCLUDE-004", "paraphrased_claim": "The held-out fixture uses 'cannot exclude' wording and recommends follow-up CT; this preserves uncertainty rather than confirming the excluded possibility.", "source_id": "SRC-SYNTH-RADIOLOGY-REPORT-004", "locator": "Fixture E impression", "passage_id": "PASSAGE-RAD-CANNOT-EXCLUDE-004", "evidence_role": "report_fact", "claim_scope": "uncertain wording and follow-up recommendation", "temporal_status": "current", "review_status": "source_verified"}
+  ]
+}
