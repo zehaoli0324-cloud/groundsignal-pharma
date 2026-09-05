@@ -1,0 +1,23 @@
+{
+  "benchmark_id": "S2-source-routing-shadow-heldout-v0.2b",
+  "as_of_date": "2026-09-05",
+  "split": "shadow_heldout",
+  "design": "Fresh generalization set created after v0.2 diagnostic fixes. Do not tune before the first recorded run.",
+  "queries": [
+    {"query_id":"S2SH-001","query":"新闻说这个药刚拿到 FDA 批准，我不信新闻稿，想直接核对官方批准记录。","intent":"approval_status","expected_primary_source_id":"DRUGS_AT_FDA","acceptable_source_ids":["DRUGS_AT_FDA"],"freshness_sensitive":true,"high_risk":false,"forbidden_as_gold":["news_article","company_press_release"]},
+    {"query_id":"S2SH-002","query":"某个 NCT 号的试验现在状态、申办方和登记终点以哪个原始数据库为准？","intent":"trial_registry","expected_primary_source_id":"CLINICALTRIALS_GOV","acceptable_source_ids":["CLINICALTRIALS_GOV"],"freshness_sensitive":true,"high_risk":false,"forbidden_as_gold":["PUBMED","company_press_release"]},
+    {"query_id":"S2SH-003","query":"Crestor 是品牌名，我想把它映射到标准成分和 RxCUI，而不是查治疗建议。","intent":"drug_terminology","expected_primary_source_id":"RXNORM","acceptable_source_ids":["RXNORM"],"freshness_sensitive":false,"high_risk":false,"forbidden_as_gold":["DAILYMED_SPL"]},
+    {"query_id":"S2SH-004","query":"尿白蛋白/肌酐比这个检验项目要进结构化数据，先找标准 observation code，不是找正常值解释。","intent":"lab_terminology","expected_primary_source_id":"LOINC","acceptable_source_ids":["LOINC"],"freshness_sensitive":false,"high_risk":false,"forbidden_as_gold":["MERCK_MANUAL","PUBMED"]},
+    {"query_id":"S2SH-005","query":"ritonavir 是否属于 strong CYP3A inhibitor，我要看 FDA 临床药理参考表。","intent":"ddi_reference","expected_primary_source_id":"FDA_DDI_TABLES","acceptable_source_ids":["FDA_DDI_TABLES"],"freshness_sensitive":true,"high_risk":false,"forbidden_as_gold":["commercial_blog","PUBMED"]},
+    {"query_id":"S2SH-006","query":"我需要的是一般性的 transporter-mediated drug interaction study 设计原则，而不是查某一对药。","intent":"ddi_methodology","expected_primary_source_id":"FDA_ICH_M12","acceptable_source_ids":["FDA_ICH_M12"],"freshness_sensitive":true,"high_risk":false,"forbidden_as_gold":["FDA_DDI_TABLES"]},
+    {"query_id":"S2SH-007","query":"HLA-B*15:02 与 carbamazepine 这种药物-基因关系，优先去哪个 FDA pharmacogenomics 来源核实？","intent":"pharmacogenomics","expected_primary_source_id":"FDA_PGX","acceptable_source_ids":["FDA_PGX","DAILYMED_SPL","DRUGS_AT_FDA"],"freshness_sensitive":true,"high_risk":true,"forbidden_as_gold":["forum","commercial_blog"]},
+    {"query_id":"S2SH-008","query":"我只想知道 FDA 自发不良事件系统里有没有报告信号，明确不拿报告数当因果证据。","intent":"safety_signal","expected_primary_source_id":"OPENFDA_FAERS","acceptable_source_ids":["OPENFDA_FAERS"],"freshness_sensitive":true,"high_risk":false,"forbidden_as_gold":["news_article","PUBMED"]},
+    {"query_id":"S2SH-009","query":"想查异烟肼相关药物性肝损伤的权威背景资料，优先 NIH 的专门药物肝损伤参考。","intent":"dili_reference","expected_primary_source_id":"LIVERTOX","acceptable_source_ids":["LIVERTOX","PUBMED"],"freshness_sensitive":false,"high_risk":false,"forbidden_as_gold":["OPENFDA_FAERS"]},
+    {"query_id":"S2SH-010","query":"我要核对某药在欧盟当前获批适应症和最新版产品说明 SmPC，不用美国标签。","intent":"eu_product_information","expected_primary_source_id":"EMA_EPAR_SMPC","acceptable_source_ids":["EMA_EPAR_SMPC"],"freshness_sensitive":true,"high_risk":true,"forbidden_as_gold":["DAILYMED_SPL","DRUGS_AT_FDA"]},
+    {"query_id":"S2SH-011","query":"中国国家层面的某病种临床路径应该去卫健委找，不是去看药审中心受理状态，对吗？","intent":"china_clinical_pathway","expected_primary_source_id":"NHC_CHINA","acceptable_source_ids":["NHC_CHINA"],"freshness_sensitive":true,"high_risk":false,"forbidden_as_gold":["CDE_NMPA"]},
+    {"query_id":"S2SH-012","query":"想核实中国某新药目前只是 CDE 审评中还是已经进入监管批准阶段，应该先查哪个官方监管来源？","intent":"china_regulatory_status","expected_primary_source_id":"CDE_NMPA","acceptable_source_ids":["CDE_NMPA"],"freshness_sensitive":true,"high_risk":false,"forbidden_as_gold":["company_press_release"]},
+    {"query_id":"S2SH-013","query":"FDA 现在的妊娠与哺乳标签规则是什么？我想确认旧的 A/B/C/D/X 字母分类是否还适用。","intent":"pregnancy_labeling_rule","expected_primary_source_id":"FDA_PLLR","acceptable_source_ids":["FDA_PLLR"],"freshness_sensitive":true,"high_risk":false,"forbidden_as_gold":["old_label_summary","commercial_blog"]},
+    {"query_id":"S2SH-014","query":"产品标签里 QTc 风险应该怎么呈现，我要的是 FDA 当前通用 labeling guidance，不是某篇单独研究。","intent":"qtc_labeling_guidance","expected_primary_source_id":"FDA_QTC_LABELING_2025","acceptable_source_ids":["FDA_QTC_LABELING_2025"],"freshness_sensitive":true,"high_risk":false,"forbidden_as_gold":["PUBMED"]},
+    {"query_id":"S2SH-015","query":"患者正在用药，我要核对该药最新版美国处方说明里的禁忌证和警告，二手患者教育页不能当 gold。","intent":"current_drug_label","expected_primary_source_id":"DAILYMED_SPL","acceptable_source_ids":["DAILYMED_SPL","DRUGS_AT_FDA"],"freshness_sensitive":true,"high_risk":true,"forbidden_as_gold":["MEDLINEPLUS_DRUG","commercial_blog"]}
+  ]
+}
