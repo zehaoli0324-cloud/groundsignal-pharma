@@ -15,6 +15,7 @@ def host_matches(host, registered):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--registry', default='medical/knowledge-base/SOURCE_REGISTRY.json')
+    ap.add_argument('--registry-supplement', default='medical/knowledge-base/SOURCE_REGISTRY_SUPPLEMENT.json')
     ap.add_argument('--case-root', default='medical/case-families')
     ap.add_argument('--backbone', default='medical/knowledge-base/PHARMACOLOGY_BACKBONE_V0.1.json')
     ap.add_argument('--strict-hosts', action='store_true')
@@ -22,11 +23,22 @@ def main():
 
     errors, warnings = [], []
     reg = load_json(args.registry)
-    ids = [s['source_id'] for s in reg['sources']]
+    registered_sources = list(reg['sources'])
+    supplement_path = Path(args.registry_supplement)
+    if supplement_path.exists():
+        supplement = load_json(supplement_path)
+        registered_sources.extend(supplement.get('sources', []))
+
+    ids = [s['source_id'] for s in registered_sources]
     if len(ids) != len(set(ids)):
-        errors.append('duplicate source_id in registry')
+        errors.append('duplicate source_id across source registries')
     registry_ids = set(ids)
-    hosts = {s['host'] for s in reg['sources']}
+
+    hosts = set()
+    for s in registered_sources:
+        if s.get('host'):
+            hosts.add(s['host'])
+        hosts.update(s.get('hosts', []))
 
     manifests = sorted(Path(args.case_root).glob('*/evidence.json'))
     source_count = claim_count = 0
@@ -112,7 +124,7 @@ def main():
         warnings.append(f'backbone not found: {backbone_path}')
 
     print(json.dumps({
-        'registry_sources': len(reg['sources']),
+        'registry_sources': len(registered_sources),
         'evidence_manifests': len(manifests),
         'local_sources': source_count,
         'case_claims': claim_count,
