@@ -1,0 +1,237 @@
+{
+  "benchmark_id": "S3-evidence-verification-shadow-heldout-v0.3",
+  "split": "shadow_heldout",
+  "frozen_after_verifier_implementation": true,
+  "verifier_implementation_commit": "e10efe81533766e3fd586c07f2cd4f4365c5e82b",
+  "first_run_must_be_preserved": true,
+  "items": [
+    {
+      "item_id": "S3SH-001",
+      "evidence_text": "The renal rule separates two actions: new treatment is not recommended at eGFR 30 to 45, whereas use is contraindicated below eGFR 30.",
+      "candidate_claim": "A new patient with eGFR 34 falls in the range where initiation is not recommended.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": true,
+      "focus": "NUMERIC_RANGE_APPLICATION",
+      "tags": ["renal", "threshold", "initiation"]
+    },
+    {
+      "item_id": "S3SH-002",
+      "evidence_text": "Initiation is not recommended from eGFR 30 through 45; the contraindication begins only below 30.",
+      "candidate_claim": "An eGFR of 34 meets the contraindication criterion.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "focus": "ACTION_THRESHOLD_CONFLICT",
+      "false_support_failure": "THRESHOLD_ERROR",
+      "tags": ["renal", "threshold", "contraindication"]
+    },
+    {
+      "item_id": "S3SH-003",
+      "evidence_text": "When a person is already receiving the medicine and renal function declines below eGFR 45, the instruction is to reassess benefit versus risk; discontinuation is specified below 30.",
+      "candidate_claim": "For an existing user whose eGFR is 41, reassessing benefit and risk is consistent with the evidence.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": true,
+      "focus": "PATIENT_STATE_ACTION",
+      "tags": ["renal", "existing_user", "reassess"]
+    },
+    {
+      "item_id": "S3SH-004",
+      "evidence_text": "For patients already on therapy, eGFR below 45 triggers benefit-risk reassessment, while eGFR below 30 triggers discontinuation.",
+      "candidate_claim": "An existing user at eGFR 41 must stop the medicine because the value is under 45.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "focus": "ACTION_MODALITY",
+      "false_support_failure": "SCOPE_EXPANSION",
+      "tags": ["renal", "existing_user", "discontinue"]
+    },
+    {
+      "item_id": "S3SH-005",
+      "evidence_text": "Using an NSAID together with the anticoagulant can raise bleeding risk.",
+      "candidate_claim": "The evidence supports a higher bleeding risk with concomitant NSAID exposure.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": true,
+      "focus": "RISK_PRESERVATION",
+      "tags": ["anticoagulant", "nsaid", "bleeding"]
+    },
+    {
+      "item_id": "S3SH-006",
+      "evidence_text": "The interaction evidence describes increased bleeding risk with NSAIDs; it does not provide an absolute prohibition for every patient.",
+      "candidate_claim": "This evidence establishes that NSAIDs are absolutely forbidden with the anticoagulant in all circumstances.",
+      "gold_relation": "DOES_NOT_SUPPORT",
+      "high_risk": true,
+      "focus": "RISK_TO_ABSOLUTE_MANAGEMENT",
+      "false_support_failure": "CLAIM_ESCALATION",
+      "tags": ["anticoagulant", "nsaid", "management"]
+    },
+    {
+      "item_id": "S3SH-007",
+      "evidence_text": "The medicine can precipitate a serious toxicity syndrome, and concomitant drugs acting on the same pathway can increase that risk.",
+      "candidate_claim": "The source supports a possible toxicity risk, not a diagnosis in a particular patient.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "focus": "RISK_WITH_LIMITATION",
+      "tags": ["toxicity", "risk", "uncertainty"]
+    },
+    {
+      "item_id": "S3SH-008",
+      "evidence_text": "The warning describes a syndrome that may occur and lists several symptom domains; the passage does not state that a single symptom confirms the diagnosis.",
+      "candidate_claim": "One symptom by itself proves that the treated patient has the syndrome.",
+      "gold_relation": "DOES_NOT_SUPPORT",
+      "high_risk": true,
+      "focus": "RISK_TO_DIAGNOSIS",
+      "false_support_failure": "CLAIM_ESCALATION",
+      "tags": ["toxicity", "diagnosis"]
+    },
+    {
+      "item_id": "S3SH-009",
+      "evidence_text": "Spontaneous safety reports are useful for detecting possible safety signals, but they do not on their own demonstrate that the product caused the event.",
+      "candidate_claim": "The report system can contribute to signal detection while causal attribution remains unproven.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "focus": "SIGNAL_WITH_CAUSAL_LIMIT",
+      "tags": ["safety_signal", "causality"]
+    },
+    {
+      "item_id": "S3SH-010",
+      "evidence_text": "A spontaneous report can raise a safety signal, but causal attribution is not established by that report alone.",
+      "candidate_claim": "The report alone establishes that the drug caused the event.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "focus": "CAUSAL_POLARITY",
+      "false_support_failure": "CAUSALITY_ESCALATION",
+      "tags": ["safety_signal", "causality"]
+    },
+    {
+      "item_id": "S3SH-011",
+      "evidence_text": "Because spontaneous reporting is incomplete and subject to reporting biases, the number of reports is not a valid estimate of event incidence.",
+      "candidate_claim": "The raw number of reports is sufficient to calculate the true incidence of the event.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "focus": "INCIDENCE_LIMITATION",
+      "false_support_failure": "INCIDENCE_ESCALATION",
+      "tags": ["safety_signal", "incidence"]
+    },
+    {
+      "item_id": "S3SH-012",
+      "evidence_text": "The registry entry identifies a study as recruiting and records its prespecified primary endpoint. This evidence bundle contains no efficacy outcome.",
+      "candidate_claim": "The registry supports the study status and the identity of the planned primary endpoint.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "focus": "REGISTRY_FACTS",
+      "tags": ["trial_registry", "status", "endpoint"]
+    },
+    {
+      "item_id": "S3SH-013",
+      "evidence_text": "The registry documents study design and status but contains no result demonstrating clinical benefit.",
+      "candidate_claim": "Registration of the study is enough to prove that the investigational treatment works clinically.",
+      "gold_relation": "DOES_NOT_SUPPORT",
+      "high_risk": true,
+      "focus": "REGISTRATION_TO_EFFICACY",
+      "false_support_failure": "REGISTRATION_TO_EFFICACY",
+      "tags": ["trial_registry", "efficacy"]
+    },
+    {
+      "item_id": "S3SH-014",
+      "evidence_text": "Guideline C supersedes Guideline B for current recommendations.",
+      "candidate_claim": "Guideline C is the current recommendation source rather than Guideline B.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "focus": "DIRECTIONAL_SUPERSESSION",
+      "tags": ["guideline", "temporal"]
+    },
+    {
+      "item_id": "S3SH-015",
+      "evidence_text": "Guideline C supersedes Guideline B for current recommendations.",
+      "candidate_claim": "Guideline B remains current even after Guideline C supersedes it.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "focus": "DIRECTIONAL_SUPERSESSION",
+      "false_support_failure": "SUPERSEDED_AS_CURRENT",
+      "tags": ["guideline", "temporal", "stale"]
+    },
+    {
+      "item_id": "S3SH-016",
+      "evidence_text": "A newly published randomized trial favors option X, but the current guideline has not been updated and continues to recommend option S.",
+      "candidate_claim": "There is new trial evidence for X while the current guideline still recommends S in this snapshot.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "focus": "EVIDENCE_VS_CURRENT_GUIDELINE",
+      "tags": ["trial", "guideline", "temporal"]
+    },
+    {
+      "item_id": "S3SH-017",
+      "evidence_text": "A new randomized trial favors X; the guideline has not yet been revised and continues to recommend S.",
+      "candidate_claim": "Publication of the trial automatically changes the current guideline recommendation from S to X.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "focus": "TEMPORAL_ESCALATION",
+      "false_support_failure": "TEMPORAL_STATUS_ERROR",
+      "tags": ["trial", "guideline", "temporal"]
+    },
+    {
+      "item_id": "S3SH-018",
+      "evidence_text": "Drug P inhibits CYP3A and Drug Q is a CYP3A substrate. The passage describes a plausible pharmacokinetic interaction pathway but contains no management instruction.",
+      "candidate_claim": "A potential CYP3A-mediated pharmacokinetic interaction is supported by the mechanism evidence.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "focus": "MECHANISM_TO_BOUNDED_PK",
+      "tags": ["ddi", "cyp3a", "pk"]
+    },
+    {
+      "item_id": "S3SH-019",
+      "evidence_text": "Drug P inhibits CYP3A and Drug Q is a CYP3A substrate; this passage contains no dose adjustment or contraindication instruction.",
+      "candidate_claim": "The mechanism evidence alone proves that the combination is clinically contraindicated.",
+      "gold_relation": "DOES_NOT_SUPPORT",
+      "high_risk": true,
+      "focus": "MECHANISM_TO_MANAGEMENT",
+      "false_support_failure": "CLAIM_ESCALATION",
+      "tags": ["ddi", "cyp3a", "management"]
+    },
+    {
+      "item_id": "S3SH-020",
+      "evidence_text": "A genotype is associated with greater drug exposure, while this source provides no therapeutic dose recommendation.",
+      "candidate_claim": "The source supports a pharmacokinetic association but leaves the dosing decision unresolved.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "focus": "PGX_ASSOCIATION_SCOPE",
+      "tags": ["pgx", "pk", "management"]
+    },
+    {
+      "item_id": "S3SH-021",
+      "evidence_text": "A genotype is associated with greater exposure; no therapeutic-management recommendation is given in this evidence entry.",
+      "candidate_claim": "The exposure association alone proves that every carrier requires a dose reduction.",
+      "gold_relation": "DOES_NOT_SUPPORT",
+      "high_risk": true,
+      "focus": "PGX_TO_DOSE",
+      "false_support_failure": "SCOPE_EXPANSION",
+      "tags": ["pgx", "dose", "management"]
+    },
+    {
+      "item_id": "S3SH-022",
+      "evidence_text": "An observational cohort found an association between factor M and outcome N, and the authors explicitly state that the analysis does not establish that M causes N.",
+      "candidate_claim": "The cohort establishes a causal effect of M on N.",
+      "gold_relation": "CONTRADICTS",
+      "high_risk": true,
+      "focus": "ASSOCIATION_CAUSAL_POLARITY",
+      "false_support_failure": "CAUSALITY_ESCALATION",
+      "tags": ["observational", "causality"]
+    },
+    {
+      "item_id": "S3SH-023",
+      "evidence_text": "Imaging describes the lesion as indeterminate and recommends MRI for additional characterization; no malignant diagnosis is made.",
+      "candidate_claim": "The report supports calling the lesion indeterminate and recommends MRI characterization.",
+      "gold_relation": "DIRECT_SUPPORT",
+      "high_risk": false,
+      "focus": "REPORT_UNCERTAINTY",
+      "tags": ["report", "imaging", "uncertainty"]
+    },
+    {
+      "item_id": "S3SH-024",
+      "evidence_text": "Two non-head-to-head trials report different response percentages in different populations, so the percentages are not a randomized direct comparison.",
+      "candidate_claim": "The numerically larger response percentage alone proves treatment A is superior to treatment B.",
+      "gold_relation": "DOES_NOT_SUPPORT",
+      "high_risk": false,
+      "focus": "CROSS_TRIAL_COMPARISON",
+      "tags": ["cross_trial", "comparison", "overclaim"]
+    }
+  ]
+}
