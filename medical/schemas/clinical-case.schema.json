@@ -67,6 +67,17 @@
       },
       "additionalProperties": false
     },
+    "graph_eval": {
+      "type": "object",
+      "properties": {
+        "graph_snapshot_id": {"type": "string"},
+        "required_node_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "required_edge_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "forbidden_claims": {"type": "array", "items": {"type": "string"}},
+        "expected_reasoning_path": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
     "safety": {
       "type": "object",
       "required": ["critical_errors"],
