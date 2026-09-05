@@ -1,0 +1,41 @@
+name: s3-v04-shadow-heldout
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'medical/stage-evals/S3/verification-shadow-heldout-v0.4.json'
+      - 'scripts/s3_atomic_proposition_verifier_v041.py'
+      - '.github/workflows/s3-v04-shadow.yml'
+
+jobs:
+  first-shadow-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run frozen untouched v0.4 shadow held-out
+        run: |
+          mkdir -p /tmp/s3-v04-shadow
+          python scripts/s3_atomic_proposition_verifier_v041.py \
+            --input medical/stage-evals/S3/verification-shadow-heldout-v0.4.json \
+            --out /tmp/s3-v04-shadow/predictions.json
+          set +e
+          python scripts/eval_s3_claim_verification.py \
+            --gold medical/stage-evals/S3/verification-shadow-heldout-v0.4.json \
+            --pred /tmp/s3-v04-shadow/predictions.json \
+            --out /tmp/s3-v04-shadow/report.json \
+            --min-relation-accuracy 0.80 \
+            --max-high-risk-false-support 0.0
+          status=$?
+          set -e
+          cat /tmp/s3-v04-shadow/report.json
+          echo "S3 v0.4 untouched shadow first-run exit code: ${status}"
+          echo "This first-run result is non-blocking and must be preserved before any v0.4.2 tuning."
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s3-v04-shadow-first-run
+          path: /tmp/s3-v04-shadow
+          retention-days: 90
