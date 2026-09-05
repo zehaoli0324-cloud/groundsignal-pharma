@@ -1,0 +1,34 @@
+{
+  "benchmark_id": "S2-dailymed-truth-retrieval-v0.3",
+  "as_of_date": "2026-09-05",
+  "purpose": "Evaluate current-version consistency and critical-section retrieval from authoritative DailyMed SPL XML.",
+  "tests": [
+    {
+      "test_id": "S2T-001",
+      "drug": "metformin extended release",
+      "setid": "85027e6c-d35b-49eb-a234-dd71aa77aee0",
+      "critical_query": "renal impairment eGFR below 30 contraindicated discontinue",
+      "acceptable_section_title_contains": ["renal impairment"],
+      "must_contain_groups": [["egfr"], ["30"], ["contraindicated", "discontinue"]],
+      "high_risk": true
+    },
+    {
+      "test_id": "S2T-002",
+      "drug": "apixaban / Eliquis",
+      "setid": "e9481622-7cc6-418a-acb6-c5450daae9b0",
+      "critical_query": "NSAID concomitant bleeding risk hemostasis apixaban",
+      "acceptable_section_title_contains": ["bleeding", "anticoagulants", "antiplatelet"],
+      "must_contain_groups": [["nsaid", "nonsteroidal anti-inflammatory"], ["bleeding"], ["concomitant", "coadministration", "hemostasis"]],
+      "high_risk": true
+    },
+    {
+      "test_id": "S2T-003",
+      "drug": "sertraline",
+      "setid": "7e5e76cf-2fda-4f9d-bcbf-f77b1f188ee6",
+      "critical_query": "serotonin syndrome serotonergic drugs warning",
+      "acceptable_section_title_contains": ["serotonin syndrome"],
+      "must_contain_groups": [["serotonin syndrome"], ["serotonergic"]],
+      "high_risk": true
+    }
+  ]
+}
