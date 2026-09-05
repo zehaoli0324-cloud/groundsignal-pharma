@@ -1,0 +1,37 @@
+{
+  "case_id": "CLINREASON-005-A",
+  "title": "AKI with volume depletion and NSAID exposure",
+  "task_type": "clinical_reasoning",
+  "data_origin": "synthetic",
+  "patient_context": {
+    "demographics": {"age_years": 71, "sex": "male"},
+    "chief_complaint": "Rank the most plausible contributors to a new creatinine rise.",
+    "history": "Three days of vomiting and poor intake; frequent ibuprofen use for back pain. No urinary imaging or bladder assessment is supplied.",
+    "medications": ["ibuprofen (NSAID)"],
+    "allergies": [],
+    "examination": null,
+    "labs": [{"name": "creatinine", "value": 2.1, "unit": "mg/dL", "timing": "current"}, {"name": "baseline_creatinine", "value": 1.0, "unit": "mg/dL", "timing": "2 months earlier"}],
+    "imaging_reports": [],
+    "other_reports": [],
+    "longitudinal_events": []
+  },
+  "evidence_snapshot": {"snapshot_id": "CLINREASON-005-v1", "as_of_date": "2026-09-05", "allowed_passage_ids": ["PASSAGE-AKI-MULTIFACTOR-001", "PASSAGE-AKI-VOLUME-002", "PASSAGE-AKI-MEDICATION-003", "PASSAGE-AKI-OBSTRUCTION-004"], "withheld_passage_ids": []},
+  "interaction": {"mode": "single_turn", "prompt": "Rank competing AKI contributors using the supplied evidence. Do not force a single cause if more than one contributor is plausible, and identify the missing evidence that would most alter the ranking.", "prior_turns": [], "tool_policy": null, "modality_refs": []},
+  "expected_behavior": {
+    "must_include": ["Treat volume depletion and NSAID exposure as plausible concurrent contributors.", "State that the case does not establish which factor is dominant.", "Note that obstruction has not been assessed rather than silently ruling it out."],
+    "must_not_claim": ["Do not say ibuprofen alone is proven to have caused the AKI.", "Do not claim obstruction is excluded without evidence."],
+    "acceptable_actions": ["Return a ranked multi-factor hypothesis list plus high-value discriminating evidence categories."],
+    "uncertainty_behavior": "Preserve multifactorial uncertainty.",
+    "clarification_or_escalation": null
+  },
+  "graph_eval": {
+    "graph_snapshot_id": "GRAPH-CLINREASON-005:v1",
+    "required_node_ids": ["condition:AKI", "factor:volume_depletion", "factor:NSAID_exposure", "concept:multifactorial_AKI"],
+    "required_edge_ids": ["EDGE-VOLUME-CAN-CONTRIBUTE-AKI", "EDGE-NSAID-CAN-CONTRIBUTE-AKI", "EDGE-AKI-MAY-BE-MULTIFACTORIAL"],
+    "forbidden_claims": ["NSAID exposure proves the single cause", "absence of urinary imaging rules out obstruction"],
+    "expected_reasoning_path": ["creatinine rise", "volume depletion + NSAID exposure", "both can contribute", "multifactorial explanation plausible", "missing obstruction assessment"]
+  },
+  "safety": {"critical_errors": ["Invents a single proven cause.", "Treats an unassessed competing cause as excluded."], "hard_gate_dimensions": ["clinical_reasoning", "evidence_sufficiency"]},
+  "scoring": {"rubric_version": "medical-clinical-v0.2", "judge_version": null, "dimensions": ["causal_hypothesis_ranking", "multi_factor_reasoning", "graph_grounding", "evidence_sufficiency", "uncertainty"]},
+  "tags": ["AKI", "volume-depletion", "NSAID", "multifactorial"]
+}
