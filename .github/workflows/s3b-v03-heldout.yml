@@ -1,0 +1,69 @@
+name: s3b-v03-structured-heldout
+
+on:
+  push:
+    paths:
+      - 'medical/stage-evals/S3/s3b-entailment-heldout-v0.3.json'
+      - 'scripts/s3b_entailment_engine_v022.py'
+      - 'scripts/s3b_structured_entailment_runner_v022.py'
+      - 'scripts/eval_s3b_structured_entailment.py'
+      - '.github/workflows/s3b-v03-heldout.yml'
+  workflow_dispatch:
+
+jobs:
+  first-heldout-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate frozen S3b v0.3 contract
+        run: |
+          python -m py_compile \
+            scripts/s3b_entailment_engine_v022.py \
+            scripts/s3b_structured_entailment_runner_v022.py \
+            scripts/eval_s3b_structured_entailment.py
+          python - <<'PY'
+          import json
+          from collections import Counter
+          p='medical/stage-evals/S3/s3b-entailment-heldout-v0.3.json'
+          d=json.load(open(p, encoding='utf-8'))
+          assert d['split']=='heldout'
+          assert d['frozen_after_entailment_implementation'] is True
+          assert d['first_run_must_be_preserved'] is True
+          assert d['entailment_engine']=='s3b-structured-entailment-v0.2.2'
+          assert d['entailment_engine_commit']=='9ca8cab8b5dafdab9b43375b39cce6b6cec9f02c'
+          assert len(d['items'])==40, len(d['items'])
+          ids=[x['item_id'] for x in d['items']]
+          assert len(ids)==len(set(ids))
+          print('Frozen items:', len(ids))
+          print('Gold distribution:', dict(Counter(x['gold_relation'] for x in d['items'])))
+          print('High-risk items:', sum(bool(x.get('high_risk')) for x in d['items']))
+          PY
+
+      - name: Run untouched S3b v0.3 first observation
+        run: |
+          mkdir -p /tmp/s3b-v03
+          python scripts/s3b_structured_entailment_runner_v022.py \
+            --input medical/stage-evals/S3/s3b-entailment-heldout-v0.3.json \
+            --out /tmp/s3b-v03/predictions.json
+          set +e
+          python scripts/eval_s3b_structured_entailment.py \
+            --gold medical/stage-evals/S3/s3b-entailment-heldout-v0.3.json \
+            --pred /tmp/s3b-v03/predictions.json \
+            --out /tmp/s3b-v03/report.json \
+            --min-relation-accuracy 0.90 \
+            --max-high-risk-false-support 0.0
+          status=$?
+          set -e
+          cat /tmp/s3b-v03/report.json
+          echo "S3b v0.3 fresh heldout first-run exit code: ${status}"
+          echo "Preserve this result before any S3b tuning."
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s3b-v03-heldout-first-run
+          path: /tmp/s3b-v03
+          retention-days: 90
