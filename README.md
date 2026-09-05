@@ -1,260 +1,465 @@
-# GroundSignal Pharma
+# GroundSignal Medical Development System
 
-### Evidence-Grounded Biopharma Intelligence（临床医学 + 先进制药情报）
+### Evidence-Grounded Medical Model Evaluation, Diagnosis & Post-training Infrastructure
 
-> **从公开信号到决策情报：药物管线、获批、授权交易、产能变化，全部可追溯。**
+> **从动态医学证据 → 临床/医药任务 → 模型评测 → Failure Diagnosis → 干预路由 → 训练数据 → Regression Gate。**
 
-**把分散的公开医药信息变成可追溯、可比较、可持续更新的管线与企业情报。**
+GroundSignal 起源于 `groundsignal-pharma` 的医药情报系统，但当前目标已经扩展为：
 
-> 软件是生产机器，数据是资产，**Intelligence 才是商品**。
-> 商业路径：Service first → Subscription second → Data/API third。
+> **Evidence-Grounded Medical Model Development System**
 
-GroundSignal Pharma 不是"搜索药物信息"的 Agent，也不是静态知识图谱。它建立一条完整的医药情报链路：
+它不是一个“已经训练好的医疗大模型”，也不是患者侧临床决策系统。它要解决的是医疗大模型开发中更底层的一组问题：
+
+- 什么医学事实在当前时间点成立？
+- 哪一段指南 / 说明书 / 监管文件 / 文献真正支持这个 claim？
+- 模型错在哪里：知识、检索、推理、证据充分性、overclaim、工具调用还是评测器？
+- 这个 bad case 应该路由到 retrieval、prompt、SFT、preference、Agent trajectory 还是 judge calibration？
+- 新模型版本虽然均分更高，有没有引入新的医疗安全退化？
+
+---
+
+## Development Loop
 
 ```text
-公开信息（ClinicalTrials.gov / FDA / NMPA / 药企公告 / 行业媒体）
-→ Evidence
-→ Claim / Relation / Event
-→ Temporal Intelligence Graph
-→ Cross-Entity Analysis
-→ Change Detection
-→ Decision-oriented Output
-→ Evaluation
+Medical / Pharma Sources
+        ↓
+Evidence & Temporal Truth Layer
+        ↓
+Medical Task Factory
+        ↓
+Model / RAG / Agent Harness
+        ↓
+Evaluation & Safety Gates
+        ↓
+Failure Diagnosis
+        ↓
+Intervention Router
+        ↓
+Retrieval / Prompt / SFT / Preference / Agent-trajectory / Judge changes
+        ↓
+New Model / System Version
+        ↓
+Regression Gate
+        └────────────────────────────→ loop
 ```
 
-目标不是回答"GLP-1 有哪些药？"，而是继续回答：
-
-> 这条管线关系由什么证据支持？它是什么时候获批的？现在还成立吗？
-> 新加入一款 GLP-1 减重药后，它和已有礼来 / 诺和诺德 / 信达有什么竞争或合作交集？
-> 一个 FDA 获批、授权交易或产能变化出现后，哪些已有判断可能需要更新？
-> 系统漏掉了多少重要事件？发现得够不够快？误报多不多？
+详细架构：[`docs/12-medical-model-development-architecture.md`](docs/12-medical-model-development-architecture.md)
 
 ---
 
-## Why this exists
+## Why GroundSignal is useful for medical-model development
 
-医药情报真正困难的部分不是"找到一条新闻"，而是把长期分散的信息连接起来：
+医疗模型的很多问题并不是简单的“知识答错”。典型失败包括：
 
 ```text
-礼来 → develops → 替尔泊肽 → targets → GLP-1R → competes with → 司美格鲁肽 → develops → 诺和诺德
+III 期阳性             → 被模型升级成“已经获批”
+试验注册               → 被模型升级成“已经证明有效”
+不良事件报告           → 被模型升级成“存在因果关系”
+单个资产安全信号       → 被模型升级成“类别效应”
+旧版指南/标签          → 覆盖了当前有效版本
+有一个来源 URL         → 被误认为引用真的支持 claim
+证据不足               → 模型仍给出高置信度诊断/结论
 ```
 
-某一天出现"FDA 批准 Zepbound 用于减重"，真正有价值的问题不是"礼来获批了"，而是：
-
-> 这对司美格鲁肽 / 玛仕度肽 / 整个 GLP-1 减重格局意味着什么？哪些 CDMO、原料药供应商、临床试验中心与这个变化有关？哪些已有 watchlist 应该被重新检查？
-
-**核心思想：新信息不是被存入数据库，而是被放进已有知识网络中重新解释。**
+GroundSignal 的核心设计因此是 **claim scope + evidence role + temporal validity + uncertainty + regression**，而不是只做静态 QA。
 
 ---
 
-## System Logic
+# Two Tracks
+
+## Track P — Pharma / drug-development evidence
+
+原有 `pharma/` 不废弃，而作为已经有真实数据的 **Temporal Medical Evidence Track**。
+
+当前对象包括：
 
 ```text
-1. Research Target (Drug/Company/Indication/Target/Watchlist)
-        ↓
-2. Multi-source Retrieval (ClinicalTrials.gov API/FDA/NMPA/annual reports/media)
-        ↓
-3. Evidence Extraction (source URL · NCT ID · publication time · source tier)
-        ↓
-4. Structured Intelligence (Company·Drug·Target·Facility·Relation·Claim·Evidence·Event)
-        ↓
-5. Intelligence Graph (company ↔ drug ↔ target ↔ trial ↔ facility, investor ↔ company, event ↔ affected)
-        ↓
-   Cross-Entity Scan              Change Detection
-   (shared target/indication/     (approval/phase transition/
-    investor/competition)          licensing/capacity)
-        ↓
-6. Intelligence Output (Company Card · Panorama · Discovery Report · Watchlist · Evidence Audit)
-        ↓
-7. Evaluation (Precision · Recall · Evidence Coverage · Detection Latency · False Alert Rate)
+Company / Drug / Target / Trial / Event / Claim / Evidence
 ```
+
+核心能力：
+
+- ClinicalTrials / FDA / NMPA 等真实世界状态变化；
+- 获批 / NDA / 临床阶段的 temporal truth；
+- Claim-Evidence provenance；
+- competition / target / indication reasoning；
+- source hierarchy；
+- stale knowledge / overclaim / contradiction 测试。
+
+已有医药安全纪律见：[`docs/11-clinical-safety-boundaries.md`](docs/11-clinical-safety-boundaries.md)
+
+## Track C — Clinical model development
+
+新建 `medical/`，开始覆盖真正面向医疗模型的任务面：
+
+- Medical QA
+- Clinical reasoning / differential reasoning
+- Medication safety
+- Lab / pathology / imaging-report interpretation
+- Longitudinal disease-course reasoning
+- Multi-turn clarification / uncertainty
+- Medical Agent / tool use
+- Multimodal-ready task manifests
+
+临床 Track 规范：[`medical/clinical-track/README.md`](medical/clinical-track/README.md)
+
+> 临床数据必须来自 public / licensed / de-identified / synthetic sources；仓库不得保存可识别患者信息。
 
 ---
 
-## What happens when a new drug enters the system?
+# 1. Medical Truth Layer
 
-加入"玛仕度肽"，系统不会只创建 `玛仕度肽.md`，而是执行一次 **Cross-Entity Intelligence Scan**：
+旧版主要是：
 
 ```text
-玛仕度肽 → 读取靶点/公司/适应症/已知关系
-        → 与已有实体逐一比较 → neighbors(new) ∩ neighbors(existing)
-        → 识别共享节点和直接关系 → 分类
+claim → source_url
 ```
 
-当前 prototype 支持发现：`DIRECT_COMPETITOR / PRODUCT_OVERLAP / SHARED_TARGET / SHARED_INDICATION / SHARED_INVESTOR / COLLABORATION_LINK / COMMON_ECOSYSTEM`
+现在升级目标是：
 
 ```text
-OBSERVED    已有直接关系或证据支持的事实
-DERIVED     由共享靶点/适应症/合作结构计算出的分析
-HYPOTHESIS  只有行业或生态重叠，需要进一步检索验证
+claim
+  → evidence_passage_id
+      → source / version / date
+      → section / paragraph / table
+      → normalized proposition
+      → evidence role
+      → scope
+      → valid_from / valid_to
+      → contradiction / supersession
 ```
 
-```bash
-python3 scripts/cross-entity-scan.py pharma 玛仕度肽 --report
-# → 08-智能发现/2026-08-27-玛仕度肽-交叉关系发现.md
-```
-
----
-
-## From search to evidence
-
-| Tier | Source | Typical use |
-|------|--------|-------------|
-| Tier 1 | ClinicalTrials.gov（NCT 编号）、FDA 批准记录、NMPA/CDE、WHO/EMA | 事实验证 |
-| Tier 2 | 药企官网/年报/公告、Reuters/FiercePharma/Endpoints/丁香园 | 强支持证据 |
-| Tier 3 | 搜索结果、公众号、论坛、自媒体 | 线索发现 |
-
-核心原则：**一手优先（CT.gov/FDA/NMPA）、多源交叉、事实与预期分离、获批日期以监管为准、授权金额标报道口径、弱来源只作为 lead。**
-
-系统保存的不只是"礼来 → 替尔泊肽"，而是 claim + evidence：
-
-```yaml
-claim:
-  subject: 礼来
-  predicate: DEVELOPS
-  object: 替尔泊肽
-  status: VERIFIED
-  valid_from: 2022-05-13
-  last_verified_at: 2026-08-27
-evidence:
-  source_type: fda_approval
-  source_url: https://www.fda.gov
-  nct_id: NCT04184622
-```
-
----
-
-## Data Model
-
-V2 intelligence model：ENTITY / PRODUCT / TARGET / FACILITY / RELATION / CLAIM / EVIDENCE / EVENT
-
-- **ENTITY**：谁？（礼来 / 诺和诺德 / 百济神州 / 药明康德）
-- **PRODUCT**：哪个药物管线？（司美格鲁肽 / 替尔泊肽 / 西达基奥仑赛）
-- **TARGET**：哪个靶点？（GLP-1R / PD-1 / BCMA / CD19 / HER2）
-- **FACILITY**：哪个产能/临床节点？（GLP-1 API 产能 / CAR-T 制备工厂）
-- **RELATION**：DEVELOPS / SUPPLIES / LICENSES / COLLABORATES / REGULATES / COMPETES_WITH
-- **CLAIM**：VERIFIED / SUPPORTED / INFERRED / DISPUTED / STALE / SUPERSEDED / UNKNOWN
-- **EVIDENCE**：clinicaltrials.gov / fda.gov / annual report / industry media
-- **EVENT**：PHASE_TRANSITION / FDA_APPROVAL / IND_SUBMISSION / LICENSING_DEAL / SAFETY_SIGNAL / CLINICAL_START / M_A / FUNDING
-
----
-
-## Information Integration
-
-### 1. Single-Entity Intelligence
-
-```bash
-python3 scripts/ask.py pharma "礼来的客户是谁" -o board.html
-```
-聚合公司画像 + 药物管线 + 靶点 + 竞品 + 交易 + 证据 + 关联实体 → 单实体 Intelligence Card。
-
-### 2. Pairwise Intelligence
-
-```bash
-python3 scripts/panorama.py pharma 礼来 诺和诺德 -o panorama.html
-```
-比较 A-only / B-only / shared nodes / common ecosystem，理解两个药企的关系结构（GLP-1 双寡头格局）。
-
-### 3. Cross-Entity Intelligence
-
-```bash
-python3 scripts/cross-entity-scan.py pharma 玛仕度肽 --report
-```
-新药物/新公司进入数据库后自动与已有知识比较 → Discovery Report。
-
-### 4. Temporal / Event Intelligence
-
-```bash
-python3 scripts/watchlist.py pharma --watch 礼来,诺和诺德,信达生物 -o watchlist.html
-```
-变化记录为 Event 而非覆盖旧事实；目标是 **Change Detection，而不是 News Aggregation**。
-
----
-
-## Evidence Layer
-
-```bash
-python3 scripts/evidence-audit.py pharma --audit-dir 05-证据审计   # pharma（V2）
-python3 scripts/evidence-audit.py demo                            # demo（V1）
-```
-
-当前打标（2026-08-27）：pharma 36 VERIFIED / 11 SUPPORTED / 0 UNKNOWN；demo 26 SUPPORTED / 4 VERIFIED / 0 UNKNOWN。**这是节点级来源打标（source_url 域名可溯源），不是 claim 级审计；claim-level audit（Claim ID → Evidence ID）是下一步升级。**
-
-长期设计区分 `source_quality ≠ evidence_strength`（Reuters 是高质量来源，但"据悉可能获批"对"已经获批"的支撑强度仍然很低）。
-
----
-
-## Evaluation
-
-### Eval v1 — Is what we stored correct?
-Relation Precision / Evidence quality / Entity Resolution / Temporal Validity / Abstention。方法就绪，50 条 gold set 抽样待跑；当前证据打标 UNKNOWN=0。
-
-### Eval v2 — Is the system useful?
-| Metric | Question | 当前值 |
-|--------|----------|--------|
-| Relation Recall | 应该知道的关系覆盖了多少？ | 待测 |
-| Event Recall | 重要事件抓到了多少？（2024-2026 医药 12 项基准） | **8/12 = 67%** |
-| Detection Latency | 事件发生多久后系统知道？ | live 待 cron 运行数据 |
-| False Alert Rate | 推送中有多少没有商业意义？ | 待运行数据 |
-| Node Source Coverage | 多少结构化节点至少含一个可追溯来源？ | 节点级 100%（0 UNKNOWN） |
-| Claim Provenance Coverage | 多少原子 claim 有明确来源（Claim ID → Evidence）？ | pharma 已实施（claim-audit.py） |
-| Claim-Evidence Entailment | URL 是否真正支持 claim（≠ 有 URL）？ | 待测（玛仕度肽 bad case 已确认存在 mismatch） |
-| Temporal Validity / Stale Claim Rate | 仍标 VERIFIED 但已被 supersede 的 claim 占比？ | 待测（玛仕度肽 NDA→获批 1 例已修复，见 postmortems/） |
-
-诚实结论：**precision 较高，coverage 有限；live latency 与 false-alert 仍待证明。**
-
----
-
-## Example Intelligence Domains
-
-- `pharma/`：V2 intelligence model（Company/Drug/Target/Event/Capacity），聚焦先进制药赛道：GLP-1 减重（司美格鲁肽/替尔泊肽/玛仕度肽）、PD-1 免疫治疗（国产四大）、CAR-T 细胞治疗（西达基奥仑赛/阿基仑赛）、ADC（德曲妥珠单抗）。52 节点 / 0 断裂。
-- `demo/`：Company-centric v1 图谱（A股/港股 10 家药企 + 产品 + 投资人 + 交易 + 产业链）。32 节点 / 0 断裂。
-
-数据来源：ClinicalTrials.gov v2 API 真实查询（NCT 编号为证据）、FDA/NMPA 批准记录、药企官网/年报、公开报道。
-
----
-
-## Repository
+证据角色包括：
 
 ```text
-demo/            v1 医药图谱（公司/产品/投资人/交易/产业链）
-pharma/          V2 先进制药图谱（实体/产品/靶点/事件/产能）
-scripts/         ingest · ask · panorama · cross-entity-scan · watchlist · evidence-audit · import-helper
-docs/            architecture · search methods · schema · eval v1 · eval v2 · user/commercial validation
-templates/       HTML 看板模板
-samples/         示例输出（HTML+PNG）
+DIRECT_SUPPORT
+PARTIAL_SUPPORT
+CONTRADICTS
+CONTEXT_ONLY
+DOES_NOT_SUPPORT
+SUPERSEDES
 ```
 
-## Documentation
+这允许系统真正评估：
 
-- `docs/02-企业情报数据库-架构与Proposal.md` — architecture
-- `docs/04-search-methods.md` — data sources & retrieval methodology（ClinicalTrials.gov v2 API 用法）
-- `docs/06-eval-report.md` — Eval v1
-- `docs/07-schema-v2.md` — intelligence schema（医药版对象模型）
-- `docs/08-eval-v2.md` — recall / latency / false-alert evaluation
-- `docs/09-user-validation.md` — user validation
-- `docs/10-commercial-validation.md` — commercial roadmap
-- `docs/11-clinical-safety-boundaries.md` — 临床安全边界（医药版反幻觉铁律：阳性≠获批、注册≠疗效、AE≠因果）
+- citation entailment；
+- evidence sufficiency；
+- source hierarchy；
+- stale claim；
+- contradiction；
+- guideline / label update；
+- RAG evidence recall@k。
+
+规范：[`medical/truth-layer/README.md`](medical/truth-layer/README.md)  
+Schema：[`medical/schemas/evidence-passage.schema.json`](medical/schemas/evidence-passage.schema.json)
+
+---
+
+# 2. Clinical Task Schema
+
+临床 case 不只保存“问题 + 标准答案”，而显式区分：
+
+```text
+patient state
++ evidence snapshot
++ interaction state
++ expected behavior
++ must-not-claim
++ uncertainty behavior
++ critical safety errors
++ scoring contract
+```
+
+Schema：[`medical/schemas/clinical-case.schema.json`](medical/schemas/clinical-case.schema.json)
+
+一个正确行为可以是：
+
+- 给出结论；
+- 排序 differential；
+- 指出证据不足；
+- 请求一个高信息量澄清项；
+- 检索指南/说明书；
+- 升级 / escalation；
+
+而不强迫所有题都存在唯一疾病字符串答案。
+
+---
+
+# 3. Model / RAG Harness
+
+新增：[`scripts/model_harness.py`](scripts/model_harness.py)
+
+记录：
+
+```text
+model_id
+provider
+model_version
+prompt_version
+RAG on/off
+retriever_version
+top_k
+tools
+temperature
+snapshot_id
+response
+latency
+usage
+run_id
+```
+
+当前首版支持：
+
+- `fixture`：本地 pipeline / CI dry-run；
+- `openai_compatible`：接 OpenAI-compatible `/chat/completions` endpoint；
+- closed-book；
+- frozen evidence injection / RAG-style context；
+- 多模型 config matrix。
+
+示例配置：[`medical/configs/model-matrix.example.json`](medical/configs/model-matrix.example.json)
+
+```bash
+python3 scripts/model_harness.py \
+  --cases medical/examples \
+  --config medical/configs/model-matrix.example.json \
+  --evidence medical/examples/evidence.jsonl \
+  --out runs/medical-v0.1.jsonl
+```
+
+> 当前 v0.1 尚未实现完整 production retriever / reranker / Agent tool executor；这些会在 harness adapter 上继续扩展。
+
+---
+
+# 4. Evaluation → Failure Diagnosis
+
+已有 benchmark 已从单纯分数扩展到 Model Diagnosis：
+
+```text
+Evidence Graph
+→ Model Query
+→ Model Response
+→ Rubric Eval
+→ Failure Type
+→ Optimization Candidate
+→ Regression
+```
+
+现有 failure taxonomy 包括：
+
+```text
+STALE_KNOWLEDGE
+SOURCE_HIERARCHY
+OVERCLAIM
+RELATION_SHORTCUT
+METRIC_SALIENCE_BIAS
+PRIORITIZATION_FAILURE
+PASSIVE_ABSTENTION
+EXPRESSION_HIERARCHY
+AUDIENCE_MISMATCH
+FORECAST_OVERCONFIDENCE
+```
+
+关键原则：
+
+> **Observed Failure ≠ Capability Gap ≠ Proven Fix**
+
+一次 bad case 只能先形成诊断假设，必须通过跨 case + held-out regression 才能证明 intervention 有效。
+
+现有诊断：[`benchmark/diagnostics/failure-taxonomy.md`](benchmark/diagnostics/failure-taxonomy.md)
+
+---
+
+# 5. Intervention Router
+
+新增：[`scripts/intervention_router.py`](scripts/intervention_router.py)
+
+核心映射：
+
+```text
+stale knowledge      → retrieval / temporal truth
+knowledge missing    → retrieval first; systematic gap → data / MidTrain
+retrieval miss       → index / query / reranker
+source hierarchy     → source-aware retrieval / hard negatives / SFT
+overclaim            → preference pairs / uncertainty policy
+reasoning failure    → reasoning SFT / task decomposition
+unsafe medication    → safety gate + expert review + safety data
+bad tool call        → Agent trajectory / tool schema / policy
+passive abstention   → uncertain-but-actionable preference data
+judge inconsistency  → judge calibration / human adjudication
+```
+
+规则配置：[`medical/configs/intervention-rules.json`](medical/configs/intervention-rules.json)
+
+Router 输出的是 `intervention_hypothesis`，不是“已证明的修复方案”。
+
+---
+
+# 6. Training Data Export
+
+新增：[`scripts/export_training_data.py`](scripts/export_training_data.py)
+
+只有显式人工/专家审核为：
+
+```json
+{"training_candidate": {"review_status": "approved"}}
+```
+
+的 eval failure 才能进入 post-training export。
+
+### SFT
+
+```json
+{
+  "instruction": "...",
+  "context": {"patient_context": {}, "evidence_snapshot": {}},
+  "ideal_response": "...",
+  "failure_type": "REASONING_FAILURE",
+  "source_case_id": "..."
+}
+```
+
+### Preference
+
+```json
+{
+  "prompt": "...",
+  "context": {},
+  "chosen": "calibrated evidence-grounded response",
+  "rejected": "overclaimed response",
+  "failure_type": "OVERCLAIM",
+  "source_case_id": "..."
+}
+```
+
+**Eval failure 不自动等于训练数据。** 这是为了避免把错误的 gold / judge bias / 数据泄漏重新训练进模型。
+
+---
+
+# 7. Regression Gate
+
+新增：[`scripts/regression_gate.py`](scripts/regression_gate.py)
+
+每个 candidate model/system version 与 frozen baseline 比较：
+
+```text
+factuality
+medical evidence sufficiency
+temporal validity
+useful abstention
+target capability
+critical clinical / medication safety errors
+```
+
+示例 policy：[`medical/configs/regression-policy.example.json`](medical/configs/regression-policy.example.json)
+
+硬原则：
+
+> **平均能力提升不能覆盖新增 Critical Medical Safety Error。**
+
+```bash
+python3 scripts/regression_gate.py \
+  --baseline eval/baseline.jsonl \
+  --candidate eval/candidate.jsonl \
+  --policy medical/configs/regression-policy.example.json \
+  --out eval/regression-report.json
+```
+
+失败时脚本以非零 exit code 退出，可以直接接 CI。
+
+---
+
+# Existing Decision Intelligence Benchmark
+
+`benchmark/` 仍然保留，作为 Pharma / medical-evidence reasoning 的成熟测试床。
+
+当前包含：
+
+- controlled cases；
+- frozen evidence snapshots；
+- pre-registered gold / critical errors / anchors；
+- blind scoring protocol；
+- user-utility rubric；
+- model diagnosis rubric；
+- failure taxonomy；
+- optimization cards；
+- regression case 思路。
+
+详情：[`benchmark/README.md`](benchmark/README.md)
+
+---
+
+# Repository
+
+```text
+pharma/                         # existing real-world pharma evidence track
+benchmark/                      # decision intelligence + model diagnosis benchmark
+medical/
+  README.md
+  clinical-track/               # clinical task families and case design
+  truth-layer/                  # paragraph-level medical truth
+  schemas/                      # case/evidence/run schemas
+  configs/                      # harness/router/regression configs
+  examples/                     # vertical-slice fixtures
+scripts/
+  model_harness.py              # multi-model runner
+  intervention_router.py        # failure → intervention hypotheses
+  export_training_data.py       # approved SFT / preference export
+  regression_gate.py            # baseline vs candidate release gate
+  ...                           # existing pharma intelligence scripts
+docs/
+  11-clinical-safety-boundaries.md
+  12-medical-model-development-architecture.md
+  13-medical-model-development-roadmap.md
+```
+
+---
+
+# Current Status — 2026-09-05
+
+## Already demonstrated
+
+- real-world pharma evidence graph and temporal events;
+- Claim / Evidence / Event representation;
+- claim provenance audit;
+- dynamic medical-state bad case (`STALE_KNOWLEDGE`); 
+- controlled benchmark cases and pre-registered scoring;
+- model failure taxonomy;
+- clinical safety boundaries.
+
+## Newly implemented in Medical Development v0.1
+
+- development-loop architecture;
+- Clinical Track task specification;
+- paragraph-level evidence schema;
+- clinical case schema;
+- reproducible model-run schema;
+- multi-model harness v0.1;
+- deterministic Intervention Router v0.1;
+- reviewed SFT / preference exporter v0.1;
+- CI-style Regression Gate v0.1.
+
+## Not yet proven / next validation
+
+- production-scale guideline / drug-label ingestion;
+- high-quality real clinical-case set;
+- expert-reviewed medication-safety gold;
+- full retriever / reranker evaluation;
+- Agent tool execution and trajectory evaluation;
+- multimodal image evaluation;
+- calibrated LLM-as-Judge vs clinician agreement;
+- actual SFT / preference intervention followed by held-out regression;
+- sustained improvement on a medical model checkpoint.
+
+The next milestone is deliberately small: **one fully traceable end-to-end clinical vertical slice**, then scale only after the loop works.
 
 ---
 
 ## Design Principle
 
-> 只保存会改变我们对药物、公司、靶点、管线或事件判断的信息，并让每个判断可以被验证、比较和更新。
-
 ```text
-Search finds information.
-A database stores information.
-Intelligence connects information, tracks how it changes,
-tests whether it is reliable, and determines why the change matters.
+Evaluation is not the end of model development.
+Evaluation should identify the failure,
+locate the evidence boundary,
+route the intervention,
+and prove the fix with regression.
 ```
-
----
-
-## Status
-
-**Current stage: sellable / testable intelligence MVP, not yet a validated commercial intelligence platform.**
-
-已证明：structured intelligence can be built / evidence provenance can be preserved（0 UNKNOWN）/ cross-entity relationships can be discovered / events can be represented and surfaced / system quality can be evaluated
-
-尚待证明：high recall / low detection latency / low false-alert rate / impact propagation quality / repeated real-user usage / willingness to pay
