@@ -1,0 +1,67 @@
+{
+  "benchmark_id": "S3b-scope-semantics-dev-v0.1",
+  "split": "development",
+  "purpose": "Development-only cases for explicit condition_semantics. Not a held-out generalization claim.",
+  "items": [
+    {
+      "item_id":"S3BS-001",
+      "evidence_propositions":[{"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":30}],"condition_semantics":"EXACT_DOMAIN","population":null}],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":29}],"population":null}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":true,"tags":["exact_domain","inside"]
+    },
+    {
+      "item_id":"S3BS-002",
+      "evidence_propositions":[{"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":30}],"condition_semantics":"EXACT_DOMAIN","population":null}],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":30}],"population":null}],
+      "gold_relation":"CONTRADICTS","high_risk":true,"tags":["exact_domain","boundary"]
+    },
+    {
+      "item_id":"S3BS-003",
+      "evidence_propositions":[{"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":45}],"condition_semantics":"SUFFICIENT_ONLY","population":"existing_user"}],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":45}],"population":"existing_user"}],
+      "gold_relation":"DOES_NOT_SUPPORT","high_risk":true,"tags":["sufficient_only","boundary"]
+    },
+    {
+      "item_id":"S3BS-004",
+      "evidence_propositions":[{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":30}],"condition_semantics":"EXACT_DOMAIN","population":"existing_user"}],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"NEGATIVE","conditions":[{"variable":"egfr","operator":"EQ","value":40}],"population":"existing_user"}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":true,"tags":["exact_domain","negative_complement"]
+    },
+    {
+      "item_id":"S3BS-005",
+      "evidence_propositions":[{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":30}],"condition_semantics":"SUFFICIENT_ONLY","population":"existing_user"}],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"NEGATIVE","conditions":[{"variable":"egfr","operator":"EQ","value":40}],"population":"existing_user"}],
+      "gold_relation":"DOES_NOT_SUPPORT","high_risk":true,"tags":["sufficient_only","negative_complement"]
+    },
+    {
+      "item_id":"S3BS-006",
+      "evidence_propositions":[{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":30}],"condition_semantics":"EXACT_DOMAIN","population":"existing_user"}],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":20}],"population":"existing_user"}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":true,"tags":["subset","exact_domain"]
+    },
+    {
+      "item_id":"S3BS-007",
+      "evidence_propositions":[{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":30}],"condition_semantics":"EXACT_DOMAIN","population":"existing_user"}],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":40}],"population":"existing_user"}],
+      "gold_relation":"CONTRADICTS","high_risk":true,"tags":["broader_rule","exact_domain"]
+    },
+    {
+      "item_id":"S3BS-008",
+      "evidence_propositions":[{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":30}],"condition_semantics":"SUFFICIENT_ONLY","population":"existing_user"}],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":40}],"population":"existing_user"}],
+      "gold_relation":"DOES_NOT_SUPPORT","high_risk":true,"tags":["broader_rule","sufficient_only"]
+    },
+    {
+      "item_id":"S3BS-009",
+      "evidence_propositions":[{"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LTE","value":45}],"condition_semantics":"EXACT_DOMAIN","population":"existing_user"}],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":45}],"population":"existing_user"}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":false,"tags":["lte","boundary"]
+    },
+    {
+      "item_id":"S3BS-010",
+      "evidence_propositions":[{"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"GT","value":20}],"condition_semantics":"SUFFICIENT_ONLY","population":"existing_user"}],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":21}],"population":"existing_user"}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":false,"tags":["gt","operator_coverage"]
+    }
+  ]
+}
