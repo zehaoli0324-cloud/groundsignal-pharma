@@ -1,0 +1,33 @@
+{
+  "graph_id": "GRAPH-REPORT-004",
+  "version": "v1",
+  "as_of_date": "2026-09-05",
+  "nodes": [
+    {"node_id": "finding:liver_lesion", "node_type": "IMAGING_FINDING", "label": "liver lesion", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-IND-001"]},
+    {"node_id": "qualifier:indeterminate", "node_type": "REPORT_QUALIFIER", "label": "indeterminate", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-IND-001"]},
+    {"node_id": "qualifier:simple_cyst", "node_type": "REPORT_QUALIFIER", "label": "simple cyst", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-BENIGN-002"]},
+    {"node_id": "qualifier:stable", "node_type": "REPORT_QUALIFIER", "label": "unchanged compared with prior", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-STABLE-003"]},
+    {"node_id": "qualifier:cannot_exclude", "node_type": "REPORT_QUALIFIER", "label": "cannot exclude", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-CANNOT-EXCLUDE-004"]},
+    {"node_id": "action:MRI_characterization", "node_type": "REPORT_RECOMMENDATION", "label": "MRI for further characterization", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-IND-001"]},
+    {"node_id": "action:no_followup", "node_type": "REPORT_RECOMMENDATION", "label": "no further imaging recommended for this finding", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-BENIGN-002"]},
+    {"node_id": "action:followup_CT", "node_type": "REPORT_RECOMMENDATION", "label": "follow-up CT recommended", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-CANNOT-EXCLUDE-004"]}
+  ],
+  "edges": [
+    {"edge_id": "EDGE-LESION-QUAL-IND", "subject_id": "finding:liver_lesion", "predicate": "QUALIFIED_AS", "object_id": "qualifier:indeterminate", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-IND-001"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-IND-RECOMMENDS-MRI", "subject_id": "qualifier:indeterminate", "predicate": "REPORT_RECOMMENDS", "object_id": "action:MRI_characterization", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-IND-001"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-LESION-QUAL-CYST", "subject_id": "finding:liver_lesion", "predicate": "QUALIFIED_AS", "object_id": "qualifier:simple_cyst", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-BENIGN-002"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-CYST-NO-FOLLOWUP", "subject_id": "qualifier:simple_cyst", "predicate": "REPORT_RECOMMENDS", "object_id": "action:no_followup", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-BENIGN-002"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-LESION-STABLE", "subject_id": "finding:liver_lesion", "predicate": "QUALIFIED_AS", "object_id": "qualifier:stable", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-STABLE-003"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-CANNOTEXCLUDE-FOLLOWUP", "subject_id": "qualifier:cannot_exclude", "predicate": "REPORT_RECOMMENDS", "object_id": "action:followup_CT", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-RAD-CANNOT-EXCLUDE-004"], "review_status": "source_verified"}
+  ],
+  "evaluation_contract": {
+    "required_nodes": ["finding:liver_lesion"],
+    "required_edges": [],
+    "forbidden_edges": [
+      {"subject": "qualifier:indeterminate", "predicate": "CONFIRMS", "object": "condition:cancer"},
+      {"subject": "qualifier:cannot_exclude", "predicate": "CONFIRMS", "object": "condition:cancer"},
+      {"subject": "qualifier:stable", "predicate": "CONFIRMS", "object": "condition:benign"}
+    ],
+    "acceptable_paths": [["extract report finding", "preserve qualifier", "preserve explicit recommendation", "do not upgrade certainty"]]
+  }
+}
