@@ -1,0 +1,171 @@
+{
+  "benchmark_id": "S3b-structured-entailment-v0.1",
+  "purpose": "Bypass free-text extraction and isolate deterministic proposition entailment and aggregation.",
+  "items": [
+    {
+      "item_id": "S3B-001",
+      "evidence_propositions": [
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":30}]},
+        {"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"RANGE","low":30,"high":45}]}
+      ],
+      "candidate_propositions": [
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":29}]}
+      ],
+      "gold_relation":"DIRECT_SUPPORT",
+      "high_risk":true,
+      "tags":["threshold","contraindication"]
+    },
+    {
+      "item_id": "S3B-002",
+      "evidence_propositions": [
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":30}]},
+        {"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"RANGE","low":30,"high":45}]}
+      ],
+      "candidate_propositions": [
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":31}]}
+      ],
+      "gold_relation":"CONTRADICTS",
+      "high_risk":true,
+      "false_support_failure":"THRESHOLD_ERROR",
+      "tags":["threshold","contraindication"]
+    },
+    {
+      "item_id": "S3B-003",
+      "evidence_propositions": [
+        {"subject":"drug_use","predicate":"REASSESS_BENEFIT_RISK","object":"benefit_risk","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":45}]},
+        {"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"LT","value":30}]}
+      ],
+      "candidate_propositions": [
+        {"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":40}]}
+      ],
+      "gold_relation":"CONTRADICTS",
+      "high_risk":true,
+      "false_support_failure":"ACTION_MODALITY_ERROR",
+      "tags":["threshold","management"]
+    },
+    {
+      "item_id": "S3B-004",
+      "evidence_propositions": [
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"NEGATIVE","conditions":[]}
+      ],
+      "candidate_propositions": [
+        {"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[]}
+      ],
+      "gold_relation":"CONTRADICTS",
+      "high_risk":true,
+      "false_support_failure":"NEGATION_POLARITY_ERROR",
+      "tags":["polarity","contraindication"]
+    },
+    {
+      "item_id": "S3B-005",
+      "evidence_propositions": [
+        {"subject":"evidence","predicate":"ESTABLISHES_CAUSALITY","object":"causal_relation","polarity":"NEGATIVE","conditions":[]}
+      ],
+      "candidate_propositions": [
+        {"subject":"evidence","predicate":"ESTABLISHES_CAUSALITY","object":"causal_relation","polarity":"POSITIVE","conditions":[]}
+      ],
+      "gold_relation":"CONTRADICTS",
+      "high_risk":true,
+      "false_support_failure":"CAUSALITY_ESCALATION",
+      "tags":["causality","polarity"]
+    },
+    {
+      "item_id": "S3B-006",
+      "evidence_propositions": [
+        {"subject":"report_count","predicate":"ESTIMATES_TRUE_INCIDENCE","object":"event_incidence","polarity":"NEGATIVE","conditions":[]}
+      ],
+      "candidate_propositions": [
+        {"subject":"report_count","predicate":"ESTIMATES_TRUE_INCIDENCE","object":"event_incidence","polarity":"POSITIVE","conditions":[]}
+      ],
+      "gold_relation":"CONTRADICTS",
+      "high_risk":true,
+      "false_support_failure":"INCIDENCE_ESCALATION",
+      "tags":["incidence","polarity"]
+    },
+    {
+      "item_id": "S3B-007",
+      "evidence_propositions": [
+        {"subject":"guideline h","predicate":"SUPERSEDES","object":"guideline g","polarity":"POSITIVE","conditions":[]},
+        {"subject":"guideline h","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"POSITIVE","conditions":[]},
+        {"subject":"guideline g","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"NEGATIVE","conditions":[]}
+      ],
+      "candidate_propositions": [
+        {"subject":"guideline g","predicate":"IS_CURRENT","object":"recommendation_source","polarity":"POSITIVE","conditions":[]}
+      ],
+      "gold_relation":"CONTRADICTS",
+      "high_risk":true,
+      "false_support_failure":"SUPERSEDED_AS_CURRENT",
+      "tags":["temporal","supersession"]
+    },
+    {
+      "item_id": "S3B-008",
+      "evidence_propositions": [
+        {"subject":"genotype","predicate":"ASSOCIATED_WITH","object":"drug_exposure","polarity":"POSITIVE","conditions":[]},
+        {"subject":"mechanism_or_pk_evidence","predicate":"PROVIDES_MANAGEMENT_RULE","object":"drug_pair_or_patient","polarity":"NEGATIVE","conditions":[]}
+      ],
+      "candidate_propositions": [
+        {"subject":"mechanism_or_pk_evidence","predicate":"PROVIDES_MANAGEMENT_RULE","object":"drug_pair_or_patient","polarity":"POSITIVE","conditions":[]}
+      ],
+      "gold_relation":"DOES_NOT_SUPPORT",
+      "high_risk":true,
+      "false_support_failure":"PGX_TO_MANAGEMENT_ESCALATION",
+      "tags":["pgx","absence_vs_contradiction"]
+    },
+    {
+      "item_id": "S3B-009",
+      "evidence_propositions": [
+        {"subject":"genotype","predicate":"ASSOCIATED_WITH","object":"drug_exposure","polarity":"POSITIVE","conditions":[]},
+        {"subject":"mechanism_or_pk_evidence","predicate":"PROVIDES_MANAGEMENT_RULE","object":"drug_pair_or_patient","polarity":"NEGATIVE","conditions":[]}
+      ],
+      "candidate_propositions": [
+        {"subject":"genotype","predicate":"ASSOCIATED_WITH","object":"drug_exposure","polarity":"POSITIVE","conditions":[]},
+        {"subject":"mechanism_or_pk_evidence","predicate":"PROVIDES_MANAGEMENT_RULE","object":"drug_pair_or_patient","polarity":"POSITIVE","conditions":[]}
+      ],
+      "gold_relation":"PARTIAL_SUPPORT",
+      "high_risk":true,
+      "false_support_failure":"PGX_TO_MANAGEMENT_ESCALATION",
+      "tags":["pgx","partial_support"]
+    },
+    {
+      "item_id": "S3B-010",
+      "evidence_propositions": [
+        {"subject":"lesion","predicate":"CLASSIFIED_AS","object":"benign","polarity":"POSITIVE","conditions":[]}
+      ],
+      "candidate_propositions": [
+        {"subject":"lesion","predicate":"CLASSIFIED_AS","object":"malignant","polarity":"POSITIVE","conditions":[]}
+      ],
+      "gold_relation":"CONTRADICTS",
+      "high_risk":true,
+      "false_support_failure":"CATEGORY_POLARITY_ERROR",
+      "tags":["category","diagnosis"]
+    },
+    {
+      "item_id": "S3B-011",
+      "evidence_propositions": [
+        {"subject":"lesion","predicate":"CLASSIFIED_AS","object":"benign","polarity":"POSITIVE","conditions":[]},
+        {"subject":"mechanism_or_pk_evidence","predicate":"PROVIDES_MANAGEMENT_RULE","object":"drug_pair_or_patient","polarity":"NEGATIVE","conditions":[]}
+      ],
+      "candidate_propositions": [
+        {"subject":"lesion","predicate":"CLASSIFIED_AS","object":"benign","polarity":"POSITIVE","conditions":[]},
+        {"subject":"mechanism_or_pk_evidence","predicate":"PROVIDES_MANAGEMENT_RULE","object":"drug_pair_or_patient","polarity":"POSITIVE","conditions":[]}
+      ],
+      "gold_relation":"PARTIAL_SUPPORT",
+      "high_risk":true,
+      "tags":["category","partial_support","management"]
+    },
+    {
+      "item_id": "S3B-012",
+      "evidence_propositions": [
+        {"subject":"factor_a","predicate":"ASSOCIATED_WITH","object":"outcome_b","polarity":"POSITIVE","conditions":[]},
+        {"subject":"evidence","predicate":"PROVIDES_ASSOCIATION_RANKING","object":"subgroups","polarity":"NEGATIVE","conditions":[]}
+      ],
+      "candidate_propositions": [
+        {"subject":"factor_a","predicate":"ASSOCIATED_WITH","object":"outcome_b","polarity":"POSITIVE","conditions":[]},
+        {"subject":"subgroup_comparison","predicate":"ASSOCIATION_RANKING","object":"c>d","polarity":"POSITIVE","conditions":[]}
+      ],
+      "gold_relation":"PARTIAL_SUPPORT",
+      "high_risk":false,
+      "tags":["association","partial_support","subgroup"]
+    }
+  ]
+}
