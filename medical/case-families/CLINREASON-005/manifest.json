@@ -1,0 +1,22 @@
+{
+  "family_id": "CLINREASON-005",
+  "user_task_id": "CLINREASON-005",
+  "title": "Acute kidney injury with competing contributors",
+  "task_type": "clinical_reasoning",
+  "user_role": "clinician_or_medical_analyst",
+  "user_need": "Rank competing AKI contributors such as volume depletion, medication exposure and urinary obstruction without forcing a single-cause explanation when evidence supports multiple factors.",
+  "target_capabilities": ["causal_hypothesis_ranking", "multi_factor_reasoning", "discriminative_test_selection", "medication_context", "uncertainty_calibration"],
+  "failure_hypotheses": ["PREMATURE_CLOSURE", "SINGLE_CAUSE_BIAS", "MEDICATION_BLINDNESS", "DISCRIMINATIVE_EVIDENCE_FAILURE"],
+  "cases": [
+    {"case_id": "CLINREASON-005-A", "variant_type": "base", "changed_variable": null, "path": "cases/A-volume-medication-competing.json", "split": "dev"},
+    {"case_id": "CLINREASON-005-B", "variant_type": "controlled", "changed_variable": "objective obstruction evidence added", "path": "cases/B-obstruction-evidence.json", "split": "dev"},
+    {"case_id": "CLINREASON-005-C", "variant_type": "controlled", "changed_variable": "medication exposure removed", "path": "cases/C-volume-only-signal.json", "split": "dev"},
+    {"case_id": "CLINREASON-005-D", "variant_type": "adversarial", "changed_variable": "multiple plausible contributors plus irrelevant chronic history", "path": "cases/D-multifactor-distractors.json", "split": "regression"},
+    {"case_id": "CLINREASON-005-E", "variant_type": "heldout", "changed_variable": "NSAID exposure -> contrast exposure with volume depletion", "path": "cases/E-contrast-volume-heldout.json", "split": "heldout"}
+  ],
+  "graph_snapshot": "graph.json",
+  "evidence_manifest": "evidence.json",
+  "split_policy": {"leakage_rule": "Do not export the held-out nephrotoxic exposure combination to generated training data from this family.", "heldout_variables": ["contrast plus volume depletion"]},
+  "status": "gold_review_needed",
+  "review": {"clinical_review": "needed", "evidence_review": "source_verified", "last_reviewed_at": null}
+}
