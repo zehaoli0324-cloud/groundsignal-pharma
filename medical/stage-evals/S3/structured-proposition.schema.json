@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "structured-proposition.schema.json",
+  "title": "S3b Canonical Structured Proposition",
+  "type": "object",
+  "required": ["subject", "predicate", "object", "polarity", "conditions"],
+  "properties": {
+    "subject": {"type": "string", "minLength": 1},
+    "predicate": {"type": "string", "minLength": 1},
+    "object": {"type": ["string", "number", "null"]},
+    "polarity": {"enum": ["POSITIVE", "NEGATIVE"]},
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["variable", "operator"],
+        "properties": {
+          "variable": {"type": "string", "minLength": 1},
+          "operator": {"enum": ["EQ", "LT", "LTE", "GT", "GTE", "RANGE"]},
+          "value": {"type": ["number", "null"]},
+          "low": {"type": ["number", "null"]},
+          "high": {"type": ["number", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "condition_semantics": {
+      "enum": ["EXACT_DOMAIN", "SUFFICIENT_ONLY"],
+      "default": "SUFFICIENT_ONLY",
+      "description": "EXACT_DOMAIN means the stated condition exhaustively defines the proposition's applicability for this rule dimension; outside the domain the same proposition is false. SUFFICIENT_ONLY means the condition supports the proposition inside the domain but makes no claim outside it."
+    },
+    "population": {"type": ["string", "null"]},
+    "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "source_ids": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  },
+  "additionalProperties": true
+}
