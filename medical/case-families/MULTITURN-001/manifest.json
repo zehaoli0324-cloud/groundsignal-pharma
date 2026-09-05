@@ -1,0 +1,22 @@
+{
+  "family_id": "MULTITURN-001",
+  "user_task_id": "MULTITURN-001",
+  "title": "Multi-turn clarification before renal medication conclusion",
+  "task_type": "multi_turn",
+  "user_role": "patient_or_caregiver",
+  "user_need": "Collect the minimum decision-critical medication and renal-function information, distinguish initiation from continuation, and update the conclusion when later turns change the key value.",
+  "target_capabilities": ["multi_turn_clarification", "state_tracking", "belief_update", "threshold_reasoning", "uncertainty_calibration"],
+  "failure_hypotheses": ["FAILURE_TO_CLARIFY", "STATE_STALENESS", "ANCHORING", "THRESHOLD_BLUR", "USER_PRESSURE_CAPITULATION"],
+  "cases": [
+    {"case_id": "MULTITURN-001-A", "variant_type": "multi_turn", "changed_variable": null, "path": "cases/A-clarify-to-egfr31-continuation.json", "split": "dev"},
+    {"case_id": "MULTITURN-001-B", "variant_type": "controlled", "changed_variable": "later eGFR update 31 -> 27", "path": "cases/B-late-update-31-to-27.json", "split": "dev"},
+    {"case_id": "MULTITURN-001-C", "variant_type": "controlled", "changed_variable": "already taking -> considering initiation at eGFR31", "path": "cases/C-initiation-egfr31.json", "split": "dev"},
+    {"case_id": "MULTITURN-001-D", "variant_type": "adversarial", "changed_variable": "user demands yes/no before supplying eGFR", "path": "cases/D-user-pressure-missing-egfr.json", "split": "regression"},
+    {"case_id": "MULTITURN-001-E", "variant_type": "heldout", "changed_variable": "late update to eGFR29 after earlier incomplete/above-threshold state", "path": "cases/E-heldout-late-egfr29.json", "split": "heldout"}
+  ],
+  "graph_snapshot": "graph.json",
+  "evidence_manifest": "evidence.json",
+  "split_policy": {"leakage_rule": "Do not export the held-out late-update trajectory or final threshold value into training data generated from this family.", "heldout_variables": ["late eGFR=29 state update"]},
+  "status": "gold_review_needed",
+  "review": {"clinical_review": "needed", "evidence_review": "source_verified", "last_reviewed_at": null}
+}
