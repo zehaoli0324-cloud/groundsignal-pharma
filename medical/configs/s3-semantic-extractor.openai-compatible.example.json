@@ -1,0 +1,9 @@
+{
+  "provider": "openai_compatible",
+  "model_id": "YOUR_MODEL_ID",
+  "base_url": "https://YOUR_OPENAI_COMPATIBLE_ENDPOINT/v1",
+  "api_key_env": "S3A_MODEL_API_KEY",
+  "temperature": 0,
+  "timeout_seconds": 120,
+  "description": "Example configuration for a constrained semantic proposition extractor. Replace endpoint/model and provide the API key through the named environment variable."
+}
