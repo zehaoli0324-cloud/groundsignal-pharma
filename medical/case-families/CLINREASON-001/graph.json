@@ -1,6 +1,6 @@
 {
   "graph_id": "GRAPH-CLINREASON-001",
-  "version": "v1",
+  "version": "v1.1",
   "as_of_date": "2026-09-05",
   "nodes": [
     {"node_id": "condition:iron_deficiency_anemia", "node_type": "CONDITION", "label": "iron deficiency anemia", "value": null, "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IDA-PATTERN-001"]},
@@ -19,7 +19,7 @@
     {"edge_id": "EDGE-LOW-TSAT-SUPPORTS-IDA", "subject_id": "finding:low_tsat", "predicate": "SUPPORTS", "object_id": "condition:iron_deficiency_anemia", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IDA-PATTERN-001"], "review_status": "source_verified"},
     {"edge_id": "EDGE-LOW-IRON-NONSPECIFIC", "subject_id": "finding:low_serum_iron", "predicate": "CAN_OCCUR_IN", "object_id": "condition:iron_deficiency_anemia", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IRON-LOW-NONSPECIFIC-002"], "review_status": "source_verified"},
     {"edge_id": "EDGE-LOW-IRON-ALSO-ACD", "subject_id": "finding:low_serum_iron", "predicate": "CAN_OCCUR_IN", "object_id": "condition:anemia_of_inflammation", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-IRON-LOW-NONSPECIFIC-002"], "review_status": "source_verified"},
-    {"edge_id": "EDGE-INFLAMMATION-CONFOUNDS-FERRITIN", "subject_id": "context:inflammation", "predicate": "CAN_CONF0UND", "object_id": "concept:ferritin_acute_phase", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-FERRITIN-INFLAMMATION-003"], "review_status": "source_verified"},
+    {"edge_id": "EDGE-INFLAMMATION-CONFOUNDS-FERRITIN", "subject_id": "context:inflammation", "predicate": "CAN_CONFOUND", "object_id": "concept:ferritin_acute_phase", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-FERRITIN-INFLAMMATION-003"], "review_status": "source_verified"},
     {"edge_id": "EDGE-INFLAMMATION-SUPPORTS-ACD", "subject_id": "context:inflammation", "predicate": "SUPPORTS_CONTEXT_FOR", "object_id": "condition:anemia_of_inflammation", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-ACD-PATTERN-004"], "review_status": "source_verified"},
     {"edge_id": "EDGE-MIXED-POSSIBLE", "subject_id": "context:inflammation", "predicate": "DOES_NOT_EXCLUDE", "object_id": "concept:mixed_ida_inflammation", "status": "OBSERVED", "source_passage_ids": ["PASSAGE-ACD-IDA-OVERLAP-005"], "review_status": "source_verified"}
   ],
