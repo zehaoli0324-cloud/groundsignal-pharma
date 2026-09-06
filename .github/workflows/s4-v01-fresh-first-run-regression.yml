@@ -1,0 +1,45 @@
+name: S4 v0.1 Fresh First-Run Preservation Regression
+
+on:
+  push:
+    paths:
+      - 'scripts/s4_truth_ledger_v01.py'
+      - 'scripts/eval_s4_truth_ledger_v01.py'
+      - 'scripts/eval_s4_truth_ledger_v01_fresh.py'
+      - 'medical/stage-evals/S4/**'
+      - '.github/workflows/s4-v01-fresh-first-run-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preserve-s4-v01-first-fresh-result:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify frozen implementation blob
+        run: |
+          test "$(git hash-object scripts/s4_truth_ledger_v01.py)" = "860e8b38131e74d9dc06160bd95ade8bd04e77df"
+      - name: Re-run exposed development regression
+        run: |
+          python scripts/eval_s4_truth_ledger_v01.py \
+            --suite medical/stage-evals/S4/s4-truth-ledger-dev-v0.1.json \
+            --out-dir /tmp/s4-v01-dev
+          diff -u medical/stage-evals/S4/runs/s4-v01-dev/metrics.json /tmp/s4-v01-dev/metrics.json
+          diff -u medical/stage-evals/S4/runs/s4-v01-dev/failures.json /tmp/s4-v01-dev/failures.json
+      - name: Reproduce immutable fresh FAIL
+        run: |
+          set +e
+          python scripts/eval_s4_truth_ledger_v01_fresh.py \
+            --suite medical/stage-evals/S4/s4-truth-ledger-fresh-heldout-v0.1.json \
+            --out-dir /tmp/s4-v01-fresh
+          rc=$?
+          set -e
+          test "$rc" -eq 2
+          diff -u medical/stage-evals/S4/runs/s4-v01-fresh-first-run/metrics.json /tmp/s4-v01-fresh/metrics.json
+          diff -u medical/stage-evals/S4/runs/s4-v01-fresh-first-run/case-results.json /tmp/s4-v01-fresh/case-results.json
+          diff -u medical/stage-evals/S4/runs/s4-v01-fresh-first-run/failures.json /tmp/s4-v01-fresh/failures.json

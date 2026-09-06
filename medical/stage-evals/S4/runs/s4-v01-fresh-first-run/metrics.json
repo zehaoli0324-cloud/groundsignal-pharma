@@ -1,0 +1,42 @@
+{
+  "integrity": {
+    "fresh_flag": true,
+    "created_after_freeze": true,
+    "implementation_commit_matches": true,
+    "implementation_blob_matches": true
+  },
+  "metrics": {
+    "benchmark_id": "S4-truth-ledger-fresh-heldout-v0.1",
+    "split": "fresh_heldout",
+    "fresh_heldout": true,
+    "implementation_version": "S4-truth-ledger-v0.1",
+    "implementation_freeze_commit": "36b9bcb63a690efe33d80c50e65dfe73bd105418",
+    "implementation_blob_sha": "860e8b38131e74d9dc06160bd95ade8bd04e77df",
+    "n_cases": 20,
+    "passed_cases": 18,
+    "failed_cases": 2,
+    "case_accuracy": 0.9,
+    "tag_accuracy": {
+      "contradiction": 0.6,
+      "partition": 1.0,
+      "provenance": 1.0,
+      "rollback": 1.0,
+      "safety": 1.0,
+      "safety-positive": 1.0,
+      "scope": 1.0,
+      "temporal": 0.8571428571428571
+    },
+    "must_reject_cases": 7,
+    "high_risk_false_accept_count": 0,
+    "stale_active_edge_count": 1
+  },
+  "gate_checks": {
+    "fresh_integrity": true,
+    "case_accuracy": false,
+    "required_tag_coverage": true,
+    "required_tag_accuracy": false,
+    "high_risk_false_accept_count": true,
+    "stale_active_edge_count": false
+  },
+  "release_gate": "FAIL"
+}

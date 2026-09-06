@@ -1,0 +1,130 @@
+[
+  {
+    "case_id": "S4F-004",
+    "name": "older arrival cannot become active behind newer unresolved contradiction",
+    "tags": [
+      "temporal",
+      "contradiction"
+    ],
+    "must_reject": false,
+    "passed": false,
+    "observed": {
+      "edge_count": 3,
+      "active_count": 1,
+      "contested_count": 2,
+      "superseded_count": 0,
+      "stale_active": 1,
+      "unresolved_contradiction_slots": 1,
+      "active_objects": [
+        "rule:old"
+      ],
+      "max_provenance_on_any_edge": 1,
+      "actions": [
+        "INSERTED_ACTIVE",
+        "CONTRADICTION_RECORDED",
+        "SUPERSEDED_PRIOR"
+      ],
+      "rejections": 0,
+      "rejection_reasons": [],
+      "rollback_exact": null
+    },
+    "failures": [
+      {
+        "field": "actions",
+        "expected": [
+          "INSERTED_ACTIVE",
+          "CONTRADICTION_RECORDED",
+          "INSERTED_HISTORICAL"
+        ],
+        "got": [
+          "INSERTED_ACTIVE",
+          "CONTRADICTION_RECORDED",
+          "SUPERSEDED_PRIOR"
+        ]
+      },
+      {
+        "field": "active_count",
+        "expected": 0,
+        "got": 1
+      },
+      {
+        "field": "superseded_count",
+        "expected": 1,
+        "got": 0
+      },
+      {
+        "field": "stale_active",
+        "expected": 0,
+        "got": 1
+      },
+      {
+        "field": "active_objects",
+        "expected": [],
+        "got": [
+          "rule:old"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "S4F-005",
+    "name": "third same-date conflicting claim joins contested set",
+    "tags": [
+      "contradiction"
+    ],
+    "must_reject": false,
+    "passed": false,
+    "observed": {
+      "edge_count": 3,
+      "active_count": 1,
+      "contested_count": 2,
+      "superseded_count": 0,
+      "stale_active": 0,
+      "unresolved_contradiction_slots": 1,
+      "active_objects": [
+        "rule:c"
+      ],
+      "max_provenance_on_any_edge": 1,
+      "actions": [
+        "INSERTED_ACTIVE",
+        "CONTRADICTION_RECORDED",
+        "SUPERSEDED_PRIOR"
+      ],
+      "rejections": 0,
+      "rejection_reasons": [],
+      "rollback_exact": null
+    },
+    "failures": [
+      {
+        "field": "actions",
+        "expected": [
+          "INSERTED_ACTIVE",
+          "CONTRADICTION_RECORDED",
+          "CONTRADICTION_RECORDED"
+        ],
+        "got": [
+          "INSERTED_ACTIVE",
+          "CONTRADICTION_RECORDED",
+          "SUPERSEDED_PRIOR"
+        ]
+      },
+      {
+        "field": "active_count",
+        "expected": 0,
+        "got": 1
+      },
+      {
+        "field": "contested_count",
+        "expected": 3,
+        "got": 2
+      },
+      {
+        "field": "active_objects",
+        "expected": [],
+        "got": [
+          "rule:c"
+        ]
+      }
+    ]
+  }
+]

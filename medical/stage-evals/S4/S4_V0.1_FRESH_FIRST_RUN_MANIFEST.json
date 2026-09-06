@@ -1,0 +1,17 @@
+{
+  "stage": "S4",
+  "version": "S4-truth-ledger-v0.1",
+  "evaluation": "independent_fresh_heldout_first_run",
+  "implementation_freeze_commit": "36b9bcb63a690efe33d80c50e65dfe73bd105418",
+  "implementation_blob_sha": "860e8b38131e74d9dc06160bd95ade8bd04e77df",
+  "base_main_before_result_commit": "678739f571a8fdf9838ca016106297f1512c45c5",
+  "fresh_suite_blob_sha": "ad509a1e7c9e92c2311d45ea9e724ab71879595a",
+  "fresh_evaluator_blob_sha": "595889132d424921b9583c360768716447ca0914",
+  "fresh_first_result": "FAIL",
+  "n_cases": 20,
+  "passed_cases": 18,
+  "failed_cases": 2,
+  "failed_case_ids": ["S4F-004", "S4F-005"],
+  "implementation_repaired_after_first_run": false,
+  "future_use_of_this_suite": "exposed_regression_only"
+}

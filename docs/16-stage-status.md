@@ -10,7 +10,7 @@ The system has **10 lifecycle stages**. Architecture completeness must not be co
 | S1 | User Need / Workflow Discovery | Partial | 48 seed tasks, high-risk matrix, user-research plan | real interview/log validation and frequency weighting |
 | S2 | Knowledge Search & Source Routing | **CONDITIONAL PASS / v0.4 development FAIL** | v0.3 fresh routing 91.7%; joint v0.1 intent/source 94.44%; v0.4 legacy smoke 12/12; live DailyMed 3/3 | clause-level negation/exclusion scope, role-separated feature polarity, broader live passage/source diversity, terminology normalization |
 | S3 | Evidence Verification & Temporal Truth | **CONDITIONAL PASS / controlled end-to-end vertical slice** | S3a v0.5.6.1 independent fresh PASS; S3b v0.3 fresh 40/40 / HFSR 0; S2→S3 joint v0.1 17/18 end-to-end / high-risk false support 0 | larger real-source/noisy-passage end-to-end held-out; long-document and multi-entity semantics |
-| S4 | Medical KG Construction / Update | Working prototype / auto-ingestion blocked | case graphs + two reusable backbones + canonical builder | terminology normalization, persistent graph/index, update-impact engine, dedicated S4 eval; unrestricted automatic S3 truth ingestion remains blocked |
+| S4 | Medical KG Construction / Update | **FRESH FAIL / development gate PASS / auto-ingestion blocked** | canonical builder; truth-ledger dev 12/12; first independent fresh 18/20; safety must-reject 7/7 | unified ACTIVE+CONTESTED temporal frontier, contested-set closure, new independent fresh after repair, persistent graph semantics |
 | S5 | Controlled Case / Benchmark Factory | P0 complete | 12 families / 60 controlled cases / held-out design | clinical expert gold review + broader validated user-task coverage + dedicated stage eval |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | live multi-provider runs, production retriever/reranker, Agent executor, dedicated stage eval |
 | S7 | Evaluation & Safety Gate | Protocol complete | v0.2 rubric, graph/RAG/Agent layers, regression safety gate | human/Judge calibration and full real model scoring |
@@ -324,30 +324,59 @@ S4 automatic KG truth ingestion     = BLOCKED
 
 ---
 
+## S4 — Medical KG Construction / Update
+
+S4 now has a stage-specific truth-ledger implementation and two distinct evidence layers:
+
+```text
+v0.1 development suite              12/12   PASS  (exposed; not fresh)
+v0.1 independent fresh first run    18/20   FAIL
+must-reject safety cases              7/7   PASS
+high-risk false accepts                 0   PASS
+stale active edges                      1   FAIL
+```
+
+Fresh integrity is preserved: the S4 implementation was frozen at commit `36b9bcb63a690efe33d80c50e65dfe73bd105418`, blob `860e8b38131e74d9dc06160bd95ade8bd04e77df`; the new suite and fresh evaluator were frozen as Git blobs before their first execution.
+
+Frozen fresh failure families:
+
+```text
+S4-F1  unresolved CONTESTED frontier ignored by late historical insertion
+       an older fact can become ACTIVE behind a newer unresolved contradiction
+
+S4-F2  existing CONTESTED set not closed under an additional same-date conflict
+       a third conflicting claim can become ACTIVE instead of joining the contested set
+```
+
+Both point to one structural defect: unresolved `CONTESTED` edges are not modeled together with `ACTIVE` edges as the current per-slot temporal frontier.
+
+Detailed report: `medical/stage-evals/S4/S4_V0.1_FRESH_FAIL_REPORT.md`  
+Raw outputs: `medical/stage-evals/S4/runs/s4-v01-fresh-first-run/`
+
+Current S4 status:
+
+> **FRESH FAIL — NOT RELEASED.** The v0.1 development gate remains valid as exposed regression evidence, but unrestricted automatic `S3 → S4` clinical truth ingestion remains blocked.
+
+---
+
 ## Immediate order
 
 ```text
-1. S2 v0.4.1 clause-scope negation + role-separated features
-   - coordinated-list and noun-phrase exclusion spans
-   - positive jurisdiction/entity context must survive an excluded task mention
-   - rerun exposed v0.4 development suite and prior S2 regression
+1. S4 v0.1.1 unified temporal frontier + contested-set closure
+   - treat ACTIVE and unresolved CONTESTED as one current-slot frontier
+   - older arrivals behind that frontier must remain historical
+   - same-date new conflicts must join the existing contested set
 
-2. after development PASS, freeze a brand-new S2 v0.4.1 fresh held-out
+2. rerun S4 exposed regression before any new fresh test
+   - 12-case original development suite
+   - 20-case v0.1 failed fresh suite, now exposed regression only
+   - preserve rollback/provenance/scope/safety behavior
 
-3. larger real-source S2→S3 passage-level held-out
-   - expand beyond DailyMed to trial registry, literature and safety sources
-   - preserve current-version/source provenance
-   - stress noisy/longer passages and distractors
+3. after S4 v0.1.1 development/regression PASS, freeze a brand-new independent S4 fresh held-out
 
-4. terminology normalization and entity resolution
-   - especially drugs, observations, biomarkers and study identifiers
+4. return to S2 v0.4.1 clause-scope negation + role-separated features as the next evidence backfill
 
-5. only after broader real-source S2→S3 proof begin S4 dedicated evaluation
-   - graph insertion correctness
-   - update/temporal replacement
-   - contradiction handling
-   - provenance preservation
-   - rollback/update-impact behavior
+5. after S4 conditional release, proceed to S5 dedicated stage evaluation rather than extending S4 without a new blocker
 ```
 
-Unrestricted automatic free text → truth → Knowledge Graph insertion remains prohibited until the S4-specific gate is built and passes.
+Unrestricted automatic free text → truth → Knowledge Graph insertion remains prohibited because the S4 independent fresh safety/release gate has not passed.
