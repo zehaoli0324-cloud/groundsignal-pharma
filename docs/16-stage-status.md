@@ -3,14 +3,14 @@
 > Date: 2026-09-06  
 > Lifecycle definition: `docs/15-system-stages.md`
 
-The system has **10 lifecycle stages**. Architecture completeness must not be confused with empirical validation completeness.
+The system has **10 lifecycle stages**. Architecture completeness must not be confused with empirical validation completeness. A `PASS` below always refers to the explicitly tested slice, not unrestricted clinical deployment.
 
 | Stage | Name | Current maturity | What is already real | Main missing proof |
 |---|---|---|---|---|
 | S1 | User Need / Workflow Discovery | Partial | 48 seed tasks, high-risk matrix, user-research plan | real interview/log validation and frequency weighting |
-| S2 | Knowledge Search & Source Routing | **Conditional pass / evaluated prototype** | v0.3 fresh routing 91.7%; live official retrieval slice; DailyMed current-version + passage slice | broader passage-source diversity and terminology normalization |
-| S3 | Evidence Verification & Temporal Truth | **HARD FAIL end-to-end / S3b conditional pass / S3a v0.5.5 development FAIL** | immutable S3a fresh history through v0.5.4; S3b fresh v0.3 40/40 / HFSR 0; v0.5.5 improves exposed scope/abstention but fails proposition+safety gates | typed reference compatibility + endpoint discourse state; new fresh only after all development gates pass |
-| S4 | Medical KG Construction / Update | Working prototype | case graphs + two reusable backbones + canonical builder | terminology normalization, persistent graph/index, update-impact engine, dedicated stage eval; automatic S3 truth ingestion blocked |
+| S2 | Knowledge Search & Source Routing | **CONDITIONAL PASS / evaluated prototype** | v0.3 fresh routing 91.7%; joint v0.1 intent/source 94.44%; live DailyMed current-version + passage retrieval 3/3 | negation-aware intent features, broader live passage/source diversity, terminology normalization |
+| S3 | Evidence Verification & Temporal Truth | **CONDITIONAL PASS / controlled end-to-end vertical slice** | S3a v0.5.6.1 independent fresh PASS; S3b v0.3 fresh 40/40 / HFSR 0; S2→S3 joint v0.1 17/18 end-to-end / high-risk false support 0 | larger real-source/noisy-passage end-to-end held-out; long-document and multi-entity semantics |
+| S4 | Medical KG Construction / Update | Working prototype / auto-ingestion blocked | case graphs + two reusable backbones + canonical builder | terminology normalization, persistent graph/index, update-impact engine, dedicated S4 eval; unrestricted automatic S3 truth ingestion remains blocked |
 | S5 | Controlled Case / Benchmark Factory | P0 complete | 12 families / 60 controlled cases / held-out design | clinical expert gold review + broader validated user-task coverage + dedicated stage eval |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | live multi-provider runs, production retriever/reranker, Agent executor, dedicated stage eval |
 | S7 | Evaluation & Safety Gate | Protocol complete | v0.2 rubric, graph/RAG/Agent layers, regression safety gate | human/Judge calibration and full real model scoring |
@@ -20,21 +20,51 @@ The system has **10 lifecycle stages**. Architecture completeness must not be co
 
 ---
 
-## S2 checkpoint
+## S2 — Knowledge Search & Source Routing
 
 **S2 = Knowledge Search & Source Routing（知识搜索与来源路由）** remains a conditional pass.
 
+Independent evidence already preserved:
+
 ```text
-v0.2b untouched shadow routing       Primary@1 73.3%  FAIL
-v0.3 fresh routing                   Primary@1 91.7%  PASS
-live official-record retrieval       10/10             PASS
-DailyMed current-version slice       100%              PASS
-critical-passage Recall@1 slice      100%              PASS
+v0.2b untouched shadow routing       Primary@1 73.3%   FAIL
+v0.3 fresh routing                   Primary@1 91.7%   PASS
+live official-record retrieval       10/10              PASS
+DailyMed current-version slice       100%               PASS
+critical-passage Recall@1 slice      100%               PASS
 ```
+
+The new S2→S3 joint held-out adds a second independent routing observation:
+
+```text
+items                                18
+Intent Accuracy                    94.44%   PASS
+Primary Source Accuracy            94.44%   PASS
+Source Handoff Accuracy           100.00%   PASS*
+```
+
+`*` Source Handoff means the expected source remained reachable in the ranked source list and controlled document bank. Top-1 source quality is separately measured by Primary Source Accuracy.
+
+### Current S2 failure
+
+The only joint first-run routing failure was `S2S3-013`.
+
+The query explicitly excluded regulatory/product-label/trial-registry evidence, but the keyword-based router still treated the negated phrase `试验注册` as positive evidence and predicted `TRIAL_REGISTRY_STATUS`.
+
+Frozen failure family:
+
+```text
+S2-F1  negated intent/source feature treated as positive evidence
+       e.g. "不涉及试验注册" still activates trial_registry
+```
+
+The next S2 version should resolve local feature polarity/exclusion scope before intent scoring rather than patch individual phrases.
+
+Detailed S2 report: `medical/stage-evals/S2/V0.3_REPORT.md`
 
 ---
 
-## S3 split architecture
+## S3 architecture
 
 ```text
 S3a — Semantic Proposition Extraction
@@ -44,12 +74,98 @@ free text
 S3b — Structured Proposition Entailment
 canonical evidence/candidate propositions
 → proposition verdicts
-→ DIRECT / PARTIAL / CONTRADICTS / DOES_NOT_SUPPORT
+→ DIRECT_SUPPORT / PARTIAL_SUPPORT / CONTRADICTS / DOES_NOT_SUPPORT
 ```
 
-### S3b — conditional pass
+---
 
-Fresh S3b v0.3, first-run workflow `33976929442`:
+## S3a — independent fresh PASS at v0.5.6.1
+
+### Immutable fresh history
+
+```text
+v0.2 fresh      F1 62.50%   Critical Recall 52.17%   FAIL
+v0.3 fresh      F1 30.77%   Critical Recall 17.86%   HARD FAIL
+v0.4 fresh      F1 40.00%   Critical Recall 25.58%   FAIL
+v0.5.1 fresh    F1 80.33%   Critical Recall 68.75%   FAIL
+v0.5.2 fresh    F1 78.20%   Critical Recall 67.27%   FAIL
+v0.5.4 fresh    F1 93.44%   Critical Recall 91.30%   FAIL
+v0.5.6.1 fresh  F1 98.90%   Critical Recall 100.00%  PASS
+```
+
+All historical first observations remain immutable. Once observed, each fresh suite becomes exposed regression data.
+
+### Development sequence after v0.5.4
+
+```text
+v0.5.5 development   FAIL
+  typed scope linker improved v0.5.4 exposed performance
+  but old v0.5.2 condition-link regressions + endpoint discourse gap remained
+
+v0.5.6 development   FAIL
+  all proposition suites PASS
+  but semantic safety gate caught one conditional-rule broadening
+
+v0.5.6.1 development PASS
+  frame/event registry reconciliation
+  all exposed proposition + abstention + semantic-safety + trace gates PASS
+```
+
+### v0.5.6.1 independent fresh first run
+
+Frozen parser:
+
+```text
+commit  4b7aaabe490e3e477d1d1441b55c5ee656675e1f
+blob    dc05a6eaccf02592652d0a48b9a712186e5b6507
+```
+
+Fresh suite:
+
+```text
+freeze commit  2147ee2d519305ba2bb2be0576a2e316e405b71f
+blob           d24ddd0d1de4e5574024bd44f7f1764f1d9382c5
+workflow       34004097408
+raw commit     53f3fde6e8f2ef47975956b5e33c14e047a21a22
+```
+
+First-run metrics:
+
+```text
+items                                      34
+known / representable cases                28
+mandatory abstention cases                  6
+gold propositions                          45
+predicted propositions                     46
+true positives                             45
+Precision                                97.83%   PASS
+Recall                                  100.00%
+F1                                       98.90%   PASS
+Critical Proposition Recall             100.00%   PASS
+Polarity Accuracy                       100.00%   PASS
+Population Accuracy                     100.00%   PASS
+Condition Binding Accuracy              100.00%   PASS
+Required-abstention accuracy            100.00%   PASS
+Known-case abstention rate                0.00%   PASS
+High-risk semantic false positives           0   PASS
+Trace contract                              PASS
+Combined fresh release                      PASS
+```
+
+There were no missing gold propositions. One conservative extra negative endpoint-evidence proposition was emitted for a record that listed an endpoint but posted no efficacy result; it did not create a positive success escalation and the semantic safety gate remained PASS.
+
+Detailed report: `medical/stage-evals/S3/S3A_V0.5.6.1_FRESH_REPORT.md`  
+Raw outputs: `medical/stage-evals/S3/runs/s3a-v0561-fresh-first-run/`
+
+S3a current status:
+
+> **CONDITIONAL PASS — independently fresh-validated controlled semantic extraction prototype.**
+
+---
+
+## S3b — independent conditional PASS
+
+Fresh S3b v0.3 first-run workflow `33976929442`:
 
 ```text
 items                              40
@@ -60,252 +176,137 @@ High-risk False-Support Rate         0.0%
 Release Gate                         PASS
 ```
 
-S3b may be used only on reviewed/gold canonical propositions. It does not validate free-text-to-truth automation.
+This proves the structured entailment layer on the current controlled proposition ontology when subject/predicate/object, polarity, population and numeric conditions are already normalized.
 
 Detailed report: `medical/stage-evals/S3/S3B_V0.3_REPORT.md`
 
----
+S3b current status:
 
-## S3a — active blocker
-
-### Immutable independent fresh history
-
-```text
-v0.2 fresh    F1 62.50%   Critical Recall 52.17%   FAIL
-v0.3 fresh    F1 30.77%   Critical Recall 17.86%   HARD FAIL
-v0.4 fresh    F1 40.00%   Critical Recall 25.58%   FAIL
-v0.5.1 fresh  F1 80.33%   Critical Recall 68.75%   FAIL
-v0.5.2 fresh  F1 78.20%   Critical Recall 67.27%   FAIL
-v0.5.4 fresh  F1 93.44%   Critical Recall 91.30%   FAIL
-```
-
-Historical first observations remain immutable. v0.5.4 is now exposed regression data and must never again be described as fresh evidence.
-
-Detailed reports:
-
-- `medical/stage-evals/S3/S3A_V0.2_REPORT.md`
-- `medical/stage-evals/S3/S3A_V0.3_REPORT.md`
-- `medical/stage-evals/S3/S3A_V0.4_FRESH_REPORT.md`
-- `medical/stage-evals/S3/S3A_V0.5.1_FRESH_REPORT.md`
-- `medical/stage-evals/S3/S3A_V0.5.2_FRESH_REPORT.md`
-- `medical/stage-evals/S3/S3A_V0.5.4_FRESH_REPORT.md`
-
-### Preserved development/fresh milestones
-
-```text
-v0.5.3 development   FAIL   semantic typing improved guard safety but regressed mature frame families
-v0.5.4 development   PASS   typed event graph + relation-family arbitration
-v0.5.4 fresh         FAIL   F1 93.44%, Critical Recall 91.30%, required abstention 83.33%
-v0.5.5 development   FAIL   proposition + semantic-safety gates fail; abstention + trace gates pass
-```
-
-Detailed development reports:
-
-- `medical/stage-evals/S3/S3A_V0.5.3_DEV_FAIL_REPORT.md`
-- `medical/stage-evals/S3/S3A_V0.5.4_DEV_PASS_REPORT.md`
-- `medical/stage-evals/S3/S3A_V0.5.5_DEV_FAIL_REPORT.md`
+> **CONDITIONAL PASS — independently fresh-validated structured truth engine.**
 
 ---
 
-## S3a v0.5.4 — last independent fresh observation
+## S2 → S3 joint vertical slice v0.1
 
-Frozen implementation commit:
-
-- `33dde2507afb8d34d47f3103ee0bfbfaf716ec5f`
-
-Fresh-suite freeze commit:
-
-- `87de9757f1defd480cdd2a13c0b6c452742a5196`
-
-First-run workflow:
-
-- `34002761349`
-
-Raw-result preservation commit:
-
-- `ed1d684a6bf46478b4092cb314f7d5844d8e98da`
-
-First-run metrics:
+The joint harness was committed before the held-out suite:
 
 ```text
-items                                      38
-known/representable cases                  32
-mandatory abstentions                       6
-gold propositions                          61
-critical propositions                      46
-Precision                                93.44%   PASS
-Recall                                   93.44%
-F1                                       93.44%   PASS
-Critical Proposition Recall              91.30%   FAIL
-Polarity Accuracy                       100.00%   PASS*  
-Population Accuracy                      98.28%   PASS
-Condition Binding Accuracy               98.28%   PASS
-Required-abstention accuracy             83.33%   FAIL
-Known-case abstention rate                3.125%  PASS
-Trace contract                              PASS
-Combined release                            FAIL
+harness commit  cca5a6bbf5bb56ca30c2a0dc06527d748d87e9a4
+harness blob    48cf7eeb500ed9ba837f11394991a2e070a61971
+suite freeze    65f6797c736792ea0da743c6f40303bf6f2825df
+workflow        34004328424
+raw commit      b31895c35a0875e7fd18c93ba1c97d5ff0a8f416
 ```
 
-`*` Historical metric blind spot preserved: predicate-family-changing endpoint inversions were excluded from the old structural-match polarity denominator.
-
-Frozen fresh failure taxonomy:
+The tested chain is:
 
 ```text
-F1 cross-sentence population carryover gap
-F2 shared preposed condition not inherited across contrastive event
-F3 endpoint-negation semantic inversion
-F4 unknown high-risk conjunction/action silently unresolved
+user query
+→ S2 intent/source routing
+→ source-scoped controlled passage selection
+→ S3a v0.5.6.1 free-text extraction
+→ canonical propositions
+→ S3b v0.2.2 entailment
+→ final relation
 ```
 
-The raw first-run data and report remain unchanged.
+No gold proposition is inserted between S3a and S3b.
 
----
-
-## S3a v0.5.5 — Typed Scope Linker + Safety Error Gate — development FAIL
-
-Implementation last-change commit:
-
-- `3caad022ab9b070a206a4d2307d74cc78093fcc9`
-
-New semantic safety evaluator commit:
-
-- `419bd6f0af79ba3b8665ff5dc09995c9f37d4e82`
-
-Development workflow source commit:
-
-- `7fd97d8f207ca699369cc342d6c6e58aaa375c33`
-
-Workflow:
-
-- `34003220909`
-
-Raw-result preservation commit:
-
-- `69429d721aed4c7233bccdcaac6ea15f2dcaf2a4`
-
-Artifact:
-
-- `s3a-v055-exposed-scope-safety-regression` / ID `9980111993`
-- SHA-256 `bfb075e60207792b647dbb0761686014ac2bf6e2c9f611615963dacb6b8719ce`
-
-v0.5.5 adds:
+First-run controlled metrics:
 
 ```text
-1. independent population-continuity and condition-continuity links
-2. explicit shared-preposed typed-condition edges
-3. typed endpoint declaration / achievement / evidence-for-achievement arbitration
-4. negation/evidence scope before endpoint success emission
-5. semantic high-risk gate for unsupported continue-only-if / otherwise-hold rules
-6. safety evaluator separating silent non-abstention, partial truth, and high-risk semantic false positives
+n items                              18
+S2 Intent Accuracy                94.44%   PASS
+S2 Primary Source Accuracy        94.44%   PASS
+Source Handoff Accuracy          100.00%   PASS
+S3a non-abstention               100.00%   PASS
+S3b Relation Accuracy            100.00%   PASS
+End-to-end Accuracy               94.44%   PASS
+High-risk False-Support Count          0   PASS
 ```
 
-No new fresh or shadow held-out was created. The v0.5.4 fresh set was used only after it became exposed regression data.
-
-### Exposed proposition regression
-
-| Suite | F1 | Critical Recall | Polarity | Population | Condition | Gate |
-|---|---:|---:|---:|---:|---:|---|
-| v0.1 | 100.00% | 100.00% | 100.00% | n/a | 100.00% | PASS |
-| v0.2 | 100.00% | 100.00% | 100.00% | 100.00% | 100.00% | PASS |
-| v0.3 | 100.00% | 100.00% | 100.00% | 100.00% | 100.00% | PASS |
-| v0.4 | 98.21% | 97.67% | 100.00% | 100.00% | 98.21% | PASS |
-| v0.5.1 | 100.00% | 100.00% | 100.00% | 100.00% | 100.00% | PASS |
-| v0.5.2 | 95.89% | **94.55%** | 100.00% | 100.00% | 95.89% | **FAIL** |
-| v0.5.4 fresh-now-exposed | 98.36% | 97.83% | 100.00% | 100.00% | 100.00% | PASS |
-
-The proposition development gate fails because v0.5.2 Critical Recall is below the fixed 95% threshold.
-
-### Abstention safety
+Failure attribution:
 
 ```text
-v0.5.1 mandatory abstentions       4/4
-v0.5.2 mandatory abstentions       6/6
-v0.5.4 exposed mandatory           6/6
-combined mandatory                16/16
-
-known representable cases           110
-known false abstentions                0
-Abstention gate                    PASS
+S2_INTENT             1
+S2_SOURCE             0
+S2_SOURCE_HANDOFF     0
+S3A                    0
+S3B                    0
 ```
 
-The old v0.5.4 `continue only if oxygen/BP criteria; otherwise hold` failure is now correctly blocked.
-
-### New semantic safety error gate
+The same workflow reran the existing real-network DailyMed passage test:
 
 ```text
-mandatory silent non-abstention        0
-mandatory partial truth emission       0
-high-risk semantic false positives     1
-Safety error gate                   FAIL
+n tests                                  3
+source availability                  100%
+current-version consistency           100%
+critical-passage Recall@1             100%
+critical-passage Recall@3             100%
+infrastructure failures                  0
+release gate                          PASS
 ```
 
-The remaining high-risk false positive is the exposed cross-sentence endpoint case in which sentence 1 declares a primary endpoint and sentence 2 states that nothing in the supplied results establishes that **the endpoint** was met. The endpoint entity is not carried into sentence 2 before scope arbitration, so positive `ACHIEVES_ENDPOINT` survives.
-
-### Trace contract
+Combined joint decision:
 
 ```text
-rows checked                           228
-trace failures                           0
-Trace gate                             PASS
+controlled S2→S3 handoff              PASS
+S2 live DailyMed sidecar              PASS
+S3a independent fresh precondition    PASS
+S3b independent fresh precondition    PASS
+combined release                      PASS
 ```
 
-### v0.5.5 frozen failure taxonomy
-
-```text
-F1 typed anaphoric condition cardinality over-propagation
-   (`same value` inherits a range-valued antecedent)
-
-F2 shared-preposed renal condition leaks into a local non-renal negative event
-
-F3 preserved historical ambiguity: `same eGFR` antecedent LT 42 vs frozen gold EQ 42
-
-F4 endpoint entity continuity remains sentence-local, allowing one
-   absence-of-evidence → positive endpoint-achievement escalation
-```
-
-Full analysis: `medical/stage-evals/S3/S3A_V0.5.5_DEV_FAIL_REPORT.md`  
-Raw outputs: `medical/stage-evals/S3/runs/s3a-v055-development/`
-
-Combined development decision:
-
-```text
-all exposed proposition suites       FAIL
-abstention safety                    PASS
-semantic safety error gate           FAIL
-trace contract                       PASS
-combined development release         FAIL
-fresh validation                  NOT RUN
-```
+Detailed report: `medical/stage-evals/S2S3/S2_S3_JOINT_V0.1_REPORT.md`  
+Raw outputs: `medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/`
 
 ---
 
 ## Current S3 release decision
 
-```text
-S3b structured truth engine             = CONDITIONAL PASS
-S3a v0.5.5 exposed proposition           = FAIL
-S3a v0.5.5 exposed abstention             = PASS
-S3a v0.5.5 semantic safety gate           = FAIL
-S3a v0.5.5 trace contract                 = PASS
-S3a v0.5.5 fresh validation               = NOT RUN
-S3a free-text release status              = HARD FAIL / BLOCKED
-End-to-end S3                             = HARD FAIL
-S4 automatic truth ingestion              = BLOCKED
-```
+The previous `HARD FAIL` is no longer accurate because:
 
-Therefore unrestricted automatic free text → S3 truth → Knowledge Graph insertion remains blocked. S4 must not automatically trust S3a-derived truth.
+1. S3a now has an independent fresh PASS;
+2. S3b already has an independent fresh/conditional PASS;
+3. a frozen S2→S3 free-text vertical slice passes without injecting gold propositions between S3a and S3b;
+4. the joint high-risk false-support count is zero.
 
-Immediate order:
+Current status:
 
 ```text
-v0.5.5 development FAIL is now immutable exposed development evidence
-→ do not create a new fresh held-out yet
-→ next implementation: S3a v0.5.6 Typed Reference Graph + Endpoint Discourse State
-→ add typed reference compatibility (scalar/range/threshold) instead of phrase patches
-→ add event-local variable-conflict veto for shared-condition edges
-→ link endpoint entities across discourse before evidence/achievement arbitration
-→ retain the v0.5.5 semantic safety evaluator unchanged as a gate
-→ only after all exposed proposition + abstention + safety + trace gates PASS freeze a new fresh held-out
-→ only after future fresh S3a PASS run a brand-new end-to-end S3 held-out
-→ only after end-to-end S3 PASS begin S4 dedicated eval
+S2                                  = CONDITIONAL PASS
+S3a                                 = CONDITIONAL PASS / independent fresh PASS
+S3b                                 = CONDITIONAL PASS / independent fresh PASS
+S2→S3 controlled vertical slice     = PASS
+S3 overall                          = CONDITIONAL PASS
+S4 automatic KG truth ingestion     = BLOCKED
 ```
+
+`CONDITIONAL PASS` is deliberately narrower than production readiness. The joint suite uses controlled source passages for most source families; only the DailyMed sidecar is a current real-network passage test. Long/noisy documents, broader terminology, multiple drugs/entities per passage, richer temporal composition and cross-document coreference remain under-tested.
+
+---
+
+## Immediate order
+
+```text
+1. S2 v0.4 negation-aware intent/source routing
+   - distinguish positive feature mentions from excluded/negated features
+   - test "not X / 不涉及 X / 不要 X" and mixed positive-negative source constraints
+
+2. larger real-source S2→S3 passage-level held-out
+   - expand beyond DailyMed to trial registry, literature and safety sources
+   - preserve current-version/source provenance
+   - stress noisy/longer passages and distractors
+
+3. terminology normalization and entity resolution
+   - especially drugs, observations, biomarkers and study identifiers
+
+4. only after broader real-source S2→S3 proof begin S4 dedicated evaluation
+   - graph insertion correctness
+   - update/temporal replacement
+   - contradiction handling
+   - provenance preservation
+   - rollback/update-impact behavior
+```
+
+Unrestricted automatic free text → truth → Knowledge Graph insertion remains prohibited until the S4-specific gate is built and passes.
