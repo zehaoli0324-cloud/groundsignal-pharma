@@ -1,0 +1,58 @@
+{
+  "stage": "S5",
+  "version": "v0.1",
+  "evidence_class": "development",
+  "snapshot_commit": "9e8aef6ee4e54dd6fe01eb6749368d2c15471762",
+  "release": "FAIL",
+  "failures": [
+    {
+      "failure_id": "S5-F1",
+      "taxonomy": "SPLIT_PROVENANCE_NOT_ENFORCED",
+      "severity": "critical",
+      "observed": true,
+      "evidence": [
+        "clinical-case.schema.json does not define or require family_id or split",
+        "export_training_data.py accepts case objects without resolving their family manifest",
+        "behavioral probe: an explicitly split=heldout synthetic case with an approved SFT candidate is exportable"
+      ],
+      "risk": "Held-out/regression contamination can occur at the interface boundary even when family manifests document a leakage rule.",
+      "next_version_direction": "Bind immutable family/suite/split provenance to materialized cases and make training export fail closed for heldout/regression partitions. Do not patch individual case IDs."
+    },
+    {
+      "failure_id": "S5-F2",
+      "taxonomy": "GOLD_READINESS_UNSATISFIED",
+      "severity": "high",
+      "observed": true,
+      "evidence": [
+        "0/12 family manifests are status=gold_approved",
+        "12/12 are explicitly status=gold_review_needed"
+      ],
+      "risk": "The current P0 families are useful development fixtures but cannot be represented as release-grade clinical gold or independently validated benchmark truth.",
+      "next_version_direction": "Add a machine-enforced release predicate. Keep unreviewed families development-only; do not fabricate or infer expert approval."
+    },
+    {
+      "failure_id": "S5-F3",
+      "taxonomy": "DECISION_CONTRACT_NOT_SCHEMA_ENFORCED",
+      "severity": "high",
+      "observed": true,
+      "evidence": [
+        "clinical-case.schema.json does not require graph_eval",
+        "graph_eval has no required list for required_node_ids, required_edge_ids, or expected_reasoning_path",
+        "schema-enforced decision-contract components: 0/3"
+      ],
+      "risk": "Future case materialization can silently lose diagnostic decision-node structure while remaining schema-valid, weakening causal diagnosis of model failures.",
+      "next_version_direction": "Strengthen the generic case contract so diagnostic decision nodes are mandatory where applicable, with an explicit typed exemption rather than per-case hardcoding."
+    }
+  ],
+  "non_failures": [
+    {
+      "check": "P0 materialization/referential integrity",
+      "result": "PASS"
+    },
+    {
+      "check": "model-facing prompt gold sentinel",
+      "result": "PASS",
+      "detail": "Gold-only sentinel did not enter the prompt rendered by model_harness.py."
+    }
+  ]
+}

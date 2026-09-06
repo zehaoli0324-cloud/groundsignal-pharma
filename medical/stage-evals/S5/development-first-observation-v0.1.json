@@ -1,0 +1,90 @@
+{
+  "stage": "S5",
+  "version": "v0.1",
+  "eval_name": "benchmark-factory-development-boundary-audit",
+  "evidence_class": "development",
+  "fresh_evidence": false,
+  "first_development_observation": true,
+  "snapshot_commit": "9e8aef6ee4e54dd6fe01eb6749368d2c15471762",
+  "family_count": 12,
+  "case_count": 60,
+  "split_counts": {
+    "dev": 36,
+    "heldout": 12,
+    "regression": 12
+  },
+  "family_structure": {
+    "passing": 12,
+    "total": 12,
+    "pass": true
+  },
+  "heldout_policy_metadata": {
+    "passing": 12,
+    "total": 12,
+    "pass": true
+  },
+  "difficulty_metadata": {
+    "passing": 12,
+    "total": 12,
+    "pass": true
+  },
+  "materialization_referential_integrity": {
+    "validator_exit_code": 0,
+    "pass": true
+  },
+  "gold_readiness": {
+    "gold_approved_families": 0,
+    "total": 12,
+    "pending": [
+      {"family_id": "AGENT-001", "status": "gold_review_needed"},
+      {"family_id": "CLINREASON-001", "status": "gold_review_needed"},
+      {"family_id": "CLINREASON-005", "status": "gold_review_needed"},
+      {"family_id": "EVIDENCE-002", "status": "gold_review_needed"},
+      {"family_id": "EVIDENCE-003", "status": "gold_review_needed"},
+      {"family_id": "MEDSAFE-001", "status": "gold_review_needed"},
+      {"family_id": "MEDSAFE-002", "status": "gold_review_needed"},
+      {"family_id": "MULTITURN-001", "status": "gold_review_needed"},
+      {"family_id": "REPORT-001", "status": "gold_review_needed"},
+      {"family_id": "REPORT-004", "status": "gold_review_needed"},
+      {"family_id": "TRIAGE-001", "status": "gold_review_needed"},
+      {"family_id": "TRIAGE-003", "status": "gold_review_needed"}
+    ],
+    "pass": false
+  },
+  "case_split_provenance_binding": {
+    "family_id_property": false,
+    "family_id_required": false,
+    "split_property": false,
+    "split_required": false,
+    "pass": false
+  },
+  "decision_node_contract_schema": {
+    "graph_eval_required": false,
+    "required_components": {
+      "required_node_ids": false,
+      "required_edge_ids": false,
+      "expected_reasoning_path": false
+    },
+    "schema_enforced_component_count": 0,
+    "schema_enforced_component_total": 3,
+    "pass": false
+  },
+  "model_prompt_gold_leakage_probe": {
+    "sentinel_leaked": false,
+    "pass": true
+  },
+  "training_export_heldout_guard_probe": {
+    "approved_heldout_case_exportable": true,
+    "pass": false
+  },
+  "hard_gate_failures": [
+    "S5-F1",
+    "S5-F2",
+    "S5-F3"
+  ],
+  "release": "FAIL",
+  "notes": [
+    "Existing P0 heldout-labelled cases are exposed repository assets and are not fresh evidence.",
+    "This audit does not assert clinical validity or completed expert review."
+  ]
+}

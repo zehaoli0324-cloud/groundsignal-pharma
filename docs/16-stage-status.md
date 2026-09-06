@@ -11,8 +11,8 @@ The system has **10 lifecycle stages**. `PASS` always refers to the explicitly t
 | S2 | Knowledge Search & Source Routing | **CONDITIONAL PASS / v0.4 development FAIL** | v0.3 fresh routing 91.7%; S2→S3 joint intent/source 94.44%; live DailyMed 3/3 | clause-level negation/exclusion + role-separated features; broader live sources |
 | S3 | Evidence Verification & Temporal Truth | **CONDITIONAL PASS** | S3a v0.5.6.1 fresh F1 98.90%, critical recall 100%; S3b 40/40; joint S2→S3 17/18, high-risk false support 0 | larger real-source/noisy-passage held-out |
 | S4 | Medical KG Construction / Update | **CONDITIONAL PASS / v0.1.1 independent fresh PASS** | new fresh 20/20; all required tags 100%; must-reject 7/7; stale ACTIVE 0; state-invariant violations 0 | persistent/real-source graph proof; unrestricted production auto-ingestion remains disabled |
-| S5 | Controlled Case / Benchmark Factory | **P0 complete / dedicated eval not yet run** | 12 families / 60 controlled cases / held-out design | stage-specific S5 eval: materialization correctness, leakage, difficulty composition, family held-out behavior |
-| S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | live multi-provider runs + dedicated S6 eval |
+| S5 | Controlled Case / Benchmark Factory | **DEVELOPMENT FAIL / v0.1 boundary audit** | P0 integrity 12/12 families, 60 cases; prompt gold-sentinel PASS | split provenance/export guard absent; 0/12 gold-approved; decision contract not schema-enforced; no fresh S5 release evidence yet |
+| S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | live multi-provider runs + dedicated S6 eval; must not auto-trust S5 release partitions |
 | S7 | Evaluation & Safety Gate | Protocol complete | v0.2 rubric, graph/RAG/Agent layers, regression safety gate | human/Judge calibration + real model scoring |
 | S8 | Failure Diagnosis | Framework ready | taxonomy, stale-knowledge bad case, intervention router | multi-model cross-case failure clusters |
 | S9 | Intervention / Post-training Data | Interface ready | SFT/preference/Agent/Judge schemas | actual intervention/training experiment |
@@ -98,6 +98,61 @@ Detailed report: `medical/stage-evals/S4/S4_V0.1.1_FRESH_PASS_REPORT.md`.
 
 ---
 
+## S5 checkpoint — v0.1 development first observation FAIL
+
+S5 v0.1 audits the already exposed P0 benchmark factory. It is **development evidence only**, not fresh held-out evidence. Existing P0 cases labelled `heldout` were already committed before this audit and can never be re-described as fresh.
+
+Snapshot under audit:
+
+```text
+P0 snapshot commit        9e8aef6ee4e54dd6fe01eb6749368d2c15471762
+families                  12
+cases                     60
+split counts              dev 36 / regression 12 / heldout 12
+family composition        12/12 PASS
+heldout-policy metadata   12/12 PASS
+difficulty metadata       12/12 PASS
+P0 referential integrity  PASS
+model prompt gold sentinel PASS
+```
+
+Hard-gate first observation:
+
+```text
+S5-F1 split provenance / training export guard     FAIL
+  case schema family_id property                   absent
+  case schema split property                       absent
+  approved synthetic heldout export probe          EXPORTABLE
+
+S5-F2 release-grade gold readiness                 FAIL
+  gold_approved families                           0/12
+  gold_review_needed families                     12/12
+
+S5-F3 decision-node contract schema enforcement    FAIL
+  graph_eval required                              no
+  required_node_ids schema-required                no
+  required_edge_ids schema-required                no
+  expected_reasoning_path schema-required          no
+  enforced decision components                     0/3
+
+S5 release                                        FAIL
+S5 release-grade heldout/regression trust          BLOCKED
+S6 automatic trust of S5 release partitions        BLOCKED
+```
+
+The most consequential defect is structural split contamination risk: family manifests document split and leakage rules, but the materialized case schema does not bind split/family provenance, and the current training exporter does not resolve a family manifest before export. A behavioral synthetic probe demonstrates that an explicitly held-out case can be exported when an evaluation candidate is approved. This is an interface-level failure, not a claim that real training contamination has occurred.
+
+All 12 family manifests remain explicitly `gold_review_needed`; no expert approval or clinical validation is inferred. The model-facing harness did **not** expose a gold sentinel in its prompt, so direct prompt leakage was not observed in this audit.
+
+Detailed artifacts:
+
+- `medical/stage-evals/S5/S5_V0.1_EVAL_SPEC.md`
+- `medical/stage-evals/S5/development-first-observation-v0.1.json`
+- `medical/stage-evals/S5/failures-v0.1.json`
+- `medical/stage-evals/S5/S5_V0.1_DEVELOPMENT_FAIL_REPORT.md`
+
+---
+
 ## S2 evidence backfill
 
 S2 still has an exposed v0.4 negation-development FAIL and remains a bounded conditional pass. It is not the current sequential blocker because S3 and S4 have independent bounded release evidence. Return to S2 when a downstream stage requires stronger source-routing evidence or after the S5–S10 sequence reaches an upstream dependency.
@@ -107,21 +162,24 @@ S2 still has an exposed v0.4 negation-development FAIL and remains a bounded con
 ## Immediate order
 
 ```text
-1. S5 v0.1 dedicated stage evaluation
-   - validate controlled-case materialization and family contracts
-   - test answer/gold leakage and information-disclosure shortcuts
-   - quantify difficulty composition and decision-node coverage
-   - check deterministic verifier alignment
-   - establish held-out family protocol before implementation tuning
+1. S5 v0.1.1 structural repair
+   - bind immutable family_id / suite_id / split provenance to materialized cases
+   - make training export fail closed for heldout/regression partitions
+   - schema-enforce diagnostic decision-node contracts with typed exemptions
+   - add a machine-enforced release predicate that keeps gold_review_needed development-only
 
-2. if S5 first observation FAILs:
-   - preserve raw failure result
-   - write failure taxonomy and stage status
-   - repair only in the next version
+2. rerun the S5 v0.1 audit only as exposed regression
+   - preserve this v0.1 first FAIL permanently
+   - do not call the old P0 heldout cases fresh
 
-3. only after S5 bounded release proceed to S6 dedicated harness evaluation
+3. after repaired S5 implementation is frozen
+   - create a genuinely new independent family/suite
+   - run first-use fresh held-out S5 evaluation
+   - include leakage/shortcut, materialization, decision-node and verifier-alignment gates
 
-4. continue S6 → S7 → S8 → S9 → S10
+4. only after S5 bounded release proceed to S6 dedicated harness evaluation
 
-5. backfill S1/S2 only when required by a downstream blocker or after the sequential stack is evaluated
+5. continue S6 → S7 → S8 → S9 → S10
+
+6. backfill S1/S2 only when required by a downstream blocker or after the sequential stack is evaluated
 ```

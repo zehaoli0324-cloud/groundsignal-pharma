@@ -1,0 +1,76 @@
+name: S5 v0.1 Benchmark Factory Development Audit
+
+on:
+  push:
+    paths:
+      - 'medical/stage-evals/S5/**'
+      - 'medical/case-families/**'
+      - 'medical/schemas/clinical-case.schema.json'
+      - 'scripts/eval_s5_benchmark_factory.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/model_harness.py'
+      - 'scripts/validate_medical_case_families.py'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v01-benchmark-factory-dev.yml'
+  pull_request:
+    paths:
+      - 'medical/stage-evals/S5/**'
+      - 'medical/case-families/**'
+      - 'medical/schemas/clinical-case.schema.json'
+      - 'scripts/eval_s5_benchmark_factory.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/model_harness.py'
+      - 'scripts/validate_medical_case_families.py'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v01-benchmark-factory-dev.yml'
+
+jobs:
+  preserve-development-first-observation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check S5 evaluator
+        run: python -m py_compile scripts/eval_s5_benchmark_factory.py
+
+      - name: Reuse P0 materialization regression
+        run: |
+          python scripts/validate_medical_case_families.py \
+            --expect-families 12 \
+            --expect-cases 60 \
+            --expect-cases-per-family 5 \
+            --rubric-version medical-clinical-v0.2
+
+      - name: Reproduce S5 v0.1 expected development FAIL
+        run: |
+          mkdir -p /tmp/groundsignal-s5
+          set +e
+          python scripts/eval_s5_benchmark_factory.py \
+            --snapshot-commit 9e8aef6ee4e54dd6fe01eb6749368d2c15471762 \
+            --out /tmp/groundsignal-s5/development-first-observation-v0.1.json
+          status=$?
+          set -e
+          cat /tmp/groundsignal-s5/development-first-observation-v0.1.json
+          if [ "$status" -ne 1 ]; then
+            echo "Expected S5 v0.1 stage result FAIL (exit 1), got exit $status"
+            exit 1
+          fi
+
+      - name: Preserve committed raw metrics exactly
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected = json.loads(Path('medical/stage-evals/S5/development-first-observation-v0.1.json').read_text(encoding='utf-8'))
+          observed = json.loads(Path('/tmp/groundsignal-s5/development-first-observation-v0.1.json').read_text(encoding='utf-8'))
+          if observed != expected:
+              print('Committed S5 first observation does not match evaluator output')
+              print('EXPECTED:', json.dumps(expected, ensure_ascii=False, indent=2))
+              print('OBSERVED:', json.dumps(observed, ensure_ascii=False, indent=2))
+              raise SystemExit(1)
+          print('S5 v0.1 first development observation preserved: release=FAIL')
+          PY
