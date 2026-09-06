@@ -1,0 +1,54 @@
+{
+  "stage": "S5",
+  "version": "v0.2",
+  "eval_name": "fresh-boundary-adversarial-first-observation",
+  "evidence_class": "independent_fresh_structural",
+  "target_implementation_freeze_commit": "37a89d14b37a1e2b3b823e933b4a7bfbd3038af8",
+  "first_observation": "FAIL",
+  "failures": [
+    {
+      "failure_id": "S5-F4",
+      "name": "PROVENANCE_AUTHORITY_NOT_VERIFIED",
+      "severity": "critical",
+      "gate": "provenance_tamper_resistance",
+      "observation": "A materialized heldout case became exportable after only changing benchmark_provenance.split to dev and training_eligible to true.",
+      "risk": "The export boundary trusts mutable case-local provenance instead of re-verifying partition authority against an immutable suite/manifest contract.",
+      "repair_direction": "Resolve partition authority from a trusted suite/manifest registry or signed/hashed provenance envelope at export time; reject local relabeling."
+    },
+    {
+      "failure_id": "S5-F5",
+      "name": "UNPROVENANCED_OR_UNKNOWN_SPLIT_NOT_FAIL_CLOSED",
+      "severity": "critical",
+      "gate": "unprovenanced_unknown_split_fail_closed",
+      "observation": "A heldout case became exportable after provenance was stripped and a top-level split=dev was supplied; an unknown provenance split=train with training_eligible=true was also exportable.",
+      "risk": "Missing or non-allowlisted partition metadata can silently become training eligible.",
+      "repair_direction": "For S5 benchmark-origin rows require materialized provenance and an explicit allowlisted split resolved from the suite; remove permissive top-level fallback."
+    },
+    {
+      "failure_id": "S5-F6",
+      "name": "MATERIALIZED_PAYLOAD_INTEGRITY_NOT_ENFORCED",
+      "severity": "high",
+      "gate": "source_content_integrity_enforcement",
+      "observation": "A dev materialized case remained exportable after its prompt was mutated while the recorded source-case hash remained unchanged.",
+      "risk": "Source hashes document lineage but do not authenticate the payload actually entering training export.",
+      "repair_direction": "Bind a canonical materialized-payload digest to provenance and verify it immediately before export; fail closed on any mismatch."
+    },
+    {
+      "failure_id": "S5-F7",
+      "name": "DECISION_EXEMPTION_SCHEMA_MATERIALIZER_DIVERGENCE",
+      "severity": "high",
+      "gate": "decision_contract_exemption_alignment",
+      "observation": "The materializer accepts a typed decision_contract_exemption without graph_eval, while the JSON schema still requires graph_eval at the root.",
+      "risk": "Different S5 interfaces disagree about what constitutes a valid case, making validation dependent on which code path is used.",
+      "repair_direction": "Encode one authoritative contract, e.g. JSON Schema oneOf graph_eval or typed exemption, and make materializer/validator consume the same rule."
+    }
+  ],
+  "non_failures": [
+    "Fresh family referential integrity passed.",
+    "Baseline heldout and regression export guards passed before adversarial mutation.",
+    "Gold sentinel was not exposed in the model prompt.",
+    "Gold release gate correctly remained BLOCKED_GOLD_REVIEW."
+  ],
+  "stage_disposition": "RELEASE_BLOCKED_DO_NOT_PROCEED_TO_S6",
+  "repair_policy": "Do not modify the first-observation metrics. Repair generically in a later version; reuse this v0.2 suite only as exposed regression thereafter."
+}

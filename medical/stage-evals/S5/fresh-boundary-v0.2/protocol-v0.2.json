@@ -1,0 +1,36 @@
+{
+  "stage": "S5",
+  "version": "v0.2",
+  "eval_name": "fresh-boundary-adversarial-first-observation",
+  "protocol_version": "s5-fresh-boundary-protocol-v0.2",
+  "target_implementation_freeze_commit": "37a89d14b37a1e2b3b823e933b4a7bfbd3038af8",
+  "target_blob_contract": {
+    "scripts/materialize_s5_cases.py": "2b9f20e4f06bf20b360e1420dad47e65ecfce442",
+    "scripts/export_training_data.py": "1726007515c3af601792e82c3f6f225c3b73261b",
+    "scripts/model_harness.py": "e6c90ab88c476c38b765d61ae8c9e2b471c8e2a2",
+    "scripts/s5_release_gate.py": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+    "medical/schemas/clinical-case.schema.json": "31a5123d2ac07aac5e20d47dcbdba36e67d49cc3"
+  },
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "predeclared_gates": [
+    "frozen_target_identity",
+    "fresh_family_integrity",
+    "fresh_materialization",
+    "baseline_partition_export_guard",
+    "provenance_tamper_resistance",
+    "source_content_integrity_enforcement",
+    "decision_contract_exemption_alignment",
+    "model_prompt_gold_leakage",
+    "gold_release_containment"
+  ],
+  "hard_fail_conditions": [
+    "any heldout/regression or forged equivalent becomes exportable",
+    "unknown/unprovenanced benchmark split is treated as training eligible",
+    "materialized content can change without integrity detection before export",
+    "schema and materializer disagree on decision-contract exemptions",
+    "gold-only sentinel enters model prompt",
+    "release gate infers approval"
+  ],
+  "note": "Protocol defined against frozen S5 v0.1.1 target; fresh fixtures are new and were not present at the freeze commit."
+}

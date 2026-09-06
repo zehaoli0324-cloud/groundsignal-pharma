@@ -1,0 +1,150 @@
+{
+  "stage": "S5",
+  "version": "v0.2",
+  "eval_name": "fresh-boundary-adversarial-first-observation",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "first_observation": true,
+  "target_implementation_freeze_commit": "37a89d14b37a1e2b3b823e933b4a7bfbd3038af8",
+  "suite_id": "S5-FRESH-BOUNDARY-v0.2",
+  "frozen_target_identity": {
+    "freeze_commit": "37a89d14b37a1e2b3b823e933b4a7bfbd3038af8",
+    "suite_declares_same_freeze": true,
+    "target_blobs": {
+      "scripts/materialize_s5_cases.py": {
+        "expected_blob": "2b9f20e4f06bf20b360e1420dad47e65ecfce442",
+        "observed_blob": "2b9f20e4f06bf20b360e1420dad47e65ecfce442",
+        "match": true
+      },
+      "scripts/export_training_data.py": {
+        "expected_blob": "1726007515c3af601792e82c3f6f225c3b73261b",
+        "observed_blob": "1726007515c3af601792e82c3f6f225c3b73261b",
+        "match": true
+      },
+      "scripts/model_harness.py": {
+        "expected_blob": "e6c90ab88c476c38b765d61ae8c9e2b471c8e2a2",
+        "observed_blob": "e6c90ab88c476c38b765d61ae8c9e2b471c8e2a2",
+        "match": true
+      },
+      "scripts/s5_release_gate.py": {
+        "expected_blob": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+        "observed_blob": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+        "match": true
+      },
+      "medical/schemas/clinical-case.schema.json": {
+        "expected_blob": "31a5123d2ac07aac5e20d47dcbdba36e67d49cc3",
+        "observed_blob": "31a5123d2ac07aac5e20d47dcbdba36e67d49cc3",
+        "match": true
+      }
+    },
+    "pass": true
+  },
+  "fresh_family_integrity": {
+    "validator_exit_code": 0,
+    "family_count_expected": 1,
+    "case_count_expected": 5,
+    "pass": true
+  },
+  "fresh_materialization": {
+    "family_count": 1,
+    "case_count": 5,
+    "split_counts": {
+      "dev": 3,
+      "heldout": 1,
+      "regression": 1
+    },
+    "training_eligible_count": 3,
+    "training_blocked_count": 2,
+    "decision_contract_cases": 5,
+    "provenance_complete_cases": 5,
+    "pass": true
+  },
+  "baseline_partition_export_guard": {
+    "dev": {
+      "blocked": false,
+      "exported": true,
+      "error_type": null
+    },
+    "regression": {
+      "blocked": true,
+      "exported": false,
+      "error_type": "PermissionError"
+    },
+    "heldout": {
+      "blocked": true,
+      "exported": false,
+      "error_type": "PermissionError"
+    },
+    "pass": true
+  },
+  "provenance_authority_tamper_resistance": {
+    "probe": "heldout provenance relabeled to dev + training_eligible=true",
+    "blocked": false,
+    "exported": true,
+    "bypass_observed": true,
+    "pass": false
+  },
+  "unprovenanced_unknown_split_fail_closed": {
+    "stripped_provenance_top_level_dev": {
+      "blocked": false,
+      "exported": true,
+      "bypass_observed": true
+    },
+    "unknown_provenance_split_train": {
+      "blocked": false,
+      "exported": true,
+      "bypass_observed": true
+    },
+    "heldout_with_eligible_true_control": {
+      "blocked": true,
+      "exported": false
+    },
+    "dev_with_eligible_false_control": {
+      "blocked": true,
+      "exported": false
+    },
+    "pass": false
+  },
+  "materialized_payload_integrity_enforcement": {
+    "recorded_source_case_sha256_present": true,
+    "materialized_payload_mutated_after_hash_binding": true,
+    "tampered_payload_blocked": false,
+    "tampered_payload_exported": true,
+    "integrity_enforced_before_export": false,
+    "pass": false
+  },
+  "decision_contract_exemption_alignment": {
+    "materializer_accepts_exemption_without_graph_eval": true,
+    "schema_defines_typed_exemption": true,
+    "schema_requires_graph_eval": true,
+    "schema_allows_exemption_without_graph_eval": false,
+    "pass": false
+  },
+  "model_prompt_gold_leakage": {
+    "sentinel_leaked": false,
+    "pass": true
+  },
+  "gold_release_containment": {
+    "gold_approved_count": 0,
+    "pending_gold_count": 1,
+    "release_ready": false,
+    "decision": "BLOCKED_GOLD_REVIEW",
+    "pass": true
+  },
+  "hard_gate_failures": [
+    "S5-F4",
+    "S5-F5",
+    "S5-F6",
+    "S5-F7"
+  ],
+  "precondition_failures": [],
+  "fresh_structural_gate": "FAIL",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "notes": [
+    "This is the first use of a new synthetic structural family created after the target implementation freeze.",
+    "The suite becomes exposed after this first observation and must never be relabeled fresh.",
+    "A structural fresh FAIL does not imply any clinical-performance conclusion.",
+    "No expert or clinical gold approval is inferred."
+  ]
+}

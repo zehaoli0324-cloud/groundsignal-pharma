@@ -1,0 +1,61 @@
+{
+  "family_id": "S5FRESH-BOUNDARY-001",
+  "title": "Fresh synthetic benchmark-boundary family",
+  "status": "gold_review_needed",
+  "data_origin": "synthetic",
+  "graph_snapshot": "graph-snapshot.json",
+  "evidence_manifest": "evidence-manifest.json",
+  "target_capabilities": [
+    "partition provenance preservation",
+    "decision-contract materialization",
+    "training/evaluation split isolation",
+    "gold leakage containment"
+  ],
+  "failure_hypotheses": [
+    "split can be relabeled after materialization",
+    "provenance can be stripped or forged",
+    "unknown split can become training eligible",
+    "schema/materializer decision-contract semantics can diverge"
+  ],
+  "split_policy": {
+    "leakage_rule": "Only manifest-declared dev cases may be training eligible; regression and heldout are evaluation-only.",
+    "heldout_variables": [
+      "partition label",
+      "provenance integrity",
+      "decision contract",
+      "gold-only fields"
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "S5FRESH-BND-DEV-001",
+      "path": "cases/S5FRESH-BND-DEV-001.json",
+      "split": "dev",
+      "variant_type": "base"
+    },
+    {
+      "case_id": "S5FRESH-BND-DEV-002",
+      "path": "cases/S5FRESH-BND-DEV-002.json",
+      "split": "dev",
+      "variant_type": "counterfactual"
+    },
+    {
+      "case_id": "S5FRESH-BND-DEV-003",
+      "path": "cases/S5FRESH-BND-DEV-003.json",
+      "split": "dev",
+      "variant_type": "negative_control"
+    },
+    {
+      "case_id": "S5FRESH-BND-REG-001",
+      "path": "cases/S5FRESH-BND-REG-001.json",
+      "split": "regression",
+      "variant_type": "regression"
+    },
+    {
+      "case_id": "S5FRESH-BND-HO-001",
+      "path": "cases/S5FRESH-BND-HO-001.json",
+      "split": "heldout",
+      "variant_type": "heldout"
+    }
+  ]
+}

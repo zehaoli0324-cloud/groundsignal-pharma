@@ -1,0 +1,21 @@
+{
+  "stage": "S5",
+  "suite_id": "S5-FRESH-BOUNDARY-v0.2",
+  "version": "v0.2",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "implementation_freeze_commit": "37a89d14b37a1e2b3b823e933b4a7bfbd3038af8",
+  "source_snapshot_commit": null,
+  "family_ids": [
+    "S5FRESH-BOUNDARY-001"
+  ],
+  "allowed_training_splits": [
+    "dev"
+  ],
+  "prohibited_training_splits": [
+    "regression",
+    "heldout"
+  ],
+  "purpose": "First-use post-freeze structural boundary evaluation; not clinical gold validation.",
+  "release_use": "evaluation_only"
+}

@@ -1,0 +1,72 @@
+{
+  "graph_id": "S5FRESH-BOUNDARY-GRAPH-v0.2",
+  "nodes": [
+    {
+      "node_id": "N1",
+      "type": "synthetic_decision_fact",
+      "label": "Synthetic boundary fact 1",
+      "source_passage_ids": ["P1"]
+    },
+    {
+      "node_id": "N2",
+      "type": "synthetic_decision_fact",
+      "label": "Synthetic boundary fact 2",
+      "source_passage_ids": ["P2"]
+    },
+    {
+      "node_id": "N3",
+      "type": "synthetic_decision_fact",
+      "label": "Synthetic boundary fact 3",
+      "source_passage_ids": ["P3"]
+    },
+    {
+      "node_id": "N4",
+      "type": "synthetic_decision_fact",
+      "label": "Synthetic boundary fact 4",
+      "source_passage_ids": ["P4"]
+    },
+    {
+      "node_id": "N5",
+      "type": "synthetic_decision_fact",
+      "label": "Synthetic boundary fact 5",
+      "source_passage_ids": ["P5"]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "E1",
+      "source_node_id": "N1",
+      "target_node_id": "N1",
+      "relation": "requires_review",
+      "source_passage_ids": ["P1"]
+    },
+    {
+      "edge_id": "E2",
+      "source_node_id": "N2",
+      "target_node_id": "N2",
+      "relation": "requires_review",
+      "source_passage_ids": ["P2"]
+    },
+    {
+      "edge_id": "E3",
+      "source_node_id": "N3",
+      "target_node_id": "N3",
+      "relation": "requires_review",
+      "source_passage_ids": ["P3"]
+    },
+    {
+      "edge_id": "E4",
+      "source_node_id": "N4",
+      "target_node_id": "N4",
+      "relation": "requires_review",
+      "source_passage_ids": ["P4"]
+    },
+    {
+      "edge_id": "E5",
+      "source_node_id": "N5",
+      "target_node_id": "N5",
+      "relation": "requires_review",
+      "source_passage_ids": ["P5"]
+    }
+  ]
+}
