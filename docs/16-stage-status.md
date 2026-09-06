@@ -8,7 +8,7 @@ The system has **10 lifecycle stages**. Architecture completeness must not be co
 | Stage | Name | Current maturity | What is already real | Main missing proof |
 |---|---|---|---|---|
 | S1 | User Need / Workflow Discovery | Partial | 48 seed tasks, high-risk matrix, user-research plan | real interview/log validation and frequency weighting |
-| S2 | Knowledge Search & Source Routing | **CONDITIONAL PASS / evaluated prototype** | v0.3 fresh routing 91.7%; joint v0.1 intent/source 94.44%; live DailyMed current-version + passage retrieval 3/3 | negation-aware intent features, broader live passage/source diversity, terminology normalization |
+| S2 | Knowledge Search & Source Routing | **CONDITIONAL PASS / v0.4 development FAIL** | v0.3 fresh routing 91.7%; joint v0.1 intent/source 94.44%; v0.4 legacy smoke 12/12; live DailyMed 3/3 | clause-level negation/exclusion scope, role-separated feature polarity, broader live passage/source diversity, terminology normalization |
 | S3 | Evidence Verification & Temporal Truth | **CONDITIONAL PASS / controlled end-to-end vertical slice** | S3a v0.5.6.1 independent fresh PASS; S3b v0.3 fresh 40/40 / HFSR 0; S2→S3 joint v0.1 17/18 end-to-end / high-risk false support 0 | larger real-source/noisy-passage end-to-end held-out; long-document and multi-entity semantics |
 | S4 | Medical KG Construction / Update | Working prototype / auto-ingestion blocked | case graphs + two reusable backbones + canonical builder | terminology normalization, persistent graph/index, update-impact engine, dedicated S4 eval; unrestricted automatic S3 truth ingestion remains blocked |
 | S5 | Controlled Case / Benchmark Factory | P0 complete | 12 families / 60 controlled cases / held-out design | clinical expert gold review + broader validated user-task coverage + dedicated stage eval |
@@ -34,7 +34,7 @@ DailyMed current-version slice       100%               PASS
 critical-passage Recall@1 slice      100%               PASS
 ```
 
-The new S2→S3 joint held-out adds a second independent routing observation:
+The S2→S3 joint held-out adds a second independent routing observation:
 
 ```text
 items                                18
@@ -45,22 +45,60 @@ Source Handoff Accuracy           100.00%   PASS*
 
 `*` Source Handoff means the expected source remained reachable in the ranked source list and controlled document bank. Top-1 source quality is separately measured by Primary Source Accuracy.
 
-### Current S2 failure
+### S2 v0.4 Negation-aware Intent Router — development FAIL
 
-The only joint first-run routing failure was `S2S3-013`.
+The joint first-run failure `S2S3-013` motivated a structural v0.4 development pass. The stage-specific development eval was fixed before implementation and no new fresh/shadow held-out was created.
 
-The query explicitly excluded regulatory/product-label/trial-registry evidence, but the keyword-based router still treated the negated phrase `试验注册` as positive evidence and predicted `TRIAL_REGISTRY_STATUS`.
-
-Frozen failure family:
+Version:
 
 ```text
-S2-F1  negated intent/source feature treated as positive evidence
-       e.g. "不涉及试验注册" still activates trial_registry
+intent-first-negation-aware-s2-v0.4.0
 ```
 
-The next S2 version should resolve local feature polarity/exclusion scope before intent scoring rather than patch individual phrases.
+Development suite:
 
-Detailed S2 report: `medical/stage-evals/S2/V0.3_REPORT.md`
+```text
+n queries                            30
+negation/exclusion stress            17
+positive control                      1
+legacy exposed smoke                 12
+```
+
+First development observation:
+
+```text
+Intent Accuracy                    90.00%   FAIL
+Primary Source Accuracy            90.00%   FAIL
+Acceptable Source Recall@3         96.67%
+Negation Subset Accuracy           82.35%   FAIL
+Legacy Subset Accuracy            100.00%   PASS
+High-risk Source Miss Rate          0.00%   PASS
+Failure Count                           3
+Combined Development Gate             FAIL
+Fresh validation                  NOT RUN
+```
+
+Frozen v0.4 failure taxonomy:
+
+```text
+S2-F1  coordinated exclusion scope gap
+       an exclusion cue such as "不涉及" does not propagate across a coordinated list
+
+S2-F2  modifier-separated exclusion gap
+       "不要一般 study design guidance" is not represented as one excluded phrase/clause span
+
+S2-F3  context-role collapse
+       an excluded CDE mention suppresses the independently positive China jurisdiction context
+```
+
+No repair was performed after the first v0.4 FAIL. Historical S2 v0.3 fresh evidence and the S2→S3 joint first observation remain unchanged.
+
+Detailed v0.4 report: `medical/stage-evals/S2/S2_V0.4_DEV_FAIL_REPORT.md`  
+Raw metrics/failures: `medical/stage-evals/S2/runs/s2-v04-development-first-fail/report.json`
+
+Next S2 target:
+
+> **S2 v0.4.1 Clause-scope Negation + Role-separated Features** — build clause/coordinated exclusion spans, allow modifiers between exclusion cue and feature head, and separate jurisdiction/entity context from excluded task-intent evidence. Only after exposed development gates pass may a brand-new fresh held-out be frozen.
 
 ---
 
@@ -274,7 +312,7 @@ The previous `HARD FAIL` is no longer accurate because:
 Current status:
 
 ```text
-S2                                  = CONDITIONAL PASS
+S2                                  = CONDITIONAL PASS / v0.4 development FAIL
 S3a                                 = CONDITIONAL PASS / independent fresh PASS
 S3b                                 = CONDITIONAL PASS / independent fresh PASS
 S2→S3 controlled vertical slice     = PASS
@@ -289,19 +327,22 @@ S4 automatic KG truth ingestion     = BLOCKED
 ## Immediate order
 
 ```text
-1. S2 v0.4 negation-aware intent/source routing
-   - distinguish positive feature mentions from excluded/negated features
-   - test "not X / 不涉及 X / 不要 X" and mixed positive-negative source constraints
+1. S2 v0.4.1 clause-scope negation + role-separated features
+   - coordinated-list and noun-phrase exclusion spans
+   - positive jurisdiction/entity context must survive an excluded task mention
+   - rerun exposed v0.4 development suite and prior S2 regression
 
-2. larger real-source S2→S3 passage-level held-out
+2. after development PASS, freeze a brand-new S2 v0.4.1 fresh held-out
+
+3. larger real-source S2→S3 passage-level held-out
    - expand beyond DailyMed to trial registry, literature and safety sources
    - preserve current-version/source provenance
    - stress noisy/longer passages and distractors
 
-3. terminology normalization and entity resolution
+4. terminology normalization and entity resolution
    - especially drugs, observations, biomarkers and study identifiers
 
-4. only after broader real-source S2→S3 proof begin S4 dedicated evaluation
+5. only after broader real-source S2→S3 proof begin S4 dedicated evaluation
    - graph insertion correctness
    - update/temporal replacement
    - contradiction handling

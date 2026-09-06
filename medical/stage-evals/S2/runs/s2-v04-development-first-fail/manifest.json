@@ -1,0 +1,14 @@
+{
+  "version": "intent-first-negation-aware-s2-v0.4.0",
+  "evaluation_mode": "development_exposed",
+  "fresh_validation": "NOT_RUN",
+  "historical_fresh_results_modified": false,
+  "base_repository_head": "2cd20928e26fff834f39124bf616dada3ea58f61",
+  "python_version": "3.13.5",
+  "router_sha256": "c98842022045206292e051118e933cbb803bb079f94f1afadd357a0f55255be2",
+  "suite_sha256": "a4baa8eb9967447f793ca3014580c922a5b6b3188d904329bf026c9dce75e34b",
+  "full_predictions_sha256": "b8bb30d9b80c636cf9e5e54463f815850b3ed7ed02e7bd48310bfb6c12a67dd1",
+  "persisted_report_sha256": "d667b404c56a5df042ed7e2d53f6a874798b79e7b8d00f14e2b410e74decdf0c",
+  "persisted_report_contains_raw_metrics_and_all_failure_cases": true,
+  "release_gate": "FAIL"
+}

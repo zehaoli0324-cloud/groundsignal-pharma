@@ -1,0 +1,59 @@
+{
+  "benchmark_id": "S2-negation-aware-development-v0.4",
+  "router_version": "intent-first-negation-aware-s2-v0.4.0",
+  "metrics": {
+    "n_queries": 30,
+    "intent_accuracy": 0.9,
+    "primary_source_accuracy": 0.9,
+    "acceptable_source_recall_at_3": 0.9666666666666667,
+    "negation_subset_accuracy": 0.8235294117647058,
+    "legacy_subset_accuracy": 1.0,
+    "high_risk_source_miss_rate": 0.0,
+    "failure_count": 3
+  },
+  "gate_checks": {
+    "overall_intent": false,
+    "overall_primary": false,
+    "negation_subset": false,
+    "critical_miss": true
+  },
+  "release_gate": "FAIL",
+  "failures": [
+    {
+      "query_id": "S2N-001",
+      "query": "不涉及监管、说明书或试验注册，我只要同行评议文献来判断这个关联。",
+      "subset": "negation",
+      "expected_intent": "PEER_REVIEWED_LITERATURE",
+      "predicted_intent": "TRIAL_REGISTRY_STATUS",
+      "expected_primary_source_id": "PUBMED",
+      "predicted_sources": ["CLINICALTRIALS_GOV", "PUBMED"],
+      "feature_hits": {"trial_registry": ["试验注册"], "literature": ["同行评议", "文献"]},
+      "negated_feature_hits": {},
+      "excluded_source_ids": []
+    },
+    {
+      "query_id": "S2N-009",
+      "query": "不要一般 study design guidance；我要查这个药是不是 CYP3A inhibitor。",
+      "subset": "negation",
+      "expected_intent": "DDI_MECHANISM_LOOKUP",
+      "predicted_intent": "DDI_METHOD_GUIDANCE",
+      "expected_primary_source_id": "FDA_DDI_TABLES",
+      "predicted_sources": ["FDA_ICH_M12", "FDA_DDI_TABLES"],
+      "feature_hits": {"enzyme_transporter": ["cyp3a"], "methodology": ["guidance", "study design"], "mechanism_lookup": ["inhibitor", "是不是 cyp"]},
+      "negated_feature_hits": {},
+      "excluded_source_ids": []
+    },
+    {
+      "query_id": "S2N-011",
+      "query": "我要中国国家临床路径，不查 CDE 受理或审评状态。",
+      "subset": "negation",
+      "expected_intent": "CHINA_NATIONAL_CLINICAL_PATHWAY",
+      "predicted_intent": "GENERIC_MEDICAL_LITERATURE",
+      "expected_primary_source_id": "NHC_CHINA",
+      "predicted_sources": ["PUBMED"],
+      "feature_hits": {"clinical_pathway": ["临床路径"], "regulatory_review": ["受理", "审评"]},
+      "negated_feature_hits": {"china": ["cde"]},
+      "excluded_source_ids": []
+    }
+  ]
+}
