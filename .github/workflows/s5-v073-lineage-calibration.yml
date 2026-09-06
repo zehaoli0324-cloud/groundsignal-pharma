@@ -43,6 +43,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
+          cache-dependency-path: requirements-s5-lineage-calibration.txt
       - name: Install pinned calibration dependency
         run: pip install -r requirements-s5-lineage-calibration.txt
 
