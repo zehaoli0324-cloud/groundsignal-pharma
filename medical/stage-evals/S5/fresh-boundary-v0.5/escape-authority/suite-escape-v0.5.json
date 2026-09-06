@@ -1,0 +1,14 @@
+{
+  "stage": "S5",
+  "suite_id": "S5-FRESH-FAMILY-ESCAPE-v0.5",
+  "version": "v0.5",
+  "evidence_class": "independent_fresh_structural_attack_fixture",
+  "fresh_evidence": true,
+  "implementation_freeze_commit": "f1778c21710a743c1e7f1e6d531301c08afdbd14",
+  "source_snapshot_commit": null,
+  "family_ids": ["S5FRESH-ESCAPE-A"],
+  "allowed_training_splits": ["dev"],
+  "prohibited_training_splits": ["regression", "heldout"],
+  "purpose": "Attack fixture: declared family A references source content under non-member sibling family B.",
+  "release_use": "evaluation_only"
+}

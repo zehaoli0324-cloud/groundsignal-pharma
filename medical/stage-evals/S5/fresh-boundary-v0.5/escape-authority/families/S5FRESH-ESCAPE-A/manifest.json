@@ -1,0 +1,14 @@
+{
+  "family_id": "S5FRESH-ESCAPE-A",
+  "title": "Fresh v0.5 declared-family path-containment attack",
+  "status": "evaluation_attack_only",
+  "data_origin": "synthetic",
+  "cases": [
+    {
+      "case_id": "S5FRESH-ESCAPE-001",
+      "path": "../S5FRESH-ESCAPE-B/cases/S5FRESH-ESCAPE-001.json",
+      "split": "dev",
+      "variant_type": "base"
+    }
+  ]
+}

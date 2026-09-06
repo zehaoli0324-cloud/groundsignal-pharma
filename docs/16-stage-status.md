@@ -11,7 +11,7 @@ The system has **10 lifecycle stages**. `PASS` always refers to the explicitly t
 | S2 | Knowledge Search & Source Routing | **CONDITIONAL PASS / v0.4 development FAIL** | v0.3 fresh routing 91.7%; S2→S3 joint intent/source 94.44%; live DailyMed 3/3 | clause-level negation/exclusion + role-separated features; broader live sources |
 | S3 | Evidence Verification & Temporal Truth | **CONDITIONAL PASS** | S3a v0.5.6.1 fresh F1 98.90%, critical recall 100%; S3b 40/40; joint S2→S3 17/18 | larger real-source/noisy-passage held-out |
 | S4 | Medical KG Construction / Update | **CONDITIONAL PASS / v0.1.1 independent fresh PASS** | fresh 20/20; must-reject 7/7; stale ACTIVE 0; invariant violations 0 | persistent/real-source graph proof; unrestricted production ingest disabled |
-| S5 | Controlled Case / Benchmark Factory | **v0.4.1 EXPOSED POLICY-ROOT REGRESSION PASS / RELEASE BLOCKED** | v0.4 independent fresh F12–F15 FAIL preserved; v0.4.1 authenticated registry repair blocks all four on exposed regression | freeze v0.4.1, then create a genuinely new post-freeze policy-root suite; gold review remains independent blocker |
+| S5 | Controlled Case / Benchmark Factory | **v0.5 INDEPENDENT FRESH AUTHORITY-COMPOSITION FAIL / RELEASE BLOCKED** | v0.4.1 exposed F12–F15 PASS; v0.5 fresh preconditions PASS but F16–F19 expose ordinary-source and family-containment gaps | repair F16–F19 generically, rerun v0.5 only as exposed regression, then freeze and create another fresh suite; gold review remains independent blocker |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release; do not auto-trust S5 partitions |
 | S7 | Evaluation & Safety Gate | Protocol complete | v0.2 rubric, graph/RAG/Agent layers, regression safety gate | human/Judge calibration + real model scoring |
 | S8 | Failure Diagnosis | Framework ready | taxonomy, stale-knowledge bad case, intervention router | multi-model cross-case failure clusters |
@@ -97,9 +97,15 @@ v0.4 third independent fresh policy-root
 
 v0.4.1 exposed policy-root regression
   F12–F15                                    REPAIRED / PASS
+
+v0.5 fourth independent fresh authority composition
+  F16 ordinary payload mutation after load           FAIL
+  F17 forged ordinary context bearer                 FAIL
+  F18 ordinary/benchmark case_id collision           FAIL
+  F19 declared-family case-path containment          FAIL
 ```
 
-Gold approval remains separate from structural evaluation: P0 `0/12`, v0.2 family `0/1`, v0.3 family `0/1`, v0.4 family `0/1`; no expert/clinical approval is inferred.
+Gold approval remains separate from structural evaluation: P0 `0/12`, v0.2 family `0/1`, v0.3 family `0/1`, v0.4 family `0/1`; no expert/clinical approval is inferred. The v0.5 suite is structural-only and creates no new clinical-gold family.
 
 ---
 
@@ -180,7 +186,68 @@ S5 release                         BLOCKED_GOLD_REVIEW
 S6 automatic trust                               BLOCKED
 ```
 
-This regression repairs the exposed F12–F15 failure classes, but it cannot establish independent generalization because the v0.4 suite has already been observed. A new post-freeze fresh suite is required before bounded S5 structural release.
+This regression repairs the exposed F12–F15 failure classes, but it cannot establish independent generalization because the v0.4 suite has already been observed.
+
+---
+
+## S5 v0.5 first observation — immutable fresh FAIL
+
+Target implementation freeze:
+
+```text
+f1778c21710a743c1e7f1e6d531301c08afdbd14
+```
+
+Freshness scope is explicit: v0.5 reuses registered v0.4 cases only as authenticated carrier controls. All attack compositions, the ordinary-source collision fixture, the family-path escape fixture, evaluator logic, and protocol were created after the v0.4.1 freeze.
+
+Preconditions:
+
+```text
+frozen target identity                               PASS
+authenticated trust root                             PASS
+carrier materialization                              5/5
+baseline dev export                           EXPORTABLE
+baseline regression export                        BLOCKED
+baseline heldout export                           BLOCKED
+ordinary allowlisted source                     EXPORTABLE
+decision-contract alignment                          PASS
+prompt gold sentinel leakage                         NONE
+gold release containment                             PASS
+precondition failures                                   0
+```
+
+New hard-gate failures:
+
+```text
+S5-F16 ORDINARY_SOURCE_PAYLOAD_NOT_BOUND_AFTER_LOAD                 FAIL
+S5-F17 FORGED_ORDINARY_CONTEXT_BEARER_CAPABILITY                    FAIL
+S5-F18 ORDINARY_BENCHMARK_CASE_ID_COLLISION_NOT_VALIDATED           FAIL
+S5-F19 DECLARED_FAMILY_CASE_PATH_CONTAINMENT_MISSING                FAIL
+```
+
+Immutable first-observation blob:
+
+```text
+c300d301cb6bf23e5ec1cc0472666f44a1148e77
+```
+
+Current decision:
+
+```text
+fresh structural gate                     FAIL
+S5 bounded release          NOT ESTABLISHED
+S5 release              BLOCKED_GOLD_REVIEW
+S6 automatic trust                   BLOCKED
+```
+
+Interpretation:
+
+- F16 shows that ordinary-source authentication is bound to a backing file, but not to the exact in-memory case payload exported afterward.
+- F17 shows that `_training_export_context` is transferable and can authorize unrelated raw heldout benchmark content.
+- F18 shows that byte-identity collision prevention does not reserve `case_id` across benchmark and ordinary namespaces.
+- F19 shows that manifest source paths are contained only by the broad family root, not by the declared family directory; the materializer mirrors the same gap.
+
+The v0.5 first observation is exposed forever and must never be relabeled fresh after repair.
 
 ---
 
@@ -195,30 +262,31 @@ S2 still has an exposed v0.4 negation-development FAIL and remains a bounded con
 ```text
 1. preserve all S5 first observations exactly
    - v0.4 first-observation blob remains immutable
+   - v0.5 first-observation blob remains immutable
 
-2. freeze S5 v0.4.1 implementation
+2. repair S5 v0.5 failures generically
+   - bind ordinary-source authorization to exact source payload
+   - remove transferable bearer semantics from _training_export_context
+   - reserve case_id across benchmark and ordinary authenticated sources
+   - enforce case-path containment inside the declared family directory
+     in both policy construction and materialization
 
-3. after that freeze, author a genuinely new S5 fresh trust-root suite
-   - policy registry substitution/replay
-   - registry-path replacement
-   - policy-version downgrade/confusion
-   - cross-policy/cross-suite identity collision
-   - ordinary-source / benchmark-content collision
-   - suite-family-root replay
-   - source-content replacement / digest replay
-   - baseline dev/regression/heldout split controls
-   - decision-contract, prompt-leakage and gold-containment controls
+3. rerun S5 v0.5 only as exposed regression
+   - preserve fresh-first-observation-v0.5.json unchanged
 
-4. if the new fresh structural gate FAILS
-   - preserve the first result
-   - sync failure taxonomy/status
-   - repair generically before any further fresh claim
+4. freeze the repaired implementation
 
-5. if the new fresh structural gate PASSES
-   - S5 still remains blocked until the independent gold-review criterion is satisfied
+5. only after that freeze create another genuinely new S5 boundary suite
+   - attack ordinary-source reconstruction/binding
+   - attack context replay and cross-object substitution
+   - attack identity aliasing across policy versions
+   - attack nested path/symlink/canonicalization variants
+   - retain baseline split, decision-contract, prompt-leakage and gold-containment controls
+
+6. gold review remains an independent blocker
    - never fabricate approval
 
-6. only after bounded S5 release proceed to S6 dedicated harness evaluation
+7. only after bounded S5 release proceed to S6 dedicated harness evaluation
 
-7. continue S6 → S7 → S8 → S9 → S10
+8. continue S6 → S7 → S8 → S9 → S10
 ```

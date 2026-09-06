@@ -1,0 +1,15 @@
+{
+  "stage": "S5",
+  "version": "v0.5",
+  "source_first_observation": "medical/stage-evals/S5/fresh-first-observation-v0.5.json",
+  "target_freeze_commit": "f1778c21710a743c1e7f1e6d531301c08afdbd14",
+  "failures": [
+    {"id": "S5-F16", "name": "ORDINARY_SOURCE_PAYLOAD_NOT_BOUND_AFTER_LOAD", "severity": "hard_gate", "observation": "An externally allowlisted ordinary case was loaded successfully, then its in-memory prompt was mutated; the mutated case remained exportable.", "root_cause": "Ordinary-source authority rechecks only the allowlisted backing-file path/blob and does not compare the exported case payload to that authenticated file."},
+    {"id": "S5-F17", "name": "FORGED_ORDINARY_CONTEXT_BEARER_CAPABILITY", "severity": "hard_gate", "observation": "Raw heldout benchmark content borrowed the _training_export_context from a valid ordinary source and became exportable.", "root_cause": "_training_export_context acts as a transferable bearer capability; it authenticates an ordinary file but is not cryptographically or structurally bound to the case object carrying it."},
+    {"id": "S5-F18", "name": "ORDINARY_BENCHMARK_CASE_ID_COLLISION_NOT_VALIDATED", "severity": "hard_gate", "observation": "A byte-distinct ordinary source reusing an authenticated heldout benchmark case_id was accepted by both policy construction and policy-content validation.", "root_cause": "Ordinary policy entries bind only path/blob identity. The builder and validator do not inspect or reserve the ordinary source's internal case_id against the global benchmark identity namespace."},
+    {"id": "S5-F19", "name": "DECLARED_FAMILY_CASE_PATH_CONTAINMENT_MISSING", "severity": "hard_gate", "observation": "A manifest for declared family A referenced a source case under non-member sibling family B; both policy construction and materialization accepted the cross-family path.", "root_cause": "Case-path containment is checked against the broad family_root, not the declared family directory (manifest parent), and the materializer has no equivalent family-local containment check."}
+  ],
+  "controls": {"authenticated_trust_root": "PASS", "baseline_dev": "EXPORTABLE", "baseline_regression": "BLOCKED", "baseline_heldout": "BLOCKED", "ordinary_source_baseline": "EXPORTABLE", "decision_contract_alignment": "PASS", "prompt_gold_leakage": "NONE", "gold_release": "BLOCKED_GOLD_REVIEW"},
+  "decision": "FRESH_STRUCTURAL_FAIL",
+  "s6_automatic_trust": "BLOCKED"
+}

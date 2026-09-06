@@ -1,0 +1,40 @@
+{
+  "stage": "S5",
+  "version": "v0.5",
+  "eval_name": "fourth-fresh-authority-composition-first-observation",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "first_observation": true,
+  "target_implementation_freeze_commit": "f1778c21710a743c1e7f1e6d531301c08afdbd14",
+  "target_blob_contract": {
+    "scripts/export_training_data.py": "8a4338e4965c53c011395de77e82211420160360",
+    "scripts/s5_trust_policy.py": "c51c96bb7a58f0dcbb41a670dbe98cd7ea2fca13",
+    "scripts/materialize_s5_cases.py": "c2d339c1a993c7f8f8d098d21d9a07eb49a14544",
+    "scripts/s5_release_gate.py": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+    "scripts/model_harness.py": "e6c90ab88c476c38b765d61ae8c9e2b471c8e2a2",
+    "medical/schemas/clinical-case.schema.json": "473edfd800b717513582a1100f9b8f4fe0814e0a",
+    "medical/configs/s5-trust-policy-registry-v0.4.1.json": "b9637e31df679e49b36d49ea96177a8100fd5c2a",
+    "medical/configs/s5-trust-root-v0.4.1.json": "57adc5384818a4254192ed53e8ba60eee5d70e48"
+  },
+  "freshness_contract": {
+    "fixtures_authored_after_freeze": true,
+    "evaluator_authored_after_freeze": true,
+    "implementation_changes_before_first_observation": false,
+    "carrier_cases_are_previously_exposed": true,
+    "carrier_case_role": "authenticated transport/control only; attack compositions and authority fixtures are new"
+  },
+  "hard_gates": [
+    {"id": "S5-F16", "name": "ORDINARY_SOURCE_PAYLOAD_NOT_BOUND_AFTER_LOAD"},
+    {"id": "S5-F17", "name": "FORGED_ORDINARY_CONTEXT_BEARER_CAPABILITY"},
+    {"id": "S5-F18", "name": "ORDINARY_BENCHMARK_CASE_ID_COLLISION_NOT_VALIDATED"},
+    {"id": "S5-F19", "name": "DECLARED_FAMILY_CASE_PATH_CONTAINMENT_MISSING"}
+  ],
+  "required_controls": [
+    "authenticated trust root",
+    "carrier dev/regression/heldout export isolation",
+    "ordinary-source baseline compatibility",
+    "decision-contract alignment",
+    "prompt gold containment",
+    "gold release containment"
+  ]
+}
