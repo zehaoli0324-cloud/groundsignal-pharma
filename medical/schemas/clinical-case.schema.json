@@ -3,7 +3,15 @@
   "$id": "groundsignal://medical/clinical-case.schema.json",
   "title": "GroundSignal Clinical Case",
   "type": "object",
-  "required": ["case_id", "task_type", "patient_context", "evidence_snapshot", "interaction", "expected_behavior", "graph_eval", "safety", "scoring"],
+  "required": ["case_id", "task_type", "patient_context", "evidence_snapshot", "interaction", "expected_behavior", "safety", "scoring"],
+  "allOf": [
+    {
+      "anyOf": [
+        {"required": ["graph_eval"]},
+        {"required": ["decision_contract_exemption"]}
+      ]
+    }
+  ],
   "properties": {
     "case_id": {"type": "string", "minLength": 1},
     "title": {"type": ["string", "null"]},
@@ -93,7 +101,7 @@
     },
     "benchmark_provenance": {
       "type": "object",
-      "required": ["stage", "suite_id", "family_id", "split", "variant_type", "evidence_class", "fresh_evidence", "source_case_path", "source_manifest_path", "materializer_version", "training_eligible"],
+      "required": ["stage", "suite_id", "family_id", "split", "variant_type", "evidence_class", "fresh_evidence", "source_case_path", "source_manifest_path", "source_manifest_sha256", "source_case_sha256", "materializer_version", "provenance_mode", "training_eligible"],
       "properties": {
         "stage": {"const": "S5"},
         "suite_id": {"type": "string", "minLength": 1},
@@ -107,9 +115,17 @@
         "source_case_path": {"type": "string", "minLength": 1},
         "source_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
         "source_case_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "materialized_payload_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
         "materializer_version": {"type": "string", "minLength": 1},
+        "provenance_mode": {"type": "string", "enum": ["materialized_manifest_bound", "source_manifest_resolved"]},
         "training_eligible": {"type": "boolean"}
       },
+      "allOf": [
+        {
+          "if": {"properties": {"provenance_mode": {"const": "materialized_manifest_bound"}}, "required": ["provenance_mode"]},
+          "then": {"required": ["materialized_payload_sha256"]}
+        }
+      ],
       "additionalProperties": false
     },
     "safety": {

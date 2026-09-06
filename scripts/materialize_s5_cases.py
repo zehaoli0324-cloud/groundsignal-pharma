@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Materialize GroundSignal S5 benchmark cases with immutable partition provenance.
+"""Materialize GroundSignal S5 benchmark cases with authenticated partition provenance.
 
 Raw case JSON remains a design source. This boundary joins each case to its family
-manifest and suite contract so downstream consumers cannot lose family/split
-metadata by reading a case file in isolation.
+manifest and suite contract, binds source identity, and computes a digest over the
+materialized payload so downstream training export can reject tampering.
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-MATERIALIZER_VERSION = "s5-materializer-v0.1.1"
+MATERIALIZER_VERSION = "s5-materializer-v0.2.1"
 
 
 def load_json(path: Path) -> Any:
@@ -25,6 +25,21 @@ def load_json(path: Path) -> Any:
 
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def canonical_materialized_sha256(case: dict[str, Any]) -> str:
+    """Hash the complete materialized case except the digest field itself."""
+    payload = deepcopy(case)
+    provenance = payload.get("benchmark_provenance")
+    if isinstance(provenance, dict):
+        provenance.pop("materialized_payload_sha256", None)
+    encoded = json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def validate_decision_contract(case: dict[str, Any]) -> None:
@@ -53,6 +68,10 @@ def materialize(suite_path: Path, root: Path, out_dir: Path) -> dict[str, Any]:
     prohibited = {str(x) for x in suite.get("prohibited_training_splits") or []}
     if allowed_training & prohibited:
         raise ValueError("training split sets overlap")
+    if allowed_training - {"dev"}:
+        raise ValueError(f"S5 training allowlist contains unsupported split(s): {sorted(allowed_training - {'dev'})}")
+    if not {"heldout", "regression"}.issubset(prohibited):
+        raise ValueError("S5 suite must explicitly prohibit heldout and regression training export")
 
     out_dir.mkdir(parents=True, exist_ok=True)
     split_counts: Counter[str] = Counter()
@@ -74,6 +93,8 @@ def materialize(suite_path: Path, root: Path, out_dir: Path) -> dict[str, Any]:
             rel = str(ref.get("path") or "")
             if not case_id or not split or not rel:
                 raise ValueError(f"{manifest_path}: incomplete case reference {ref!r}")
+            if split not in {"dev", "regression", "heldout"}:
+                raise ValueError(f"{manifest_path}: unsupported split {split!r} for {case_id}")
             if case_id in seen:
                 raise ValueError(f"duplicate case_id across suite: {case_id}")
             seen.add(case_id)
@@ -98,8 +119,11 @@ def materialize(suite_path: Path, root: Path, out_dir: Path) -> dict[str, Any]:
                 "source_manifest_sha256": manifest_sha,
                 "source_case_sha256": sha256_file(case_path),
                 "materializer_version": MATERIALIZER_VERSION,
+                "provenance_mode": "materialized_manifest_bound",
                 "training_eligible": split in allowed_training and split not in prohibited,
             }
+            materialized["benchmark_provenance"]["materialized_payload_sha256"] = canonical_materialized_sha256(materialized)
+
             target = out_dir / family_id / f"{case_id}.json"
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(json.dumps(materialized, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -111,6 +135,7 @@ def materialize(suite_path: Path, root: Path, out_dir: Path) -> dict[str, Any]:
                 "training_eligible": materialized["benchmark_provenance"]["training_eligible"],
                 "path": target.relative_to(out_dir).as_posix(),
                 "source_case_sha256": materialized["benchmark_provenance"]["source_case_sha256"],
+                "materialized_payload_sha256": materialized["benchmark_provenance"]["materialized_payload_sha256"],
             })
 
     summary = {

@@ -1,0 +1,45 @@
+{
+  "stage": "S5",
+  "version": "v0.2.1",
+  "eval_name": "generic-boundary-repair-exposed-regression",
+  "evidence_class": "development_exposed_regression",
+  "fresh_evidence": false,
+  "source_first_observation_git_blob_sha": "3de2ebfb66dcf46ff204c8dcfe08cb29b0b0f695",
+  "suite_id": "S5-FRESH-BOUNDARY-v0.2",
+  "family_count": 1,
+  "case_count": 5,
+  "split_counts": {
+    "dev": 3,
+    "heldout": 1,
+    "regression": 1
+  },
+  "training_eligible_count": 3,
+  "training_blocked_count": 2,
+  "payload_digest_present_cases": 5,
+  "payload_digest_self_consistent_cases": 5,
+  "baseline_export": {
+    "dev": "EXPORTABLE",
+    "regression": "BLOCKED",
+    "heldout": "BLOCKED"
+  },
+  "probes": {
+    "S5-F4_PROVENANCE_AUTHORITY_NOT_VERIFIED": "BLOCKED",
+    "S5-F5_STRIPPED_PROVENANCE_TOP_LEVEL_DEV": "BLOCKED",
+    "S5-F5_UNKNOWN_SPLIT_TRAIN": "BLOCKED",
+    "S5-F5_HELDOUT_ELIGIBLE_TRUE_CONTROL": "BLOCKED",
+    "S5-F5_DEV_ELIGIBLE_FALSE_CONTROL": "BLOCKED",
+    "S5-F6_TAMPERED_MATERIALIZED_PAYLOAD": "BLOCKED",
+    "S5-F7_DECISION_EXEMPTION_SCHEMA_ALIGNMENT": "PASS"
+  },
+  "historical_failure_disposition": {
+    "S5-F4": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F5": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F6": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F7": "REPAIRED_EXPOSED_REGRESSION"
+  },
+  "gold_approved_count": 0,
+  "pending_gold_count": 1,
+  "regression_gate": "PASS",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED"
+}

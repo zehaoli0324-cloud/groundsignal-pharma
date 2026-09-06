@@ -11,7 +11,7 @@ The system has **10 lifecycle stages**. `PASS` always refers to the explicitly t
 | S2 | Knowledge Search & Source Routing | **CONDITIONAL PASS / v0.4 development FAIL** | v0.3 fresh routing 91.7%; S2→S3 joint intent/source 94.44%; live DailyMed 3/3 | clause-level negation/exclusion + role-separated features; broader live sources |
 | S3 | Evidence Verification & Temporal Truth | **CONDITIONAL PASS** | S3a v0.5.6.1 fresh F1 98.90%, critical recall 100%; S3b 40/40; joint S2→S3 17/18 | larger real-source/noisy-passage held-out |
 | S4 | Medical KG Construction / Update | **CONDITIONAL PASS / v0.1.1 independent fresh PASS** | fresh 20/20; must-reject 7/7; stale ACTIVE 0; invariant violations 0 | persistent/real-source graph proof; unrestricted production ingest disabled |
-| S5 | Controlled Case / Benchmark Factory | **FRESH v0.2 BOUNDARY FAIL / v0.1.1 STRUCTURAL PASS / RELEASE BLOCKED** | new post-freeze 5-case family materializes 5/5 and baseline split guard passes, but four generic boundary failures were observed | provenance authority, fail-closed split identity, payload integrity, decision-contract alignment; 0/12 P0 + 0/1 fresh family gold-approved |
+| S5 | Controlled Case / Benchmark Factory | **v0.2.1 EXPOSED REGRESSION PASS / RELEASE BLOCKED** | v0.2 first fresh FAIL is immutable; F4–F7 now pass exposed regression with authenticated manifest authority + payload digest | freeze v0.2.1, then create a genuinely new fresh boundary suite; gold review remains independent blocker |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release; do not auto-trust S5 partitions |
 | S7 | Evaluation & Safety Gate | Protocol complete | v0.2 rubric, graph/RAG/Agent layers, regression safety gate | human/Judge calibration + real model scoring |
 | S8 | Failure Diagnosis | Framework ready | taxonomy, stale-knowledge bad case, intervention router | multi-model cross-case failure clusters |
@@ -131,22 +131,7 @@ S5 stage release                     BLOCKED
 S6 automatic trust                   BLOCKED
 ```
 
-Key implementation rules at the v0.1.1 freeze:
-
-1. raw case JSON is a design source, not the downstream partition authority;
-2. `materialize_s5_cases.py` joins case + family manifest + suite contract and records `suite_id`, `family_id`, `split`, source paths, SHA-256 hashes, materializer version and training eligibility;
-3. only `dev` is training-eligible in the exposed P0 suite;
-4. `heldout` and `regression` are fail-closed in `export_training_data.py` on the ordinary materialized path;
-5. `clinical-case.schema.json` requires the decision contract;
-6. `s5_release_gate.py` requires explicit `status=gold_approved` for every family and never infers approval.
-
-Detailed artifacts:
-
-- `medical/stage-evals/S5/S5_V0.1.1_EXPOSED_REGRESSION_SPEC.md`
-- `medical/stage-evals/S5/structural-regression-v0.1.1.json`
-- `medical/stage-evals/S5/release-gate-v0.1.1.json`
-- `medical/stage-evals/S5/blockers-v0.1.1.json`
-- `medical/stage-evals/S5/S5_V0.1.1_STRUCTURAL_PASS_REPORT.md`
+The v0.1.1 workflow is now historical-preservation only: it reproduces the exact stored metrics against commit `37a89d14...`, rather than demanding that later implementations reproduce the same byte-level output.
 
 ---
 
@@ -199,9 +184,7 @@ S5-F7 DECISION_EXEMPTION_SCHEMA_MATERIALIZER_DIVERGENCE
   result: CONTRACT DIVERGENCE
 ```
 
-Controls behaved correctly: an unchanged heldout split remained blocked even with `training_eligible=true`, and `training_eligible=false` remained blocking after a split flip.
-
-Current decision:
+Current historical decision remains:
 
 ```text
 fresh structural gate                   FAIL
@@ -209,16 +192,74 @@ S5 release               BLOCKED_GOLD_REVIEW
 S6 automatic trust                     BLOCKED
 ```
 
-The v0.2 suite is now exposed and can only be used as regression evidence. It must never be relabeled fresh after repair.
+The v0.2 first observation is immutable. Its preservation workflow now reproduces the result at the exact first-observation commit `c2ea0a58...`, so later repaired code cannot overwrite or reinterpret it.
 
-Immutable first-observation artifacts:
+---
 
-- `medical/stage-evals/S5/fresh-boundary-v0.2/protocol-v0.2.json`
-- `medical/stage-evals/S5/fresh-boundary-v0.2/suite-fresh-boundary-v0.2.json`
-- `medical/stage-evals/S5/fresh-first-observation-v0.2.json`
-- `medical/stage-evals/S5/failures-v0.2.json`
-- `medical/stage-evals/S5/S5_V0.2_FRESH_BOUNDARY_SPEC.md`
-- `medical/stage-evals/S5/S5_V0.2_FRESH_BOUNDARY_FAIL_REPORT.md`
+## S5 v0.2.1 checkpoint — generic boundary repair exposed regression
+
+Evidence class: **development exposed regression**. The v0.2 suite is not fresh anymore.
+
+Generic repairs:
+
+1. **Authenticated partition authority** — training export resolves the source family manifest, verifies manifest/source-case SHA-256 values, finds the authoritative case reference, and rejects any local split mismatch.
+2. **Explicit fail-closed split semantics** — only `dev` is allowlisted; `regression`, `heldout`, missing partition identity, unknown split labels, or partitioned cases without authenticated provenance are blocked.
+3. **Materialized payload binding** — materialization records `materialized_payload_sha256` over the canonical complete payload; exporter recomputes it immediately before export and rejects mutation.
+4. **Decision-contract alignment** — the clinical-case schema now requires either a complete `graph_eval` contract or a typed `decision_contract_exemption`, matching materializer semantics.
+5. **Non-benchmark compatibility is not a bypass** — standalone training fixtures are accepted only through an in-process trusted file-loader context; direct unprovenanced case objects cannot self-assert trust.
+
+Exposed regression metrics:
+
+```text
+family count                              1
+case count                                5
+split counts                dev 3 / regression 1 / heldout 1
+training eligible                         3
+training blocked                          2
+payload digest present                  5/5
+payload digest self-consistent          5/5
+
+baseline dev export              EXPORTABLE
+baseline regression export          BLOCKED
+baseline heldout export             BLOCKED
+
+S5-F4 forged heldout -> dev          BLOCKED
+S5-F5 stripped provenance            BLOCKED
+S5-F5 unknown split=train            BLOCKED
+S5-F5 heldout + eligible=true        BLOCKED
+S5-F5 dev + eligible=false           BLOCKED
+S5-F6 post-materialization tamper     BLOCKED
+S5-F7 exemption schema alignment        PASS
+
+exposed regression gate                  PASS
+```
+
+Historical failure disposition:
+
+```text
+S5-F4  REPAIRED_EXPOSED_REGRESSION
+S5-F5  REPAIRED_EXPOSED_REGRESSION
+S5-F6  REPAIRED_EXPOSED_REGRESSION
+S5-F7  REPAIRED_EXPOSED_REGRESSION
+```
+
+Release status does **not** change to PASS:
+
+```text
+v0.2 fresh family gold approved        0/1
+P0 family gold approved               0/12
+release predicate       BLOCKED_GOLD_REVIEW
+S5 stage release                      BLOCKED
+S6 automatic trust                    BLOCKED
+```
+
+Detailed artifacts:
+
+- `medical/stage-evals/S5/boundary-regression-v0.2.1.json`
+- `medical/stage-evals/S5/S5_V0.2.1_BOUNDARY_REPAIR_REPORT.md`
+- `scripts/eval_s5_boundary_regression_v021.py`
+
+Interpretation: F4–F7 are repaired on exposed regression probes, but S5 still lacks a **new independent post-repair fresh boundary observation** and still lacks required gold approval. Therefore this version is not sufficient to release S5 or to let S6 automatically trust S5 partitions.
 
 ---
 
@@ -231,30 +272,25 @@ S2 still has an exposed v0.4 negation-development FAIL and remains a bounded con
 ## Immediate order
 
 ```text
-1. repair S5 v0.2 failures generically
-   - authenticate partition authority against the suite/manifest contract
-   - require explicit allowlisted materialized split; remove permissive fallback
-   - bind and verify materialized-payload integrity before training export
-   - unify schema/materializer decision-contract exemption semantics
+1. freeze S5 v0.2.1 implementation and blob identities
 
-2. rerun S5 v0.2 only as exposed regression
-   - preserve fresh-first-observation-v0.2.json unchanged
-
-3. freeze the repaired S5 implementation
-
-4. only after that freeze, create a second genuinely new S5 boundary suite
+2. after that freeze only, author a genuinely new S5 fresh boundary suite
    - do not reuse v0.2 as fresh
-   - retest provenance tamper, missing/unknown split, payload mutation and contract alignment
-   - retain leakage/shortcut and gold-containment probes
+   - attack manifest authority and manifest/source hash tampering
+   - attack stripped/unknown split and alternate metadata placement
+   - attack post-materialization payload mutation
+   - attack decision-contract exemption/graph semantic disagreement
+   - retain prompt leakage and gold-containment probes
+   - preserve the first result permanently whether PASS or FAIL
 
-5. gold review remains an independent blocker
+3. gold review remains an independent blocker
    - P0: 0/12 gold-approved
-   - new v0.2 family: 0/1 gold-approved
+   - v0.2 family: 0/1 gold-approved
    - never fabricate approval
 
-6. only after bounded S5 release proceed to S6 dedicated harness evaluation
+4. only when the applicable bounded S5 release gates are satisfied proceed to S6 dedicated harness evaluation
 
-7. continue S6 → S7 → S8 → S9 → S10
+5. continue S6 → S7 → S8 → S9 → S10
 
-8. backfill S1/S2 only when required by a downstream blocker or after sequential evaluation
+6. backfill S1/S2 only when required by a downstream blocker or after sequential evaluation
 ```

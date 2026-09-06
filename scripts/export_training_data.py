@@ -4,18 +4,26 @@
 Important design rules:
 - evaluation failures are not automatically training data;
 - only explicitly approved candidates are exportable;
-- S5 benchmark partitions are fail-closed: heldout/regression cases cannot be
-  exported even when a candidate is approved;
-- materialized benchmark provenance is propagated into every exported row.
+- S5 benchmark partitions are authenticated against the authoritative family manifest;
+- missing/unknown benchmark split identity is fail-closed;
+- materialized S5 payloads must pass digest verification before export;
+- ordinary unpartitioned non-benchmark files are allowed only when loaded through
+  this module's trusted file-loader path, never by case-local self-assertion.
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+from copy import deepcopy
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Tuple
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+ALLOWED_TRAINING_SPLITS = {"dev"}
 BLOCKED_TRAINING_SPLITS = {"heldout", "regression"}
+KNOWN_BENCHMARK_SPLITS = ALLOWED_TRAINING_SPLITS | BLOCKED_TRAINING_SPLITS
+_TRUSTED_UNPARTITIONED_SOURCE = object()
 
 
 def read_json(path: Path) -> Dict[str, Any]:
@@ -37,6 +45,38 @@ def read_jsonl(path: Path) -> List[Dict[str, Any]]:
     return rows
 
 
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def canonical_materialized_sha256(case: Dict[str, Any]) -> str:
+    payload = deepcopy(case)
+    payload.pop("_training_export_context", None)
+    provenance = payload.get("benchmark_provenance")
+    if isinstance(provenance, dict):
+        provenance.pop("materialized_payload_sha256", None)
+    encoded = json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _resolve_repo_path(value: Any) -> Path:
+    if not isinstance(value, str) or not value.strip():
+        raise PermissionError("S5 export blocked: provenance source path is missing")
+    raw = Path(value)
+    resolved = raw.resolve() if raw.is_absolute() else (REPO_ROOT / raw).resolve()
+    root = REPO_ROOT.resolve()
+    try:
+        resolved.relative_to(root)
+    except ValueError as exc:
+        raise PermissionError(f"S5 export blocked: provenance path escapes repository: {value!r}") from exc
+    return resolved
+
+
 def _iter_json_files(path: Path) -> Iterable[Path]:
     if path.is_file():
         yield path
@@ -51,27 +91,39 @@ def _iter_json_files(path: Path) -> Iterable[Path]:
 
 def _attach_family_manifest_provenance(file: Path, case: Dict[str, Any]) -> Dict[str, Any]:
     """Resolve legacy raw case files under case-families to their manifest split."""
-    if case.get("benchmark_provenance"):
-        return case
-    parts = file.parts
+    incoming = dict(case)
+    incoming.pop("_training_export_context", None)
+    if incoming.get("benchmark_provenance"):
+        return incoming
+
+    resolved_file = file.resolve()
+    parts = resolved_file.parts
     try:
         idx = parts.index("case-families")
     except ValueError:
-        return case
+        incoming["_training_export_context"] = _TRUSTED_UNPARTITIONED_SOURCE
+        return incoming
     if len(parts) <= idx + 2:
-        return case
+        raise PermissionError(f"{file}: ambiguous case-families path")
+
     family_dir = Path(*parts[: idx + 2])
     manifest_path = family_dir / "manifest.json"
     if not manifest_path.is_file():
-        return case
+        raise PermissionError(f"{file}: S5-family-like source has no sibling manifest")
     manifest = read_json(manifest_path)
-    case_id = str(case.get("case_id") or "")
+    case_id = str(incoming.get("case_id") or "")
     for ref in manifest.get("cases") or []:
         if str(ref.get("case_id") or "") != case_id:
             continue
-        out = dict(case)
         split = str(ref.get("split") or "")
-        out["benchmark_provenance"] = {
+        if split not in KNOWN_BENCHMARK_SPLITS:
+            raise PermissionError(f"{file}: unsupported manifest split {split!r}")
+        try:
+            manifest_rel = manifest_path.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+            case_rel = resolved_file.relative_to(REPO_ROOT.resolve()).as_posix()
+        except ValueError as exc:
+            raise PermissionError(f"{file}: S5 raw case must live inside repository") from exc
+        incoming["benchmark_provenance"] = {
             "stage": "S5",
             "suite_id": "UNMATERIALIZED_SOURCE",
             "family_id": str(manifest.get("family_id") or family_dir.name),
@@ -80,13 +132,16 @@ def _attach_family_manifest_provenance(file: Path, case: Dict[str, Any]) -> Dict
             "evidence_class": "source_case_unmaterialized",
             "fresh_evidence": False,
             "source_snapshot_commit": None,
-            "source_manifest_path": str(manifest_path),
-            "source_case_path": str(file),
-            "materializer_version": "manifest-resolver-compat-v0.1.1",
-            "training_eligible": split not in BLOCKED_TRAINING_SPLITS,
+            "source_manifest_path": manifest_rel,
+            "source_case_path": case_rel,
+            "source_manifest_sha256": sha256_file(manifest_path),
+            "source_case_sha256": sha256_file(resolved_file),
+            "materializer_version": "manifest-resolver-compat-v0.2.1",
+            "provenance_mode": "source_manifest_resolved",
+            "training_eligible": split in ALLOWED_TRAINING_SPLITS,
         }
-        return out
-    raise ValueError(f"{file}: case_id {case_id!r} not found in sibling manifest")
+        return incoming
+    raise PermissionError(f"{file}: case_id {case_id!r} not found in sibling manifest")
 
 
 def load_cases(path: Path) -> Dict[str, Dict[str, Any]]:
@@ -139,17 +194,90 @@ def failure_list(eval_row: Dict[str, Any]) -> List[str]:
     return [str(x) for x in failures]
 
 
+def _authoritative_manifest_ref(case: Dict[str, Any], provenance: Dict[str, Any]) -> tuple[str, Dict[str, Any]]:
+    if provenance.get("stage") != "S5":
+        raise PermissionError(f"Training export blocked for case {case.get('case_id')}: unsupported benchmark provenance stage")
+    case_id = str(case.get("case_id") or "")
+    family_id = str(provenance.get("family_id") or "")
+    manifest_path = _resolve_repo_path(provenance.get("source_manifest_path"))
+    source_case_path = _resolve_repo_path(provenance.get("source_case_path"))
+    if not manifest_path.is_file() or not source_case_path.is_file():
+        raise PermissionError(f"Training export blocked for case {case_id}: authoritative provenance source missing")
+
+    expected_manifest_sha = str(provenance.get("source_manifest_sha256") or "")
+    expected_source_sha = str(provenance.get("source_case_sha256") or "")
+    if not expected_manifest_sha or sha256_file(manifest_path) != expected_manifest_sha:
+        raise PermissionError(f"Training export blocked for case {case_id}: manifest digest mismatch")
+    if not expected_source_sha or sha256_file(source_case_path) != expected_source_sha:
+        raise PermissionError(f"Training export blocked for case {case_id}: source-case digest mismatch")
+
+    manifest = read_json(manifest_path)
+    if str(manifest.get("family_id") or "") != family_id:
+        raise PermissionError(f"Training export blocked for case {case_id}: family authority mismatch")
+    for ref in manifest.get("cases") or []:
+        if str(ref.get("case_id") or "") == case_id:
+            authoritative_split = str(ref.get("split") or "")
+            if authoritative_split not in KNOWN_BENCHMARK_SPLITS:
+                raise PermissionError(f"Training export blocked for case {case_id}: unknown authoritative split {authoritative_split!r}")
+            authoritative_case_path = (manifest_path.parent / str(ref.get("path") or "")).resolve()
+            if authoritative_case_path != source_case_path:
+                raise PermissionError(f"Training export blocked for case {case_id}: source-case path is not manifest-authoritative")
+            return authoritative_split, ref
+    raise PermissionError(f"Training export blocked for case {case_id}: absent from authoritative manifest")
+
+
+def _verify_payload_integrity(case: Dict[str, Any], provenance: Dict[str, Any]) -> None:
+    case_id = str(case.get("case_id") or "")
+    mode = str(provenance.get("provenance_mode") or "")
+    if mode == "materialized_manifest_bound":
+        expected = str(provenance.get("materialized_payload_sha256") or "")
+        if not expected:
+            raise PermissionError(f"Training export blocked for case {case_id}: materialized payload digest missing")
+        observed = canonical_materialized_sha256(case)
+        if observed != expected:
+            raise PermissionError(f"Training export blocked for case {case_id}: materialized payload digest mismatch")
+        return
+    if mode == "source_manifest_resolved":
+        source_case_path = _resolve_repo_path(provenance.get("source_case_path"))
+        source_case = read_json(source_case_path)
+        current = deepcopy(case)
+        current.pop("benchmark_provenance", None)
+        current.pop("_training_export_context", None)
+        if current != source_case:
+            raise PermissionError(f"Training export blocked for case {case_id}: raw source payload diverged after authority resolution")
+        return
+    raise PermissionError(f"Training export blocked for case {case_id}: unknown provenance mode {mode!r}")
+
+
 def training_partition(case: Dict[str, Any]) -> tuple[str | None, bool | None, Dict[str, Any] | None]:
     provenance = case.get("benchmark_provenance")
     if isinstance(provenance, dict):
-        split = provenance.get("split")
+        local_split = provenance.get("split")
+        if not isinstance(local_split, str) or local_split not in KNOWN_BENCHMARK_SPLITS:
+            raise PermissionError(f"Training export blocked for case {case.get('case_id')}: missing/unknown benchmark split {local_split!r}")
+        authoritative_split, _ = _authoritative_manifest_ref(case, provenance)
+        if local_split != authoritative_split:
+            raise PermissionError(
+                f"Training export blocked for case {case.get('case_id')}: local split={local_split!r} disagrees with manifest={authoritative_split!r}"
+            )
         eligible = provenance.get("training_eligible")
-        return (str(split) if split is not None else None, bool(eligible) if eligible is not None else None, provenance)
-    split = case.get("split")
-    if split is not None:
-        split = str(split)
-        return split, split not in BLOCKED_TRAINING_SPLITS, None
-    return None, None, None
+        expected_eligible = authoritative_split in ALLOWED_TRAINING_SPLITS
+        if not isinstance(eligible, bool) or eligible is not expected_eligible:
+            raise PermissionError(
+                f"Training export blocked for case {case.get('case_id')}: training_eligible={eligible!r} disagrees with authoritative split"
+            )
+        _verify_payload_integrity(case, provenance)
+        return authoritative_split, eligible, provenance
+
+    if case.get("split") is not None:
+        raise PermissionError(
+            f"Training export blocked for case {case.get('case_id')}: partitioned case lacks authenticated benchmark provenance"
+        )
+    if case.get("_training_export_context") is _TRUSTED_UNPARTITIONED_SOURCE:
+        return None, True, None
+    raise PermissionError(
+        f"Training export blocked for case {case.get('case_id')}: unpartitioned direct case has no trusted loader context"
+    )
 
 
 def export_row(eval_row: Dict[str, Any], case: Dict[str, Any], run: Dict[str, Any] | None) -> tuple[str, Dict[str, Any]] | None:
@@ -161,6 +289,10 @@ def export_row(eval_row: Dict[str, Any], case: Dict[str, Any], run: Dict[str, An
     if split in BLOCKED_TRAINING_SPLITS or eligible is False:
         raise PermissionError(
             f"Training export blocked for case {case.get('case_id')}: split={split!r} is evaluation-only"
+        )
+    if split is not None and split not in ALLOWED_TRAINING_SPLITS:
+        raise PermissionError(
+            f"Training export blocked for case {case.get('case_id')}: split={split!r} is not allowlisted"
         )
 
     kind = candidate.get("type")
@@ -240,7 +372,7 @@ def main() -> None:
         "sft_count": len(sft_rows),
         "preference_count": len(pref_rows),
         "skipped_not_approved_or_none": skipped,
-        "rule": "approved candidates only; heldout/regression benchmark partitions are fail-closed",
+        "rule": "approved candidates only; S5 partition authority and materialized payload integrity are fail-closed",
     }
     (args.out_dir / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(manifest, ensure_ascii=False, indent=2))

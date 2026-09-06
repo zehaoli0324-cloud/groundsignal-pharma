@@ -1,4 +1,4 @@
-name: S5 v0.2 Fresh Boundary First Observation
+name: S5 v0.2 Fresh Boundary First Observation Preservation
 
 on:
   push:
@@ -30,9 +30,6 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Syntax check S5 v0.2 evaluator
-        run: python -m py_compile scripts/eval_s5_fresh_boundary_v02.py
-
       - name: Protect committed first-observation blob
         run: |
           observed="$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.2.json)"
@@ -40,7 +37,7 @@ jobs:
           echo "first-observation blob=$observed"
           test "$observed" = "$expected"
 
-      - name: Verify frozen implementation identity
+      - name: Verify target implementation freeze identity
         run: |
           freeze="37a89d14b37a1e2b3b823e933b4a7bfbd3038af8"
           test "$(git rev-parse "$freeze":scripts/materialize_s5_cases.py)" = "2b9f20e4f06bf20b360e1420dad47e65ecfce442"
@@ -49,56 +46,27 @@ jobs:
           test "$(git rev-parse "$freeze":scripts/s5_release_gate.py)" = "8431e1e4c299df8c051ef19e7a69db3d1d199715"
           test "$(git rev-parse "$freeze":medical/schemas/clinical-case.schema.json)" = "31a5123d2ac07aac5e20d47dcbdba36e67d49cc3"
 
-      - name: Validate new fresh family
+      - name: Reproduce first observation at the exact first-observation commit
         run: |
-          python scripts/validate_medical_case_families.py \
-            --root medical/stage-evals/S5/fresh-boundary-v0.2/families \
-            --expect-families 1 \
-            --expect-cases 5 \
-            --expect-cases-per-family 5 \
-            --rubric-version medical-clinical-v0.2
-
-      - name: Run first-use fresh adversarial evaluation and preserve FAIL
-        run: |
-          mkdir -p /tmp/groundsignal-s5-v02
+          first_commit="c2ea0a58aaf41987e3694b5ccb8da3ae72171c9b"
+          rm -rf /tmp/groundsignal-s5-v02-first
+          git worktree add --detach /tmp/groundsignal-s5-v02-first "$first_commit"
+          cd /tmp/groundsignal-s5-v02-first
           set +e
           python scripts/eval_s5_fresh_boundary_v02.py \
-            --out /tmp/groundsignal-s5-v02/fresh-first-observation-v0.2.json
+            --out /tmp/s5-v02-first-reproduced.json
           status=$?
           set -e
-          cat /tmp/groundsignal-s5-v02/fresh-first-observation-v0.2.json
-          if [ "$status" -ne 1 ]; then
-            echo "Expected immutable first observation FAIL (exit 1), got exit $status"
-            exit 1
-          fi
-
-      - name: Match committed raw first-observation metrics exactly
-        run: |
+          test "$status" -eq 1
           python - <<'PY'
           import json
           from pathlib import Path
-          expected = json.loads(Path('medical/stage-evals/S5/fresh-first-observation-v0.2.json').read_text(encoding='utf-8'))
-          observed = json.loads(Path('/tmp/groundsignal-s5-v02/fresh-first-observation-v0.2.json').read_text(encoding='utf-8'))
-          if observed != expected:
-              print('S5 v0.2 committed first observation does not match evaluator output')
-              print('EXPECTED:', json.dumps(expected, ensure_ascii=False, indent=2))
-              print('OBSERVED:', json.dumps(observed, ensure_ascii=False, indent=2))
-              raise SystemExit(1)
+          expected=json.loads(Path('medical/stage-evals/S5/fresh-first-observation-v0.2.json').read_text(encoding='utf-8'))
+          observed=json.loads(Path('/tmp/s5-v02-first-reproduced.json').read_text(encoding='utf-8'))
+          assert observed == expected
           assert observed['fresh_structural_gate'] == 'FAIL'
           assert observed['hard_gate_failures'] == ['S5-F4', 'S5-F5', 'S5-F6', 'S5-F7']
           assert observed['stage_release'] == 'BLOCKED_GOLD_REVIEW'
           assert observed['s6_automatic_trust'] == 'BLOCKED'
-          print('S5 v0.2 first fresh FAIL preserved exactly')
-          PY
-
-      - name: Keep S5 v0.1.1 exposed structural regression green
-        run: |
-          python scripts/eval_s5_benchmark_factory_v011.py \
-            --out /tmp/groundsignal-s5-v02/v011-regression.json
-          python - <<'PY'
-          import json
-          d=json.load(open('/tmp/groundsignal-s5-v02/v011-regression.json', encoding='utf-8'))
-          assert d['structural_gate'] == 'PASS'
-          assert d['stage_release'] == 'BLOCKED_GOLD_REVIEW'
-          print('S5 v0.1.1 exposed regression remains PASS while release remains blocked')
+          print('S5 v0.2 first fresh FAIL reproduced exactly at its original implementation snapshot.')
           PY

@@ -1,0 +1,139 @@
+name: S5 v0.2.1 Generic Boundary Repair Exposed Regression
+
+on:
+  push:
+    paths:
+      - 'scripts/materialize_s5_cases.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/eval_s5_boundary_regression_v021.py'
+      - 'medical/schemas/clinical-case.schema.json'
+      - 'medical/stage-evals/S5/boundary-regression-v0.2.1.json'
+      - 'medical/stage-evals/S5/S5_V0.2.1_BOUNDARY_REPAIR_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v021-boundary-regression.yml'
+  pull_request:
+    paths:
+      - 'scripts/materialize_s5_cases.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/eval_s5_boundary_regression_v021.py'
+      - 'medical/schemas/clinical-case.schema.json'
+      - 'medical/stage-evals/S5/boundary-regression-v0.2.1.json'
+      - 'medical/stage-evals/S5/S5_V0.2.1_BOUNDARY_REPAIR_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v021-boundary-regression.yml'
+
+jobs:
+  exposed-boundary-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check S5 v0.2.1 implementation and evaluator
+        run: |
+          python -m py_compile \
+            scripts/materialize_s5_cases.py \
+            scripts/export_training_data.py \
+            scripts/eval_s5_boundary_regression_v021.py
+
+      - name: Preserve immutable v0.2 first observation
+        run: |
+          observed="$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.2.json)"
+          expected="3de2ebfb66dcf46ff204c8dcfe08cb29b0b0f695"
+          echo "v0.2 first-observation blob=$observed"
+          test "$observed" = "$expected"
+
+      - name: Validate exposed v0.2 family integrity
+        run: |
+          python scripts/validate_medical_case_families.py \
+            --root medical/stage-evals/S5/fresh-boundary-v0.2/families \
+            --expect-families 1 \
+            --expect-cases 5 \
+            --expect-cases-per-family 5 \
+            --rubric-version medical-clinical-v0.2
+
+      - name: Run S5 v0.2.1 exposed boundary regression
+        run: |
+          rm -rf /tmp/groundsignal-s5-v021
+          mkdir -p /tmp/groundsignal-s5-v021
+          python scripts/eval_s5_boundary_regression_v021.py \
+            --out /tmp/groundsignal-s5-v021/result.json
+          cat /tmp/groundsignal-s5-v021/result.json
+
+      - name: Match committed audit metrics projection
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          o=json.loads(Path('/tmp/groundsignal-s5-v021/result.json').read_text(encoding='utf-8'))
+          m=o['materialization_integrity']
+          b=o['baseline_partition_export_guard']
+          f5=o['S5-F5']
+          g=o['gold_release_containment']
+          projection={
+            'stage':'S5',
+            'version':'v0.2.1',
+            'eval_name':'generic-boundary-repair-exposed-regression',
+            'evidence_class':'development_exposed_regression',
+            'fresh_evidence':False,
+            'source_first_observation_git_blob_sha':o['historical_first_observation_preservation']['observed_git_blob_sha'],
+            'suite_id':o['suite_id'],
+            'family_count':m['family_count'],
+            'case_count':m['case_count'],
+            'split_counts':m['split_counts'],
+            'training_eligible_count':m['training_eligible_count'],
+            'training_blocked_count':m['training_blocked_count'],
+            'payload_digest_present_cases':m['payload_digest_present_cases'],
+            'payload_digest_self_consistent_cases':m['payload_digest_self_consistent_cases'],
+            'baseline_export':{
+              'dev':'EXPORTABLE' if b['dev']['exported'] else 'BLOCKED',
+              'regression':'BLOCKED' if b['regression']['blocked'] else 'EXPORTABLE',
+              'heldout':'BLOCKED' if b['heldout']['blocked'] else 'EXPORTABLE',
+            },
+            'probes':{
+              'S5-F4_PROVENANCE_AUTHORITY_NOT_VERIFIED':'BLOCKED' if o['S5-F4']['blocked'] else 'EXPORTABLE',
+              'S5-F5_STRIPPED_PROVENANCE_TOP_LEVEL_DEV':'BLOCKED' if f5['stripped_provenance_top_level_dev']['blocked'] else 'EXPORTABLE',
+              'S5-F5_UNKNOWN_SPLIT_TRAIN':'BLOCKED' if f5['unknown_provenance_split_train']['blocked'] else 'EXPORTABLE',
+              'S5-F5_HELDOUT_ELIGIBLE_TRUE_CONTROL':'BLOCKED' if f5['heldout_with_eligible_true_control']['blocked'] else 'EXPORTABLE',
+              'S5-F5_DEV_ELIGIBLE_FALSE_CONTROL':'BLOCKED' if f5['dev_with_eligible_false_control']['blocked'] else 'EXPORTABLE',
+              'S5-F6_TAMPERED_MATERIALIZED_PAYLOAD':'BLOCKED' if o['S5-F6']['tampered_payload_blocked'] else 'EXPORTABLE',
+              'S5-F7_DECISION_EXEMPTION_SCHEMA_ALIGNMENT':'PASS' if o['S5-F7']['pass'] else 'FAIL',
+            },
+            'historical_failure_disposition':o['historical_failure_disposition'],
+            'gold_approved_count':g['gold_approved_count'],
+            'pending_gold_count':g['pending_gold_count'],
+            'regression_gate':o['regression_gate'],
+            'stage_release':o['stage_release'],
+            's6_automatic_trust':o['s6_automatic_trust'],
+          }
+          expected=json.loads(Path('medical/stage-evals/S5/boundary-regression-v0.2.1.json').read_text(encoding='utf-8'))
+          if projection != expected:
+              print('EXPECTED:', json.dumps(expected, ensure_ascii=False, indent=2))
+              print('OBSERVED:', json.dumps(projection, ensure_ascii=False, indent=2))
+              raise SystemExit(1)
+          assert o['regression_gate']=='PASS'
+          assert o['hard_gate_failures']==[]
+          assert o['stage_release']=='BLOCKED_GOLD_REVIEW'
+          assert o['s6_automatic_trust']=='BLOCKED'
+          print('S5 v0.2.1 exposed boundary regression matches committed metrics.')
+          PY
+
+      - name: Preserve standalone non-benchmark training export compatibility
+        run: |
+          mkdir -p /tmp/groundsignal-s5-v021/standalone
+          python scripts/model_harness.py \
+            --cases medical/examples/clinical-medication-safety-001.json \
+            --config medical/configs/model-matrix.fixture.json \
+            --evidence medical/examples/evidence.jsonl \
+            --out /tmp/groundsignal-s5-v021/runs.jsonl
+          python scripts/export_training_data.py \
+            --cases medical/examples/clinical-medication-safety-001.json \
+            --runs /tmp/groundsignal-s5-v021/runs.jsonl \
+            --eval medical/examples/eval-baseline.jsonl \
+            --out-dir /tmp/groundsignal-s5-v021/standalone
+          test "$(wc -l < /tmp/groundsignal-s5-v021/standalone/preference.jsonl)" -eq 1
