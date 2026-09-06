@@ -55,6 +55,13 @@ passes every content and gate check, but deliberately records `candidate_frozen=
 `freeze_commit=null`. Merge approval is therefore still the authority boundary that materializes the
 freeze; the attestation cannot grant that authority itself.
 
+`scripts/check_s5_next_fresh_admission.py` adds a second authority boundary. Before any v0.9 fresh
+asset may exist, it requires a canonical freeze receipt, verifies that the named commit is an ancestor
+of `origin/main`, and compares all 22 pinned blobs against that commit. Once fresh assets exist, their
+protocol must also name the same freeze commit and state that authoring occurred afterward. With PR
+#4 still open, the correct current decision is `BLOCKED_NOT_FROZEN`; injecting an early fresh file is
+a hard failure, not a development warning.
+
 ## 1. Objective
 
 Build a reusable semantic-lineage detector that can identify whether a candidate training/source record is derived from protected benchmark/held-out content after paraphrase, field-level edits, wrapper changes, or partial fragment reuse.

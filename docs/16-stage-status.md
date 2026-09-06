@@ -150,6 +150,7 @@ noisy multi-reference mosaics                      6/6 BLOCK
 multilingual clean near-neighbours                18/18 ALLOW
 pre-freeze pinned artifacts                       22/22 VERIFIED
 candidate frozen                                         no
+v0.9 fresh authoring admission             BLOCKED_NOT_FROZEN
 builder / exporter regression                     PASS / PASS
 fresh evidence                                           no
 ```
@@ -160,6 +161,9 @@ development matrix passes without false block/review; it is synthetic exposed ev
 The pre-freeze attestation also pins the candidate's runtime, transitive compatibility files and
 evidence outputs with Git blob SHA-1 plus SHA-256. All 22 paths verify, while the attestation
 explicitly records `candidate_frozen=false` and a null freeze commit.
+The next-fresh admission guard therefore permits no v0.9 asset. A negative injection test confirms
+that even one file under the reserved fresh root fails CI unless a canonical-main freeze receipt is
+present, its 22 pinned artifacts match, and the new protocol names that exact freeze commit.
 
 ## 8. Current release decision
 
@@ -185,7 +189,8 @@ or clinical validation. Synthetic/CI evidence is not substituted for those claim
 3. keep the v0.7.3 target and v0.8 first observation immutable
 4. treat v0.8.1 only as exposed repair evidence
 5. retain the passing 36-case multilingual/mosaic development matrix as exposed evidence
-6. freeze the selected implementation before creating another independent fresh suite
-7. require an independent fresh PASS before any bounded release claim
-8. keep gold review as a separate release blocker
-9. only after bounded S5 release proceed to S6 dedicated evaluation
+6. freeze the selected implementation and record a canonical-main freeze receipt
+7. only after the admission guard opens, create another independent fresh suite
+8. require an independent fresh PASS before any bounded release claim
+9. keep gold review as a separate release blocker
+10. only after bounded S5 release proceed to S6 dedicated evaluation

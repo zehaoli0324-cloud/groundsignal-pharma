@@ -12,11 +12,13 @@ on:
       - 'scripts/calibrate_s5_lineage_v081.py'
       - 'scripts/calibrate_s5_lineage_v081_matrix.py'
       - 'scripts/verify_s5_v081_freeze_readiness.py'
+      - 'scripts/check_s5_next_fresh_admission.py'
       - 'scripts/eval_s5_boundary_regression_v081.py'
       - 'medical/stage-evals/S5/calibration-v0.8.1.json'
       - 'medical/stage-evals/S5/calibration-matrix-v0.8.1.json'
       - 'medical/stage-evals/S5/freeze-readiness-v0.8.1.json'
       - 'medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json'
+      - 'medical/stage-evals/S5/next-fresh-admission-v0.9.json'
       - 'medical/stage-evals/S5/regression-v0.8.1.json'
       - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
       - 'medical/stage-evals/S5/S5_V0.8.1_MULTILINGUAL_MOSAIC_REPAIR_REPORT.md'
@@ -37,11 +39,13 @@ on:
       - 'scripts/calibrate_s5_lineage_v081.py'
       - 'scripts/calibrate_s5_lineage_v081_matrix.py'
       - 'scripts/verify_s5_v081_freeze_readiness.py'
+      - 'scripts/check_s5_next_fresh_admission.py'
       - 'scripts/eval_s5_boundary_regression_v081.py'
       - 'medical/stage-evals/S5/calibration-v0.8.1.json'
       - 'medical/stage-evals/S5/calibration-matrix-v0.8.1.json'
       - 'medical/stage-evals/S5/freeze-readiness-v0.8.1.json'
       - 'medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json'
+      - 'medical/stage-evals/S5/next-fresh-admission-v0.9.json'
       - 'medical/stage-evals/S5/regression-v0.8.1.json'
       - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
       - '.github/workflows/s5-v081-multilingual-mosaic-repair.yml'
@@ -73,6 +77,7 @@ jobs:
             scripts/calibrate_s5_lineage_v081.py \
             scripts/calibrate_s5_lineage_v081_matrix.py \
             scripts/verify_s5_v081_freeze_readiness.py \
+            scripts/check_s5_next_fresh_admission.py \
             scripts/eval_s5_boundary_regression_v081.py
 
       - name: Preserve immutable v0.8 fresh FAIL
@@ -86,6 +91,32 @@ jobs:
           test "$(git rev-parse HEAD:medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json)" = '9568b8762896279f935e11a86d4dc6efb63b46fa'
           python scripts/verify_s5_v081_freeze_readiness.py --out /tmp/s5-v081-freeze-readiness.json
           cmp /tmp/s5-v081-freeze-readiness.json medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json
+
+      - name: Enforce next-fresh authoring admission
+        run: |
+          test "$(git rev-parse HEAD:scripts/check_s5_next_fresh_admission.py)" = '952a9ab3e815cd2047bccb7a55ca371ca4ce5d51'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/next-fresh-admission-v0.9.json)" = 'b73126c77f5601e6381d085c037251c60d0012a7'
+          python scripts/check_s5_next_fresh_admission.py --out /tmp/s5-v09-admission.json
+          cmp /tmp/s5-v09-admission.json medical/stage-evals/S5/next-fresh-admission-v0.9.json
+
+          tmp="$(mktemp -d)"
+          mkdir -p "$tmp/fresh-lineage-v0.9"
+          touch "$tmp/fresh-lineage-v0.9/unauthorized.json"
+          set +e
+          python scripts/check_s5_next_fresh_admission.py \
+            --receipt "$tmp/missing-receipt.json" \
+            --fresh-root "$tmp/fresh-lineage-v0.9" \
+            --out "$tmp/negative.json"
+          rc=$?
+          set -e
+          test "$rc" -eq 1
+          python - "$tmp/negative.json" <<'PY'
+          import json,sys
+          result=json.load(open(sys.argv[1]))
+          assert result['guard_gate']=='FAIL'
+          assert result['fresh_authoring_allowed'] is False
+          assert 'UNAUTHORIZED_FRESH_ASSETS_BEFORE_VERIFIED_FREEZE' in result['failures']
+          PY
 
       - name: Reproduce v0.8.1 calibration
         run: |
