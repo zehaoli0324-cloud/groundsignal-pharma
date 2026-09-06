@@ -1,0 +1,53 @@
+{
+  "suites": [
+    {
+      "suite": "v051",
+      "required_abstention_cases": 4,
+      "required_abstention_correct": 4,
+      "required_abstention_accuracy": 1.0,
+      "required_abstention_failures": [],
+      "known_cases": 38,
+      "known_case_abstentions": [],
+      "known_case_abstention_rate": 0.0,
+      "gate_checks": {
+        "required_abstention_accuracy": true,
+        "known_case_abstention_rate": true,
+        "no_partial_truth_on_required_abstention": true
+      },
+      "release_gate": "PASS"
+    },
+    {
+      "suite": "v052",
+      "required_abstention_cases": 6,
+      "required_abstention_correct": 6,
+      "required_abstention_accuracy": 1.0,
+      "required_abstention_failures": [],
+      "known_cases": 40,
+      "known_case_abstentions": [],
+      "known_case_abstention_rate": 0.0,
+      "gate_checks": {
+        "required_abstention_accuracy": true,
+        "known_case_abstention_rate": true,
+        "no_partial_truth_on_required_abstention": true
+      },
+      "release_gate": "PASS"
+    },
+    {
+      "suite": "v054fresh",
+      "required_abstention_cases": 6,
+      "required_abstention_correct": 6,
+      "required_abstention_accuracy": 1.0,
+      "required_abstention_failures": [],
+      "known_cases": 32,
+      "known_case_abstentions": [],
+      "known_case_abstention_rate": 0.0,
+      "gate_checks": {
+        "required_abstention_accuracy": true,
+        "known_case_abstention_rate": true,
+        "no_partial_truth_on_required_abstention": true
+      },
+      "release_gate": "PASS"
+    }
+  ],
+  "release_gate": "PASS"
+}

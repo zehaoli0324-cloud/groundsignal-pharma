@@ -1,0 +1,28 @@
+{
+  "benchmark_id": "S3a-compositional-frame-heldout-v0.5.1",
+  "metrics": {
+    "gold_propositions": 66,
+    "predicted_propositions": 66,
+    "true_positive": 66,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "critical_proposition_recall": 1.0,
+    "polarity_accuracy_on_structural_matches": 1.0,
+    "polarity_structural_matches": 66,
+    "population_accuracy_on_semantic_matches": 1.0,
+    "population_semantic_matches": 66,
+    "condition_binding_accuracy_on_semantic_matches": 1.0,
+    "condition_semantic_matches": 66,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": true,
+    "critical_recall": true,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": true
+  },
+  "release_gate": "PASS",
+  "failures": []
+}
