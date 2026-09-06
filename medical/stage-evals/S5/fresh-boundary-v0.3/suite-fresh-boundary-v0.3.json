@@ -1,0 +1,14 @@
+{
+  "stage": "S5",
+  "suite_id": "S5-FRESH-BOUNDARY-v0.3",
+  "version": "v0.3",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "implementation_freeze_commit": "c938dc86c992f13015585b813aad11c2dca55b24",
+  "source_snapshot_commit": null,
+  "family_ids": ["S5FRESH-BOUNDARY-002"],
+  "allowed_training_splits": ["dev"],
+  "prohibited_training_splits": ["regression", "heldout"],
+  "purpose": "Second genuinely fresh post-repair benchmark-boundary evaluation using attack classes not present in v0.2.",
+  "release_use": "evaluation_only"
+}
