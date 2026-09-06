@@ -2,7 +2,9 @@
 
 > Date: 2026-09-06  
 > Lifecycle definition: `docs/15-system-stages.md`  
-> Evaluation/optimization ledger: `docs/17-evaluation-methods-and-optimization-ledger.md`
+> Evaluation/optimization ledger: `docs/17-evaluation-methods-and-optimization-ledger.md`  
+> Reusable method: `docs/18-reusable-stage-eval-optimization-playbook.md`  
+> Algorithm collaboration: `docs/19-algorithm-collaboration-handoff-guide.md`
 
 The system has **10 lifecycle stages**. `PASS` always refers to the explicitly tested slice, not unrestricted clinical deployment. Historical fresh/first observations are immutable; once observed, a suite may only be reused as exposed regression evidence.
 
@@ -12,7 +14,7 @@ The system has **10 lifecycle stages**. `PASS` always refers to the explicitly t
 | S2 | Knowledge Search & Source Routing | **CONDITIONAL PASS / v0.4 development FAIL** | v0.3 fresh routing 91.7%; S2→S3 94.44%; live DailyMed 3/3 | clause-level negation/exclusion; broader live sources |
 | S3 | Evidence Verification & Temporal Truth | **CONDITIONAL PASS** | S3a fresh F1 98.90%, critical recall 100%; S3b 40/40; joint 17/18 | larger real-source/noisy-passage held-out |
 | S4 | Medical KG Construction / Update | **CONDITIONAL PASS / independent fresh PASS** | new fresh 20/20; must-reject 7/7; stale ACTIVE 0; invariant violations 0 | persistent/real-source graph proof; production ingest disabled |
-| S5 | Controlled Case / Benchmark Factory | **v0.6.1 EXPOSED IDENTITY/LINEAGE/TOCTOU REGRESSION PASS / RELEASE BLOCKED** | v0.6 independent fresh F20–F23 FAIL preserved; v0.6.1 exposed regression repairs all four | freeze v0.6.1 and create genuinely new post-freeze fresh suite; gold review remains independent blocker |
+| S5 | Controlled Case / Benchmark Factory | **v0.7 INDEPENDENT FRESH LINEAGE-GENERALIZATION FAIL / RELEASE BLOCKED** | v0.6.1 exposed F20–F23 PASS; new v0.7 preconditions PASS but F24–F27 FAIL | deterministic repair F24/F27 + algorithm handoff F25/F26; then re-freeze and new hidden fresh; gold review remains separate |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release |
 | S7 | Evaluation & Safety Gate | Protocol complete | v0.2 rubric, graph/RAG/Agent layers, regression safety gate | human/Judge calibration + real model scoring |
 | S8 | Failure Diagnosis | Framework ready | taxonomy, stale-knowledge bad case, intervention router | multi-model cross-case failure clusters |
@@ -57,6 +59,7 @@ v0.5   F16–F19  fourth independent fresh authority composition            FAIL
 v0.5.1           exposed repair                                           PASS
 v0.6   F20–F23  fifth independent fresh identity / lineage / TOCTOU       FAIL
 v0.6.1           exposed identity / lineage / atomic-snapshot repair       PASS
+v0.7   F24–F27  sixth independent fresh lineage generalization            FAIL
 ```
 
 Recent immutable first-observation blobs:
@@ -65,72 +68,64 @@ Recent immutable first-observation blobs:
 v0.4  45a10ed2cc522b555a3f3eecf785dffedf8cd4c3
 v0.5  c300d301cb6bf23e5ec1cc0472666f44a1148e77
 v0.6  f855e853ea2af9705cd3db478a3a40848459e0ea
+v0.7  09b2c84c1ebe63dfdc40c0317b73f5b778df733c
 ```
 
-Gold approval remains separate from structural evaluation: P0 `0/12`, v0.2 family `0/1`, v0.3 family `0/1`, v0.4 family `0/1`; no expert/clinical approval is inferred. v0.5/v0.6 are structural-only suites.
+Gold approval remains separate from structural evaluation: P0 `0/12`, v0.2 family `0/1`, v0.3 family `0/1`, v0.4 family `0/1`; no expert/clinical approval is inferred. v0.5–v0.7 are structural-only suites.
 
-## S5 v0.6 first observation — immutable independent FAIL
-
-Implementation freeze: `60f74c7f30c007008ee73df3eed6eacf4a9bab0a`.
-
-All preconditions passed, then four new hard failures were observed:
-
-```text
-S5-F20 transformed heldout-derived ordinary source       FAIL
-S5-F21 Unicode-normalization case_id collision           FAIL
-S5-F22 registry check/read TOCTOU substitution           FAIL
-S5-F23 ordinary-source check/read TOCTOU substitution    FAIL
-fresh structural gate                                    FAIL
-S5 release                                BLOCKED_GOLD_REVIEW
-S6 automatic trust                                     BLOCKED
-```
-
-That result is exposed forever and is never relabeled fresh.
-
-## S5 v0.6.1 — exposed repair checkpoint
-
-Generic changes:
-
-- case identifiers must be Unicode NFC canonical at construction and protected validation boundaries;
-- a stable semantic-core fingerprint is reserved across benchmark and ordinary-source namespaces, preventing byte-distinct transformed benchmark content from being reclassified as ordinary training data;
-- registry, registered policy, suite, manifest, source case and ordinary source authority JSON are hashed and parsed from the same in-memory byte snapshot;
-- existing authenticated registry, exact payload, split guard and declared-family containment protections remain active.
-
-Regression contract:
+## S5 v0.6.1 exposed repair checkpoint
 
 ```text
 v0.6 first observation preservation      PASS
 v0.5.1 exposed regression                PASS
 F20 transformed lineage                  BLOCKED
-F21 Unicode identity collision           BLOCKED
+F21 Unicode NFC identity collision       BLOCKED
 F22 registry TOCTOU                      BLOCKED
 F23 source TOCTOU                        BLOCKED
-failed gates                                 0
 regression gate                          PASS
 ```
 
-Current decision:
+This remains exposed evidence only.
+
+## S5 v0.7 first observation — immutable independent FAIL
+
+Implementation freeze: `b2e2696bae9cf57bbf255e67e64dd63bd8773ff8`.
+
+All v0.7 evaluator logic and fixtures were created after the freeze. All normal preconditions passed, then:
 
 ```text
-S5 v0.6.1 exposed regression             PASS
-S5 bounded independent release           NOT ESTABLISHED
-S5 gold review                           INCOMPLETE
-S5 stage_release                         BLOCKED_GOLD_REVIEW
-S6 automatic trust                       BLOCKED
+S5-F24 cross-split semantic duplicate isolation        FAIL
+S5-F25 paraphrased heldout-derived ordinary laundering FAIL
+S5-F26 partial heldout fragment reuse                  FAIL
+S5-F27 NFKC compatibility-equivalent case identity     FAIL
+precondition failures                                     0
+fresh structural gate                                  FAIL
+S5 release                               BLOCKED_GOLD_REVIEW
+S6 automatic trust                                    BLOCKED
 ```
+
+Ownership split:
+
+```text
+F24 deterministic benchmark/eval infrastructure
+F27 deterministic identifier contract
+F25 algorithm-required semantic near-duplicate lineage
+F26 algorithm-required field/span partial-lineage detection
+```
+
+Concrete algorithm handoff: `docs/20-s5-v07-algorithm-handoff.md`.
 
 ## Immediate order
 
 ```text
-1. preserve v0.4/v0.5/v0.6 first observations exactly
-2. treat v0.6.1 only as exposed repair evidence
-3. freeze v0.6.1 implementation
-4. after freeze create a genuinely new S5 fresh suite
-   - paraphrased / partial-derived benchmark leakage
-   - semantic-core perturbations that should still count as derived
-   - new path/identifier canonicalization attacks
-   - snapshot-consistency attacks that do not reuse v0.6 mechanics
-5. gold review remains independent; never fabricate approval
-6. only after bounded S5 release proceed to S6 dedicated evaluation
-7. then continue S6 → S7 → S8 → S9 → S10
+1. preserve v0.4/v0.5/v0.6/v0.7 first observations exactly
+2. never relabel v0.7 after repair; it is exposed forever
+3. repair F24/F27 through generic deterministic contracts, not fixture-specific rules
+4. hand F25/F26 capability gaps to algorithm owner using docs/20
+5. algorithm owner may use dev + exposed data only; no next hidden fresh
+6. integrate detector + exposed regression + cross-stage non-regression
+7. freeze repaired implementation
+8. eval owner creates another unseen S5 lineage family
+9. gold review remains independent; never fabricate approval
+10. only after bounded S5 release proceed to S6 dedicated evaluation
 ```

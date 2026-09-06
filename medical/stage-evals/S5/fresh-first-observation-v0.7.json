@@ -1,0 +1,48 @@
+{
+  "stage": "S5",
+  "version": "v0.7",
+  "eval_name": "sixth-fresh-lineage-generalization-first-observation",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "first_observation": true,
+  "target_implementation_freeze_commit": "b2e2696bae9cf57bbf255e67e64dd63bd8773ff8",
+  "eval_suite_id": "S5-FRESH-LINEAGE-GENERALIZATION-v0.7",
+  "carrier_suite_id": "S5-FRESH-BOUNDARY-v0.4",
+  "FROZEN_TARGET_IDENTITY": {
+    "freeze_commit": "b2e2696bae9cf57bbf255e67e64dd63bd8773ff8",
+    "suite_declares_same_freeze": true,
+    "target_blobs": {
+      "scripts/export_training_data.py": {"expected_blob": "923a7f35d55de0fcd80d5c60c31c6295cc6c2851", "observed_blob": "923a7f35d55de0fcd80d5c60c31c6295cc6c2851", "match": true},
+      "scripts/s5_trust_policy.py": {"expected_blob": "893eeb35d323960a364e1294bffbbd57499f56bf", "observed_blob": "893eeb35d323960a364e1294bffbbd57499f56bf", "match": true},
+      "scripts/materialize_s5_cases.py": {"expected_blob": "ecca14f947e7922bb277c1149f07d51f34f605cf", "observed_blob": "ecca14f947e7922bb277c1149f07d51f34f605cf", "match": true},
+      "scripts/s5_release_gate.py": {"expected_blob": "8431e1e4c299df8c051ef19e7a69db3d1d199715", "observed_blob": "8431e1e4c299df8c051ef19e7a69db3d1d199715", "match": true},
+      "scripts/model_harness.py": {"expected_blob": "e6c90ab88c476c38b765d61ae8c9e2b471c8e2a2", "observed_blob": "e6c90ab88c476c38b765d61ae8c9e2b471c8e2a2", "match": true},
+      "medical/schemas/clinical-case.schema.json": {"expected_blob": "473edfd800b717513582a1100f9b8f4fe0814e0a", "observed_blob": "473edfd800b717513582a1100f9b8f4fe0814e0a", "match": true},
+      "medical/configs/s5-trust-policy-registry-v0.4.1.json": {"expected_blob": "b9637e31df679e49b36d49ea96177a8100fd5c2a", "observed_blob": "b9637e31df679e49b36d49ea96177a8100fd5c2a", "match": true},
+      "medical/configs/s5-trust-root-v0.4.1.json": {"expected_blob": "57adc5384818a4254192ed53e8ba60eee5d70e48", "observed_blob": "57adc5384818a4254192ed53e8ba60eee5d70e48", "match": true}
+    },
+    "pass": true
+  },
+  "AUTHENTICATED_TRUST_ROOT": {"registry_version": "s5-trust-policy-registry-v0.4.1", "registry_path": "medical/configs/s5-trust-policy-registry-v0.4.1.json", "registry_git_blob_sha1": "b9637e31df679e49b36d49ea96177a8100fd5c2a", "default_policy_id": "s5-trust-root-v0.4.1", "default_policy_path": "medical/configs/s5-trust-root-v0.4.1.json", "default_policy_git_blob_sha1": "57adc5384818a4254192ed53e8ba60eee5d70e48", "registered_policy_count": 2, "pass": true},
+  "CARRIER_MATERIALIZATION": {"family_count": 1, "case_count": 5, "split_counts": {"dev": 3, "heldout": 1, "regression": 1}, "training_eligible_count": 3, "training_blocked_count": 2, "pass": true},
+  "BASELINE_PARTITION_EXPORT_GUARD": {"dev": {"blocked": false, "exported": true, "error_type": null}, "regression": {"blocked": true, "exported": false, "error_type": "PermissionError"}, "heldout": {"blocked": true, "exported": false, "error_type": "PermissionError"}, "pass": true},
+  "ORDINARY_SOURCE_BASELINE_EXPORT": {"blocked": false, "exported": true, "error_type": null, "pass": true},
+  "DECISION_CONTRACT_ALIGNMENT": {"materializer_accepts_exemption": true, "schema_accepts_exemption_shape": true, "pass": true},
+  "MODEL_PROMPT_GOLD_LEAKAGE": {"sentinel_leaked": false, "pass": true},
+  "GOLD_RELEASE_CONTAINMENT": {"gold_approved_count": 0, "pending_gold_count": 1, "release_ready": false, "decision": "BLOCKED_GOLD_REVIEW", "pass": true},
+  "S5-F24": {"probe": "dev and heldout benchmark cases have identical semantic core but different case_id/title/tags", "semantic_core_equal": true, "dev_case_id": "S5FRESH-BND7-CROSS-DEV-001", "heldout_case_id": "S5FRESH-BND7-CROSS-HO-001", "policy_builder_rejected": false, "policy_content_validator_rejected": false, "pass": false},
+  "S5-F25": {"probe": "light paraphrase of heldout-derived ordinary source bypasses exact semantic-core lineage fingerprint", "derived_from_case_id": "S5FRESH-BND4-HO-001", "policy_builder_rejected": false, "policy_content_validator_rejected": false, "pass": false},
+  "S5-F26": {"probe": "ordinary source reuses evaluation-critical fragments from heldout while changing other semantic-core fields", "derived_fragments_from_case_id": "S5FRESH-BND4-HO-001", "reused_fields": ["evidence_snapshot", "expected_behavior", "graph_eval", "safety", "scoring"], "policy_builder_rejected": false, "policy_content_validator_rejected": false, "pass": false},
+  "S5-F27": {"probe": "benchmark and ordinary case_id are distinct under NFC but equal under Unicode NFKC compatibility normalization", "benchmark_case_id": "S5FRESH-BND7-ID-A", "ordinary_case_id": "S5FRESH-BND7-ID-Ａ", "nfc_equal": false, "nfkc_equal": true, "policy_builder_rejected": false, "policy_content_validator_rejected": false, "pass": false},
+  "hard_gate_failures": ["S5-F24", "S5-F25", "S5-F26", "S5-F27"],
+  "precondition_failures": [],
+  "fresh_structural_gate": "FAIL",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "notes": [
+    "All v0.7 evaluator logic and attack fixtures were authored after the v0.6.1 implementation freeze.",
+    "Previously registered v0.4 cases are used only as authenticated carrier controls.",
+    "No v0.7 implementation repair is applied before this first observation.",
+    "No expert approval, clinical validation, real-user evidence, or model-training gain is inferred."
+  ]
+}

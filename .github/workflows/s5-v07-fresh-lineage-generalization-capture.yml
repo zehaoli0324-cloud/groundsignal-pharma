@@ -1,19 +1,25 @@
-name: S5 v0.7 Fresh Lineage-Generalization First-Observation Capture
+name: S5 v0.7 Historical Fresh Lineage-Generalization Preservation
 
 on:
   push:
     paths:
       - 'scripts/eval_s5_fresh_boundary_v07.py'
       - 'medical/stage-evals/S5/fresh-boundary-v0.7/**'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.7.json'
+      - 'medical/stage-evals/S5/failures-v0.7.json'
+      - 'medical/stage-evals/S5/S5_V0.7_FRESH_LINEAGE_GENERALIZATION_FAIL_REPORT.md'
       - '.github/workflows/s5-v07-fresh-lineage-generalization-capture.yml'
   pull_request:
     paths:
       - 'scripts/eval_s5_fresh_boundary_v07.py'
       - 'medical/stage-evals/S5/fresh-boundary-v0.7/**'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.7.json'
+      - 'medical/stage-evals/S5/failures-v0.7.json'
+      - 'medical/stage-evals/S5/S5_V0.7_FRESH_LINEAGE_GENERALIZATION_FAIL_REPORT.md'
       - '.github/workflows/s5-v07-fresh-lineage-generalization-capture.yml'
 
 jobs:
-  capture-first-observation:
+  preserve-first-observation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,42 +29,36 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Syntax check evaluator
-        run: python -m py_compile scripts/eval_s5_fresh_boundary_v07.py
-
-      - name: Preserve v0.6 immutable first observation
+      - name: Protect immutable v0.7 first-observation blob
         run: |
-          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.6.json)" = 'f855e853ea2af9705cd3db478a3a40848459e0ea'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.7.json)" = '09b2c84c1ebe63dfdc40c0317b73f5b778df733c'
 
-      - name: Confirm v0.6.1 exposed repair remains green before fresh observation
+      - name: Reproduce first observation at historical commit
         run: |
-          mkdir -p /tmp/groundsignal-s5-v07
-          python scripts/eval_s5_boundary_regression_v061.py --out /tmp/groundsignal-s5-v07/v061.json
-          python - <<'PY'
-          import json
-          d=json.load(open('/tmp/groundsignal-s5-v07/v061.json', encoding='utf-8'))
-          assert d['regression_gate'] == 'PASS'
-          assert d['failed_gates'] == []
-          print('S5 v0.6.1 exposed regression remains PASS before v0.7 first observation.')
-          PY
-
-      - name: Capture v0.7 first observation without repairing it
-        id: fresh
-        run: |
+          first_commit='e478878e46e8fec04d07ae1c9d12ba4fefd659db'
+          cp medical/stage-evals/S5/fresh-first-observation-v0.7.json /tmp/s5-v07-expected.json
+          rm -rf /tmp/groundsignal-s5-v07-historical
+          git worktree add --detach /tmp/groundsignal-s5-v07-historical "$first_commit"
+          cd /tmp/groundsignal-s5-v07-historical
+          python -m py_compile scripts/eval_s5_fresh_boundary_v07.py
           set +e
-          python scripts/eval_s5_fresh_boundary_v07.py --out /tmp/groundsignal-s5-v07/v07-first.json
+          python scripts/eval_s5_fresh_boundary_v07.py --out /tmp/s5-v07-reproduced.json
           status=$?
           set -e
-          echo "$status" > /tmp/groundsignal-s5-v07/v07-exit-status.txt
-          cat /tmp/groundsignal-s5-v07/v07-first.json
-          echo "evaluator_exit_status=$status" >> "$GITHUB_OUTPUT"
-          test -s /tmp/groundsignal-s5-v07/v07-first.json
+          test "$status" -eq 1
 
-      - name: Upload immutable first-observation candidate
-        uses: actions/upload-artifact@v4
-        with:
-          name: s5-v07-first-observation
-          path: |
-            /tmp/groundsignal-s5-v07/v07-first.json
-            /tmp/groundsignal-s5-v07/v07-exit-status.txt
-          if-no-files-found: error
+      - name: Match immutable historical result exactly
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected=json.loads(Path('/tmp/s5-v07-expected.json').read_text(encoding='utf-8'))
+          observed=json.loads(Path('/tmp/s5-v07-reproduced.json').read_text(encoding='utf-8'))
+          assert observed == expected
+          assert observed['precondition_failures'] == []
+          assert observed['hard_gate_failures'] == ['S5-F24','S5-F25','S5-F26','S5-F27']
+          assert observed['fresh_structural_gate'] == 'FAIL'
+          assert observed['stage_release'] == 'BLOCKED_GOLD_REVIEW'
+          assert observed['s6_automatic_trust'] == 'BLOCKED'
+          print('S5 v0.7 independent fresh FAIL preserved exactly at its historical first-observation commit.')
+          PY

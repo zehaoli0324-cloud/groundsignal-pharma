@@ -1,0 +1,47 @@
+{
+  "stage": "S5",
+  "version": "v0.7",
+  "source_first_observation": "medical/stage-evals/S5/fresh-first-observation-v0.7.json",
+  "target_freeze_commit": "b2e2696bae9cf57bbf255e67e64dd63bd8773ff8",
+  "failures": [
+    {
+      "id": "S5-F24",
+      "name": "CROSS_SPLIT_SEMANTIC_DUPLICATE_NOT_REJECTED",
+      "severity": "hard_gate",
+      "owner_class": "eval_infrastructure",
+      "observation": "A dev case and a heldout case with identical semantic-core content but different case_id/title/tags were accepted by policy construction and policy-content validation.",
+      "root_cause": "Semantic-core fingerprints are used to block benchmark-to-ordinary reclassification but are not enforced as a uniqueness/isolation constraint across benchmark splits.",
+      "capability_gap": "The benchmark factory must prevent evaluation-equivalent content from existing in train-eligible and evaluation-only partitions under different identities."
+    },
+    {
+      "id": "S5-F25",
+      "name": "PARAPHRASED_HELDOUT_DERIVED_ORDINARY_LAUNDERING",
+      "severity": "hard_gate",
+      "owner_class": "algorithm_required",
+      "observation": "A lightly paraphrased copy explicitly derived from a heldout benchmark case was accepted as an ordinary training source because its exact semantic-core digest changed.",
+      "root_cause": "The current lineage guard is an exact structured hash, not a semantic near-duplicate detector, so benign wording changes destroy equality while retaining benchmark content lineage.",
+      "capability_gap": "Detect transformed/near-duplicate benchmark lineage across paraphrase and presentation changes without exposing hidden fresh cases to the repair implementer."
+    },
+    {
+      "id": "S5-F26",
+      "name": "PARTIAL_HELDOUT_FRAGMENT_REUSE_NOT_DETECTED",
+      "severity": "hard_gate",
+      "owner_class": "algorithm_required",
+      "observation": "An ordinary source that changed wrapper context but reused evaluation-critical heldout fragments was accepted by both policy construction and validation.",
+      "root_cause": "Whole-record semantic-core equality cannot detect field-level or span-level contamination when only part of an evaluation case is reused.",
+      "capability_gap": "Detect partial benchmark contamination at field/span level and surface the matched reference evidence for review."
+    },
+    {
+      "id": "S5-F27",
+      "name": "NFKC_COMPATIBILITY_CASE_ID_COLLISION",
+      "severity": "hard_gate",
+      "owner_class": "eval_infrastructure",
+      "observation": "A benchmark identifier and an ordinary-source identifier that differ under NFC but collapse to the same value under NFKC were accepted as separate identities.",
+      "root_cause": "The system identifier contract requires NFC only and does not constrain compatibility-equivalent Unicode forms or a safer identifier alphabet.",
+      "capability_gap": "Use a compatibility-safe canonical identity representation for system keys before namespace uniqueness checks."
+    }
+  ],
+  "controls": {"baseline_dev": "EXPORTABLE", "baseline_regression": "BLOCKED", "baseline_heldout": "BLOCKED", "ordinary_baseline": "EXPORTABLE", "decision_contract_alignment": "PASS", "prompt_gold_leakage": "NONE", "gold_release": "BLOCKED_GOLD_REVIEW"},
+  "decision": "FRESH_STRUCTURAL_FAIL",
+  "s6_automatic_trust": "BLOCKED"
+}
