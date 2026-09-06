@@ -1,0 +1,105 @@
+{
+  "stage": "S5",
+  "version": "v0.9-admission-tests-v0.1",
+  "evidence_class": "development_process_guard_test",
+  "fresh_evidence": false,
+  "scenario_count": 10,
+  "scenario_pass_count": 10,
+  "test_gate": "PASS",
+  "scenarios": [
+    {
+      "name": "missing_receipt_no_assets_blocks_cleanly",
+      "guard_gate": "PASS",
+      "admission_decision": "BLOCKED_NOT_FROZEN",
+      "fresh_authoring_allowed": false,
+      "expected_failures_observed": []
+    },
+    {
+      "name": "malformed_receipt_fails_closed",
+      "guard_gate": "FAIL",
+      "admission_decision": "FAIL_CLOSED",
+      "fresh_authoring_allowed": false,
+      "expected_failures_observed": [
+        "RECEIPT_UNREADABLE"
+      ]
+    },
+    {
+      "name": "self_asserted_authority_is_rejected",
+      "guard_gate": "FAIL",
+      "admission_decision": "FAIL_CLOSED",
+      "fresh_authoring_allowed": false,
+      "expected_failures_observed": [
+        "ATTESTATION_PIN_MISMATCH",
+        "CANDIDATE_NOT_FROZEN",
+        "EXPLICIT_APPROVAL_MISSING",
+        "FREEZE_COMMIT_INVALID",
+        "MERGED_PR_MISMATCH",
+        "RECEIPT_SCOPE_INVALID",
+        "RECEIPT_TYPE_INVALID"
+      ]
+    },
+    {
+      "name": "unavailable_commit_is_rejected",
+      "guard_gate": "FAIL",
+      "admission_decision": "FAIL_CLOSED",
+      "fresh_authoring_allowed": false,
+      "expected_failures_observed": [
+        "FREEZE_COMMIT_UNAVAILABLE"
+      ]
+    },
+    {
+      "name": "unmerged_pr_head_is_rejected",
+      "guard_gate": "FAIL",
+      "admission_decision": "FAIL_CLOSED",
+      "fresh_authoring_allowed": false,
+      "expected_failures_observed": [
+        "FREEZE_COMMIT_NOT_ON_CANONICAL_MAIN"
+      ]
+    },
+    {
+      "name": "fresh_asset_before_freeze_is_rejected",
+      "guard_gate": "FAIL",
+      "admission_decision": "FAIL_CLOSED",
+      "fresh_authoring_allowed": false,
+      "expected_failures_observed": [
+        "FRESH_PROTOCOL_MISSING",
+        "UNAUTHORIZED_FRESH_ASSETS_BEFORE_VERIFIED_FREEZE"
+      ]
+    },
+    {
+      "name": "verified_canonical_freeze_opens_authoring",
+      "guard_gate": "PASS",
+      "admission_decision": "ALLOW_AFTER_VERIFIED_FREEZE",
+      "fresh_authoring_allowed": true,
+      "expected_failures_observed": []
+    },
+    {
+      "name": "post_freeze_assets_without_protocol_are_rejected",
+      "guard_gate": "FAIL",
+      "admission_decision": "FAIL_CLOSED",
+      "fresh_authoring_allowed": false,
+      "expected_failures_observed": [
+        "FRESH_PROTOCOL_MISSING"
+      ]
+    },
+    {
+      "name": "protocol_target_mismatch_is_rejected",
+      "guard_gate": "FAIL",
+      "admission_decision": "FAIL_CLOSED",
+      "fresh_authoring_allowed": false,
+      "expected_failures_observed": [
+        "FRESH_PROTOCOL_INVALID"
+      ]
+    },
+    {
+      "name": "matching_post_freeze_protocol_is_admitted",
+      "guard_gate": "PASS",
+      "admission_decision": "ALLOW_AFTER_VERIFIED_FREEZE",
+      "fresh_authoring_allowed": true,
+      "expected_failures_observed": []
+    }
+  ],
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "note": "The positive path uses a deterministic mocked canonical Git history; it is not a real freeze receipt or fresh evidence."
+}

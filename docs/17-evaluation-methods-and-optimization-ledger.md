@@ -127,6 +127,7 @@ S5 目前已经形成的防线：
 - v0.8.1 扩展矩阵新增 12 个英→中/日/西翻译污染、6 个带噪声双源拼接和 18 个多语言同领域干净近邻：污染 18/18 阻断，干净 18/18 放行；这些均为 synthetic exposed development evidence，不是 fresh；
 - v0.8.1 冻结前清单用 Git blob SHA-1 与 SHA-256 双重固定 22 个实现、兼容依赖和证据文件，22/22 复验通过；清单仍明确 `candidate_frozen=false`，只有获批合并后才能产生正式 freeze commit；
 - v0.9 fresh 准入门禁当前返回 `BLOCKED_NOT_FROZEN`；无冻结回执时注入任意 fresh 文件都会 fail-closed，回执还必须证明冻结提交已进入 canonical `main` 且 22 个固定文件逐一匹配；
+- 准入门禁新增 10 个确定性对抗状态测试，覆盖畸形/自证回执、不可用或未合并提交、提前写入、缺失/错配协议和模拟合法转换；10/10 通过，但模拟正路径不构成真实冻结或 fresh 证据；
 - 每次 fresh first observation 用 Git blob/历史 commit 固化，不会因修复被覆盖。
 
 ## 6. 我们现在的“优化结果”应该怎样解读

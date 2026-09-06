@@ -12,7 +12,7 @@ GroundSignal Medical 是一个面向医疗大模型开发的 **evidence-grounded
 
 项目的正式能力版图现包括：**医学问答、辅助诊疗、用药安全、医学影像、报告解读、医疗 Agent、多模态医疗模型、Benchmark、评测 Agent 和训练数据**。这些方向共享同一套证据、知识图谱、分区隔离和分阶段评测底座，但成熟度分别记录；“纳入版图”不等于“已经具备临床能力”。完整边界与各方向完成标准见 [`docs/21-medical-ai-capability-portfolio.md`](docs/21-medical-ai-capability-portfolio.md)。
 
-> **当前 S5 门禁：** v0.8 首次 fresh FAIL 保持不可变；v0.8.1 的 36-case 多语言/拼接开发矩阵通过，22/22 个冻结候选文件已完成双哈希核验，但仍只属于 synthetic exposed evidence，且 `candidate_frozen=false`。v0.9 fresh authoring 当前为 `BLOCKED_NOT_FROZEN`，任何提前写入的 fresh 资产都会触发 fail-closed。S5 独立 release 与 gold review 未完成，S6 不得自动信任 S5 输出。
+> **当前 S5 门禁：** v0.8 首次 fresh FAIL 保持不可变；v0.8.1 的 36-case 多语言/拼接开发矩阵通过，22/22 个冻结候选文件已完成双哈希核验，但仍只属于 synthetic exposed evidence，且 `candidate_frozen=false`。v0.9 fresh authoring 当前为 `BLOCKED_NOT_FROZEN`；10/10 个准入对抗场景证明伪造回执、未合并提交、提前写入、缺失协议和目标提交错配都会 fail-closed。S5 独立 release 与 gold review 未完成，S6 不得自动信任 S5 输出。
 
 ```text
 Real User Needs / Clinical Workflows

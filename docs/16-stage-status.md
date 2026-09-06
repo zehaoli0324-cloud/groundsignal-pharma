@@ -151,6 +151,7 @@ multilingual clean near-neighbours                18/18 ALLOW
 pre-freeze pinned artifacts                       22/22 VERIFIED
 candidate frozen                                         no
 v0.9 fresh authoring admission             BLOCKED_NOT_FROZEN
+v0.9 admission adversarial scenarios                  10/10 PASS
 builder / exporter regression                     PASS / PASS
 fresh evidence                                           no
 ```
@@ -164,6 +165,10 @@ explicitly records `candidate_frozen=false` and a null freeze commit.
 The next-fresh admission guard therefore permits no v0.9 asset. A negative injection test confirms
 that even one file under the reserved fresh root fails CI unless a canonical-main freeze receipt is
 present, its 22 pinned artifacts match, and the new protocol names that exact freeze commit.
+Its deterministic adversarial suite covers 10 states: missing/malformed/self-asserted receipts,
+unavailable or unmerged commits, pre-freeze assets, the simulated valid transition, and missing,
+mismatched or matching post-freeze protocols. The positive transition uses mocked Git history and is
+explicitly development process evidence—not a real freeze, fresh result or release signal.
 
 ## 8. Current release decision
 
