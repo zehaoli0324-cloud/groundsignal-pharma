@@ -68,7 +68,7 @@ fixture / development check
 | S3a Proposition Extraction | 原子医学命题抽取 | fresh F1 98.90%；critical recall 100%；mandatory abstention 6/6 | bounded CONDITIONAL PASS；长/噪声/多源文本不足 |
 | S3b Evidence Relation | 支持/反驳/证据不足关系 | 40/40，relation accuracy 100%，high-risk false-support 0 | bounded CONDITIONAL PASS；需扩大真实来源 |
 | S4 Medical KG Construction / Update | 知识图谱时间状态、冲突、不变量 | 首次 fresh 18/20 FAIL；修复后新 fresh 20/20 PASS；must-reject 7/7 | CONDITIONAL PASS；persistent real-source graph 未证实，production ingest disabled |
-| S5 Controlled Case / Benchmark Factory | benchmark 分区、gold、训练导出、身份/来源/血缘 | v0.2→v0.6 连续五轮独立 fresh 找到 F4–F23；当前 v0.6.1 已暴露回归修复 F20–F23 | **RELEASE BLOCKED**；必须再做 post-freeze fresh，gold review 仍未完成 |
+| S5 Controlled Case / Benchmark Factory | benchmark 分区、gold、训练导出、身份/来源/血缘 | v0.2→v0.7 六轮独立 fresh 找到 F4–F27；v0.7.3 完成 225-case 开发校准与 F24–F27 exposed regression | **RELEASE BLOCKED**；冻结后必须再做 post-freeze fresh，gold review 仍未完成 |
 | S6 Model / RAG / Agent Harness | 模型/检索增强生成/Agent 运行可复现与证据注入 | runner + fixture + CI scaffold | 不能正式推进 dedicated S6 release eval，因 S5 未 bounded release |
 | S7 Evaluation & Safety Gate | rubric、多层评分、安全门禁 | protocol + rubric v0.2 + regression gate | 缺 human/Judge calibration 与真实模型 scoring |
 | S8 Failure Diagnosis | 错误聚类、根因、干预路由 | taxonomy + intervention router | 缺 multi-model × multi-case failure clusters |
@@ -99,6 +99,10 @@ v0.5   F16–F19  payload-after-load, bearer context, namespace, family escape  
 v0.5.1           exact payload + namespace + family containment                    exposed PASS
 v0.6   F20–F23  derived lineage, Unicode identity, registry/source TOCTOU         fresh FAIL
 v0.6.1           semantic lineage + NFC identity + atomic authority snapshot       exposed PASS
+v0.7   F24–F27  cross-split/paraphrase/partial lineage/NFKC identity              fresh FAIL
+v0.7.1           deterministic F24/F27 repair                                      partial repair
+v0.7.2           record/field/span hybrid + exporter validation                    exposed PASS
+v0.7.3           protected-exclusive index + broader calibration                   development PASS
 ```
 
 S5 目前已经形成的防线：
@@ -112,6 +116,9 @@ S5 目前已经形成的防线：
 - v0.6.1 新增 Unicode NFC canonical identity；
 - v0.6.1 新增跨 benchmark/ordinary 的 semantic-core lineage fingerprint，防止仅换 ID/标题/外层字节的 held-out 洗白；
 - v0.6.1 新增 atomic byte snapshot：受信 JSON 的 hash 与 parse 针对同一份内存字节，消除本次测试的 TOCTOU check/read gap；
+- v0.7 首次证明精确 semantic-core hash 不能泛化到改写、局部复用和兼容字符身份；
+- v0.7.3 显式减去允许 dev 共享模板，只把 protected-exclusive 字段、片段和稀有锚点作为 held-out 血缘证据；
+- v0.7.3 在 30 个受保护 reference、45 个 allowed-dev reference、163 个可归因污染变体和 62 个 clean/shared hard negatives 上完成算法、阈值、索引和延迟校准；
 - 每次 fresh first observation 用 Git blob/历史 commit 固化，不会因修复被覆盖。
 
 ## 6. 我们现在的“优化结果”应该怎样解读
@@ -136,13 +143,13 @@ S5 目前已经形成的防线：
 ```text
 S3 bounded conditional evidence          established
 S4 bounded independent evidence          established
-S5 v0.6 independent fresh                FAIL (immutable)
-S5 v0.6.1 exposed regression             PASS
+S5 v0.7 independent fresh                FAIL (immutable)
+S5 v0.7.3 development calibration        PASS (not fresh)
 S5 bounded independent release           NOT ESTABLISHED
 S5 gold review                           INCOMPLETE
 S6 automatic trust                       BLOCKED
 ```
 
-下一轮不应继续对 v0.6 调参。应冻结 v0.6.1，然后创建**完全新的** S5 fresh suite，重点测试：更强 paraphrase/partial-derived leakage、语义核心字段的局部变换、路径 alias/symlink 或其他 canonicalization、以及不复用 v0.6 注入机制的 snapshot consistency 攻击。只有新的 fresh suite 通过，才有资格讨论 S5 bounded structural release；gold review 仍是另一条独立门槛。
+下一轮应先把 v0.7.3 实现、阈值与 reference-index manifest 固定到 commit，然后才创建**完全新的** S5 fresh lineage suite。新的 suite 必须使用本轮未出现的变换，首次结果永久保存；只有独立 fresh 结果才有资格改变 bounded structural release 判断。Gold review 仍是另一条独立门槛。
 
 本仓库当前没有真实用户验证、专家 gold approval、模型训练收益或临床验证数据时，均明确记录为“没有”，不会用 synthetic/CI 结果替代。

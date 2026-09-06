@@ -1,0 +1,11 @@
+{
+  "benchmark_version": "s5-lineage-calibration-v0.7.3",
+  "host_dependent": true,
+  "sample_count": 24,
+  "reference_count": 30,
+  "median_ms_per_candidate": 117.157,
+  "p95_ms_per_candidate": 158.537,
+  "max_ms_per_candidate": 306.939,
+  "guardrail_p95_ms": 500.0,
+  "guardrail_pass": true
+}

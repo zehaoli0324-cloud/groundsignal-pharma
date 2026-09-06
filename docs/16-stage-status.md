@@ -21,7 +21,7 @@
 | S3a | Proposition Extraction | bounded CONDITIONAL PASS | fresh F1 98.90%; critical recall 100%; mandatory abstention 6/6 | longer/noisier real-source coverage |
 | S3b | Evidence Relation | bounded CONDITIONAL PASS | 40/40 relation; high-risk false-support 0 | broader real-source relation set |
 | S4 | Medical KG Construction / Update | CONDITIONAL PASS | first fresh 18/20 FAIL → repair regression 20/20 → new independent fresh 20/20; must-reject 7/7 | persistent real-source graph |
-| S5 | Controlled Case / Benchmark Factory | **v0.7.2 EXPOSED REPAIR PASS / INDEPENDENT RELEASE BLOCKED** | immutable v0.7 fresh F24–F27 FAIL; v0.7.2 exposed F24–F27 all blocked at builder + exporter boundary | broader algorithm calibration, freeze, then new hidden fresh; gold review remains separate |
+| S5 | Controlled Case / Benchmark Factory | **v0.7.3 DEVELOPMENT CALIBRATION PASS / INDEPENDENT RELEASE BLOCKED** | immutable v0.7 fresh F24–F27 FAIL; v0.7.3 exposed regression + 225-case development calibration PASS | freeze v0.7.3, then new hidden fresh; gold review remains separate |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release |
 | S7 | Evaluation & Safety Gate | Protocol only | rubric v0.2 + regression gate protocol | human/Judge calibration + real model runs |
 | S8 | Failure Diagnosis | Scaffold | taxonomy + intervention router | multi-model × multi-case clusters |
@@ -32,7 +32,8 @@
 
 S3a/S3b and S4 already have bounded independent evidence. S5 is the first stage whose output can
 change later training data, so contamination, identity, authority and provenance failures are release-critical.
-S5 v0.7 first observation remains an immutable FAIL. v0.7.2 is only exposed regression evidence.
+S5 v0.7 first observation remains an immutable FAIL. v0.7.3 adds only exposed regression and
+development calibration evidence.
 Therefore S5 cannot be called PASS, and S6 cannot automatically trust S5 output.
 
 ## 3. S5 evidence history
@@ -52,6 +53,7 @@ v0.6.1           exposed repair                                                 
 v0.7 fresh       F24-F27 lineage-generalization/NFKC                             FAIL
 v0.7.1           deterministic builder repair F24/F27                      PARTIAL REPAIR
 v0.7.2           hybrid lineage + exporter validation exposed regression   PASS
+v0.7.3           broader hard negatives + algorithm/cost calibration        DEVELOPMENT PASS
 ```
 
 Each fresh FAIL remains permanent evidence; later repair never overwrites it.
@@ -74,41 +76,34 @@ S6 automatic trust                       BLOCKED
 
 This cannot be relabeled after repair.
 
-## 5. S5 v0.7.2 exposed repair checkpoint
+## 5. S5 v0.7.3 development calibration checkpoint
 
-`v0.7.2` is **not fresh**. It reuses the exposed v0.7 cases only as regression.
-
-```text
-v0.7 first-observation blob                preserved
-normal baseline                            PASS
-F24 builder / exporter validator          BLOCKED / BLOCKED
-F25 builder / exporter validator          BLOCKED / BLOCKED
-F26 builder / exporter validator          BLOCKED / BLOCKED
-F27 builder / exporter validator          BLOCKED / BLOCKED
-exposed failed gates                       0
-regression gate                            PASS
-```
-
-Algorithm candidate: `s5-lineage-hybrid-v0.7.2`.
-Development-only detector probe:
+`v0.7.3` is **not fresh**. It preserves v0.7.2 and expands only public/exposed development data.
 
 ```text
-contaminated positives          5
-clean negatives                 2
-hybrid recall                   5/5 = 1.00
-clean false-block               0/2 = 0.00
-
-ablation recall:
-exact semantic core             1/5 = 0.20
-record lexical only             3/5 = 0.60
-hybrid record+field+span        5/5 = 1.00
+v0.7 first-observation blob                       preserved
+v0.7.2 two-negative hard-negative expansion       23/36 false BLOCK (preserved dev FAIL)
+calibration families                               15
+protected / allowed-dev references                 30 / 45
+attributable contamination / clean                 163 / 62
+selected hybrid recall                             163/163 = 1.00
+selected hybrid clean false-block                  0/62 = 0.00
+learned pair grouped-CV recall                     158/163 = 0.9693
+p95 latency                                        158.537 ms/candidate
+F24-F27 builder / exporter                         all BLOCKED / BLOCKED
+v0.7.3 development calibration + regression        PASS
 ```
 
-This is too small and too exposed to establish unseen generalization. Embedding/cross-encoder
-comparison, larger negatives, threshold calibration and latency/index cost are still missing.
+Selected development candidate: `s5-lineage-exclusive-anchor-v0.7.3`. It subtracts content already
+available in dev before treating fields/spans as protected-only lineage evidence. Exact-core, lexical,
+TF-IDF vector and grouped learned-pair comparators are reported separately. A neural cross-encoder was
+not used because no frozen reproducible artifact is present.
 
-Raw metrics: `medical/stage-evals/S5/regression-v0.7.2.json`.  
-Implementation/report: `medical/stage-evals/S5/S5_V0.7.2_HYBRID_LINEAGE_REPAIR_REPORT.md`.  
+This larger slice is still synthetic/exposed development calibration and cannot establish unseen
+generalization.
+
+Raw metrics: `medical/stage-evals/S5/calibration-v0.7.3.json` and `regression-v0.7.3.json`.
+Implementation/report: `medical/stage-evals/S5/S5_V0.7.3_LINEAGE_CALIBRATION_REPORT.md`.
 Algorithm handoff: `docs/20-s5-v07-algorithm-handoff.md` + GitHub Issue #1.
 
 ## 6. Current release decision
@@ -117,7 +112,7 @@ Algorithm handoff: `docs/20-s5-v07-algorithm-handoff.md` + GitHub Issue #1.
 S3 bounded conditional evidence            established
 S4 bounded independent evidence            established
 S5 v0.7 independent first observation      FAIL (immutable)
-S5 v0.7.2 exposed regression               PASS
+S5 v0.7.3 development calibration          PASS (not fresh)
 S5 bounded independent release             NOT ESTABLISHED
 S5 gold review                             INCOMPLETE
 S6 automatic trust                         BLOCKED
@@ -129,12 +124,11 @@ or clinical validation. Synthetic/CI evidence is not substituted for those claim
 ## 7. Next sequence
 
 1. keep v0.7 first observation immutable
-2. treat v0.7.2 only as exposed repair evidence
-3. expand clean-negative coverage without using any future hidden suite
-4. add more already-exposed/development paraphrase, partial-reuse and compositional transformations
-5. compare exact-core vs record lexical vs hybrid, and embedding/cross-encoder only if reproducible artifacts are available
-6. calibrate BLOCK/REVIEW thresholds and measure latency/index size
-7. freeze the selected lineage implementation
-8. only after freeze author a new unseen S5 lineage family
-9. require independent first observation before any bounded release claim
-10. only after bounded S5 release proceed to S6 dedicated evaluation
+2. treat v0.7.3 only as development/exposed evidence
+3. freeze the selected lineage implementation and reference-index manifest
+4. only after freeze author a new unseen S5 lineage family
+5. use transformations not present in v0.7.3 calibration
+6. preserve the first observation before any repair
+7. require independent first observation before any bounded release claim
+8. keep gold review as a separate release blocker
+9. only after bounded S5 release proceed to S6 dedicated evaluation

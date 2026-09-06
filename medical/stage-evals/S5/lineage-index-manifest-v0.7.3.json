@@ -1,0 +1,532 @@
+{
+  "manifest_version": "s5-protected-reference-index-v0.7.3",
+  "method_version": "s5-lineage-exclusive-anchor-v0.7.3",
+  "future_fresh_suite_used": false,
+  "records": [
+    {
+      "family_id": "AGENT-001",
+      "case_id": "AGENT-001-D",
+      "split": "regression",
+      "source": "medical/case-families/AGENT-001/cases/D-sufficient-evidence-stop.json",
+      "git_blob_sha1": "f9eeffe842f46a1bdc20c6b041d6fe9d29795e7b"
+    },
+    {
+      "family_id": "AGENT-001",
+      "case_id": "AGENT-001-E",
+      "split": "heldout",
+      "source": "medical/case-families/AGENT-001/cases/E-apixaban-nsaid-heldout.json",
+      "git_blob_sha1": "34cbb2d93e3c669207340a315bc271d969bec50d"
+    },
+    {
+      "family_id": "CLINREASON-001",
+      "case_id": "CLINREASON-001-D",
+      "split": "regression",
+      "source": "medical/case-families/CLINREASON-001/cases/D-low-iron-salience-trap.json",
+      "git_blob_sha1": "326b27acbb939b0652cb73b323f11ffd7a4638df"
+    },
+    {
+      "family_id": "CLINREASON-001",
+      "case_id": "CLINREASON-001-E",
+      "split": "heldout",
+      "source": "medical/case-families/CLINREASON-001/cases/E-normocytic-inflammation-heldout.json",
+      "git_blob_sha1": "6e99b21824129f90f3790143956fb36aed23b9fc"
+    },
+    {
+      "family_id": "CLINREASON-005",
+      "case_id": "CLINREASON-005-D",
+      "split": "regression",
+      "source": "medical/case-families/CLINREASON-005/cases/D-multifactor-distractors.json",
+      "git_blob_sha1": "b8f54d179e44a085f6017c9d19a3bc05c438e078"
+    },
+    {
+      "family_id": "CLINREASON-005",
+      "case_id": "CLINREASON-005-E",
+      "split": "heldout",
+      "source": "medical/case-families/CLINREASON-005/cases/E-contrast-volume-heldout.json",
+      "git_blob_sha1": "deeb85a473d0e6f4008ffb0ace38ff59aa965748"
+    },
+    {
+      "family_id": "EVIDENCE-002",
+      "case_id": "EVIDENCE-002-D",
+      "split": "regression",
+      "source": "medical/case-families/EVIDENCE-002/cases/D-headline-salience-trap.json",
+      "git_blob_sha1": "42861d672423b7a652c162235127815789373cee"
+    },
+    {
+      "family_id": "EVIDENCE-002",
+      "case_id": "EVIDENCE-002-E",
+      "split": "heldout",
+      "source": "medical/case-families/EVIDENCE-002/cases/E-head-to-head-heldout.json",
+      "git_blob_sha1": "e34e60db57c75d4354ecf1af5b2826bb5974a20d"
+    },
+    {
+      "family_id": "EVIDENCE-003",
+      "case_id": "EVIDENCE-003-D",
+      "split": "regression",
+      "source": "medical/case-families/EVIDENCE-003/cases/D-obsolete-headline-trap.json",
+      "git_blob_sha1": "b080c3393d893cd749f4ec5f68ec9f8addd8a66e"
+    },
+    {
+      "family_id": "EVIDENCE-003",
+      "case_id": "EVIDENCE-003-E",
+      "split": "heldout",
+      "source": "medical/case-families/EVIDENCE-003/cases/E-updated-guideline-heldout.json",
+      "git_blob_sha1": "0cdd1dd654a4c1faa5cd2d4bb3d47d5f183762fc"
+    },
+    {
+      "family_id": "MEDSAFE-001",
+      "case_id": "MEDSAFE-001-D",
+      "split": "regression",
+      "source": "medical/case-families/MEDSAFE-001/cases/D-egfr27-distractors.json",
+      "git_blob_sha1": "03f5bbb53c7dcc946d9427d1745ff22d5f9e567b"
+    },
+    {
+      "family_id": "MEDSAFE-001",
+      "case_id": "MEDSAFE-001-E",
+      "split": "heldout",
+      "source": "medical/case-families/MEDSAFE-001/cases/E-egfr29-heldout.json",
+      "git_blob_sha1": "1e5fbf085735737f335385c7cc4c760637304380"
+    },
+    {
+      "family_id": "MEDSAFE-002",
+      "case_id": "MEDSAFE-002-C",
+      "split": "regression",
+      "source": "medical/case-families/MEDSAFE-002/cases/C-ibuprofen-bleeding.json",
+      "git_blob_sha1": "766972ac2135a484405722ba9044b73881c88d77"
+    },
+    {
+      "family_id": "MEDSAFE-002",
+      "case_id": "MEDSAFE-002-E",
+      "split": "heldout",
+      "source": "medical/case-families/MEDSAFE-002/cases/E-naproxen-heldout.json",
+      "git_blob_sha1": "42a6c71c68174adececf83a1b30d0aa08cd63b00"
+    },
+    {
+      "family_id": "MULTITURN-001",
+      "case_id": "MULTITURN-001-D",
+      "split": "regression",
+      "source": "medical/case-families/MULTITURN-001/cases/D-user-pressure-missing-egfr.json",
+      "git_blob_sha1": "5482ba79b1dacf75ffc75b45853a00a605a98aeb"
+    },
+    {
+      "family_id": "MULTITURN-001",
+      "case_id": "MULTITURN-001-E",
+      "split": "heldout",
+      "source": "medical/case-families/MULTITURN-001/cases/E-heldout-late-egfr29.json",
+      "git_blob_sha1": "76f300ced4a70409e461236c66df94b8287f4fbd"
+    },
+    {
+      "family_id": "REPORT-001",
+      "case_id": "REPORT-001-D",
+      "split": "regression",
+      "source": "medical/case-families/REPORT-001/cases/D-mild-abnormalities-distractors.json",
+      "git_blob_sha1": "2cdd4d7fde46a8908a9e214a485d421f06cada97"
+    },
+    {
+      "family_id": "REPORT-001",
+      "case_id": "REPORT-001-E",
+      "split": "heldout",
+      "source": "medical/case-families/REPORT-001/cases/E-heldout-combination.json",
+      "git_blob_sha1": "400f49f237a8e1ab92cdba4496d107102f7ced3e"
+    },
+    {
+      "family_id": "REPORT-004",
+      "case_id": "REPORT-004-D",
+      "split": "regression",
+      "source": "medical/case-families/REPORT-004/cases/D-user-cancer-leading-question.json",
+      "git_blob_sha1": "cc905d2eba9d81f05d2bc395237ec076745fb1e9"
+    },
+    {
+      "family_id": "REPORT-004",
+      "case_id": "REPORT-004-E",
+      "split": "heldout",
+      "source": "medical/case-families/REPORT-004/cases/E-cannot-exclude-heldout.json",
+      "git_blob_sha1": "66a337d630021fb4cbb78df0ea9e0c61bc85e71b"
+    },
+    {
+      "family_id": "TRIAGE-001",
+      "case_id": "TRIAGE-001-D",
+      "split": "regression",
+      "source": "medical/case-families/TRIAGE-001/cases/D-chest-pressure-distractors.json",
+      "git_blob_sha1": "4f4b109a73f1fba4c2bc1d854e40529f9293e366"
+    },
+    {
+      "family_id": "TRIAGE-001",
+      "case_id": "TRIAGE-001-E",
+      "split": "heldout",
+      "source": "medical/case-families/TRIAGE-001/cases/E-jaw-sob-heldout.json",
+      "git_blob_sha1": "5b52424e888e5107a999ab15c059b55746857caf"
+    },
+    {
+      "family_id": "TRIAGE-003",
+      "case_id": "TRIAGE-003-D",
+      "split": "regression",
+      "source": "medical/case-families/TRIAGE-003/cases/D-migraine-history-new-weakness.json",
+      "git_blob_sha1": "6474c12db70d018d002b06f34ce5ea51f90ae0cb"
+    },
+    {
+      "family_id": "TRIAGE-003",
+      "case_id": "TRIAGE-003-E",
+      "split": "heldout",
+      "source": "medical/case-families/TRIAGE-003/cases/E-speech-difficulty-heldout.json",
+      "git_blob_sha1": "e5c25a72b994552dbee23333217f3cdc956e61c6"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-001",
+      "case_id": "S5FRESH-BND-REG-001",
+      "split": "regression",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.2/families/S5FRESH-BOUNDARY-001/cases/S5FRESH-BND-REG-001.json",
+      "git_blob_sha1": "22081919e3113d2d77c8db106c9976b01dccbdda"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-001",
+      "case_id": "S5FRESH-BND-HO-001",
+      "split": "heldout",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.2/families/S5FRESH-BOUNDARY-001/cases/S5FRESH-BND-HO-001.json",
+      "git_blob_sha1": "7781cad6778239315b731d4f3aae0cf349add320"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-002",
+      "case_id": "S5FRESH-BND3-REG-001",
+      "split": "regression",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.3/families/S5FRESH-BOUNDARY-002/cases/S5FRESH-BND3-REG-001.json",
+      "git_blob_sha1": "8df69b4aab474f381b8ab2b64040d99299b53688"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-002",
+      "case_id": "S5FRESH-BND3-HO-001",
+      "split": "heldout",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.3/families/S5FRESH-BOUNDARY-002/cases/S5FRESH-BND3-HO-001.json",
+      "git_blob_sha1": "c1a8514c2428f3207f223e8c9e1ac08b3639dfd3"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-003",
+      "case_id": "S5FRESH-BND4-REG-001",
+      "split": "regression",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.4/families/S5FRESH-BOUNDARY-003/cases/S5FRESH-BND4-REG-001.json",
+      "git_blob_sha1": "7299af0ec7a9584f3c5644b7add9ae497ce84134"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-003",
+      "case_id": "S5FRESH-BND4-HO-001",
+      "split": "heldout",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.4/families/S5FRESH-BOUNDARY-003/cases/S5FRESH-BND4-HO-001.json",
+      "git_blob_sha1": "05c6a200237ba035f138d38240986b918343ba3f"
+    },
+    {
+      "family_id": "AGENT-001",
+      "case_id": "AGENT-001-A",
+      "split": "dev",
+      "source": "medical/case-families/AGENT-001/cases/A-current-label-required.json",
+      "git_blob_sha1": "8f2398f144c113bfb618b92bdc6fbb437dd20269"
+    },
+    {
+      "family_id": "AGENT-001",
+      "case_id": "AGENT-001-B",
+      "split": "dev",
+      "source": "medical/case-families/AGENT-001/cases/B-stale-label-first.json",
+      "git_blob_sha1": "2b184a4bb2c3b7990baa4f2db05af498a6e3cce1"
+    },
+    {
+      "family_id": "AGENT-001",
+      "case_id": "AGENT-001-C",
+      "split": "dev",
+      "source": "medical/case-families/AGENT-001/cases/C-irrelevant-result-first.json",
+      "git_blob_sha1": "d084ba1884a0aaeda16c137afb7b61f07ca45eb2"
+    },
+    {
+      "family_id": "CLINREASON-001",
+      "case_id": "CLINREASON-001-A",
+      "split": "dev",
+      "source": "medical/case-families/CLINREASON-001/cases/A-low-ferritin-high-tibc.json",
+      "git_blob_sha1": "ccce794a2d9f3dd23c70c067eb541290a23f2878"
+    },
+    {
+      "family_id": "CLINREASON-001",
+      "case_id": "CLINREASON-001-B",
+      "split": "dev",
+      "source": "medical/case-families/CLINREASON-001/cases/B-inflammation-pattern.json",
+      "git_blob_sha1": "c47d5ebc81e35ddbcc3ad095153fb250b3404d31"
+    },
+    {
+      "family_id": "CLINREASON-001",
+      "case_id": "CLINREASON-001-C",
+      "split": "dev",
+      "source": "medical/case-families/CLINREASON-001/cases/C-ambiguous-ferritin-inflammation.json",
+      "git_blob_sha1": "f5b475b204778abbbdfcf5a8df78f3a56ddd1053"
+    },
+    {
+      "family_id": "CLINREASON-005",
+      "case_id": "CLINREASON-005-A",
+      "split": "dev",
+      "source": "medical/case-families/CLINREASON-005/cases/A-volume-medication-competing.json",
+      "git_blob_sha1": "3f47f0b4eb8c02ec455b6e9b391c3dfadb1102b5"
+    },
+    {
+      "family_id": "CLINREASON-005",
+      "case_id": "CLINREASON-005-B",
+      "split": "dev",
+      "source": "medical/case-families/CLINREASON-005/cases/B-obstruction-evidence.json",
+      "git_blob_sha1": "1aac82460e2e465b4fabfeddf404698ac9ac8b36"
+    },
+    {
+      "family_id": "CLINREASON-005",
+      "case_id": "CLINREASON-005-C",
+      "split": "dev",
+      "source": "medical/case-families/CLINREASON-005/cases/C-volume-only-signal.json",
+      "git_blob_sha1": "bf80d5321264904553d915c77dd703e272e7e3c3"
+    },
+    {
+      "family_id": "EVIDENCE-002",
+      "case_id": "EVIDENCE-002-A",
+      "split": "dev",
+      "source": "medical/case-families/EVIDENCE-002/cases/A-unmatched-trials-62-vs-48.json",
+      "git_blob_sha1": "0ee21d865649fd2bf3ee714f7532dfc48abec810"
+    },
+    {
+      "family_id": "EVIDENCE-002",
+      "case_id": "EVIDENCE-002-B",
+      "split": "dev",
+      "source": "medical/case-families/EVIDENCE-002/cases/B-matched-pop-different-endpoint.json",
+      "git_blob_sha1": "271a5b5251da37d5e9362911718b2a10387b0ac5"
+    },
+    {
+      "family_id": "EVIDENCE-002",
+      "case_id": "EVIDENCE-002-C",
+      "split": "dev",
+      "source": "medical/case-families/EVIDENCE-002/cases/C-aligned-separate-trials.json",
+      "git_blob_sha1": "575dfaea1349f4d2631f9e299b9271834bdfdd19"
+    },
+    {
+      "family_id": "EVIDENCE-003",
+      "case_id": "EVIDENCE-003-A",
+      "split": "dev",
+      "source": "medical/case-families/EVIDENCE-003/cases/A-current-guideline-new-rct.json",
+      "git_blob_sha1": "831959ad2f2a1d2c435e242a07434753d5d41ee9"
+    },
+    {
+      "family_id": "EVIDENCE-003",
+      "case_id": "EVIDENCE-003-B",
+      "split": "dev",
+      "source": "medical/case-families/EVIDENCE-003/cases/B-topline-only.json",
+      "git_blob_sha1": "451cd0958070576586fee894adce75c060df4294"
+    },
+    {
+      "family_id": "EVIDENCE-003",
+      "case_id": "EVIDENCE-003-C",
+      "split": "dev",
+      "source": "medical/case-families/EVIDENCE-003/cases/C-guideline-only.json",
+      "git_blob_sha1": "71b96711edfabf601032e63b0a951968e37259aa"
+    },
+    {
+      "family_id": "MEDSAFE-001",
+      "case_id": "MEDSAFE-001-A",
+      "split": "dev",
+      "source": "medical/case-families/MEDSAFE-001/cases/A-egfr27.json",
+      "git_blob_sha1": "44212f27a6b4abc561f426b06f1f24e079c845b8"
+    },
+    {
+      "family_id": "MEDSAFE-001",
+      "case_id": "MEDSAFE-001-B",
+      "split": "dev",
+      "source": "medical/case-families/MEDSAFE-001/cases/B-egfr31.json",
+      "git_blob_sha1": "9ec8ddbbdc80879be3fd70ad2fccc7fcfe5c5cfc"
+    },
+    {
+      "family_id": "MEDSAFE-001",
+      "case_id": "MEDSAFE-001-C",
+      "split": "dev",
+      "source": "medical/case-families/MEDSAFE-001/cases/C-egfr-missing.json",
+      "git_blob_sha1": "8aa6fb88d8cba7223901ae644ca17a8b3a8bb7c6"
+    },
+    {
+      "family_id": "MEDSAFE-002",
+      "case_id": "MEDSAFE-002-A",
+      "split": "dev",
+      "source": "medical/case-families/MEDSAFE-002/cases/A-ibuprofen.json",
+      "git_blob_sha1": "d339e49198af7713e56beb1e9226132f5d91c02d"
+    },
+    {
+      "family_id": "MEDSAFE-002",
+      "case_id": "MEDSAFE-002-B",
+      "split": "dev",
+      "source": "medical/case-families/MEDSAFE-002/cases/B-product-unknown.json",
+      "git_blob_sha1": "392034acbdff70b0ef7400e12a18ed8ff04dd65d"
+    },
+    {
+      "family_id": "MEDSAFE-002",
+      "case_id": "MEDSAFE-002-D",
+      "split": "dev",
+      "source": "medical/case-families/MEDSAFE-002/cases/D-ibuprofen-distractors.json",
+      "git_blob_sha1": "b53a50d03dfd24a7d0878ca83a87a523ad0b57f6"
+    },
+    {
+      "family_id": "MULTITURN-001",
+      "case_id": "MULTITURN-001-A",
+      "split": "dev",
+      "source": "medical/case-families/MULTITURN-001/cases/A-clarify-to-egfr31-continuation.json",
+      "git_blob_sha1": "c436ebaa095be462a8a5fb293d2773d370f90e84"
+    },
+    {
+      "family_id": "MULTITURN-001",
+      "case_id": "MULTITURN-001-B",
+      "split": "dev",
+      "source": "medical/case-families/MULTITURN-001/cases/B-late-update-31-to-27.json",
+      "git_blob_sha1": "760def512c807d5505dbc4568734e613bd9afa93"
+    },
+    {
+      "family_id": "MULTITURN-001",
+      "case_id": "MULTITURN-001-C",
+      "split": "dev",
+      "source": "medical/case-families/MULTITURN-001/cases/C-initiation-egfr31.json",
+      "git_blob_sha1": "5d60b6bad8dbcfc332f5599411954f0e6676179f"
+    },
+    {
+      "family_id": "REPORT-001",
+      "case_id": "REPORT-001-A",
+      "split": "dev",
+      "source": "medical/case-families/REPORT-001/cases/A-mild-multi-abnormalities.json",
+      "git_blob_sha1": "6ddf155bebdf21da4eae910257d0325ebb9007a7"
+    },
+    {
+      "family_id": "REPORT-001",
+      "case_id": "REPORT-001-B",
+      "split": "dev",
+      "source": "medical/case-families/REPORT-001/cases/B-low-wbc.json",
+      "git_blob_sha1": "e6032ba26d31df3ad3dd85c4a347ddf4ececb2ba"
+    },
+    {
+      "family_id": "REPORT-001",
+      "case_id": "REPORT-001-C",
+      "split": "dev",
+      "source": "medical/case-families/REPORT-001/cases/C-high-wbc.json",
+      "git_blob_sha1": "db8dfc7871a37d2cc233e228282c11b48b547e21"
+    },
+    {
+      "family_id": "REPORT-004",
+      "case_id": "REPORT-004-A",
+      "split": "dev",
+      "source": "medical/case-families/REPORT-004/cases/A-indeterminate-mri-recommended.json",
+      "git_blob_sha1": "82daa178f59bcb90d78c8aa67d0ea1033638e6d4"
+    },
+    {
+      "family_id": "REPORT-004",
+      "case_id": "REPORT-004-B",
+      "split": "dev",
+      "source": "medical/case-families/REPORT-004/cases/B-benign-wording-no-followup.json",
+      "git_blob_sha1": "0252ecbc86bf9357da00b1fd7880ab3631b0dfff"
+    },
+    {
+      "family_id": "REPORT-004",
+      "case_id": "REPORT-004-C",
+      "split": "dev",
+      "source": "medical/case-families/REPORT-004/cases/C-stable-prior-comparison.json",
+      "git_blob_sha1": "39551c45aca39e1421d1e89528aaca2f7a732741"
+    },
+    {
+      "family_id": "TRIAGE-001",
+      "case_id": "TRIAGE-001-A",
+      "split": "dev",
+      "source": "medical/case-families/TRIAGE-001/cases/A-chest-pressure-sob.json",
+      "git_blob_sha1": "56fbcfdcd4e88a556709413f7dcaa8e0c7fff5e4"
+    },
+    {
+      "family_id": "TRIAGE-001",
+      "case_id": "TRIAGE-001-B",
+      "split": "dev",
+      "source": "medical/case-families/TRIAGE-001/cases/B-anginal-equivalent.json",
+      "git_blob_sha1": "7fbc423b74f00852c7f2d1afcc455584befaac44"
+    },
+    {
+      "family_id": "TRIAGE-001",
+      "case_id": "TRIAGE-001-C",
+      "split": "dev",
+      "source": "medical/case-families/TRIAGE-001/cases/C-vague-current-chest-discomfort.json",
+      "git_blob_sha1": "b75b56df24efa901c569fe902ac690963e15b274"
+    },
+    {
+      "family_id": "TRIAGE-003",
+      "case_id": "TRIAGE-003-A",
+      "split": "dev",
+      "source": "medical/case-families/TRIAGE-003/cases/A-headache-arm-weakness.json",
+      "git_blob_sha1": "22fe6d1f814f133b76ebe093af4c30571f6f84cd"
+    },
+    {
+      "family_id": "TRIAGE-003",
+      "case_id": "TRIAGE-003-B",
+      "split": "dev",
+      "source": "medical/case-families/TRIAGE-003/cases/B-sudden-severe-headache.json",
+      "git_blob_sha1": "86a6adbcd26c786329f7490ab33b0c428569055b"
+    },
+    {
+      "family_id": "TRIAGE-003",
+      "case_id": "TRIAGE-003-C",
+      "split": "dev",
+      "source": "medical/case-families/TRIAGE-003/cases/C-gradual-headache-no-deficit.json",
+      "git_blob_sha1": "2a2180e25a2b4ce08e010b5f92b414ca5c360601"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-001",
+      "case_id": "S5FRESH-BND-DEV-001",
+      "split": "dev",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.2/families/S5FRESH-BOUNDARY-001/cases/S5FRESH-BND-DEV-001.json",
+      "git_blob_sha1": "44a8f0eede65e08c72bff9b9aa4c7fbf74f5581c"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-001",
+      "case_id": "S5FRESH-BND-DEV-002",
+      "split": "dev",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.2/families/S5FRESH-BOUNDARY-001/cases/S5FRESH-BND-DEV-002.json",
+      "git_blob_sha1": "5f084d7393b05b3a89c3d752b8fb93a077a3885c"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-001",
+      "case_id": "S5FRESH-BND-DEV-003",
+      "split": "dev",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.2/families/S5FRESH-BOUNDARY-001/cases/S5FRESH-BND-DEV-003.json",
+      "git_blob_sha1": "c7f04c80ba9ab6e29a8f3d65ad4e00a25d5b7efe"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-002",
+      "case_id": "S5FRESH-BND3-DEV-001",
+      "split": "dev",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.3/families/S5FRESH-BOUNDARY-002/cases/S5FRESH-BND3-DEV-001.json",
+      "git_blob_sha1": "01c63dc83fd81a42f6f625a536a3eb894f53d65a"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-002",
+      "case_id": "S5FRESH-BND3-DEV-002",
+      "split": "dev",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.3/families/S5FRESH-BOUNDARY-002/cases/S5FRESH-BND3-DEV-002.json",
+      "git_blob_sha1": "eb9f24c514e6946cfc68ec7eafdb8c79455c61f4"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-002",
+      "case_id": "S5FRESH-BND3-DEV-003",
+      "split": "dev",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.3/families/S5FRESH-BOUNDARY-002/cases/S5FRESH-BND3-DEV-003.json",
+      "git_blob_sha1": "5fd9470675bfe37f2bd0d7bd65e4e364af1b6ca0"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-003",
+      "case_id": "S5FRESH-BND4-DEV-001",
+      "split": "dev",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.4/families/S5FRESH-BOUNDARY-003/cases/S5FRESH-BND4-DEV-001.json",
+      "git_blob_sha1": "9f148b3be093930b0078cca5b62988eefd6f529a"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-003",
+      "case_id": "S5FRESH-BND4-DEV-002",
+      "split": "dev",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.4/families/S5FRESH-BOUNDARY-003/cases/S5FRESH-BND4-DEV-002.json",
+      "git_blob_sha1": "fc7e0e6014b9d5a980dd4207ea01cea7855ba275"
+    },
+    {
+      "family_id": "S5FRESH-BOUNDARY-003",
+      "case_id": "S5FRESH-BND4-DEV-003",
+      "split": "dev",
+      "source": "medical/stage-evals/S5/fresh-boundary-v0.4/families/S5FRESH-BOUNDARY-003/cases/S5FRESH-BND4-DEV-003.json",
+      "git_blob_sha1": "983d8aede1e018da10a18dbbe2ab90717f9a95cd"
+    }
+  ]
+}

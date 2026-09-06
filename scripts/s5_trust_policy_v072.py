@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""S5 trust-policy entry point, v0.7.3 development calibration.
+"""S5 trust-policy entry point, v0.7.2 exposed repair.
 
 The direct v0.7.1 deterministic implementation is preserved byte-for-byte in
 `s5_trust_policy_v071.py`. This entry point keeps its NFKC/cross-split rules and
-adds calibrated protected-exclusive lineage checks for paraphrase and
-partial-field reuse without treating shared dev-family templates as leakage.
+adds generic explainable lineage checks for paraphrase and partial-field reuse.
 """
 from __future__ import annotations
 
@@ -13,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 _HERE = Path(__file__).resolve().parent
-POLICY_VERSION = "s5-trust-root-v0.7.3"
+POLICY_VERSION = "s5-trust-root-v0.7.2"
 
 
 def _load(name: str, path: Path):
@@ -26,14 +25,14 @@ def _load(name: str, path: Path):
 
 
 _legacy = _load("s5_trust_policy_v071_legacy", _HERE / "s5_trust_policy_v071.py")
-_lineage = _load("s5_lineage_detector_v073", _HERE / "s5_lineage_detector_v073.py")
+_lineage = _load("s5_lineage_detector_v072", _HERE / "s5_lineage_detector.py")
 
 for _name in dir(_legacy):
     if not _name.startswith("__"):
         globals()[_name] = getattr(_legacy, _name)
 
 # New version marker overrides the re-exported v0.7.1 constant.
-POLICY_VERSION = "s5-trust-root-v0.7.3"
+POLICY_VERSION = "s5-trust-root-v0.7.2"
 _orig_build_policy = _legacy.build_policy
 
 
@@ -88,7 +87,7 @@ def build_policy(
     try:
         _validate_lineage(policy)
     except ValueError as exc:
-        raise ValueError(f"S5 v0.7.3 lineage policy rejected: {exc}") from exc
+        raise ValueError(f"S5 v0.7.2 lineage policy rejected: {exc}") from exc
     return policy
 
 

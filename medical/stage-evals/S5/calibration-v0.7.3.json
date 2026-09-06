@@ -1,0 +1,498 @@
+{
+  "stage": "S5",
+  "version": "v0.7.3",
+  "eval_name": "lineage-development-calibration",
+  "evidence_class": "development_exposed_calibration",
+  "fresh_evidence": false,
+  "calibration_version": "s5-lineage-calibration-v0.7.3",
+  "data_isolation": {
+    "future_fresh_suite_used": false,
+    "source_scope": "P0 exposed families + completed fresh v0.2-v0.4 families only",
+    "protected_reference_count": 30,
+    "allowed_dev_reference_count": 45,
+    "contaminated_variant_count": 163,
+    "clean_hard_negative_count": 62,
+    "groups": 15,
+    "transformations": [
+      "presentation_only",
+      "prompt_paraphrase",
+      "single_evidence_field",
+      "evidence_graph_composition",
+      "prompt_span_reuse",
+      "distributed_fragment_reuse"
+    ]
+  },
+  "methods": {
+    "exact_semantic_core": {
+      "tp": 30,
+      "fp": 0,
+      "fn": 133,
+      "tn": 62,
+      "precision": 1.0,
+      "recall": 0.184049,
+      "clean_false_block_rate": 0.0,
+      "clean_review_rate": 0.0,
+      "by_transformation": {
+        "distributed_fragment_reuse": {
+          "total": 24,
+          "blocked": 0,
+          "reviewed": 0,
+          "recall": 0.0
+        },
+        "evidence_graph_composition": {
+          "total": 30,
+          "blocked": 0,
+          "reviewed": 0,
+          "recall": 0.0
+        },
+        "presentation_only": {
+          "total": 30,
+          "blocked": 30,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "prompt_paraphrase": {
+          "total": 30,
+          "blocked": 0,
+          "reviewed": 0,
+          "recall": 0.0
+        },
+        "prompt_span_reuse": {
+          "total": 30,
+          "blocked": 0,
+          "reviewed": 0,
+          "recall": 0.0
+        },
+        "single_evidence_field": {
+          "total": 19,
+          "blocked": 0,
+          "reviewed": 0,
+          "recall": 0.0
+        }
+      }
+    },
+    "lexical_record_cv": {
+      "tp": 30,
+      "fp": 0,
+      "fn": 133,
+      "tn": 62,
+      "precision": 1.0,
+      "recall": 0.184049,
+      "clean_false_block_rate": 0.0,
+      "clean_review_rate": 0.274194,
+      "by_transformation": {
+        "distributed_fragment_reuse": {
+          "total": 24,
+          "blocked": 0,
+          "reviewed": 7,
+          "recall": 0.0
+        },
+        "evidence_graph_composition": {
+          "total": 30,
+          "blocked": 0,
+          "reviewed": 6,
+          "recall": 0.0
+        },
+        "presentation_only": {
+          "total": 30,
+          "blocked": 30,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "prompt_paraphrase": {
+          "total": 30,
+          "blocked": 0,
+          "reviewed": 30,
+          "recall": 0.0
+        },
+        "prompt_span_reuse": {
+          "total": 30,
+          "blocked": 0,
+          "reviewed": 8,
+          "recall": 0.0
+        },
+        "single_evidence_field": {
+          "total": 19,
+          "blocked": 0,
+          "reviewed": 4,
+          "recall": 0.0
+        }
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "test_groups": [
+            "EVIDENCE-003",
+            "REPORT-004",
+            "TRIAGE-003"
+          ],
+          "block_threshold": 0.979684,
+          "review_threshold": 0.762527
+        },
+        {
+          "fold": 2,
+          "test_groups": [
+            "EVIDENCE-002",
+            "REPORT-001",
+            "TRIAGE-001"
+          ],
+          "block_threshold": 0.979684,
+          "review_threshold": 0.782335
+        },
+        {
+          "fold": 3,
+          "test_groups": [
+            "CLINREASON-005",
+            "MULTITURN-001",
+            "S5FRESH-BOUNDARY-003"
+          ],
+          "block_threshold": 1.0,
+          "review_threshold": 0.762796
+        },
+        {
+          "fold": 4,
+          "test_groups": [
+            "CLINREASON-001",
+            "MEDSAFE-002",
+            "S5FRESH-BOUNDARY-002"
+          ],
+          "block_threshold": 0.979684,
+          "review_threshold": 0.749492
+        },
+        {
+          "fold": 5,
+          "test_groups": [
+            "AGENT-001",
+            "MEDSAFE-001",
+            "S5FRESH-BOUNDARY-001"
+          ],
+          "block_threshold": 0.979684,
+          "review_threshold": 0.758306
+        }
+      ]
+    },
+    "tfidf_vector_embedding_cv": {
+      "tp": 42,
+      "fp": 3,
+      "fn": 121,
+      "tn": 59,
+      "precision": 0.933333,
+      "recall": 0.257669,
+      "clean_false_block_rate": 0.048387,
+      "clean_review_rate": 0.209677,
+      "by_transformation": {
+        "distributed_fragment_reuse": {
+          "total": 24,
+          "blocked": 0,
+          "reviewed": 10,
+          "recall": 0.0
+        },
+        "evidence_graph_composition": {
+          "total": 30,
+          "blocked": 1,
+          "reviewed": 2,
+          "recall": 0.033333
+        },
+        "presentation_only": {
+          "total": 30,
+          "blocked": 30,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "prompt_paraphrase": {
+          "total": 30,
+          "blocked": 10,
+          "reviewed": 20,
+          "recall": 0.333333
+        },
+        "prompt_span_reuse": {
+          "total": 30,
+          "blocked": 0,
+          "reviewed": 10,
+          "recall": 0.0
+        },
+        "single_evidence_field": {
+          "total": 19,
+          "blocked": 1,
+          "reviewed": 1,
+          "recall": 0.052632
+        }
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "test_groups": [
+            "EVIDENCE-003",
+            "REPORT-004",
+            "TRIAGE-003"
+          ],
+          "block_threshold": 0.93822,
+          "review_threshold": 0.609664
+        },
+        {
+          "fold": 2,
+          "test_groups": [
+            "EVIDENCE-002",
+            "REPORT-001",
+            "TRIAGE-001"
+          ],
+          "block_threshold": 0.939704,
+          "review_threshold": 0.723965
+        },
+        {
+          "fold": 3,
+          "test_groups": [
+            "CLINREASON-005",
+            "MULTITURN-001",
+            "S5FRESH-BOUNDARY-003"
+          ],
+          "block_threshold": 0.915143,
+          "review_threshold": 0.614639
+        },
+        {
+          "fold": 4,
+          "test_groups": [
+            "CLINREASON-001",
+            "MEDSAFE-002",
+            "S5FRESH-BOUNDARY-002"
+          ],
+          "block_threshold": 0.93822,
+          "review_threshold": 0.598665
+        },
+        {
+          "fold": 5,
+          "test_groups": [
+            "AGENT-001",
+            "MEDSAFE-001",
+            "S5FRESH-BOUNDARY-001"
+          ],
+          "block_threshold": 0.93822,
+          "review_threshold": 0.609619
+        }
+      ]
+    },
+    "learned_pair_logistic_cv": {
+      "tp": 158,
+      "fp": 0,
+      "fn": 5,
+      "tn": 62,
+      "precision": 1.0,
+      "recall": 0.969325,
+      "clean_false_block_rate": 0.0,
+      "clean_review_rate": 0.0,
+      "by_transformation": {
+        "distributed_fragment_reuse": {
+          "total": 24,
+          "blocked": 24,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "evidence_graph_composition": {
+          "total": 30,
+          "blocked": 29,
+          "reviewed": 0,
+          "recall": 0.966667
+        },
+        "presentation_only": {
+          "total": 30,
+          "blocked": 30,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "prompt_paraphrase": {
+          "total": 30,
+          "blocked": 28,
+          "reviewed": 0,
+          "recall": 0.933333
+        },
+        "prompt_span_reuse": {
+          "total": 30,
+          "blocked": 29,
+          "reviewed": 0,
+          "recall": 0.966667
+        },
+        "single_evidence_field": {
+          "total": 19,
+          "blocked": 18,
+          "reviewed": 0,
+          "recall": 0.947368
+        }
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "test_groups": [
+            "EVIDENCE-003",
+            "REPORT-004",
+            "TRIAGE-003"
+          ],
+          "block_threshold": 0.960993,
+          "review_threshold": 0.960993,
+          "coefficient_count": 7
+        },
+        {
+          "fold": 2,
+          "test_groups": [
+            "EVIDENCE-002",
+            "REPORT-001",
+            "TRIAGE-001"
+          ],
+          "block_threshold": 0.960986,
+          "review_threshold": 0.960986,
+          "coefficient_count": 7
+        },
+        {
+          "fold": 3,
+          "test_groups": [
+            "CLINREASON-005",
+            "MULTITURN-001",
+            "S5FRESH-BOUNDARY-003"
+          ],
+          "block_threshold": 0.969406,
+          "review_threshold": 0.969406,
+          "coefficient_count": 7
+        },
+        {
+          "fold": 4,
+          "test_groups": [
+            "CLINREASON-001",
+            "MEDSAFE-002",
+            "S5FRESH-BOUNDARY-002"
+          ],
+          "block_threshold": 0.970695,
+          "review_threshold": 0.970695,
+          "coefficient_count": 7
+        },
+        {
+          "fold": 5,
+          "test_groups": [
+            "AGENT-001",
+            "MEDSAFE-001",
+            "S5FRESH-BOUNDARY-001"
+          ],
+          "block_threshold": 0.966571,
+          "review_threshold": 0.966571,
+          "coefficient_count": 7
+        }
+      ]
+    },
+    "exclusive_anchor_hybrid_v073": {
+      "tp": 163,
+      "fp": 0,
+      "fn": 0,
+      "tn": 62,
+      "precision": 1.0,
+      "recall": 1.0,
+      "clean_false_block_rate": 0.0,
+      "clean_review_rate": 0.0,
+      "by_transformation": {
+        "distributed_fragment_reuse": {
+          "total": 24,
+          "blocked": 24,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "evidence_graph_composition": {
+          "total": 30,
+          "blocked": 30,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "presentation_only": {
+          "total": 30,
+          "blocked": 30,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "prompt_paraphrase": {
+          "total": 30,
+          "blocked": 30,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "prompt_span_reuse": {
+          "total": 30,
+          "blocked": 30,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "single_evidence_field": {
+          "total": 19,
+          "blocked": 19,
+          "reviewed": 0,
+          "recall": 1.0
+        }
+      }
+    }
+  },
+  "selected_method": "s5-lineage-exclusive-anchor-v0.7.3",
+  "selection_gate": "PASS",
+  "threshold_contract": {
+    "record_block": 0.88,
+    "record_review": 0.7,
+    "field_near": 0.9,
+    "span_block": 0.95,
+    "span_review": 0.82
+  },
+  "learned_pair_model": {
+    "model_version": "s5-lineage-pair-logistic-v0.7.3",
+    "feature_names": [
+      "record_similarity",
+      "max_field_similarity",
+      "near_field_count",
+      "max_span_similarity",
+      "span_count_norm",
+      "exclusive_anchor_count_norm",
+      "deterministic_reason_present"
+    ],
+    "scaler_mean": [
+      0.509237831111,
+      0.687750139852,
+      0.260148148148,
+      0.020640888889,
+      0.009888888889,
+      0.023037037037,
+      0.027555555556
+    ],
+    "scaler_scale": [
+      0.098629238829,
+      0.113493189237,
+      0.988465316415,
+      0.141886630025,
+      0.08779388038,
+      0.102251679867,
+      0.163695592224
+    ],
+    "coefficients": [
+      -2.106026526274,
+      0.307793307171,
+      1.324339247997,
+      0.342074123043,
+      0.873220086423,
+      0.098321169842,
+      1.569309866561
+    ],
+    "intercept": -5.582437487901,
+    "block_threshold": 0.964366,
+    "review_threshold": 0.964366,
+    "training_pair_count": 6750,
+    "positive_pair_count": 163,
+    "candidate_count": 225,
+    "calibration_only": true
+  },
+  "artifact_cost": {
+    "protected_index_size_bytes": 55472,
+    "tfidf_vocabulary_bytes": 217625,
+    "protected_pair_evaluations": 6750
+  },
+  "fresh_status": "NOT_FRESH_DO_NOT_USE_FOR_RELEASE",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "known_limitations": [
+    "Synthetic/exposed transformations cannot establish unseen semantic generalization.",
+    "TF-IDF is a deterministic vector-space baseline, not a neural semantic embedding.",
+    "The learned pair classifier is calibration-only and is not used as an opaque hard gate.",
+    "A reproducible neural cross-encoder artifact is not available in this repository.",
+    "A new post-freeze hidden lineage suite remains mandatory before bounded release."
+  ]
+}

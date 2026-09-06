@@ -1,0 +1,41 @@
+{
+  "stage": "S5",
+  "version": "v0.7.3-precalibration",
+  "eval_name": "v0.7.2-hard-negative-expansion-first-observation",
+  "evidence_class": "development_calibration_first_observation",
+  "fresh_evidence": false,
+  "implementation_commit": "2bc4b82ca351d548975a0ceb1ef44d31f317121f",
+  "detector_git_blob_sha1": "e85e6d8f69fbe7ef0b04c03a492989a5f219f24d",
+  "source_scope": {
+    "protected_reference_count": 24,
+    "protected_splits": ["regression", "heldout"],
+    "clean_dev_hard_negative_count": 36,
+    "families": 12,
+    "future_fresh_suite_used": false
+  },
+  "observed_decisions": {
+    "BLOCK": 23,
+    "REVIEW": 11,
+    "ALLOW": 2
+  },
+  "rates": {
+    "clean_false_block_rate": 0.638889,
+    "clean_review_rate": 0.305556,
+    "clean_direct_allow_rate": 0.055556
+  },
+  "failure_analysis": [
+    "The v0.7.2 two-negative probe did not represent same-family allowed-dev hard negatives.",
+    "Generic family-shared safety and expected-behavior spans triggered MULTI_SPAN_REUSE.",
+    "Near-matching family templates triggered MULTI_FIELD_NEAR_REUSE without proving protected-only lineage.",
+    "All-pairs SequenceMatcher span comparison was operationally too slow for broader calibration."
+  ],
+  "disposition": "DEVELOPMENT_CALIBRATION_FAIL_REPAIRED_BY_V0.7.3_CANDIDATE",
+  "release_effect": "NONE_ALREADY_BLOCKED",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "notes": [
+    "This is not a fresh held-out result and does not receive an S5-F identifier.",
+    "The observation is retained so the broader calibration cannot hide the v0.7.2 false-block problem.",
+    "No gold approval, clinical validation, real-user evidence, or model-training gain is inferred."
+  ]
+}
