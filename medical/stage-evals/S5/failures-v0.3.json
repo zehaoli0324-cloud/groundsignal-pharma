@@ -1,0 +1,15 @@
+{
+  "stage":"S5",
+  "version":"v0.3",
+  "source_first_observation":"medical/stage-evals/S5/fresh-first-observation-v0.3.json",
+  "target_freeze_commit":"c938dc86c992f13015585b813aad11c2dca55b24",
+  "failures":[
+    {"id":"S5-F8","name":"LOCATION_LAUNDERING_TRUST_BYPASS","severity":"hard_gate","observation":"A raw heldout benchmark case copied to an ordinary path was treated as trusted unpartitioned input and became exportable.","root_cause":"Non-benchmark trust is inferred from loader path/context instead of an external allowlisted source authority."},
+    {"id":"S5-F9","name":"SELF_AUTHENTICATED_PAYLOAD_DIGEST_RECOMPUTABLE","severity":"hard_gate","observation":"A materialized dev payload was modified, its embedded SHA-256 recomputed, and the modified payload remained exportable.","root_cause":"The payload digest is stored inside the object it authenticates and is not checked against an independent immutable authority."},
+    {"id":"S5-F10","name":"SUITE_IDENTITY_NOT_AUTHENTICATED","severity":"hard_gate","observation":"Changing benchmark_provenance.suite_id and recomputing the embedded digest did not block export.","root_cause":"Exporter authenticates family manifest/source paths but never binds the provenance to an authoritative suite contract."},
+    {"id":"S5-F11","name":"FOREIGN_MANIFEST_AUTHORITY_SUBSTITUTION","severity":"hard_gate","observation":"A heldout case was redirected to a repo-local foreign manifest declaring the same case_id as dev and became exportable.","root_cause":"Any repo-local manifest with matching family_id/case_id/path can become authority; suite membership is not verified."}
+  ],
+  "controls":{"baseline_dev":"EXPORTABLE","baseline_regression":"BLOCKED","baseline_heldout":"BLOCKED","decision_contract_alignment":"PASS","prompt_gold_leakage":"NONE","gold_release":"BLOCKED_GOLD_REVIEW"},
+  "decision":"FRESH_STRUCTURAL_FAIL",
+  "s6_automatic_trust":"BLOCKED"
+}
