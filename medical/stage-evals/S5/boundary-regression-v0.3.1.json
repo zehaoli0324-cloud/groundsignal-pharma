@@ -1,0 +1,33 @@
+{
+  "stage": "S5",
+  "version": "v0.3.1",
+  "eval_name": "external-trust-root-repair-exposed-regression",
+  "evidence_class": "development_exposed_regression",
+  "fresh_evidence": false,
+  "source_first_observation_git_blob_sha": "47e1669f724f8b2cab285ec0f689cb3819e068e2",
+  "trust_policy_version": "s5-trust-root-v0.3.1",
+  "family_count": 1,
+  "case_count": 5,
+  "split_counts": {"dev": 3, "heldout": 1, "regression": 1},
+  "training_eligible_count": 3,
+  "training_blocked_count": 2,
+  "baseline_export": {"dev": "EXPORTABLE", "regression": "BLOCKED", "heldout": "BLOCKED"},
+  "probes": {
+    "S5-F8_LOCATION_LAUNDERING_TRUST_BYPASS": "BLOCKED",
+    "S5-F9_SELF_AUTHENTICATED_PAYLOAD_DIGEST_RECOMPUTABLE": "BLOCKED",
+    "S5-F10_SUITE_IDENTITY_NOT_AUTHENTICATED": "BLOCKED",
+    "S5-F11_FOREIGN_MANIFEST_AUTHORITY_SUBSTITUTION": "BLOCKED"
+  },
+  "ordinary_allowlisted_source_control": "EXPORTABLE",
+  "historical_failure_disposition": {
+    "S5-F8": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F9": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F10": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F11": "REPAIRED_EXPOSED_REGRESSION"
+  },
+  "gold_approved_count": 0,
+  "pending_gold_count": 1,
+  "regression_gate": "PASS",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED"
+}

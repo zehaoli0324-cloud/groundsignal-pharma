@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""Export reviewed evaluation failures into SFT / preference candidates.
+"""Export explicitly reviewed evaluation failures into SFT/preference candidates.
 
-Important design rules:
-- evaluation failures are not automatically training data;
-- only explicitly approved candidates are exportable;
-- S5 benchmark partitions are authenticated against the authoritative family manifest;
-- missing/unknown benchmark split identity is fail-closed;
-- materialized S5 payloads must pass digest verification before export;
-- ordinary unpartitioned non-benchmark files are allowed only when loaded through
-  this module's trusted file-loader path, never by case-local self-assertion.
+S5 v0.3.1 trust rules:
+- benchmark identity is authenticated against an external trust-root policy;
+- suite membership, manifest identity and source-case identity are policy-bound;
+- a materialized payload is reconstructed from trusted source content before export;
+- an embedded digest is only a consistency field, never the root of trust;
+- ordinary non-benchmark sources require explicit policy allowlisting;
+- missing/unknown authority fails closed.
 """
 from __future__ import annotations
 
@@ -20,10 +19,11 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Tuple
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_TRUST_POLICY = REPO_ROOT / "medical/configs/s5-trust-root-v0.3.1.json"
 ALLOWED_TRAINING_SPLITS = {"dev"}
 BLOCKED_TRAINING_SPLITS = {"heldout", "regression"}
 KNOWN_BENCHMARK_SPLITS = ALLOWED_TRAINING_SPLITS | BLOCKED_TRAINING_SPLITS
-_TRUSTED_UNPARTITIONED_SOURCE = object()
+TRUSTED_MATERIALIZER_VERSIONS = {"s5-materializer-v0.2.1"}
 
 
 def read_json(path: Path) -> Dict[str, Any]:
@@ -49,32 +49,56 @@ def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def git_blob_sha1(path: Path) -> str:
+    data = path.read_bytes()
+    h = hashlib.sha1()
+    h.update(f"blob {len(data)}\0".encode("utf-8"))
+    h.update(data)
+    return h.hexdigest()
+
+
 def canonical_materialized_sha256(case: Dict[str, Any]) -> str:
     payload = deepcopy(case)
     payload.pop("_training_export_context", None)
     provenance = payload.get("benchmark_provenance")
     if isinstance(provenance, dict):
         provenance.pop("materialized_payload_sha256", None)
-    encoded = json.dumps(
-        payload,
-        ensure_ascii=False,
-        sort_keys=True,
-        separators=(",", ":"),
-    ).encode("utf-8")
+    encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
 
 
 def _resolve_repo_path(value: Any) -> Path:
     if not isinstance(value, str) or not value.strip():
-        raise PermissionError("S5 export blocked: provenance source path is missing")
+        raise PermissionError("S5 export blocked: authority path is missing")
     raw = Path(value)
     resolved = raw.resolve() if raw.is_absolute() else (REPO_ROOT / raw).resolve()
-    root = REPO_ROOT.resolve()
     try:
-        resolved.relative_to(root)
+        resolved.relative_to(REPO_ROOT.resolve())
     except ValueError as exc:
-        raise PermissionError(f"S5 export blocked: provenance path escapes repository: {value!r}") from exc
+        raise PermissionError(f"S5 export blocked: path escapes repository: {value!r}") from exc
     return resolved
+
+
+def _repo_rel(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+    except ValueError as exc:
+        raise PermissionError(f"S5 export blocked: source outside repository: {path}") from exc
+
+
+def load_trust_policy(policy: Dict[str, Any] | Path | None = None) -> Dict[str, Any]:
+    if isinstance(policy, dict):
+        out = policy
+    else:
+        path = Path(policy) if policy is not None else DEFAULT_TRUST_POLICY
+        if not path.is_file():
+            raise PermissionError(f"S5 export blocked: trust policy not found: {path}")
+        out = read_json(path)
+    if not str(out.get("policy_version") or "").startswith("s5-trust-root-v0.3.1"):
+        raise PermissionError("S5 export blocked: unsupported or missing external trust-policy version")
+    if not isinstance(out.get("benchmark_suites"), dict) or not isinstance(out.get("ordinary_training_sources"), dict):
+        raise PermissionError("S5 export blocked: malformed external trust policy")
+    return out
 
 
 def _iter_json_files(path: Path) -> Iterable[Path]:
@@ -89,65 +113,26 @@ def _iter_json_files(path: Path) -> Iterable[Path]:
         yield file
 
 
-def _attach_family_manifest_provenance(file: Path, case: Dict[str, Any]) -> Dict[str, Any]:
-    """Resolve legacy raw case files under case-families to their manifest split."""
-    incoming = dict(case)
-    incoming.pop("_training_export_context", None)
-    if incoming.get("benchmark_provenance"):
-        return incoming
-
-    resolved_file = file.resolve()
-    parts = resolved_file.parts
-    try:
-        idx = parts.index("case-families")
-    except ValueError:
-        incoming["_training_export_context"] = _TRUSTED_UNPARTITIONED_SOURCE
-        return incoming
-    if len(parts) <= idx + 2:
-        raise PermissionError(f"{file}: ambiguous case-families path")
-
-    family_dir = Path(*parts[: idx + 2])
-    manifest_path = family_dir / "manifest.json"
-    if not manifest_path.is_file():
-        raise PermissionError(f"{file}: S5-family-like source has no sibling manifest")
-    manifest = read_json(manifest_path)
-    case_id = str(incoming.get("case_id") or "")
-    for ref in manifest.get("cases") or []:
-        if str(ref.get("case_id") or "") != case_id:
-            continue
-        split = str(ref.get("split") or "")
-        if split not in KNOWN_BENCHMARK_SPLITS:
-            raise PermissionError(f"{file}: unsupported manifest split {split!r}")
-        try:
-            manifest_rel = manifest_path.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
-            case_rel = resolved_file.relative_to(REPO_ROOT.resolve()).as_posix()
-        except ValueError as exc:
-            raise PermissionError(f"{file}: S5 raw case must live inside repository") from exc
-        incoming["benchmark_provenance"] = {
-            "stage": "S5",
-            "suite_id": "UNMATERIALIZED_SOURCE",
-            "family_id": str(manifest.get("family_id") or family_dir.name),
-            "split": split,
-            "variant_type": ref.get("variant_type"),
-            "evidence_class": "source_case_unmaterialized",
-            "fresh_evidence": False,
-            "source_snapshot_commit": None,
-            "source_manifest_path": manifest_rel,
-            "source_case_path": case_rel,
-            "source_manifest_sha256": sha256_file(manifest_path),
-            "source_case_sha256": sha256_file(resolved_file),
-            "materializer_version": "manifest-resolver-compat-v0.2.1",
-            "provenance_mode": "source_manifest_resolved",
-            "training_eligible": split in ALLOWED_TRAINING_SPLITS,
-        }
-        return incoming
-    raise PermissionError(f"{file}: case_id {case_id!r} not found in sibling manifest")
+def _ordinary_source_context(file: Path, policy: Dict[str, Any]) -> Dict[str, Any]:
+    rel = _repo_rel(file)
+    entry = (policy.get("ordinary_training_sources") or {}).get(rel)
+    if not isinstance(entry, dict):
+        raise PermissionError(f"S5 export blocked: ordinary source is not externally allowlisted: {rel}")
+    expected = str(entry.get("git_blob_sha1") or "")
+    observed = git_blob_sha1(file)
+    if not expected or observed != expected:
+        raise PermissionError(f"S5 export blocked: ordinary source identity mismatch: {rel}")
+    return {"kind": "ordinary_policy_allowlisted", "path": rel, "git_blob_sha1": observed}
 
 
-def load_cases(path: Path) -> Dict[str, Dict[str, Any]]:
+def load_cases(path: Path, trust_policy: Dict[str, Any] | Path | None = None) -> Dict[str, Dict[str, Any]]:
+    policy = load_trust_policy(trust_policy)
     cases: Dict[str, Dict[str, Any]] = {}
     for file in _iter_json_files(path):
-        case = _attach_family_manifest_provenance(file, read_json(file))
+        case = read_json(file)
+        if not isinstance(case.get("benchmark_provenance"), dict):
+            case = dict(case)
+            case["_training_export_context"] = _ordinary_source_context(file, policy)
         case_id = str(case.get("case_id", ""))
         if not case_id:
             raise ValueError(f"Case file missing case_id: {file}")
@@ -175,8 +160,7 @@ def find_run(eval_row: Dict[str, Any], by_run: Dict[str, Dict[str, Any]], by_cas
     rid = eval_row.get("run_id") or eval_row.get("response_id")
     if rid and str(rid) in by_run:
         return by_run[str(rid)]
-    key = (str(eval_row.get("case_id", "")), str(eval_row.get("model_id", "")))
-    return by_case_model.get(key)
+    return by_case_model.get((str(eval_row.get("case_id", "")), str(eval_row.get("model_id", ""))))
 
 
 def case_context(case: Dict[str, Any]) -> Dict[str, Any]:
@@ -194,106 +178,155 @@ def failure_list(eval_row: Dict[str, Any]) -> List[str]:
     return [str(x) for x in failures]
 
 
-def _authoritative_manifest_ref(case: Dict[str, Any], provenance: Dict[str, Any]) -> tuple[str, Dict[str, Any]]:
-    if provenance.get("stage") != "S5":
-        raise PermissionError(f"Training export blocked for case {case.get('case_id')}: unsupported benchmark provenance stage")
+def _trusted_suite_authority(case: Dict[str, Any], provenance: Dict[str, Any], policy: Dict[str, Any]) -> Dict[str, Any]:
     case_id = str(case.get("case_id") or "")
+    if provenance.get("stage") != "S5":
+        raise PermissionError(f"Training export blocked for case {case_id}: unsupported provenance stage")
+    suite_id = str(provenance.get("suite_id") or "")
+    suite_entry = (policy.get("benchmark_suites") or {}).get(suite_id)
+    if not isinstance(suite_entry, dict):
+        raise PermissionError(f"Training export blocked for case {case_id}: suite {suite_id!r} is not in external trust policy")
+
+    suite_path = _resolve_repo_path(suite_entry.get("suite_path"))
+    if git_blob_sha1(suite_path) != str(suite_entry.get("suite_git_blob_sha1") or ""):
+        raise PermissionError(f"Training export blocked for case {case_id}: trusted suite file identity mismatch")
+    suite = read_json(suite_path)
+    if str(suite.get("suite_id") or "") != suite_id:
+        raise PermissionError(f"Training export blocked for case {case_id}: suite identity mismatch")
+
     family_id = str(provenance.get("family_id") or "")
-    manifest_path = _resolve_repo_path(provenance.get("source_manifest_path"))
-    source_case_path = _resolve_repo_path(provenance.get("source_case_path"))
-    if not manifest_path.is_file() or not source_case_path.is_file():
-        raise PermissionError(f"Training export blocked for case {case_id}: authoritative provenance source missing")
+    if family_id not in {str(x) for x in suite.get("family_ids") or []}:
+        raise PermissionError(f"Training export blocked for case {case_id}: family is not a member of trusted suite")
+    family_entry = (suite_entry.get("families") or {}).get(family_id)
+    if not isinstance(family_entry, dict):
+        raise PermissionError(f"Training export blocked for case {case_id}: family missing from external trust policy")
 
-    expected_manifest_sha = str(provenance.get("source_manifest_sha256") or "")
-    expected_source_sha = str(provenance.get("source_case_sha256") or "")
-    if not expected_manifest_sha or sha256_file(manifest_path) != expected_manifest_sha:
-        raise PermissionError(f"Training export blocked for case {case_id}: manifest digest mismatch")
-    if not expected_source_sha or sha256_file(source_case_path) != expected_source_sha:
-        raise PermissionError(f"Training export blocked for case {case_id}: source-case digest mismatch")
-
+    family_root = _resolve_repo_path(suite_entry.get("family_root"))
+    manifest_path = _resolve_repo_path(family_entry.get("manifest_path"))
+    expected_manifest_path = (family_root / family_id / "manifest.json").resolve()
+    if manifest_path != expected_manifest_path:
+        raise PermissionError(f"Training export blocked for case {case_id}: manifest path is not suite-authoritative")
+    if git_blob_sha1(manifest_path) != str(family_entry.get("manifest_git_blob_sha1") or ""):
+        raise PermissionError(f"Training export blocked for case {case_id}: trusted manifest identity mismatch")
     manifest = read_json(manifest_path)
     if str(manifest.get("family_id") or "") != family_id:
-        raise PermissionError(f"Training export blocked for case {case_id}: family authority mismatch")
-    for ref in manifest.get("cases") or []:
-        if str(ref.get("case_id") or "") == case_id:
-            authoritative_split = str(ref.get("split") or "")
-            if authoritative_split not in KNOWN_BENCHMARK_SPLITS:
-                raise PermissionError(f"Training export blocked for case {case_id}: unknown authoritative split {authoritative_split!r}")
-            authoritative_case_path = (manifest_path.parent / str(ref.get("path") or "")).resolve()
-            if authoritative_case_path != source_case_path:
-                raise PermissionError(f"Training export blocked for case {case_id}: source-case path is not manifest-authoritative")
-            return authoritative_split, ref
-    raise PermissionError(f"Training export blocked for case {case_id}: absent from authoritative manifest")
+        raise PermissionError(f"Training export blocked for case {case_id}: manifest family mismatch")
+
+    case_entry = (family_entry.get("cases") or {}).get(case_id)
+    if not isinstance(case_entry, dict):
+        raise PermissionError(f"Training export blocked for case {case_id}: case absent from external trust policy")
+    source_case_path = _resolve_repo_path(case_entry.get("source_case_path"))
+    if git_blob_sha1(source_case_path) != str(case_entry.get("source_case_git_blob_sha1") or ""):
+        raise PermissionError(f"Training export blocked for case {case_id}: trusted source-case identity mismatch")
+    source_case = read_json(source_case_path)
+    if str(source_case.get("case_id") or "") != case_id:
+        raise PermissionError(f"Training export blocked for case {case_id}: source-case id mismatch")
+
+    matching_refs = [r for r in manifest.get("cases") or [] if str(r.get("case_id") or "") == case_id]
+    if len(matching_refs) != 1:
+        raise PermissionError(f"Training export blocked for case {case_id}: manifest case membership is ambiguous")
+    ref = matching_refs[0]
+    authoritative_split = str(case_entry.get("split") or "")
+    authoritative_variant = str(case_entry.get("variant_type") or "")
+    if authoritative_split not in KNOWN_BENCHMARK_SPLITS:
+        raise PermissionError(f"Training export blocked for case {case_id}: unknown trusted split")
+    if str(ref.get("split") or "") != authoritative_split or str(ref.get("variant_type") or "") != authoritative_variant:
+        raise PermissionError(f"Training export blocked for case {case_id}: manifest metadata diverges from external trust policy")
+    ref_path = (manifest_path.parent / str(ref.get("path") or "")).resolve()
+    if ref_path != source_case_path:
+        raise PermissionError(f"Training export blocked for case {case_id}: manifest source path diverges from external trust policy")
+
+    return {
+        "suite": suite,
+        "suite_path": suite_path,
+        "suite_entry": suite_entry,
+        "family_id": family_id,
+        "manifest": manifest,
+        "manifest_path": manifest_path,
+        "ref": ref,
+        "source_case": source_case,
+        "source_case_path": source_case_path,
+        "split": authoritative_split,
+        "variant_type": authoritative_variant,
+    }
 
 
-def _verify_payload_integrity(case: Dict[str, Any], provenance: Dict[str, Any]) -> None:
-    case_id = str(case.get("case_id") or "")
-    mode = str(provenance.get("provenance_mode") or "")
-    if mode == "materialized_manifest_bound":
-        expected = str(provenance.get("materialized_payload_sha256") or "")
-        if not expected:
-            raise PermissionError(f"Training export blocked for case {case_id}: materialized payload digest missing")
-        observed = canonical_materialized_sha256(case)
-        if observed != expected:
-            raise PermissionError(f"Training export blocked for case {case_id}: materialized payload digest mismatch")
-        return
-    if mode == "source_manifest_resolved":
-        source_case_path = _resolve_repo_path(provenance.get("source_case_path"))
-        source_case = read_json(source_case_path)
-        current = deepcopy(case)
-        current.pop("benchmark_provenance", None)
-        current.pop("_training_export_context", None)
-        if current != source_case:
-            raise PermissionError(f"Training export blocked for case {case_id}: raw source payload diverged after authority resolution")
-        return
-    raise PermissionError(f"Training export blocked for case {case_id}: unknown provenance mode {mode!r}")
+def _expected_materialized_case(case: Dict[str, Any], provenance: Dict[str, Any], authority: Dict[str, Any]) -> Dict[str, Any]:
+    suite = authority["suite"]
+    split = authority["split"]
+    allowed = {str(x) for x in suite.get("allowed_training_splits") or []}
+    prohibited = {str(x) for x in suite.get("prohibited_training_splits") or []}
+    if allowed - ALLOWED_TRAINING_SPLITS or not BLOCKED_TRAINING_SPLITS.issubset(prohibited):
+        raise PermissionError(f"Training export blocked for case {case.get('case_id')}: trusted suite split policy is unsafe")
+
+    materializer_version = str(provenance.get("materializer_version") or "")
+    if materializer_version not in TRUSTED_MATERIALIZER_VERSIONS:
+        raise PermissionError(f"Training export blocked for case {case.get('case_id')}: untrusted materializer version {materializer_version!r}")
+
+    expected = deepcopy(authority["source_case"])
+    expected["benchmark_provenance"] = {
+        "stage": "S5",
+        "suite_id": str(suite.get("suite_id")),
+        "family_id": authority["family_id"],
+        "split": split,
+        "variant_type": authority["variant_type"],
+        "evidence_class": suite.get("evidence_class"),
+        "fresh_evidence": bool(suite.get("fresh_evidence", False)),
+        "source_snapshot_commit": suite.get("source_snapshot_commit"),
+        "source_manifest_path": _repo_rel(authority["manifest_path"]),
+        "source_case_path": _repo_rel(authority["source_case_path"]),
+        "source_manifest_sha256": sha256_file(authority["manifest_path"]),
+        "source_case_sha256": sha256_file(authority["source_case_path"]),
+        "materializer_version": materializer_version,
+        "provenance_mode": "materialized_manifest_bound",
+        "training_eligible": split in allowed and split not in prohibited,
+    }
+    expected["benchmark_provenance"]["materialized_payload_sha256"] = canonical_materialized_sha256(expected)
+    return expected
 
 
-def training_partition(case: Dict[str, Any]) -> tuple[str | None, bool | None, Dict[str, Any] | None]:
+def training_partition(case: Dict[str, Any], trust_policy: Dict[str, Any] | Path | None = None) -> tuple[str | None, bool | None, Dict[str, Any] | None]:
+    policy = load_trust_policy(trust_policy)
     provenance = case.get("benchmark_provenance")
     if isinstance(provenance, dict):
-        local_split = provenance.get("split")
-        if not isinstance(local_split, str) or local_split not in KNOWN_BENCHMARK_SPLITS:
-            raise PermissionError(f"Training export blocked for case {case.get('case_id')}: missing/unknown benchmark split {local_split!r}")
-        authoritative_split, _ = _authoritative_manifest_ref(case, provenance)
-        if local_split != authoritative_split:
-            raise PermissionError(
-                f"Training export blocked for case {case.get('case_id')}: local split={local_split!r} disagrees with manifest={authoritative_split!r}"
-            )
-        eligible = provenance.get("training_eligible")
-        expected_eligible = authoritative_split in ALLOWED_TRAINING_SPLITS
-        if not isinstance(eligible, bool) or eligible is not expected_eligible:
-            raise PermissionError(
-                f"Training export blocked for case {case.get('case_id')}: training_eligible={eligible!r} disagrees with authoritative split"
-            )
-        _verify_payload_integrity(case, provenance)
-        return authoritative_split, eligible, provenance
+        authority = _trusted_suite_authority(case, provenance, policy)
+        expected = _expected_materialized_case(case, provenance, authority)
+        observed = deepcopy(case)
+        observed.pop("_training_export_context", None)
+        if observed != expected:
+            raise PermissionError(f"Training export blocked for case {case.get('case_id')}: payload/provenance diverges from external authority")
+        split = authority["split"]
+        eligible = bool(expected["benchmark_provenance"]["training_eligible"])
+        return split, eligible, expected["benchmark_provenance"]
+
+    context = case.get("_training_export_context")
+    if isinstance(context, dict) and context.get("kind") == "ordinary_policy_allowlisted":
+        path = _resolve_repo_path(context.get("path"))
+        entry = (policy.get("ordinary_training_sources") or {}).get(_repo_rel(path))
+        if not isinstance(entry, dict) or git_blob_sha1(path) != str(entry.get("git_blob_sha1") or ""):
+            raise PermissionError(f"Training export blocked for case {case.get('case_id')}: ordinary-source authority no longer matches")
+        return None, True, None
 
     if case.get("split") is not None:
-        raise PermissionError(
-            f"Training export blocked for case {case.get('case_id')}: partitioned case lacks authenticated benchmark provenance"
-        )
-    if case.get("_training_export_context") is _TRUSTED_UNPARTITIONED_SOURCE:
-        return None, True, None
-    raise PermissionError(
-        f"Training export blocked for case {case.get('case_id')}: unpartitioned direct case has no trusted loader context"
-    )
+        raise PermissionError(f"Training export blocked for case {case.get('case_id')}: partitioned case lacks external benchmark authority")
+    raise PermissionError(f"Training export blocked for case {case.get('case_id')}: no external training-source authority")
 
 
-def export_row(eval_row: Dict[str, Any], case: Dict[str, Any], run: Dict[str, Any] | None) -> tuple[str, Dict[str, Any]] | None:
+def export_row(
+    eval_row: Dict[str, Any],
+    case: Dict[str, Any],
+    run: Dict[str, Any] | None,
+    trust_policy: Dict[str, Any] | Path | None = None,
+) -> tuple[str, Dict[str, Any]] | None:
     candidate = eval_row.get("training_candidate") or {}
     if candidate.get("review_status") != "approved":
         return None
 
-    split, eligible, provenance = training_partition(case)
+    split, eligible, provenance = training_partition(case, trust_policy)
     if split in BLOCKED_TRAINING_SPLITS or eligible is False:
-        raise PermissionError(
-            f"Training export blocked for case {case.get('case_id')}: split={split!r} is evaluation-only"
-        )
+        raise PermissionError(f"Training export blocked for case {case.get('case_id')}: split={split!r} is evaluation-only")
     if split is not None and split not in ALLOWED_TRAINING_SPLITS:
-        raise PermissionError(
-            f"Training export blocked for case {case.get('case_id')}: split={split!r} is not allowlisted"
-        )
+        raise PermissionError(f"Training export blocked for case {case.get('case_id')}: split={split!r} is not allowlisted")
 
     kind = candidate.get("type")
     ideal = candidate.get("ideal_response") or candidate.get("chosen")
@@ -311,7 +344,6 @@ def export_row(eval_row: Dict[str, Any], case: Dict[str, Any], run: Dict[str, An
         "reviewed_by": candidate.get("reviewed_by"),
         "review_status": "approved",
     }
-
     instruction = case.get("interaction", {}).get("prompt", "")
     context = case_context(case)
 
@@ -340,9 +372,11 @@ def main() -> None:
     parser.add_argument("--runs", required=True, type=Path, help="Model harness run JSONL")
     parser.add_argument("--eval", required=True, type=Path, help="Evaluations with training_candidate blocks")
     parser.add_argument("--out-dir", required=True, type=Path)
+    parser.add_argument("--trust-policy", type=Path, default=DEFAULT_TRUST_POLICY)
     args = parser.parse_args()
 
-    cases = load_cases(args.cases)
+    policy = load_trust_policy(args.trust_policy)
+    cases = load_cases(args.cases, policy)
     runs = read_jsonl(args.runs)
     eval_rows = read_jsonl(args.eval)
     by_run, by_case_model = run_index(runs)
@@ -350,13 +384,12 @@ def main() -> None:
     sft_rows: List[Dict[str, Any]] = []
     pref_rows: List[Dict[str, Any]] = []
     skipped = 0
-
     for eval_row in eval_rows:
         case_id = str(eval_row.get("case_id", ""))
         if case_id not in cases:
             raise KeyError(f"Evaluation references unknown case_id: {case_id}")
         run = find_run(eval_row, by_run, by_case_model)
-        result = export_row(eval_row, cases[case_id], run)
+        result = export_row(eval_row, cases[case_id], run, policy)
         if result is None:
             skipped += 1
             continue
@@ -372,7 +405,8 @@ def main() -> None:
         "sft_count": len(sft_rows),
         "preference_count": len(pref_rows),
         "skipped_not_approved_or_none": skipped,
-        "rule": "approved candidates only; S5 partition authority and materialized payload integrity are fail-closed",
+        "rule": "approved candidates only; export authority comes from external S5 trust policy",
+        "trust_policy_version": policy.get("policy_version"),
     }
     (args.out_dir / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(manifest, ensure_ascii=False, indent=2))

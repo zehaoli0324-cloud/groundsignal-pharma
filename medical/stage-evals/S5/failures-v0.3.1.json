@@ -1,0 +1,19 @@
+{
+  "stage": "S5",
+  "version": "v0.3.1",
+  "evidence_class": "development_exposed_regression",
+  "fresh_evidence": false,
+  "active_failures": [],
+  "historical_failure_disposition": [
+    {"id": "S5-F8", "name": "LOCATION_LAUNDERING_TRUST_BYPASS", "status": "REPAIRED_EXPOSED_REGRESSION"},
+    {"id": "S5-F9", "name": "SELF_AUTHENTICATED_PAYLOAD_DIGEST_RECOMPUTABLE", "status": "REPAIRED_EXPOSED_REGRESSION"},
+    {"id": "S5-F10", "name": "SUITE_IDENTITY_NOT_AUTHENTICATED", "status": "REPAIRED_EXPOSED_REGRESSION"},
+    {"id": "S5-F11", "name": "FOREIGN_MANIFEST_AUTHORITY_SUBSTITUTION", "status": "REPAIRED_EXPOSED_REGRESSION"}
+  ],
+  "remaining_release_blockers": [
+    "No independent fresh proof exists yet for the v0.3.1 trust-root repair.",
+    "Gold review remains incomplete; no family approval is inferred."
+  ],
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED"
+}

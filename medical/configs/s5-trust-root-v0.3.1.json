@@ -1,0 +1,46 @@
+{
+  "policy_version": "s5-trust-root-v0.3.1",
+  "benchmark_suites": {
+    "S5-FRESH-BOUNDARY-v0.2": {
+      "suite_path": "medical/stage-evals/S5/fresh-boundary-v0.2/suite-fresh-boundary-v0.2.json",
+      "suite_git_blob_sha1": "21784fa9fae0f91c23d4f51916b1cbae611c0135",
+      "family_root": "medical/stage-evals/S5/fresh-boundary-v0.2/families",
+      "families": {
+        "S5FRESH-BOUNDARY-001": {
+          "manifest_path": "medical/stage-evals/S5/fresh-boundary-v0.2/families/S5FRESH-BOUNDARY-001/manifest.json",
+          "manifest_git_blob_sha1": "2caccbd779fd364cac6b373ddf8c066379078904",
+          "cases": {
+            "S5FRESH-BND-DEV-001": {"source_case_path": "medical/stage-evals/S5/fresh-boundary-v0.2/families/S5FRESH-BOUNDARY-001/cases/S5FRESH-BND-DEV-001.json", "source_case_git_blob_sha1": "44a8f0eede65e08c72bff9b9aa4c7fbf74f5581c", "split": "dev", "variant_type": "base"},
+            "S5FRESH-BND-DEV-002": {"source_case_path": "medical/stage-evals/S5/fresh-boundary-v0.2/families/S5FRESH-BOUNDARY-001/cases/S5FRESH-BND-DEV-002.json", "source_case_git_blob_sha1": "5f084d7393b05b3a89c3d752b8fb93a077a3885c", "split": "dev", "variant_type": "counterfactual"},
+            "S5FRESH-BND-DEV-003": {"source_case_path": "medical/stage-evals/S5/fresh-boundary-v0.2/families/S5FRESH-BOUNDARY-001/cases/S5FRESH-BND-DEV-003.json", "source_case_git_blob_sha1": "c7f04c80ba9ab6e29a8f3d65ad4e00a25d5b7efe", "split": "dev", "variant_type": "negative_control"},
+            "S5FRESH-BND-REG-001": {"source_case_path": "medical/stage-evals/S5/fresh-boundary-v0.2/families/S5FRESH-BOUNDARY-001/cases/S5FRESH-BND-REG-001.json", "source_case_git_blob_sha1": "22081919e3113d2d77c8db106c9976b01dccbdda", "split": "regression", "variant_type": "regression"},
+            "S5FRESH-BND-HO-001": {"source_case_path": "medical/stage-evals/S5/fresh-boundary-v0.2/families/S5FRESH-BOUNDARY-001/cases/S5FRESH-BND-HO-001.json", "source_case_git_blob_sha1": "7781cad6778239315b731d4f3aae0cf349add320", "split": "heldout", "variant_type": "heldout"}
+          }
+        }
+      }
+    },
+    "S5-FRESH-BOUNDARY-v0.3": {
+      "suite_path": "medical/stage-evals/S5/fresh-boundary-v0.3/suite-fresh-boundary-v0.3.json",
+      "suite_git_blob_sha1": "d6b19cc4b5574382d3b18c0a95d46e09cb5cd7f4",
+      "family_root": "medical/stage-evals/S5/fresh-boundary-v0.3/families",
+      "families": {
+        "S5FRESH-BOUNDARY-002": {
+          "manifest_path": "medical/stage-evals/S5/fresh-boundary-v0.3/families/S5FRESH-BOUNDARY-002/manifest.json",
+          "manifest_git_blob_sha1": "3a47127f38d0858e28b92769a6a10b2b5e3e9cfb",
+          "cases": {
+            "S5FRESH-BND3-DEV-001": {"source_case_path": "medical/stage-evals/S5/fresh-boundary-v0.3/families/S5FRESH-BOUNDARY-002/cases/S5FRESH-BND3-DEV-001.json", "source_case_git_blob_sha1": "01c63dc83fd81a42f6f625a536a3eb894f53d65a", "split": "dev", "variant_type": "base"},
+            "S5FRESH-BND3-DEV-002": {"source_case_path": "medical/stage-evals/S5/fresh-boundary-v0.3/families/S5FRESH-BOUNDARY-002/cases/S5FRESH-BND3-DEV-002.json", "source_case_git_blob_sha1": "eb9f24c514e6946cfc68ec7eafdb8c79455c61f4", "split": "dev", "variant_type": "counterfactual"},
+            "S5FRESH-BND3-DEV-003": {"source_case_path": "medical/stage-evals/S5/fresh-boundary-v0.3/families/S5FRESH-BOUNDARY-002/cases/S5FRESH-BND3-DEV-003.json", "source_case_git_blob_sha1": "5fd9470675bfe37f2bd0d7bd65e4e364af1b6ca0", "split": "dev", "variant_type": "negative_control"},
+            "S5FRESH-BND3-REG-001": {"source_case_path": "medical/stage-evals/S5/fresh-boundary-v0.3/families/S5FRESH-BOUNDARY-002/cases/S5FRESH-BND3-REG-001.json", "source_case_git_blob_sha1": "8df69b4aab474f381b8ab2b64040d99299b53688", "split": "regression", "variant_type": "regression"},
+            "S5FRESH-BND3-HO-001": {"source_case_path": "medical/stage-evals/S5/fresh-boundary-v0.3/families/S5FRESH-BOUNDARY-002/cases/S5FRESH-BND3-HO-001.json", "source_case_git_blob_sha1": "c1a8514c2428f3207f223e8c9e1ac08b3639dfd3", "split": "heldout", "variant_type": "heldout"}
+          }
+        }
+      }
+    }
+  },
+  "ordinary_training_sources": {
+    "medical/examples/clinical-medication-safety-001.json": {
+      "git_blob_sha1": "7ec5fa5ea4cfa0076eb61bc2da7f8c3bdfbd7b22"
+    }
+  }
+}

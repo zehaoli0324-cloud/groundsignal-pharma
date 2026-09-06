@@ -1,0 +1,143 @@
+name: S5 v0.3.1 External Trust-Root Repair Exposed Regression
+
+on:
+  push:
+    paths:
+      - 'scripts/export_training_data.py'
+      - 'scripts/s5_trust_policy.py'
+      - 'scripts/eval_s5_boundary_regression_v031.py'
+      - 'medical/configs/s5-trust-root-v0.3.1.json'
+      - 'medical/stage-evals/S5/boundary-regression-v0.3.1.json'
+      - 'medical/stage-evals/S5/failures-v0.3.1.json'
+      - 'medical/stage-evals/S5/S5_V0.3.1_TRUST_ROOT_REPAIR_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v031-trust-root-regression.yml'
+  pull_request:
+    paths:
+      - 'scripts/export_training_data.py'
+      - 'scripts/s5_trust_policy.py'
+      - 'scripts/eval_s5_boundary_regression_v031.py'
+      - 'medical/configs/s5-trust-root-v0.3.1.json'
+      - 'medical/stage-evals/S5/boundary-regression-v0.3.1.json'
+      - 'medical/stage-evals/S5/failures-v0.3.1.json'
+      - 'medical/stage-evals/S5/S5_V0.3.1_TRUST_ROOT_REPAIR_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v031-trust-root-regression.yml'
+
+jobs:
+  exposed-trust-root-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check S5 v0.3.1 implementation and evaluator
+        run: |
+          python -m py_compile \
+            scripts/export_training_data.py \
+            scripts/s5_trust_policy.py \
+            scripts/eval_s5_boundary_regression_v031.py
+
+      - name: Preserve immutable S5 v0.3 first observation
+        run: |
+          observed="$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.3.json)"
+          expected='47e1669f724f8b2cab285ec0f689cb3819e068e2'
+          echo "v0.3 first-observation blob=$observed"
+          test "$observed" = "$expected"
+
+      - name: Rebuild and verify external trust-root policy
+        run: |
+          python scripts/s5_trust_policy.py \
+            --suite medical/stage-evals/S5/fresh-boundary-v0.2/suite-fresh-boundary-v0.2.json \
+            --family-root medical/stage-evals/S5/fresh-boundary-v0.2/families \
+            --suite medical/stage-evals/S5/fresh-boundary-v0.3/suite-fresh-boundary-v0.3.json \
+            --family-root medical/stage-evals/S5/fresh-boundary-v0.3/families \
+            --ordinary-source medical/examples/clinical-medication-safety-001.json \
+            --out /tmp/s5-trust-root-rebuilt.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected=json.loads(Path('medical/configs/s5-trust-root-v0.3.1.json').read_text(encoding='utf-8'))
+          observed=json.loads(Path('/tmp/s5-trust-root-rebuilt.json').read_text(encoding='utf-8'))
+          assert observed == expected, 'external trust-root policy does not match repository source identities'
+          assert expected['policy_version'] == 's5-trust-root-v0.3.1'
+          print('S5 external trust-root policy rebuilt exactly from registered repository blobs.')
+          PY
+
+      - name: Run v0.3.1 exposed trust-root regression
+        run: |
+          mkdir -p /tmp/groundsignal-s5-v031
+          python scripts/eval_s5_boundary_regression_v031.py \
+            --out /tmp/groundsignal-s5-v031/result.json
+          cat /tmp/groundsignal-s5-v031/result.json
+
+      - name: Match committed v0.3.1 audit metrics projection
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          o=json.loads(Path('/tmp/groundsignal-s5-v031/result.json').read_text(encoding='utf-8'))
+          m=o['materialization']
+          b=o['baseline_partition_export']
+          g=o['gold_release_containment']
+          projection={
+            'stage':'S5',
+            'version':'v0.3.1',
+            'eval_name':'external-trust-root-repair-exposed-regression',
+            'evidence_class':'development_exposed_regression',
+            'fresh_evidence':False,
+            'source_first_observation_git_blob_sha':o['historical_first_observation_preservation']['observed_git_blob_sha'],
+            'trust_policy_version':o['external_trust_root']['policy_version'],
+            'family_count':m['family_count'],
+            'case_count':m['case_count'],
+            'split_counts':m['split_counts'],
+            'training_eligible_count':m['training_eligible_count'],
+            'training_blocked_count':m['training_blocked_count'],
+            'baseline_export':{
+              'dev':'EXPORTABLE' if b['dev']['exported'] else 'BLOCKED',
+              'regression':'BLOCKED' if b['regression']['blocked'] else 'EXPORTABLE',
+              'heldout':'BLOCKED' if b['heldout']['blocked'] else 'EXPORTABLE',
+            },
+            'probes':{
+              'S5-F8_LOCATION_LAUNDERING_TRUST_BYPASS':'BLOCKED' if o['S5-F8']['blocked'] else 'EXPORTABLE',
+              'S5-F9_SELF_AUTHENTICATED_PAYLOAD_DIGEST_RECOMPUTABLE':'BLOCKED' if o['S5-F9']['blocked'] else 'EXPORTABLE',
+              'S5-F10_SUITE_IDENTITY_NOT_AUTHENTICATED':'BLOCKED' if o['S5-F10']['blocked'] else 'EXPORTABLE',
+              'S5-F11_FOREIGN_MANIFEST_AUTHORITY_SUBSTITUTION':'BLOCKED' if o['S5-F11']['blocked'] else 'EXPORTABLE',
+            },
+            'ordinary_allowlisted_source_control':'EXPORTABLE' if o['ordinary_source_allowlist_control']['exported'] else 'BLOCKED',
+            'historical_failure_disposition':o['historical_failure_disposition'],
+            'gold_approved_count':g['gold_approved_count'],
+            'pending_gold_count':g['pending_gold_count'],
+            'regression_gate':o['regression_gate'],
+            'stage_release':o['stage_release'],
+            's6_automatic_trust':o['s6_automatic_trust'],
+          }
+          expected=json.loads(Path('medical/stage-evals/S5/boundary-regression-v0.3.1.json').read_text(encoding='utf-8'))
+          assert projection == expected, (expected, projection)
+          assert o['failed_gates'] == []
+          assert o['regression_gate'] == 'PASS'
+          assert o['stage_release'] == 'BLOCKED_GOLD_REVIEW'
+          assert o['s6_automatic_trust'] == 'BLOCKED'
+          failures=json.loads(Path('medical/stage-evals/S5/failures-v0.3.1.json').read_text(encoding='utf-8'))
+          assert failures['active_failures'] == []
+          assert failures['stage_release'] == 'BLOCKED_GOLD_REVIEW'
+          print('S5 v0.3.1 exposed trust-root regression matches committed audit metrics.')
+          PY
+
+      - name: Keep S5 v0.2.1 exposed regression green
+        run: |
+          python scripts/eval_s5_boundary_regression_v021.py \
+            --out /tmp/groundsignal-s5-v031/v021-regression.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/groundsignal-s5-v031/v021-regression.json', encoding='utf-8'))
+          assert d['regression_gate'] == 'PASS'
+          assert d['hard_gate_failures'] == []
+          assert d['stage_release'] == 'BLOCKED_GOLD_REVIEW'
+          print('S5 v0.2.1 exposed regression remains green under v0.3.1 exporter.')
+          PY
