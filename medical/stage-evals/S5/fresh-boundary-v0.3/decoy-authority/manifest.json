@@ -1,0 +1,8 @@
+{
+  "family_id":"S5FRESH-DECOY-AUTHORITY-001",
+  "title":"Adversarial foreign authority not listed in S5-FRESH-BOUNDARY-v0.3",
+  "status":"not_a_suite_member",
+  "cases":[
+    {"case_id":"S5FRESH-BND3-HO-001","path":"cases/S5FRESH-BND3-HO-001.json","split":"dev","variant_type":"foreign_authority_decoy"}
+  ]
+}
