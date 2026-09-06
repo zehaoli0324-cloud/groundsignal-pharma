@@ -1,0 +1,15 @@
+{
+  "stage": "S5",
+  "version": "v0.6",
+  "source_first_observation": "medical/stage-evals/S5/fresh-first-observation-v0.6.json",
+  "target_freeze_commit": "60f74c7f30c007008ee73df3eed6eacf4a9bab0a",
+  "failures": [
+    {"id": "S5-F20", "name": "DERIVED_HELDOUT_ORDINARY_SOURCE_LAUNDERING", "severity": "hard_gate", "observation": "A byte-distinct ordinary-source fixture explicitly derived from a heldout benchmark case was accepted by both policy construction and policy-content validation after changing case_id/presentation metadata.", "root_cause": "Authority checks prove exact blob and raw case_id uniqueness but do not encode benchmark lineage or transformed/derived-source exclusion."},
+    {"id": "S5-F21", "name": "UNICODE_CASE_ID_NORMALIZATION_COLLISION", "severity": "hard_gate", "observation": "A benchmark case_id encoded in NFC and a canonically equivalent ordinary case_id encoded in NFD were accepted as distinct identities.", "root_cause": "case_id namespace uniqueness is enforced on raw Unicode code-point strings rather than a canonical normalized identity representation."},
+    {"id": "S5-F22", "name": "REGISTRY_TOCTOU_POST_HASH_SUBSTITUTION", "severity": "hard_gate", "observation": "Replacing the trust-policy registry after its genuine bytes were hashed but before JSON parsing allowed an attacker registry/policy to authorize and export a previously unregistered ordinary source.", "root_cause": "Registry authentication performs identity check and content read as separate filesystem operations; the verified bytes are not the bytes subsequently parsed."},
+    {"id": "S5-F23", "name": "SOURCE_TOCTOU_POST_HASH_SUBSTITUTION", "severity": "hard_gate", "observation": "Replacing a canonical ordinary source after its genuine bytes were hashed but before payload parsing allowed the substituted payload with the same case_id to be loaded and exported.", "root_cause": "Source authentication hashes a path and later re-opens it for parsing; verification is not bound to a single immutable byte snapshot."}
+  ],
+  "controls": {"baseline_dev": "EXPORTABLE", "baseline_regression": "BLOCKED", "baseline_heldout": "BLOCKED", "ordinary_baseline": "EXPORTABLE", "decision_contract_alignment": "PASS", "prompt_gold_leakage": "NONE", "gold_release": "BLOCKED_GOLD_REVIEW"},
+  "decision": "FRESH_STRUCTURAL_FAIL",
+  "s6_automatic_trust": "BLOCKED"
+}

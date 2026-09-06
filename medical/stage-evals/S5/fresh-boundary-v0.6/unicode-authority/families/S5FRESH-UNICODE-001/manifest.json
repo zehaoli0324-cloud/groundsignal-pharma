@@ -1,0 +1,15 @@
+{
+  "family_id": "S5FRESH-UNICODE-001",
+  "title": "Fresh v0.6 Unicode identity authority fixture",
+  "status": "structural_eval_only",
+  "data_origin": "synthetic",
+  "target_capabilities": ["canonical case identity"],
+  "failure_hypotheses": ["canonically equivalent Unicode case_id strings may evade raw-string collision checks"],
+  "split_policy": {
+    "leakage_rule": "Only manifest-declared dev cases may be training eligible.",
+    "heldout_variables": ["Unicode normalization form"]
+  },
+  "cases": [
+    {"case_id": "S5FRESH-BND6-ID-é", "path": "cases/case-nfc.json", "split": "dev", "variant_type": "identity_control"}
+  ]
+}

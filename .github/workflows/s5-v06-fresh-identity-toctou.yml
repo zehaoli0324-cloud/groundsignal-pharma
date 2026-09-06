@@ -1,0 +1,81 @@
+name: S5 v0.6 Fresh Identity TOCTOU First Observation
+
+on:
+  push:
+    paths:
+      - 'scripts/eval_s5_fresh_boundary_v06.py'
+      - 'medical/stage-evals/S5/fresh-boundary-v0.6/**'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.6.json'
+      - 'medical/stage-evals/S5/failures-v0.6.json'
+      - 'medical/stage-evals/S5/S5_V0.6_FRESH_IDENTITY_TOCTOU_FAIL_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v06-fresh-identity-toctou.yml'
+  pull_request:
+    paths:
+      - 'scripts/eval_s5_fresh_boundary_v06.py'
+      - 'medical/stage-evals/S5/fresh-boundary-v0.6/**'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.6.json'
+      - 'medical/stage-evals/S5/failures-v0.6.json'
+      - 'medical/stage-evals/S5/S5_V0.6_FRESH_IDENTITY_TOCTOU_FAIL_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v06-fresh-identity-toctou.yml'
+
+jobs:
+  fresh-first-observation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check fresh evaluator
+        run: python -m py_compile scripts/eval_s5_fresh_boundary_v06.py
+
+      - name: Preserve prior v0.5 first observation
+        run: |
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.5.json)" = 'c300d301cb6bf23e5ec1cc0472666f44a1148e77'
+
+      - name: Re-run v0.5.1 exposed regression
+        run: |
+          mkdir -p /tmp/groundsignal-s5-v06
+          python scripts/eval_s5_boundary_regression_v051.py \
+            --out /tmp/groundsignal-s5-v06/v051.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('/tmp/groundsignal-s5-v06/v051.json').read_text(encoding='utf-8'))
+          assert d['regression_gate']=='PASS'
+          assert d['failed_gates']==[]
+          assert d['stage_release']=='BLOCKED_GOLD_REVIEW'
+          assert d['s6_automatic_trust']=='BLOCKED'
+          print('S5 v0.5.1 exposed regression remains PASS.')
+          PY
+
+      - name: Run v0.6 first fresh observation
+        run: |
+          set +e
+          python scripts/eval_s5_fresh_boundary_v06.py \
+            --out /tmp/groundsignal-s5-v06/v06.json
+          status=$?
+          set -e
+          test "$status" -eq 1
+          cat /tmp/groundsignal-s5-v06/v06.json
+
+      - name: Match committed immutable first observation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          observed=json.loads(Path('/tmp/groundsignal-s5-v06/v06.json').read_text(encoding='utf-8'))
+          expected=json.loads(Path('medical/stage-evals/S5/fresh-first-observation-v0.6.json').read_text(encoding='utf-8'))
+          assert observed == expected
+          assert observed['precondition_failures'] == []
+          assert observed['hard_gate_failures'] == ['S5-F20','S5-F21','S5-F22','S5-F23']
+          assert observed['fresh_structural_gate'] == 'FAIL'
+          assert observed['stage_release'] == 'BLOCKED_GOLD_REVIEW'
+          assert observed['s6_automatic_trust'] == 'BLOCKED'
+          print('S5 v0.6 fresh first observation reproduced exactly and remains a hard-gate FAIL.')
+          PY

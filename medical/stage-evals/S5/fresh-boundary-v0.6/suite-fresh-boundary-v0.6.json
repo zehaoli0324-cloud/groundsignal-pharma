@@ -1,0 +1,17 @@
+{
+  "stage": "S5",
+  "suite_id": "S5-FRESH-IDENTITY-TOCTOU-v0.6",
+  "version": "v0.6",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "implementation_freeze_commit": "60f74c7f30c007008ee73df3eed6eacf4a9bab0a",
+  "carrier_suite_id": "S5-FRESH-BOUNDARY-v0.4",
+  "carrier_suite_path": "medical/stage-evals/S5/fresh-boundary-v0.4/suite-fresh-boundary-v0.4.json",
+  "purpose": "Fresh post-v0.5.1 evaluation of transformed-source identity, Unicode canonical identity, and hash/read time-of-check-to-time-of-use boundaries.",
+  "attack_fixture_ids": ["S5-F20", "S5-F21", "S5-F22", "S5-F23"],
+  "release_use": "evaluation_only",
+  "notes": [
+    "This is a structural security suite, not a new clinical-gold family.",
+    "Existing registered v0.4 benchmark cases are used only as authenticated carrier controls."
+  ]
+}

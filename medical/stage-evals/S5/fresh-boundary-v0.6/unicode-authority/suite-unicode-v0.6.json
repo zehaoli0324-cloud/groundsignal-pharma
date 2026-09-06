@@ -1,0 +1,14 @@
+{
+  "stage": "S5",
+  "suite_id": "S5-FRESH-UNICODE-AUTHORITY-v0.6",
+  "version": "v0.6",
+  "evidence_class": "independent_fresh_structural_fixture",
+  "fresh_evidence": true,
+  "implementation_freeze_commit": "60f74c7f30c007008ee73df3eed6eacf4a9bab0a",
+  "source_snapshot_commit": null,
+  "family_ids": ["S5FRESH-UNICODE-001"],
+  "allowed_training_splits": ["dev"],
+  "prohibited_training_splits": ["regression", "heldout"],
+  "purpose": "Synthetic authority fixture for canonical Unicode case-identity collision testing.",
+  "release_use": "evaluation_only"
+}

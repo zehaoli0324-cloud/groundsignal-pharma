@@ -1,0 +1,40 @@
+{
+  "stage": "S5",
+  "version": "v0.6",
+  "eval_name": "fifth-fresh-identity-toctou-first-observation",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "first_observation": true,
+  "target_implementation_freeze_commit": "60f74c7f30c007008ee73df3eed6eacf4a9bab0a",
+  "target_blob_contract": {
+    "scripts/export_training_data.py": "27ff2c79521119fad03f4876d04a3ce0245ba5c6",
+    "scripts/s5_trust_policy.py": "62a7509cdc2a4e030b9a790f3e5a047710ef37de",
+    "scripts/materialize_s5_cases.py": "ecca14f947e7922bb277c1149f07d51f34f605cf",
+    "scripts/s5_release_gate.py": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+    "scripts/model_harness.py": "e6c90ab88c476c38b765d61ae8c9e2b471c8e2a2",
+    "medical/schemas/clinical-case.schema.json": "473edfd800b717513582a1100f9b8f4fe0814e0a",
+    "medical/configs/s5-trust-policy-registry-v0.4.1.json": "b9637e31df679e49b36d49ea96177a8100fd5c2a",
+    "medical/configs/s5-trust-root-v0.4.1.json": "57adc5384818a4254192ed53e8ba60eee5d70e48"
+  },
+  "freshness_contract": {
+    "fixtures_authored_after_freeze": true,
+    "evaluator_authored_after_freeze": true,
+    "implementation_changes_before_first_observation": false,
+    "carrier_cases_are_previously_exposed": true,
+    "carrier_case_role": "authenticated transport/control only; all v0.6 attack compositions and identity fixtures are new"
+  },
+  "hard_gates": [
+    {"id": "S5-F20", "name": "DERIVED_HELDOUT_ORDINARY_SOURCE_LAUNDERING"},
+    {"id": "S5-F21", "name": "UNICODE_CASE_ID_NORMALIZATION_COLLISION"},
+    {"id": "S5-F22", "name": "REGISTRY_TOCTOU_POST_HASH_SUBSTITUTION"},
+    {"id": "S5-F23", "name": "SOURCE_TOCTOU_POST_HASH_SUBSTITUTION"}
+  ],
+  "required_controls": [
+    "authenticated trust root",
+    "carrier dev/regression/heldout export isolation",
+    "ordinary-source baseline compatibility",
+    "decision-contract alignment",
+    "prompt gold containment",
+    "gold release containment"
+  ]
+}

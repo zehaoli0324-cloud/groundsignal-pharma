@@ -11,7 +11,7 @@ The system has **10 lifecycle stages**. `PASS` always refers to the explicitly t
 | S2 | Knowledge Search & Source Routing | **CONDITIONAL PASS / v0.4 development FAIL** | v0.3 fresh routing 91.7%; S2→S3 joint intent/source 94.44%; live DailyMed 3/3 | clause-level negation/exclusion + role-separated features; broader live sources |
 | S3 | Evidence Verification & Temporal Truth | **CONDITIONAL PASS** | S3a v0.5.6.1 fresh F1 98.90%, critical recall 100%; S3b 40/40; joint S2→S3 17/18 | larger real-source/noisy-passage held-out |
 | S4 | Medical KG Construction / Update | **CONDITIONAL PASS / v0.1.1 independent fresh PASS** | fresh 20/20; must-reject 7/7; stale ACTIVE 0; invariant violations 0 | persistent/real-source graph proof; unrestricted production ingest disabled |
-| S5 | Controlled Case / Benchmark Factory | **v0.5.1 EXPOSED AUTHORITY-COMPOSITION REGRESSION PASS / RELEASE BLOCKED** | v0.5 independent fresh F16–F19 FAIL preserved; v0.5.1 exposed regression blocks all four without changing historical fresh evidence | freeze v0.5.1 and create a genuinely new post-freeze authority-boundary suite; gold review remains independent blocker |
+| S5 | Controlled Case / Benchmark Factory | **v0.6 INDEPENDENT FRESH IDENTITY/TOCTOU FAIL / RELEASE BLOCKED** | v0.5.1 exposed F16–F19 regression PASS; new post-freeze v0.6 preconditions PASS but F20–F23 all fail | preserve v0.6 first observation; repair lineage/canonical-ID/atomic-snapshot boundaries; rerun only as exposed regression |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release; do not auto-trust S5 partitions |
 | S7 | Evaluation & Safety Gate | Protocol complete | v0.2 rubric, graph/RAG/Agent layers, regression safety gate | human/Judge calibration + real model scoring |
 | S8 | Failure Diagnosis | Framework ready | taxonomy, stale-knowledge bad case, intervention router | multi-model cross-case failure clusters |
@@ -43,7 +43,7 @@ S2→S3 controlled vertical slice
   combined release                  PASS
 ```
 
-S3 remains a bounded `CONDITIONAL PASS`. Long/noisy real multi-source passages remain under-tested.
+S3 remains a bounded `CONDITIONAL PASS`; long/noisy real multi-source passages remain under-tested.
 
 ---
 
@@ -63,7 +63,7 @@ Current decision: controlled truth-ledger state machine = `CONDITIONAL PASS`; un
 
 ## S5 evidence history
 
-Historical first observations remain immutable:
+Historical first observations remain immutable.
 
 ```text
 v0.1 development first observation
@@ -76,103 +76,65 @@ v0.2 first independent fresh boundary
   F5 missing/unknown split fail-closed               FAIL
   F6 payload integrity                               FAIL
   F7 decision exemption alignment                    FAIL
-
-v0.2.1 exposed regression
-  F4–F7                                      REPAIRED / PASS
+v0.2.1 exposed regression                            F4–F7 REPAIRED / PASS
 
 v0.3 second independent fresh trust-root
   F8 location laundering                             FAIL
   F9 recomputable self-auth digest                   FAIL
   F10 suite identity                                 FAIL
   F11 foreign manifest substitution                  FAIL
-
-v0.3.1 exposed trust-root regression
-  F8–F11                                     REPAIRED / PASS
+v0.3.1 exposed regression                            F8–F11 REPAIRED / PASS
 
 v0.4 third independent fresh policy-root
   F12 caller-supplied policy laundering              FAIL
   F13 off-repo policy root                           FAIL
   F14 cross-suite case_id collision                  FAIL
   F15 suite blob replay / alternate family root      FAIL
-
-v0.4.1 exposed policy-root regression
-  F12–F15                                    REPAIRED / PASS
+v0.4.1 exposed regression                            F12–F15 REPAIRED / PASS
 
 v0.5 fourth independent fresh authority composition
   F16 ordinary payload mutation after load           FAIL
   F17 forged ordinary context bearer                 FAIL
   F18 ordinary/benchmark case_id collision           FAIL
   F19 declared-family case-path containment          FAIL
+v0.5.1 exposed regression                            F16–F19 REPAIRED / PASS
 
-v0.5.1 exposed authority-composition regression
-  F16–F19                                    REPAIRED / PASS
+v0.6 fifth independent fresh identity / TOCTOU boundary
+  F20 transformed heldout-derived ordinary source    FAIL
+  F21 Unicode-normalization case_id collision        FAIL
+  F22 registry check/read TOCTOU substitution        FAIL
+  F23 source check/read TOCTOU substitution          FAIL
 ```
 
-Gold approval remains separate from structural evaluation: P0 `0/12`, v0.2 family `0/1`, v0.3 family `0/1`, v0.4 family `0/1`; no expert/clinical approval is inferred. The v0.5 suite is structural-only and creates no new clinical-gold family.
+Gold approval remains separate from structural evaluation: P0 `0/12`, v0.2 family `0/1`, v0.3 family `0/1`, v0.4 family `0/1`; no expert/clinical approval is inferred. v0.5 and v0.6 are structural-only suites and create no new clinical-gold family.
+
+### Immutable recent first observations
+
+```text
+v0.4 first observation blob  45a10ed2cc522b555a3f3eecf785dffedf8cd4c3
+v0.5 first observation blob  c300d301cb6bf23e5ec1cc0472666f44a1148e77
+```
+
+The v0.6 first-observation file is created in the same commit as its post-freeze evaluator/fixtures; after this commit it is exposed forever and must never be relabeled fresh.
 
 ---
 
-## S5 v0.4 first observation — immutable fresh FAIL
-
-Target implementation freeze:
-
-```text
-64cd9288d0b13012d8b71989431dde493c4e8a59
-```
-
-Fresh preconditions all passed, but the first observation recorded four hard failures:
-
-```text
-S5-F12 CALLER_SUPPLIED_POLICY_CAN_LAUNDER_HELDOUT       FAIL
-S5-F13 OFF_REPO_POLICY_PATH_ACCEPTED_AS_ROOT            FAIL
-S5-F14 CROSS_SUITE_CASE_ID_COLLISION_NOT_REJECTED       FAIL
-S5-F15 SUITE_BLOB_REPLAY_ALTERNATE_FAMILY_ROOT          FAIL
-
-fresh structural gate                                  FAIL
-S5 release                               BLOCKED_GOLD_REVIEW
-S6 automatic trust                                    BLOCKED
-```
-
-Immutable first-observation blob:
-
-```text
-45a10ed2cc522b555a3f3eecf785dffedf8cd4c3
-```
-
-The v0.4 suite is exposed forever and is never relabeled fresh.
-
----
-
-## S5 v0.4.1 checkpoint — policy-root repair exposed regression
+## S5 v0.5.1 checkpoint — authority-composition repair exposed regression
 
 Evidence class: **development exposed regression**, not fresh held-out.
 
-The repair moves export authority above caller-selected policy data:
-
-- `medical/configs/s5-trust-policy-registry-v0.4.1.json` is a canonical registry whose Git blob identity is pinned in the exporter.
-- Protected export accepts only registry-listed canonical policy paths or policy objects exactly matching a registered policy.
-- The registered policy binds canonical suite path/blob, family root, manifest path/blob, source-case path/blob, split, and variant metadata.
-- Policy construction and authenticated-policy validation reject duplicate benchmark `case_id` values across suites.
-- Ordinary source blobs may not equal any benchmark source-case blob in the authenticated policy.
-- The prior v0.3.1 policy is explicitly registry-authenticated so historical exposed regression remains reproducible without trusting arbitrary policies.
-
-Regression result:
-
 ```text
-historical v0.4 first-observation preservation       PASS
+historical v0.5 first-observation preservation       PASS
 authenticated policy registry                         PASS
-canonical v0.4.1 policy rebuild                       PASS
-materialization                                      5/5
+carrier materialization                              5/5
 baseline dev export                            EXPORTABLE
 baseline regression export                         BLOCKED
 baseline heldout export                            BLOCKED
-
-S5-F12 caller policy laundering                    BLOCKED
-S5-F13 off-repo policy root                        BLOCKED
-S5-F14 cross-suite case_id collision               BLOCKED
-S5-F15 suite blob replay / alternate root          BLOCKED
-
 ordinary allowlisted source                    EXPORTABLE
+S5-F16 mutated ordinary payload                    BLOCKED
+S5-F17 borrowed ordinary context                   BLOCKED
+S5-F18 ordinary/benchmark case_id collision        BLOCKED
+S5-F19 sibling-family path escape                  BLOCKED
 decision-contract alignment                          PASS
 prompt gold leakage                                  NONE
 gold approved                                         0
@@ -180,28 +142,19 @@ pending gold                                          1
 regression gate                                      PASS
 ```
 
-Current decision:
-
-```text
-S5 v0.4.1 exposed structural regression             PASS
-S5 bounded release                 NOT YET ESTABLISHED
-S5 release                         BLOCKED_GOLD_REVIEW
-S6 automatic trust                               BLOCKED
-```
-
-This regression repairs the exposed F12–F15 failure classes, but it cannot establish independent generalization because the v0.4 suite has already been observed.
+This repair is exposed evidence only and does not establish independent generalization.
 
 ---
 
-## S5 v0.5 first observation — immutable fresh FAIL
+## S5 v0.6 checkpoint — fifth genuinely fresh identity / TOCTOU FAIL
 
 Target implementation freeze:
 
 ```text
-f1778c21710a743c1e7f1e6d531301c08afdbd14
+60f74c7f30c007008ee73df3eed6eacf4a9bab0a
 ```
 
-Freshness scope is explicit: v0.5 reuses registered v0.4 cases only as authenticated carrier controls. All attack compositions, the ordinary-source collision fixture, the family-path escape fixture, evaluator logic, and protocol were created after the v0.4.1 freeze.
+All v0.6 evaluator logic and attack fixtures were authored after this freeze. Previously registered v0.4 cases are reused only as authenticated carrier controls.
 
 Preconditions:
 
@@ -222,19 +175,20 @@ precondition failures                                   0
 New hard-gate failures:
 
 ```text
-S5-F16 ORDINARY_SOURCE_PAYLOAD_NOT_BOUND_AFTER_LOAD                 FAIL
-S5-F17 FORGED_ORDINARY_CONTEXT_BEARER_CAPABILITY                    FAIL
-S5-F18 ORDINARY_BENCHMARK_CASE_ID_COLLISION_NOT_VALIDATED           FAIL
-S5-F19 DECLARED_FAMILY_CASE_PATH_CONTAINMENT_MISSING                FAIL
+S5-F20 DERIVED_HELDOUT_ORDINARY_SOURCE_LAUNDERING             FAIL
+S5-F21 UNICODE_CASE_ID_NORMALIZATION_COLLISION                 FAIL
+S5-F22 REGISTRY_TOCTOU_POST_HASH_SUBSTITUTION                  FAIL
+S5-F23 SOURCE_TOCTOU_POST_HASH_SUBSTITUTION                    FAIL
 ```
 
-Immutable first-observation blob:
+Interpretation:
 
-```text
-c300d301cb6bf23e5ec1cc0472666f44a1148e77
-```
+- F20: exact blob/case-id uniqueness does not encode source lineage; a transformed heldout-derived case can be proposed as ordinary training data.
+- F21: raw Unicode string equality is not a canonical identity namespace.
+- F22: registry hash verification and JSON parsing use separate filesystem reads, so the verified bytes can differ from parsed bytes.
+- F23: source hash verification and payload parsing have the same check/read race.
 
-Historical decision:
+Current decision:
 
 ```text
 fresh structural gate                     FAIL
@@ -243,63 +197,7 @@ S5 release              BLOCKED_GOLD_REVIEW
 S6 automatic trust                   BLOCKED
 ```
 
-Interpretation:
-
-- F16 showed ordinary-source authentication was bound to a backing file but not the exact in-memory case payload exported afterward.
-- F17 showed `_training_export_context` was transferable and could authorize unrelated raw heldout benchmark content.
-- F18 showed byte-identity collision prevention did not reserve `case_id` across benchmark and ordinary namespaces.
-- F19 showed manifest source paths were contained only by the broad family root, not the declared family directory; the materializer mirrored the same gap.
-
-The v0.5 first observation is exposed forever and must never be relabeled fresh after repair.
-
----
-
-## S5 v0.5.1 checkpoint — authority-composition repair exposed regression
-
-Evidence class: **development exposed regression**, not fresh held-out.
-
-Generic repair:
-
-- Ordinary-source authorization is no longer a transferable bearer capability. Export reloads the authenticated source and requires exact case payload, `case_id`, path, Git blob, and canonical payload-digest agreement.
-- Policy construction and authenticated-policy content validation parse ordinary source `case_id` values and reject benchmark/ordinary plus ordinary/ordinary namespace collisions.
-- Valid historical policy serialization is unchanged, so the pinned v0.4.1 policy and registry remain the active external trust root.
-- Policy construction and materialization independently canonicalize case paths and require them to remain inside the exact declared family directory.
-
-Regression result:
-
-```text
-historical v0.5 first-observation preservation       PASS
-authenticated policy registry                         PASS
-carrier materialization                              5/5
-baseline dev export                            EXPORTABLE
-baseline regression export                         BLOCKED
-baseline heldout export                            BLOCKED
-ordinary allowlisted source                    EXPORTABLE
-S5-F16 mutated ordinary payload                    BLOCKED
-S5-F17 borrowed ordinary context                   BLOCKED
-S5-F18 ordinary/benchmark case_id collision        BLOCKED
-  policy builder                                     PASS
-  policy validator                                   PASS
-S5-F19 sibling-family path escape                  BLOCKED
-  policy builder                                     PASS
-  materializer                                       PASS
-decision-contract alignment                          PASS
-prompt gold leakage                                  NONE
-gold approved                                         0
-pending gold                                          1
-regression gate                                      PASS
-```
-
-Current decision:
-
-```text
-S5 v0.5.1 exposed structural regression             PASS
-S5 bounded release                 NOT YET ESTABLISHED
-S5 release                         BLOCKED_GOLD_REVIEW
-S6 automatic trust                               BLOCKED
-```
-
-This closes F16–F19 on already exposed attacks, but it does not prove independent generalization. A new post-freeze suite is still required before bounded structural release can be considered.
+No S6 automatic trust is permitted.
 
 ---
 
@@ -312,26 +210,30 @@ S2 still has an exposed v0.4 negation-development FAIL and remains a bounded con
 ## Immediate order
 
 ```text
-1. preserve all S5 first observations exactly
-   - v0.4 and v0.5 first-observation blobs remain immutable
+1. preserve S5 v0.6 first observation exactly
+   - never relabel it as fresh after repair
 
-2. treat v0.5.1 only as exposed repair evidence
-   - never relabel v0.5 as fresh PASS
+2. repair F20–F23 generically
+   - authenticate + parse one immutable byte snapshot rather than check path then reopen
+   - normalize identity keys to a documented Unicode canonical form before collision checks
+   - introduce explicit benchmark lineage / derivation exclusion for ordinary training sources
+   - keep fail-closed behavior for unknown authority
 
-3. freeze the repaired S5 v0.5.1 implementation
+3. rerun v0.6 only as exposed regression
+   - retain v0.5.1 and older boundary regressions
 
-4. only after that freeze create another genuinely new S5 authority-boundary suite
-   - attack ordinary-source aliasing through alternate/canonical paths
-   - attack policy/registry time-of-check-to-time-of-use replacement
-   - attack Unicode/path canonicalization identity ambiguity
-   - attack transformed/derived ordinary-source identity reuse
-   - attack source replacement between validation and export
+4. freeze the repaired implementation
+
+5. create another genuinely new post-freeze S5 boundary suite
+   - attack file-descriptor/symlink replacement and snapshot reuse
+   - attack lineage metadata omission/forgery and multi-step transformations
+   - attack normalization confusables beyond canonical equivalence
    - retain baseline split, decision-contract, prompt-leakage and gold-containment controls
 
-5. gold review remains an independent blocker
+6. gold review remains an independent blocker
    - never fabricate approval
 
-6. only after bounded S5 release proceed to S6 dedicated harness evaluation
+7. only after bounded S5 release proceed to S6 dedicated harness evaluation
 
-7. continue S6 → S7 → S8 → S9 → S10
+8. continue S6 → S7 → S8 → S9 → S10
 ```
