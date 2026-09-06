@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""GroundSignal S5 training export boundary, v0.7.3 calibration candidate.
+"""GroundSignal S5 training export boundary, v0.7.2 exposed repair.
 
 The complete v0.6.1 exporter is preserved byte-for-byte in
 `export_training_data_v061.py`. This entry point patches its module-level
 identity and policy-validation hooks with NFKC-safe identifiers plus an
-explainable protected-exclusive record/field/span lineage detector. Existing
-path/blob/TOCTOU and partition checks remain provided by the preserved exporter.
+explainable record/field/span lineage detector. Existing path/blob/TOCTOU and
+partition checks remain provided by the preserved exporter.
 """
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ def _load(name: str, path: Path):
 
 
 _legacy = _load("export_training_data_v061_legacy", _HERE / "export_training_data_v061.py")
-_lineage = _load("s5_lineage_detector_v073_export", _HERE / "s5_lineage_detector_v073.py")
+_lineage = _load("s5_lineage_detector_v072_export", _HERE / "s5_lineage_detector.py")
 
 for _name in dir(_legacy):
     if not _name.startswith("__"):
@@ -57,7 +57,7 @@ def _collect_authenticated_policy_records(
                 case, _ = _legacy._authenticated_json(
                     path,
                     str(entry.get("source_case_git_blob_sha1") or ""),
-                    f"v0.7.3 lineage source case {case_id!r}",
+                    f"v0.7.2 lineage source case {case_id!r}",
                 )
                 benchmark.append(
                     {
@@ -73,7 +73,7 @@ def _collect_authenticated_policy_records(
         case, _ = _legacy._authenticated_json(
             path,
             str((entry or {}).get("git_blob_sha1") or ""),
-            f"v0.7.3 lineage ordinary source {rel!r}",
+            f"v0.7.2 lineage ordinary source {rel!r}",
         )
         ordinary.append({"case": case, "source": rel})
     return benchmark, ordinary
@@ -87,7 +87,7 @@ def _validate_policy_content(policy: Dict[str, Any], expected_policy_id: str) ->
     try:
         _lineage.validate_policy_records(benchmark, ordinary)
     except ValueError as exc:
-        raise PermissionError(f"S5 export blocked: v0.7.3 lineage policy violation: {exc}") from exc
+        raise PermissionError(f"S5 export blocked: v0.7.2 lineage policy violation: {exc}") from exc
 
 
 _legacy.canonical_case_id = canonical_case_id

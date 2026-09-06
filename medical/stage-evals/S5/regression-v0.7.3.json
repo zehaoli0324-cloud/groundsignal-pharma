@@ -1,0 +1,120 @@
+{
+  "stage": "S5",
+  "version": "v0.7.3",
+  "eval_name": "lineage-calibrated-exposed-regression",
+  "evidence_class": "exposed_regression",
+  "fresh_evidence": false,
+  "source_fresh_observation": "medical/stage-evals/S5/fresh-first-observation-v0.7.json",
+  "preserved_v0.7_first_observation": {
+    "expected_blob": "b14f9e8f348976ee4823e26a5d3923b7417efa0b",
+    "observed_blob": "b14f9e8f348976ee4823e26a5d3923b7417efa0b",
+    "pass": true
+  },
+  "baseline": {
+    "policy_builder_pass": true,
+    "policy_content_validator_pass": true,
+    "registered_trust_root_pass": true,
+    "pass": true
+  },
+  "S5-F24": {
+    "policy_builder_rejected": true,
+    "policy_content_validator_rejected": true,
+    "pass": true
+  },
+  "S5-F25": {
+    "policy_builder_rejected": true,
+    "policy_content_validator_rejected": true,
+    "pass": true
+  },
+  "S5-F26": {
+    "policy_builder_rejected": true,
+    "policy_content_validator_rejected": true,
+    "pass": true
+  },
+  "S5-F27": {
+    "policy_builder_rejected": true,
+    "policy_content_validator_rejected": true,
+    "pass": true
+  },
+  "development_detector_metrics": {
+    "method_version": "s5-lineage-exclusive-anchor-v0.7.3",
+    "development_scope": "already-exposed synthetic transformations + existing ordinary-source negatives",
+    "positive_count": 5,
+    "clean_negative_count": 2,
+    "contamination_recall": 1.0,
+    "clean_false_block_rate": 0.0,
+    "clean_review_rate": 0.0,
+    "transformation_recall": {
+      "paraphrase": 1.0,
+      "partial_reuse": 1.0,
+      "presentation": 1.0
+    },
+    "ablation_recall": {
+      "exact_semantic_core_only": 0.2,
+      "lexical_record_only": 0.6,
+      "hybrid_record_field_span": 1.0
+    },
+    "positive_rows": [
+      {
+        "name": "exposed_paraphrase",
+        "exact_core": false,
+        "lexical_record_block": true,
+        "hybrid_decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-BND4-HO-001"
+      },
+      {
+        "name": "exposed_partial",
+        "exact_core": false,
+        "lexical_record_block": false,
+        "hybrid_decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-BND4-HO-001"
+      },
+      {
+        "name": "presentation_only",
+        "exact_core": true,
+        "lexical_record_block": true,
+        "hybrid_decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-BND4-HO-001"
+      },
+      {
+        "name": "development_paraphrase",
+        "exact_core": false,
+        "lexical_record_block": true,
+        "hybrid_decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-BND4-HO-001"
+      },
+      {
+        "name": "development_partial_wrapper",
+        "exact_core": false,
+        "lexical_record_block": false,
+        "hybrid_decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-BND4-HO-001"
+      }
+    ],
+    "negative_rows": [
+      {
+        "name": "ordinary_baseline",
+        "decision": "ALLOW"
+      },
+      {
+        "name": "ordinary_wrapper",
+        "decision": "ALLOW"
+      }
+    ],
+    "embedding_or_cross_encoder": "SEE_V0.7.3_BROADER_CALIBRATION",
+    "latency_benchmark": "SEE_V0.7.3_BROADER_CALIBRATION"
+  },
+  "failed_gates": [],
+  "regression_gate": "PASS",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "notes": [
+    "v0.7 remains the immutable independent FAIL; v0.7.3 is exposed repair evidence only.",
+    "F24/F27 retain the deterministic v0.7.1 split/identifier repair.",
+    "F25/F26 are addressed by an explainable protected-exclusive lineage detector using allowed-dev subtraction plus record, field, span, and anchor evidence.",
+    "Both policy construction and authenticated export validation are required to reject all four exposed attacks.",
+    "The legacy development probe remains exposed-only; the broader v0.7.3 calibration is reported separately and is not release evidence.",
+    "Broader calibration, threshold comparison, and latency are recorded by calibrate_s5_lineage_v073.py; a new post-freeze fresh suite remains outstanding.",
+    "No expert approval, real-user evidence, model-training gain, or clinical validation is inferred."
+  ]
+}

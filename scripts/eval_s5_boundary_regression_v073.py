@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""S5 v0.7.2 exposed regression for lineage-generalization failures F24-F27.
+"""S5 v0.7.3 exposed regression for lineage-generalization failures F24-F27.
 
 This evaluator is not fresh. It deliberately reuses the already-exposed v0.7
 attacks to verify the repair while preserving the v0.7 first observation
@@ -209,8 +209,8 @@ def development_probe(detector: Any) -> dict[str, Any]:
         },
         "positive_rows": positive_rows,
         "negative_rows": negative_rows,
-        "embedding_or_cross_encoder": "NOT_IMPLEMENTED_IN_V0.7.2",
-        "latency_benchmark": "DEFERRED_TO_BROADER_ALGORITHM_CALIBRATION",
+        "embedding_or_cross_encoder": "SEE_V0.7.3_BROADER_CALIBRATION",
+        "latency_benchmark": "SEE_V0.7.3_BROADER_CALIBRATION",
     }
 
 
@@ -219,11 +219,11 @@ def main() -> int:
     p.add_argument("--out", required=True, type=Path)
     args = p.parse_args()
 
-    trust = load_module(ROOT / "scripts/s5_trust_policy_v072.py", "s5_trust_v072")
+    trust = load_module(ROOT / "scripts/s5_trust_policy.py", "s5_trust_v073")
     legacy_v071 = load_module(ROOT / "scripts/s5_trust_policy_v071.py", "s5_trust_v071_exposed")
     legacy_v061 = load_module(ROOT / "scripts/s5_trust_policy_v061.py", "s5_trust_v061_exposed")
-    exporter = load_module(ROOT / "scripts/export_training_data_v072.py", "s5_export_v072")
-    detector = load_module(ROOT / "scripts/s5_lineage_detector.py", "s5_lineage_detector_v072_eval")
+    exporter = load_module(ROOT / "scripts/export_training_data.py", "s5_export_v073")
+    detector = load_module(ROOT / "scripts/s5_lineage_detector_v073.py", "s5_lineage_detector_v073_eval")
 
     observed_blob = git_blob_sha(FIRST_OBS)
     preservation = {
@@ -232,7 +232,7 @@ def main() -> int:
         "pass": observed_blob == EXPECTED_FIRST_OBS_BLOB,
     }
 
-    baseline_version = "s5-trust-root-v0.7.2-baseline"
+    baseline_version = "s5-trust-root-v0.7.3-baseline"
     baseline_builder_pass = True
     baseline_validator_pass = True
     try:
@@ -268,7 +268,7 @@ def main() -> int:
             CROSS_SUITE,
             CROSS_ROOT,
             [],
-            "s5-trust-root-v0.7.2-f24-regression",
+            "s5-trust-root-v0.7.3-f24-regression",
         ),
         "S5-F25": policy_probe(
             trust,
@@ -277,7 +277,7 @@ def main() -> int:
             CARRIER_SUITE,
             CARRIER_ROOT,
             [PARAPHRASED],
-            "s5-trust-root-v0.7.2-f25-regression",
+            "s5-trust-root-v0.7.3-f25-regression",
         ),
         "S5-F26": policy_probe(
             trust,
@@ -286,7 +286,7 @@ def main() -> int:
             CARRIER_SUITE,
             CARRIER_ROOT,
             [PARTIAL],
-            "s5-trust-root-v0.7.2-f26-regression",
+            "s5-trust-root-v0.7.3-f26-regression",
         ),
         "S5-F27": policy_probe(
             trust,
@@ -295,7 +295,7 @@ def main() -> int:
             NFKC_SUITE,
             NFKC_ROOT,
             [NFKC_ORDINARY],
-            "s5-trust-root-v0.7.2-f27-regression",
+            "s5-trust-root-v0.7.3-f27-regression",
         ),
     }
     development = development_probe(detector)
@@ -309,8 +309,8 @@ def main() -> int:
 
     result = {
         "stage": "S5",
-        "version": "v0.7.2",
-        "eval_name": "exposed-lineage-generalization-hybrid-repair-regression",
+        "version": "v0.7.3",
+        "eval_name": "lineage-calibrated-exposed-regression",
         "evidence_class": "exposed_regression",
         "fresh_evidence": False,
         "source_fresh_observation": "medical/stage-evals/S5/fresh-first-observation-v0.7.json",
@@ -323,12 +323,12 @@ def main() -> int:
         "stage_release": "BLOCKED_GOLD_REVIEW",
         "s6_automatic_trust": "BLOCKED",
         "notes": [
-            "v0.7 remains the immutable independent FAIL; v0.7.2 is exposed repair evidence only.",
+            "v0.7 remains the immutable independent FAIL; v0.7.3 is exposed repair evidence only.",
             "F24/F27 retain the deterministic v0.7.1 split/identifier repair.",
-            "F25/F26 are addressed by an explainable stdlib hybrid lineage detector using record, field, and span evidence.",
+            "F25/F26 are addressed by an explainable protected-exclusive lineage detector using allowed-dev subtraction plus record, field, span, and anchor evidence.",
             "Both policy construction and authenticated export validation are required to reject all four exposed attacks.",
-            "The development probe is intentionally small and uses only exposed/development material; it is not a generalization claim.",
-            "Embedding/cross-encoder comparison, broader clean negatives, latency calibration, and a new post-freeze fresh suite remain outstanding.",
+            "The legacy development probe remains exposed-only; the broader v0.7.3 calibration is reported separately and is not release evidence.",
+            "Broader calibration, threshold comparison, and latency are recorded by calibrate_s5_lineage_v073.py; a new post-freeze fresh suite remains outstanding.",
             "No expert approval, real-user evidence, model-training gain, or clinical validation is inferred.",
         ],
     }

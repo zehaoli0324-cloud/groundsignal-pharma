@@ -5,9 +5,11 @@ on:
     paths:
       - 'scripts/s5_lineage_detector.py'
       - 'scripts/s5_trust_policy.py'
+      - 'scripts/s5_trust_policy_v072.py'
       - 'scripts/s5_trust_policy_v071.py'
       - 'scripts/s5_trust_policy_v061.py'
       - 'scripts/export_training_data.py'
+      - 'scripts/export_training_data_v072.py'
       - 'scripts/export_training_data_v061.py'
       - 'scripts/eval_s5_boundary_regression_v072.py'
       - 'medical/stage-evals/S5/regression-v0.7.2.json'
@@ -18,9 +20,11 @@ on:
     paths:
       - 'scripts/s5_lineage_detector.py'
       - 'scripts/s5_trust_policy.py'
+      - 'scripts/s5_trust_policy_v072.py'
       - 'scripts/s5_trust_policy_v071.py'
       - 'scripts/s5_trust_policy_v061.py'
       - 'scripts/export_training_data.py'
+      - 'scripts/export_training_data_v072.py'
       - 'scripts/export_training_data_v061.py'
       - 'scripts/eval_s5_boundary_regression_v072.py'
       - 'medical/stage-evals/S5/regression-v0.7.2.json'
@@ -43,10 +47,10 @@ jobs:
         run: |
           python -m py_compile \
             scripts/s5_lineage_detector.py \
-            scripts/s5_trust_policy.py \
+            scripts/s5_trust_policy_v072.py \
             scripts/s5_trust_policy_v071.py \
             scripts/s5_trust_policy_v061.py \
-            scripts/export_training_data.py \
+            scripts/export_training_data_v072.py \
             scripts/export_training_data_v061.py \
             scripts/eval_s5_boundary_regression_v072.py
 

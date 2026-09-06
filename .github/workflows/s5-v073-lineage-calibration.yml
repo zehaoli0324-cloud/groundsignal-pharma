@@ -1,0 +1,114 @@
+name: S5 v0.7.3 Lineage Calibration
+
+on:
+  push:
+    paths:
+      - 'requirements-s5-lineage-calibration.txt'
+      - 'scripts/s5_lineage_detector_v073.py'
+      - 'scripts/s5_trust_policy.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/calibrate_s5_lineage_v073.py'
+      - 'scripts/eval_s5_boundary_regression_v073.py'
+      - 'medical/stage-evals/S5/calibration-first-observation-v0.7.3.json'
+      - 'medical/stage-evals/S5/calibration-v0.7.3.json'
+      - 'medical/stage-evals/S5/lineage-index-manifest-v0.7.3.json'
+      - 'medical/stage-evals/S5/latency-v0.7.3.json'
+      - 'medical/stage-evals/S5/regression-v0.7.3.json'
+      - 'medical/stage-evals/S5/S5_V0.7.3_LINEAGE_CALIBRATION_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - 'docs/17-evaluation-methods-and-optimization-ledger.md'
+      - '.github/workflows/s5-v073-lineage-calibration.yml'
+  pull_request:
+    paths:
+      - 'requirements-s5-lineage-calibration.txt'
+      - 'scripts/s5_lineage_detector_v073.py'
+      - 'scripts/s5_trust_policy.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/calibrate_s5_lineage_v073.py'
+      - 'scripts/eval_s5_boundary_regression_v073.py'
+      - 'medical/stage-evals/S5/calibration-first-observation-v0.7.3.json'
+      - 'medical/stage-evals/S5/calibration-v0.7.3.json'
+      - 'medical/stage-evals/S5/lineage-index-manifest-v0.7.3.json'
+      - 'medical/stage-evals/S5/regression-v0.7.3.json'
+      - '.github/workflows/s5-v073-lineage-calibration.yml'
+
+jobs:
+  calibrate-and-regress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: requirements-s5-lineage-calibration.txt
+      - name: Install pinned calibration dependency
+        run: pip install -r requirements-s5-lineage-calibration.txt
+
+      - name: Syntax check
+        run: |
+          python -m py_compile \
+            scripts/s5_lineage_detector.py \
+            scripts/s5_lineage_detector_v073.py \
+            scripts/s5_trust_policy.py \
+            scripts/s5_trust_policy_v072.py \
+            scripts/export_training_data.py \
+            scripts/export_training_data_v072.py \
+            scripts/calibrate_s5_lineage_v073.py \
+            scripts/eval_s5_boundary_regression_v073.py
+
+      - name: Preserve immutable v0.7 fresh FAIL
+        run: |
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.7.json)" = 'b14f9e8f348976ee4823e26a5d3923b7417efa0b'
+
+      - name: Reproduce stable calibration and index
+        run: |
+          mkdir -p /tmp/groundsignal-s5-v073
+          python scripts/calibrate_s5_lineage_v073.py \
+            --out /tmp/groundsignal-s5-v073/calibration.json \
+            --index-out /tmp/groundsignal-s5-v073/index.json \
+            --benchmark-out /tmp/groundsignal-s5-v073/benchmark.json
+          cmp /tmp/groundsignal-s5-v073/calibration.json medical/stage-evals/S5/calibration-v0.7.3.json
+          cmp /tmp/groundsignal-s5-v073/index.json medical/stage-evals/S5/lineage-index-manifest-v0.7.3.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          stable=json.loads(Path('/tmp/groundsignal-s5-v073/calibration.json').read_text())
+          runtime=json.loads(Path('/tmp/groundsignal-s5-v073/benchmark.json').read_text())
+          selected=stable['methods']['exclusive_anchor_hybrid_v073']
+          assert stable['selection_gate']=='PASS'
+          assert stable['data_isolation']['future_fresh_suite_used'] is False
+          assert selected['recall'] >= 0.95
+          assert selected['clean_false_block_rate'] <= 0.05
+          assert selected['clean_review_rate'] <= 0.25
+          assert runtime['guardrail_pass'] is True
+          assert stable['stage_release']=='BLOCKED_GOLD_REVIEW'
+          assert stable['s6_automatic_trust']=='BLOCKED'
+          PY
+
+      - name: Run v0.7.3 exposed regression
+        run: |
+          python scripts/eval_s5_boundary_regression_v073.py \
+            --out /tmp/groundsignal-s5-v073/regression.json
+          cmp /tmp/groundsignal-s5-v073/regression.json medical/stage-evals/S5/regression-v0.7.3.json
+
+      - name: Preserve v0.7.2 behavior from versioned implementation
+        run: |
+          python scripts/eval_s5_boundary_regression_v072.py \
+            --out /tmp/groundsignal-s5-v073/v072.json
+          cmp /tmp/groundsignal-s5-v073/v072.json medical/stage-evals/S5/regression-v0.7.2.json
+
+      - name: Confirm release containment
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('/tmp/groundsignal-s5-v073/regression.json').read_text())
+          assert d['regression_gate']=='PASS'
+          assert d['failed_gates']==[]
+          assert d['stage_release']=='BLOCKED_GOLD_REVIEW'
+          assert d['s6_automatic_trust']=='BLOCKED'
+          print('S5 v0.7.3 development calibration PASS; fresh release evidence still absent.')
+          PY

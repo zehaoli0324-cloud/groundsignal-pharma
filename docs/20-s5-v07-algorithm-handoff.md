@@ -1,8 +1,20 @@
 # Algorithm Handoff — S5 v0.7 Semantic Lineage Detection
 
-> Handoff status: READY  
+> Handoff status: **v0.7.3 CALIBRATED CANDIDATE READY FOR FREEZE**
 > Evidence source: S5 v0.7 independent fresh first observation  
 > Repair scope for algorithm team: **F25 + F26 only**. F24/F27 remain deterministic platform/eval-infrastructure work.
+
+## v0.7.3 checkpoint
+
+The handoff's development Definition of Done is now met on public/exposed data. The selected
+`s5-lineage-exclusive-anchor-v0.7.3` candidate was calibrated with 30 protected references,
+45 allowed-dev references, 163 attributable contamination variants and 62 clean/shared hard
+negatives. Development recall was 163/163 with 0/62 false blocks; a family-grouped learned-pair
+comparator reached 158/163 recall with 0/62 false blocks. p95 runtime was 158.537 ms/candidate
+against 30 protected references on the recorded host.
+
+This checkpoint is not fresh evidence and does not establish S5 release. After commit freeze,
+the eval owner must create a new unseen lineage suite before any bounded-release claim.
 
 ## 1. Objective
 
