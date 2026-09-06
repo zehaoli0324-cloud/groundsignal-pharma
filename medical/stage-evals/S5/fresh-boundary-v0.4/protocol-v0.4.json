@@ -1,0 +1,29 @@
+{
+  "stage": "S5",
+  "version": "v0.4",
+  "eval_name": "third-fresh-policy-root-first-observation",
+  "target_implementation_freeze_commit": "64cd9288d0b13012d8b71989431dde493c4e8a59",
+  "freshness_rule": "All v0.4 fixtures/evaluator authored after target freeze; first result immutable.",
+  "target_blob_contract": {
+    "scripts/export_training_data.py": "ad370349a18af495f92247d4347c34393c51f6b9",
+    "scripts/s5_trust_policy.py": "afa760489bf838ee1082402f4338bf0e9cc4c10e",
+    "scripts/materialize_s5_cases.py": "c2d339c1a993c7f8f8d098d21d9a07eb49a14544",
+    "scripts/model_harness.py": "e6c90ab88c476c38b765d61ae8c9e2b471c8e2a2",
+    "scripts/s5_release_gate.py": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+    "medical/schemas/clinical-case.schema.json": "473edfd800b717513582a1100f9b8f4fe0814e0a",
+    "medical/configs/s5-trust-root-v0.3.1.json": "83bfe8153f1195f163b2c1e813ca08853f765757"
+  },
+  "hard_gates": [
+    "S5-F12_CALLER_SUPPLIED_POLICY_CAN_LAUNDER_HELDOUT",
+    "S5-F13_OFF_REPO_POLICY_PATH_ACCEPTED_AS_ROOT",
+    "S5-F14_CROSS_SUITE_CASE_ID_COLLISION_NOT_REJECTED",
+    "S5-F15_SUITE_BLOB_REPLAY_ALTERNATE_FAMILY_ROOT"
+  ],
+  "controls": [
+    "baseline_partition_guard",
+    "source_blob_mismatch_fail_closed",
+    "decision_contract_alignment",
+    "prompt_gold_leakage",
+    "gold_release_containment"
+  ]
+}

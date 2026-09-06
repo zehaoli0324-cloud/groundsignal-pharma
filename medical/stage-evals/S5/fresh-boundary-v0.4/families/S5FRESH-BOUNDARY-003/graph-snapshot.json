@@ -1,0 +1,9 @@
+{
+  "nodes": [
+    {"node_id": "N1", "source_passage_ids": ["P1"]},
+    {"node_id": "N2", "source_passage_ids": ["P1"]}
+  ],
+  "edges": [
+    {"edge_id": "E1", "source": "N1", "target": "N2", "source_passage_ids": ["P1"]}
+  ]
+}

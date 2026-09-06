@@ -11,7 +11,7 @@ The system has **10 lifecycle stages**. `PASS` always refers to the explicitly t
 | S2 | Knowledge Search & Source Routing | **CONDITIONAL PASS / v0.4 development FAIL** | v0.3 fresh routing 91.7%; S2→S3 joint intent/source 94.44%; live DailyMed 3/3 | clause-level negation/exclusion + role-separated features; broader live sources |
 | S3 | Evidence Verification & Temporal Truth | **CONDITIONAL PASS** | S3a v0.5.6.1 fresh F1 98.90%, critical recall 100%; S3b 40/40; joint S2→S3 17/18 | larger real-source/noisy-passage held-out |
 | S4 | Medical KG Construction / Update | **CONDITIONAL PASS / v0.1.1 independent fresh PASS** | fresh 20/20; must-reject 7/7; stale ACTIVE 0; invariant violations 0 | persistent/real-source graph proof; unrestricted production ingest disabled |
-| S5 | Controlled Case / Benchmark Factory | **v0.3.1 EXPOSED TRUST-ROOT REGRESSION PASS / RELEASE BLOCKED** | v0.3 independent fresh exposed F8–F11; v0.3.1 external trust-root repair blocks all four on exposed regression | freeze v0.3.1, then create a genuinely new fresh trust-root suite; gold review remains an independent blocker |
+| S5 | Controlled Case / Benchmark Factory | **v0.4 INDEPENDENT FRESH POLICY-ROOT FAIL / RELEASE BLOCKED** | v0.3.1 exposed F8–F11 PASS; v0.4 fresh preconditions PASS but F12–F15 redefine root authority | authenticate trust-policy root, global case identity and suite↔family-root binding; gold review remains independent blocker |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release; do not auto-trust S5 partitions |
 | S7 | Evaluation & Safety Gate | Protocol complete | v0.2 rubric, graph/RAG/Agent layers, regression safety gate | human/Judge calibration + real model scoring |
 | S8 | Failure Diagnosis | Framework ready | taxonomy, stale-knowledge bad case, intervention router | multi-model cross-case failure clusters |
@@ -57,204 +57,147 @@ v0.1.1 v0.1 fresh-now-exposed regression  20/20   PASS
 v0.1.1 new independent fresh               20/20   PASS
 ```
 
+Current decision: controlled truth-ledger state machine = `CONDITIONAL PASS`; unrestricted production clinical ingest remains disabled.
+
+---
+
+## S5 evidence history
+
+Historical first observations remain immutable:
+
+```text
+v0.1 development first observation
+  F1 split/export provenance                         FAIL
+  F2 gold readiness                                  FAIL
+  F3 decision contract schema                        FAIL
+
+v0.2 first independent fresh boundary
+  F4 provenance authority                            FAIL
+  F5 missing/unknown split fail-closed               FAIL
+  F6 payload integrity                               FAIL
+  F7 decision exemption alignment                    FAIL
+
+v0.2.1 exposed regression
+  F4–F7                                      REPAIRED / PASS
+
+v0.3 second independent fresh trust-root
+  F8 location laundering                             FAIL
+  F9 recomputable self-auth digest                   FAIL
+  F10 suite identity                                 FAIL
+  F11 foreign manifest substitution                  FAIL
+
+v0.3.1 exposed trust-root regression
+  F8–F11                                     REPAIRED / PASS
+```
+
+Gold approval remains separate from structural evaluation: P0 `0/12`, v0.2 family `0/1`, v0.3 family `0/1`; no expert/clinical approval is inferred.
+
+---
+
+## S5 v0.4 checkpoint — third genuinely fresh policy-root FAIL
+
+Target implementation freeze:
+
+```text
+64cd9288d0b13012d8b71989431dde493c4e8a59
+```
+
+All v0.4 family files, attack authorities, evaluator logic and workflow were authored after that freeze. The fresh family has 5 synthetic cases (`dev 3 / regression 1 / heldout 1`). The first executable observation is required to match the committed raw metrics exactly; no post-hoc rewrite is allowed.
+
+Preconditions / controls:
+
+```text
+frozen target identity                     PASS
+fresh family validation                    PASS
+fresh materialization                    5/5 PASS
+baseline dev export                  EXPORTABLE
+baseline regression export              BLOCKED
+baseline heldout export                 BLOCKED
+source blob mismatch control            BLOCKED
+decision-contract alignment               PASS
+prompt gold sentinel leakage              NONE
+gold release containment                  PASS
+precondition failures                         0
+```
+
+New hard-gate failures:
+
+```text
+S5-F12 CALLER_SUPPLIED_POLICY_CAN_LAUNDER_HELDOUT
+  byte-identical heldout copied to ordinary path
+  caller-built policy allowlists it as ordinary source
+  result: EXPORTABLE
+
+S5-F13 OFF_REPO_POLICY_PATH_ACCEPTED_AS_ROOT
+  policy JSON outside repository accepted as root authority
+  result: EXPORTABLE
+
+S5-F14 CROSS_SUITE_CASE_ID_COLLISION_NOT_REJECTED
+  same case_id trusted in heldout suite and another dev suite
+  policy builder accepts both
+  collision dev result: EXPORTABLE
+
+S5-F15 SUITE_BLOB_REPLAY_ALTERNATE_FAMILY_ROOT
+  exact genuine suite blob replayed at alternate path
+  alternate family root declares genuine heldout case_id as dev
+  result: EXPORTABLE
+```
+
+Interpretation: v0.3.1 correctly authenticates suite/manifest/source **relative to the selected policy**, but the policy root itself is not independently authenticated. A caller that controls the policy argument can redefine root authority. The builder also lacks a global case-ID collision gate, and a suite blob is not canonically bound to one family-root/manifest set.
+
 Current decision:
 
 ```text
-S4 controlled truth-ledger state machine = CONDITIONAL PASS
-independent fresh gate                   = PASS
-unrestricted production clinical ingest = DISABLED
+fresh structural gate                    FAIL
+S5 release                BLOCKED_GOLD_REVIEW
+S6 automatic trust                     BLOCKED
 ```
 
----
+Immutable v0.4 evidence paths:
 
-## S5 historical checkpoint — v0.1 first development observation
+- `medical/stage-evals/S5/fresh-boundary-v0.4/protocol-v0.4.json`
+- `medical/stage-evals/S5/fresh-boundary-v0.4/suite-fresh-boundary-v0.4.json`
+- `medical/stage-evals/S5/fresh-first-observation-v0.4.json`
+- `medical/stage-evals/S5/failures-v0.4.json`
+- `medical/stage-evals/S5/S5_V0.4_FRESH_POLICY_ROOT_FAIL_REPORT.md`
+- `scripts/eval_s5_fresh_boundary_v04.py`
 
-The v0.1 first observation at commit `811a755120210a14863a485e31c42ed5d3dd5f28` is permanently preserved:
-
-```text
-S5-F1 split provenance / training export guard     FAIL
-S5-F2 release-grade gold readiness                 FAIL
-S5-F3 decision-node contract schema enforcement    FAIL
-S5 release                                         FAIL
-```
-
-Original P0 assets were already exposed and can never be relabeled as fresh evidence.
-
----
-
-## S5 v0.1.1 checkpoint — structural repair exposed regression
-
-```text
-families                                  12
-cases                                     60
-split counts              dev 36 / regression 12 / heldout 12
-materialized provenance                  60/60
-decision-contract coverage               60/60
-approved heldout export                 BLOCKED
-approved regression export              BLOCKED
-approved dev export                         PASS
-structural gate                            PASS
-```
-
-Historical failure disposition:
-
-```text
-S5-F1  REPAIRED_EXPOSED_REGRESSION
-S5-F2  CONTAINED_RELEASE_BLOCKED_NO_FAKE_APPROVAL
-S5-F3  REPAIRED_EXPOSED_REGRESSION
-```
-
-Gold approval remains `0/12`; S5 release and S6 automatic trust remain blocked.
-
----
-
-## S5 v0.2 checkpoint — first independent fresh boundary FAIL
-
-Target implementation freeze: `37a89d14b37a1e2b3b823e933b4a7bfbd3038af8`.
-
-```text
-S5-F4 PROVENANCE_AUTHORITY_NOT_VERIFIED                  FAIL
-S5-F5 UNPROVENANCED_OR_UNKNOWN_SPLIT_NOT_FAIL_CLOSED    FAIL
-S5-F6 MATERIALIZED_PAYLOAD_INTEGRITY_NOT_ENFORCED       FAIL
-S5-F7 DECISION_EXEMPTION_SCHEMA_MATERIALIZER_DIVERGENCE FAIL
-```
-
-The first observation is immutable and reproduced only against its historical implementation snapshot.
-
----
-
-## S5 v0.2.1 checkpoint — generic boundary repair exposed regression
-
-```text
-baseline dev export              EXPORTABLE
-baseline regression export          BLOCKED
-baseline heldout export             BLOCKED
-S5-F4 forged heldout -> dev          BLOCKED
-S5-F5 stripped provenance            BLOCKED
-S5-F5 unknown split=train            BLOCKED
-S5-F6 post-materialization tamper     BLOCKED
-S5-F7 exemption schema alignment        PASS
-exposed regression gate                  PASS
-```
-
-This remained exposed regression evidence only.
-
----
-
-## S5 v0.3 checkpoint — second genuinely fresh trust-root FAIL
-
-Target implementation freeze: `c938dc86c992f13015585b813aad11c2dca55b24`.
-
-All v0.3 fixtures and evaluator logic were authored after the freeze. Preconditions passed, but four new trust-root failures were observed:
-
-```text
-S5-F8 LOCATION_LAUNDERING_TRUST_BYPASS
-  raw heldout case copied to an ordinary path
-  historical result: EXPORTABLE
-
-S5-F9 SELF_AUTHENTICATED_PAYLOAD_DIGEST_RECOMPUTABLE
-  payload changed + embedded SHA-256 recomputed
-  historical result: EXPORTABLE
-
-S5-F10 SUITE_IDENTITY_NOT_AUTHENTICATED
-  suite_id forged + embedded digest recomputed
-  historical result: EXPORTABLE
-
-S5-F11 FOREIGN_MANIFEST_AUTHORITY_SUBSTITUTION
-  heldout redirected to repo-local foreign dev manifest
-  historical result: EXPORTABLE
-```
-
-The v0.3 first observation remains immutable at `medical/stage-evals/S5/fresh-first-observation-v0.3.json` (Git blob `47e1669f724f8b2cab285ec0f689cb3819e068e2`). The v0.3 suite is exposed forever.
-
----
-
-## S5 v0.3.1 checkpoint — external trust-root repair exposed regression
-
-Evidence class: **development exposed regression**, not fresh held-out.
-
-The repair moves export authority outside the case payload:
-
-1. `medical/configs/s5-trust-root-v0.3.1.json` separately registers trusted suite, manifest, source-case and ordinary-source Git blob identities;
-2. arbitrary location no longer grants non-benchmark training trust;
-3. benchmark export resolves suite/family/case against the external policy;
-4. exporter reconstructs the expected materialized case from trusted source content and compares the entire payload, so recomputing an embedded digest cannot authenticate a mutation;
-5. suite membership and manifest identity are externally bound, so foreign repo-local manifests cannot substitute for the intended authority;
-6. `scripts/s5_trust_policy.py` can build a separate policy for future post-freeze suites without changing exporter implementation.
-
-Exposed v0.3 regression:
-
-```text
-family count                                 1
-case count                                   5
-split counts                   dev 3 / regression 1 / heldout 1
-baseline dev export                 EXPORTABLE
-baseline regression export             BLOCKED
-baseline heldout export                BLOCKED
-
-S5-F8 location laundering               BLOCKED
-S5-F9 mutate + recompute digest          BLOCKED
-S5-F10 forged suite_id                   BLOCKED
-S5-F11 foreign manifest substitution     BLOCKED
-explicit ordinary-source control      EXPORTABLE
-
-exposed regression gate                    PASS
-```
-
-Historical failure disposition:
-
-```text
-S5-F8   REPAIRED_EXPOSED_REGRESSION
-S5-F9   REPAIRED_EXPOSED_REGRESSION
-S5-F10  REPAIRED_EXPOSED_REGRESSION
-S5-F11  REPAIRED_EXPOSED_REGRESSION
-```
-
-Release remains blocked:
-
-```text
-v0.3 family gold approved              0/1
-v0.3 family pending gold               1/1
-P0 gold approved                      0/12
-v0.2 family gold approved              0/1
-stage release           BLOCKED_GOLD_REVIEW
-S6 automatic trust                   BLOCKED
-```
-
-This is not clinical validation and is not an independent fresh PASS for the repair.
+The v0.4 suite becomes exposed immediately after the first executable observation and must never be relabeled fresh after repair.
 
 ---
 
 ## S2 evidence backfill
 
-S2 still has an exposed v0.4 negation-development FAIL and remains a bounded conditional pass. It is not the current sequential blocker because S3 and S4 have bounded independent release evidence. Return to S2 when a downstream stage requires stronger source-routing evidence or after the S5–S10 sequence reaches an upstream dependency.
+S2 still has an exposed v0.4 negation-development FAIL and remains a bounded conditional pass. It is not the current sequential blocker because S3 and S4 have bounded independent release evidence. Return to S2 only when a downstream blocker requires stronger source-routing evidence or after the S5–S10 sequence reaches an upstream dependency.
 
 ---
 
 ## Immediate order
 
 ```text
-1. freeze the S5 v0.3.1 trust-root repair implementation
+1. preserve S5 v0.4 fresh first observation exactly
 
-2. only after that freeze create a genuinely new S5 trust-root fresh suite
-   - external source-policy substitution
-   - suite policy path/hash replay
-   - cross-suite same-case-id collision
-   - source-content replacement + digest replay
-   - authority-policy mismatch
-   - retain baseline split, decision-contract, prompt-leakage and gold-containment controls
+2. repair F12–F15 generically in S5 v0.4.1
+   - canonical/authenticated trust-policy root independent of caller input
+   - reject arbitrary/off-repo policy substitution in protected export flows
+   - global benchmark case identity/collision policy across trusted suites
+   - canonical suite path + family-root + manifest binding
+   - preserve existing source/manifest/payload mismatch fail-closed behavior
 
-3. preserve that first fresh result permanently whether PASS or FAIL
+3. rerun v0.4 only as exposed regression
 
-4. gold review remains an independent blocker
+4. freeze the repaired implementation
+
+5. only after that freeze create another genuinely new fresh trust-root suite
+
+6. gold review remains an independent blocker
    - P0: 0/12 gold-approved
-   - v0.2 family: 0/1 gold-approved
-   - v0.3 family: 0/1 gold-approved
+   - v0.2: 0/1
+   - v0.3: 0/1
+   - v0.4: 0/1
    - never fabricate approval
 
-5. only after bounded S5 release proceed to S6 dedicated harness evaluation
+7. only after bounded S5 release proceed to S6 dedicated harness evaluation
 
-6. continue S6 → S7 → S8 → S9 → S10
-
-7. backfill S1/S2 only when required by a downstream blocker or after sequential evaluation
+8. continue S6 → S7 → S8 → S9 → S10
 ```

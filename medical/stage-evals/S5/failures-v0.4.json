@@ -1,0 +1,15 @@
+{
+  "stage": "S5",
+  "version": "v0.4",
+  "source_first_observation": "medical/stage-evals/S5/fresh-first-observation-v0.4.json",
+  "target_freeze_commit": "64cd9288d0b13012d8b71989431dde493c4e8a59",
+  "failures": [
+    {"id": "S5-F12", "name": "CALLER_SUPPLIED_POLICY_CAN_LAUNDER_HELDOUT", "severity": "hard_gate", "observation": "A byte-identical raw heldout case was copied to an ordinary path, allowlisted by a caller-built policy, and became exportable.", "root_cause": "The policy selected by the caller is treated as a root authority without an independent canonical registry/signature binding that can recognize benchmark-derived content."},
+    {"id": "S5-F13", "name": "OFF_REPO_POLICY_PATH_ACCEPTED_AS_ROOT", "severity": "hard_gate", "observation": "A policy JSON written outside the repository was accepted by load_trust_policy and authorized training export.", "root_cause": "Trust-policy file identity/path is not itself authenticated; version/shape checks are sufficient to become root authority."},
+    {"id": "S5-F14", "name": "CROSS_SUITE_CASE_ID_COLLISION_NOT_REJECTED", "severity": "hard_gate", "observation": "The policy builder accepted the same case_id in two trusted suites with conflicting heldout/dev splits, and the dev collision remained exportable.", "root_cause": "The trust policy enforces uniqueness of suite_id but has no global case identity namespace/collision gate across suites."},
+    {"id": "S5-F15", "name": "SUITE_BLOB_REPLAY_ALTERNATE_FAMILY_ROOT", "severity": "hard_gate", "observation": "The exact genuine suite blob was replayed at another path with an alternate family root that declared the genuine heldout case_id as dev, and export succeeded.", "root_cause": "Suite blob identity is not bound to a canonical suite path plus canonical family-root/manifest set by an authority above the caller-built policy."}
+  ],
+  "controls": {"baseline_dev": "EXPORTABLE", "baseline_regression": "BLOCKED", "baseline_heldout": "BLOCKED", "source_blob_mismatch": "BLOCKED", "decision_contract_alignment": "PASS", "prompt_gold_leakage": "NONE", "gold_release": "BLOCKED_GOLD_REVIEW"},
+  "decision": "FRESH_STRUCTURAL_FAIL",
+  "s6_automatic_trust": "BLOCKED"
+}

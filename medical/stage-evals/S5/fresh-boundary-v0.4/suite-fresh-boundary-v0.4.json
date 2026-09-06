@@ -1,0 +1,14 @@
+{
+  "stage": "S5",
+  "suite_id": "S5-FRESH-BOUNDARY-v0.4",
+  "version": "v0.4",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "implementation_freeze_commit": "64cd9288d0b13012d8b71989431dde493c4e8a59",
+  "source_snapshot_commit": null,
+  "family_ids": ["S5FRESH-BOUNDARY-003"],
+  "allowed_training_splits": ["dev"],
+  "prohibited_training_splits": ["regression", "heldout"],
+  "purpose": "Third genuinely fresh post-repair trust-root evaluation; attacks policy-root authentication and cross-suite identity.",
+  "release_use": "evaluation_only"
+}

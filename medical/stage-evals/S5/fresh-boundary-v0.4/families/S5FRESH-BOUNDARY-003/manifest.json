@@ -1,0 +1,26 @@
+{
+  "family_id": "S5FRESH-BOUNDARY-003",
+  "title": "Third fresh synthetic policy-root boundary family",
+  "status": "gold_review_needed",
+  "data_origin": "synthetic",
+  "graph_snapshot": "graph-snapshot.json",
+  "evidence_manifest": "evidence-manifest.json",
+  "target_capabilities": ["trust-policy root authentication", "cross-suite identity isolation", "suite-to-family-root binding", "partition persistence"],
+  "failure_hypotheses": [
+    "caller-selected trust policy can reclassify copied heldout as ordinary training source",
+    "off-repository policy path can become trust root without independent authentication",
+    "policy builder permits the same case_id across trusted suites with conflicting splits",
+    "the same suite blob can be replayed against an alternate family root"
+  ],
+  "split_policy": {
+    "leakage_rule": "Only authoritative dev cases under an independently authenticated policy root may be training eligible.",
+    "heldout_variables": ["policy root identity", "policy path", "cross-suite case namespace", "suite-family-root binding"]
+  },
+  "cases": [
+    {"case_id": "S5FRESH-BND4-DEV-001", "path": "cases/S5FRESH-BND4-DEV-001.json", "split": "dev", "variant_type": "base"},
+    {"case_id": "S5FRESH-BND4-DEV-002", "path": "cases/S5FRESH-BND4-DEV-002.json", "split": "dev", "variant_type": "counterfactual"},
+    {"case_id": "S5FRESH-BND4-DEV-003", "path": "cases/S5FRESH-BND4-DEV-003.json", "split": "dev", "variant_type": "negative_control"},
+    {"case_id": "S5FRESH-BND4-REG-001", "path": "cases/S5FRESH-BND4-REG-001.json", "split": "regression", "variant_type": "regression"},
+    {"case_id": "S5FRESH-BND4-HO-001", "path": "cases/S5FRESH-BND4-HO-001.json", "split": "heldout", "variant_type": "heldout"}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "family_id": "S5FRESH-BOUNDARY-003",
+  "title": "Replay alternate-root family",
+  "status": "gold_review_needed",
+  "data_origin": "synthetic",
+  "cases": [
+    {"case_id": "S5FRESH-BND4-HO-001", "path": "cases/S5FRESH-BND4-HO-001.json", "split": "dev", "variant_type": "base"}
+  ]
+}

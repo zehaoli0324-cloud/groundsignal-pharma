@@ -1,0 +1,80 @@
+name: S5 v0.4 Third Fresh Policy-Root First Observation
+
+on:
+  push:
+    paths:
+      - 'medical/stage-evals/S5/fresh-boundary-v0.4/**'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.4.json'
+      - 'medical/stage-evals/S5/failures-v0.4.json'
+      - 'medical/stage-evals/S5/S5_V0.4_FRESH_POLICY_ROOT_FAIL_REPORT.md'
+      - 'scripts/eval_s5_fresh_boundary_v04.py'
+      - '.github/workflows/s5-v04-third-fresh-policy-root.yml'
+  pull_request:
+    paths:
+      - 'medical/stage-evals/S5/fresh-boundary-v0.4/**'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.4.json'
+      - 'medical/stage-evals/S5/failures-v0.4.json'
+      - 'medical/stage-evals/S5/S5_V0.4_FRESH_POLICY_ROOT_FAIL_REPORT.md'
+      - 'scripts/eval_s5_fresh_boundary_v04.py'
+      - '.github/workflows/s5-v04-third-fresh-policy-root.yml'
+
+jobs:
+  first-observation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check evaluator
+        run: python -m py_compile scripts/eval_s5_fresh_boundary_v04.py
+
+      - name: Protect frozen expected evidence blobs
+        run: |
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.4.json)" = '45a10ed2cc522b555a3f3eecf785dffedf8cd4c3'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/failures-v0.4.json)" = '8ca66b13e6782cf8477378525f0ae3d267b9fd48'
+
+      - name: Verify v0.3.1 implementation freeze identity
+        run: |
+          freeze='64cd9288d0b13012d8b71989431dde493c4e8a59'
+          test "$(git rev-parse "$freeze":scripts/export_training_data.py)" = 'ad370349a18af495f92247d4347c34393c51f6b9'
+          test "$(git rev-parse "$freeze":scripts/s5_trust_policy.py)" = 'afa760489bf838ee1082402f4338bf0e9cc4c10e'
+          test "$(git rev-parse "$freeze":scripts/materialize_s5_cases.py)" = 'c2d339c1a993c7f8f8d098d21d9a07eb49a14544'
+          test "$(git rev-parse HEAD:scripts/export_training_data.py)" = 'ad370349a18af495f92247d4347c34393c51f6b9'
+          test "$(git rev-parse HEAD:scripts/s5_trust_policy.py)" = 'afa760489bf838ee1082402f4338bf0e9cc4c10e'
+          test "$(git rev-parse HEAD:scripts/materialize_s5_cases.py)" = 'c2d339c1a993c7f8f8d098d21d9a07eb49a14544'
+
+      - name: Validate fresh family
+        run: |
+          python scripts/validate_medical_case_families.py \
+            --root medical/stage-evals/S5/fresh-boundary-v0.4/families \
+            --expect-families 1 --expect-cases 5 --expect-cases-per-family 5 \
+            --rubric-version medical-clinical-v0.2
+
+      - name: Run immutable first observation and require fresh FAIL
+        run: |
+          set +e
+          python scripts/eval_s5_fresh_boundary_v04.py --out /tmp/s5-v04-first.json
+          status=$?
+          set -e
+          cat /tmp/s5-v04-first.json
+          test "$status" -eq 1
+
+      - name: Match committed raw metrics exactly
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected=json.loads(Path('medical/stage-evals/S5/fresh-first-observation-v0.4.json').read_text(encoding='utf-8'))
+          observed=json.loads(Path('/tmp/s5-v04-first.json').read_text(encoding='utf-8'))
+          assert observed == expected, (expected, observed)
+          assert observed['fresh_structural_gate'] == 'FAIL'
+          assert observed['hard_gate_failures'] == ['S5-F12','S5-F13','S5-F14','S5-F15']
+          assert observed['precondition_failures'] == []
+          assert observed['stage_release'] == 'BLOCKED_GOLD_REVIEW'
+          assert observed['s6_automatic_trust'] == 'BLOCKED'
+          print('S5 v0.4 first fresh policy-root FAIL preserved exactly.')
+          PY
