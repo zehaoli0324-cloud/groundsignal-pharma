@@ -51,7 +51,7 @@
     },
     "ablation_recall": {
       "exact_semantic_core_only": 0.2,
-      "lexical_record_only": 0.4,
+      "lexical_record_only": 0.6,
       "hybrid_record_field_span": 1.0
     },
     "positive_rows": [
@@ -79,7 +79,7 @@
       {
         "name": "development_paraphrase",
         "exact_core": false,
-        "lexical_record_block": false,
+        "lexical_record_block": true,
         "hybrid_decision": "BLOCK",
         "nearest_reference_id": "S5FRESH-BND4-HO-001"
       },

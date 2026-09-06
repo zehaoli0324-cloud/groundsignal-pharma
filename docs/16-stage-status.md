@@ -100,7 +100,7 @@ clean false-block               0/2 = 0.00
 
 ablation recall:
 exact semantic core             1/5 = 0.20
-record lexical only             2/5 = 0.40
+record lexical only             3/5 = 0.60
 hybrid record+field+span        5/5 = 1.00
 ```
 
