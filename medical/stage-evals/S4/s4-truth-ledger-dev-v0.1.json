@@ -1,0 +1,126 @@
+{
+  "benchmark_id": "S4-truth-ledger-dev-v0.1",
+  "split": "development",
+  "fresh_heldout": false,
+  "note": "Development-only suite created with S4 v0.1; never relabel as fresh.",
+  "base_event": {
+    "proposition": {
+      "subject_id": "drug:x",
+      "predicate": "HAS_LABEL_RULE",
+      "object_id": "rule:a",
+      "polarity": "POSITIVE",
+      "population": "adult",
+      "conditions": {},
+      "jurisdiction": "US",
+      "effective_at": "2026-01-01"
+    },
+    "provenance": {
+      "source_id": "DAILYMED_SPL",
+      "passage_id": "p:default",
+      "locator": "Warnings",
+      "source_version": "v:2026-01-01",
+      "retrieved_at": "2026-09-06"
+    },
+    "s3_relation": "DIRECT_SUPPORT",
+    "review_status": "SOURCE_VERIFIED",
+    "source_scope": "external"
+  },
+  "cases": [
+    {
+      "case_id": "S4D-001",
+      "name": "insert current truth",
+      "steps": [{"op": "ingest", "event": {"event_id": "e1"}}],
+      "expect": {"actions": ["INSERTED_ACTIVE"], "edge_count": 1, "active_count": 1, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "rejections": 0}
+    },
+    {
+      "case_id": "S4D-002",
+      "name": "idempotent merge preserves provenance without duplicate edge",
+      "steps": [
+        {"op": "ingest", "event": {"event_id": "e1", "provenance": {"passage_id": "p:e1"}}},
+        {"op": "ingest", "event": {"event_id": "e2", "provenance": {"passage_id": "p:e2"}}}
+      ],
+      "expect": {"actions": ["INSERTED_ACTIVE", "MERGED_IDEMPOTENT"], "edge_count": 1, "active_count": 1, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "rejections": 0, "min_provenance_on_any_edge": 2}
+    },
+    {
+      "case_id": "S4D-003",
+      "name": "newer truth supersedes prior active truth",
+      "steps": [
+        {"op": "ingest", "event": {"event_id": "e1", "proposition": {"object_id": "rule:old", "effective_at": "2025-01-01"}, "provenance": {"passage_id": "p:e1", "source_version": "v:2025-01-01"}}},
+        {"op": "ingest", "event": {"event_id": "e2", "proposition": {"object_id": "rule:new"}, "provenance": {"passage_id": "p:e2"}}}
+      ],
+      "expect": {"actions": ["INSERTED_ACTIVE", "SUPERSEDED_PRIOR"], "edge_count": 2, "active_count": 1, "contested_count": 0, "superseded_count": 1, "stale_active": 0, "rejections": 0, "active_objects": ["rule:new"]}
+    },
+    {
+      "case_id": "S4D-004",
+      "name": "out-of-order older truth cannot reactivate stale edge",
+      "steps": [
+        {"op": "ingest", "event": {"event_id": "e2", "proposition": {"object_id": "rule:new"}, "provenance": {"passage_id": "p:e2"}}},
+        {"op": "ingest", "event": {"event_id": "e1", "proposition": {"object_id": "rule:old", "effective_at": "2025-01-01"}, "provenance": {"passage_id": "p:e1", "source_version": "v:2025-01-01"}}}
+      ],
+      "expect": {"actions": ["INSERTED_ACTIVE", "INSERTED_HISTORICAL"], "edge_count": 2, "active_count": 1, "contested_count": 0, "superseded_count": 1, "stale_active": 0, "rejections": 0, "active_objects": ["rule:new"]}
+    },
+    {
+      "case_id": "S4D-005",
+      "name": "same-date contradiction is preserved and active truth abstains",
+      "steps": [
+        {"op": "ingest", "event": {"event_id": "e1", "provenance": {"passage_id": "p:e1"}}},
+        {"op": "ingest", "event": {"event_id": "e2", "proposition": {"object_id": "rule:b"}, "provenance": {"source_id": "DRUGS_AT_FDA", "passage_id": "p:e2", "locator": "Approval history"}}}
+      ],
+      "expect": {"actions": ["INSERTED_ACTIVE", "CONTRADICTION_RECORDED"], "edge_count": 2, "active_count": 0, "contested_count": 2, "superseded_count": 0, "stale_active": 0, "rejections": 0, "unresolved_contradiction_slots": 1}
+    },
+    {
+      "case_id": "S4D-006",
+      "name": "missing passage provenance is rejected",
+      "steps": [{"op": "ingest", "event": {"event_id": "e1"}, "drop": ["provenance.passage_id"]}],
+      "expect": {"actions": ["REJECTED"], "edge_count": 0, "active_count": 0, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "rejections": 1, "rejection_reasons": ["MISSING_PROVENANCE_PASSAGE_ID"]}
+    },
+    {
+      "case_id": "S4D-007",
+      "name": "non-direct S3 relation cannot enter truth ledger",
+      "steps": [{"op": "ingest", "event": {"event_id": "e1", "s3_relation": "PARTIAL_SUPPORT"}}],
+      "expect": {"actions": ["REJECTED"], "edge_count": 0, "active_count": 0, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "rejections": 1, "rejection_reasons": ["S3_RELATION_NOT_DIRECT_SUPPORT"]}
+    },
+    {
+      "case_id": "S4D-008",
+      "name": "synthetic controlled truth cannot leak into clinical partition",
+      "steps": [{"op": "ingest", "event": {"event_id": "e1", "source_scope": "synthetic_controlled", "provenance": {"source_id": "SYNTH_FIXTURE"}}}],
+      "expect": {"actions": ["REJECTED"], "edge_count": 0, "active_count": 0, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "rejections": 1, "rejection_reasons": ["SYNTHETIC_PARTITION_VIOLATION"]}
+    },
+    {
+      "case_id": "S4D-009",
+      "name": "rollback restores exact pre-update state",
+      "steps": [
+        {"op": "ingest", "event": {"event_id": "e1", "proposition": {"object_id": "rule:old", "effective_at": "2025-01-01"}, "provenance": {"passage_id": "p:e1", "source_version": "v:2025-01-01"}}},
+        {"op": "checkpoint", "name": "before_update"},
+        {"op": "ingest", "event": {"event_id": "e2", "proposition": {"object_id": "rule:new"}, "provenance": {"passage_id": "p:e2"}}},
+        {"op": "rollback_last"},
+        {"op": "assert_checkpoint", "name": "before_update"}
+      ],
+      "expect": {"actions": ["INSERTED_ACTIVE", "CHECKPOINT", "SUPERSEDED_PRIOR", "ROLLED_BACK", "CHECKPOINT_MATCH"], "edge_count": 1, "active_count": 1, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "rejections": 0, "active_objects": ["rule:old"], "rollback_exact": true}
+    },
+    {
+      "case_id": "S4D-010",
+      "name": "jurisdiction scopes prevent false supersession",
+      "steps": [
+        {"op": "ingest", "event": {"event_id": "us", "proposition": {"object_id": "rule:us"}, "provenance": {"passage_id": "p:us"}}},
+        {"op": "ingest", "event": {"event_id": "eu", "proposition": {"object_id": "rule:eu", "jurisdiction": "EU", "effective_at": "2026-02-01"}, "provenance": {"source_id": "EMA_EPAR_SMPC", "passage_id": "p:eu", "source_version": "v:2026-02-01"}}}
+      ],
+      "expect": {"actions": ["INSERTED_ACTIVE", "INSERTED_ACTIVE"], "edge_count": 2, "active_count": 2, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "rejections": 0, "active_objects": ["rule:eu", "rule:us"]}
+    },
+    {
+      "case_id": "S4D-011",
+      "name": "population scopes prevent false supersession",
+      "steps": [
+        {"op": "ingest", "event": {"event_id": "adult", "proposition": {"object_id": "rule:adult"}, "provenance": {"passage_id": "p:adult"}}},
+        {"op": "ingest", "event": {"event_id": "peds", "proposition": {"object_id": "rule:pediatric", "population": "pediatric", "effective_at": "2026-02-01"}, "provenance": {"passage_id": "p:peds", "source_version": "v:2026-02-01"}}}
+      ],
+      "expect": {"actions": ["INSERTED_ACTIVE", "INSERTED_ACTIVE"], "edge_count": 2, "active_count": 2, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "rejections": 0, "active_objects": ["rule:adult", "rule:pediatric"]}
+    },
+    {
+      "case_id": "S4D-012",
+      "name": "unverified source cannot enter truth ledger",
+      "steps": [{"op": "ingest", "event": {"event_id": "e1", "review_status": "MACHINE_PARSED"}}],
+      "expect": {"actions": ["REJECTED"], "edge_count": 0, "active_count": 0, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "rejections": 1, "rejection_reasons": ["SOURCE_NOT_VERIFIED"]}
+    }
+  ]
+}

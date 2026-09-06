@@ -1,0 +1,86 @@
+[
+  {
+    "case_id": "S4D-001",
+    "name": "insert current truth",
+    "passed": true,
+    "observed": {"edge_count": 1, "active_count": 1, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "unresolved_contradiction_slots": 0, "active_objects": ["rule:a"], "max_provenance_on_any_edge": 1, "actions": ["INSERTED_ACTIVE"], "rejections": 0, "rejection_reasons": [], "rollback_exact": null},
+    "failures": []
+  },
+  {
+    "case_id": "S4D-002",
+    "name": "idempotent merge preserves provenance without duplicate edge",
+    "passed": true,
+    "observed": {"edge_count": 1, "active_count": 1, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "unresolved_contradiction_slots": 0, "active_objects": ["rule:a"], "max_provenance_on_any_edge": 2, "actions": ["INSERTED_ACTIVE", "MERGED_IDEMPOTENT"], "rejections": 0, "rejection_reasons": [], "rollback_exact": null},
+    "failures": []
+  },
+  {
+    "case_id": "S4D-003",
+    "name": "newer truth supersedes prior active truth",
+    "passed": true,
+    "observed": {"edge_count": 2, "active_count": 1, "contested_count": 0, "superseded_count": 1, "stale_active": 0, "unresolved_contradiction_slots": 0, "active_objects": ["rule:new"], "max_provenance_on_any_edge": 1, "actions": ["INSERTED_ACTIVE", "SUPERSEDED_PRIOR"], "rejections": 0, "rejection_reasons": [], "rollback_exact": null},
+    "failures": []
+  },
+  {
+    "case_id": "S4D-004",
+    "name": "out-of-order older truth cannot reactivate stale edge",
+    "passed": true,
+    "observed": {"edge_count": 2, "active_count": 1, "contested_count": 0, "superseded_count": 1, "stale_active": 0, "unresolved_contradiction_slots": 0, "active_objects": ["rule:new"], "max_provenance_on_any_edge": 1, "actions": ["INSERTED_ACTIVE", "INSERTED_HISTORICAL"], "rejections": 0, "rejection_reasons": [], "rollback_exact": null},
+    "failures": []
+  },
+  {
+    "case_id": "S4D-005",
+    "name": "same-date contradiction is preserved and active truth abstains",
+    "passed": true,
+    "observed": {"edge_count": 2, "active_count": 0, "contested_count": 2, "superseded_count": 0, "stale_active": 0, "unresolved_contradiction_slots": 1, "active_objects": [], "max_provenance_on_any_edge": 1, "actions": ["INSERTED_ACTIVE", "CONTRADICTION_RECORDED"], "rejections": 0, "rejection_reasons": [], "rollback_exact": null},
+    "failures": []
+  },
+  {
+    "case_id": "S4D-006",
+    "name": "missing passage provenance is rejected",
+    "passed": true,
+    "observed": {"edge_count": 0, "active_count": 0, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "unresolved_contradiction_slots": 0, "active_objects": [], "max_provenance_on_any_edge": 0, "actions": ["REJECTED"], "rejections": 1, "rejection_reasons": ["MISSING_PROVENANCE_PASSAGE_ID"], "rollback_exact": null},
+    "failures": []
+  },
+  {
+    "case_id": "S4D-007",
+    "name": "non-direct S3 relation cannot enter truth ledger",
+    "passed": true,
+    "observed": {"edge_count": 0, "active_count": 0, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "unresolved_contradiction_slots": 0, "active_objects": [], "max_provenance_on_any_edge": 0, "actions": ["REJECTED"], "rejections": 1, "rejection_reasons": ["S3_RELATION_NOT_DIRECT_SUPPORT"], "rollback_exact": null},
+    "failures": []
+  },
+  {
+    "case_id": "S4D-008",
+    "name": "synthetic controlled truth cannot leak into clinical partition",
+    "passed": true,
+    "observed": {"edge_count": 0, "active_count": 0, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "unresolved_contradiction_slots": 0, "active_objects": [], "max_provenance_on_any_edge": 0, "actions": ["REJECTED"], "rejections": 1, "rejection_reasons": ["SYNTHETIC_PARTITION_VIOLATION"], "rollback_exact": null},
+    "failures": []
+  },
+  {
+    "case_id": "S4D-009",
+    "name": "rollback restores exact pre-update state",
+    "passed": true,
+    "observed": {"edge_count": 1, "active_count": 1, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "unresolved_contradiction_slots": 0, "active_objects": ["rule:old"], "max_provenance_on_any_edge": 1, "actions": ["INSERTED_ACTIVE", "CHECKPOINT", "SUPERSEDED_PRIOR", "ROLLED_BACK", "CHECKPOINT_MATCH"], "rejections": 0, "rejection_reasons": [], "rollback_exact": true},
+    "failures": []
+  },
+  {
+    "case_id": "S4D-010",
+    "name": "jurisdiction scopes prevent false supersession",
+    "passed": true,
+    "observed": {"edge_count": 2, "active_count": 2, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "unresolved_contradiction_slots": 0, "active_objects": ["rule:eu", "rule:us"], "max_provenance_on_any_edge": 1, "actions": ["INSERTED_ACTIVE", "INSERTED_ACTIVE"], "rejections": 0, "rejection_reasons": [], "rollback_exact": null},
+    "failures": []
+  },
+  {
+    "case_id": "S4D-011",
+    "name": "population scopes prevent false supersession",
+    "passed": true,
+    "observed": {"edge_count": 2, "active_count": 2, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "unresolved_contradiction_slots": 0, "active_objects": ["rule:adult", "rule:pediatric"], "max_provenance_on_any_edge": 1, "actions": ["INSERTED_ACTIVE", "INSERTED_ACTIVE"], "rejections": 0, "rejection_reasons": [], "rollback_exact": null},
+    "failures": []
+  },
+  {
+    "case_id": "S4D-012",
+    "name": "unverified source cannot enter truth ledger",
+    "passed": true,
+    "observed": {"edge_count": 0, "active_count": 0, "contested_count": 0, "superseded_count": 0, "stale_active": 0, "unresolved_contradiction_slots": 0, "active_objects": [], "max_provenance_on_any_edge": 0, "actions": ["REJECTED"], "rejections": 1, "rejection_reasons": ["SOURCE_NOT_VERIFIED"], "rollback_exact": null},
+    "failures": []
+  }
+]

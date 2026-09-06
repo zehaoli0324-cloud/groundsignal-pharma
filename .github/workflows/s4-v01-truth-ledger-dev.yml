@@ -1,0 +1,31 @@
+name: S4 v0.1 Truth Ledger Development Regression
+
+on:
+  push:
+    paths:
+      - 'scripts/s4_truth_ledger_v01.py'
+      - 'scripts/eval_s4_truth_ledger_v01.py'
+      - 'medical/stage-evals/S4/**'
+      - '.github/workflows/s4-v01-truth-ledger-dev.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  s4-v01-development-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run S4 v0.1 development evaluator
+        run: |
+          python scripts/eval_s4_truth_ledger_v01.py \
+            --suite medical/stage-evals/S4/s4-truth-ledger-dev-v0.1.json \
+            --out-dir /tmp/s4-v01
+      - name: Verify committed aggregate outputs are reproducible
+        run: |
+          diff -u medical/stage-evals/S4/runs/s4-v01-dev/metrics.json /tmp/s4-v01/metrics.json
+          diff -u medical/stage-evals/S4/runs/s4-v01-dev/failures.json /tmp/s4-v01/failures.json

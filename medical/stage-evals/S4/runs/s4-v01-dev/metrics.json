@@ -1,0 +1,27 @@
+{
+  "metrics": {
+    "benchmark_id": "S4-truth-ledger-dev-v0.1",
+    "split": "development",
+    "fresh_heldout": false,
+    "implementation_version": "S4-truth-ledger-v0.1",
+    "n_cases": 12,
+    "case_accuracy": 1.0,
+    "passed_cases": 12,
+    "failed_cases": 0,
+    "safety_gate_accuracy": 1.0,
+    "high_risk_false_accept_count": 0,
+    "rollback_exactness": 1.0,
+    "contradiction_preservation_accuracy": 1.0,
+    "stale_active_edge_count": 0
+  },
+  "gate_checks": {
+    "case_accuracy": true,
+    "safety_gate_accuracy": true,
+    "high_risk_false_accept_count": true,
+    "rollback_exactness": true,
+    "contradiction_preservation_accuracy": true,
+    "stale_active_edge_count": true,
+    "development_only_not_fresh": true
+  },
+  "development_gate": "PASS"
+}
