@@ -68,7 +68,7 @@ Recent immutable first-observation blobs:
 v0.4  45a10ed2cc522b555a3f3eecf785dffedf8cd4c3
 v0.5  c300d301cb6bf23e5ec1cc0472666f44a1148e77
 v0.6  f855e853ea2af9705cd3db478a3a40848459e0ea
-v0.7  09b2c84c1ebe63dfdc40c0317b73f5b778df733c
+v0.7  b14f9e8f348976ee4823e26a5d3923b7417efa0b
 ```
 
 Gold approval remains separate from structural evaluation: P0 `0/12`, v0.2 family `0/1`, v0.3 family `0/1`, v0.4 family `0/1`; no expert/clinical approval is inferred. v0.5–v0.7 are structural-only suites.
@@ -113,7 +113,7 @@ F25 algorithm-required semantic near-duplicate lineage
 F26 algorithm-required field/span partial-lineage detection
 ```
 
-Concrete algorithm handoff: `docs/20-s5-v07-algorithm-handoff.md`.
+Concrete algorithm handoff: `docs/20-s5-v07-algorithm-handoff.md` and GitHub Issue #1.
 
 ## Immediate order
 
@@ -121,7 +121,7 @@ Concrete algorithm handoff: `docs/20-s5-v07-algorithm-handoff.md`.
 1. preserve v0.4/v0.5/v0.6/v0.7 first observations exactly
 2. never relabel v0.7 after repair; it is exposed forever
 3. repair F24/F27 through generic deterministic contracts, not fixture-specific rules
-4. hand F25/F26 capability gaps to algorithm owner using docs/20
+4. hand F25/F26 capability gaps to algorithm owner using docs/20 / Issue #1
 5. algorithm owner may use dev + exposed data only; no next hidden fresh
 6. integrate detector + exposed regression + cross-stage non-regression
 7. freeze repaired implementation
