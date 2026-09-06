@@ -1,0 +1,89 @@
+name: S5 v0.7.2 Hybrid Lineage Exposed Regression
+
+on:
+  push:
+    paths:
+      - 'scripts/s5_lineage_detector.py'
+      - 'scripts/s5_trust_policy.py'
+      - 'scripts/s5_trust_policy_v071.py'
+      - 'scripts/s5_trust_policy_v061.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/export_training_data_v061.py'
+      - 'scripts/eval_s5_boundary_regression_v072.py'
+      - 'medical/stage-evals/S5/regression-v0.7.2.json'
+      - 'medical/stage-evals/S5/S5_V0.7.2_HYBRID_LINEAGE_REPAIR_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v072-lineage-hybrid-regression.yml'
+  pull_request:
+    paths:
+      - 'scripts/s5_lineage_detector.py'
+      - 'scripts/s5_trust_policy.py'
+      - 'scripts/s5_trust_policy_v071.py'
+      - 'scripts/s5_trust_policy_v061.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/export_training_data_v061.py'
+      - 'scripts/eval_s5_boundary_regression_v072.py'
+      - 'medical/stage-evals/S5/regression-v0.7.2.json'
+      - 'medical/stage-evals/S5/S5_V0.7.2_HYBRID_LINEAGE_REPAIR_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v072-lineage-hybrid-regression.yml'
+
+jobs:
+  exposed-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check v0.7.2 implementation and evaluator
+        run: |
+          python -m py_compile \
+            scripts/s5_lineage_detector.py \
+            scripts/s5_trust_policy.py \
+            scripts/s5_trust_policy_v071.py \
+            scripts/s5_trust_policy_v061.py \
+            scripts/export_training_data.py \
+            scripts/export_training_data_v061.py \
+            scripts/eval_s5_boundary_regression_v072.py
+
+      - name: Preserve immutable v0.7 first observation
+        run: |
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.7.json)" = 'b14f9e8f348976ee4823e26a5d3923b7417efa0b'
+
+      - name: Run v0.7.2 exposed regression and match committed metrics
+        run: |
+          mkdir -p /tmp/groundsignal-s5-v072
+          python scripts/eval_s5_boundary_regression_v072.py \
+            --out /tmp/groundsignal-s5-v072/v072.json
+          cmp /tmp/groundsignal-s5-v072/v072.json medical/stage-evals/S5/regression-v0.7.2.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('/tmp/groundsignal-s5-v072/v072.json').read_text(encoding='utf-8'))
+          assert d['regression_gate']=='PASS'
+          assert d['failed_gates']==[]
+          assert d['development_detector_metrics']['contamination_recall']==1.0
+          assert d['development_detector_metrics']['clean_false_block_rate']==0.0
+          assert d['stage_release']=='BLOCKED_GOLD_REVIEW'
+          assert d['s6_automatic_trust']=='BLOCKED'
+          print('S5 v0.7.2 exposed repair regression PASS; release remains blocked.')
+          PY
+
+      - name: Preserve v0.6.1 exposed regression behavior
+        run: |
+          python scripts/eval_s5_boundary_regression_v061.py \
+            --out /tmp/groundsignal-s5-v072/v061.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('/tmp/groundsignal-s5-v072/v061.json').read_text(encoding='utf-8'))
+          assert d['regression_gate']=='PASS'
+          assert d['failed_gates']==[]
+          assert d['stage_release']=='BLOCKED_GOLD_REVIEW'
+          assert d['s6_automatic_trust']=='BLOCKED'
+          print('S5 v0.6.1 exposed regression remains PASS.')
+          PY
