@@ -1,0 +1,14 @@
+{
+  "family_id": "S5FRESH-LINEAGE-008",
+  "title": "Fresh v0.8 post-calibration semantic lineage family",
+  "status": "structural_only",
+  "data_origin": "synthetic",
+  "target_capabilities": ["cross-language lineage", "semantic abstraction", "cross-field flattening", "multi-source mosaic detection"],
+  "cases": [
+    {"case_id": "S5FRESH-LIN8-DEV-001", "path": "cases/S5FRESH-LIN8-DEV-001.json", "split": "dev", "variant_type": "allowed-control"},
+    {"case_id": "S5FRESH-LIN8-DEV-002", "path": "cases/S5FRESH-LIN8-DEV-002.json", "split": "dev", "variant_type": "allowed-control"},
+    {"case_id": "S5FRESH-LIN8-DEV-003", "path": "cases/S5FRESH-LIN8-DEV-003.json", "split": "dev", "variant_type": "allowed-control"},
+    {"case_id": "S5FRESH-LIN8-REG-001", "path": "cases/S5FRESH-LIN8-REG-001.json", "split": "regression", "variant_type": "protected-reference"},
+    {"case_id": "S5FRESH-LIN8-HO-001", "path": "cases/S5FRESH-LIN8-HO-001.json", "split": "heldout", "variant_type": "protected-reference"}
+  ]
+}
