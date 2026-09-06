@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
 """Export explicitly reviewed evaluation failures into SFT/preference candidates.
 
-S5 v0.5.1 trust rules:
-- the policy registry remains the compile-time authenticated trust anchor;
+S5 v0.6.1 trust rules:
+- authenticated authority files are parsed from the exact byte snapshot that is hashed;
+- policy registry remains the compile-time authenticated trust anchor;
 - benchmark suite/family/manifest/source identities are externally policy-bound;
-- ordinary sources are bound to both their backing file and exact loaded payload;
-- ordinary and benchmark case_id namespaces may not collide;
-- transferable loader context alone never authorizes a different payload;
-- missing, substituted, off-repository, or caller-invented authority fails closed.
+- ordinary sources are bound to backing file, exact loaded payload, canonical case_id and payload digest;
+- benchmark/ordinary namespaces reject canonical-id and semantic-core lineage collisions;
+- heldout/regression partitions remain evaluation-only and fail closed;
+- caller-invented, substituted or off-repository authority is rejected.
 """
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+import unicodedata
 from copy import deepcopy
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Tuple
@@ -27,11 +29,21 @@ ALLOWED_TRAINING_SPLITS = {"dev"}
 BLOCKED_TRAINING_SPLITS = {"heldout", "regression"}
 KNOWN_BENCHMARK_SPLITS = ALLOWED_TRAINING_SPLITS | BLOCKED_TRAINING_SPLITS
 TRUSTED_MATERIALIZER_VERSIONS = {"s5-materializer-v0.2.1"}
+SEMANTIC_CORE_FIELDS = (
+    "task_type",
+    "data_origin",
+    "patient_context",
+    "evidence_snapshot",
+    "interaction",
+    "expected_behavior",
+    "graph_eval",
+    "safety",
+    "scoring",
+)
 
 
 def read_json(path: Path) -> Dict[str, Any]:
-    with path.open("r", encoding="utf-8") as f:
-        return json.load(f)
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def read_jsonl(path: Path) -> List[Dict[str, Any]]:
@@ -48,16 +60,60 @@ def read_jsonl(path: Path) -> List[Dict[str, Any]]:
     return rows
 
 
-def sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def git_blob_sha1(path: Path) -> str:
-    data = path.read_bytes()
+def _git_blob_sha1_bytes(data: bytes) -> str:
     h = hashlib.sha1()
     h.update(f"blob {len(data)}\0".encode("utf-8"))
     h.update(data)
     return h.hexdigest()
+
+
+def git_blob_sha1(path: Path) -> str:
+    """Compatibility helper. Security-sensitive reads use _json_snapshot instead."""
+    return _git_blob_sha1_bytes(path.read_bytes())
+
+
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _json_snapshot(path: Path) -> tuple[Dict[str, Any], str, str]:
+    """Read once; hash and parse the same immutable in-memory byte snapshot."""
+    data = path.read_bytes()
+    try:
+        obj = json.loads(data.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise PermissionError(f"S5 export blocked: invalid authenticated JSON snapshot: {path}") from exc
+    if not isinstance(obj, dict):
+        raise PermissionError(f"S5 export blocked: authenticated JSON must be an object: {path}")
+    return obj, _git_blob_sha1_bytes(data), hashlib.sha256(data).hexdigest()
+
+
+def _authenticated_json(path: Path, expected_blob: str, label: str) -> tuple[Dict[str, Any], str]:
+    obj, observed_blob, sha256 = _json_snapshot(path)
+    if not expected_blob or observed_blob != expected_blob:
+        raise PermissionError(f"S5 export blocked: {label} identity mismatch")
+    return obj, sha256
+
+
+def canonical_case_id(value: Any) -> str:
+    text = str(value or "")
+    return unicodedata.normalize("NFC", text)
+
+
+def _require_canonical_case_id(value: Any, label: str) -> str:
+    raw = str(value or "")
+    if not raw:
+        raise PermissionError(f"S5 export blocked: {label} lacks case_id")
+    normalized = canonical_case_id(raw)
+    if raw != normalized:
+        raise PermissionError(f"S5 export blocked: {label} case_id is not Unicode NFC canonical")
+    return normalized
+
+
+def semantic_core_sha256(case: Dict[str, Any]) -> str:
+    core = {key: deepcopy(case.get(key)) for key in SEMANTIC_CORE_FIELDS}
+    encoded = json.dumps(core, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def canonical_materialized_sha256(case: Dict[str, Any]) -> str:
@@ -106,25 +162,48 @@ def _validate_policy_content(policy: Dict[str, Any], expected_policy_id: str) ->
 
     benchmark_case_ids: dict[str, str] = {}
     benchmark_blobs: dict[str, str] = {}
+    benchmark_semantic_cores: dict[str, str] = {}
+
     for suite_id, suite_entry in suites.items():
         if not isinstance(suite_entry, dict):
             raise PermissionError(f"S5 export blocked: malformed suite entry {suite_id!r}")
         for field in ("suite_path", "suite_git_blob_sha1", "family_root"):
             if not str(suite_entry.get(field) or ""):
                 raise PermissionError(f"S5 export blocked: suite {suite_id!r} missing {field}")
+        suite_path = _resolve_repo_path(suite_entry["suite_path"])
+        suite_obj, _ = _authenticated_json(
+            suite_path, str(suite_entry["suite_git_blob_sha1"]), f"suite {suite_id!r}"
+        )
+        if str(suite_obj.get("suite_id") or "") != str(suite_id):
+            raise PermissionError(f"S5 export blocked: suite identity mismatch for {suite_id!r}")
+        family_root = _resolve_repo_path(suite_entry["family_root"])
         families = suite_entry.get("families")
         if not isinstance(families, dict) or not families:
             raise PermissionError(f"S5 export blocked: suite {suite_id!r} has no families")
+
         for family_id, family_entry in families.items():
             if not isinstance(family_entry, dict):
                 raise PermissionError(f"S5 export blocked: malformed family {suite_id}/{family_id}")
             for field in ("manifest_path", "manifest_git_blob_sha1"):
                 if not str(family_entry.get(field) or ""):
                     raise PermissionError(f"S5 export blocked: family {suite_id}/{family_id} missing {field}")
+            manifest_path = _resolve_repo_path(family_entry["manifest_path"])
+            expected_manifest_path = (family_root / str(family_id) / "manifest.json").resolve()
+            if manifest_path != expected_manifest_path:
+                raise PermissionError(f"S5 export blocked: manifest path is not family-authoritative: {family_id}")
+            manifest, _ = _authenticated_json(
+                manifest_path,
+                str(family_entry["manifest_git_blob_sha1"]),
+                f"manifest {suite_id}/{family_id}",
+            )
+            if str(manifest.get("family_id") or "") != str(family_id):
+                raise PermissionError(f"S5 export blocked: manifest family mismatch: {family_id}")
             cases = family_entry.get("cases")
             if not isinstance(cases, dict) or not cases:
                 raise PermissionError(f"S5 export blocked: family {suite_id}/{family_id} has no cases")
-            for case_id, case_entry in cases.items():
+
+            for raw_case_id, case_entry in cases.items():
+                case_id = _require_canonical_case_id(raw_case_id, f"benchmark {suite_id}/{family_id}")
                 if case_id in benchmark_case_ids:
                     raise PermissionError(
                         f"S5 export blocked: duplicate benchmark case_id {case_id!r} across "
@@ -139,6 +218,19 @@ def _validate_policy_content(policy: Dict[str, Any], expected_policy_id: str) ->
                 for field in ("source_case_path", "source_case_git_blob_sha1", "variant_type"):
                     if not str(case_entry.get(field) or ""):
                         raise PermissionError(f"S5 export blocked: case {case_id!r} missing {field}")
+                source_path = _resolve_repo_path(case_entry["source_case_path"])
+                try:
+                    source_path.relative_to(manifest_path.parent.resolve())
+                except ValueError as exc:
+                    raise PermissionError(f"S5 export blocked: source case escapes declared family: {case_id}") from exc
+                source_obj, _ = _authenticated_json(
+                    source_path,
+                    str(case_entry["source_case_git_blob_sha1"]),
+                    f"source case {case_id!r}",
+                )
+                source_id = _require_canonical_case_id(source_obj.get("case_id"), f"source case {case_id!r}")
+                if source_id != case_id:
+                    raise PermissionError(f"S5 export blocked: source-case id mismatch for {case_id!r}")
                 blob = str(case_entry["source_case_git_blob_sha1"])
                 prior = benchmark_blobs.get(blob)
                 if prior and prior != case_id:
@@ -146,6 +238,8 @@ def _validate_policy_content(policy: Dict[str, Any], expected_policy_id: str) ->
                         f"S5 export blocked: benchmark blob identity reused by {prior!r} and {case_id!r}"
                     )
                 benchmark_blobs[blob] = case_id
+                core = semantic_core_sha256(source_obj)
+                benchmark_semantic_cores.setdefault(core, case_id)
 
     ordinary_case_ids: dict[str, str] = {}
     for rel, entry in ordinary.items():
@@ -155,17 +249,15 @@ def _validate_policy_content(policy: Dict[str, Any], expected_policy_id: str) ->
         if not blob:
             raise PermissionError(f"S5 export blocked: ordinary source {rel!r} lacks blob identity")
         path = _resolve_repo_path(rel)
-        if _repo_rel(path) != rel or not path.is_file() or git_blob_sha1(path) != blob:
-            raise PermissionError(f"S5 export blocked: ordinary source identity mismatch: {rel}")
+        if _repo_rel(path) != rel or not path.is_file():
+            raise PermissionError(f"S5 export blocked: ordinary source path mismatch: {rel}")
+        source, _ = _authenticated_json(path, blob, f"ordinary source {rel!r}")
         if blob in benchmark_blobs:
             raise PermissionError(
                 f"S5 export blocked: ordinary source {rel!r} is byte-identical to benchmark case "
                 f"{benchmark_blobs[blob]!r}"
             )
-        source = read_json(path)
-        case_id = str(source.get("case_id") or "")
-        if not case_id:
-            raise PermissionError(f"S5 export blocked: ordinary source {rel!r} lacks case_id")
+        case_id = _require_canonical_case_id(source.get("case_id"), f"ordinary source {rel!r}")
         if case_id in benchmark_case_ids:
             raise PermissionError(
                 f"S5 export blocked: ordinary source {rel!r} reuses benchmark case_id {case_id!r}"
@@ -175,16 +267,23 @@ def _validate_policy_content(policy: Dict[str, Any], expected_policy_id: str) ->
                 f"S5 export blocked: ordinary case_id {case_id!r} reused by "
                 f"{ordinary_case_ids[case_id]!r} and {rel!r}"
             )
+        core = semantic_core_sha256(source)
+        if core in benchmark_semantic_cores:
+            raise PermissionError(
+                f"S5 export blocked: ordinary source {rel!r} shares benchmark semantic core with "
+                f"{benchmark_semantic_cores[core]!r}"
+            )
         ordinary_case_ids[case_id] = rel
 
 
 def _registered_policy_catalog() -> tuple[Dict[str, Any], Dict[str, Dict[str, Any]]]:
     if not TRUST_POLICY_REGISTRY_PATH.is_file():
         raise PermissionError("S5 export blocked: authenticated trust-policy registry is missing")
-    observed_registry_blob = git_blob_sha1(TRUST_POLICY_REGISTRY_PATH)
-    if observed_registry_blob != TRUST_POLICY_REGISTRY_GIT_BLOB_SHA1:
-        raise PermissionError("S5 export blocked: trust-policy registry identity mismatch")
-    registry = read_json(TRUST_POLICY_REGISTRY_PATH)
+    registry, _ = _authenticated_json(
+        TRUST_POLICY_REGISTRY_PATH,
+        TRUST_POLICY_REGISTRY_GIT_BLOB_SHA1,
+        "trust-policy registry",
+    )
     if str(registry.get("registry_version") or "") != TRUST_POLICY_REGISTRY_VERSION:
         raise PermissionError("S5 export blocked: unsupported trust-policy registry version")
     entries = registry.get("policies")
@@ -205,9 +304,9 @@ def _registered_policy_catalog() -> tuple[Dict[str, Any], Dict[str, Dict[str, An
             raise PermissionError("S5 export blocked: trust registry reuses a policy path")
         seen_paths.add(rel)
         expected_blob = str(entry.get("git_blob_sha1") or "")
-        if not expected_blob or not path.is_file() or git_blob_sha1(path) != expected_blob:
-            raise PermissionError(f"S5 export blocked: registered policy identity mismatch for {policy_id!r}")
-        policy_obj = read_json(path)
+        if not expected_blob or not path.is_file():
+            raise PermissionError(f"S5 export blocked: registered policy identity missing for {policy_id!r}")
+        policy_obj, _ = _authenticated_json(path, expected_blob, f"registered policy {policy_id!r}")
         _validate_policy_content(policy_obj, str(policy_id))
         catalog[str(policy_id)] = {
             "path": path,
@@ -225,7 +324,7 @@ def trust_root_status() -> Dict[str, Any]:
     return {
         "registry_version": registry["registry_version"],
         "registry_path": _repo_rel(TRUST_POLICY_REGISTRY_PATH),
-        "registry_git_blob_sha1": git_blob_sha1(TRUST_POLICY_REGISTRY_PATH),
+        "registry_git_blob_sha1": TRUST_POLICY_REGISTRY_GIT_BLOB_SHA1,
         "default_policy_id": default_id,
         "default_policy_path": default["path_rel"],
         "default_policy_git_blob_sha1": default["git_blob_sha1"],
@@ -261,23 +360,26 @@ def _iter_json_files(path: Path) -> Iterable[Path]:
             yield file
 
 
-def _ordinary_source_context(file: Path, policy: Dict[str, Any]) -> Dict[str, Any]:
+def _ordinary_source_context(
+    file: Path,
+    policy: Dict[str, Any],
+    source: Dict[str, Any] | None = None,
+    observed_blob: str | None = None,
+) -> Dict[str, Any]:
     rel = _repo_rel(file)
     entry = (policy.get("ordinary_training_sources") or {}).get(rel)
     if not isinstance(entry, dict):
         raise PermissionError(f"S5 export blocked: ordinary source is not externally allowlisted: {rel}")
     expected = str(entry.get("git_blob_sha1") or "")
-    observed = git_blob_sha1(file)
-    if not expected or observed != expected:
+    if source is None or observed_blob is None:
+        source, observed_blob, _ = _json_snapshot(file)
+    if not expected or observed_blob != expected:
         raise PermissionError(f"S5 export blocked: ordinary source identity mismatch: {rel}")
-    source = read_json(file)
-    case_id = str(source.get("case_id") or "")
-    if not case_id:
-        raise PermissionError(f"S5 export blocked: ordinary source lacks case_id: {rel}")
+    case_id = _require_canonical_case_id(source.get("case_id"), f"ordinary source {rel!r}")
     return {
         "kind": "ordinary_policy_allowlisted",
         "path": rel,
-        "git_blob_sha1": observed,
+        "git_blob_sha1": observed_blob,
         "case_id": case_id,
         "payload_sha256": canonical_case_sha256(source),
     }
@@ -287,13 +389,13 @@ def load_cases(path: Path, trust_policy: Dict[str, Any] | Path | None = None) ->
     policy = load_trust_policy(trust_policy)
     cases: Dict[str, Dict[str, Any]] = {}
     for file in _iter_json_files(path):
-        case = read_json(file)
+        case, observed_blob, _ = _json_snapshot(file)
         if not isinstance(case.get("benchmark_provenance"), dict):
             case = dict(case)
-            case["_training_export_context"] = _ordinary_source_context(file, policy)
-        case_id = str(case.get("case_id", ""))
-        if not case_id:
-            raise ValueError(f"Case file missing case_id: {file}")
+            case["_training_export_context"] = _ordinary_source_context(
+                file, policy, source=case, observed_blob=observed_blob
+            )
+        case_id = _require_canonical_case_id(case.get("case_id"), f"loaded case {file}")
         if case_id in cases:
             raise ValueError(f"Duplicate case_id while loading export input: {case_id}")
         cases[case_id] = case
@@ -334,7 +436,7 @@ def failure_list(eval_row: Dict[str, Any]) -> List[str]:
 
 
 def _trusted_suite_authority(case: Dict[str, Any], provenance: Dict[str, Any], policy: Dict[str, Any]) -> Dict[str, Any]:
-    case_id = str(case.get("case_id") or "")
+    case_id = _require_canonical_case_id(case.get("case_id"), "materialized benchmark case")
     if provenance.get("stage") != "S5":
         raise PermissionError(f"Training export blocked for case {case_id}: unsupported provenance stage")
     suite_id = str(provenance.get("suite_id") or "")
@@ -342,9 +444,9 @@ def _trusted_suite_authority(case: Dict[str, Any], provenance: Dict[str, Any], p
     if not isinstance(suite_entry, dict):
         raise PermissionError(f"Training export blocked for case {case_id}: suite {suite_id!r} is not in external trust policy")
     suite_path = _resolve_repo_path(suite_entry.get("suite_path"))
-    if git_blob_sha1(suite_path) != str(suite_entry.get("suite_git_blob_sha1") or ""):
-        raise PermissionError(f"Training export blocked for case {case_id}: trusted suite file identity mismatch")
-    suite = read_json(suite_path)
+    suite, _ = _authenticated_json(
+        suite_path, str(suite_entry.get("suite_git_blob_sha1") or ""), f"trusted suite {suite_id!r}"
+    )
     if str(suite.get("suite_id") or "") != suite_id:
         raise PermissionError(f"Training export blocked for case {case_id}: suite identity mismatch")
 
@@ -359,9 +461,11 @@ def _trusted_suite_authority(case: Dict[str, Any], provenance: Dict[str, Any], p
     expected_manifest_path = (family_root / family_id / "manifest.json").resolve()
     if manifest_path != expected_manifest_path:
         raise PermissionError(f"Training export blocked for case {case_id}: manifest path is not suite-authoritative")
-    if git_blob_sha1(manifest_path) != str(family_entry.get("manifest_git_blob_sha1") or ""):
-        raise PermissionError(f"Training export blocked for case {case_id}: trusted manifest identity mismatch")
-    manifest = read_json(manifest_path)
+    manifest, manifest_sha256 = _authenticated_json(
+        manifest_path,
+        str(family_entry.get("manifest_git_blob_sha1") or ""),
+        f"trusted manifest {family_id!r}",
+    )
     if str(manifest.get("family_id") or "") != family_id:
         raise PermissionError(f"Training export blocked for case {case_id}: manifest family mismatch")
 
@@ -374,10 +478,13 @@ def _trusted_suite_authority(case: Dict[str, Any], provenance: Dict[str, Any], p
         source_case_path.relative_to(declared_family_dir)
     except ValueError as exc:
         raise PermissionError(f"Training export blocked for case {case_id}: source case escapes declared family") from exc
-    if git_blob_sha1(source_case_path) != str(case_entry.get("source_case_git_blob_sha1") or ""):
-        raise PermissionError(f"Training export blocked for case {case_id}: trusted source-case identity mismatch")
-    source_case = read_json(source_case_path)
-    if str(source_case.get("case_id") or "") != case_id:
+    source_case, source_case_sha256 = _authenticated_json(
+        source_case_path,
+        str(case_entry.get("source_case_git_blob_sha1") or ""),
+        f"trusted source case {case_id!r}",
+    )
+    source_id = _require_canonical_case_id(source_case.get("case_id"), f"source case {case_id!r}")
+    if source_id != case_id:
         raise PermissionError(f"Training export blocked for case {case_id}: source-case id mismatch")
 
     refs = [r for r in manifest.get("cases") or [] if str(r.get("case_id") or "") == case_id]
@@ -400,9 +507,11 @@ def _trusted_suite_authority(case: Dict[str, Any], provenance: Dict[str, Any], p
         "family_id": family_id,
         "manifest": manifest,
         "manifest_path": manifest_path,
+        "manifest_sha256": manifest_sha256,
         "ref": ref,
         "source_case": source_case,
         "source_case_path": source_case_path,
+        "source_case_sha256": source_case_sha256,
         "split": split,
         "variant_type": variant,
     }
@@ -432,8 +541,8 @@ def _expected_materialized_case(case: Dict[str, Any], provenance: Dict[str, Any]
         "source_snapshot_commit": suite.get("source_snapshot_commit"),
         "source_manifest_path": _repo_rel(authority["manifest_path"]),
         "source_case_path": _repo_rel(authority["source_case_path"]),
-        "source_manifest_sha256": sha256_file(authority["manifest_path"]),
-        "source_case_sha256": sha256_file(authority["source_case_path"]),
+        "source_manifest_sha256": authority["manifest_sha256"],
+        "source_case_sha256": authority["source_case_sha256"],
         "materializer_version": materializer_version,
         "provenance_mode": "materialized_manifest_bound",
         "training_eligible": split in allowed and split not in prohibited,
@@ -463,10 +572,10 @@ def training_partition(case: Dict[str, Any], trust_policy: Dict[str, Any] | Path
         rel = _repo_rel(path)
         entry = (policy.get("ordinary_training_sources") or {}).get(rel)
         expected_blob = str((entry or {}).get("git_blob_sha1") or "")
-        if not isinstance(entry, dict) or not expected_blob or git_blob_sha1(path) != expected_blob:
-            raise PermissionError(f"Training export blocked for case {case.get('case_id')}: ordinary-source authority no longer matches")
-        source = read_json(path)
-        source_case_id = str(source.get("case_id") or "")
+        if not isinstance(entry, dict) or not expected_blob:
+            raise PermissionError(f"Training export blocked for case {case.get('case_id')}: ordinary-source authority missing")
+        source, _ = _authenticated_json(path, expected_blob, f"ordinary source {rel!r}")
+        source_case_id = _require_canonical_case_id(source.get("case_id"), f"ordinary source {rel!r}")
         observed = deepcopy(case)
         observed.pop("_training_export_context", None)
         expected_payload_sha = canonical_case_sha256(source)
@@ -475,7 +584,7 @@ def training_partition(case: Dict[str, Any], trust_policy: Dict[str, Any] | Path
             or str(context.get("git_blob_sha1") or "") != expected_blob
             or str(context.get("case_id") or "") != source_case_id
             or str(context.get("payload_sha256") or "") != expected_payload_sha
-            or str(case.get("case_id") or "") != source_case_id
+            or _require_canonical_case_id(case.get("case_id"), "ordinary export case") != source_case_id
             or observed != source
         ):
             raise PermissionError(

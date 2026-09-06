@@ -1,0 +1,70 @@
+{
+  "stage": "S5",
+  "version": "v0.6.1",
+  "eval_name": "identity-lineage-toctou-repair-exposed-regression",
+  "evidence_class": "development_exposed_regression",
+  "fresh_evidence": false,
+  "first_observation": false,
+  "source_fresh_suite": "S5 v0.6 first observation; now exposed",
+  "historical_v06_first_observation_preservation": {
+    "expected_git_blob_sha1": "f855e853ea2af9705cd3db478a3a40848459e0ea",
+    "observed_git_blob_sha1": "f855e853ea2af9705cd3db478a3a40848459e0ea",
+    "pass": true
+  },
+  "authenticated_trust_root": {
+    "registry_version": "s5-trust-policy-registry-v0.4.1",
+    "registry_git_blob_sha1": "b9637e31df679e49b36d49ea96177a8100fd5c2a",
+    "default_policy_id": "s5-trust-root-v0.4.1",
+    "default_policy_git_blob_sha1": "57adc5384818a4254192ed53e8ba60eee5d70e48",
+    "pass": true
+  },
+  "prior_v051_exposed_regression": {
+    "returncode": 0,
+    "regression_gate": "PASS",
+    "failed_gates": [],
+    "pass": true
+  },
+  "S5-F20": {
+    "policy_builder_rejected": true,
+    "policy_content_validator_rejected": false,
+    "pass": true
+  },
+  "S5-F21": {
+    "policy_builder_rejected": true,
+    "policy_content_validator_rejected": false,
+    "pass": true
+  },
+  "S5-F22": {
+    "race_triggered": true,
+    "blocked": true,
+    "exported": false,
+    "error_type": "PermissionError",
+    "pass": true
+  },
+  "S5-F23": {
+    "race_triggered": true,
+    "mutated_payload_loaded": false,
+    "blocked": true,
+    "exported": false,
+    "error_type": "PermissionError",
+    "pass": true
+  },
+  "historical_failure_disposition": {
+    "S5-F20": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F21": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F22": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F23": "REPAIRED_EXPOSED_REGRESSION"
+  },
+  "failed_gates": [],
+  "regression_gate": "PASS",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "next_fresh_requirement": "freeze v0.6.1, then author a genuinely new post-freeze S5 suite; v0.6 remains exposed forever",
+  "notes": [
+    "v0.6 first-observation FAIL is preserved exactly and is never relabeled fresh.",
+    "Canonical case identity uses Unicode NFC at policy and export boundaries.",
+    "Benchmark-derived ordinary-source laundering is blocked by a stable semantic-core fingerprint, not a case-id patch.",
+    "Security-sensitive JSON authority is hashed and parsed from one byte snapshot, eliminating the tested check/read race.",
+    "No expert approval, clinical validation, real-user evidence, or model-training gain is inferred."
+  ]
+}

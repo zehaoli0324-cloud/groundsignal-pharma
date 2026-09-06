@@ -1,0 +1,31 @@
+{
+  "stage": "S5",
+  "version": "v0.6.1",
+  "evidence_class": "development_exposed_regression",
+  "source_first_observation": "medical/stage-evals/S5/fresh-first-observation-v0.6.json",
+  "source_first_observation_git_blob_sha1": "f855e853ea2af9705cd3db478a3a40848459e0ea",
+  "historical_failure_disposition": [
+    {
+      "id": "S5-F20",
+      "status": "REPAIRED_EXPOSED_REGRESSION",
+      "generic_control": "semantic-core fingerprint reserved across benchmark and ordinary-source namespaces"
+    },
+    {
+      "id": "S5-F21",
+      "status": "REPAIRED_EXPOSED_REGRESSION",
+      "generic_control": "Unicode NFC canonical case_id enforced before namespace uniqueness checks"
+    },
+    {
+      "id": "S5-F22",
+      "status": "REPAIRED_EXPOSED_REGRESSION",
+      "generic_control": "registry and registered-policy authentication parse the exact byte snapshot that was hashed"
+    },
+    {
+      "id": "S5-F23",
+      "status": "REPAIRED_EXPOSED_REGRESSION",
+      "generic_control": "ordinary source load/export re-authentication hashes and parses one immutable byte snapshot"
+    }
+  ],
+  "open_fresh_failures": [],
+  "release_note": "No bounded S5 release is inferred from exposed regression. A new post-freeze independent suite remains required, and gold review is still incomplete."
+}

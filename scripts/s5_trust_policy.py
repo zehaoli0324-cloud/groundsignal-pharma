@@ -1,27 +1,42 @@
 #!/usr/bin/env python3
 """Build explicit S5 benchmark/export policies.
 
-v0.5.1 adds generic construction-time identity/containment guards while preserving
-the serialized v0.4.1 policy contract for valid inputs:
-- every benchmark case path must remain inside its declared family directory;
-- ordinary training sources may not reuse any benchmark case_id;
-- ordinary training case_id values must also be unique within a policy.
+v0.6.1 adds generic identity/lineage guards while preserving the serialized
+v0.4.1 policy contract for valid inputs:
+- case_id values must be Unicode NFC canonical and unique across namespaces;
+- ordinary sources may not share a stable semantic-core fingerprint with any
+  benchmark case, even when case_id/title/tags or outer bytes differ;
+- benchmark case paths remain inside their declared family directory;
+- ordinary source and benchmark blob identities may not collide.
 
-Policy construction is not policy authentication. Protected export authenticates a
-canonical policy registry in export_training_data.py.
+Policy construction is not policy authentication. Protected export authenticates
+the canonical registry in export_training_data.py.
 """
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+import unicodedata
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-POLICY_VERSION = "s5-trust-root-v0.5.1"
+POLICY_VERSION = "s5-trust-root-v0.6.1"
 CLI_DEFAULT_POLICY_VERSION = "s5-trust-root-v0.3.1"  # preserve historical rebuild workflows
 KNOWN_SPLITS = {"dev", "regression", "heldout"}
+SEMANTIC_CORE_FIELDS = (
+    "task_type",
+    "data_origin",
+    "patient_context",
+    "evidence_snapshot",
+    "interaction",
+    "expected_behavior",
+    "graph_eval",
+    "safety",
+    "scoring",
+)
 
 
 def load_json(path: Path) -> Any:
@@ -34,6 +49,26 @@ def git_blob_sha1(path: Path) -> str:
     h.update(f"blob {len(data)}\0".encode("utf-8"))
     h.update(data)
     return h.hexdigest()
+
+
+def canonical_case_id(value: Any) -> str:
+    return unicodedata.normalize("NFC", str(value or ""))
+
+
+def require_canonical_case_id(value: Any, label: str) -> str:
+    raw = str(value or "")
+    if not raw:
+        raise ValueError(f"{label}: case_id is required")
+    normalized = canonical_case_id(raw)
+    if raw != normalized:
+        raise ValueError(f"{label}: case_id must already be Unicode NFC canonical")
+    return normalized
+
+
+def semantic_core_sha256(case: dict[str, Any]) -> str:
+    core = {key: deepcopy(case.get(key)) for key in SEMANTIC_CORE_FIELDS}
+    encoded = json.dumps(core, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def repo_path(path: Path | str) -> Path:
@@ -75,15 +110,18 @@ def build_suite_entry(suite_path: Path, family_root: Path) -> tuple[str, dict[st
         if str(manifest.get("family_id") or "") != family_id:
             raise ValueError(f"{manifest_path}: family_id mismatch")
         cases: dict[str, Any] = {}
+        canonical_ids: set[str] = set()
         for ref in manifest.get("cases") or []:
-            case_id = str(ref.get("case_id") or "")
+            raw_case_id = str(ref.get("case_id") or "")
+            case_id = require_canonical_case_id(raw_case_id, str(manifest_path))
             rel = str(ref.get("path") or "")
             split = str(ref.get("split") or "")
             variant_type = str(ref.get("variant_type") or "")
-            if not case_id or not rel or split not in KNOWN_SPLITS:
+            if not rel or split not in KNOWN_SPLITS:
                 raise ValueError(f"{manifest_path}: invalid case ref {ref!r}")
-            if case_id in cases:
-                raise ValueError(f"{manifest_path}: duplicate case_id {case_id!r}")
+            if case_id in canonical_ids:
+                raise ValueError(f"{manifest_path}: duplicate canonical case_id {case_id!r}")
+            canonical_ids.add(case_id)
             case_path = (family_dir / rel).resolve()
             try:
                 case_path.relative_to(family_dir)
@@ -92,7 +130,8 @@ def build_suite_entry(suite_path: Path, family_root: Path) -> tuple[str, dict[st
                     f"{manifest_path}: case path escapes declared family directory: {rel!r}"
                 ) from exc
             case = load_json(case_path)
-            if str(case.get("case_id") or "") != case_id:
+            source_id = require_canonical_case_id(case.get("case_id"), str(case_path))
+            if source_id != case_id:
                 raise ValueError(f"{case_path}: case_id mismatch")
             cases[case_id] = {
                 "source_case_path": repo_rel(case_path),
@@ -114,12 +153,16 @@ def build_suite_entry(suite_path: Path, family_root: Path) -> tuple[str, dict[st
     }
 
 
-def _case_index(suites: dict[str, Any]) -> tuple[dict[str, tuple[str, str]], dict[str, str]]:
+def _case_index(
+    suites: dict[str, Any],
+) -> tuple[dict[str, tuple[str, str]], dict[str, str], dict[str, str]]:
     by_id: dict[str, tuple[str, str]] = {}
     by_blob: dict[str, str] = {}
+    by_semantic_core: dict[str, str] = {}
     for suite_id, suite in suites.items():
         for family_id, family in (suite.get("families") or {}).items():
-            for case_id, case in (family.get("cases") or {}).items():
+            for raw_case_id, case in (family.get("cases") or {}).items():
+                case_id = require_canonical_case_id(raw_case_id, f"{suite_id}/{family_id}")
                 if case_id in by_id:
                     prior_suite, prior_family = by_id[case_id]
                     raise ValueError(
@@ -136,7 +179,10 @@ def _case_index(suites: dict[str, Any]) -> tuple[dict[str, tuple[str, str]], dic
                         f"benchmark blob identity reused by {prior!r} and {case_id!r}"
                     )
                 by_blob[blob] = case_id
-    return by_id, by_blob
+                source = load_json(repo_path(case["source_case_path"]))
+                core = semantic_core_sha256(source)
+                by_semantic_core.setdefault(core, case_id)
+    return by_id, by_blob, by_semantic_core
 
 
 def build_policy(
@@ -155,7 +201,7 @@ def build_policy(
             raise ValueError(f"duplicate trusted suite_id: {suite_id}")
         suites[suite_id] = entry
 
-    benchmark_case_ids, benchmark_blobs = _case_index(suites)
+    benchmark_case_ids, benchmark_blobs, benchmark_semantic_cores = _case_index(suites)
     ordinary: dict[str, Any] = {}
     ordinary_case_ids: dict[str, str] = {}
     for source in ordinary_sources or []:
@@ -170,9 +216,7 @@ def build_policy(
                 f"{benchmark_blobs[blob]!r}; benchmark-derived content cannot be reclassified"
             )
         source_obj = load_json(path)
-        case_id = str(source_obj.get("case_id") or "")
-        if not case_id:
-            raise ValueError(f"ordinary source {rel} lacks case_id")
+        case_id = require_canonical_case_id(source_obj.get("case_id"), f"ordinary source {rel}")
         if case_id in benchmark_case_ids:
             suite_id, family_id = benchmark_case_ids[case_id]
             raise ValueError(
@@ -183,8 +227,14 @@ def build_policy(
             raise ValueError(
                 f"duplicate ordinary case_id {case_id!r}: {ordinary_case_ids[case_id]} vs {rel}"
             )
+        semantic_core = semantic_core_sha256(source_obj)
+        if semantic_core in benchmark_semantic_cores:
+            raise ValueError(
+                f"ordinary source {rel} shares benchmark semantic core with "
+                f"{benchmark_semantic_cores[semantic_core]!r}; transformed benchmark content cannot be reclassified"
+            )
         ordinary_case_ids[case_id] = rel
-        # Keep the serialized policy shape unchanged for backward-compatible rebuilds.
+        # Keep serialized policy shape unchanged for backward-compatible rebuilds.
         ordinary[rel] = {"git_blob_sha1": blob}
 
     return {

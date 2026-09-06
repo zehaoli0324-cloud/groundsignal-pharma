@@ -1,0 +1,109 @@
+name: S5 v0.6.1 Identity-Lineage-TOCTOU Repair Exposed Regression
+
+on:
+  push:
+    paths:
+      - 'scripts/export_training_data.py'
+      - 'scripts/s5_trust_policy.py'
+      - 'scripts/eval_s5_boundary_regression_v061.py'
+      - 'medical/stage-evals/S5/boundary-regression-v0.6.1.json'
+      - 'medical/stage-evals/S5/failures-v0.6.1.json'
+      - 'medical/stage-evals/S5/S5_V0.6.1_IDENTITY_LINEAGE_TOCTOU_REPAIR_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - 'docs/17-evaluation-methods-and-optimization-ledger.md'
+      - '.github/workflows/s5-v061-identity-lineage-toctou-regression.yml'
+  pull_request:
+    paths:
+      - 'scripts/export_training_data.py'
+      - 'scripts/s5_trust_policy.py'
+      - 'scripts/eval_s5_boundary_regression_v061.py'
+      - 'medical/stage-evals/S5/boundary-regression-v0.6.1.json'
+      - 'medical/stage-evals/S5/failures-v0.6.1.json'
+      - 'medical/stage-evals/S5/S5_V0.6.1_IDENTITY_LINEAGE_TOCTOU_REPAIR_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - 'docs/17-evaluation-methods-and-optimization-ledger.md'
+      - '.github/workflows/s5-v061-identity-lineage-toctou-regression.yml'
+
+jobs:
+  exposed-repair-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check implementation and evaluator
+        run: |
+          python -m py_compile \
+            scripts/export_training_data.py \
+            scripts/s5_trust_policy.py \
+            scripts/eval_s5_boundary_regression_v061.py
+
+      - name: Preserve immutable v0.6 fresh FAIL
+        run: |
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.6.json)" = 'f855e853ea2af9705cd3db478a3a40848459e0ea'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.5.json)" = 'c300d301cb6bf23e5ec1cc0472666f44a1148e77'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.4.json)" = '45a10ed2cc522b555a3f3eecf785dffedf8cd4c3'
+
+      - name: Preserve authenticated registry and policy roots
+        run: |
+          test "$(git rev-parse HEAD:medical/configs/s5-trust-policy-registry-v0.4.1.json)" = 'b9637e31df679e49b36d49ea96177a8100fd5c2a'
+          test "$(git rev-parse HEAD:medical/configs/s5-trust-root-v0.4.1.json)" = '57adc5384818a4254192ed53e8ba60eee5d70e48'
+
+      - name: Verify canonical v0.4.1 policy serialization remains compatible
+        run: |
+          python scripts/s5_trust_policy.py \
+            --policy-version s5-trust-root-v0.4.1 \
+            --suite medical/stage-evals/S5/fresh-boundary-v0.2/suite-fresh-boundary-v0.2.json \
+            --family-root medical/stage-evals/S5/fresh-boundary-v0.2/families \
+            --suite medical/stage-evals/S5/fresh-boundary-v0.3/suite-fresh-boundary-v0.3.json \
+            --family-root medical/stage-evals/S5/fresh-boundary-v0.3/families \
+            --suite medical/stage-evals/S5/fresh-boundary-v0.4/suite-fresh-boundary-v0.4.json \
+            --family-root medical/stage-evals/S5/fresh-boundary-v0.4/families \
+            --ordinary-source medical/examples/clinical-medication-safety-001.json \
+            --out /tmp/s5-v041-rebuilt-v061.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected=json.loads(Path('medical/configs/s5-trust-root-v0.4.1.json').read_text(encoding='utf-8'))
+          observed=json.loads(Path('/tmp/s5-v041-rebuilt-v061.json').read_text(encoding='utf-8'))
+          assert observed == expected
+          print('Pinned v0.4.1 policy serialization remains backward compatible.')
+          PY
+
+      - name: Re-run prior v0.5.1 exposed regression
+        run: |
+          python scripts/eval_s5_boundary_regression_v051.py --out /tmp/s5-v051-under-v061.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/s5-v051-under-v061.json', encoding='utf-8'))
+          assert d['regression_gate']=='PASS'
+          assert d['failed_gates']==[]
+          assert d['stage_release']=='BLOCKED_GOLD_REVIEW'
+          assert d['s6_automatic_trust']=='BLOCKED'
+          print('S5 v0.5.1 exposed regression remains PASS.')
+          PY
+
+      - name: Run S5 v0.6.1 exposed repair regression
+        run: |
+          python scripts/eval_s5_boundary_regression_v061.py --out /tmp/s5-v061.json
+          cat /tmp/s5-v061.json
+
+      - name: Match committed v0.6.1 raw metrics exactly
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          observed=json.loads(Path('/tmp/s5-v061.json').read_text(encoding='utf-8'))
+          expected=json.loads(Path('medical/stage-evals/S5/boundary-regression-v0.6.1.json').read_text(encoding='utf-8'))
+          assert observed == expected, (expected, observed)
+          assert observed['regression_gate']=='PASS'
+          assert observed['failed_gates']==[]
+          assert all(observed[f'S5-F{i}']['pass'] for i in range(20,24))
+          assert observed['stage_release']=='BLOCKED_GOLD_REVIEW'
+          assert observed['s6_automatic_trust']=='BLOCKED'
+          print('S5 v0.6.1 F20-F23 exposed regression PASS; release remains blocked.')
+          PY
