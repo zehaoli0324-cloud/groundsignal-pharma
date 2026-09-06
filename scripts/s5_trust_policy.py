@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Build explicit S5 benchmark/export policies.
 
-v0.6.1 adds generic identity/lineage guards while preserving the serialized
-v0.4.1 policy contract for valid inputs:
-- case_id values must be Unicode NFC canonical and unique across namespaces;
+v0.7.1 extends the v0.6.1 identity/lineage guards while preserving the
+serialized v0.4.1 policy contract for valid inputs:
+- case_id values must be Unicode NFKC canonical and unique across namespaces;
+- benchmark semantic-core identity may not cross training/evaluation split boundaries;
 - ordinary sources may not share a stable semantic-core fingerprint with any
   benchmark case, even when case_id/title/tags or outer bytes differ;
 - benchmark case paths remain inside their declared family directory;
@@ -23,7 +24,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-POLICY_VERSION = "s5-trust-root-v0.6.1"
+POLICY_VERSION = "s5-trust-root-v0.7.1"
 CLI_DEFAULT_POLICY_VERSION = "s5-trust-root-v0.3.1"  # preserve historical rebuild workflows
 KNOWN_SPLITS = {"dev", "regression", "heldout"}
 SEMANTIC_CORE_FIELDS = (
@@ -52,7 +53,7 @@ def git_blob_sha1(path: Path) -> str:
 
 
 def canonical_case_id(value: Any) -> str:
-    return unicodedata.normalize("NFC", str(value or ""))
+    return unicodedata.normalize("NFKC", str(value or ""))
 
 
 def require_canonical_case_id(value: Any, label: str) -> str:
@@ -61,7 +62,7 @@ def require_canonical_case_id(value: Any, label: str) -> str:
         raise ValueError(f"{label}: case_id is required")
     normalized = canonical_case_id(raw)
     if raw != normalized:
-        raise ValueError(f"{label}: case_id must already be Unicode NFC canonical")
+        raise ValueError(f"{label}: case_id must already be Unicode NFKC canonical")
     return normalized
 
 
@@ -155,10 +156,10 @@ def build_suite_entry(suite_path: Path, family_root: Path) -> tuple[str, dict[st
 
 def _case_index(
     suites: dict[str, Any],
-) -> tuple[dict[str, tuple[str, str]], dict[str, str], dict[str, str]]:
+) -> tuple[dict[str, tuple[str, str]], dict[str, str], dict[str, tuple[str, str]]]:
     by_id: dict[str, tuple[str, str]] = {}
     by_blob: dict[str, str] = {}
-    by_semantic_core: dict[str, str] = {}
+    by_semantic_core: dict[str, tuple[str, str]] = {}
     for suite_id, suite in suites.items():
         for family_id, family in (suite.get("families") or {}).items():
             for raw_case_id, case in (family.get("cases") or {}).items():
@@ -179,9 +180,18 @@ def _case_index(
                         f"benchmark blob identity reused by {prior!r} and {case_id!r}"
                     )
                 by_blob[blob] = case_id
+                split = str(case.get("split") or "")
+                if split not in KNOWN_SPLITS:
+                    raise ValueError(f"{suite_id}/{family_id}/{case_id}: invalid benchmark split")
                 source = load_json(repo_path(case["source_case_path"]))
                 core = semantic_core_sha256(source)
-                by_semantic_core.setdefault(core, case_id)
+                prior_core = by_semantic_core.get(core)
+                if prior_core and prior_core[1] != split:
+                    raise ValueError(
+                        f"benchmark semantic core crosses split boundary: {prior_core[0]!r} "
+                        f"({prior_core[1]}) vs {case_id!r} ({split})"
+                    )
+                by_semantic_core.setdefault(core, (case_id, split))
     return by_id, by_blob, by_semantic_core
 
 
@@ -229,9 +239,10 @@ def build_policy(
             )
         semantic_core = semantic_core_sha256(source_obj)
         if semantic_core in benchmark_semantic_cores:
+            benchmark_case_id, benchmark_split = benchmark_semantic_cores[semantic_core]
             raise ValueError(
                 f"ordinary source {rel} shares benchmark semantic core with "
-                f"{benchmark_semantic_cores[semantic_core]!r}; transformed benchmark content cannot be reclassified"
+                f"{benchmark_case_id!r} ({benchmark_split}); transformed benchmark content cannot be reclassified"
             )
         ordinary_case_ids[case_id] = rel
         # Keep serialized policy shape unchanged for backward-compatible rebuilds.
