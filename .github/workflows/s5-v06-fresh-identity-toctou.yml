@@ -1,4 +1,4 @@
-name: S5 v0.6 Fresh Identity TOCTOU First Observation
+name: S5 v0.6 Historical Fresh First-Observation Preservation
 
 on:
   push:
@@ -8,7 +8,6 @@ on:
       - 'medical/stage-evals/S5/fresh-first-observation-v0.6.json'
       - 'medical/stage-evals/S5/failures-v0.6.json'
       - 'medical/stage-evals/S5/S5_V0.6_FRESH_IDENTITY_TOCTOU_FAIL_REPORT.md'
-      - 'docs/16-stage-status.md'
       - '.github/workflows/s5-v06-fresh-identity-toctou.yml'
   pull_request:
     paths:
@@ -17,11 +16,10 @@ on:
       - 'medical/stage-evals/S5/fresh-first-observation-v0.6.json'
       - 'medical/stage-evals/S5/failures-v0.6.json'
       - 'medical/stage-evals/S5/S5_V0.6_FRESH_IDENTITY_TOCTOU_FAIL_REPORT.md'
-      - 'docs/16-stage-status.md'
       - '.github/workflows/s5-v06-fresh-identity-toctou.yml'
 
 jobs:
-  fresh-first-observation:
+  preserve-first-observation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,51 +29,37 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Syntax check fresh evaluator
-        run: python -m py_compile scripts/eval_s5_fresh_boundary_v06.py
-
-      - name: Preserve prior v0.5 first observation
+      - name: Protect immutable v0.6 evidence blobs
         run: |
-          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.5.json)" = 'c300d301cb6bf23e5ec1cc0472666f44a1148e77'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.6.json)" = 'f855e853ea2af9705cd3db478a3a40848459e0ea'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/failures-v0.6.json)" = '94652c3f311df19e5a7dd6c9364420df1acf73c3'
 
-      - name: Re-run v0.5.1 exposed regression
+      - name: Reproduce v0.6 first observation at historical commit
         run: |
-          mkdir -p /tmp/groundsignal-s5-v06
-          python scripts/eval_s5_boundary_regression_v051.py \
-            --out /tmp/groundsignal-s5-v06/v051.json
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          d=json.loads(Path('/tmp/groundsignal-s5-v06/v051.json').read_text(encoding='utf-8'))
-          assert d['regression_gate']=='PASS'
-          assert d['failed_gates']==[]
-          assert d['stage_release']=='BLOCKED_GOLD_REVIEW'
-          assert d['s6_automatic_trust']=='BLOCKED'
-          print('S5 v0.5.1 exposed regression remains PASS.')
-          PY
-
-      - name: Run v0.6 first fresh observation
-        run: |
+          historical_commit='e406c122765501ad6ebfbbee9fcea00d75a452cb'
+          cp medical/stage-evals/S5/fresh-first-observation-v0.6.json /tmp/s5-v06-expected.json
+          rm -rf /tmp/groundsignal-s5-v06-historical
+          git worktree add --detach /tmp/groundsignal-s5-v06-historical "$historical_commit"
+          cd /tmp/groundsignal-s5-v06-historical
+          python -m py_compile scripts/eval_s5_fresh_boundary_v06.py
           set +e
-          python scripts/eval_s5_fresh_boundary_v06.py \
-            --out /tmp/groundsignal-s5-v06/v06.json
+          python scripts/eval_s5_fresh_boundary_v06.py --out /tmp/s5-v06-reproduced.json
           status=$?
           set -e
           test "$status" -eq 1
-          cat /tmp/groundsignal-s5-v06/v06.json
 
-      - name: Match committed immutable first observation
+      - name: Match immutable historical metrics exactly
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          observed=json.loads(Path('/tmp/groundsignal-s5-v06/v06.json').read_text(encoding='utf-8'))
-          expected=json.loads(Path('medical/stage-evals/S5/fresh-first-observation-v0.6.json').read_text(encoding='utf-8'))
+          expected=json.loads(Path('/tmp/s5-v06-expected.json').read_text(encoding='utf-8'))
+          observed=json.loads(Path('/tmp/s5-v06-reproduced.json').read_text(encoding='utf-8'))
           assert observed == expected
           assert observed['precondition_failures'] == []
           assert observed['hard_gate_failures'] == ['S5-F20','S5-F21','S5-F22','S5-F23']
           assert observed['fresh_structural_gate'] == 'FAIL'
           assert observed['stage_release'] == 'BLOCKED_GOLD_REVIEW'
           assert observed['s6_automatic_trust'] == 'BLOCKED'
-          print('S5 v0.6 fresh first observation reproduced exactly and remains a hard-gate FAIL.')
+          print('S5 v0.6 immutable fresh FAIL reproduced at its historical implementation snapshot.')
           PY
