@@ -1,0 +1,329 @@
+{
+  "stage": "S5",
+  "version": "v0.8",
+  "eval_name": "seventh-fresh-post-calibration-lineage-first-observation",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "first_observation": true,
+  "target_implementation_freeze_commit": "62b791cef47d1f5c7296220557db970d618b7bcf",
+  "eval_suite_id": "S5-FRESH-LINEAGE-v0.8",
+  "FROZEN_TARGET_IDENTITY": {
+    "freeze_commit": "62b791cef47d1f5c7296220557db970d618b7bcf",
+    "suite_declares_same_freeze": true,
+    "target_blobs": {
+      "scripts/s5_lineage_detector_v073.py": {
+        "expected_blob": "ad9571c1941dc623bcbdb7919488289c4dbc071c",
+        "observed_blob": "ad9571c1941dc623bcbdb7919488289c4dbc071c",
+        "match": true
+      },
+      "scripts/s5_trust_policy.py": {
+        "expected_blob": "00e51ccc0e653f24a3d85e3fba1ef33d90b6863c",
+        "observed_blob": "00e51ccc0e653f24a3d85e3fba1ef33d90b6863c",
+        "match": true
+      },
+      "scripts/export_training_data.py": {
+        "expected_blob": "a70f9e1db761ce36e0384ad83abdecf3294347b3",
+        "observed_blob": "a70f9e1db761ce36e0384ad83abdecf3294347b3",
+        "match": true
+      },
+      "scripts/s5_trust_policy_v071.py": {
+        "expected_blob": "a201d1bbaecb28e30543d9123d0ae257574fa20f",
+        "observed_blob": "a201d1bbaecb28e30543d9123d0ae257574fa20f",
+        "match": true
+      },
+      "scripts/export_training_data_v061.py": {
+        "expected_blob": "923a7f35d55de0fcd80d5c60c31c6295cc6c2851",
+        "observed_blob": "923a7f35d55de0fcd80d5c60c31c6295cc6c2851",
+        "match": true
+      },
+      "scripts/s5_release_gate.py": {
+        "expected_blob": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+        "observed_blob": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+        "match": true
+      }
+    },
+    "pass": true
+  },
+  "AUTHENTICATED_TRUST_ROOT": {
+    "registry_version": "s5-trust-policy-registry-v0.4.1",
+    "registry_path": "medical/configs/s5-trust-policy-registry-v0.4.1.json",
+    "registry_git_blob_sha1": "b9637e31df679e49b36d49ea96177a8100fd5c2a",
+    "default_policy_id": "s5-trust-root-v0.4.1",
+    "default_policy_path": "medical/configs/s5-trust-root-v0.4.1.json",
+    "default_policy_git_blob_sha1": "57adc5384818a4254192ed53e8ba60eee5d70e48",
+    "registered_policy_count": 2,
+    "pass": true
+  },
+  "FRESH_SUITE_MATERIALIZATION": {
+    "family_count": 1,
+    "case_count": 5,
+    "split_counts": {
+      "dev": 3,
+      "heldout": 1,
+      "regression": 1
+    },
+    "training_eligible_count": 3,
+    "training_blocked_count": 2,
+    "pass": true
+  },
+  "FRESH_SUITE_BASELINE": {
+    "policy_builder_accepted": true,
+    "exporter_policy_validator_accepted": true,
+    "error": null,
+    "pass": true
+  },
+  "GOLD_RELEASE_CONTAINMENT": {
+    "gold_approved_count": 0,
+    "pending_gold_count": 1,
+    "release_ready": false,
+    "decision": "BLOCKED_GOLD_REVIEW",
+    "pass": true
+  },
+  "hard_gates": {
+    "S5-F28": {
+      "failure_name": "CROSS_LANGUAGE_LINEAGE_LAUNDERING",
+      "ground_truth": {
+        "derived_from": [
+          "S5FRESH-LIN8-HO-001"
+        ],
+        "transformation": "human-authored Chinese translation preserving the protected decision contract"
+      },
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f28-cross-language.json",
+      "policy_builder_rejected": false,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": false,
+      "error": null,
+      "detector_trace": {
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+        "record_similarity": 0.485912,
+        "risk_score": 0.69301,
+        "exclusive_anchor_overlap": [
+          "17",
+          "881",
+          "aster",
+          "snapshot",
+          "trial"
+        ],
+        "reasons": [],
+        "method_version": "s5-lineage-exclusive-anchor-v0.7.3"
+      },
+      "pass": false
+    },
+    "S5-F29": {
+      "failure_name": "SEMANTIC_ABSTRACTION_LINEAGE_LAUNDERING",
+      "ground_truth": {
+        "derived_from": [
+          "S5FRESH-LIN8-HO-001"
+        ],
+        "transformation": "entity aliasing, numeric paraphrase, and ontology-level semantic abstraction"
+      },
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f29-semantic-abstraction.json",
+      "policy_builder_rejected": true,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": true,
+      "error": "S5 v0.7.3 lineage policy rejected: ordinary source 'medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f29-semantic-abstraction.json' is protected-benchmark derived; nearest='S5FRESH-LIN8-HO-001', reasons=PROTECTED_EXCLUSIVE_FIELD_REUSE",
+      "detector_trace": {
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+        "record_similarity": 0.561715,
+        "risk_score": 0.92,
+        "exclusive_anchor_overlap": [
+          "881",
+          "adjudication",
+          "after",
+          "apparent",
+          "attribution",
+          "causal",
+          "causal_boundary",
+          "change",
+          "deviation",
+          "hypothesis",
+          "rescue",
+          "response",
+          "signal",
+          "timing",
+          "trial",
+          "until"
+        ],
+        "reasons": [
+          "PROTECTED_EXCLUSIVE_FIELD_REUSE"
+        ],
+        "method_version": "s5-lineage-exclusive-anchor-v0.7.3"
+      },
+      "pass": true
+    },
+    "S5-F30": {
+      "failure_name": "CROSS_FIELD_FLATTENING_LINEAGE_LAUNDERING",
+      "ground_truth": {
+        "derived_from": [
+          "S5FRESH-LIN8-HO-001"
+        ],
+        "transformation": "lossless flattening of protected fields into a different top-level field"
+      },
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f30-cross-field-flattening.json",
+      "policy_builder_rejected": true,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": true,
+      "error": "S5 v0.7.3 lineage policy rejected: ordinary source 'medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f30-cross-field-flattening.json' is protected-benchmark derived; nearest='S5FRESH-LIN8-HO-001', reasons=DENSE_PROTECTED_ANCHOR_REUSE",
+      "detector_trace": {
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+        "record_similarity": 0.785779,
+        "risk_score": 0.803962,
+        "exclusive_anchor_overlap": [
+          "17",
+          "37",
+          "881",
+          "absent",
+          "adjudication",
+          "after",
+          "assessment",
+          "aster",
+          "aster_response",
+          "attribution",
+          "audit",
+          "audit_gap",
+          "change",
+          "clinically",
+          "defer",
+          "deviation",
+          "dose",
+          "effective",
+          "fell",
+          "hour",
+          "hours",
+          "hypothesis",
+          "ignoring",
+          "investigational",
+          "kinase",
+          "level",
+          "modulator",
+          "occurred",
+          "participant",
+          "percent",
+          "phospho",
+          "protocol",
+          "received",
+          "rescue",
+          "rescue_confounder",
+          "response",
+          "seventy",
+          "snapshot",
+          "trial"
+        ],
+        "reasons": [
+          "DENSE_PROTECTED_ANCHOR_REUSE"
+        ],
+        "method_version": "s5-lineage-exclusive-anchor-v0.7.3"
+      },
+      "pass": true
+    },
+    "S5-F31": {
+      "failure_name": "MULTI_PROTECTED_MOSAIC_LINEAGE_LAUNDERING",
+      "ground_truth": {
+        "derived_from": [
+          "S5FRESH-LIN8-HO-001",
+          "S5FRESH-LIN8-REG-001"
+        ],
+        "transformation": "distributed semantic mosaic with entity generalization and field recomposition"
+      },
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f31-multi-protected-mosaic.json",
+      "policy_builder_rejected": false,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": false,
+      "error": null,
+      "detector_trace": {
+        "decision": "REVIEW",
+        "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+        "record_similarity": 0.613265,
+        "risk_score": 0.897535,
+        "exclusive_anchor_overlap": [
+          "42",
+          "68",
+          "both",
+          "causal",
+          "causal_boundary",
+          "caused",
+          "estimates",
+          "exposure",
+          "hydration",
+          "hydration_gap",
+          "identifiability",
+          "impairment",
+          "intervention",
+          "renal",
+          "retain",
+          "sampling",
+          "snapshot",
+          "timing",
+          "toxicity",
+          "undocumented"
+        ],
+        "reasons": [],
+        "method_version": "s5-lineage-exclusive-anchor-v0.7.3"
+      },
+      "pass": false
+    }
+  },
+  "clean_controls": {
+    "CLEAN-ENGLISH-SAME-DOMAIN": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.8/clean-sources/clean-english-same-domain.json",
+      "policy_builder_rejected": false,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": false,
+      "error": null,
+      "detector_trace": {
+        "decision": "REVIEW",
+        "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+        "record_similarity": 0.553248,
+        "risk_score": 0.847331,
+        "exclusive_anchor_overlap": [
+          "attribution",
+          "causal",
+          "causal_boundary",
+          "dose",
+          "received",
+          "timing"
+        ],
+        "reasons": [],
+        "method_version": "s5-lineage-exclusive-anchor-v0.7.3"
+      },
+      "pass": false
+    },
+    "CLEAN-CHINESE-SAME-DOMAIN": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.8/clean-sources/clean-chinese-same-domain.json",
+      "policy_builder_rejected": false,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": false,
+      "error": null,
+      "detector_trace": {
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+        "record_similarity": 0.515033,
+        "risk_score": 0.726489,
+        "exclusive_anchor_overlap": [],
+        "reasons": [],
+        "method_version": "s5-lineage-exclusive-anchor-v0.7.3"
+      },
+      "pass": true
+    }
+  },
+  "hard_gate_failures": [
+    "S5-F28",
+    "S5-F31"
+  ],
+  "clean_control_failures": [
+    "CLEAN-ENGLISH-SAME-DOMAIN"
+  ],
+  "precondition_failures": [],
+  "fresh_structural_gate": "FAIL",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "notes": [
+    "All v0.8 evaluator logic, benchmark cases, attack sources and clean controls were authored after the v0.7.3 merge freeze.",
+    "The four transformations are absent from the v0.7.3 development calibration set.",
+    "The first observation is retained unchanged whether PASS or FAIL.",
+    "No implementation repair, gold approval, clinical validation, real-user evidence or S6 release claim is made."
+  ]
+}

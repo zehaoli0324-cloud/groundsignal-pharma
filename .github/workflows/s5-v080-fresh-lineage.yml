@@ -1,0 +1,82 @@
+name: S5 v0.8 Fresh Lineage First Observation
+
+on:
+  push:
+    paths:
+      - 'scripts/eval_s5_fresh_lineage_v08.py'
+      - 'medical/stage-evals/S5/fresh-lineage-v0.8/**'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
+      - 'medical/stage-evals/S5/S5_V0.8_FRESH_LINEAGE_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - 'docs/17-evaluation-methods-and-optimization-ledger.md'
+      - 'docs/20-s5-v07-algorithm-handoff.md'
+      - '.github/workflows/s5-v080-fresh-lineage.yml'
+  pull_request:
+    paths:
+      - 'scripts/eval_s5_fresh_lineage_v08.py'
+      - 'medical/stage-evals/S5/fresh-lineage-v0.8/**'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
+      - 'medical/stage-evals/S5/S5_V0.8_FRESH_LINEAGE_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - 'docs/17-evaluation-methods-and-optimization-ledger.md'
+      - 'docs/20-s5-v07-algorithm-handoff.md'
+      - '.github/workflows/s5-v080-fresh-lineage.yml'
+
+jobs:
+  preserve-first-observation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax and JSON checks
+        run: |
+          python -m py_compile scripts/eval_s5_fresh_lineage_v08.py
+          find medical/stage-evals/S5/fresh-lineage-v0.8 -type f -name '*.json' -print0 \
+            | xargs -0 -n1 python -m json.tool >/dev/null
+
+      - name: Verify frozen v0.7.3 implementation blobs
+        run: |
+          test "$(git rev-parse HEAD:scripts/s5_lineage_detector_v073.py)" = 'ad9571c1941dc623bcbdb7919488289c4dbc071c'
+          test "$(git rev-parse HEAD:scripts/s5_trust_policy.py)" = '00e51ccc0e653f24a3d85e3fba1ef33d90b6863c'
+          test "$(git rev-parse HEAD:scripts/export_training_data.py)" = 'a70f9e1db761ce36e0384ad83abdecf3294347b3'
+          test "$(git rev-parse HEAD:scripts/s5_trust_policy_v071.py)" = 'a201d1bbaecb28e30543d9123d0ae257574fa20f'
+          test "$(git rev-parse HEAD:scripts/export_training_data_v061.py)" = '923a7f35d55de0fcd80d5c60c31c6295cc6c2851'
+          test "$(git rev-parse HEAD:scripts/s5_release_gate.py)" = '8431e1e4c299df8c051ef19e7a69db3d1d199715'
+
+      - name: Preserve immutable v0.8 fresh FAIL
+        run: |
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.8.json)" = '8d2d96890915aa981652f78e3ff52242c7c0f51c'
+
+      - name: Reproduce the frozen first observation
+        run: |
+          set +e
+          python scripts/eval_s5_fresh_lineage_v08.py --out /tmp/s5-v08-fresh.json
+          rc=$?
+          set -e
+          test "$rc" -eq 1
+          cmp /tmp/s5-v08-fresh.json medical/stage-evals/S5/fresh-first-observation-v0.8.json
+
+      - name: Confirm failures and release containment
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('/tmp/s5-v08-fresh.json').read_text())
+          assert d['fresh_structural_gate']=='FAIL'
+          assert d['hard_gate_failures']==['S5-F28','S5-F31']
+          assert d['clean_control_failures']==['CLEAN-ENGLISH-SAME-DOMAIN']
+          assert d['precondition_failures']==[]
+          assert d['stage_release']=='BLOCKED_GOLD_REVIEW'
+          assert d['s6_automatic_trust']=='BLOCKED'
+          print('S5 v0.8 fresh FAIL preserved; release and S6 trust remain blocked.')
+          PY
+
+      - name: Preserve v0.7.3 exposed regression
+        run: |
+          python scripts/eval_s5_boundary_regression_v073.py --out /tmp/s5-v073-regression.json
+          cmp /tmp/s5-v073-regression.json medical/stage-evals/S5/regression-v0.7.3.json

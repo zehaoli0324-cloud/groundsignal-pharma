@@ -1,6 +1,6 @@
 # Algorithm Handoff — S5 v0.7 Semantic Lineage Detection
 
-> Handoff status: **v0.7.3 CALIBRATED CANDIDATE READY FOR FREEZE**
+> Handoff status: **v0.8 FRESH FAIL PRESERVED; F28/F31 EXPOSED REPAIR REQUIRED**
 > Evidence source: S5 v0.7 independent fresh first observation  
 > Repair scope for algorithm team: **F25 + F26 only**. F24/F27 remain deterministic platform/eval-infrastructure work.
 
@@ -15,6 +15,25 @@ against 30 protected references on the recorded host.
 
 This checkpoint is not fresh evidence and does not establish S5 release. After commit freeze,
 the eval owner must create a new unseen lineage suite before any bounded-release claim.
+
+## v0.8 post-freeze result
+
+The required post-freeze suite was created only after v0.7.3 merge commit
+`62b791cef47d1f5c7296220557db970d618b7bcf`. Its immutable first observation is `FAIL`:
+
+```text
+F28 cross-language protected lineage       ALLOW
+F29 semantic abstraction                   BLOCK
+F30 cross-field flattening                  BLOCK
+F31 multi-protected-source mosaic          REVIEW
+clean English same-domain                  REVIEW
+clean Chinese same-domain                   ALLOW
+```
+
+The next algorithm round may now use F28/F31 as exposed data. It must address multilingual semantic
+equivalence and how `REVIEW` is resolved at the export boundary, while expanding clean multilingual
+controls. A blanket REVIEW→BLOCK conversion is disallowed because a frozen clean control already
+entered review. No next fresh suite may be used during repair or threshold selection.
 
 ## 1. Objective
 

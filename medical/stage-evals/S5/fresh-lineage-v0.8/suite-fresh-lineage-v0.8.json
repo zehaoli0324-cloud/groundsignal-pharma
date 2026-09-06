@@ -1,0 +1,13 @@
+{
+  "stage": "S5",
+  "suite_id": "S5-FRESH-LINEAGE-v0.8",
+  "version": "v0.8",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "implementation_freeze_commit": "62b791cef47d1f5c7296220557db970d618b7bcf",
+  "family_ids": ["S5FRESH-LINEAGE-008"],
+  "allowed_training_splits": ["dev"],
+  "prohibited_training_splits": ["regression", "heldout"],
+  "purpose": "Post-freeze evaluation of semantic lineage laundering beyond the v0.7.3 development transformations.",
+  "release_use": "evaluation_only"
+}

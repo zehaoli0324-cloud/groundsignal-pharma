@@ -1,0 +1,28 @@
+{
+  "stage": "S5",
+  "version": "v0.8",
+  "eval_name": "seventh-fresh-post-calibration-lineage-first-observation",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "first_observation": true,
+  "target_implementation_freeze_commit": "62b791cef47d1f5c7296220557db970d618b7bcf",
+  "target_blob_contract": {
+    "scripts/s5_lineage_detector_v073.py": "ad9571c1941dc623bcbdb7919488289c4dbc071c",
+    "scripts/s5_trust_policy.py": "00e51ccc0e653f24a3d85e3fba1ef33d90b6863c",
+    "scripts/export_training_data.py": "a70f9e1db761ce36e0384ad83abdecf3294347b3",
+    "scripts/s5_trust_policy_v071.py": "a201d1bbaecb28e30543d9123d0ae257574fa20f",
+    "scripts/export_training_data_v061.py": "923a7f35d55de0fcd80d5c60c31c6295cc6c2851",
+    "scripts/s5_release_gate.py": "8431e1e4c299df8c051ef19e7a69db3d1d199715"
+  },
+  "hard_gates": [
+    "S5-F28 CROSS_LANGUAGE_LINEAGE_LAUNDERING",
+    "S5-F29 SEMANTIC_ABSTRACTION_LINEAGE_LAUNDERING",
+    "S5-F30 CROSS_FIELD_FLATTENING_LINEAGE_LAUNDERING",
+    "S5-F31 MULTI_PROTECTED_MOSAIC_LINEAGE_LAUNDERING"
+  ],
+  "clean_controls": [
+    "CLEAN-ENGLISH-SAME-DOMAIN",
+    "CLEAN-CHINESE-SAME-DOMAIN"
+  ],
+  "freshness_declaration": "All v0.8 protocol, benchmark cases, ordinary-source attacks, evaluator logic, and expected outcomes were authored after commit 62b791cef47d1f5c7296220557db970d618b7bcf was merged and its CI passed. No target implementation file may change before the first observation is recorded."
+}

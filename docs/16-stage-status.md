@@ -21,7 +21,7 @@
 | S3a | Proposition Extraction | bounded CONDITIONAL PASS | fresh F1 98.90%; critical recall 100%; mandatory abstention 6/6 | longer/noisier real-source coverage |
 | S3b | Evidence Relation | bounded CONDITIONAL PASS | 40/40 relation; high-risk false-support 0 | broader real-source relation set |
 | S4 | Medical KG Construction / Update | CONDITIONAL PASS | first fresh 18/20 FAIL → repair regression 20/20 → new independent fresh 20/20; must-reject 7/7 | persistent real-source graph |
-| S5 | Controlled Case / Benchmark Factory | **v0.7.3 DEVELOPMENT CALIBRATION PASS / INDEPENDENT RELEASE BLOCKED** | immutable v0.7 fresh F24–F27 FAIL; v0.7.3 exposed regression + 225-case development calibration PASS | freeze v0.7.3, then new hidden fresh; gold review remains separate |
+| S5 | Controlled Case / Benchmark Factory | **v0.8 FRESH LINEAGE FAIL / INDEPENDENT RELEASE BLOCKED** | v0.7.3 development calibration PASS; post-freeze v0.8 finds F28 cross-language and F31 mosaic failures | preserve v0.8; exposed repair + broader multilingual clean calibration; gold remains separate |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release |
 | S7 | Evaluation & Safety Gate | Protocol only | rubric v0.2 + regression gate protocol | human/Judge calibration + real model runs |
 | S8 | Failure Diagnosis | Scaffold | taxonomy + intervention router | multi-model × multi-case clusters |
@@ -32,8 +32,10 @@
 
 S3a/S3b and S4 already have bounded independent evidence. S5 is the first stage whose output can
 change later training data, so contamination, identity, authority and provenance failures are release-critical.
-S5 v0.7 first observation remains an immutable FAIL. v0.7.3 adds only exposed regression and
-development calibration evidence.
+S5 v0.7 first observation remains an immutable FAIL. v0.7.3 added exposed regression and
+development calibration evidence. After its merge freeze, v0.8 supplied genuinely fresh evidence
+and also failed: cross-language lineage was allowed and a multi-protected-source mosaic stopped at
+review without closing the export boundary.
 Therefore S5 cannot be called PASS, and S6 cannot automatically trust S5 output.
 
 ## 3. S5 evidence history
@@ -54,6 +56,7 @@ v0.7 fresh       F24-F27 lineage-generalization/NFKC                            
 v0.7.1           deterministic builder repair F24/F27                      PARTIAL REPAIR
 v0.7.2           hybrid lineage + exporter validation exposed regression   PASS
 v0.7.3           broader hard negatives + algorithm/cost calibration        DEVELOPMENT PASS
+v0.8 fresh       F28 cross-language + F31 multi-source mosaic                FAIL
 ```
 
 Each fresh FAIL remains permanent evidence; later repair never overwrites it.
@@ -106,13 +109,40 @@ Raw metrics: `medical/stage-evals/S5/calibration-v0.7.3.json` and `regression-v0
 Implementation/report: `medical/stage-evals/S5/S5_V0.7.3_LINEAGE_CALIBRATION_REPORT.md`.
 Algorithm handoff: `docs/20-s5-v07-algorithm-handoff.md` + GitHub Issue #1.
 
-## 6. Current release decision
+## 6. S5 v0.8 post-freeze first observation — immutable FAIL
+
+The v0.8 protocol and fixtures were authored only after freeze commit
+`62b791cef47d1f5c7296220557db970d618b7bcf` was merged and its CI passed. All six target blobs
+matched the freeze; all preconditions passed.
+
+```text
+S5-F28 cross-language lineage          ALLOW   FAIL
+S5-F29 semantic abstraction            BLOCK   PASS
+S5-F30 cross-field flattening           BLOCK   PASS
+S5-F31 multi-protected mosaic          REVIEW  FAIL
+clean English same-domain              REVIEW  strict-control FAIL
+clean Chinese same-domain               ALLOW  PASS
+
+fresh structural gate                         FAIL
+S5 release                      BLOCKED_GOLD_REVIEW
+S6 automatic trust                           BLOCKED
+```
+
+The clean English control was not blocked from export, but its `REVIEW` result failed the pre-frozen
+strict `ALLOW` requirement. This also means that changing every review into a hard block is not an
+acceptable repair by itself.
+
+Evidence: `medical/stage-evals/S5/fresh-first-observation-v0.8.json` and
+`medical/stage-evals/S5/S5_V0.8_FRESH_LINEAGE_REPORT.md`.
+
+## 7. Current release decision
 
 ```text
 S3 bounded conditional evidence            established
 S4 bounded independent evidence            established
 S5 v0.7 independent first observation      FAIL (immutable)
 S5 v0.7.3 development calibration          PASS (not fresh)
+S5 v0.8 independent first observation      FAIL (immutable)
 S5 bounded independent release             NOT ESTABLISHED
 S5 gold review                             INCOMPLETE
 S6 automatic trust                         BLOCKED
@@ -121,14 +151,14 @@ S6 automatic trust                         BLOCKED
 The repository still has no real-user validation, completed expert gold approval, demonstrated model-training gain,
 or clinical validation. Synthetic/CI evidence is not substituted for those claims.
 
-## 7. Next sequence
+## 8. Next sequence
 
 1. keep v0.7 first observation immutable
 2. treat v0.7.3 only as development/exposed evidence
-3. freeze the selected lineage implementation and reference-index manifest
-4. only after freeze author a new unseen S5 lineage family
-5. use transformations not present in v0.7.3 calibration
-6. preserve the first observation before any repair
-7. require independent first observation before any bounded release claim
+3. keep the v0.7.3 target and v0.8 first observation immutable
+4. treat F28/F31 and the English clean review as exposed repair/calibration evidence only
+5. compare multilingual semantic methods and an explicit review-resolution policy on broader clean controls
+6. freeze the repaired implementation before creating another fresh suite
+7. require an independent fresh PASS before any bounded release claim
 8. keep gold review as a separate release blocker
 9. only after bounded S5 release proceed to S6 dedicated evaluation
