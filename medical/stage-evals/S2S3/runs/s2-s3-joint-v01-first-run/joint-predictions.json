@@ -1,0 +1,1412 @@
+{
+  "predictions": [
+    {
+      "item_id": "S2S3-001",
+      "s2": {
+        "predicted_intent": "US_PRODUCT_LABEL_CURRENT",
+        "ranked_source_ids": [
+          "DAILYMED_SPL",
+          "DRUGS_AT_FDA"
+        ],
+        "intent_score": 86.02,
+        "feature_hits": {
+          "us_regulator": [
+            "美国说明书"
+          ],
+          "literature": [
+            "文献"
+          ],
+          "patient_management_rule": [
+            "egfr"
+          ]
+        },
+        "matched_groups": [
+          "patient_management_rule",
+          "us_regulator"
+        ]
+      },
+      "selected_source_id": "DAILYMED_SPL",
+      "selected_source_rank": 1,
+      "selected_document_id": "dm-renal-1",
+      "selected_text": "For an existing user, eGFR below 30 requires discontinuation of the medicine.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "drug_use",
+          "predicate": "DISCONTINUE",
+          "object": "drug",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 30
+            }
+          ],
+          "population": "existing_user",
+          "confidence": 1.0,
+          "source_span": "For an existing user, eGFR below 30 requires discontinuation of the medicine."
+        }
+      ],
+      "s3b_relation": "DIRECT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "drug_use",
+            "predicate": "DISCONTINUE",
+            "object": "drug",
+            "polarity": "POSITIVE",
+            "conditions": [
+              {
+                "variable": "egfr",
+                "operator": "EQ",
+                "value": 29
+              }
+            ],
+            "population": "existing_user"
+          },
+          "verdict": "SUPPORTED",
+          "safety_class": "MANAGEMENT",
+          "evidence_matches": [
+            {
+              "subject": "drug_use",
+              "predicate": "DISCONTINUE",
+              "object": "drug",
+              "polarity": "POSITIVE",
+              "conditions": [
+                {
+                  "variable": "egfr",
+                  "operator": "LT",
+                  "value": 30
+                }
+              ],
+              "population": "existing_user",
+              "confidence": 1.0,
+              "source_span": "For an existing user, eGFR below 30 requires discontinuation of the medicine."
+            }
+          ],
+          "reason": "same scoped action applies at candidate value"
+        }
+      ],
+      "s3b_cues": [
+        "all_candidate_propositions_supported"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-002",
+      "s2": {
+        "predicted_intent": "US_PRODUCT_LABEL_CURRENT",
+        "ranked_source_ids": [
+          "DAILYMED_SPL",
+          "DRUGS_AT_FDA"
+        ],
+        "intent_score": 88.01,
+        "feature_hits": {
+          "current_label": [
+            "处方信息"
+          ],
+          "patient_management_rule": [
+            "egfr"
+          ]
+        },
+        "matched_groups": [
+          "current_label"
+        ]
+      },
+      "selected_source_id": "DAILYMED_SPL",
+      "selected_source_rank": 1,
+      "selected_document_id": "dm-renal-2",
+      "selected_text": "For an existing user, eGFR below 30 requires discontinuation of the medicine.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "drug_use",
+          "predicate": "DISCONTINUE",
+          "object": "drug",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 30
+            }
+          ],
+          "population": "existing_user",
+          "confidence": 1.0,
+          "source_span": "For an existing user, eGFR below 30 requires discontinuation of the medicine."
+        }
+      ],
+      "s3b_relation": "DOES_NOT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "drug_use",
+            "predicate": "DISCONTINUE",
+            "object": "drug",
+            "polarity": "POSITIVE",
+            "conditions": [
+              {
+                "variable": "egfr",
+                "operator": "EQ",
+                "value": 35
+              }
+            ],
+            "population": "existing_user"
+          },
+          "verdict": "UNSUPPORTED",
+          "safety_class": "MANAGEMENT",
+          "evidence_matches": [
+            {
+              "subject": "drug_use",
+              "predicate": "DISCONTINUE",
+              "object": "drug",
+              "polarity": "POSITIVE",
+              "conditions": [
+                {
+                  "variable": "egfr",
+                  "operator": "LT",
+                  "value": 30
+                }
+              ],
+              "population": "existing_user",
+              "confidence": 1.0,
+              "source_span": "For an existing user, eGFR below 30 requires discontinuation of the medicine."
+            }
+          ],
+          "reason": "value not supported; available domains are open or non-applicable"
+        }
+      ],
+      "s3b_cues": [
+        "unsupported=1"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-003",
+      "s2": {
+        "predicted_intent": "US_PRODUCT_LABEL_CURRENT",
+        "ranked_source_ids": [
+          "DAILYMED_SPL",
+          "DRUGS_AT_FDA"
+        ],
+        "intent_score": 88.01,
+        "feature_hits": {
+          "current_label": [
+            "最新说明书"
+          ],
+          "patient_management_rule": [
+            "egfr"
+          ]
+        },
+        "matched_groups": [
+          "current_label"
+        ]
+      },
+      "selected_source_id": "DAILYMED_SPL",
+      "selected_source_rank": 1,
+      "selected_document_id": "dm-init-1",
+      "selected_text": "For a new patient, initiation is not recommended when eGFR is below 45.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "drug_initiation",
+          "predicate": "INITIATION_NOT_RECOMMENDED",
+          "object": "initiation",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 45
+            }
+          ],
+          "population": "new_or_initiating_user",
+          "confidence": 1.0,
+          "source_span": "For a new patient, initiation is not recommended when eGFR is below 45."
+        }
+      ],
+      "s3b_relation": "DIRECT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "drug_initiation",
+            "predicate": "INITIATION_NOT_RECOMMENDED",
+            "object": "initiation",
+            "polarity": "POSITIVE",
+            "conditions": [
+              {
+                "variable": "egfr",
+                "operator": "EQ",
+                "value": 40
+              }
+            ],
+            "population": "new_or_initiating_user"
+          },
+          "verdict": "SUPPORTED",
+          "safety_class": "MANAGEMENT",
+          "evidence_matches": [
+            {
+              "subject": "drug_initiation",
+              "predicate": "INITIATION_NOT_RECOMMENDED",
+              "object": "initiation",
+              "polarity": "POSITIVE",
+              "conditions": [
+                {
+                  "variable": "egfr",
+                  "operator": "LT",
+                  "value": 45
+                }
+              ],
+              "population": "new_or_initiating_user",
+              "confidence": 1.0,
+              "source_span": "For a new patient, initiation is not recommended when eGFR is below 45."
+            }
+          ],
+          "reason": "same scoped action applies at candidate value"
+        }
+      ],
+      "s3b_cues": [
+        "all_candidate_propositions_supported"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-004",
+      "s2": {
+        "predicted_intent": "US_PRODUCT_LABEL_CURRENT",
+        "ranked_source_ids": [
+          "DAILYMED_SPL",
+          "DRUGS_AT_FDA"
+        ],
+        "intent_score": 88.01,
+        "feature_hits": {
+          "current_label": [
+            "产品标签"
+          ],
+          "patient_management_rule": [
+            "禁忌"
+          ]
+        },
+        "matched_groups": [
+          "current_label"
+        ]
+      },
+      "selected_source_id": "DAILYMED_SPL",
+      "selected_source_rank": 1,
+      "selected_document_id": "dm-ci-1",
+      "selected_text": "The finding by itself is not a contraindication to use of the treatment.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "drug_use",
+          "predicate": "CONTRAINDICATED",
+          "object": "use",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "The finding by itself is not a contraindication to use of the treatment."
+        }
+      ],
+      "s3b_relation": "CONTRADICTS",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "drug_use",
+            "predicate": "CONTRAINDICATED",
+            "object": "use",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "CONTRADICTED",
+          "safety_class": "MANAGEMENT",
+          "evidence_matches": [
+            {
+              "subject": "drug_use",
+              "predicate": "CONTRAINDICATED",
+              "object": "use",
+              "polarity": "NEGATIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "The finding by itself is not a contraindication to use of the treatment."
+            }
+          ],
+          "reason": "opposite-polarity scoped proposition overlaps candidate domain"
+        }
+      ],
+      "s3b_cues": [
+        "contradicted=1",
+        "unsupported=0"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-005",
+      "s2": {
+        "predicted_intent": "TRIAL_REGISTRY_STATUS",
+        "ranked_source_ids": [
+          "CLINICALTRIALS_GOV",
+          "PUBMED"
+        ],
+        "intent_score": 92.01,
+        "feature_hits": {
+          "trial_registry": [
+            "nct",
+            "trial registry",
+            "注册终点",
+            "招募状态"
+          ]
+        },
+        "matched_groups": [
+          "trial_registry"
+        ]
+      },
+      "selected_source_id": "CLINICALTRIALS_GOV",
+      "selected_source_rank": 1,
+      "selected_document_id": "ct-status-1",
+      "selected_text": "The study is RECRUITING and lists a prespecified primary endpoint.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "study",
+          "predicate": "HAS_STATUS",
+          "object": "recruiting",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "The study is RECRUITING and lists a prespecified primary endpoint."
+        },
+        {
+          "subject": "study",
+          "predicate": "HAS_PRIMARY_ENDPOINT",
+          "object": "primary_endpoint",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "The study is RECRUITING and lists a prespecified primary endpoint."
+        }
+      ],
+      "s3b_relation": "DIRECT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "study",
+            "predicate": "HAS_STATUS",
+            "object": "recruiting",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "SUPPORTED",
+          "safety_class": "OTHER",
+          "evidence_matches": [
+            {
+              "subject": "study",
+              "predicate": "HAS_STATUS",
+              "object": "recruiting",
+              "polarity": "POSITIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "The study is RECRUITING and lists a prespecified primary endpoint."
+            }
+          ],
+          "reason": "matching normalized proposition with same polarity"
+        }
+      ],
+      "s3b_cues": [
+        "all_candidate_propositions_supported"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-006",
+      "s2": {
+        "predicted_intent": "TRIAL_REGISTRY_STATUS",
+        "ranked_source_ids": [
+          "CLINICALTRIALS_GOV",
+          "PUBMED"
+        ],
+        "intent_score": 92.01,
+        "feature_hits": {
+          "trial_registry": [
+            "clinicaltrials.gov",
+            "注册终点"
+          ]
+        },
+        "matched_groups": [
+          "trial_registry"
+        ]
+      },
+      "selected_source_id": "CLINICALTRIALS_GOV",
+      "selected_source_rank": 1,
+      "selected_document_id": "ct-endpoint-1",
+      "selected_text": "The registry identifies a primary endpoint. Nothing in the posted results establishes that the endpoint was achieved.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "study",
+          "predicate": "HAS_PRIMARY_ENDPOINT",
+          "object": "primary_endpoint",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "The registry identifies a primary endpoint."
+        },
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_ENDPOINT_ACHIEVEMENT",
+          "object": "primary_endpoint",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "nothing in the posted results establishes that the endpoint was achieved."
+        }
+      ],
+      "s3b_relation": "DOES_NOT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "study",
+            "predicate": "ACHIEVES_ENDPOINT",
+            "object": "primary_endpoint",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "UNSUPPORTED",
+          "safety_class": "EFFICACY",
+          "evidence_matches": [
+            {
+              "subject": "evidence",
+              "predicate": "ESTABLISHES_ENDPOINT_ACHIEVEMENT",
+              "object": "primary_endpoint",
+              "polarity": "NEGATIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "nothing in the posted results establishes that the endpoint was achieved."
+            }
+          ],
+          "reason": "source does not establish endpoint achievement"
+        }
+      ],
+      "s3b_cues": [
+        "unsupported=1"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-007",
+      "s2": {
+        "predicted_intent": "SAFETY_SIGNAL_SURVEILLANCE",
+        "ranked_source_ids": [
+          "OPENFDA_FAERS",
+          "FDA_SAFETY_COMMUNICATIONS"
+        ],
+        "intent_score": 104.01,
+        "feature_hits": {
+          "signal": [
+            "faers",
+            "自发报告",
+            "安全信号"
+          ]
+        },
+        "matched_groups": [
+          "signal"
+        ]
+      },
+      "selected_source_id": "OPENFDA_FAERS",
+      "selected_source_rank": 1,
+      "selected_document_id": "faers-causal-1",
+      "selected_text": "Spontaneous adverse-event reports can flag a safety signal, but they do not establish causation for the event.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "spontaneous_report_system",
+          "predicate": "SUPPORTS_SIGNAL_DETECTION",
+          "object": "safety_signal",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Spontaneous adverse-event reports can flag a safety signal"
+        },
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_CAUSALITY",
+          "object": "causal_relation",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "they do not establish causation for the event."
+        }
+      ],
+      "s3b_relation": "CONTRADICTS",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "evidence",
+            "predicate": "ESTABLISHES_CAUSALITY",
+            "object": "causal_relation",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "CONTRADICTED",
+          "safety_class": "CAUSAL",
+          "evidence_matches": [
+            {
+              "subject": "evidence",
+              "predicate": "ESTABLISHES_CAUSALITY",
+              "object": "causal_relation",
+              "polarity": "NEGATIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "they do not establish causation for the event."
+            }
+          ],
+          "reason": "matching normalized proposition with opposite polarity"
+        }
+      ],
+      "s3b_cues": [
+        "contradicted=1",
+        "unsupported=0"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-008",
+      "s2": {
+        "predicted_intent": "SAFETY_SIGNAL_SURVEILLANCE",
+        "ranked_source_ids": [
+          "OPENFDA_FAERS",
+          "FDA_SAFETY_COMMUNICATIONS"
+        ],
+        "intent_score": 104.01,
+        "feature_hits": {
+          "signal": [
+            "faers",
+            "自发报告"
+          ]
+        },
+        "matched_groups": [
+          "signal"
+        ]
+      },
+      "selected_source_id": "OPENFDA_FAERS",
+      "selected_source_rank": 1,
+      "selected_document_id": "faers-inc-1",
+      "selected_text": "Raw report counts do not estimate true event incidence without an exposed-population denominator.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "report_count",
+          "predicate": "ESTIMATES_TRUE_INCIDENCE",
+          "object": "event_incidence",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Raw report counts do not estimate true event incidence without an exposed-population denominator."
+        }
+      ],
+      "s3b_relation": "CONTRADICTS",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "report_count",
+            "predicate": "ESTIMATES_TRUE_INCIDENCE",
+            "object": "event_incidence",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "CONTRADICTED",
+          "safety_class": "OTHER",
+          "evidence_matches": [
+            {
+              "subject": "report_count",
+              "predicate": "ESTIMATES_TRUE_INCIDENCE",
+              "object": "event_incidence",
+              "polarity": "NEGATIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "Raw report counts do not estimate true event incidence without an exposed-population denominator."
+            }
+          ],
+          "reason": "matching normalized proposition with opposite polarity"
+        }
+      ],
+      "s3b_cues": [
+        "contradicted=1",
+        "unsupported=0"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-009",
+      "s2": {
+        "predicted_intent": "SAFETY_SIGNAL_SURVEILLANCE",
+        "ranked_source_ids": [
+          "OPENFDA_FAERS",
+          "FDA_SAFETY_COMMUNICATIONS"
+        ],
+        "intent_score": 104.01,
+        "feature_hits": {
+          "signal": [
+            "faers",
+            "safety signal"
+          ]
+        },
+        "matched_groups": [
+          "signal"
+        ]
+      },
+      "selected_source_id": "OPENFDA_FAERS",
+      "selected_source_rank": 1,
+      "selected_document_id": "faers-signal-1",
+      "selected_text": "Spontaneous reports can flag a safety signal for further review.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "spontaneous_report_system",
+          "predicate": "SUPPORTS_SIGNAL_DETECTION",
+          "object": "safety_signal",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Spontaneous reports can flag a safety signal for further review."
+        }
+      ],
+      "s3b_relation": "DIRECT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "spontaneous_report_system",
+            "predicate": "SUPPORTS_SIGNAL_DETECTION",
+            "object": "safety_signal",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "SUPPORTED",
+          "safety_class": "OTHER",
+          "evidence_matches": [
+            {
+              "subject": "spontaneous_report_system",
+              "predicate": "SUPPORTS_SIGNAL_DETECTION",
+              "object": "safety_signal",
+              "polarity": "POSITIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "Spontaneous reports can flag a safety signal for further review."
+            }
+          ],
+          "reason": "matching normalized proposition with same polarity"
+        }
+      ],
+      "s3b_cues": [
+        "all_candidate_propositions_supported"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-010",
+      "s2": {
+        "predicted_intent": "PEER_REVIEWED_LITERATURE",
+        "ranked_source_ids": [
+          "PUBMED"
+        ],
+        "intent_score": 80.01,
+        "feature_hits": {
+          "literature": [
+            "pubmed",
+            "randomized trial paper"
+          ]
+        },
+        "matched_groups": [
+          "literature"
+        ]
+      },
+      "selected_source_id": "PUBMED",
+      "selected_source_rank": 1,
+      "selected_document_id": "pm-trial-1",
+      "selected_text": "The randomized trial supports option Alpha.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "trial",
+          "predicate": "SUPPORTS_OPTION",
+          "object": "alpha",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "The randomized trial supports option Alpha."
+        }
+      ],
+      "s3b_relation": "DIRECT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "trial",
+            "predicate": "SUPPORTS_OPTION",
+            "object": "alpha",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "SUPPORTED",
+          "safety_class": "OTHER",
+          "evidence_matches": [
+            {
+              "subject": "trial",
+              "predicate": "SUPPORTS_OPTION",
+              "object": "alpha",
+              "polarity": "POSITIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "The randomized trial supports option Alpha."
+            }
+          ],
+          "reason": "matching normalized proposition with same polarity"
+        }
+      ],
+      "s3b_cues": [
+        "all_candidate_propositions_supported"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-011",
+      "s2": {
+        "predicted_intent": "PEER_REVIEWED_LITERATURE",
+        "ranked_source_ids": [
+          "PUBMED"
+        ],
+        "intent_score": 80.01,
+        "feature_hits": {
+          "literature": [
+            "pubmed",
+            "论文",
+            "临床论文"
+          ]
+        },
+        "matched_groups": [
+          "literature"
+        ]
+      },
+      "selected_source_id": "PUBMED",
+      "selected_source_rank": 1,
+      "selected_document_id": "pm-trial-2",
+      "selected_text": "Option Beta was not supported by the randomized trial.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "trial",
+          "predicate": "SUPPORTS_OPTION",
+          "object": "beta",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Option Beta was not supported by the randomized trial."
+        }
+      ],
+      "s3b_relation": "CONTRADICTS",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "trial",
+            "predicate": "SUPPORTS_OPTION",
+            "object": "beta",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "CONTRADICTED",
+          "safety_class": "OTHER",
+          "evidence_matches": [
+            {
+              "subject": "trial",
+              "predicate": "SUPPORTS_OPTION",
+              "object": "beta",
+              "polarity": "NEGATIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "Option Beta was not supported by the randomized trial."
+            }
+          ],
+          "reason": "matching normalized proposition with opposite polarity"
+        }
+      ],
+      "s3b_cues": [
+        "contradicted=1",
+        "unsupported=0"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-012",
+      "s2": {
+        "predicted_intent": "PEER_REVIEWED_LITERATURE",
+        "ranked_source_ids": [
+          "PUBMED"
+        ],
+        "intent_score": 80.01,
+        "feature_hits": {
+          "literature": [
+            "pubmed",
+            "文献"
+          ]
+        },
+        "matched_groups": [
+          "literature"
+        ]
+      },
+      "selected_source_id": "PUBMED",
+      "selected_source_rank": 1,
+      "selected_document_id": "pm-assoc-1",
+      "selected_text": "Outcome D was associated with Biomarker C.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "biomarker_c",
+          "predicate": "ASSOCIATED_WITH",
+          "object": "outcome_d",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Outcome D was associated with Biomarker C."
+        }
+      ],
+      "s3b_relation": "DIRECT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "biomarker_c",
+            "predicate": "ASSOCIATED_WITH",
+            "object": "outcome_d",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "SUPPORTED",
+          "safety_class": "OTHER",
+          "evidence_matches": [
+            {
+              "subject": "biomarker_c",
+              "predicate": "ASSOCIATED_WITH",
+              "object": "outcome_d",
+              "polarity": "POSITIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "Outcome D was associated with Biomarker C."
+            }
+          ],
+          "reason": "matching normalized proposition with same polarity"
+        }
+      ],
+      "s3b_cues": [
+        "all_candidate_propositions_supported"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-013",
+      "s2": {
+        "predicted_intent": "TRIAL_REGISTRY_STATUS",
+        "ranked_source_ids": [
+          "CLINICALTRIALS_GOV",
+          "PUBMED"
+        ],
+        "intent_score": 92.01,
+        "feature_hits": {
+          "trial_registry": [
+            "试验注册"
+          ]
+        },
+        "matched_groups": [
+          "trial_registry"
+        ]
+      },
+      "selected_source_id": "PUBMED",
+      "selected_source_rank": 2,
+      "selected_document_id": "pm-path-1",
+      "selected_text": "The final pathology report classifies the lesion as malignant.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "lesion",
+          "predicate": "CLASSIFIED_AS",
+          "object": "malignant",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "The final pathology report classifies the lesion as malignant."
+        }
+      ],
+      "s3b_relation": "DIRECT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "lesion",
+            "predicate": "CLASSIFIED_AS",
+            "object": "malignant",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "SUPPORTED",
+          "safety_class": "DIAGNOSTIC",
+          "evidence_matches": [
+            {
+              "subject": "lesion",
+              "predicate": "CLASSIFIED_AS",
+              "object": "malignant",
+              "polarity": "POSITIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "The final pathology report classifies the lesion as malignant."
+            }
+          ],
+          "reason": "same explicit report classification"
+        }
+      ],
+      "s3b_cues": [
+        "all_candidate_propositions_supported"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-014",
+      "s2": {
+        "predicted_intent": "CARDIOVASCULAR_GUIDANCE",
+        "ranked_source_ids": [
+          "AHA_GUIDANCE"
+        ],
+        "intent_score": 91.01,
+        "feature_hits": {
+          "cardiovascular": [
+            "aha",
+            "胸痛"
+          ]
+        },
+        "matched_groups": [
+          "cardiovascular"
+        ]
+      },
+      "selected_source_id": "AHA_GUIDANCE",
+      "selected_source_rank": 1,
+      "selected_document_id": "aha-guide-1",
+      "selected_text": "The current guideline still recommends option Gamma.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "current_guideline",
+          "predicate": "IS_CURRENT",
+          "object": "gamma",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "The current guideline still recommends option Gamma."
+        }
+      ],
+      "s3b_relation": "DIRECT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "current_guideline",
+            "predicate": "IS_CURRENT",
+            "object": "gamma",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "SUPPORTED",
+          "safety_class": "TEMPORAL",
+          "evidence_matches": [
+            {
+              "subject": "current_guideline",
+              "predicate": "IS_CURRENT",
+              "object": "gamma",
+              "polarity": "POSITIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "The current guideline still recommends option Gamma."
+            }
+          ],
+          "reason": "matching normalized proposition with same polarity"
+        }
+      ],
+      "s3b_cues": [
+        "all_candidate_propositions_supported"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-015",
+      "s2": {
+        "predicted_intent": "DILI_REFERENCE",
+        "ranked_source_ids": [
+          "LIVERTOX",
+          "DAILYMED_SPL",
+          "PUBMED"
+        ],
+        "intent_score": 102.01,
+        "feature_hits": {
+          "dili": [
+            "drug-induced liver injury"
+          ]
+        },
+        "matched_groups": [
+          "dili"
+        ]
+      },
+      "selected_source_id": "LIVERTOX",
+      "selected_source_rank": 1,
+      "selected_document_id": "lt-causal-1",
+      "selected_text": "A case report can raise concern, but it does not establish causation for the liver event.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_CAUSALITY",
+          "object": "causal_relation",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "it does not establish causation for the liver event."
+        }
+      ],
+      "s3b_relation": "CONTRADICTS",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "evidence",
+            "predicate": "ESTABLISHES_CAUSALITY",
+            "object": "causal_relation",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "CONTRADICTED",
+          "safety_class": "CAUSAL",
+          "evidence_matches": [
+            {
+              "subject": "evidence",
+              "predicate": "ESTABLISHES_CAUSALITY",
+              "object": "causal_relation",
+              "polarity": "NEGATIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "it does not establish causation for the liver event."
+            }
+          ],
+          "reason": "matching normalized proposition with opposite polarity"
+        }
+      ],
+      "s3b_cues": [
+        "contradicted=1",
+        "unsupported=0"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-016",
+      "s2": {
+        "predicted_intent": "PHARMACOGENOMICS",
+        "ranked_source_ids": [
+          "FDA_PGX",
+          "DAILYMED_SPL",
+          "DRUGS_AT_FDA"
+        ],
+        "intent_score": 98.01,
+        "feature_hits": {
+          "pgx": [
+            "pharmacogenomic"
+          ]
+        },
+        "matched_groups": [
+          "pgx"
+        ]
+      },
+      "selected_source_id": "FDA_PGX",
+      "selected_source_rank": 1,
+      "selected_document_id": "pgx-assoc-1",
+      "selected_text": "Outcome P was associated with Biomarker G.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "biomarker_g",
+          "predicate": "ASSOCIATED_WITH",
+          "object": "outcome_p",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Outcome P was associated with Biomarker G."
+        }
+      ],
+      "s3b_relation": "DIRECT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "biomarker_g",
+            "predicate": "ASSOCIATED_WITH",
+            "object": "outcome_p",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "SUPPORTED",
+          "safety_class": "OTHER",
+          "evidence_matches": [
+            {
+              "subject": "biomarker_g",
+              "predicate": "ASSOCIATED_WITH",
+              "object": "outcome_p",
+              "polarity": "POSITIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "Outcome P was associated with Biomarker G."
+            }
+          ],
+          "reason": "matching normalized proposition with same polarity"
+        }
+      ],
+      "s3b_cues": [
+        "all_candidate_propositions_supported"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-017",
+      "s2": {
+        "predicted_intent": "US_PRODUCT_LABEL_CURRENT",
+        "ranked_source_ids": [
+          "DAILYMED_SPL",
+          "DRUGS_AT_FDA"
+        ],
+        "intent_score": 88.01,
+        "feature_hits": {
+          "current_label": [
+            "当前说明书"
+          ],
+          "patient_management_rule": [
+            "egfr"
+          ]
+        },
+        "matched_groups": [
+          "current_label"
+        ]
+      },
+      "selected_source_id": "DAILYMED_SPL",
+      "selected_source_rank": 1,
+      "selected_document_id": "dm-pop-1",
+      "selected_text": "For a new patient, initiation is not recommended when eGFR is below 45.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "drug_initiation",
+          "predicate": "INITIATION_NOT_RECOMMENDED",
+          "object": "initiation",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 45
+            }
+          ],
+          "population": "new_or_initiating_user",
+          "confidence": 1.0,
+          "source_span": "For a new patient, initiation is not recommended when eGFR is below 45."
+        }
+      ],
+      "s3b_relation": "DOES_NOT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "drug_initiation",
+            "predicate": "INITIATION_NOT_RECOMMENDED",
+            "object": "initiation",
+            "polarity": "POSITIVE",
+            "conditions": [
+              {
+                "variable": "egfr",
+                "operator": "EQ",
+                "value": 40
+              }
+            ],
+            "population": "existing_user"
+          },
+          "verdict": "UNSUPPORTED",
+          "safety_class": "MANAGEMENT",
+          "evidence_matches": [
+            {
+              "subject": "drug_initiation",
+              "predicate": "INITIATION_NOT_RECOMMENDED",
+              "object": "initiation",
+              "polarity": "POSITIVE",
+              "conditions": [
+                {
+                  "variable": "egfr",
+                  "operator": "LT",
+                  "value": 45
+                }
+              ],
+              "population": "new_or_initiating_user",
+              "confidence": 1.0,
+              "source_span": "For a new patient, initiation is not recommended when eGFR is below 45."
+            }
+          ],
+          "reason": "value not supported; available domains are open or non-applicable"
+        }
+      ],
+      "s3b_cues": [
+        "unsupported=1"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    },
+    {
+      "item_id": "S2S3-018",
+      "s2": {
+        "predicted_intent": "TRIAL_REGISTRY_STATUS",
+        "ranked_source_ids": [
+          "CLINICALTRIALS_GOV",
+          "PUBMED"
+        ],
+        "intent_score": 92.01,
+        "feature_hits": {
+          "trial_registry": [
+            "nct",
+            "试验注册"
+          ]
+        },
+        "matched_groups": [
+          "trial_registry"
+        ]
+      },
+      "selected_source_id": "CLINICALTRIALS_GOV",
+      "selected_source_rank": 1,
+      "selected_document_id": "ct-endpoint-2",
+      "selected_text": "The registry lists a prespecified primary endpoint, but no efficacy result is posted.",
+      "s3a_abstain": false,
+      "s3a_unresolved_spans": [],
+      "s3a_propositions": [
+        {
+          "subject": "study",
+          "predicate": "HAS_PRIMARY_ENDPOINT",
+          "object": "primary_endpoint",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "The registry lists a prespecified primary endpoint"
+        },
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_ENDPOINT_ACHIEVEMENT",
+          "object": "primary_endpoint",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "The registry lists a prespecified primary endpoint, but no efficacy result is posted."
+        }
+      ],
+      "s3b_relation": "DOES_NOT_SUPPORT",
+      "s3b_verdicts": [
+        {
+          "proposition": {
+            "subject": "study",
+            "predicate": "ACHIEVES_ENDPOINT",
+            "object": "primary_endpoint",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null
+          },
+          "verdict": "UNSUPPORTED",
+          "safety_class": "EFFICACY",
+          "evidence_matches": [
+            {
+              "subject": "evidence",
+              "predicate": "ESTABLISHES_ENDPOINT_ACHIEVEMENT",
+              "object": "primary_endpoint",
+              "polarity": "NEGATIVE",
+              "conditions": [],
+              "population": null,
+              "confidence": 1.0,
+              "source_span": "The registry lists a prespecified primary endpoint, but no efficacy result is posted."
+            }
+          ],
+          "reason": "source does not establish endpoint achievement"
+        }
+      ],
+      "s3b_cues": [
+        "unsupported=1"
+      ],
+      "error_stage": null,
+      "pipeline_version": "s2-s3-joint-pipeline-v0.1"
+    }
+  ]
+}

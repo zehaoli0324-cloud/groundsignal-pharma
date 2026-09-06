@@ -1,0 +1,147 @@
+{
+  "benchmark_id": "S2-dailymed-truth-retrieval-v0.3",
+  "runner_version": "s2-dailymed-truth-v0.3.1",
+  "results": [
+    {
+      "test_id": "S2T-001",
+      "drug": "metformin extended release",
+      "setid": "85027e6c-d35b-49eb-a234-dd71aa77aee0",
+      "execution_status": "OK",
+      "history_http_status": 200,
+      "xml_http_status": 200,
+      "latest_history_entry": {
+        "spl_version": 8,
+        "published_date": "Jun 29, 2026"
+      },
+      "xml_version": "8",
+      "version_consistent": true,
+      "top_sections": [
+        {
+          "rank": 1,
+          "title": "2.4 recommended dosage in patients with renal impairment",
+          "score": 19.0,
+          "text_preview": "2.4.1 assess renal function prior to initiation of metformin hydrochloride extended-release tablets and periodically thereafter. 2.4.2 metformin hydrochloride extended-release tablets are contraindicated in patients with an estimated glomerular filtration rate (egfr) below 30 ml/minute/1.73 m2. 2.4.3 initiation of metformin hydrochloride extended-release tablets in patients with an egfr between 30 ml/minute/1.73 m2 to 45 ml/minute/1.73 m2 is not recommended. 2.4.4 in patients taking metformin hydrochloride extended-release tablets whose egfr later falls below 45 ml/min/1.73 m2, assess the benefit risk of continuing therapy. 2.4.5 discontinue metformin hydrochloride extended-release tablets i"
+        },
+        {
+          "rank": 2,
+          "title": "8.6 renal impairment",
+          "score": 18.0,
+          "text_preview": "metformin is substantially excreted by the kidney, and the risk of metformin accumulation and lactic acidosis increases with the degree of renal impairment. metformin hydrochloride extended-release tablets are contraindicated in severe renal impairment, patients with an estimated glomerular filtration rate (egfr) below 30 ml/min/1.73 m 2 [see dosage and administration ( 2.3 ), contraindications ( 4 ), warnings and precautions ( 5.1 ), and clinical pharmacology ( 12.3 )] ."
+        },
+        {
+          "rank": 3,
+          "title": "5.1 lactic acidosis",
+          "score": 7.0,
+          "text_preview": "there have been postmarketing cases of metformin-associated lactic acidosis, including fatal cases. these cases had a subtle onset and were accompanied by nonspecific symptoms such as malaise, myalgias, abdominal pain, respiratory distress, or increased somnolence; however, hypotension and resistant bradyarrhythmias have occurred with severe acidosis. metformin - associated lactic acidosis was characterized by elevated blood lactate concentrations (>5 mmol/l), anion gap acidosis (without evidence of ketonuria or ketonemia), and an increased lactate: pyruvate ratio; metformin plasma levels were generally >5 mcg/ml. metformin decreases liver uptake of lactate increasing lactate blood levels wh"
+        },
+        {
+          "rank": 4,
+          "title": "4 contraindications",
+          "score": 6.0,
+          "text_preview": "metformin hydrochloride extended-release tablets are contraindicated in patients with: severe renal impairment (egfr below 30 ml/min/1.73 m 2 ) [see warnings and precautions ( 5.1 )] . hypersensitivity to metformin. acute or chronic metabolic acidosis, including diabetic ketoacidosis, with or without coma."
+        },
+        {
+          "rank": 5,
+          "title": "13.1 carcinogenesis, mutagenesis, impairment of fertility",
+          "score": 4.0,
+          "text_preview": "long-term carcinogenicity studies have been performed in rats (dosing duration of 104 weeks) and mice (dosing duration of 91 weeks) at doses up to and including 900 mg/kg/day and 1,500 mg/kg/day, respectively. these doses are both approximately 3 times the maximum recommended human daily dose of 2,550 mg based on body surface area comparisons. no evidence of carcinogenicity with metformin was found in either male or female mice. similarly, there was no tumorigenic potential observed with metformin in male rats. there was, however, an increased incidence of benign stromal uterine polyps in female rats treated with 900 mg/kg/day. there was no evidence of a mutagenic potential of metformin in t"
+        }
+      ],
+      "latency_ms": 791.7
+    },
+    {
+      "test_id": "S2T-002",
+      "drug": "apixaban / Eliquis",
+      "setid": "e9481622-7cc6-418a-acb6-c5450daae9b0",
+      "execution_status": "OK",
+      "history_http_status": 200,
+      "xml_http_status": 200,
+      "latest_history_entry": {
+        "spl_version": 30,
+        "published_date": "May 05, 2025"
+      },
+      "xml_version": "30",
+      "version_consistent": true,
+      "top_sections": [
+        {
+          "rank": 1,
+          "title": "7.3 anticoagulants and antiplatelet agents",
+          "score": 16.0,
+          "text_preview": "coadministration of antiplatelet agents, fibrinolytics, heparin, aspirin, and chronic nsaid use increases the risk of bleeding. appraise-2, a placebo-controlled clinical trial of eliquis in high-risk, post-acute coronary syndrome patients treated with aspirin or the combination of aspirin and clopidogrel, was terminated early due to a higher rate of bleeding with eliquis compared to placebo. the rate of isth major bleeding was 2.8% per year with eliquis versus 0.6% per year with placebo in patients receiving single antiplatelet therapy and was 5.9% per year with eliquis versus 2.5% per year with placebo in those receiving dual antiplatelet therapy. in aristotle, concomitant use of aspirin in"
+        },
+        {
+          "rank": 2,
+          "title": "5.2 bleeding",
+          "score": 14.0,
+          "text_preview": "eliquis increases the risk of bleeding and can cause serious, potentially fatal, bleeding [see dosage and administration (2.1) and adverse reactions (6.1) ] . concomitant use of drugs affecting hemostasis increases the risk of bleeding. these include aspirin and other antiplatelet agents, other anticoagulants, heparin, thrombolytic agents, selective serotonin reuptake inhibitors, serotonin norepinephrine reuptake inhibitors, and nonsteroidal anti-inflammatory drugs (nsaids) [see drug interactions (7.3) ] . advise patients of signs and symptoms of blood loss and to report them immediately or go to an emergency room. discontinue eliquis in patients with active pathological hemorrhage."
+        },
+        {
+          "rank": 3,
+          "title": "warning: (a) premature discontinuation of eliquis increases the risk of thrombotic events (b) spinal/epidural hematoma",
+          "score": 8.0,
+          "text_preview": "(a) premature discontinuation of eliquis increases the risk of thrombotic events premature discontinuation of any oral anticoagulant, including eliquis, increases the risk of thrombotic events. if anticoagulation with eliquis is discontinued for a reason other than pathological bleeding or completion of a course of therapy, consider coverage with another anticoagulant [see dosage and administration (2.5) , warnings and precautions (5.1) , and clinical studies (14.1) ] . (b) spinal/epidural hematoma epidural or spinal hematomas may occur in patients treated with eliquis who are receiving neuraxial anesthesia or undergoing spinal puncture. these hematomas may result in long-term or permanent p"
+        },
+        {
+          "rank": 4,
+          "title": "14.1 reduction of risk of stroke and systemic embolism in nonvalvular atrial fibrillation",
+          "score": 6.0,
+          "text_preview": "aristotle evidence for the efficacy and safety of eliquis was derived from aristotle, a multinational, double-blind study in patients with nonvalvular af comparing the effects of eliquis and warfarin on the risk of stroke and non-central nervous system (cns) systemic embolism. in aristotle, patients were randomized to eliquis 5 mg orally twice daily (or 2.5 mg twice daily in subjects with at least 2 of the following characteristics: age greater than or equal to 80 years, body weight less than or equal to 60 kg, or serum creatinine greater than or equal to 1.5 mg/dl) or to warfarin (targeted to an inr range of 2.0-3.0). patients had to have one or more of the following additional risk factors"
+        },
+        {
+          "rank": 5,
+          "title": "risk summary",
+          "score": 6.0,
+          "text_preview": "the limited available data on eliquis use in pregnant women are insufficient to inform drug-associated risks of major birth defects, miscarriage, or adverse developmental outcomes. treatment may increase the risk of bleeding during pregnancy and delivery. in animal reproduction studies, no adverse developmental effects were seen when apixaban was administered to rats (orally), rabbits (intravenously) and mice (orally) during organogenesis at unbound apixaban exposure levels up to 4, 1 and 19 times, respectively, the human exposure based on area under plasma-concentration time curve (auc) at the maximum recommended human dose (mrhd) of 5 mg twice daily. the estimated background risk of major "
+        }
+      ],
+      "latency_ms": 855.1
+    },
+    {
+      "test_id": "S2T-003",
+      "drug": "sertraline",
+      "setid": "7e5e76cf-2fda-4f9d-bcbf-f77b1f188ee6",
+      "execution_status": "OK",
+      "history_http_status": 200,
+      "xml_http_status": 200,
+      "latest_history_entry": {
+        "spl_version": 9,
+        "published_date": "Sep 02, 2026"
+      },
+      "xml_version": "9",
+      "version_consistent": true,
+      "top_sections": [
+        {
+          "rank": 1,
+          "title": "5.2 serotonin syndrome",
+          "score": 16.0,
+          "text_preview": "serotonin-norepinephrine reuptake inhibitors (snris) and selective serotonin reuptake inhibitors (ssris), including sertraline, can precipitate serotonin syndrome, a potentially life-threatening condition. the risk is increased with concomitant use of other serotonergic drugs (including triptans, tricyclic antidepressants, fentanyl, lithium, tramadol, meperidine, methadone, tryptophan, buspirone, amphetamines, and st. john’s wort) and with drugs that impair metabolism of serotonin, i.e., maois [see contraindications (4) , drug interactions (7.1) ]. serotonin syndrome can also occur when these drugs are used alone. serotonin syndrome signs and symptoms may include mental status changes (e.g.,"
+        },
+        {
+          "rank": 2,
+          "title": "17 patient counseling information",
+          "score": 5.0,
+          "text_preview": "advise the patient to read the fda-approved patient labeling (medication guide) . suicidal thoughts and behaviors advise patients and caregivers to look for the emergence of suicidality, especially early during treatment and when the dosage is adjusted up or down, and instruct them to report such symptoms to the healthcare provider [see boxed warning and warnings and precautions (5.1) ]. serotonin syndrome caution patients about the risk of serotonin syndrome, particularly with the concomitant use of sertraline with other serotonergic drugs including triptans, tricyclic antidepressants, opioids, lithium, tryptophan, buspirone, amphetamines, st. john’s wort, and with drugs that impair metabol"
+        },
+        {
+          "rank": 3,
+          "title": "5.5 discontinuation syndrome",
+          "score": 5.0,
+          "text_preview": "adverse reactions after discontinuation of serotonergic antidepressants, particularly after abrupt discontinuation, include: nausea, sweating, dysphoric mood, irritability, agitation, dizziness, sensory disturbances (e.g., paresthesia, such as electric shock sensations), tremor, anxiety, confusion, headache, lethargy, emotional lability, insomnia, hypomania, tinnitus, and seizures. a gradual reduction in dosage rather than abrupt cessation is recommended whenever possible [see dosage and administration (2.6) ]."
+        },
+        {
+          "rank": 4,
+          "title": "7.1 clinically significant drug interactions",
+          "score": 5.0,
+          "text_preview": "table 5 includes clinically significant drug interactions with sertraline [see clinical pharmacology (12.3) ]. table 5: clinically-significant drug interactions with sertraline monoamine oxidase inhibitors (maois) clinical impact: the concomitant use of ssris including sertraline and maois increases the risk of serotonin syndrome. intervention: sertraline is contraindicated in patients taking maois, including maois such as linezolid or intravenous methylene blue [see dosage and administration (2.5) , contraindications (4) , warnings and precautions (5.2) ]. examples: selegiline, tranylcypromine, isocarboxazid, phenelzine, linezolid, methylene blue pimozide clinical impact: increased plasma c"
+        },
+        {
+          "rank": 5,
+          "title": "10 overdosage",
+          "score": 4.0,
+          "text_preview": "the following have been reported with sertraline tablet overdosage: • seizures, which may be delayed, and altered mental status including coma. • cardiovascular toxicity, which may be delayed, including qrs and qtc interval prolongation. hypertension most commonly seen, but rarely can see hypotension alone or with co-ingestants including alcohol. • serotonin syndrome (patients with a multiple drug overdosage with other proserotonergic drugs may have a higher risk). gastrointestinal decontamination with activated charcoal should be considered in patients who present early after a sertraline overdose. consider contacting a poison center (1-800-221-2222) or a medical toxicologist for additional"
+        }
+      ],
+      "latency_ms": 726.6
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "s3a_fresh_release_gate": "PASS",
+  "s3a_gate_checks": {
+    "proposition_gate": true,
+    "abstention_gate": true,
+    "semantic_safety_error_gate": true,
+    "trace_gate": true
+  },
+  "s3b_engine_version": "s3b-structured-entailment-v0.2.2",
+  "s3b_independent_fresh_relation_accuracy": 1.0,
+  "s3b_independent_high_risk_false_support_count": 0,
+  "s3b_status": "CONDITIONAL PASS"
+}

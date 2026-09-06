@@ -1,0 +1,36 @@
+{
+  "benchmark_id": "S2-S3-joint-heldout-v0.1",
+  "gate_checks": {
+    "controlled_joint_handoff": true,
+    "s2_live_dailymed_sidecar": true,
+    "s3a_independent_fresh_precondition": true,
+    "s3b_independent_fresh_precondition": true
+  },
+  "controlled_joint_metrics": {
+    "n_items": 18,
+    "intent_accuracy": 0.9444444444444444,
+    "primary_source_accuracy": 0.9444444444444444,
+    "source_handoff_accuracy": 1.0,
+    "s3a_nonabstention_rate": 1.0,
+    "s3b_relation_accuracy": 1.0,
+    "end_to_end_accuracy": 0.9444444444444444,
+    "high_risk_false_support_count": 0
+  },
+  "joint_failure_attribution": {
+    "S2_INTENT": 1,
+    "S2_SOURCE": 0,
+    "S2_SOURCE_HANDOFF": 0,
+    "S3A": 0,
+    "S3B": 0
+  },
+  "live_dailymed_metrics": {
+    "n_tests": 3,
+    "source_availability_rate": 1.0,
+    "current_version_consistency_rate_given_available": 1.0,
+    "critical_passage_recall_at_1_given_available": 1.0,
+    "critical_passage_recall_at_3_given_available": 1.0,
+    "infrastructure_failure_counts": {}
+  },
+  "release_gate": "PASS",
+  "interpretation": "PASS requires both the frozen controlled S2->S3 handoff and the existing live DailyMed retrieval sidecar to pass, plus independent S3a/S3b preconditions."
+}

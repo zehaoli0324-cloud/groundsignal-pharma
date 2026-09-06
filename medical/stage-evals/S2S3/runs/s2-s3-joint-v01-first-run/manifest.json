@@ -1,0 +1,16 @@
+{
+  "benchmark_id": "S2-S3-joint-heldout-v0.1",
+  "suite_freeze_commit": "65f6797c736792ea0da743c6f40303bf6f2825df",
+  "suite_blob_sha": "55d191267eb754f61348c6a3f54488173a2ea50d",
+  "joint_harness_commit": "cca5a6bbf5bb56ca30c2a0dc06527d748d87e9a4",
+  "joint_harness_blob_sha": "48cf7eeb500ed9ba837f11394991a2e070a61971",
+  "s2_router_version": "intent-first-s2-v0.3.0",
+  "s3a_version": "s3a-compositional-frame-v0.5.6.1",
+  "s3a_commit": "4b7aaabe490e3e477d1d1441b55c5ee656675e1f",
+  "s3b_version": "s3b-structured-entailment-v0.2.2",
+  "workflow_source_commit": "142ceded3094b2961d2e0183a35eca15146ce671",
+  "github_run_id": "34004328424",
+  "dataset_sha256": "93d7bd2f2e8a53d6f6378f6a31b4821dd554a37480bb8074f98e166dfbb4ea9b",
+  "first_observation_must_be_preserved": true,
+  "release_gate": "PASS"
+}

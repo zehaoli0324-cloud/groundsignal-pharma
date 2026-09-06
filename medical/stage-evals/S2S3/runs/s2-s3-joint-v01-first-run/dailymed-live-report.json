@@ -1,0 +1,19 @@
+{
+  "benchmark_id": "S2-dailymed-truth-retrieval-v0.3",
+  "metrics": {
+    "n_tests": 3,
+    "source_availability_rate": 1.0,
+    "current_version_consistency_rate_given_available": 1.0,
+    "critical_passage_recall_at_1_given_available": 1.0,
+    "critical_passage_recall_at_3_given_available": 1.0,
+    "infrastructure_failure_counts": {}
+  },
+  "gate_checks": {
+    "version_consistency": true,
+    "passage_r1": true,
+    "passage_r3": true
+  },
+  "release_gate": "PASS",
+  "failures": [],
+  "interpretation": "Version consistency compares DailyMed history with the current SPL XML version. Passage Recall@K asks whether a preregistered critical section appears within the top K ranked sections."
+}
