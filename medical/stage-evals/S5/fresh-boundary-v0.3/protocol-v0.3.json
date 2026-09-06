@@ -1,0 +1,28 @@
+{
+  "stage": "S5",
+  "version": "v0.3",
+  "eval_name": "second-fresh-boundary-adversarial-first-observation",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "target_implementation_freeze_commit": "c938dc86c992f13015585b813aad11c2dca55b24",
+  "target_blob_contract": {
+    "scripts/materialize_s5_cases.py": "c2d339c1a993c7f8f8d098d21d9a07eb49a14544",
+    "scripts/export_training_data.py": "65a908861ab2d0566f62518bea6359c77a8f293a",
+    "scripts/model_harness.py": "e6c90ab88c476c38b765d61ae8c9e2b471c8e2a2",
+    "scripts/s5_release_gate.py": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+    "medical/schemas/clinical-case.schema.json": "473edfd800b717513582a1100f9b8f4fe0814e0a"
+  },
+  "freshness_rule": "All v0.3 fixtures, decoy authorities, evaluator logic, and workflow are authored after the target freeze commit. The target implementation must not be changed before the first observation is recorded.",
+  "hard_gate_probes": [
+    "S5-F8 LOCATION_LAUNDERING_TRUST_BYPASS",
+    "S5-F9 SELF_AUTHENTICATED_PAYLOAD_DIGEST_RECOMPUTABLE",
+    "S5-F10 SUITE_IDENTITY_NOT_AUTHENTICATED",
+    "S5-F11 FOREIGN_MANIFEST_AUTHORITY_SUBSTITUTION"
+  ],
+  "retained_controls": [
+    "baseline dev/regression/heldout export behavior",
+    "prompt gold-sentinel containment",
+    "gold release containment",
+    "decision-contract schema/materializer alignment"
+  ]
+}
