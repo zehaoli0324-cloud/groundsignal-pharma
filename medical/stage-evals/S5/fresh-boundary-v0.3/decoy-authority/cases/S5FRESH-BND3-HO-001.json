@@ -1,0 +1,5 @@
+{
+  "case_id":"S5FRESH-BND3-HO-001",
+  "title":"Foreign authority decoy source",
+  "note":"This file is intentionally not part of S5-FRESH-BOUNDARY-v0.3. It exists only to test whether exporter authority is bound to suite membership."
+}
