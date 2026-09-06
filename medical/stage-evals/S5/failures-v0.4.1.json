@@ -1,0 +1,44 @@
+{
+  "stage": "S5",
+  "version": "v0.4.1",
+  "source_first_observation": "medical/stage-evals/S5/fresh-first-observation-v0.4.json",
+  "source_first_observation_git_blob_sha": "45a10ed2cc522b555a3f3eecf785dffedf8cd4c3",
+  "evidence_class": "development_exposed_regression",
+  "fresh_evidence": false,
+  "active_failures": [],
+  "repaired_failures": [
+    {
+      "id": "S5-F12",
+      "name": "CALLER_SUPPLIED_POLICY_CAN_LAUNDER_HELDOUT",
+      "disposition": "REPAIRED_EXPOSED_REGRESSION",
+      "repair": "Protected export now accepts only policies authenticated by a compile-time-pinned registry; arbitrary caller-built policy objects cannot become authority."
+    },
+    {
+      "id": "S5-F13",
+      "name": "OFF_REPO_POLICY_PATH_ACCEPTED_AS_ROOT",
+      "disposition": "REPAIRED_EXPOSED_REGRESSION",
+      "repair": "Policy paths must exactly match registry-listed canonical repository paths and Git blob identities; off-repository policy files fail closed."
+    },
+    {
+      "id": "S5-F14",
+      "name": "CROSS_SUITE_CASE_ID_COLLISION_NOT_REJECTED",
+      "disposition": "REPAIRED_EXPOSED_REGRESSION",
+      "repair": "Policy construction and authenticated-policy validation reject duplicate benchmark case_id values across trusted suites."
+    },
+    {
+      "id": "S5-F15",
+      "name": "SUITE_BLOB_REPLAY_ALTERNATE_FAMILY_ROOT",
+      "disposition": "REPAIRED_EXPOSED_REGRESSION",
+      "repair": "The authenticated policy blob binds suite path, suite blob, family root, manifest path/blob, and source case identities; replay policies at alternate roots are not registered authority."
+    }
+  ],
+  "additional_guards": [
+    "ordinary source Git blobs may not equal benchmark source-case blobs inside an authenticated policy",
+    "the registry file itself is pinned by Git blob SHA-1 in the exporter",
+    "legacy v0.3.1 policy remains registry-authenticated for exposed regression compatibility"
+  ],
+  "regression_gate": "PASS",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "next_required_evidence": "Freeze v0.4.1 and create a genuinely new post-freeze policy-root suite; v0.4 remains exposed forever."
+}

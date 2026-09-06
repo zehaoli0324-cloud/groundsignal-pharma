@@ -1,0 +1,52 @@
+{
+  "stage": "S5",
+  "version": "v0.4.1",
+  "eval_name": "policy-root-repair-exposed-regression",
+  "evidence_class": "development_exposed_regression",
+  "fresh_evidence": false,
+  "source_first_observation_git_blob_sha": "45a10ed2cc522b555a3f3eecf785dffedf8cd4c3",
+  "trust_root": {
+    "registry_version": "s5-trust-policy-registry-v0.4.1",
+    "registry_path": "medical/configs/s5-trust-policy-registry-v0.4.1.json",
+    "registry_git_blob_sha1": "b9637e31df679e49b36d49ea96177a8100fd5c2a",
+    "default_policy_id": "s5-trust-root-v0.4.1",
+    "default_policy_path": "medical/configs/s5-trust-root-v0.4.1.json",
+    "default_policy_git_blob_sha1": "57adc5384818a4254192ed53e8ba60eee5d70e48",
+    "registered_policy_count": 2
+  },
+  "canonical_policy_rebuild": "PASS",
+  "family_count": 1,
+  "case_count": 5,
+  "split_counts": {
+    "dev": 3,
+    "heldout": 1,
+    "regression": 1
+  },
+  "training_eligible_count": 3,
+  "training_blocked_count": 2,
+  "baseline_export": {
+    "dev": "EXPORTABLE",
+    "regression": "BLOCKED",
+    "heldout": "BLOCKED"
+  },
+  "probes": {
+    "S5-F12_CALLER_SUPPLIED_POLICY_CAN_LAUNDER_HELDOUT": "BLOCKED",
+    "S5-F13_OFF_REPO_POLICY_PATH_ACCEPTED_AS_ROOT": "BLOCKED",
+    "S5-F14_CROSS_SUITE_CASE_ID_COLLISION_NOT_REJECTED": "BLOCKED",
+    "S5-F15_SUITE_BLOB_REPLAY_ALTERNATE_FAMILY_ROOT": "BLOCKED"
+  },
+  "ordinary_allowlisted_source_control": "EXPORTABLE",
+  "decision_contract_alignment": "PASS",
+  "prompt_gold_leakage": "NONE",
+  "gold_approved_count": 0,
+  "pending_gold_count": 1,
+  "historical_failure_disposition": {
+    "S5-F12": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F13": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F14": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F15": "REPAIRED_EXPOSED_REGRESSION"
+  },
+  "regression_gate": "PASS",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED"
+}

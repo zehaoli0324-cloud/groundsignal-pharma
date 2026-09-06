@@ -1,0 +1,1 @@
+{"registry_version":"s5-trust-policy-registry-v0.4.1","default_policy_id":"s5-trust-root-v0.4.1","policies":{"s5-trust-root-v0.3.1":{"path":"medical/configs/s5-trust-root-v0.3.1.json","git_blob_sha1":"83bfe8153f1195f163b2c1e813ca08853f765757"},"s5-trust-root-v0.4.1":{"path":"medical/configs/s5-trust-root-v0.4.1.json","git_blob_sha1":"57adc5384818a4254192ed53e8ba60eee5d70e48"}}}

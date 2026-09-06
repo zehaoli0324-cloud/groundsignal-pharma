@@ -11,7 +11,7 @@ The system has **10 lifecycle stages**. `PASS` always refers to the explicitly t
 | S2 | Knowledge Search & Source Routing | **CONDITIONAL PASS / v0.4 development FAIL** | v0.3 fresh routing 91.7%; S2→S3 joint intent/source 94.44%; live DailyMed 3/3 | clause-level negation/exclusion + role-separated features; broader live sources |
 | S3 | Evidence Verification & Temporal Truth | **CONDITIONAL PASS** | S3a v0.5.6.1 fresh F1 98.90%, critical recall 100%; S3b 40/40; joint S2→S3 17/18 | larger real-source/noisy-passage held-out |
 | S4 | Medical KG Construction / Update | **CONDITIONAL PASS / v0.1.1 independent fresh PASS** | fresh 20/20; must-reject 7/7; stale ACTIVE 0; invariant violations 0 | persistent/real-source graph proof; unrestricted production ingest disabled |
-| S5 | Controlled Case / Benchmark Factory | **v0.4 INDEPENDENT FRESH POLICY-ROOT FAIL / RELEASE BLOCKED** | v0.3.1 exposed F8–F11 PASS; v0.4 fresh preconditions PASS but F12–F15 redefine root authority | authenticate trust-policy root, global case identity and suite↔family-root binding; gold review remains independent blocker |
+| S5 | Controlled Case / Benchmark Factory | **v0.4.1 EXPOSED POLICY-ROOT REGRESSION PASS / RELEASE BLOCKED** | v0.4 independent fresh F12–F15 FAIL preserved; v0.4.1 authenticated registry repair blocks all four on exposed regression | freeze v0.4.1, then create a genuinely new post-freeze policy-root suite; gold review remains independent blocker |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release; do not auto-trust S5 partitions |
 | S7 | Evaluation & Safety Gate | Protocol complete | v0.2 rubric, graph/RAG/Agent layers, regression safety gate | human/Judge calibration + real model scoring |
 | S8 | Failure Diagnosis | Framework ready | taxonomy, stale-knowledge bad case, intervention router | multi-model cross-case failure clusters |
@@ -88,13 +88,22 @@ v0.3 second independent fresh trust-root
 
 v0.3.1 exposed trust-root regression
   F8–F11                                     REPAIRED / PASS
+
+v0.4 third independent fresh policy-root
+  F12 caller-supplied policy laundering              FAIL
+  F13 off-repo policy root                           FAIL
+  F14 cross-suite case_id collision                  FAIL
+  F15 suite blob replay / alternate family root      FAIL
+
+v0.4.1 exposed policy-root regression
+  F12–F15                                    REPAIRED / PASS
 ```
 
-Gold approval remains separate from structural evaluation: P0 `0/12`, v0.2 family `0/1`, v0.3 family `0/1`; no expert/clinical approval is inferred.
+Gold approval remains separate from structural evaluation: P0 `0/12`, v0.2 family `0/1`, v0.3 family `0/1`, v0.4 family `0/1`; no expert/clinical approval is inferred.
 
 ---
 
-## S5 v0.4 checkpoint — third genuinely fresh policy-root FAIL
+## S5 v0.4 first observation — immutable fresh FAIL
 
 Target implementation freeze:
 
@@ -102,67 +111,76 @@ Target implementation freeze:
 64cd9288d0b13012d8b71989431dde493c4e8a59
 ```
 
-All v0.4 family files, attack authorities, evaluator logic and workflow were authored after that freeze. The fresh family has 5 synthetic cases (`dev 3 / regression 1 / heldout 1`). The first executable observation is required to match the committed raw metrics exactly; no post-hoc rewrite is allowed.
-
-Preconditions / controls:
+Fresh preconditions all passed, but the first observation recorded four hard failures:
 
 ```text
-frozen target identity                     PASS
-fresh family validation                    PASS
-fresh materialization                    5/5 PASS
-baseline dev export                  EXPORTABLE
-baseline regression export              BLOCKED
-baseline heldout export                 BLOCKED
-source blob mismatch control            BLOCKED
-decision-contract alignment               PASS
-prompt gold sentinel leakage              NONE
-gold release containment                  PASS
-precondition failures                         0
+S5-F12 CALLER_SUPPLIED_POLICY_CAN_LAUNDER_HELDOUT       FAIL
+S5-F13 OFF_REPO_POLICY_PATH_ACCEPTED_AS_ROOT            FAIL
+S5-F14 CROSS_SUITE_CASE_ID_COLLISION_NOT_REJECTED       FAIL
+S5-F15 SUITE_BLOB_REPLAY_ALTERNATE_FAMILY_ROOT          FAIL
+
+fresh structural gate                                  FAIL
+S5 release                               BLOCKED_GOLD_REVIEW
+S6 automatic trust                                    BLOCKED
 ```
 
-New hard-gate failures:
+Immutable first-observation blob:
 
 ```text
-S5-F12 CALLER_SUPPLIED_POLICY_CAN_LAUNDER_HELDOUT
-  byte-identical heldout copied to ordinary path
-  caller-built policy allowlists it as ordinary source
-  result: EXPORTABLE
-
-S5-F13 OFF_REPO_POLICY_PATH_ACCEPTED_AS_ROOT
-  policy JSON outside repository accepted as root authority
-  result: EXPORTABLE
-
-S5-F14 CROSS_SUITE_CASE_ID_COLLISION_NOT_REJECTED
-  same case_id trusted in heldout suite and another dev suite
-  policy builder accepts both
-  collision dev result: EXPORTABLE
-
-S5-F15 SUITE_BLOB_REPLAY_ALTERNATE_FAMILY_ROOT
-  exact genuine suite blob replayed at alternate path
-  alternate family root declares genuine heldout case_id as dev
-  result: EXPORTABLE
+45a10ed2cc522b555a3f3eecf785dffedf8cd4c3
 ```
 
-Interpretation: v0.3.1 correctly authenticates suite/manifest/source **relative to the selected policy**, but the policy root itself is not independently authenticated. A caller that controls the policy argument can redefine root authority. The builder also lacks a global case-ID collision gate, and a suite blob is not canonically bound to one family-root/manifest set.
+The v0.4 suite is exposed forever and is never relabeled fresh.
+
+---
+
+## S5 v0.4.1 checkpoint — policy-root repair exposed regression
+
+Evidence class: **development exposed regression**, not fresh held-out.
+
+The repair moves export authority above caller-selected policy data:
+
+- `medical/configs/s5-trust-policy-registry-v0.4.1.json` is a canonical registry whose Git blob identity is pinned in the exporter.
+- Protected export accepts only registry-listed canonical policy paths or policy objects exactly matching a registered policy.
+- The registered policy binds canonical suite path/blob, family root, manifest path/blob, source-case path/blob, split, and variant metadata.
+- Policy construction and authenticated-policy validation reject duplicate benchmark `case_id` values across suites.
+- Ordinary source blobs may not equal any benchmark source-case blob in the authenticated policy.
+- The prior v0.3.1 policy is explicitly registry-authenticated so historical exposed regression remains reproducible without trusting arbitrary policies.
+
+Regression result:
+
+```text
+historical v0.4 first-observation preservation       PASS
+authenticated policy registry                         PASS
+canonical v0.4.1 policy rebuild                       PASS
+materialization                                      5/5
+baseline dev export                            EXPORTABLE
+baseline regression export                         BLOCKED
+baseline heldout export                            BLOCKED
+
+S5-F12 caller policy laundering                    BLOCKED
+S5-F13 off-repo policy root                        BLOCKED
+S5-F14 cross-suite case_id collision               BLOCKED
+S5-F15 suite blob replay / alternate root          BLOCKED
+
+ordinary allowlisted source                    EXPORTABLE
+decision-contract alignment                          PASS
+prompt gold leakage                                  NONE
+gold approved                                         0
+pending gold                                          1
+regression gate                                      PASS
+```
 
 Current decision:
 
 ```text
-fresh structural gate                    FAIL
-S5 release                BLOCKED_GOLD_REVIEW
-S6 automatic trust                     BLOCKED
+S5 v0.4.1 exposed structural regression             PASS
+S5 bounded release                 NOT YET ESTABLISHED
+S5 release                         BLOCKED_GOLD_REVIEW
+S6 automatic trust                               BLOCKED
 ```
 
-Immutable v0.4 evidence paths:
-
-- `medical/stage-evals/S5/fresh-boundary-v0.4/protocol-v0.4.json`
-- `medical/stage-evals/S5/fresh-boundary-v0.4/suite-fresh-boundary-v0.4.json`
-- `medical/stage-evals/S5/fresh-first-observation-v0.4.json`
-- `medical/stage-evals/S5/failures-v0.4.json`
-- `medical/stage-evals/S5/S5_V0.4_FRESH_POLICY_ROOT_FAIL_REPORT.md`
-- `scripts/eval_s5_fresh_boundary_v04.py`
-
-The v0.4 suite becomes exposed immediately after the first executable observation and must never be relabeled fresh after repair.
+This regression repairs the exposed F12–F15 failure classes, but it cannot establish independent generalization because the v0.4 suite has already been observed. A new post-freeze fresh suite is required before bounded S5 structural release.
 
 ---
 
@@ -175,29 +193,32 @@ S2 still has an exposed v0.4 negation-development FAIL and remains a bounded con
 ## Immediate order
 
 ```text
-1. preserve S5 v0.4 fresh first observation exactly
+1. preserve all S5 first observations exactly
+   - v0.4 first-observation blob remains immutable
 
-2. repair F12–F15 generically in S5 v0.4.1
-   - canonical/authenticated trust-policy root independent of caller input
-   - reject arbitrary/off-repo policy substitution in protected export flows
-   - global benchmark case identity/collision policy across trusted suites
-   - canonical suite path + family-root + manifest binding
-   - preserve existing source/manifest/payload mismatch fail-closed behavior
+2. freeze S5 v0.4.1 implementation
 
-3. rerun v0.4 only as exposed regression
+3. after that freeze, author a genuinely new S5 fresh trust-root suite
+   - policy registry substitution/replay
+   - registry-path replacement
+   - policy-version downgrade/confusion
+   - cross-policy/cross-suite identity collision
+   - ordinary-source / benchmark-content collision
+   - suite-family-root replay
+   - source-content replacement / digest replay
+   - baseline dev/regression/heldout split controls
+   - decision-contract, prompt-leakage and gold-containment controls
 
-4. freeze the repaired implementation
+4. if the new fresh structural gate FAILS
+   - preserve the first result
+   - sync failure taxonomy/status
+   - repair generically before any further fresh claim
 
-5. only after that freeze create another genuinely new fresh trust-root suite
-
-6. gold review remains an independent blocker
-   - P0: 0/12 gold-approved
-   - v0.2: 0/1
-   - v0.3: 0/1
-   - v0.4: 0/1
+5. if the new fresh structural gate PASSES
+   - S5 still remains blocked until the independent gold-review criterion is satisfied
    - never fabricate approval
 
-7. only after bounded S5 release proceed to S6 dedicated harness evaluation
+6. only after bounded S5 release proceed to S6 dedicated harness evaluation
 
-8. continue S6 → S7 → S8 → S9 → S10
+7. continue S6 → S7 → S8 → S9 → S10
 ```
