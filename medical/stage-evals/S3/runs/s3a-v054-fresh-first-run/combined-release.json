@@ -1,0 +1,10 @@
+{
+  "benchmark_id": "S3a-typed-event-shadow-heldout-v0.5.4",
+  "gate_checks": {
+    "proposition_gate": false,
+    "abstention_gate": false,
+    "unsafe_simplification_invariant": false,
+    "trace_gate": true
+  },
+  "release_gate": "FAIL"
+}

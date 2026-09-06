@@ -1,0 +1,150 @@
+{
+  "benchmark_id": "S3a-typed-event-shadow-heldout-v0.5.4",
+  "metrics": {
+    "gold_propositions": 61,
+    "predicted_propositions": 61,
+    "true_positive": 57,
+    "precision": 0.9344262295081968,
+    "recall": 0.9344262295081968,
+    "f1": 0.9344262295081968,
+    "critical_proposition_recall": 0.9130434782608695,
+    "polarity_accuracy_on_structural_matches": 1.0,
+    "polarity_structural_matches": 57,
+    "population_accuracy_on_semantic_matches": 0.9827586206896551,
+    "population_semantic_matches": 58,
+    "condition_binding_accuracy_on_semantic_matches": 0.9827586206896551,
+    "condition_semantic_matches": 58,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": true,
+    "critical_recall": false,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": true
+  },
+  "release_gate": "FAIL",
+  "failures": [
+    {
+      "item_id": "S3A54F-003",
+      "text": "An established user should stop the medicine if eGFR falls below 31. Being older than 85 years, by itself, is not a reason to stop it.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "DISCONTINUE",
+          "object": "drug",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "DISCONTINUE",
+          "drug",
+          [],
+          null,
+          "NEGATIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A54F-004",
+      "text": "When eGFR is under 46, starting treatment is not recommended for a new user, whereas a patient already receiving the drug should instead have benefit and risk reassessed.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "REASSESS_BENEFIT_RISK",
+          "object": "benefit_risk",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 46
+            }
+          ],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "REASSESS_BENEFIT_RISK",
+          "benefit_risk",
+          [],
+          "existing_user",
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A54F-016",
+      "text": "The registry marks the study COMPLETED and lists a prespecified primary endpoint. No posted outcome demonstrates that the primary endpoint was achieved.",
+      "missing_gold": [
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_ENDPOINT_ACHIEVEMENT",
+          "object": "primary_endpoint",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "study",
+          "ACHIEVES_ENDPOINT",
+          "primary_endpoint",
+          [],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": true,
+      "unresolved_spans": [
+        {
+          "text": "The registry marks the study COMPLETED and lists a prespecified primary endpoint. No posted outcome demonstrates that the primary endpoint was achieved.",
+          "reason": "representable critical semantic family unresolved: ENDPOINT_ACHIEVEMENT_EVIDENCE",
+          "potentially_critical": true,
+          "guard": "semantic_coverage"
+        }
+      ]
+    },
+    {
+      "item_id": "S3A54F-019",
+      "text": "The study is ACTIVE, NOT RECRUITING and specifies a primary endpoint. Nothing in the supplied results establishes that the endpoint was met.",
+      "missing_gold": [
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_ENDPOINT_ACHIEVEMENT",
+          "object": "primary_endpoint",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "study",
+          "ACHIEVES_ENDPOINT",
+          "primary_endpoint",
+          [],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "benchmark_id": "S3a-typed-event-shadow-heldout-v0.5.4",
+  "suite_freeze_commit": "87de9757f1defd480cdd2a13c0b6c452742a5196",
+  "workflow_source_commit": "4d3f5d87e147cb94bf48dcabf51953276db539fb",
+  "github_run_id": "34002761349",
+  "extractor_version": "s3a-compositional-frame-v0.5.4",
+  "extractor_commit": "33dde2507afb8d34d47f3103ee0bfbfaf716ec5f",
+  "extractor_blob_sha": "a72e0eb8ad2ace097b1756e2040a20f5ec56745f",
+  "evaluator_commit": "50a9a7a2f4a5409297434cf0c29f05d1fa6780c5",
+  "dataset_sha256": "11ea362c6c0592b6886fae2dacaf39adc205b9947fa6cbe0a44c88d115cb69ed",
+  "first_observation_must_be_preserved": true,
+  "release_gate": "FAIL"
+}

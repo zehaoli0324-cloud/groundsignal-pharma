@@ -1,0 +1,18 @@
+{
+  "required_abstention_cases": 6,
+  "required_abstention_correct": 5,
+  "required_abstention_accuracy": 0.8333333333333334,
+  "required_abstention_failures": [
+    "S3A54F-034"
+  ],
+  "known_cases": 32,
+  "known_case_abstentions": [
+    "S3A54F-016"
+  ],
+  "known_case_abstention_rate": 0.03125,
+  "gate_checks": {
+    "required_abstention_accuracy": false,
+    "known_case_abstention_rate": true
+  },
+  "release_gate": "FAIL"
+}
