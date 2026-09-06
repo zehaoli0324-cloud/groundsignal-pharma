@@ -1,0 +1,15 @@
+{
+  "version": "S4-truth-ledger-v0.1.1",
+  "parent_repository_head": "ee7a4445b016397091a15f132be9f8c200ab3d44",
+  "evaluation_mode": "development_and_exposed_regression",
+  "fresh_validation": "NOT_RUN",
+  "historical_v01_fresh_modified": false,
+  "historical_v01_fresh_decision": "FAIL",
+  "implementation_sha256": "69f99e7ca7f35b5b58aec000f842b64a0b05178c1eaed44a033782692ecd26e4",
+  "evaluator_sha256": "5ded612a1b81f20ac48e92812e3cc0825f9f767f3084e34875913c2be084067d",
+  "development_metrics_sha256": "238a14b26d70fece411d1ffe5db0eae177fb2212bb311c261aaf00a264ee37eb",
+  "exposed_fresh_regression_metrics_sha256": "51670d78bd81cfe77e5a744aa52c7c1ad7aeefd8763da99a3dad37e7cddde1e0",
+  "development_gate": "PASS",
+  "exposed_fresh_regression_gate": "PASS",
+  "overall_s4_release": "BLOCKED_PENDING_NEW_FRESH"
+}

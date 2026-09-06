@@ -1,0 +1,34 @@
+{
+  "metrics": {
+    "benchmark_id": "S4-truth-ledger-fresh-heldout-v0.1",
+    "suite_role": "exposed_fresh_regression",
+    "historical_split": "fresh_heldout",
+    "fresh_evidence": false,
+    "implementation_version": "S4-truth-ledger-v0.1.1",
+    "n_cases": 20,
+    "passed_cases": 20,
+    "failed_cases": 0,
+    "case_accuracy": 1.0,
+    "tag_accuracy": {
+      "contradiction": 1.0,
+      "partition": 1.0,
+      "provenance": 1.0,
+      "rollback": 1.0,
+      "safety": 1.0,
+      "safety-positive": 1.0,
+      "scope": 1.0,
+      "temporal": 1.0
+    },
+    "must_reject_cases": 7,
+    "high_risk_false_accept_count": 0,
+    "stale_active_edge_count": 0
+  },
+  "gate_checks": {
+    "case_accuracy": true,
+    "high_risk_false_accept_count": true,
+    "stale_active_edge_count": true,
+    "required_tag_coverage": true,
+    "required_tag_accuracy": true
+  },
+  "regression_gate": "PASS"
+}
