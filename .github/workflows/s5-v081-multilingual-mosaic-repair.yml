@@ -114,13 +114,13 @@ jobs:
 
       - name: Enforce next-fresh authoring admission
         run: |
-          test "$(git rev-parse HEAD:scripts/check_s5_next_fresh_admission.py)" = 'dacf969d4e02f8d9b0dc20f7a7457c96b4608d17'
+          test "$(git rev-parse HEAD:scripts/check_s5_next_fresh_admission.py)" = '02d598f10a959d5e389364d277af54a3d2e4ae8c'
           test "$(git rev-parse HEAD:medical/stage-evals/S5/next-fresh-admission-v0.9.json)" = 'b73126c77f5601e6381d085c037251c60d0012a7'
-          test "$(git rev-parse HEAD:scripts/test_s5_next_fresh_admission.py)" = '0e66f8aa2fcc021bd9b0e2da3b5de08d9b8bb50a'
-          test "$(git rev-parse HEAD:medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json)" = 'be06fdb7424e321a785c24796f2810c8e0f97129'
-          test "$(git rev-parse HEAD:scripts/materialize_s5_v081_freeze_receipt.py)" = '0a7e2bea649b84f6f82b3e6c89af896c9f10120c'
-          test "$(git rev-parse HEAD:scripts/test_s5_v081_freeze_receipt_materializer.py)" = '139caaa1aca03e89c48208947b3601fbb8084a3d'
-          test "$(git rev-parse HEAD:medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json)" = '01cacd638f0bed8761cbb074ebacdf7f71338b4f'
+          test "$(git rev-parse HEAD:scripts/test_s5_next_fresh_admission.py)" = '0cb0e817ec2766e04d2628e11a41eabcacbac505'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json)" = 'fe87ab0874199c23b28648318d413ebc3425dcf4'
+          test "$(git rev-parse HEAD:scripts/materialize_s5_v081_freeze_receipt.py)" = 'a397f3e8628bdda1021cc165a7759ab7971d28ac'
+          test "$(git rev-parse HEAD:scripts/test_s5_v081_freeze_receipt_materializer.py)" = '807ad14792a613a56a7cd11db2939cfc90240965'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json)" = '8a89e77131193d4ac22794de0996c2fa1d1a82ce'
           python scripts/check_s5_next_fresh_admission.py --out /tmp/s5-v09-admission.json
           cmp /tmp/s5-v09-admission.json medical/stage-evals/S5/next-fresh-admission-v0.9.json
           python scripts/test_s5_next_fresh_admission.py --out /tmp/s5-v09-admission-tests.json
@@ -131,8 +131,8 @@ jobs:
       - name: Verify pinned pre-freeze control plane
         run: |
           test "$(git rev-parse HEAD:scripts/verify_s5_v081_control_plane_readiness.py)" = '1410554c3947ca3e2be189b8ca220b0f88349605'
-          test "$(git rev-parse HEAD:medical/stage-evals/S5/control-plane-readiness-v0.8.1.json)" = '7479de0e46d8b55c31b7580edac00ccb24574705'
-          test "$(git rev-parse HEAD:medical/stage-evals/S5/control-plane-readiness-check-v0.8.1.json)" = 'c9123453bc43dbec4cb5f99d303a222a7490560d'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/control-plane-readiness-v0.8.1.json)" = '5149b5eb5f265f2ecbe1cca6759061298455b18b'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/control-plane-readiness-check-v0.8.1.json)" = 'fbda5f24a47f957ebd999b3a637aa30a04384237'
           python scripts/verify_s5_v081_control_plane_readiness.py \
             --out /tmp/s5-v081-control-plane-readiness.json
           cmp /tmp/s5-v081-control-plane-readiness.json \

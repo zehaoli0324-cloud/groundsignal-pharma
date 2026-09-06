@@ -15,6 +15,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 GUARD_PATH = ROOT / "scripts/check_s5_next_fresh_admission.py"
 ATTESTATION_PATH = ROOT / "medical/stage-evals/S5/freeze-readiness-v0.8.1.json"
+CONTROL_PLANE_PATH = ROOT / "medical/stage-evals/S5/control-plane-readiness-v0.8.1.json"
 
 
 def load_guard():
@@ -32,20 +33,25 @@ def write_json(path: Path, value: dict[str, Any]) -> None:
 
 
 def receipt(*, commit: str, tree: str, **overrides: Any) -> dict[str, Any]:
+    control_plane_blob = load_guard().git_blob_sha1(CONTROL_PLANE_PATH.read_bytes())
     value: dict[str, Any] = {
         "stage": "S5",
         "version": "v0.8.1",
         "receipt_type": "canonical_freeze_receipt",
-        "generator_version": "s5-freeze-receipt-v0.1",
+        "generator_version": "s5-freeze-receipt-v0.2",
         "candidate_frozen": True,
+        "control_plane_frozen": True,
         "merged_pr": 4,
         "explicit_merge_approval": True,
         "approval_reference": "user-approval:fixture-0001",
         "attestation_git_blob_sha1": "f7ecf1663adebeb7b81eaa681ca142b1f749f833",
+        "control_plane_attestation_git_blob_sha1": control_plane_blob,
         "freeze_commit": commit,
         "freeze_tree_sha": tree,
         "pinned_artifact_count": 22,
         "verified_artifact_count": 22,
+        "control_plane_pinned_artifact_count": 9,
+        "control_plane_verified_artifact_count": 9,
         "fresh_evidence": False,
         "gold_approved": False,
         "bounded_release": "BLOCKED_NEXT_FRESH",
@@ -58,7 +64,15 @@ def receipt(*, commit: str, tree: str, **overrides: Any) -> dict[str, Any]:
 
 def fake_git_factory(module, commit: str, tree: str, *, on_main: bool):
     attestation = json.loads(ATTESTATION_PATH.read_text(encoding="utf-8"))
+    control_plane = json.loads(CONTROL_PLANE_PATH.read_text(encoding="utf-8"))
     pinned = {row["path"]: row["git_blob_sha1"] for row in attestation["pinned_artifacts"]}
+    pinned.update({
+        row["path"]: row["git_blob_sha1"]
+        for row in control_plane["pinned_control_plane_artifacts"]
+    })
+    pinned[str(CONTROL_PLANE_PATH.relative_to(ROOT))] = module.git_blob_sha1(
+        CONTROL_PLANE_PATH.read_bytes()
+    )
 
     def fake_git(*args: str):
         if args[:2] == ("cat-file", "-e") and args[2] == f"{commit}^{{commit}}":
@@ -125,16 +139,19 @@ def run() -> dict[str, Any]:
             receipt_type="self_asserted",
             generator_version="unknown-generator",
             candidate_frozen=False,
+            control_plane_frozen=False,
             merged_pr=999,
             explicit_merge_approval=False,
             approval_reference="TODO",
             attestation_git_blob_sha1="0" * 40,
+            control_plane_attestation_git_blob_sha1="0" * 40,
         ))
         result = module.evaluate(invalid, tmp / "empty-fresh")
         require(result, gate="FAIL", decision="FAIL_CLOSED", failures={
             "RECEIPT_SCOPE_INVALID", "RECEIPT_TYPE_INVALID", "CANDIDATE_NOT_FROZEN",
             "MERGED_PR_MISMATCH", "EXPLICIT_APPROVAL_MISSING", "ATTESTATION_PIN_MISMATCH",
             "FREEZE_COMMIT_INVALID", "RECEIPT_GENERATOR_INVALID", "APPROVAL_REFERENCE_INVALID",
+            "CONTROL_PLANE_NOT_FROZEN", "CONTROL_PLANE_ATTESTATION_PIN_MISMATCH",
         })
         record("self_asserted_authority_is_rejected", result)
 
@@ -169,6 +186,18 @@ def run() -> dict[str, Any]:
         module.git = fake_git_factory(module, simulated_commit, simulated_tree, on_main=True)
         valid_receipt = tmp / "valid-simulated.json"
         write_json(valid_receipt, receipt(commit=simulated_commit, tree=simulated_tree))
+
+        invalid_control_plane = tmp / "invalid-control-plane-pin.json"
+        write_json(invalid_control_plane, receipt(
+            commit=simulated_commit,
+            tree=simulated_tree,
+            control_plane_attestation_git_blob_sha1="0" * 40,
+        ))
+        result = module.evaluate(invalid_control_plane, tmp / "empty-fresh")
+        require(result, gate="FAIL", decision="FAIL_CLOSED", failures={
+            "CONTROL_PLANE_ATTESTATION_PIN_MISMATCH",
+        })
+        record("receipt_without_exact_control_plane_pin_is_rejected", result)
 
         result = module.evaluate(valid_receipt, tmp / "empty-fresh")
         require(result, gate="PASS", decision="ALLOW_AFTER_VERIFIED_FREEZE", failures=set())

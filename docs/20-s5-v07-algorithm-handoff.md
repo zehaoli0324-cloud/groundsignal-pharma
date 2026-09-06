@@ -72,6 +72,11 @@ algorithm, dependency and evidence artifacts; `control-plane-readiness-v0.8.1.js
 authorize and verify freeze/fresh transitions. Its verifier checks both content hashes and 10 state
 boundaries, while still recording `control_plane_frozen=false` and no canonical receipt.
 
+Receipt contract v0.2 joins the independent candidate and control-plane checks only at freeze time.
+The same canonical `main` tip must contain all 22 candidate and all 9 control-plane pins. Missing or
+incorrect control-plane hashes/counts, legacy receipt schemas and drifted gate bytes are rejected.
+This contract creates no receipt while PR #4 remains open and changes no fresh, gold or S6 status.
+
 ## 1. Objective
 
 Build a reusable semantic-lineage detector that can identify whether a candidate training/source record is derived from protected benchmark/held-out content after paraphrase, field-level edits, wrapper changes, or partial fragment reuse.

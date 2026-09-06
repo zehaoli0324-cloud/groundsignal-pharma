@@ -3,8 +3,8 @@
   "version": "v0.9-admission-tests-v0.1",
   "evidence_class": "development_process_guard_test",
   "fresh_evidence": false,
-  "scenario_count": 10,
-  "scenario_pass_count": 10,
+  "scenario_count": 11,
+  "scenario_pass_count": 11,
   "test_gate": "PASS",
   "scenarios": [
     {
@@ -32,6 +32,8 @@
         "APPROVAL_REFERENCE_INVALID",
         "ATTESTATION_PIN_MISMATCH",
         "CANDIDATE_NOT_FROZEN",
+        "CONTROL_PLANE_ATTESTATION_PIN_MISMATCH",
+        "CONTROL_PLANE_NOT_FROZEN",
         "EXPLICIT_APPROVAL_MISSING",
         "FREEZE_COMMIT_INVALID",
         "MERGED_PR_MISMATCH",
@@ -66,6 +68,15 @@
       "expected_failures_observed": [
         "FRESH_PROTOCOL_MISSING",
         "UNAUTHORIZED_FRESH_ASSETS_BEFORE_VERIFIED_FREEZE"
+      ]
+    },
+    {
+      "name": "receipt_without_exact_control_plane_pin_is_rejected",
+      "guard_gate": "FAIL",
+      "admission_decision": "FAIL_CLOSED",
+      "fresh_authoring_allowed": false,
+      "expected_failures_observed": [
+        "CONTROL_PLANE_ATTESTATION_PIN_MISMATCH"
       ]
     },
     {

@@ -4,8 +4,8 @@
   "verification": "pre-freeze-control-plane-readiness",
   "evidence_class": "development_process_integrity_attestation",
   "fresh_evidence": false,
-  "manifest_git_blob_sha1": "7479de0e46d8b55c31b7580edac00ccb24574705",
-  "manifest_sha256": "a20e1720e02b54fe08cd05c1265e043ef4db66c317b76e9574deef3295252759",
+  "manifest_git_blob_sha1": "5149b5eb5f265f2ecbe1cca6759061298455b18b",
+  "manifest_sha256": "59408b7c3b235547373393882381887acf6d876ca54fe8910eb0c2f5f8183900",
   "required_path_count": 9,
   "verified_path_count": 9,
   "boundary_checks": {

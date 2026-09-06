@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MATERIALIZER = ROOT / "scripts/materialize_s5_v081_freeze_receipt.py"
 ATTESTATION = ROOT / "medical/stage-evals/S5/freeze-readiness-v0.8.1.json"
+CONTROL_PLANE = ROOT / "medical/stage-evals/S5/control-plane-readiness-v0.8.1.json"
 
 
 def load_module():
@@ -24,8 +25,15 @@ def load_module():
 
 def fake_git_factory(module, commit: str, tree: str, *, canonical: bool, drift_path: str | None = None):
     attestation = json.loads(ATTESTATION.read_text(encoding="utf-8"))
+    control_plane = json.loads(CONTROL_PLANE.read_text(encoding="utf-8"))
     pinned = {row["path"]: row["git_blob_sha1"] for row in attestation["pinned_artifacts"]}
     pinned[str(ATTESTATION.relative_to(ROOT))] = module.EXPECTED_ATTESTATION_BLOB
+    pinned.update({
+        row["path"]: row["git_blob_sha1"]
+        for row in control_plane["pinned_control_plane_artifacts"]
+    })
+    control_plane_bytes = CONTROL_PLANE.read_bytes()
+    pinned[str(CONTROL_PLANE.relative_to(ROOT))] = module.git_blob_sha1(control_plane_bytes)
 
     def done(args: tuple[str, ...], code: int, stdout: str = ""):
         return module.subprocess.CompletedProcess(["git", *args], code, stdout, "")
@@ -83,11 +91,20 @@ def run() -> dict:
     assert receipt is None and f"FREEZE_ARTIFACT_MISMATCH:{drift_path}" in failures
     scenarios.append({"name": "candidate_byte_drift_rejected", "result": "PASS", "failures": sorted(failures)})
 
+    drift_path = "scripts/check_s5_next_fresh_admission.py"
+    module.git = fake_git_factory(module, commit, tree, canonical=True, drift_path=drift_path)
+    receipt, failures = module.build_receipt(commit, "user-approval:fixture-0001")
+    assert receipt is None and f"FREEZE_CONTROL_PLANE_ARTIFACT_MISMATCH:{drift_path}" in failures
+    scenarios.append({"name": "control_plane_byte_drift_rejected", "result": "PASS", "failures": sorted(failures)})
+
     module.git = fake_git_factory(module, commit, tree, canonical=True)
     receipt, failures = module.build_receipt(commit, "user-approval:fixture-0001")
     assert failures == [] and receipt is not None
     assert receipt["candidate_frozen"] is True
+    assert receipt["control_plane_frozen"] is True
     assert receipt["pinned_artifact_count"] == receipt["verified_artifact_count"] == 22
+    assert receipt["control_plane_pinned_artifact_count"] == 9
+    assert receipt["control_plane_verified_artifact_count"] == 9
     assert receipt["fresh_evidence"] is False and receipt["gold_approved"] is False
     assert receipt["bounded_release"] == "BLOCKED_NEXT_FRESH"
     assert receipt["stage_release"] == "BLOCKED_GOLD_REVIEW"

@@ -3,8 +3,8 @@
   "version": "v0.8.1-freeze-receipt-tests-v0.1",
   "evidence_class": "development_process_guard_test",
   "fresh_evidence": false,
-  "scenario_count": 6,
-  "scenario_pass_count": 6,
+  "scenario_count": 7,
+  "scenario_pass_count": 7,
   "test_gate": "PASS",
   "scenarios": [
     {
@@ -42,6 +42,13 @@
       "result": "PASS",
       "failures": [
         "FREEZE_ARTIFACT_MISMATCH:scripts/s5_lineage_detector_v081.py"
+      ]
+    },
+    {
+      "name": "control_plane_byte_drift_rejected",
+      "result": "PASS",
+      "failures": [
+        "FREEZE_CONTROL_PLANE_ARTIFACT_MISMATCH:scripts/check_s5_next_fresh_admission.py"
       ]
     },
     {
