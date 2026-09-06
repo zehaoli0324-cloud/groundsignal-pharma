@@ -1,96 +1,57 @@
-name: S5 v0.5 Fourth Fresh Authority-Composition First Observation
+name: S5 v0.5 Fourth Fresh Authority-Composition Historical Preservation
 
 on:
   push:
     paths:
-      - 'medical/stage-evals/S5/fresh-boundary-v0.5/**'
       - 'medical/stage-evals/S5/fresh-first-observation-v0.5.json'
       - 'medical/stage-evals/S5/failures-v0.5.json'
       - 'medical/stage-evals/S5/S5_V0.5_FRESH_AUTHORITY_COMPOSITION_FAIL_REPORT.md'
-      - 'scripts/eval_s5_fresh_boundary_v05.py'
-      - 'docs/16-stage-status.md'
       - '.github/workflows/s5-v05-fourth-fresh-authority-composition.yml'
   pull_request:
     paths:
-      - 'medical/stage-evals/S5/fresh-boundary-v0.5/**'
       - 'medical/stage-evals/S5/fresh-first-observation-v0.5.json'
       - 'medical/stage-evals/S5/failures-v0.5.json'
       - 'medical/stage-evals/S5/S5_V0.5_FRESH_AUTHORITY_COMPOSITION_FAIL_REPORT.md'
-      - 'scripts/eval_s5_fresh_boundary_v05.py'
-      - 'docs/16-stage-status.md'
       - '.github/workflows/s5-v05-fourth-fresh-authority-composition.yml'
 
 jobs:
-  first-observation:
+  preserve-first-observation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Syntax check evaluator
-        run: python -m py_compile scripts/eval_s5_fresh_boundary_v05.py
-
-      - name: Protect immutable prior and v0.5 observations
+      - name: Protect immutable v0.5 first-observation artifacts
         run: |
-          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.4.json)" = '45a10ed2cc522b555a3f3eecf785dffedf8cd4c3'
           test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.5.json)" = 'c300d301cb6bf23e5ec1cc0472666f44a1148e77'
           test "$(git rev-parse HEAD:medical/stage-evals/S5/failures-v0.5.json)" = 'f2a9683516284a79435e18742d0e056bbf5784d8'
 
-      - name: Verify v0.4.1 implementation freeze identity
+      - name: Reproduce v0.5 first observation at its exact historical commit
         run: |
-          freeze='f1778c21710a743c1e7f1e6d531301c08afdbd14'
-          test "$(git rev-parse "$freeze":scripts/export_training_data.py)" = '8a4338e4965c53c011395de77e82211420160360'
-          test "$(git rev-parse "$freeze":scripts/s5_trust_policy.py)" = 'c51c96bb7a58f0dcbb41a670dbe98cd7ea2fca13'
-          test "$(git rev-parse "$freeze":scripts/materialize_s5_cases.py)" = 'c2d339c1a993c7f8f8d098d21d9a07eb49a14544'
-          test "$(git rev-parse "$freeze":medical/configs/s5-trust-policy-registry-v0.4.1.json)" = 'b9637e31df679e49b36d49ea96177a8100fd5c2a'
-          test "$(git rev-parse "$freeze":medical/configs/s5-trust-root-v0.4.1.json)" = '57adc5384818a4254192ed53e8ba60eee5d70e48'
-          test "$(git rev-parse HEAD:scripts/export_training_data.py)" = '8a4338e4965c53c011395de77e82211420160360'
-          test "$(git rev-parse HEAD:scripts/s5_trust_policy.py)" = 'c51c96bb7a58f0dcbb41a670dbe98cd7ea2fca13'
-          test "$(git rev-parse HEAD:scripts/materialize_s5_cases.py)" = 'c2d339c1a993c7f8f8d098d21d9a07eb49a14544'
-          test "$(git rev-parse HEAD:medical/configs/s5-trust-policy-registry-v0.4.1.json)" = 'b9637e31df679e49b36d49ea96177a8100fd5c2a'
-          test "$(git rev-parse HEAD:medical/configs/s5-trust-root-v0.4.1.json)" = '57adc5384818a4254192ed53e8ba60eee5d70e48'
-
-      - name: Run immutable v0.5 first observation and require fresh FAIL
-        run: |
+          first_commit='fd19264c2fac77a879e8ed3d6f2a45400170bef7'
+          cp medical/stage-evals/S5/fresh-first-observation-v0.5.json /tmp/s5-v05-expected.json
+          rm -rf /tmp/groundsignal-s5-v05-first
+          git worktree add --detach /tmp/groundsignal-s5-v05-first "$first_commit"
+          cd /tmp/groundsignal-s5-v05-first
           set +e
-          python scripts/eval_s5_fresh_boundary_v05.py --out /tmp/s5-v05-first.json
+          python scripts/eval_s5_fresh_boundary_v05.py --out /tmp/s5-v05-reproduced.json
           status=$?
           set -e
-          cat /tmp/s5-v05-first.json
           test "$status" -eq 1
-
-      - name: Match committed raw metrics exactly
-        run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          expected=json.loads(Path('medical/stage-evals/S5/fresh-first-observation-v0.5.json').read_text(encoding='utf-8'))
-          observed=json.loads(Path('/tmp/s5-v05-first.json').read_text(encoding='utf-8'))
-          assert observed == expected, (expected, observed)
+          expected=json.loads(Path('/tmp/s5-v05-expected.json').read_text(encoding='utf-8'))
+          observed=json.loads(Path('/tmp/s5-v05-reproduced.json').read_text(encoding='utf-8'))
+          assert observed == expected
           assert observed['fresh_structural_gate'] == 'FAIL'
           assert observed['hard_gate_failures'] == ['S5-F16','S5-F17','S5-F18','S5-F19']
           assert observed['precondition_failures'] == []
           assert observed['stage_release'] == 'BLOCKED_GOLD_REVIEW'
           assert observed['s6_automatic_trust'] == 'BLOCKED'
-          failures=json.loads(Path('medical/stage-evals/S5/failures-v0.5.json').read_text(encoding='utf-8'))
-          assert [x['id'] for x in failures['failures']] == ['S5-F16','S5-F17','S5-F18','S5-F19']
-          print('S5 v0.5 first fresh authority-composition FAIL preserved exactly.')
-          PY
-
-      - name: Keep v0.4.1 exposed regression green
-        run: |
-          python scripts/eval_s5_boundary_regression_v041.py --out /tmp/s5-v041-regression.json
-          python - <<'PY'
-          import json
-          d=json.load(open('/tmp/s5-v041-regression.json', encoding='utf-8'))
-          assert d['regression_gate'] == 'PASS'
-          assert d['failed_gates'] == []
-          assert d['stage_release'] == 'BLOCKED_GOLD_REVIEW'
-          assert d['s6_automatic_trust'] == 'BLOCKED'
-          print('S5 v0.4.1 exposed regression remains green.')
+          print('S5 v0.5 first fresh FAIL reproduced exactly at its historical implementation snapshot.')
           PY

@@ -1,0 +1,46 @@
+{
+  "stage": "S5",
+  "version": "v0.5.1",
+  "source_first_observation": "medical/stage-evals/S5/fresh-first-observation-v0.5.json",
+  "source_first_observation_git_blob_sha": "c300d301cb6bf23e5ec1cc0472666f44a1148e77",
+  "evidence_class": "development_exposed_regression",
+  "fresh_evidence": false,
+  "historical_failures": [
+    {
+      "id": "S5-F16",
+      "name": "ORDINARY_SOURCE_PAYLOAD_NOT_BOUND_AFTER_LOAD",
+      "root_cause": "Ordinary authorization rechecked the backing file identity but did not compare the in-memory export payload to that source.",
+      "repair": "Reload the externally allowlisted source at export time and require exact payload, case_id, path, blob and canonical payload-digest agreement.",
+      "disposition": "REPAIRED_EXPOSED_REGRESSION"
+    },
+    {
+      "id": "S5-F17",
+      "name": "FORGED_ORDINARY_CONTEXT_BEARER_CAPABILITY",
+      "root_cause": "_training_export_context behaved like a transferable bearer capability independent of the payload carrying it.",
+      "repair": "Treat loader context only as a source locator and verify the carrying payload exactly equals the authenticated ordinary source.",
+      "disposition": "REPAIRED_EXPOSED_REGRESSION"
+    },
+    {
+      "id": "S5-F18",
+      "name": "ORDINARY_BENCHMARK_CASE_ID_COLLISION_NOT_VALIDATED",
+      "root_cause": "Policy checks separated benchmark case identity from ordinary-source identity and only compared byte hashes.",
+      "repair": "Parse ordinary source case_id during policy build and policy validation; reject benchmark/ordinary and ordinary/ordinary collisions.",
+      "disposition": "REPAIRED_EXPOSED_REGRESSION"
+    },
+    {
+      "id": "S5-F19",
+      "name": "DECLARED_FAMILY_CASE_PATH_CONTAINMENT_MISSING",
+      "root_cause": "Case path containment was checked only against the broad family root, not the declared family directory; materialization had no equivalent canonical containment check.",
+      "repair": "Resolve canonical case paths and require containment inside the declared family directory in both policy construction and materialization.",
+      "disposition": "REPAIRED_EXPOSED_REGRESSION"
+    }
+  ],
+  "active_failures": [],
+  "regression_gate": "PASS",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "notes": [
+    "This file records repair disposition only; the v0.5 fresh FAIL remains immutable.",
+    "No expert approval, clinical validation, real-user evidence, or model-training gain is claimed."
+  ]
+}

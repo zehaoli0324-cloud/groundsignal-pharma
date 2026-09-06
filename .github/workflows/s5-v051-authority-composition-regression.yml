@@ -1,0 +1,161 @@
+name: S5 v0.5.1 Authority-Composition Repair Exposed Regression
+
+on:
+  push:
+    paths:
+      - 'scripts/export_training_data.py'
+      - 'scripts/s5_trust_policy.py'
+      - 'scripts/materialize_s5_cases.py'
+      - 'scripts/eval_s5_boundary_regression_v051.py'
+      - 'medical/stage-evals/S5/boundary-regression-v0.5.1.json'
+      - 'medical/stage-evals/S5/failures-v0.5.1.json'
+      - 'medical/stage-evals/S5/S5_V0.5.1_AUTHORITY_COMPOSITION_REPAIR_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v051-authority-composition-regression.yml'
+  pull_request:
+    paths:
+      - 'scripts/export_training_data.py'
+      - 'scripts/s5_trust_policy.py'
+      - 'scripts/materialize_s5_cases.py'
+      - 'scripts/eval_s5_boundary_regression_v051.py'
+      - 'medical/stage-evals/S5/boundary-regression-v0.5.1.json'
+      - 'medical/stage-evals/S5/failures-v0.5.1.json'
+      - 'medical/stage-evals/S5/S5_V0.5.1_AUTHORITY_COMPOSITION_REPAIR_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v051-authority-composition-regression.yml'
+
+jobs:
+  exposed-authority-composition-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check S5 v0.5.1 implementation and evaluator
+        run: |
+          python -m py_compile \
+            scripts/export_training_data.py \
+            scripts/s5_trust_policy.py \
+            scripts/materialize_s5_cases.py \
+            scripts/eval_s5_boundary_regression_v051.py
+
+      - name: Preserve immutable v0.5 fresh FAIL
+        run: |
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.5.json)" = 'c300d301cb6bf23e5ec1cc0472666f44a1148e77'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/failures-v0.5.json)" = 'f2a9683516284a79435e18742d0e056bbf5784d8'
+
+      - name: Preserve authenticated v0.4.1 policy root
+        run: |
+          test "$(git rev-parse HEAD:medical/configs/s5-trust-root-v0.4.1.json)" = '57adc5384818a4254192ed53e8ba60eee5d70e48'
+          test "$(git rev-parse HEAD:medical/configs/s5-trust-policy-registry-v0.4.1.json)" = 'b9637e31df679e49b36d49ea96177a8100fd5c2a'
+
+      - name: Verify valid v0.4.1 policy serialization remains backward compatible
+        run: |
+          python scripts/s5_trust_policy.py \
+            --policy-version s5-trust-root-v0.4.1 \
+            --suite medical/stage-evals/S5/fresh-boundary-v0.2/suite-fresh-boundary-v0.2.json \
+            --family-root medical/stage-evals/S5/fresh-boundary-v0.2/families \
+            --suite medical/stage-evals/S5/fresh-boundary-v0.3/suite-fresh-boundary-v0.3.json \
+            --family-root medical/stage-evals/S5/fresh-boundary-v0.3/families \
+            --suite medical/stage-evals/S5/fresh-boundary-v0.4/suite-fresh-boundary-v0.4.json \
+            --family-root medical/stage-evals/S5/fresh-boundary-v0.4/families \
+            --ordinary-source medical/examples/clinical-medication-safety-001.json \
+            --out /tmp/s5-v041-rebuilt.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected=json.loads(Path('medical/configs/s5-trust-root-v0.4.1.json').read_text(encoding='utf-8'))
+          observed=json.loads(Path('/tmp/s5-v041-rebuilt.json').read_text(encoding='utf-8'))
+          assert observed == expected
+          print('Canonical v0.4.1 policy serialization preserved.')
+          PY
+
+      - name: Run S5 v0.5.1 exposed authority-composition regression
+        run: |
+          mkdir -p /tmp/groundsignal-s5-v051
+          python scripts/eval_s5_boundary_regression_v051.py \
+            --out /tmp/groundsignal-s5-v051/result.json
+          cat /tmp/groundsignal-s5-v051/result.json
+
+      - name: Match committed v0.5.1 audit metrics
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          o=json.loads(Path('/tmp/groundsignal-s5-v051/result.json').read_text(encoding='utf-8'))
+          m=o['carrier_materialization']; b=o['baseline_partition_export_guard']; g=o['gold_release_containment']; t=o['authenticated_trust_root']
+          projection={
+            'stage':'S5',
+            'version':'v0.5.1',
+            'eval_name':'authority-composition-repair-exposed-regression',
+            'evidence_class':'development_exposed_regression',
+            'fresh_evidence':False,
+            'source_first_observation_git_blob_sha':o['historical_first_observation_preservation']['observed_git_blob_sha'],
+            'trust_root':{
+              'registry_version':t['registry_version'],
+              'registry_git_blob_sha1':t['registry_git_blob_sha1'],
+              'default_policy_id':t['default_policy_id'],
+              'default_policy_git_blob_sha1':t['default_policy_git_blob_sha1'],
+            },
+            'family_count':m['family_count'],
+            'case_count':m['case_count'],
+            'split_counts':m['split_counts'],
+            'training_eligible_count':m['training_eligible_count'],
+            'training_blocked_count':m['training_blocked_count'],
+            'baseline_export':{
+              'dev':'EXPORTABLE' if b['dev']['exported'] else 'BLOCKED',
+              'regression':'BLOCKED' if b['regression']['blocked'] else 'EXPORTABLE',
+              'heldout':'BLOCKED' if b['heldout']['blocked'] else 'EXPORTABLE',
+            },
+            'ordinary_allowlisted_source_control':'EXPORTABLE' if o['ordinary_source_allowlist_control']['exported'] else 'BLOCKED',
+            'probes':{
+              'S5-F16_ORDINARY_SOURCE_PAYLOAD_NOT_BOUND_AFTER_LOAD':'BLOCKED' if o['S5-F16']['blocked'] else 'EXPORTABLE',
+              'S5-F17_FORGED_ORDINARY_CONTEXT_BEARER_CAPABILITY':'BLOCKED' if o['S5-F17']['blocked'] else 'EXPORTABLE',
+              'S5-F18_ORDINARY_BENCHMARK_CASE_ID_COLLISION_NOT_VALIDATED':'BLOCKED' if o['S5-F18']['pass'] else 'ACCEPTED',
+              'S5-F19_DECLARED_FAMILY_CASE_PATH_CONTAINMENT_MISSING':'BLOCKED' if o['S5-F19']['pass'] else 'ACCEPTED',
+            },
+            'decision_contract_alignment':'PASS' if o['decision_contract_alignment']['pass'] else 'FAIL',
+            'prompt_gold_leakage':'NONE' if not o['model_prompt_gold_leakage']['sentinel_leaked'] else 'LEAKED',
+            'historical_failure_disposition':o['historical_failure_disposition'],
+            'gold_approved_count':g['gold_approved_count'],
+            'pending_gold_count':g['pending_gold_count'],
+            'regression_gate':o['regression_gate'],
+            'stage_release':o['stage_release'],
+            's6_automatic_trust':o['s6_automatic_trust'],
+          }
+          expected=json.loads(Path('medical/stage-evals/S5/boundary-regression-v0.5.1.json').read_text(encoding='utf-8'))
+          assert projection == expected, (expected, projection)
+          assert o['failed_gates'] == []
+          assert o['S5-F18']['policy_builder_rejected'] is True
+          assert o['S5-F18']['policy_content_validator_rejected'] is True
+          assert o['S5-F19']['policy_builder_rejected'] is True
+          assert o['S5-F19']['materializer_rejected'] is True
+          assert o['stage_release'] == 'BLOCKED_GOLD_REVIEW'
+          assert o['s6_automatic_trust'] == 'BLOCKED'
+          failures=json.loads(Path('medical/stage-evals/S5/failures-v0.5.1.json').read_text(encoding='utf-8'))
+          assert failures['active_failures'] == []
+          print('S5 v0.5.1 exposed regression matches committed audit metrics.')
+          PY
+
+      - name: Keep prior S5 exposed regressions green
+        run: |
+          python scripts/eval_s5_boundary_regression_v041.py --out /tmp/groundsignal-s5-v051/v041.json
+          python scripts/eval_s5_boundary_regression_v031.py --out /tmp/groundsignal-s5-v051/v031.json
+          python scripts/eval_s5_boundary_regression_v021.py --out /tmp/groundsignal-s5-v051/v021.json
+          python - <<'PY'
+          import json
+          for path in [
+            '/tmp/groundsignal-s5-v051/v041.json',
+            '/tmp/groundsignal-s5-v051/v031.json',
+            '/tmp/groundsignal-s5-v051/v021.json',
+          ]:
+              d=json.load(open(path, encoding='utf-8'))
+              assert d['regression_gate'] == 'PASS', (path, d)
+              assert d['stage_release'] == 'BLOCKED_GOLD_REVIEW'
+              assert d['s6_automatic_trust'] == 'BLOCKED'
+          print('S5 v0.2.1, v0.3.1 and v0.4.1 exposed regressions remain green.')
+          PY

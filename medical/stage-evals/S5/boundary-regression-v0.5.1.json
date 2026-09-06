@@ -1,0 +1,40 @@
+{
+  "stage": "S5",
+  "version": "v0.5.1",
+  "eval_name": "authority-composition-repair-exposed-regression",
+  "evidence_class": "development_exposed_regression",
+  "fresh_evidence": false,
+  "source_first_observation_git_blob_sha": "c300d301cb6bf23e5ec1cc0472666f44a1148e77",
+  "trust_root": {
+    "registry_version": "s5-trust-policy-registry-v0.4.1",
+    "registry_git_blob_sha1": "b9637e31df679e49b36d49ea96177a8100fd5c2a",
+    "default_policy_id": "s5-trust-root-v0.4.1",
+    "default_policy_git_blob_sha1": "57adc5384818a4254192ed53e8ba60eee5d70e48"
+  },
+  "family_count": 1,
+  "case_count": 5,
+  "split_counts": {"dev": 3, "heldout": 1, "regression": 1},
+  "training_eligible_count": 3,
+  "training_blocked_count": 2,
+  "baseline_export": {"dev": "EXPORTABLE", "regression": "BLOCKED", "heldout": "BLOCKED"},
+  "ordinary_allowlisted_source_control": "EXPORTABLE",
+  "probes": {
+    "S5-F16_ORDINARY_SOURCE_PAYLOAD_NOT_BOUND_AFTER_LOAD": "BLOCKED",
+    "S5-F17_FORGED_ORDINARY_CONTEXT_BEARER_CAPABILITY": "BLOCKED",
+    "S5-F18_ORDINARY_BENCHMARK_CASE_ID_COLLISION_NOT_VALIDATED": "BLOCKED",
+    "S5-F19_DECLARED_FAMILY_CASE_PATH_CONTAINMENT_MISSING": "BLOCKED"
+  },
+  "decision_contract_alignment": "PASS",
+  "prompt_gold_leakage": "NONE",
+  "historical_failure_disposition": {
+    "S5-F16": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F17": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F18": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F19": "REPAIRED_EXPOSED_REGRESSION"
+  },
+  "gold_approved_count": 0,
+  "pending_gold_count": 1,
+  "regression_gate": "PASS",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED"
+}

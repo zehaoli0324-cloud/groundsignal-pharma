@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Build explicit S5 benchmark/export policies.
 
-v0.4.1 adds two generic construction-time guards:
-- case_id is a global identity inside one policy and may not occur in multiple suites;
-- ordinary training blobs may not equal any benchmark source-case blob in the same policy.
+v0.5.1 adds generic construction-time identity/containment guards while preserving
+the serialized v0.4.1 policy contract for valid inputs:
+- every benchmark case path must remain inside its declared family directory;
+- ordinary training sources may not reuse any benchmark case_id;
+- ordinary training case_id values must also be unique within a policy.
 
 Policy construction is not policy authentication. Protected export authenticates a
 canonical policy registry in export_training_data.py.
@@ -17,8 +19,8 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-POLICY_VERSION = "s5-trust-root-v0.4.1"
-CLI_DEFAULT_POLICY_VERSION = "s5-trust-root-v0.3.1"  # preserve v0.3.1 rebuild workflow
+POLICY_VERSION = "s5-trust-root-v0.5.1"
+CLI_DEFAULT_POLICY_VERSION = "s5-trust-root-v0.3.1"  # preserve historical rebuild workflows
 KNOWN_SPLITS = {"dev", "regression", "heldout"}
 
 
@@ -63,7 +65,12 @@ def build_suite_entry(suite_path: Path, family_root: Path) -> tuple[str, dict[st
 
     families: dict[str, Any] = {}
     for family_id in family_ids:
-        manifest_path = family_root / family_id / "manifest.json"
+        family_dir = (family_root / family_id).resolve()
+        try:
+            family_dir.relative_to(family_root.resolve())
+        except ValueError as exc:
+            raise ValueError(f"{suite_path}: family path escapes family root: {family_id!r}") from exc
+        manifest_path = family_dir / "manifest.json"
         manifest = load_json(manifest_path)
         if str(manifest.get("family_id") or "") != family_id:
             raise ValueError(f"{manifest_path}: family_id mismatch")
@@ -77,11 +84,13 @@ def build_suite_entry(suite_path: Path, family_root: Path) -> tuple[str, dict[st
                 raise ValueError(f"{manifest_path}: invalid case ref {ref!r}")
             if case_id in cases:
                 raise ValueError(f"{manifest_path}: duplicate case_id {case_id!r}")
-            case_path = (manifest_path.parent / rel).resolve()
+            case_path = (family_dir / rel).resolve()
             try:
-                case_path.relative_to(family_root.resolve())
+                case_path.relative_to(family_dir)
             except ValueError as exc:
-                raise ValueError(f"{manifest_path}: case path escapes family root: {rel!r}") from exc
+                raise ValueError(
+                    f"{manifest_path}: case path escapes declared family directory: {rel!r}"
+                ) from exc
             case = load_json(case_path)
             if str(case.get("case_id") or "") != case_id:
                 raise ValueError(f"{case_path}: case_id mismatch")
@@ -109,8 +118,7 @@ def _case_index(suites: dict[str, Any]) -> tuple[dict[str, tuple[str, str]], dic
     by_id: dict[str, tuple[str, str]] = {}
     by_blob: dict[str, str] = {}
     for suite_id, suite in suites.items():
-        families = suite.get("families") or {}
-        for family_id, family in families.items():
+        for family_id, family in (suite.get("families") or {}).items():
             for case_id, case in (family.get("cases") or {}).items():
                 if case_id in by_id:
                     prior_suite, prior_family = by_id[case_id]
@@ -122,7 +130,12 @@ def _case_index(suites: dict[str, Any]) -> tuple[dict[str, tuple[str, str]], dic
                 blob = str(case.get("source_case_git_blob_sha1") or "")
                 if not blob:
                     raise ValueError(f"{suite_id}/{family_id}/{case_id}: source blob identity missing")
-                by_blob.setdefault(blob, case_id)
+                prior = by_blob.get(blob)
+                if prior and prior != case_id:
+                    raise ValueError(
+                        f"benchmark blob identity reused by {prior!r} and {case_id!r}"
+                    )
+                by_blob[blob] = case_id
     return by_id, by_blob
 
 
@@ -142,9 +155,9 @@ def build_policy(
             raise ValueError(f"duplicate trusted suite_id: {suite_id}")
         suites[suite_id] = entry
 
-    _, benchmark_blobs = _case_index(suites)
-
+    benchmark_case_ids, benchmark_blobs = _case_index(suites)
     ordinary: dict[str, Any] = {}
+    ordinary_case_ids: dict[str, str] = {}
     for source in ordinary_sources or []:
         path = repo_path(source)
         rel = repo_rel(path)
@@ -156,6 +169,22 @@ def build_policy(
                 f"ordinary source {rel} is byte-identical to benchmark case "
                 f"{benchmark_blobs[blob]!r}; benchmark-derived content cannot be reclassified"
             )
+        source_obj = load_json(path)
+        case_id = str(source_obj.get("case_id") or "")
+        if not case_id:
+            raise ValueError(f"ordinary source {rel} lacks case_id")
+        if case_id in benchmark_case_ids:
+            suite_id, family_id = benchmark_case_ids[case_id]
+            raise ValueError(
+                f"ordinary source {rel} reuses benchmark case_id {case_id!r} "
+                f"from {suite_id}/{family_id}"
+            )
+        if case_id in ordinary_case_ids:
+            raise ValueError(
+                f"duplicate ordinary case_id {case_id!r}: {ordinary_case_ids[case_id]} vs {rel}"
+            )
+        ordinary_case_ids[case_id] = rel
+        # Keep the serialized policy shape unchanged for backward-compatible rebuilds.
         ordinary[rel] = {"git_blob_sha1": blob}
 
     return {

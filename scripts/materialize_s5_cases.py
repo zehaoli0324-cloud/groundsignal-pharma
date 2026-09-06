@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Materialize GroundSignal S5 benchmark cases with authenticated partition provenance.
+"""Materialize GroundSignal S5 cases with authenticated partition provenance.
 
-Raw case JSON remains a design source. This boundary joins each case to its family
-manifest and suite contract, binds source identity, and computes a digest over the
-materialized payload so downstream training export can reject tampering.
+v0.5.1 keeps the valid-case materialization contract stable while rejecting any
+manifest case path that escapes its declared family directory, including sibling
+family traversal and symlink/canonicalization escape.
 """
 from __future__ import annotations
 
@@ -17,6 +17,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 MATERIALIZER_VERSION = "s5-materializer-v0.2.1"
+MATERIALIZER_SECURITY_REVISION = "v0.5.1-family-containment"
 
 
 def load_json(path: Path) -> Any:
@@ -28,17 +29,11 @@ def sha256_file(path: Path) -> str:
 
 
 def canonical_materialized_sha256(case: dict[str, Any]) -> str:
-    """Hash the complete materialized case except the digest field itself."""
     payload = deepcopy(case)
     provenance = payload.get("benchmark_provenance")
     if isinstance(provenance, dict):
         provenance.pop("materialized_payload_sha256", None)
-    encoded = json.dumps(
-        payload,
-        ensure_ascii=False,
-        sort_keys=True,
-        separators=(",", ":"),
-    ).encode("utf-8")
+    encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
 
 
@@ -56,7 +51,21 @@ def validate_decision_contract(case: dict[str, Any]) -> None:
     )
 
 
+def _contained_case_path(family_dir: Path, rel: str, manifest_path: Path) -> Path:
+    family_dir = family_dir.resolve()
+    case_path = (family_dir / rel).resolve()
+    try:
+        case_path.relative_to(family_dir)
+    except ValueError as exc:
+        raise ValueError(
+            f"{manifest_path}: case path escapes declared family directory: {rel!r}"
+        ) from exc
+    return case_path
+
+
 def materialize(suite_path: Path, root: Path, out_dir: Path) -> dict[str, Any]:
+    suite_path = suite_path.resolve()
+    root = root.resolve()
     suite = load_json(suite_path)
     suite_id = str(suite.get("suite_id") or "")
     if not suite_id:
@@ -64,6 +73,8 @@ def materialize(suite_path: Path, root: Path, out_dir: Path) -> dict[str, Any]:
     family_ids = [str(x) for x in suite.get("family_ids") or []]
     if not family_ids:
         raise ValueError("family_ids must be non-empty")
+    if len(set(family_ids)) != len(family_ids):
+        raise ValueError("duplicate family_id in suite")
     allowed_training = {str(x) for x in suite.get("allowed_training_splits") or []}
     prohibited = {str(x) for x in suite.get("prohibited_training_splits") or []}
     if allowed_training & prohibited:
@@ -79,7 +90,11 @@ def materialize(suite_path: Path, root: Path, out_dir: Path) -> dict[str, Any]:
     seen: set[str] = set()
 
     for family_id in family_ids:
-        family_dir = root / family_id
+        family_dir = (root / family_id).resolve()
+        try:
+            family_dir.relative_to(root)
+        except ValueError as exc:
+            raise ValueError(f"family path escapes suite family root: {family_id!r}") from exc
         manifest_path = family_dir / "manifest.json"
         manifest = load_json(manifest_path)
         if manifest.get("family_id") != family_id:
@@ -98,7 +113,7 @@ def materialize(suite_path: Path, root: Path, out_dir: Path) -> dict[str, Any]:
             if case_id in seen:
                 raise ValueError(f"duplicate case_id across suite: {case_id}")
             seen.add(case_id)
-            case_path = family_dir / rel
+            case_path = _contained_case_path(family_dir, rel, manifest_path)
             case = load_json(case_path)
             if case.get("case_id") != case_id:
                 raise ValueError(f"{case_path}: case_id mismatch")
@@ -114,8 +129,8 @@ def materialize(suite_path: Path, root: Path, out_dir: Path) -> dict[str, Any]:
                 "evidence_class": suite.get("evidence_class"),
                 "fresh_evidence": bool(suite.get("fresh_evidence", False)),
                 "source_snapshot_commit": suite.get("source_snapshot_commit"),
-                "source_manifest_path": manifest_path.relative_to(ROOT).as_posix(),
-                "source_case_path": case_path.relative_to(ROOT).as_posix(),
+                "source_manifest_path": manifest_path.relative_to(ROOT.resolve()).as_posix(),
+                "source_case_path": case_path.relative_to(ROOT.resolve()).as_posix(),
                 "source_manifest_sha256": manifest_sha,
                 "source_case_sha256": sha256_file(case_path),
                 "materializer_version": MATERIALIZER_VERSION,
