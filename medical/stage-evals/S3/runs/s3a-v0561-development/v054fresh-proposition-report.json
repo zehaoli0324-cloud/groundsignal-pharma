@@ -1,0 +1,28 @@
+{
+  "benchmark_id": "S3a-typed-event-shadow-heldout-v0.5.4",
+  "metrics": {
+    "gold_propositions": 61,
+    "predicted_propositions": 61,
+    "true_positive": 61,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "critical_proposition_recall": 1.0,
+    "polarity_accuracy_on_structural_matches": 1.0,
+    "polarity_structural_matches": 61,
+    "population_accuracy_on_semantic_matches": 1.0,
+    "population_semantic_matches": 61,
+    "condition_binding_accuracy_on_semantic_matches": 1.0,
+    "condition_semantic_matches": 61,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": true,
+    "critical_recall": true,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": true
+  },
+  "release_gate": "PASS",
+  "failures": []
+}

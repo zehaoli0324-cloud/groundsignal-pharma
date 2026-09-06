@@ -1,0 +1,71 @@
+{
+  "benchmark_id": "S3a-compositional-frame-heldout-v0.5.1",
+  "metrics": {
+    "gold_propositions": 66,
+    "predicted_propositions": 66,
+    "true_positive": 65,
+    "precision": 0.9848484848484849,
+    "recall": 0.9848484848484849,
+    "f1": 0.9848484848484849,
+    "critical_proposition_recall": 0.9791666666666666,
+    "polarity_accuracy_on_structural_matches": 1.0,
+    "polarity_structural_matches": 65,
+    "population_accuracy_on_semantic_matches": 1.0,
+    "population_semantic_matches": 65,
+    "condition_binding_accuracy_on_semantic_matches": 0.9848484848484849,
+    "condition_semantic_matches": 66,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": true,
+    "critical_recall": true,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": true
+  },
+  "release_gate": "PASS",
+  "failures": [
+    {
+      "item_id": "S3A51-010",
+      "text": "Treatment is contraindicated when eGFR is below 25, but it is not contraindicated solely because the patient is older than 75 years.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "CONTRAINDICATED",
+          "object": "use",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "CONTRAINDICATED",
+          "use",
+          [
+            [
+              [
+                "operator",
+                "LT"
+              ],
+              [
+                "value",
+                25
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          null,
+          "NEGATIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    }
+  ]
+}

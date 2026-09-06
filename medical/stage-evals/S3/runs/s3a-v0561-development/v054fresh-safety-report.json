@@ -1,0 +1,15 @@
+{
+  "benchmark_id": "S3a-typed-event-shadow-heldout-v0.5.4",
+  "mandatory_silent_non_abstention": [],
+  "mandatory_silent_non_abstention_count": 0,
+  "mandatory_partial_truth_emission": [],
+  "mandatory_partial_truth_emission_count": 0,
+  "high_risk_false_positives": [],
+  "high_risk_false_positive_count": 0,
+  "gate_checks": {
+    "silent_unknown_critical_non_abstention_count": true,
+    "partial_truth_emission_count": true,
+    "high_risk_false_positive_count": true
+  },
+  "release_gate": "PASS"
+}

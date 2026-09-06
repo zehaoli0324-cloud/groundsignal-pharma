@@ -1,0 +1,1216 @@
+{
+  "predictions": [
+    {
+      "item_id": "S3A-001",
+      "role": "evidence",
+      "scope_nodes": [
+        {
+          "node_id": 0,
+          "sentence_id": 0,
+          "clause_id": 0,
+          "text": "For treatment initiation, eGFR 30 through 45 is not recommended",
+          "sentence": "For treatment initiation, eGFR 30 through 45 is not recommended; use is contraindicated when eGFR is less than 30.",
+          "condition": [
+            {
+              "variable": "egfr",
+              "operator": "RANGE",
+              "low": 30,
+              "high": 45
+            }
+          ],
+          "condition_source": "clause_local",
+          "local_condition_candidates": [
+            [
+              {
+                "variable": "egfr",
+                "operator": "RANGE",
+                "low": 30,
+                "high": 45
+              }
+            ]
+          ],
+          "sentence_condition_candidates": [
+            [
+              {
+                "variable": "egfr",
+                "operator": "RANGE",
+                "low": 30,
+                "high": 45
+              }
+            ],
+            [
+              {
+                "variable": "egfr",
+                "operator": "LT",
+                "value": 30
+              }
+            ]
+          ],
+          "local_populations": [
+            "new_or_initiating_user"
+          ],
+          "sentence_populations": [
+            "new_or_initiating_user"
+          ],
+          "inherited_population": null
+        },
+        {
+          "node_id": 1,
+          "sentence_id": 0,
+          "clause_id": 1,
+          "text": "use is contraindicated when eGFR is less than 30.",
+          "sentence": "For treatment initiation, eGFR 30 through 45 is not recommended; use is contraindicated when eGFR is less than 30.",
+          "condition": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 30
+            }
+          ],
+          "condition_source": "clause_local",
+          "local_condition_candidates": [
+            [
+              {
+                "variable": "egfr",
+                "operator": "LT",
+                "value": 30
+              }
+            ]
+          ],
+          "sentence_condition_candidates": [
+            [
+              {
+                "variable": "egfr",
+                "operator": "RANGE",
+                "low": 30,
+                "high": 45
+              }
+            ],
+            [
+              {
+                "variable": "egfr",
+                "operator": "LT",
+                "value": 30
+              }
+            ]
+          ],
+          "local_populations": [],
+          "sentence_populations": [
+            "new_or_initiating_user"
+          ],
+          "inherited_population": "new_or_initiating_user"
+        }
+      ],
+      "semantic_frames": [
+        {
+          "event_type": "INITIATION_RESTRICTION",
+          "subject": "drug_initiation",
+          "object": "initiation",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "RANGE",
+              "low": 30,
+              "high": 45
+            }
+          ],
+          "population": "new_or_initiating_user",
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "For treatment initiation, eGFR 30 through 45 is not recommended",
+          "trigger_family": "management:initiation",
+          "scope_trace": {
+            "node_id": 0,
+            "scope": "frame_local",
+            "condition_rebind": "coordination_local_nearest",
+            "v054_event_owner": {
+              "sentence_id": 0,
+              "window_start": 0,
+              "window_end": 43
+            },
+            "v054_condition": "event_local_typed",
+            "v054_population": "event_or_sentence_typed"
+          }
+        },
+        {
+          "event_type": "CONTRAINDICATION",
+          "subject": "drug_use",
+          "object": "use",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 30
+            }
+          ],
+          "population": null,
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "use is contraindicated when eGFR is less than 30.",
+          "trigger_family": "management:contraindication",
+          "scope_trace": {
+            "node_id": 1,
+            "scope": "frame_local",
+            "condition_rebind": "coordination_local_nearest",
+            "v054_event_owner": {
+              "sentence_id": 0,
+              "window_start": 43,
+              "window_end": 114
+            },
+            "v054_condition": "event_local_typed",
+            "v054_polarity": "event_local"
+          }
+        }
+      ],
+      "predicted_propositions": [
+        {
+          "subject": "drug_initiation",
+          "predicate": "INITIATION_NOT_RECOMMENDED",
+          "object": "initiation",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "RANGE",
+              "low": 30,
+              "high": 45
+            }
+          ],
+          "population": "new_or_initiating_user",
+          "confidence": 1.0,
+          "source_span": "For treatment initiation, eGFR 30 through 45 is not recommended"
+        },
+        {
+          "subject": "drug_use",
+          "predicate": "CONTRAINDICATED",
+          "object": "use",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 30
+            }
+          ],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "use is contraindicated when eGFR is less than 30."
+        }
+      ],
+      "abstain": false,
+      "unresolved_spans": [],
+      "extractor_version": "s3a-compositional-frame-v0.5.6.1"
+    },
+    {
+      "item_id": "S3A-002",
+      "role": "candidate",
+      "scope_nodes": [
+        {
+          "node_id": 0,
+          "sentence_id": 0,
+          "clause_id": 0,
+          "text": "For a new patient with eGFR 44, initiation is not recommended.",
+          "sentence": "For a new patient with eGFR 44, initiation is not recommended.",
+          "condition": [
+            {
+              "variable": "egfr",
+              "operator": "EQ",
+              "value": 44
+            }
+          ],
+          "condition_source": "clause_local",
+          "local_condition_candidates": [
+            [
+              {
+                "variable": "egfr",
+                "operator": "EQ",
+                "value": 44
+              }
+            ]
+          ],
+          "sentence_condition_candidates": [
+            [
+              {
+                "variable": "egfr",
+                "operator": "EQ",
+                "value": 44
+              }
+            ]
+          ],
+          "local_populations": [
+            "new_or_initiating_user"
+          ],
+          "sentence_populations": [
+            "new_or_initiating_user"
+          ],
+          "inherited_population": null
+        }
+      ],
+      "semantic_frames": [
+        {
+          "event_type": "INITIATION_RESTRICTION",
+          "subject": "drug_initiation",
+          "object": "initiation",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "EQ",
+              "value": 44
+            }
+          ],
+          "population": "new_or_initiating_user",
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "For a new patient with eGFR 44, initiation is not recommended.",
+          "trigger_family": "management:initiation",
+          "scope_trace": {
+            "node_id": 0,
+            "scope": "frame_local",
+            "condition_rebind": "coordination_local_nearest",
+            "v054_event_owner": {
+              "sentence_id": 0,
+              "window_start": 0,
+              "window_end": 62
+            },
+            "v054_condition": "event_local_typed",
+            "v054_population": "event_or_sentence_typed"
+          }
+        }
+      ],
+      "predicted_propositions": [
+        {
+          "subject": "drug_initiation",
+          "predicate": "INITIATION_NOT_RECOMMENDED",
+          "object": "initiation",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "EQ",
+              "value": 44
+            }
+          ],
+          "population": "new_or_initiating_user",
+          "confidence": 1.0,
+          "source_span": "For a new patient with eGFR 44, initiation is not recommended."
+        }
+      ],
+      "abstain": false,
+      "unresolved_spans": [],
+      "extractor_version": "s3a-compositional-frame-v0.5.6.1"
+    },
+    {
+      "item_id": "S3A-003",
+      "role": "evidence",
+      "scope_nodes": [
+        {
+          "node_id": 0,
+          "sentence_id": 0,
+          "clause_id": 0,
+          "text": "For an existing user under eGFR 45, benefit and risk should be reassessed",
+          "sentence": "For an existing user under eGFR 45, benefit and risk should be reassessed; discontinuation is specified only under 30.",
+          "condition": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 45
+            }
+          ],
+          "condition_source": "clause_local",
+          "local_condition_candidates": [
+            [
+              {
+                "variable": "egfr",
+                "operator": "LT",
+                "value": 45
+              }
+            ]
+          ],
+          "sentence_condition_candidates": [
+            [
+              {
+                "variable": "egfr",
+                "operator": "LT",
+                "value": 45
+              }
+            ]
+          ],
+          "local_populations": [
+            "existing_user"
+          ],
+          "sentence_populations": [
+            "existing_user"
+          ],
+          "inherited_population": null
+        },
+        {
+          "node_id": 1,
+          "sentence_id": 0,
+          "clause_id": 1,
+          "text": "discontinuation is specified only under 30.",
+          "sentence": "For an existing user under eGFR 45, benefit and risk should be reassessed; discontinuation is specified only under 30.",
+          "condition": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 30
+            }
+          ],
+          "condition_source": "clause_local",
+          "local_condition_candidates": [
+            [
+              {
+                "variable": "egfr",
+                "operator": "LT",
+                "value": 30
+              }
+            ]
+          ],
+          "sentence_condition_candidates": [
+            [
+              {
+                "variable": "egfr",
+                "operator": "LT",
+                "value": 45
+              }
+            ]
+          ],
+          "local_populations": [],
+          "sentence_populations": [
+            "existing_user"
+          ],
+          "inherited_population": "existing_user"
+        }
+      ],
+      "semantic_frames": [
+        {
+          "event_type": "BENEFIT_RISK_REASSESSMENT",
+          "subject": "drug_use",
+          "object": "benefit_risk",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 45
+            }
+          ],
+          "population": "existing_user",
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "For an existing user under eGFR 45, benefit and risk should be reassessed",
+          "trigger_family": "management:benefit_risk",
+          "scope_trace": {
+            "node_id": 0,
+            "scope": "frame_local",
+            "condition_rebind": "coordination_local_nearest",
+            "v054_event_owner": {
+              "sentence_id": 0,
+              "window_start": 0,
+              "window_end": 55
+            },
+            "v054_condition": "event_local_typed",
+            "v054_population": "event_or_sentence_typed"
+          }
+        },
+        {
+          "event_type": "DISCONTINUATION",
+          "subject": "drug_use",
+          "object": "drug",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 30
+            }
+          ],
+          "population": "existing_user",
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "discontinuation is specified only under 30.",
+          "trigger_family": "management:discontinuation",
+          "scope_trace": {
+            "node_id": 1,
+            "scope": "frame_local",
+            "condition_rebind": "coordination_local_nearest",
+            "v054_event_owner": {
+              "sentence_id": 0,
+              "window_start": 55,
+              "window_end": 118
+            },
+            "v054_condition": "event_local_typed",
+            "v054_population": "event_or_sentence_typed",
+            "v054_polarity": "event_local"
+          }
+        }
+      ],
+      "predicted_propositions": [
+        {
+          "subject": "drug_use",
+          "predicate": "REASSESS_BENEFIT_RISK",
+          "object": "benefit_risk",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 45
+            }
+          ],
+          "population": "existing_user",
+          "confidence": 1.0,
+          "source_span": "For an existing user under eGFR 45, benefit and risk should be reassessed"
+        },
+        {
+          "subject": "drug_use",
+          "predicate": "DISCONTINUE",
+          "object": "drug",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 30
+            }
+          ],
+          "population": "existing_user",
+          "confidence": 1.0,
+          "source_span": "discontinuation is specified only under 30."
+        }
+      ],
+      "abstain": false,
+      "unresolved_spans": [],
+      "extractor_version": "s3a-compositional-frame-v0.5.6.1"
+    },
+    {
+      "item_id": "S3A-004",
+      "role": "evidence",
+      "scope_nodes": [
+        {
+          "node_id": 0,
+          "sentence_id": 0,
+          "clause_id": 0,
+          "text": "Condition K by itself does not constitute a contraindication to treatment A.",
+          "sentence": "Condition K by itself does not constitute a contraindication to treatment A.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        }
+      ],
+      "semantic_frames": [
+        {
+          "event_type": "CONTRAINDICATION",
+          "subject": "drug_use",
+          "object": "use",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "LIMITED",
+          "confidence": 1.0,
+          "source_span": "Condition K by itself does not constitute a contraindication to treatment A.",
+          "trigger_family": "management:contraindication",
+          "scope_trace": {
+            "node_id": 0,
+            "scope": "frame_local",
+            "v054_event_owner": {
+              "sentence_id": 0,
+              "window_start": 0,
+              "window_end": 76
+            },
+            "v054_polarity": "event_local"
+          }
+        }
+      ],
+      "predicted_propositions": [
+        {
+          "subject": "drug_use",
+          "predicate": "CONTRAINDICATED",
+          "object": "use",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Condition K by itself does not constitute a contraindication to treatment A."
+        }
+      ],
+      "abstain": false,
+      "unresolved_spans": [],
+      "extractor_version": "s3a-compositional-frame-v0.5.6.1"
+    },
+    {
+      "item_id": "S3A-005",
+      "role": "evidence",
+      "scope_nodes": [
+        {
+          "node_id": 0,
+          "sentence_id": 0,
+          "clause_id": 0,
+          "text": "Spontaneous reports can identify a possible safety signal",
+          "sentence": "Spontaneous reports can identify a possible safety signal, but one report cannot distinguish causal attribution from temporal association.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        },
+        {
+          "node_id": 1,
+          "sentence_id": 0,
+          "clause_id": 1,
+          "text": "one report cannot distinguish causal attribution from temporal association.",
+          "sentence": "Spontaneous reports can identify a possible safety signal, but one report cannot distinguish causal attribution from temporal association.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        }
+      ],
+      "semantic_frames": [
+        {
+          "event_type": "SIGNAL_DETECTION",
+          "subject": "spontaneous_report_system",
+          "object": "safety_signal",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "Spontaneous reports can identify a possible safety signal",
+          "trigger_family": "pv:signal",
+          "scope_trace": {
+            "node_id": 0,
+            "scope": "frame_local"
+          }
+        },
+        {
+          "event_type": "CAUSALITY_ESTABLISHMENT",
+          "subject": "evidence",
+          "object": "causal_relation",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "LIMITED",
+          "confidence": 1.0,
+          "source_span": "one report cannot distinguish causal attribution from temporal association.",
+          "trigger_family": "evidence:causality",
+          "scope_trace": {
+            "node_id": 1,
+            "scope": "frame_local"
+          }
+        }
+      ],
+      "predicted_propositions": [
+        {
+          "subject": "spontaneous_report_system",
+          "predicate": "SUPPORTS_SIGNAL_DETECTION",
+          "object": "safety_signal",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Spontaneous reports can identify a possible safety signal"
+        },
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_CAUSALITY",
+          "object": "causal_relation",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "one report cannot distinguish causal attribution from temporal association."
+        }
+      ],
+      "abstain": false,
+      "unresolved_spans": [],
+      "extractor_version": "s3a-compositional-frame-v0.5.6.1"
+    },
+    {
+      "item_id": "S3A-006",
+      "role": "evidence",
+      "scope_nodes": [
+        {
+          "node_id": 0,
+          "sentence_id": 0,
+          "clause_id": 0,
+          "text": "Because the database lacks a complete exposed-patient denominator, raw report counts cannot yield the true event incidence.",
+          "sentence": "Because the database lacks a complete exposed-patient denominator, raw report counts cannot yield the true event incidence.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        }
+      ],
+      "semantic_frames": [
+        {
+          "event_type": "INCIDENCE_ESTIMATION",
+          "subject": "report_count",
+          "object": "event_incidence",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "LIMITED",
+          "confidence": 1.0,
+          "source_span": "Because the database lacks a complete exposed-patient denominator, raw report counts cannot yield the true event incidence.",
+          "trigger_family": "pv:incidence",
+          "scope_trace": {
+            "node_id": 0,
+            "scope": "frame_local"
+          }
+        }
+      ],
+      "predicted_propositions": [
+        {
+          "subject": "report_count",
+          "predicate": "ESTIMATES_TRUE_INCIDENCE",
+          "object": "event_incidence",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Because the database lacks a complete exposed-patient denominator, raw report counts cannot yield the true event incidence."
+        }
+      ],
+      "abstain": false,
+      "unresolved_spans": [],
+      "extractor_version": "s3a-compositional-frame-v0.5.6.1"
+    },
+    {
+      "item_id": "S3A-007",
+      "role": "evidence",
+      "scope_nodes": [
+        {
+          "node_id": 0,
+          "sentence_id": 0,
+          "clause_id": 0,
+          "text": "The study is COMPLETED and its primary endpoint is named",
+          "sentence": "The study is COMPLETED and its primary endpoint is named, but no result establishes that the endpoint was met.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        },
+        {
+          "node_id": 1,
+          "sentence_id": 0,
+          "clause_id": 1,
+          "text": "no result establishes that the endpoint was met.",
+          "sentence": "The study is COMPLETED and its primary endpoint is named, but no result establishes that the endpoint was met.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        }
+      ],
+      "semantic_frames": [
+        {
+          "event_type": "STUDY_STATUS",
+          "subject": "study",
+          "object": "completed",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "The study is COMPLETED and its primary endpoint is named",
+          "trigger_family": "trial:status",
+          "scope_trace": {
+            "node_id": 0,
+            "scope": "frame_local"
+          }
+        },
+        {
+          "event_type": "PRIMARY_ENDPOINT_DECLARATION",
+          "subject": "study",
+          "object": "primary_endpoint",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "The study is COMPLETED and its primary endpoint is named, but no result establishes that the endpoint was met.",
+          "trigger_family": "v0.4_fallback:primary_endpoint_declaration",
+          "scope_trace": {
+            "scope": "legacy_fallback_adapted",
+            "adapter": "s3a-compositional-frame-v0.5.1",
+            "source_extractor": "s3a-semantic-frame-v0.4",
+            "node_id": 0
+          }
+        },
+        {
+          "event_type": "ENDPOINT_ACHIEVEMENT_EVIDENCE",
+          "subject": "evidence",
+          "object": "primary_endpoint",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "LIMITED",
+          "confidence": 1.0,
+          "source_span": "the study is completed and its primary endpoint is named, but no result establishes that the endpoint was met.",
+          "trigger_family": "v0.5.6:endpoint_discourse",
+          "scope_trace": {
+            "scope": "typed_endpoint_discourse_evidence",
+            "sentence_id": 0,
+            "linked_from_sentence": null,
+            "negation_bound_before_achievement_arbitration": true
+          }
+        }
+      ],
+      "predicted_propositions": [
+        {
+          "subject": "study",
+          "predicate": "HAS_STATUS",
+          "object": "completed",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "The study is COMPLETED and its primary endpoint is named"
+        },
+        {
+          "subject": "study",
+          "predicate": "HAS_PRIMARY_ENDPOINT",
+          "object": "primary_endpoint",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "The study is COMPLETED and its primary endpoint is named, but no result establishes that the endpoint was met."
+        },
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_ENDPOINT_ACHIEVEMENT",
+          "object": "primary_endpoint",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "the study is completed and its primary endpoint is named, but no result establishes that the endpoint was met."
+        }
+      ],
+      "abstain": false,
+      "unresolved_spans": [],
+      "extractor_version": "s3a-compositional-frame-v0.5.6.1"
+    },
+    {
+      "item_id": "S3A-008",
+      "role": "evidence",
+      "scope_nodes": [
+        {
+          "node_id": 0,
+          "sentence_id": 0,
+          "clause_id": 0,
+          "text": "Guideline H replaces Guideline G as the operative current recommendation source.",
+          "sentence": "Guideline H replaces Guideline G as the operative current recommendation source.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        }
+      ],
+      "semantic_frames": [
+        {
+          "event_type": "SUPERSESSION",
+          "subject": "guideline h",
+          "object": "guideline g",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "Guideline H replaces Guideline G as the operative current recommendation source.",
+          "trigger_family": "temporal:supersession",
+          "scope_trace": {
+            "node_id": 0,
+            "direction": "surface_to_canonical"
+          }
+        },
+        {
+          "event_type": "CURRENTNESS",
+          "subject": "guideline h",
+          "object": "recommendation_source",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "Guideline H replaces Guideline G as the operative current recommendation source.",
+          "trigger_family": "temporal:current",
+          "scope_trace": {
+            "node_id": 0,
+            "direction": "surface_to_canonical"
+          }
+        },
+        {
+          "event_type": "CURRENTNESS",
+          "subject": "guideline g",
+          "object": "recommendation_source",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "LIMITED",
+          "confidence": 1.0,
+          "source_span": "Guideline H replaces Guideline G as the operative current recommendation source.",
+          "trigger_family": "temporal:stale",
+          "scope_trace": {
+            "node_id": 0,
+            "direction": "surface_to_canonical"
+          }
+        }
+      ],
+      "predicted_propositions": [
+        {
+          "subject": "guideline h",
+          "predicate": "SUPERSEDES",
+          "object": "guideline g",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Guideline H replaces Guideline G as the operative current recommendation source."
+        },
+        {
+          "subject": "guideline h",
+          "predicate": "IS_CURRENT",
+          "object": "recommendation_source",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Guideline H replaces Guideline G as the operative current recommendation source."
+        },
+        {
+          "subject": "guideline g",
+          "predicate": "IS_CURRENT",
+          "object": "recommendation_source",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Guideline H replaces Guideline G as the operative current recommendation source."
+        }
+      ],
+      "abstain": false,
+      "unresolved_spans": [],
+      "extractor_version": "s3a-compositional-frame-v0.5.6.1"
+    },
+    {
+      "item_id": "S3A-009",
+      "role": "evidence",
+      "scope_nodes": [
+        {
+          "node_id": 0,
+          "sentence_id": 0,
+          "clause_id": 0,
+          "text": "A new randomized trial favors Q",
+          "sentence": "A new randomized trial favors Q, but the unchanged current guideline still recommends P.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        },
+        {
+          "node_id": 1,
+          "sentence_id": 0,
+          "clause_id": 1,
+          "text": "the unchanged current guideline still recommends P.",
+          "sentence": "A new randomized trial favors Q, but the unchanged current guideline still recommends P.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        }
+      ],
+      "semantic_frames": [
+        {
+          "event_type": "TRIAL_OPTION_SUPPORT",
+          "subject": "trial",
+          "object": "q",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "A new randomized trial favors Q",
+          "trigger_family": "guideline:trial_support",
+          "scope_trace": {
+            "node_id": 0,
+            "direction": "surface_to_canonical"
+          }
+        },
+        {
+          "event_type": "CURRENTNESS",
+          "subject": "current_guideline",
+          "object": "p",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "the unchanged current guideline still recommends P.",
+          "trigger_family": "guideline:current_recommendation",
+          "scope_trace": {
+            "node_id": 1,
+            "direction": "surface_to_canonical"
+          }
+        }
+      ],
+      "predicted_propositions": [
+        {
+          "subject": "trial",
+          "predicate": "SUPPORTS_OPTION",
+          "object": "q",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "A new randomized trial favors Q"
+        },
+        {
+          "subject": "current_guideline",
+          "predicate": "IS_CURRENT",
+          "object": "p",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "the unchanged current guideline still recommends P."
+        }
+      ],
+      "abstain": false,
+      "unresolved_spans": [],
+      "extractor_version": "s3a-compositional-frame-v0.5.6.1"
+    },
+    {
+      "item_id": "S3A-010",
+      "role": "evidence",
+      "scope_nodes": [
+        {
+          "node_id": 0,
+          "sentence_id": 0,
+          "clause_id": 0,
+          "text": "A genotype is associated with increased drug exposure",
+          "sentence": "A genotype is associated with increased drug exposure, but the source gives no therapeutic dose recommendation.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        },
+        {
+          "node_id": 1,
+          "sentence_id": 0,
+          "clause_id": 1,
+          "text": "the source gives no therapeutic dose recommendation.",
+          "sentence": "A genotype is associated with increased drug exposure, but the source gives no therapeutic dose recommendation.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        }
+      ],
+      "semantic_frames": [
+        {
+          "event_type": "ASSOCIATION",
+          "subject": "genotype",
+          "object": "drug_exposure",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "A genotype is associated with increased drug exposure",
+          "trigger_family": "pgx:association",
+          "scope_trace": {
+            "node_id": 0,
+            "scope": "frame_local"
+          }
+        },
+        {
+          "event_type": "MANAGEMENT_RULE_AVAILABILITY",
+          "subject": "mechanism_or_pk_evidence",
+          "object": "drug_pair_or_patient",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "LIMITED",
+          "confidence": 1.0,
+          "source_span": "the source gives no therapeutic dose recommendation.",
+          "trigger_family": "pgx:no_rule",
+          "scope_trace": {
+            "node_id": 1,
+            "scope": "frame_local"
+          }
+        }
+      ],
+      "predicted_propositions": [
+        {
+          "subject": "genotype",
+          "predicate": "ASSOCIATED_WITH",
+          "object": "drug_exposure",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "A genotype is associated with increased drug exposure"
+        },
+        {
+          "subject": "mechanism_or_pk_evidence",
+          "predicate": "PROVIDES_MANAGEMENT_RULE",
+          "object": "drug_pair_or_patient",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "the source gives no therapeutic dose recommendation."
+        }
+      ],
+      "abstain": false,
+      "unresolved_spans": [],
+      "extractor_version": "s3a-compositional-frame-v0.5.6.1"
+    },
+    {
+      "item_id": "S3A-011",
+      "role": "evidence",
+      "scope_nodes": [
+        {
+          "node_id": 0,
+          "sentence_id": 0,
+          "clause_id": 0,
+          "text": "The pathology summary classifies finding X as benign.",
+          "sentence": "The pathology summary classifies finding X as benign.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        }
+      ],
+      "semantic_frames": [
+        {
+          "event_type": "DIAGNOSTIC_CLASSIFICATION",
+          "subject": "lesion",
+          "object": "benign",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "ASSERTED",
+          "confidence": 1.0,
+          "source_span": "The pathology summary classifies finding X as benign.",
+          "trigger_family": "diagnosis:class",
+          "scope_trace": {
+            "node_id": 0,
+            "scope": "frame_local"
+          }
+        }
+      ],
+      "predicted_propositions": [
+        {
+          "subject": "lesion",
+          "predicate": "CLASSIFIED_AS",
+          "object": "benign",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "The pathology summary classifies finding X as benign."
+        }
+      ],
+      "abstain": false,
+      "unresolved_spans": [],
+      "extractor_version": "s3a-compositional-frame-v0.5.6.1"
+    },
+    {
+      "item_id": "S3A-012",
+      "role": "evidence",
+      "scope_nodes": [
+        {
+          "node_id": 0,
+          "sentence_id": 0,
+          "clause_id": 0,
+          "text": "Biomarker J is explicitly not associated with outcome W in this analysis.",
+          "sentence": "Biomarker J is explicitly not associated with outcome W in this analysis.",
+          "condition": [],
+          "condition_source": "unresolved_or_ambiguous",
+          "local_condition_candidates": [],
+          "sentence_condition_candidates": [],
+          "local_populations": [],
+          "sentence_populations": [],
+          "inherited_population": null
+        }
+      ],
+      "semantic_frames": [
+        {
+          "event_type": "ASSOCIATION",
+          "subject": "biomarker_j",
+          "object": "outcome_w",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "modality": "LIMITED",
+          "confidence": 1.0,
+          "source_span": "Biomarker J is explicitly not associated with outcome W in this analysis.",
+          "trigger_family": "association:biomarker_outcome",
+          "scope_trace": {
+            "node_id": 0,
+            "scope": "frame_local",
+            "argument_order": "canonical"
+          }
+        }
+      ],
+      "predicted_propositions": [
+        {
+          "subject": "biomarker_j",
+          "predicate": "ASSOCIATED_WITH",
+          "object": "outcome_w",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "confidence": 1.0,
+          "source_span": "Biomarker J is explicitly not associated with outcome W in this analysis."
+        }
+      ],
+      "abstain": false,
+      "unresolved_spans": [],
+      "extractor_version": "s3a-compositional-frame-v0.5.6.1"
+    }
+  ]
+}
