@@ -1,0 +1,26 @@
+{
+  "stage": "S5",
+  "gate_version": "s5-release-gate-v0.1.1",
+  "suite_id": "S5-P0-EXPOSED-v0.1.1",
+  "fresh_evidence": false,
+  "family_count": 12,
+  "gold_approved_count": 0,
+  "pending_gold_count": 12,
+  "pending_gold": [
+    {"family_id": "AGENT-001", "status": "gold_review_needed"},
+    {"family_id": "CLINREASON-001", "status": "gold_review_needed"},
+    {"family_id": "CLINREASON-005", "status": "gold_review_needed"},
+    {"family_id": "EVIDENCE-002", "status": "gold_review_needed"},
+    {"family_id": "EVIDENCE-003", "status": "gold_review_needed"},
+    {"family_id": "MEDSAFE-001", "status": "gold_review_needed"},
+    {"family_id": "MEDSAFE-002", "status": "gold_review_needed"},
+    {"family_id": "MULTITURN-001", "status": "gold_review_needed"},
+    {"family_id": "REPORT-001", "status": "gold_review_needed"},
+    {"family_id": "REPORT-004", "status": "gold_review_needed"},
+    {"family_id": "TRIAGE-001", "status": "gold_review_needed"},
+    {"family_id": "TRIAGE-003", "status": "gold_review_needed"}
+  ],
+  "release_ready": false,
+  "decision": "BLOCKED_GOLD_REVIEW",
+  "rule": "release requires explicit status=gold_approved for every family; no approval is inferred"
+}

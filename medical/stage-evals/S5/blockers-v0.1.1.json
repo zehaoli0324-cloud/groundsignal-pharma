@@ -1,0 +1,26 @@
+{
+  "stage": "S5",
+  "version": "v0.1.1",
+  "structural_gate": "PASS",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "active_blockers": [
+    {
+      "id": "S5-B1",
+      "type": "GOLD_REVIEW_PENDING",
+      "count": 12,
+      "severity": "release_blocking",
+      "rule": "No family may become release-grade without explicit gold_approved status."
+    },
+    {
+      "id": "S5-B2",
+      "type": "NO_FRESH_S5_RELEASE_EVIDENCE",
+      "severity": "release_blocking",
+      "rule": "The exposed P0 partitions cannot be relabeled fresh; a new suite must be created only after v0.1.1 freeze."
+    }
+  ],
+  "historical_failures": {
+    "S5-F1": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F2": "CONTAINED_RELEASE_BLOCKED_NO_FAKE_APPROVAL",
+    "S5-F3": "REPAIRED_EXPOSED_REGRESSION"
+  }
+}

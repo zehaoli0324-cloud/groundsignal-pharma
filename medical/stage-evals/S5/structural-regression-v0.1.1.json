@@ -1,0 +1,87 @@
+{
+  "stage": "S5",
+  "version": "v0.1.1",
+  "eval_name": "benchmark-factory-structural-repair-exposed-regression",
+  "evidence_class": "development_exposed_regression",
+  "fresh_evidence": false,
+  "first_observation": true,
+  "implementation_parent": "811a755120210a14863a485e31c42ed5d3dd5f28",
+  "suite_id": "S5-P0-EXPOSED-v0.1.1",
+  "schema_contract_gate": {
+    "graph_eval_required": true,
+    "decision_components_required": {
+      "required_node_ids": true,
+      "required_edge_ids": true,
+      "expected_reasoning_path": true
+    },
+    "benchmark_provenance_defined": true,
+    "provenance_components_required": {
+      "suite_id": true,
+      "family_id": true,
+      "split": true,
+      "source_case_path": true,
+      "source_manifest_path": true,
+      "materializer_version": true,
+      "training_eligible": true
+    },
+    "pass": true
+  },
+  "materialization_gate": {
+    "family_count": 12,
+    "case_count": 60,
+    "split_counts": {
+      "dev": 36,
+      "heldout": 12,
+      "regression": 12
+    },
+    "training_eligible_count": 36,
+    "training_blocked_count": 24,
+    "decision_contract_cases": 60,
+    "provenance_complete_cases": 60,
+    "provenance_errors": [],
+    "manifest_roundtrip_equal": true,
+    "pass": true
+  },
+  "training_export_partition_guard": {
+    "heldout": {
+      "blocked": true,
+      "error_type": "PermissionError"
+    },
+    "regression": {
+      "blocked": true,
+      "error_type": "PermissionError"
+    },
+    "dev": {
+      "exportable": true,
+      "source_split_propagated": true,
+      "source_family_propagated": true,
+      "source_suite_propagated": true
+    },
+    "pass": true
+  },
+  "gold_release_containment": {
+    "gold_approved_count": 0,
+    "pending_gold_count": 12,
+    "release_ready": false,
+    "decision": "BLOCKED_GOLD_REVIEW",
+    "pass": true
+  },
+  "model_prompt_gold_leakage_regression": {
+    "sentinel_leaked": false,
+    "pass": true
+  },
+  "historical_failure_disposition": {
+    "S5-F1": "REPAIRED_EXPOSED_REGRESSION",
+    "S5-F2": "CONTAINED_RELEASE_BLOCKED_NO_FAKE_APPROVAL",
+    "S5-F3": "REPAIRED_EXPOSED_REGRESSION"
+  },
+  "structural_gate": "PASS",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "release_grade_heldout_trust": "BLOCKED_PENDING_FRESH_S5_AFTER_FREEZE",
+  "hard_gate_failures": [],
+  "notes": [
+    "This reuses exposed P0 assets and is not fresh held-out evidence.",
+    "0/12 gold approval is intentionally preserved; the repair is the machine-enforced block, not invented approval.",
+    "A genuinely fresh S5 suite may only be created after this implementation is frozen."
+  ]
+}

@@ -1,0 +1,111 @@
+name: S5 v0.1.1 Structural Repair Exposed Regression
+
+on:
+  push:
+    paths:
+      - 'medical/stage-evals/S5/**'
+      - 'medical/case-families/**'
+      - 'medical/schemas/clinical-case.schema.json'
+      - 'scripts/materialize_s5_cases.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/s5_release_gate.py'
+      - 'scripts/eval_s5_benchmark_factory_v011.py'
+      - 'scripts/model_harness.py'
+      - 'scripts/validate_medical_case_families.py'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v011-structural-regression.yml'
+  pull_request:
+    paths:
+      - 'medical/stage-evals/S5/**'
+      - 'medical/case-families/**'
+      - 'medical/schemas/clinical-case.schema.json'
+      - 'scripts/materialize_s5_cases.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/s5_release_gate.py'
+      - 'scripts/eval_s5_benchmark_factory_v011.py'
+      - 'scripts/model_harness.py'
+      - 'scripts/validate_medical_case_families.py'
+      - 'docs/16-stage-status.md'
+      - '.github/workflows/s5-v011-structural-regression.yml'
+
+jobs:
+  structural-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check
+        run: |
+          python -m py_compile \
+            scripts/materialize_s5_cases.py \
+            scripts/export_training_data.py \
+            scripts/s5_release_gate.py \
+            scripts/eval_s5_benchmark_factory_v011.py
+
+      - name: Preserve P0 referential integrity
+        run: |
+          python scripts/validate_medical_case_families.py \
+            --expect-families 12 \
+            --expect-cases 60 \
+            --expect-cases-per-family 5 \
+            --rubric-version medical-clinical-v0.2
+
+      - name: Materialize exposed P0 suite with provenance
+        run: |
+          rm -rf /tmp/groundsignal-s5-v011
+          python scripts/materialize_s5_cases.py \
+            --suite medical/stage-evals/S5/suite-p0-exposed-v0.1.1.json \
+            --out-dir /tmp/groundsignal-s5-v011/materialized \
+            > /tmp/groundsignal-s5-v011-materialize.log
+          python - <<'PY'
+          import json
+          p='/tmp/groundsignal-s5-v011/materialized/materialization-manifest.json'
+          d=json.load(open(p, encoding='utf-8'))
+          assert d['family_count']==12 and d['case_count']==60
+          assert d['split_counts']=={'dev':36,'heldout':12,'regression':12}
+          assert d['training_eligible_count']==36
+          assert d['training_blocked_count']==24
+          print(json.dumps({k:d[k] for k in ['family_count','case_count','split_counts','training_eligible_count','training_blocked_count']}, indent=2))
+          PY
+
+      - name: Run v0.1.1 exposed structural regression
+        run: |
+          python scripts/eval_s5_benchmark_factory_v011.py \
+            --implementation-parent 811a755120210a14863a485e31c42ed5d3dd5f28 \
+            --out /tmp/groundsignal-s5-v011-result.json
+
+      - name: Match committed raw metrics
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected=json.loads(Path('medical/stage-evals/S5/structural-regression-v0.1.1.json').read_text(encoding='utf-8'))
+          observed=json.loads(Path('/tmp/groundsignal-s5-v011-result.json').read_text(encoding='utf-8'))
+          assert observed==expected, (expected, observed)
+          assert observed['structural_gate']=='PASS'
+          assert observed['stage_release']=='BLOCKED_GOLD_REVIEW'
+          print('S5 v0.1.1 structural regression reproduced exactly.')
+          PY
+
+      - name: Verify gold release gate remains fail-closed
+        run: |
+          set +e
+          python scripts/s5_release_gate.py \
+            --suite medical/stage-evals/S5/suite-p0-exposed-v0.1.1.json \
+            --out /tmp/groundsignal-s5-v011-release.json
+          status=$?
+          set -e
+          test "$status" -eq 1
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected=json.loads(Path('medical/stage-evals/S5/release-gate-v0.1.1.json').read_text(encoding='utf-8'))
+          observed=json.loads(Path('/tmp/groundsignal-s5-v011-release.json').read_text(encoding='utf-8'))
+          assert observed==expected
+          assert observed['decision']=='BLOCKED_GOLD_REVIEW'
+          assert observed['gold_approved_count']==0
+          print('Gold gate blocked release exactly as intended; no approval was inferred.')
+          PY

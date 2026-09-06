@@ -3,7 +3,7 @@
   "$id": "groundsignal://medical/clinical-case.schema.json",
   "title": "GroundSignal Clinical Case",
   "type": "object",
-  "required": ["case_id", "task_type", "patient_context", "evidence_snapshot", "interaction", "expected_behavior", "safety", "scoring"],
+  "required": ["case_id", "task_type", "patient_context", "evidence_snapshot", "interaction", "expected_behavior", "graph_eval", "safety", "scoring"],
   "properties": {
     "case_id": {"type": "string", "minLength": 1},
     "title": {"type": ["string", "null"]},
@@ -69,12 +69,46 @@
     },
     "graph_eval": {
       "type": "object",
+      "required": ["required_node_ids", "required_edge_ids", "expected_reasoning_path"],
       "properties": {
         "graph_snapshot_id": {"type": "string"},
         "required_node_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
         "required_edge_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
         "forbidden_claims": {"type": "array", "items": {"type": "string"}},
         "expected_reasoning_path": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "decision_contract_exemption": {
+      "type": "object",
+      "required": ["type", "rationale"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["NO_GRAPH_DECISION_REQUIRED", "NON_REASONING_CONTROL", "EXTERNAL_TRAJECTORY_ONLY"]
+        },
+        "rationale": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "benchmark_provenance": {
+      "type": "object",
+      "required": ["stage", "suite_id", "family_id", "split", "variant_type", "evidence_class", "fresh_evidence", "source_case_path", "source_manifest_path", "materializer_version", "training_eligible"],
+      "properties": {
+        "stage": {"const": "S5"},
+        "suite_id": {"type": "string", "minLength": 1},
+        "family_id": {"type": "string", "minLength": 1},
+        "split": {"type": "string", "enum": ["dev", "regression", "heldout"]},
+        "variant_type": {"type": "string", "minLength": 1},
+        "evidence_class": {"type": ["string", "null"]},
+        "fresh_evidence": {"type": "boolean"},
+        "source_snapshot_commit": {"type": ["string", "null"]},
+        "source_manifest_path": {"type": "string", "minLength": 1},
+        "source_case_path": {"type": "string", "minLength": 1},
+        "source_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_case_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "materializer_version": {"type": "string", "minLength": 1},
+        "training_eligible": {"type": "boolean"}
       },
       "additionalProperties": false
     },

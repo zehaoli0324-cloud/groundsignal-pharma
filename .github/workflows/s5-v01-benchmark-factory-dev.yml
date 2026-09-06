@@ -1,4 +1,4 @@
-name: S5 v0.1 Benchmark Factory Development Audit
+name: S5 v0.1 Historical Development Evidence Preservation
 
 on:
   push:
@@ -8,8 +8,8 @@ on:
       - 'medical/schemas/clinical-case.schema.json'
       - 'scripts/eval_s5_benchmark_factory.py'
       - 'scripts/export_training_data.py'
-      - 'scripts/model_harness.py'
-      - 'scripts/validate_medical_case_families.py'
+      - 'scripts/materialize_s5_cases.py'
+      - 'scripts/s5_release_gate.py'
       - 'docs/16-stage-status.md'
       - '.github/workflows/s5-v01-benchmark-factory-dev.yml'
   pull_request:
@@ -19,58 +19,35 @@ on:
       - 'medical/schemas/clinical-case.schema.json'
       - 'scripts/eval_s5_benchmark_factory.py'
       - 'scripts/export_training_data.py'
-      - 'scripts/model_harness.py'
-      - 'scripts/validate_medical_case_families.py'
+      - 'scripts/materialize_s5_cases.py'
+      - 'scripts/s5_release_gate.py'
       - 'docs/16-stage-status.md'
       - '.github/workflows/s5-v01-benchmark-factory-dev.yml'
 
 jobs:
-  preserve-development-first-observation:
+  preserve-v01-first-observation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Syntax check S5 evaluator
-        run: python -m py_compile scripts/eval_s5_benchmark_factory.py
-
-      - name: Reuse P0 materialization regression
+      - name: Preserve immutable v0.1 evidence blobs
         run: |
-          python scripts/validate_medical_case_families.py \
-            --expect-families 12 \
-            --expect-cases 60 \
-            --expect-cases-per-family 5 \
-            --rubric-version medical-clinical-v0.2
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/S5_V0.1_EVAL_SPEC.md)" = "dfa9697c517f37b6f2bd2a5b13b8cc8cb9f6d132"
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/development-first-observation-v0.1.json)" = "7ff21096fc39612cf2c0669c13c1b1e332b8175f"
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/failures-v0.1.json)" = "74262304e1d5754a14053a60adde7c6efee27037"
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/S5_V0.1_DEVELOPMENT_FAIL_REPORT.md)" = "c8f8a2654b76968f0b693d828303eaf6acb8cbee"
 
-      - name: Reproduce S5 v0.1 expected development FAIL
-        run: |
-          mkdir -p /tmp/groundsignal-s5
-          set +e
-          python scripts/eval_s5_benchmark_factory.py \
-            --snapshot-commit 9e8aef6ee4e54dd6fe01eb6749368d2c15471762 \
-            --out /tmp/groundsignal-s5/development-first-observation-v0.1.json
-          status=$?
-          set -e
-          cat /tmp/groundsignal-s5/development-first-observation-v0.1.json
-          if [ "$status" -ne 1 ]; then
-            echo "Expected S5 v0.1 stage result FAIL (exit 1), got exit $status"
-            exit 1
-          fi
-
-      - name: Preserve committed raw metrics exactly
+      - name: Validate historical semantic decision
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          expected = json.loads(Path('medical/stage-evals/S5/development-first-observation-v0.1.json').read_text(encoding='utf-8'))
-          observed = json.loads(Path('/tmp/groundsignal-s5/development-first-observation-v0.1.json').read_text(encoding='utf-8'))
-          if observed != expected:
-              print('Committed S5 first observation does not match evaluator output')
-              print('EXPECTED:', json.dumps(expected, ensure_ascii=False, indent=2))
-              print('OBSERVED:', json.dumps(observed, ensure_ascii=False, indent=2))
-              raise SystemExit(1)
-          print('S5 v0.1 first development observation preserved: release=FAIL')
+          p=Path('medical/stage-evals/S5/development-first-observation-v0.1.json')
+          d=json.loads(p.read_text(encoding='utf-8'))
+          assert d['version']=='v0.1'
+          assert d['first_development_observation'] is True
+          assert d['fresh_evidence'] is False
+          assert d['release']=='FAIL'
+          assert d['hard_gate_failures']==['S5-F1','S5-F2','S5-F3']
+          print('S5 v0.1 first observation preserved exactly; it is not recomputed against later implementations.')
           PY
