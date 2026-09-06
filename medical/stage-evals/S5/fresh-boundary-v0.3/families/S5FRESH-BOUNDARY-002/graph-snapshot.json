@@ -1,0 +1,10 @@
+{
+  "graph_snapshot_id": "S5FRESH-BOUNDARY-GRAPH-v0.3",
+  "nodes": [
+    {"node_id":"N1","type":"fixture","label":"synthetic boundary fact"},
+    {"node_id":"N2","type":"decision","label":"bounded synthetic conclusion"}
+  ],
+  "edges": [
+    {"edge_id":"E1","source":"N1","target":"N2","relation":"supports"}
+  ]
+}
