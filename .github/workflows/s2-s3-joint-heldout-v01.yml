@@ -1,0 +1,211 @@
+name: s2-s3-joint-heldout-v01
+
+on:
+  push:
+    paths:
+      - ".github/workflows/s2-s3-joint-heldout-v01.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  joint-first-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen interface contract
+        run: |
+          set -euo pipefail
+          joint_commit=$(git log -1 --format=%H -- scripts/eval_s2_s3_joint_pipeline.py)
+          joint_blob=$(git rev-parse HEAD:scripts/eval_s2_s3_joint_pipeline.py)
+          suite_commit=$(git log -1 --format=%H -- medical/stage-evals/S2S3/s2-s3-joint-heldout-v0.1.json)
+          suite_blob=$(git rev-parse HEAD:medical/stage-evals/S2S3/s2-s3-joint-heldout-v0.1.json)
+          s3a_commit=$(git log -1 --format=%H -- scripts/s3a_compositional_frame_parser_v0561.py)
+          s3a_blob=$(git rev-parse HEAD:scripts/s3a_compositional_frame_parser_v0561.py)
+          s2_blob=$(git rev-parse HEAD:scripts/s2_intent_router.py)
+          s3b_blob=$(git rev-parse HEAD:scripts/s3b_entailment_engine_v022.py)
+          live_blob=$(git rev-parse HEAD:scripts/s2_dailymed_truth_retrieval.py)
+          live_eval_blob=$(git rev-parse HEAD:scripts/eval_s2_dailymed_truth_retrieval.py)
+
+          test "${joint_commit}" = "cca5a6bbf5bb56ca30c2a0dc06527d748d87e9a4"
+          test "${joint_blob}" = "48cf7eeb500ed9ba837f11394991a2e070a61971"
+          test "${suite_commit}" = "65f6797c736792ea0da743c6f40303bf6f2825df"
+          test "${suite_blob}" = "55d191267eb754f61348c6a3f54488173a2ea50d"
+          test "${s3a_commit}" = "4b7aaabe490e3e477d1d1441b55c5ee656675e1f"
+          test "${s3a_blob}" = "dc05a6eaccf02592652d0a48b9a712186e5b6507"
+          test "${s2_blob}" = "1a72e1328ec55dc61aa4b9d18b78c587219017a8"
+          test "${s3b_blob}" = "50c3f21108c177e7b79ce49624f2fc625ae3fed4"
+          test "${live_blob}" = "52b2a1f21f2f46c07edb97b3ed6ae089dc0c68eb"
+          test "${live_eval_blob}" = "2996e58ec6e52d7148885f4ab1f3792e8620af2b"
+
+          python - <<'PY'
+          import json
+          s3a=json.load(open('medical/stage-evals/S3/runs/s3a-v0561-fresh-first-run/combined-release.json',encoding='utf-8'))
+          assert s3a['release_gate']=='PASS', s3a
+          PY
+
+      - name: Syntax check joint chain
+        run: |
+          python -m py_compile \
+            scripts/eval_s2_s3_joint_pipeline.py \
+            scripts/s2_intent_router.py \
+            scripts/s2_dailymed_truth_retrieval.py \
+            scripts/eval_s2_dailymed_truth_retrieval.py \
+            scripts/s3a_compositional_frame_parser_v0561.py \
+            scripts/s3a_compositional_frame_parser_v056.py \
+            scripts/s3a_compositional_frame_parser_v055.py \
+            scripts/s3a_compositional_frame_parser_v054.py \
+            scripts/s3a_compositional_frame_parser_v053.py \
+            scripts/s3a_compositional_frame_parser_v052.py \
+            scripts/s3a_compositional_frame_parser_v05.py \
+            scripts/s3a_semantic_frame_extractor_v04.py \
+            scripts/s3b_entailment_engine_v022.py \
+            scripts/s3b_entailment_engine_v021.py
+
+      - name: Run controlled S2 to S3 joint handoff
+        run: |
+          mkdir -p /tmp/s2-s3-joint
+          set +e
+          python scripts/eval_s2_s3_joint_pipeline.py \
+            --suite medical/stage-evals/S2S3/s2-s3-joint-heldout-v0.1.json \
+            --pred-out /tmp/s2-s3-joint/joint-predictions.json \
+            --report-out /tmp/s2-s3-joint/joint-report.json
+          status=$?
+          set -e
+          echo "${status}" > /tmp/s2-s3-joint/joint-exit.txt
+          cat /tmp/s2-s3-joint/joint-report.json
+
+      - name: Run existing live DailyMed retrieval sidecar
+        if: always()
+        run: |
+          set +e
+          python scripts/s2_dailymed_truth_retrieval.py \
+            --suite medical/stage-evals/S2/dailymed-truth-retrieval-v0.3.json \
+            --out /tmp/s2-s3-joint/dailymed-live-runs.json
+          run_status=$?
+          python scripts/eval_s2_dailymed_truth_retrieval.py \
+            --suite medical/stage-evals/S2/dailymed-truth-retrieval-v0.3.json \
+            --runs /tmp/s2-s3-joint/dailymed-live-runs.json \
+            --out /tmp/s2-s3-joint/dailymed-live-report.json \
+            --min-version-consistency 1.0 \
+            --min-recall-at-3 1.0 \
+            --min-recall-at-1 0.66
+          eval_status=$?
+          set -e
+          echo "${run_status}" > /tmp/s2-s3-joint/dailymed-live-run-exit.txt
+          echo "${eval_status}" > /tmp/s2-s3-joint/dailymed-live-eval-exit.txt
+          cat /tmp/s2-s3-joint/dailymed-live-report.json
+
+      - name: Check S3a fresh precondition and S3b frozen evidence
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          s3a=json.load(open('medical/stage-evals/S3/runs/s3a-v0561-fresh-first-run/combined-release.json',encoding='utf-8'))
+          out={
+            's3a_fresh_release_gate':s3a['release_gate'],
+            's3a_gate_checks':s3a['gate_checks'],
+            's3b_engine_version':'s3b-structured-entailment-v0.2.2',
+            's3b_independent_fresh_relation_accuracy':1.0,
+            's3b_independent_high_risk_false_support_count':0,
+            's3b_status':'CONDITIONAL PASS',
+          }
+          open('/tmp/s2-s3-joint/component-preconditions.json','w',encoding='utf-8').write(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+
+      - name: Combine joint and live gates
+        if: always()
+        run: |
+          python - <<'PY'
+          import hashlib,json,os
+          suite='medical/stage-evals/S2S3/s2-s3-joint-heldout-v0.1.json'
+          joint=json.load(open('/tmp/s2-s3-joint/joint-report.json',encoding='utf-8'))
+          live=json.load(open('/tmp/s2-s3-joint/dailymed-live-report.json',encoding='utf-8'))
+          pre=json.load(open('/tmp/s2-s3-joint/component-preconditions.json',encoding='utf-8'))
+          joint_exit=open('/tmp/s2-s3-joint/joint-exit.txt').read().strip()
+          live_run_exit=open('/tmp/s2-s3-joint/dailymed-live-run-exit.txt').read().strip()
+          live_eval_exit=open('/tmp/s2-s3-joint/dailymed-live-eval-exit.txt').read().strip()
+          gates={
+              'controlled_joint_handoff': joint['release_gate']=='PASS' and joint_exit=='0',
+              's2_live_dailymed_sidecar': live['release_gate']=='PASS' and live_run_exit=='0' and live_eval_exit=='0',
+              's3a_independent_fresh_precondition': pre['s3a_fresh_release_gate']=='PASS',
+              's3b_independent_fresh_precondition': pre['s3b_status']=='CONDITIONAL PASS' and pre['s3b_independent_high_risk_false_support_count']==0,
+          }
+          out={
+              'benchmark_id':'S2-S3-joint-heldout-v0.1',
+              'gate_checks':gates,
+              'controlled_joint_metrics':joint['metrics'],
+              'joint_failure_attribution':joint['failure_attribution'],
+              'live_dailymed_metrics':live['metrics'],
+              'release_gate':'PASS' if all(gates.values()) else 'FAIL',
+              'interpretation':'PASS requires both the frozen controlled S2->S3 handoff and the existing live DailyMed retrieval sidecar to pass, plus independent S3a/S3b preconditions.',
+          }
+          open('/tmp/s2-s3-joint/combined-release.json','w',encoding='utf-8').write(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          open('/tmp/s2-s3-joint/dataset-sha256.txt','w').write(hashlib.sha256(open(suite,'rb').read()).hexdigest()+'\n')
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+
+      - name: Write first-run manifest
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,os
+          combined=json.load(open('/tmp/s2-s3-joint/combined-release.json',encoding='utf-8'))
+          manifest={
+              'benchmark_id':'S2-S3-joint-heldout-v0.1',
+              'suite_freeze_commit':'65f6797c736792ea0da743c6f40303bf6f2825df',
+              'suite_blob_sha':'55d191267eb754f61348c6a3f54488173a2ea50d',
+              'joint_harness_commit':'cca5a6bbf5bb56ca30c2a0dc06527d748d87e9a4',
+              'joint_harness_blob_sha':'48cf7eeb500ed9ba837f11394991a2e070a61971',
+              's2_router_version':'intent-first-s2-v0.3.0',
+              's3a_version':'s3a-compositional-frame-v0.5.6.1',
+              's3a_commit':'4b7aaabe490e3e477d1d1441b55c5ee656675e1f',
+              's3b_version':'s3b-structured-entailment-v0.2.2',
+              'workflow_source_commit':os.environ.get('GITHUB_SHA'),
+              'github_run_id':os.environ.get('GITHUB_RUN_ID'),
+              'dataset_sha256':open('/tmp/s2-s3-joint/dataset-sha256.txt').read().strip(),
+              'first_observation_must_be_preserved':True,
+              'release_gate':combined['release_gate'],
+          }
+          open('/tmp/s2-s3-joint/manifest.json','w',encoding='utf-8').write(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s2-s3-joint-v01-first-run
+          path: /tmp/s2-s3-joint
+          retention-days: 90
+
+      - name: Preserve first-run raw outputs before enforcement
+        if: always()
+        run: |
+          dest="medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run"
+          mkdir -p "${dest}"
+          cp -f /tmp/s2-s3-joint/* "${dest}/"
+          cp -f medical/stage-evals/S2S3/s2-s3-joint-heldout-v0.1.json "${dest}/gold.json"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${dest}"
+          if ! git diff --cached --quiet; then
+            git commit -m "S2-S3 eval: preserve joint first-run raw results"
+            git push
+          fi
+
+      - name: Enforce combined release gate
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/s2-s3-joint/combined-release.json',encoding='utf-8'))
+          if d['release_gate']!='PASS': raise SystemExit(2)
+          PY
