@@ -152,6 +152,8 @@ pre-freeze pinned artifacts                       22/22 VERIFIED
 candidate frozen                                         no
 v0.9 fresh authoring admission             BLOCKED_NOT_FROZEN
 v0.9 admission adversarial scenarios                  10/10 PASS
+freeze receipt materializer scenarios                   6/6 PASS
+canonical freeze receipt                               absent
 builder / exporter regression                     PASS / PASS
 fresh evidence                                           no
 ```
@@ -169,6 +171,11 @@ Its deterministic adversarial suite covers 10 states: missing/malformed/self-ass
 unavailable or unmerged commits, pre-freeze assets, the simulated valid transition, and missing,
 mismatched or matching post-freeze protocols. The positive transition uses mocked Git history and is
 explicitly development process evidence—not a real freeze, fresh result or release signal.
+The receipt materializer adds the inverse transition: it refuses invalid approval references,
+unavailable/non-canonical commits and any drift in the 22 pinned artifacts. Only the exact
+`origin/main` tip can yield a receipt, and even that receipt records `fresh_evidence=false`,
+`gold_approved=false`, S5 release blocked and S6 trust blocked. Its 6/6 tests use simulated Git state;
+no canonical receipt exists while PR #4 remains open.
 
 ## 8. Current release decision
 

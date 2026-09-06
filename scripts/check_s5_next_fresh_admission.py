@@ -15,7 +15,9 @@ DEFAULT_RECEIPT = ROOT / "medical/stage-evals/S5/freeze-receipt-v0.8.1.json"
 DEFAULT_FRESH_ROOT = ROOT / "medical/stage-evals/S5/fresh-lineage-v0.9"
 ATTESTATION = ROOT / "medical/stage-evals/S5/freeze-readiness-v0.8.1.json"
 EXPECTED_ATTESTATION_BLOB = "f7ecf1663adebeb7b81eaa681ca142b1f749f833"
+EXPECTED_RECEIPT_GENERATOR = "s5-freeze-receipt-v0.1"
 COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
+APPROVAL_RE = re.compile(r"^user-approval:[A-Za-z0-9._:/#-]{8,}$")
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -40,12 +42,16 @@ def validate_receipt(receipt: dict[str, Any], attestation: dict[str, Any]) -> tu
         failures.append("RECEIPT_SCOPE_INVALID")
     if receipt.get("receipt_type") != "canonical_freeze_receipt":
         failures.append("RECEIPT_TYPE_INVALID")
+    if receipt.get("generator_version") != EXPECTED_RECEIPT_GENERATOR:
+        failures.append("RECEIPT_GENERATOR_INVALID")
     if receipt.get("candidate_frozen") is not True:
         failures.append("CANDIDATE_NOT_FROZEN")
     if receipt.get("merged_pr") != 4:
         failures.append("MERGED_PR_MISMATCH")
     if receipt.get("explicit_merge_approval") is not True:
         failures.append("EXPLICIT_APPROVAL_MISSING")
+    if not APPROVAL_RE.fullmatch(str(receipt.get("approval_reference") or "")):
+        failures.append("APPROVAL_REFERENCE_INVALID")
     if receipt.get("attestation_git_blob_sha1") != EXPECTED_ATTESTATION_BLOB:
         failures.append("ATTESTATION_PIN_MISMATCH")
     if not COMMIT_RE.fullmatch(freeze_commit):
@@ -71,6 +77,19 @@ def validate_receipt(receipt: dict[str, Any], attestation: dict[str, Any]) -> tu
         observed = git("rev-parse", f"{freeze_commit}:{rel}")
         if observed.returncode != 0 or observed.stdout.strip() != row.get("git_blob_sha1"):
             failures.append(f"FREEZE_ARTIFACT_MISMATCH:{rel}")
+    pinned_count = len(attestation.get("pinned_artifacts", []))
+    if receipt.get("pinned_artifact_count") != pinned_count:
+        failures.append("PINNED_ARTIFACT_COUNT_MISMATCH")
+    if receipt.get("verified_artifact_count") != pinned_count:
+        failures.append("VERIFIED_ARTIFACT_COUNT_MISMATCH")
+    if receipt.get("fresh_evidence") is not False or receipt.get("gold_approved") is not False:
+        failures.append("RECEIPT_EVIDENCE_BOUNDARY_INVALID")
+    if (
+        receipt.get("bounded_release") != "BLOCKED_NEXT_FRESH"
+        or receipt.get("stage_release") != "BLOCKED_GOLD_REVIEW"
+        or receipt.get("s6_automatic_trust") != "BLOCKED"
+    ):
+        failures.append("RECEIPT_RELEASE_BOUNDARY_INVALID")
     return not failures, failures
 
 

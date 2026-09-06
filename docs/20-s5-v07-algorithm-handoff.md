@@ -62,6 +62,11 @@ protocol must also name the same freeze commit and state that authoring occurred
 #4 still open, the correct current decision is `BLOCKED_NOT_FROZEN`; injecting an early fresh file is
 a hard failure, not a development warning.
 
+`scripts/materialize_s5_v081_freeze_receipt.py` is the only documented receipt path. It requires the
+exact canonical `origin/main` tip, a non-placeholder `user-approval:` reference and an unchanged
+22-file candidate. The resulting receipt asserts neither fresh evidence nor gold approval and keeps
+S5 release plus S6 automatic trust blocked. While PR #4 remains open, materialization must fail.
+
 ## 1. Objective
 
 Build a reusable semantic-lineage detector that can identify whether a candidate training/source record is derived from protected benchmark/held-out content after paraphrase, field-level edits, wrapper changes, or partial fragment reuse.

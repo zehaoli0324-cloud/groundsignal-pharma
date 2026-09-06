@@ -29,11 +29,13 @@
       "admission_decision": "FAIL_CLOSED",
       "fresh_authoring_allowed": false,
       "expected_failures_observed": [
+        "APPROVAL_REFERENCE_INVALID",
         "ATTESTATION_PIN_MISMATCH",
         "CANDIDATE_NOT_FROZEN",
         "EXPLICIT_APPROVAL_MISSING",
         "FREEZE_COMMIT_INVALID",
         "MERGED_PR_MISMATCH",
+        "RECEIPT_GENERATOR_INVALID",
         "RECEIPT_SCOPE_INVALID",
         "RECEIPT_TYPE_INVALID"
       ]

@@ -14,6 +14,8 @@ on:
       - 'scripts/verify_s5_v081_freeze_readiness.py'
       - 'scripts/check_s5_next_fresh_admission.py'
       - 'scripts/test_s5_next_fresh_admission.py'
+      - 'scripts/materialize_s5_v081_freeze_receipt.py'
+      - 'scripts/test_s5_v081_freeze_receipt_materializer.py'
       - 'scripts/eval_s5_boundary_regression_v081.py'
       - 'medical/stage-evals/S5/calibration-v0.8.1.json'
       - 'medical/stage-evals/S5/calibration-matrix-v0.8.1.json'
@@ -21,6 +23,7 @@ on:
       - 'medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json'
       - 'medical/stage-evals/S5/next-fresh-admission-v0.9.json'
       - 'medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json'
+      - 'medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json'
       - 'medical/stage-evals/S5/regression-v0.8.1.json'
       - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
       - 'medical/stage-evals/S5/S5_V0.8.1_MULTILINGUAL_MOSAIC_REPAIR_REPORT.md'
@@ -43,6 +46,8 @@ on:
       - 'scripts/verify_s5_v081_freeze_readiness.py'
       - 'scripts/check_s5_next_fresh_admission.py'
       - 'scripts/test_s5_next_fresh_admission.py'
+      - 'scripts/materialize_s5_v081_freeze_receipt.py'
+      - 'scripts/test_s5_v081_freeze_receipt_materializer.py'
       - 'scripts/eval_s5_boundary_regression_v081.py'
       - 'medical/stage-evals/S5/calibration-v0.8.1.json'
       - 'medical/stage-evals/S5/calibration-matrix-v0.8.1.json'
@@ -50,6 +55,7 @@ on:
       - 'medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json'
       - 'medical/stage-evals/S5/next-fresh-admission-v0.9.json'
       - 'medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json'
+      - 'medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json'
       - 'medical/stage-evals/S5/regression-v0.8.1.json'
       - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
       - '.github/workflows/s5-v081-multilingual-mosaic-repair.yml'
@@ -83,6 +89,8 @@ jobs:
             scripts/verify_s5_v081_freeze_readiness.py \
             scripts/check_s5_next_fresh_admission.py \
             scripts/test_s5_next_fresh_admission.py \
+            scripts/materialize_s5_v081_freeze_receipt.py \
+            scripts/test_s5_v081_freeze_receipt_materializer.py \
             scripts/eval_s5_boundary_regression_v081.py
 
       - name: Preserve immutable v0.8 fresh FAIL
@@ -99,14 +107,19 @@ jobs:
 
       - name: Enforce next-fresh authoring admission
         run: |
-          test "$(git rev-parse HEAD:scripts/check_s5_next_fresh_admission.py)" = '952a9ab3e815cd2047bccb7a55ca371ca4ce5d51'
+          test "$(git rev-parse HEAD:scripts/check_s5_next_fresh_admission.py)" = 'dacf969d4e02f8d9b0dc20f7a7457c96b4608d17'
           test "$(git rev-parse HEAD:medical/stage-evals/S5/next-fresh-admission-v0.9.json)" = 'b73126c77f5601e6381d085c037251c60d0012a7'
-          test "$(git rev-parse HEAD:scripts/test_s5_next_fresh_admission.py)" = 'febcaae919e78e1d0ba91385c6b9d3053bc6c72f'
-          test "$(git rev-parse HEAD:medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json)" = 'bd1f73e8f41fa53e04f3f378c9234ed909b52527'
+          test "$(git rev-parse HEAD:scripts/test_s5_next_fresh_admission.py)" = '0e66f8aa2fcc021bd9b0e2da3b5de08d9b8bb50a'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json)" = 'be06fdb7424e321a785c24796f2810c8e0f97129'
+          test "$(git rev-parse HEAD:scripts/materialize_s5_v081_freeze_receipt.py)" = '0a7e2bea649b84f6f82b3e6c89af896c9f10120c'
+          test "$(git rev-parse HEAD:scripts/test_s5_v081_freeze_receipt_materializer.py)" = '139caaa1aca03e89c48208947b3601fbb8084a3d'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json)" = '01cacd638f0bed8761cbb074ebacdf7f71338b4f'
           python scripts/check_s5_next_fresh_admission.py --out /tmp/s5-v09-admission.json
           cmp /tmp/s5-v09-admission.json medical/stage-evals/S5/next-fresh-admission-v0.9.json
           python scripts/test_s5_next_fresh_admission.py --out /tmp/s5-v09-admission-tests.json
           cmp /tmp/s5-v09-admission-tests.json medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json
+          python scripts/test_s5_v081_freeze_receipt_materializer.py --out /tmp/s5-v081-receipt-tests.json
+          cmp /tmp/s5-v081-receipt-tests.json medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json
 
           tmp="$(mktemp -d)"
           mkdir -p "$tmp/fresh-lineage-v0.9"

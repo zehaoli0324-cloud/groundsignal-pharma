@@ -1,0 +1,59 @@
+{
+  "stage": "S5",
+  "version": "v0.8.1-freeze-receipt-tests-v0.1",
+  "evidence_class": "development_process_guard_test",
+  "fresh_evidence": false,
+  "scenario_count": 6,
+  "scenario_pass_count": 6,
+  "test_gate": "PASS",
+  "scenarios": [
+    {
+      "name": "invalid_authority_inputs_rejected",
+      "result": "PASS",
+      "failures": [
+        "APPROVAL_REFERENCE_INVALID",
+        "FREEZE_COMMIT_INVALID"
+      ]
+    },
+    {
+      "name": "unavailable_commit_rejected",
+      "result": "PASS",
+      "failures": [
+        "FREEZE_COMMIT_UNAVAILABLE"
+      ]
+    },
+    {
+      "name": "working_attestation_drift_rejected",
+      "result": "PASS",
+      "failures": [
+        "CURRENT_ATTESTATION_BLOB_MISMATCH"
+      ]
+    },
+    {
+      "name": "noncanonical_commit_rejected",
+      "result": "PASS",
+      "failures": [
+        "FREEZE_COMMIT_NOT_CANONICAL_MAIN_TIP",
+        "FREEZE_COMMIT_NOT_ON_CANONICAL_MAIN"
+      ]
+    },
+    {
+      "name": "candidate_byte_drift_rejected",
+      "result": "PASS",
+      "failures": [
+        "FREEZE_ARTIFACT_MISMATCH:scripts/s5_lineage_detector_v081.py"
+      ]
+    },
+    {
+      "name": "canonical_exact_candidate_materializes_bounded_receipt",
+      "result": "PASS",
+      "failures": []
+    }
+  ],
+  "receipt_materialized": false,
+  "gold_approved": false,
+  "bounded_release": "BLOCKED_NEXT_FRESH",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "note": "The success path uses mocked Git history; no canonical freeze receipt is created by this test."
+}

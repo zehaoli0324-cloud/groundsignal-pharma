@@ -36,12 +36,21 @@ def receipt(*, commit: str, tree: str, **overrides: Any) -> dict[str, Any]:
         "stage": "S5",
         "version": "v0.8.1",
         "receipt_type": "canonical_freeze_receipt",
+        "generator_version": "s5-freeze-receipt-v0.1",
         "candidate_frozen": True,
         "merged_pr": 4,
         "explicit_merge_approval": True,
+        "approval_reference": "user-approval:fixture-0001",
         "attestation_git_blob_sha1": "f7ecf1663adebeb7b81eaa681ca142b1f749f833",
         "freeze_commit": commit,
         "freeze_tree_sha": tree,
+        "pinned_artifact_count": 22,
+        "verified_artifact_count": 22,
+        "fresh_evidence": False,
+        "gold_approved": False,
+        "bounded_release": "BLOCKED_NEXT_FRESH",
+        "stage_release": "BLOCKED_GOLD_REVIEW",
+        "s6_automatic_trust": "BLOCKED",
     }
     value.update(overrides)
     return value
@@ -114,16 +123,18 @@ def run() -> dict[str, Any]:
             tree="not-a-tree",
             stage="S6",
             receipt_type="self_asserted",
+            generator_version="unknown-generator",
             candidate_frozen=False,
             merged_pr=999,
             explicit_merge_approval=False,
+            approval_reference="TODO",
             attestation_git_blob_sha1="0" * 40,
         ))
         result = module.evaluate(invalid, tmp / "empty-fresh")
         require(result, gate="FAIL", decision="FAIL_CLOSED", failures={
             "RECEIPT_SCOPE_INVALID", "RECEIPT_TYPE_INVALID", "CANDIDATE_NOT_FROZEN",
             "MERGED_PR_MISMATCH", "EXPLICIT_APPROVAL_MISSING", "ATTESTATION_PIN_MISMATCH",
-            "FREEZE_COMMIT_INVALID",
+            "FREEZE_COMMIT_INVALID", "RECEIPT_GENERATOR_INVALID", "APPROVAL_REFERENCE_INVALID",
         })
         record("self_asserted_authority_is_rejected", result)
 
