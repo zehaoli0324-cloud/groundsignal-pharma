@@ -1,0 +1,238 @@
+{
+  "benchmark_id": "S2-S3-joint-heldout-v0.1",
+  "split": "heldout",
+  "frozen_after_joint_harness_implementation": true,
+  "joint_harness_commit": "cca5a6bbf5bb56ca30c2a0dc06527d748d87e9a4",
+  "s2_router_version": "intent-first-s2-v0.3.0",
+  "s3a_version": "s3a-compositional-frame-v0.5.6.1",
+  "s3a_commit": "4b7aaabe490e3e477d1d1441b55c5ee656675e1f",
+  "s3b_version": "s3b-structured-entailment-v0.2.2",
+  "design_note": "Controlled source-scoped passages test the S2-to-S3 handoff without network variance. A separate live DailyMed sidecar is required in the same evaluation workflow. Passage text is capability data, not clinical validation or a claim of source completeness.",
+  "release_criteria": {
+    "min_intent_accuracy": 0.90,
+    "min_primary_source_accuracy": 0.90,
+    "min_source_handoff_accuracy": 0.90,
+    "min_s3a_nonabstention_rate": 0.95,
+    "min_s3b_relation_accuracy": 0.90,
+    "min_end_to_end_accuracy": 0.85,
+    "max_high_risk_false_support_count": 0
+  },
+  "items": [
+    {
+      "item_id":"S2S3-001",
+      "query":"我想核对美国说明书里当前的 eGFR 用药限制，不要二手文献。",
+      "expected_intent":"US_PRODUCT_LABEL_CURRENT",
+      "expected_primary_source":"DAILYMED_SPL",
+      "source_documents":[
+        {"source_id":"DAILYMED_SPL","document_id":"dm-renal-1","text":"For an existing user, eGFR below 30 requires discontinuation of the medicine."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-1","text":"A review discusses renal impairment but does not provide a therapeutic dose rule."}
+      ],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":29}],"population":"existing_user"}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":true
+    },
+    {
+      "item_id":"S2S3-002",
+      "query":"查美国当前处方信息：eGFR 35 的既有患者是不是必须停药？",
+      "expected_intent":"US_PRODUCT_LABEL_CURRENT",
+      "expected_primary_source":"DAILYMED_SPL",
+      "source_documents":[
+        {"source_id":"DAILYMED_SPL","document_id":"dm-renal-2","text":"For an existing user, eGFR below 30 requires discontinuation of the medicine."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-2","text":"A narrative review mentions kidney disease without a discontinuation threshold."}
+      ],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"DISCONTINUE","object":"drug","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":35}],"population":"existing_user"}],
+      "gold_relation":"DOES_NOT_SUPPORT","high_risk":true
+    },
+    {
+      "item_id":"S2S3-003",
+      "query":"美国最新说明书中，新患者 eGFR 低时能不能开始治疗？",
+      "expected_intent":"US_PRODUCT_LABEL_CURRENT",
+      "expected_primary_source":"DAILYMED_SPL",
+      "source_documents":[
+        {"source_id":"DAILYMED_SPL","document_id":"dm-init-1","text":"For a new patient, initiation is not recommended when eGFR is below 45."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-3","text":"The literature reviews kidney function in treated populations."}
+      ],
+      "candidate_propositions":[{"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":40}],"population":"new_or_initiating_user"}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":true
+    },
+    {
+      "item_id":"S2S3-004",
+      "query":"我要看美国当前产品标签，这个发现到底是不是正式禁忌。",
+      "expected_intent":"US_PRODUCT_LABEL_CURRENT",
+      "expected_primary_source":"DAILYMED_SPL",
+      "source_documents":[
+        {"source_id":"DAILYMED_SPL","document_id":"dm-ci-1","text":"The finding by itself is not a contraindication to use of the treatment."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-4","text":"An observational report describes the finding."}
+      ],
+      "candidate_propositions":[{"subject":"drug_use","predicate":"CONTRAINDICATED","object":"use","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"CONTRADICTS","high_risk":true
+    },
+    {
+      "item_id":"S2S3-005",
+      "query":"NCT 记录现在是什么招募状态？同时看看 trial registry 里的注册终点。",
+      "expected_intent":"TRIAL_REGISTRY_STATUS",
+      "expected_primary_source":"CLINICALTRIALS_GOV",
+      "source_documents":[
+        {"source_id":"CLINICALTRIALS_GOV","document_id":"ct-status-1","text":"The study is RECRUITING and lists a prespecified primary endpoint."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-5","text":"A protocol paper discusses the study design."}
+      ],
+      "candidate_propositions":[{"subject":"study","predicate":"HAS_STATUS","object":"recruiting","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":false
+    },
+    {
+      "item_id":"S2S3-006",
+      "query":"ClinicalTrials.gov 的注册终点是否已经有结果证明达成？",
+      "expected_intent":"TRIAL_REGISTRY_STATUS",
+      "expected_primary_source":"CLINICALTRIALS_GOV",
+      "source_documents":[
+        {"source_id":"CLINICALTRIALS_GOV","document_id":"ct-endpoint-1","text":"The registry identifies a primary endpoint. Nothing in the posted results establishes that the endpoint was achieved."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-6","text":"A background paper mentions the intervention without endpoint results."}
+      ],
+      "candidate_propositions":[{"subject":"study","predicate":"ACHIEVES_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"DOES_NOT_SUPPORT","high_risk":true
+    },
+    {
+      "item_id":"S2S3-007",
+      "query":"去 FAERS 看自发报告安全信号，这些报告能不能直接证明因果？",
+      "expected_intent":"SAFETY_SIGNAL_SURVEILLANCE",
+      "expected_primary_source":"OPENFDA_FAERS",
+      "source_documents":[
+        {"source_id":"OPENFDA_FAERS","document_id":"faers-causal-1","text":"Spontaneous adverse-event reports can flag a safety signal, but they do not establish causation for the event."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-7","text":"A review discusses possible biological mechanisms."}
+      ],
+      "candidate_propositions":[{"subject":"evidence","predicate":"ESTABLISHES_CAUSALITY","object":"causal_relation","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"CONTRADICTS","high_risk":true
+    },
+    {
+      "item_id":"S2S3-008",
+      "query":"FAERS 的自发报告数量能不能当成真实不良事件发生率？",
+      "expected_intent":"SAFETY_SIGNAL_SURVEILLANCE",
+      "expected_primary_source":"OPENFDA_FAERS",
+      "source_documents":[
+        {"source_id":"OPENFDA_FAERS","document_id":"faers-inc-1","text":"Raw report counts do not estimate true event incidence without an exposed-population denominator."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-8","text":"A publication summarizes reported cases."}
+      ],
+      "candidate_propositions":[{"subject":"report_count","predicate":"ESTIMATES_TRUE_INCIDENCE","object":"event_incidence","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"CONTRADICTS","high_risk":true
+    },
+    {
+      "item_id":"S2S3-009",
+      "query":"我要查 FAERS safety signal，不做因果推断，只确认是否能用于信号发现。",
+      "expected_intent":"SAFETY_SIGNAL_SURVEILLANCE",
+      "expected_primary_source":"OPENFDA_FAERS",
+      "source_documents":[
+        {"source_id":"OPENFDA_FAERS","document_id":"faers-signal-1","text":"Spontaneous reports can flag a safety signal for further review."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-9","text":"A methods paper discusses signal validation."}
+      ],
+      "candidate_propositions":[{"subject":"spontaneous_report_system","predicate":"SUPPORTS_SIGNAL_DETECTION","object":"safety_signal","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":false
+    },
+    {
+      "item_id":"S2S3-010",
+      "query":"去 PubMed 找 randomized trial paper，确认试验是否支持 option Alpha。",
+      "expected_intent":"PEER_REVIEWED_LITERATURE",
+      "expected_primary_source":"PUBMED",
+      "source_documents":[
+        {"source_id":"PUBMED","document_id":"pm-trial-1","text":"The randomized trial supports option Alpha."},
+        {"source_id":"DAILYMED_SPL","document_id":"dm-distractor-10","text":"The product label does not compare option Alpha with alternatives."}
+      ],
+      "candidate_propositions":[{"subject":"trial","predicate":"SUPPORTS_OPTION","object":"alpha","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":false
+    },
+    {
+      "item_id":"S2S3-011",
+      "query":"查 PubMed 的临床论文：randomized trial 到底有没有支持 option Beta？",
+      "expected_intent":"PEER_REVIEWED_LITERATURE",
+      "expected_primary_source":"PUBMED",
+      "source_documents":[
+        {"source_id":"PUBMED","document_id":"pm-trial-2","text":"Option Beta was not supported by the randomized trial."},
+        {"source_id":"DAILYMED_SPL","document_id":"dm-distractor-11","text":"The label contains no comparative trial conclusion."}
+      ],
+      "candidate_propositions":[{"subject":"trial","predicate":"SUPPORTS_OPTION","object":"beta","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"CONTRADICTS","high_risk":true
+    },
+    {
+      "item_id":"S2S3-012",
+      "query":"从 PubMed 文献里核对 Biomarker C 和 Outcome D 的 association。",
+      "expected_intent":"PEER_REVIEWED_LITERATURE",
+      "expected_primary_source":"PUBMED",
+      "source_documents":[
+        {"source_id":"PUBMED","document_id":"pm-assoc-1","text":"Outcome D was associated with Biomarker C."},
+        {"source_id":"DAILYMED_SPL","document_id":"dm-distractor-12","text":"The product label does not discuss Biomarker C."}
+      ],
+      "candidate_propositions":[{"subject":"biomarker_c","predicate":"ASSOCIATED_WITH","object":"outcome_d","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":false
+    },
+    {
+      "item_id":"S2S3-013",
+      "query":"这个病理分类我只想找一般医学证据核对，不涉及监管、说明书或试验注册。",
+      "expected_intent":"GENERIC_MEDICAL_LITERATURE",
+      "expected_primary_source":"PUBMED",
+      "source_documents":[
+        {"source_id":"PUBMED","document_id":"pm-path-1","text":"The final pathology report classifies the lesion as malignant."},
+        {"source_id":"DAILYMED_SPL","document_id":"dm-distractor-13","text":"The medicine label does not classify this lesion."}
+      ],
+      "candidate_propositions":[{"subject":"lesion","predicate":"CLASSIFIED_AS","object":"malignant","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":true
+    },
+    {
+      "item_id":"S2S3-014",
+      "query":"查 AHA 对胸痛的当前专业指导，我要确认现行 guideline 推荐的是不是 option Gamma。",
+      "expected_intent":"CARDIOVASCULAR_GUIDANCE",
+      "expected_primary_source":"AHA_GUIDANCE",
+      "source_documents":[
+        {"source_id":"AHA_GUIDANCE","document_id":"aha-guide-1","text":"The current guideline still recommends option Gamma."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-14","text":"An older review mentions option Delta."}
+      ],
+      "candidate_propositions":[{"subject":"current_guideline","predicate":"IS_CURRENT","object":"gamma","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":false
+    },
+    {
+      "item_id":"S2S3-015",
+      "query":"查 LiverTox 的 drug-induced liver injury 背景：单个 case report 能不能证明因果？",
+      "expected_intent":"DILI_REFERENCE",
+      "expected_primary_source":"LIVERTOX",
+      "source_documents":[
+        {"source_id":"LIVERTOX","document_id":"lt-causal-1","text":"A case report can raise concern, but it does not establish causation for the liver event."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-15","text":"A mechanistic paper proposes a possible pathway."}
+      ],
+      "candidate_propositions":[{"subject":"evidence","predicate":"ESTABLISHES_CAUSALITY","object":"causal_relation","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"CONTRADICTS","high_risk":true
+    },
+    {
+      "item_id":"S2S3-016",
+      "query":"查 pharmacogenomic 证据，确认 Biomarker G 是否和 Outcome P 有 association。",
+      "expected_intent":"PHARMACOGENOMICS",
+      "expected_primary_source":"FDA_PGX",
+      "source_documents":[
+        {"source_id":"FDA_PGX","document_id":"pgx-assoc-1","text":"Outcome P was associated with Biomarker G."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-16","text":"A review discusses pharmacogenomic hypotheses."}
+      ],
+      "candidate_propositions":[{"subject":"biomarker_g","predicate":"ASSOCIATED_WITH","object":"outcome_p","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"DIRECT_SUPPORT","high_risk":false
+    },
+    {
+      "item_id":"S2S3-017",
+      "query":"美国当前说明书说 eGFR 低于 45 时新患者不建议开始，我想问这个规则能不能直接推广到 existing user？",
+      "expected_intent":"US_PRODUCT_LABEL_CURRENT",
+      "expected_primary_source":"DAILYMED_SPL",
+      "source_documents":[
+        {"source_id":"DAILYMED_SPL","document_id":"dm-pop-1","text":"For a new patient, initiation is not recommended when eGFR is below 45."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-17","text":"A review combines new and existing users without a formal rule."}
+      ],
+      "candidate_propositions":[{"subject":"drug_initiation","predicate":"INITIATION_NOT_RECOMMENDED","object":"initiation","polarity":"POSITIVE","conditions":[{"variable":"egfr","operator":"EQ","value":40}],"population":"existing_user"}],
+      "gold_relation":"DOES_NOT_SUPPORT","high_risk":true
+    },
+    {
+      "item_id":"S2S3-018",
+      "query":"查试验注册 NCT 的 primary endpoint；如果记录只写了终点但没结果，能否说已经达成？",
+      "expected_intent":"TRIAL_REGISTRY_STATUS",
+      "expected_primary_source":"CLINICALTRIALS_GOV",
+      "source_documents":[
+        {"source_id":"CLINICALTRIALS_GOV","document_id":"ct-endpoint-2","text":"The registry lists a prespecified primary endpoint, but no efficacy result is posted."},
+        {"source_id":"PUBMED","document_id":"pm-distractor-18","text":"A background article discusses endpoint selection."}
+      ],
+      "candidate_propositions":[{"subject":"study","predicate":"ACHIEVES_ENDPOINT","object":"primary_endpoint","polarity":"POSITIVE","conditions":[],"population":null}],
+      "gold_relation":"DOES_NOT_SUPPORT","high_risk":true
+    }
+  ]
+}
