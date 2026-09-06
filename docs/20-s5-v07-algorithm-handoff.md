@@ -67,6 +67,11 @@ exact canonical `origin/main` tip, a non-placeholder `user-approval:` reference 
 22-file candidate. The resulting receipt asserts neither fresh evidence nor gold approval and keeps
 S5 release plus S6 automatic trust blocked. While PR #4 remains open, materialization must fail.
 
+The candidate-byte attestation and the control plane are intentionally separate. The former pins 22
+algorithm, dependency and evidence artifacts; `control-plane-readiness-v0.8.1.json` pins 9 files that
+authorize and verify freeze/fresh transitions. Its verifier checks both content hashes and 10 state
+boundaries, while still recording `control_plane_frozen=false` and no canonical receipt.
+
 ## 1. Objective
 
 Build a reusable semantic-lineage detector that can identify whether a candidate training/source record is derived from protected benchmark/held-out content after paraphrase, field-level edits, wrapper changes, or partial fragment reuse.

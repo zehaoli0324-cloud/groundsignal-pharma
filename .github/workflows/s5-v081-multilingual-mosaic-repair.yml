@@ -16,6 +16,7 @@ on:
       - 'scripts/test_s5_next_fresh_admission.py'
       - 'scripts/materialize_s5_v081_freeze_receipt.py'
       - 'scripts/test_s5_v081_freeze_receipt_materializer.py'
+      - 'scripts/verify_s5_v081_control_plane_readiness.py'
       - 'scripts/eval_s5_boundary_regression_v081.py'
       - 'medical/stage-evals/S5/calibration-v0.8.1.json'
       - 'medical/stage-evals/S5/calibration-matrix-v0.8.1.json'
@@ -24,6 +25,8 @@ on:
       - 'medical/stage-evals/S5/next-fresh-admission-v0.9.json'
       - 'medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json'
       - 'medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json'
+      - 'medical/stage-evals/S5/control-plane-readiness-v0.8.1.json'
+      - 'medical/stage-evals/S5/control-plane-readiness-check-v0.8.1.json'
       - 'medical/stage-evals/S5/regression-v0.8.1.json'
       - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
       - 'medical/stage-evals/S5/S5_V0.8.1_MULTILINGUAL_MOSAIC_REPAIR_REPORT.md'
@@ -48,6 +51,7 @@ on:
       - 'scripts/test_s5_next_fresh_admission.py'
       - 'scripts/materialize_s5_v081_freeze_receipt.py'
       - 'scripts/test_s5_v081_freeze_receipt_materializer.py'
+      - 'scripts/verify_s5_v081_control_plane_readiness.py'
       - 'scripts/eval_s5_boundary_regression_v081.py'
       - 'medical/stage-evals/S5/calibration-v0.8.1.json'
       - 'medical/stage-evals/S5/calibration-matrix-v0.8.1.json'
@@ -56,6 +60,8 @@ on:
       - 'medical/stage-evals/S5/next-fresh-admission-v0.9.json'
       - 'medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json'
       - 'medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json'
+      - 'medical/stage-evals/S5/control-plane-readiness-v0.8.1.json'
+      - 'medical/stage-evals/S5/control-plane-readiness-check-v0.8.1.json'
       - 'medical/stage-evals/S5/regression-v0.8.1.json'
       - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
       - '.github/workflows/s5-v081-multilingual-mosaic-repair.yml'
@@ -91,6 +97,7 @@ jobs:
             scripts/test_s5_next_fresh_admission.py \
             scripts/materialize_s5_v081_freeze_receipt.py \
             scripts/test_s5_v081_freeze_receipt_materializer.py \
+            scripts/verify_s5_v081_control_plane_readiness.py \
             scripts/eval_s5_boundary_regression_v081.py
 
       - name: Preserve immutable v0.8 fresh FAIL
@@ -120,6 +127,38 @@ jobs:
           cmp /tmp/s5-v09-admission-tests.json medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json
           python scripts/test_s5_v081_freeze_receipt_materializer.py --out /tmp/s5-v081-receipt-tests.json
           cmp /tmp/s5-v081-receipt-tests.json medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json
+
+      - name: Verify pinned pre-freeze control plane
+        run: |
+          test "$(git rev-parse HEAD:scripts/verify_s5_v081_control_plane_readiness.py)" = '1410554c3947ca3e2be189b8ca220b0f88349605'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/control-plane-readiness-v0.8.1.json)" = '7479de0e46d8b55c31b7580edac00ccb24574705'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/control-plane-readiness-check-v0.8.1.json)" = 'c9123453bc43dbec4cb5f99d303a222a7490560d'
+          python scripts/verify_s5_v081_control_plane_readiness.py \
+            --out /tmp/s5-v081-control-plane-readiness.json
+          cmp /tmp/s5-v081-control-plane-readiness.json \
+            medical/stage-evals/S5/control-plane-readiness-check-v0.8.1.json
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          source=Path('medical/stage-evals/S5/control-plane-readiness-v0.8.1.json')
+          tampered=json.loads(source.read_text())
+          tampered['pinned_control_plane_artifacts'][0]['sha256']='0'*64
+          Path('/tmp/s5-v081-control-plane-tampered.json').write_text(json.dumps(tampered))
+          PY
+          set +e
+          python scripts/verify_s5_v081_control_plane_readiness.py \
+            --manifest /tmp/s5-v081-control-plane-tampered.json \
+            --out /tmp/s5-v081-control-plane-negative.json
+          rc=$?
+          set -e
+          test "$rc" -eq 1
+          python - <<'PY'
+          import json
+          result=json.load(open('/tmp/s5-v081-control-plane-negative.json'))
+          assert result['verification_gate']=='FAIL'
+          assert 'PIN_MISMATCH:scripts/check_s5_next_fresh_admission.py:sha256' in result['failures']
+          PY
 
           tmp="$(mktemp -d)"
           mkdir -p "$tmp/fresh-lineage-v0.9"

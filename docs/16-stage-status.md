@@ -149,6 +149,7 @@ broader translation attacks                      12/12 BLOCK
 noisy multi-reference mosaics                      6/6 BLOCK
 multilingual clean near-neighbours                18/18 ALLOW
 pre-freeze pinned artifacts                       22/22 VERIFIED
+pre-freeze control-plane artifacts                  9/9 VERIFIED
 candidate frozen                                         no
 v0.9 fresh authoring admission             BLOCKED_NOT_FROZEN
 v0.9 admission adversarial scenarios                  10/10 PASS
@@ -176,6 +177,11 @@ unavailable/non-canonical commits and any drift in the 22 pinned artifacts. Only
 `origin/main` tip can yield a receipt, and even that receipt records `fresh_evidence=false`,
 `gold_approved=false`, S5 release blocked and S6 trust blocked. Its 6/6 tests use simulated Git state;
 no canonical receipt exists while PR #4 remains open.
+The separate control-plane attestation pins the admission guard, receipt materializer, both test
+runners, their committed evidence, the current admission decision, the candidate attestation and its
+own verifier. All 9/9 paths and 10/10 boundary assertions pass. This prevents a green candidate hash
+from hiding drift in the code that decides whether later fresh authoring is authorized. It remains a
+pre-freeze development attestation with `control_plane_frozen=false`.
 
 ## 8. Current release decision
 
