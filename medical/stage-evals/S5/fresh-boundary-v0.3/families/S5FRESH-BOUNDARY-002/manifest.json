@@ -1,0 +1,18 @@
+{
+  "family_id": "S5FRESH-BOUNDARY-002",
+  "title": "Second fresh synthetic trust-boundary family",
+  "status": "gold_review_needed",
+  "data_origin": "synthetic",
+  "graph_snapshot": "graph-snapshot.json",
+  "evidence_manifest": "evidence-manifest.json",
+  "target_capabilities": ["external trust-root enforcement", "partition identity persistence", "payload authority binding", "suite-membership authentication"],
+  "failure_hypotheses": ["benchmark identity can be laundered by copying a file outside case-families", "a self-contained payload digest can be recomputed after mutation", "suite_id can be forged without external verification", "a foreign manifest not belonging to the suite can replace the intended authority"],
+  "split_policy": {"leakage_rule": "Only manifest-declared dev cases in the frozen suite may be training eligible.", "heldout_variables": ["loader trust context", "payload digest authority", "suite identity", "manifest membership"]},
+  "cases": [
+    {"case_id":"S5FRESH-BND3-DEV-001","path":"cases/S5FRESH-BND3-DEV-001.json","split":"dev","variant_type":"base"},
+    {"case_id":"S5FRESH-BND3-DEV-002","path":"cases/S5FRESH-BND3-DEV-002.json","split":"dev","variant_type":"counterfactual"},
+    {"case_id":"S5FRESH-BND3-DEV-003","path":"cases/S5FRESH-BND3-DEV-003.json","split":"dev","variant_type":"negative_control"},
+    {"case_id":"S5FRESH-BND3-REG-001","path":"cases/S5FRESH-BND3-REG-001.json","split":"regression","variant_type":"regression"},
+    {"case_id":"S5FRESH-BND3-HO-001","path":"cases/S5FRESH-BND3-HO-001.json","split":"heldout","variant_type":"heldout"}
+  ]
+}
