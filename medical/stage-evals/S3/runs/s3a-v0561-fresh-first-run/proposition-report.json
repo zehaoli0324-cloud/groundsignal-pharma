@@ -1,0 +1,46 @@
+{
+  "benchmark_id": "S3a-reference-discourse-fresh-v0.5.6.1",
+  "metrics": {
+    "gold_propositions": 45,
+    "predicted_propositions": 46,
+    "true_positive": 45,
+    "precision": 0.9782608695652174,
+    "recall": 1.0,
+    "f1": 0.989010989010989,
+    "critical_proposition_recall": 1.0,
+    "polarity_accuracy_on_structural_matches": 1.0,
+    "polarity_structural_matches": 45,
+    "population_accuracy_on_semantic_matches": 1.0,
+    "population_semantic_matches": 45,
+    "condition_binding_accuracy_on_semantic_matches": 1.0,
+    "condition_semantic_matches": 45,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": true,
+    "critical_recall": true,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": true
+  },
+  "release_gate": "PASS",
+  "failures": [
+    {
+      "item_id": "S3A561F-016",
+      "text": "The registry lists a prespecified primary endpoint, but no efficacy result is posted.",
+      "missing_gold": [],
+      "extra_predicted_signatures": [
+        [
+          "evidence",
+          "ESTABLISHES_ENDPOINT_ACHIEVEMENT",
+          "primary_endpoint",
+          [],
+          null,
+          "NEGATIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    }
+  ]
+}

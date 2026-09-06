@@ -1,0 +1,10 @@
+{
+  "benchmark_id": "S3a-reference-discourse-fresh-v0.5.6.1",
+  "gate_checks": {
+    "proposition_gate": true,
+    "abstention_gate": true,
+    "semantic_safety_error_gate": true,
+    "trace_gate": true
+  },
+  "release_gate": "PASS"
+}
