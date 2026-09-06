@@ -1,0 +1,10 @@
+{
+  "manifest_id": "S5FRESH-BOUNDARY-EVIDENCE-v0.3",
+  "claims": [
+    {"claim_id":"C1","passage_id":"P1","text":"Synthetic v0.3 boundary fixture passage 1; not a clinical claim.","source_type":"synthetic"},
+    {"claim_id":"C2","passage_id":"P2","text":"Synthetic v0.3 boundary fixture passage 2; not a clinical claim.","source_type":"synthetic"},
+    {"claim_id":"C3","passage_id":"P3","text":"Synthetic v0.3 boundary fixture passage 3; not a clinical claim.","source_type":"synthetic"},
+    {"claim_id":"C4","passage_id":"P4","text":"Synthetic v0.3 boundary fixture passage 4; not a clinical claim.","source_type":"synthetic"},
+    {"claim_id":"C5","passage_id":"P5","text":"Synthetic v0.3 boundary fixture passage 5; not a clinical claim.","source_type":"synthetic"}
+  ]
+}
