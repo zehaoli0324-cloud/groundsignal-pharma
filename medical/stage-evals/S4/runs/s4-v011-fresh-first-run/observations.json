@@ -1,0 +1,299 @@
+[
+  {
+    "case_id": "S4F11-001",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "SUPERSEDED_PRIOR",
+      "SUPERSEDED_PRIOR",
+      "SUPERSEDED_PRIOR",
+      "SUPERSEDED_PRIOR"
+    ],
+    "active_count": 1,
+    "contested_count": 0,
+    "superseded_count": 4,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-002",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "CONTRADICTION_RECORDED",
+      "INSERTED_HISTORICAL",
+      "INSERTED_HISTORICAL",
+      "INSERTED_HISTORICAL"
+    ],
+    "active_count": 0,
+    "contested_count": 2,
+    "superseded_count": 3,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-003",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "CONTRADICTION_RECORDED",
+      "SUPERSEDED_PRIOR",
+      "CONTRADICTION_RECORDED",
+      "SUPERSEDED_PRIOR"
+    ],
+    "active_count": 1,
+    "contested_count": 0,
+    "superseded_count": 4,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-004",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "CONTRADICTION_RECORDED",
+      "CONTRADICTION_RECORDED",
+      "CONTRADICTION_RECORDED"
+    ],
+    "active_count": 0,
+    "contested_count": 4,
+    "superseded_count": 0,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-005",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "CONTRADICTION_RECORDED",
+      "SUPERSEDED_PRIOR",
+      "MERGED_IDEMPOTENT"
+    ],
+    "active_count": 1,
+    "contested_count": 0,
+    "superseded_count": 2,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-006",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "CONTRADICTION_RECORDED",
+      "MERGED_IDEMPOTENT"
+    ],
+    "active_count": 0,
+    "contested_count": 2,
+    "superseded_count": 0,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-007",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "INSERTED_ACTIVE",
+      "INSERTED_ACTIVE",
+      "INSERTED_ACTIVE"
+    ],
+    "active_count": 4,
+    "contested_count": 0,
+    "superseded_count": 0,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-008",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "CONTRADICTION_RECORDED",
+      "INSERTED_ACTIVE"
+    ],
+    "active_count": 1,
+    "contested_count": 2,
+    "superseded_count": 0,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-009",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "INSERTED_ACTIVE",
+      "CONTRADICTION_RECORDED",
+      "SUPERSEDED_PRIOR",
+      "SUPERSEDED_PRIOR"
+    ],
+    "active_count": 2,
+    "contested_count": 0,
+    "superseded_count": 3,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-010",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "CONTRADICTION_RECORDED",
+      "CHECKPOINT",
+      "SUPERSEDED_PRIOR",
+      "ROLLED_BACK",
+      "CHECKPOINT_MATCH"
+    ],
+    "active_count": 0,
+    "contested_count": 2,
+    "superseded_count": 0,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-011",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "CONTRADICTION_RECORDED",
+      "CHECKPOINT",
+      "CONTRADICTION_RECORDED",
+      "ROLLED_BACK",
+      "CHECKPOINT_MATCH"
+    ],
+    "active_count": 0,
+    "contested_count": 2,
+    "superseded_count": 0,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-012",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "CHECKPOINT",
+      "MERGED_IDEMPOTENT",
+      "ROLLED_BACK",
+      "CHECKPOINT_MATCH"
+    ],
+    "active_count": 1,
+    "contested_count": 0,
+    "superseded_count": 0,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-013",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "CONTRADICTION_RECORDED",
+      "SUPERSEDED_PRIOR"
+    ],
+    "active_count": 1,
+    "contested_count": 0,
+    "superseded_count": 2,
+    "rejections": 0,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-014",
+    "passed": true,
+    "actions": ["REJECTED"],
+    "active_count": 0,
+    "contested_count": 0,
+    "superseded_count": 0,
+    "rejections": 1,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-015",
+    "passed": true,
+    "actions": ["REJECTED"],
+    "active_count": 0,
+    "contested_count": 0,
+    "superseded_count": 0,
+    "rejections": 1,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-016",
+    "passed": true,
+    "actions": ["REJECTED"],
+    "active_count": 0,
+    "contested_count": 0,
+    "superseded_count": 0,
+    "rejections": 1,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-017",
+    "passed": true,
+    "actions": ["REJECTED"],
+    "active_count": 0,
+    "contested_count": 0,
+    "superseded_count": 0,
+    "rejections": 1,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-018",
+    "passed": true,
+    "actions": ["REJECTED"],
+    "active_count": 0,
+    "contested_count": 0,
+    "superseded_count": 0,
+    "rejections": 1,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-019",
+    "passed": true,
+    "actions": ["REJECTED"],
+    "active_count": 0,
+    "contested_count": 0,
+    "superseded_count": 0,
+    "rejections": 1,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  },
+  {
+    "case_id": "S4F11-020",
+    "passed": true,
+    "actions": [
+      "INSERTED_ACTIVE",
+      "CONTRADICTION_RECORDED",
+      "CHECKPOINT",
+      "REJECTED",
+      "CHECKPOINT_MATCH"
+    ],
+    "active_count": 0,
+    "contested_count": 2,
+    "superseded_count": 0,
+    "rejections": 1,
+    "stale_active": 0,
+    "invariant_violation_count": 0
+  }
+]

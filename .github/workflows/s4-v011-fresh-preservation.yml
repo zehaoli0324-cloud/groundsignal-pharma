@@ -1,0 +1,76 @@
+name: S4 v0.1.1 Fresh Preservation
+
+on:
+  push:
+    paths:
+      - 'scripts/s4_truth_ledger_v01.py'
+      - 'scripts/s4_truth_ledger_v011.py'
+      - 'scripts/eval_s4_truth_ledger_v011_fresh.py'
+      - 'medical/stage-evals/S4/s4_v011_fresh_suite.py'
+      - 'medical/stage-evals/S4/runs/s4-v011-fresh-first-run/**'
+      - 'medical/stage-evals/S4/S4_V0.1.1_FRESH_PASS_REPORT.md'
+      - '.github/workflows/s4-v011-fresh-preservation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preserve-s4-v011-fresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify frozen blobs
+        run: |
+          test "$(git hash-object scripts/s4_truth_ledger_v01.py)" = "860e8b38131e74d9dc06160bd95ade8bd04e77df"
+          test "$(git hash-object scripts/s4_truth_ledger_v011.py)" = "3063927fb22c711ee35f6d629d61284455363cd5"
+          test "$(git hash-object scripts/eval_s4_truth_ledger_v011_fresh.py)" = "9a368ae06f9497805469364ca75f6d0c6278ea9d"
+          test "$(git hash-object medical/stage-evals/S4/s4_v011_fresh_suite.py)" = "a2c253ea3583445e9666d9475f378df75d123799"
+
+      - name: Re-run exposed S4 v0.1.1 regressions
+        run: |
+          python scripts/eval_s4_truth_ledger_v011_regression.py \
+            --suite medical/stage-evals/S4/s4-truth-ledger-dev-v0.1.json \
+            --out-dir /tmp/s4-v011-dev \
+            --suite-role development
+          python scripts/eval_s4_truth_ledger_v011_regression.py \
+            --suite medical/stage-evals/S4/s4-truth-ledger-fresh-heldout-v0.1.json \
+            --out-dir /tmp/s4-v011-exposed \
+            --suite-role exposed_fresh_regression
+
+      - name: Render frozen fresh suite
+        run: |
+          python - <<'PY'
+          import importlib.util, json
+          path='medical/stage-evals/S4/s4_v011_fresh_suite.py'
+          spec=importlib.util.spec_from_file_location('fresh_suite',path)
+          mod=importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(mod)
+          with open('/tmp/s4-v011-fresh-suite.json','w',encoding='utf-8') as f:
+              json.dump(mod.SUITE,f,ensure_ascii=False,indent=2)
+              f.write('\n')
+          PY
+
+      - name: Reproduce immutable fresh first result
+        run: |
+          python scripts/eval_s4_truth_ledger_v011_fresh.py \
+            --suite /tmp/s4-v011-fresh-suite.json \
+            --out-dir /tmp/s4-v011-fresh
+
+      - name: Compare preserved outputs semantically
+        run: |
+          python - <<'PY'
+          import json
+          pairs=[
+            ('medical/stage-evals/S4/runs/s4-v011-fresh-first-run/metrics.json','/tmp/s4-v011-fresh/metrics.json'),
+            ('medical/stage-evals/S4/runs/s4-v011-fresh-first-run/failures.json','/tmp/s4-v011-fresh/failures.json'),
+          ]
+          for expected,got in pairs:
+              with open(expected,encoding='utf-8') as f: a=json.load(f)
+              with open(got,encoding='utf-8') as f: b=json.load(f)
+              assert a==b,(expected,got)
+          PY

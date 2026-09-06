@@ -1,0 +1,31 @@
+{
+  "stage": "S4",
+  "version": "S4-truth-ledger-v0.1.1",
+  "run_id": "s4-v011-fresh-first-run",
+  "evaluation_mode": "independent_fresh_heldout_first_observation",
+  "implementation_freeze_commit": "8d0406df9bb91b16d3201e2b0cf97a0f084e1dad",
+  "implementation_blob_sha": "3063927fb22c711ee35f6d629d61284455363cd5",
+  "base_v01_blob_sha": "860e8b38131e74d9dc06160bd95ade8bd04e77df",
+  "fresh_suite_module_blob_sha": "a2c253ea3583445e9666d9475f378df75d123799",
+  "fresh_evaluator_blob_sha": "9a368ae06f9497805469364ca75f6d0c6278ea9d",
+  "suite_created_after_implementation_freeze": true,
+  "first_observation": true,
+  "first_observation_date": "2026-09-06",
+  "python_version": "3.13.5",
+  "result": "PASS",
+  "n_cases": 20,
+  "passed_cases": 20,
+  "failed_cases": 0,
+  "high_risk_false_accept_count": 0,
+  "stale_active_edge_count": 0,
+  "invariant_violation_count": 0,
+  "artifact_blobs": {
+    "metrics.json": "37c5e5493fb2e3ad1bb503a31106304af25a2008",
+    "observations.json": "772ed1b10e267bc915c60187b577a0908ea94fdf",
+    "failures.json": "fe51488c7066f6687ef680d6bfaa4f7768ef205c",
+    "report": "46de3458b8e9378c91b1546fec2b1710a5c8d799",
+    "stage_status": "736546fe0a2461abdc55f873ce8de24fc9962a27",
+    "preservation_workflow": "a6a29d51bd40082f6074a1a468065658acbefdb5"
+  },
+  "immutability_note": "This first fresh result is historical evidence. Any future reuse of this suite must be labeled exposed regression, never fresh."
+}

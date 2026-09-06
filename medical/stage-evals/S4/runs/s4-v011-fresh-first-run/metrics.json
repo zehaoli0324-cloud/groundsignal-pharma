@@ -1,0 +1,53 @@
+{
+  "integrity": {
+    "fresh_flag": true,
+    "created_after_freeze": true,
+    "implementation_commit_matches": true,
+    "implementation_blob_declared": true,
+    "base_blob_declared": true,
+    "implementation_blob_runtime": true,
+    "base_blob_runtime": true,
+    "version_matches": true
+  },
+  "metrics": {
+    "benchmark_id": "S4-truth-ledger-v0.1.1-independent-fresh-heldout-v0.1",
+    "split": "fresh_heldout",
+    "fresh_heldout": true,
+    "fresh_evidence": true,
+    "first_observation": true,
+    "implementation_version": "S4-truth-ledger-v0.1.1",
+    "implementation_freeze_commit": "8d0406df9bb91b16d3201e2b0cf97a0f084e1dad",
+    "implementation_blob_sha": "3063927fb22c711ee35f6d629d61284455363cd5",
+    "base_v01_blob_sha": "860e8b38131e74d9dc06160bd95ade8bd04e77df",
+    "n_cases": 20,
+    "passed_cases": 20,
+    "failed_cases": 0,
+    "case_accuracy": 1.0,
+    "tag_accuracy": {
+      "contradiction": 1.0,
+      "frontier_closure": 1.0,
+      "late_arrival": 1.0,
+      "long_chain": 1.0,
+      "partition": 1.0,
+      "provenance": 1.0,
+      "rollback": 1.0,
+      "safety": 1.0,
+      "scope": 1.0,
+      "temporal": 1.0
+    },
+    "must_reject_cases": 7,
+    "high_risk_false_accept_count": 0,
+    "stale_active_edge_count": 0,
+    "invariant_violation_count": 0
+  },
+  "gate_checks": {
+    "fresh_integrity": true,
+    "case_accuracy": true,
+    "required_tag_coverage": true,
+    "required_tag_accuracy": true,
+    "high_risk_false_accept_count": true,
+    "stale_active_edge_count": true,
+    "invariant_violation_count": true
+  },
+  "release_gate": "PASS"
+}
