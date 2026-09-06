@@ -1,6 +1,6 @@
 # Algorithm Handoff — S5 v0.7 Semantic Lineage Detection
 
-> Handoff status: **v0.8.1 EXPOSED REPAIR PASS; BROADER CALIBRATION REQUIRED BEFORE FREEZE**
+> Handoff status: **v0.8.1 BROADER DEVELOPMENT CALIBRATION PASS; READY FOR EXPLICIT FREEZE DECISION**
 > Evidence source: S5 v0.7 independent fresh first observation  
 > Repair scope for algorithm team: **F25 + F26 only**. F24/F27 remain deterministic platform/eval-infrastructure work.
 
@@ -42,9 +42,12 @@ multi-reference mosaic aggregation and stricter evidence for `REVIEW`. It blocks
 v0.8 attacks, allows both v0.8 clean controls, and preserves the v0.7.3 development matrix at
 163/163 contamination blocks with 0/62 false blocks and 0/62 clean reviews.
 
-This satisfies the exposed repair checkpoint, not the next freeze checkpoint. Only two multilingual
-clean controls are currently available. Expand the development corpus across languages, task families
-and clean near-neighbours before freezing a candidate for another independent fresh suite.
+The broader follow-up matrix adds 12 English-to-Chinese/Japanese/Spanish contaminated translations,
+6 noisy two-reference mosaics and 18 multilingual clean near-neighbours. All 18 contaminated cases
+block, all 6 mosaics carry the explicit mosaic reason, and all 18 clean cases allow. The matrix also
+removed concept-only blocking unless case-specific identity or a distinctive numeric constellation is
+present. This satisfies the development calibration checkpoint and makes the candidate ready for an
+explicit freeze decision. It remains synthetic exposed evidence, not S5 release evidence.
 
 ## 1. Objective
 

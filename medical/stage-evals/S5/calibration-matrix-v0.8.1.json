@@ -1,0 +1,1148 @@
+{
+  "stage": "S5",
+  "version": "v0.8.1-development-matrix",
+  "eval_name": "broader-multilingual-mosaic-development-calibration",
+  "evidence_class": "development_exposed_calibration",
+  "fresh_evidence": false,
+  "first_observation": false,
+  "method_version": "s5-lineage-multilingual-mosaic-v0.8.1-matrix-calibrated",
+  "data_isolation": {
+    "v0.8_first_observation_preserved": true,
+    "future_fresh_suite_used": false,
+    "synthetic_cases_only": true,
+    "protected_reference_count": 2,
+    "allowed_reference_count": 3,
+    "candidate_count": 36,
+    "language_directions": [
+      "en-to-es",
+      "en-to-ja",
+      "en-to-zh"
+    ]
+  },
+  "metrics": {
+    "cross_language_count": 12,
+    "cross_language_block_rate": 1.0,
+    "mosaic_noise_count": 6,
+    "mosaic_reasoned_block_rate": 1.0,
+    "clean_near_neighbour_count": 18,
+    "clean_false_block_rate": 0.0,
+    "clean_review_rate": 0.0,
+    "by_language": {
+      "en": {
+        "count": 6,
+        "decision_counts": {
+          "BLOCK": 6
+        }
+      },
+      "es": {
+        "count": 10,
+        "decision_counts": {
+          "ALLOW": 6,
+          "BLOCK": 4
+        }
+      },
+      "ja": {
+        "count": 10,
+        "decision_counts": {
+          "ALLOW": 6,
+          "BLOCK": 4
+        }
+      },
+      "zh": {
+        "count": 10,
+        "decision_counts": {
+          "ALLOW": 6,
+          "BLOCK": 4
+        }
+      }
+    }
+  },
+  "selection_gate": "PASS",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "traces": [
+    {
+      "case_id": "CAL-XLT-ZH-ASTER-01",
+      "language": "zh",
+      "family": "cross_language",
+      "target": "aster",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [
+        "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+      ],
+      "record_similarity": 0.519062,
+      "risk_score": 0.94,
+      "exclusive_identifier_overlap": [
+        "aster-17",
+        "qz-881"
+      ],
+      "semantic_concept_overlap": [
+        "audit_or_adjudication",
+        "biomarker_change",
+        "causal_attribution",
+        "efficacy_claim",
+        "hypothesis_only",
+        "investigational_intervention",
+        "missing_evidence",
+        "protocol_deviation",
+        "rescue_intervention",
+        "uncertainty",
+        "unverified_source"
+      ],
+      "semantic_numeric_overlap": [
+        "17",
+        "2",
+        "37",
+        "881"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-XLT-ZH-ASTER-02",
+      "language": "zh",
+      "family": "cross_language",
+      "target": "aster",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [
+        "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+      ],
+      "record_similarity": 0.512066,
+      "risk_score": 0.94,
+      "exclusive_identifier_overlap": [
+        "aster-17"
+      ],
+      "semantic_concept_overlap": [
+        "audit_or_adjudication",
+        "causal_attribution",
+        "investigational_intervention",
+        "missing_evidence",
+        "rescue_intervention",
+        "uncertainty",
+        "unverified_source"
+      ],
+      "semantic_numeric_overlap": [
+        "17",
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-XLT-ZH-RENAL-01",
+      "language": "zh",
+      "family": "cross_language",
+      "target": "renal",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+      "reasons": [
+        "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+      ],
+      "record_similarity": 0.569684,
+      "risk_score": 0.94,
+      "exclusive_identifier_overlap": [
+        "borealis-9",
+        "rx-404"
+      ],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "hydration_confounder",
+        "missing_evidence",
+        "renal_clearance",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2",
+        "404",
+        "42",
+        "68",
+        "9"
+      ],
+      "mosaic_reference_matches": [
+        {
+          "reference_id": "S5FRESH-LIN8-REG-001",
+          "record_similarity": 0.569684,
+          "exclusive_anchor_count": 8
+        }
+      ]
+    },
+    {
+      "case_id": "CAL-XLT-ZH-RENAL-02",
+      "language": "zh",
+      "family": "cross_language",
+      "target": "renal",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+      "reasons": [
+        "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+      ],
+      "record_similarity": 0.550081,
+      "risk_score": 0.94,
+      "exclusive_identifier_overlap": [
+        "borealis-9",
+        "rx-404"
+      ],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "hydration_confounder",
+        "missing_evidence",
+        "renal_clearance",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2",
+        "404",
+        "9"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-XLT-ES-ASTER-01",
+      "language": "es",
+      "family": "cross_language",
+      "target": "aster",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [
+        "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+      ],
+      "record_similarity": 0.490365,
+      "risk_score": 0.94,
+      "exclusive_identifier_overlap": [
+        "aster-17",
+        "qz-881"
+      ],
+      "semantic_concept_overlap": [
+        "audit_or_adjudication",
+        "biomarker_change",
+        "causal_attribution",
+        "efficacy_claim",
+        "hypothesis_only",
+        "investigational_intervention",
+        "missing_evidence",
+        "protocol_deviation",
+        "rescue_intervention",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "17",
+        "2",
+        "37",
+        "881"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-XLT-ES-ASTER-02",
+      "language": "es",
+      "family": "cross_language",
+      "target": "aster",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [
+        "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+      ],
+      "record_similarity": 0.492134,
+      "risk_score": 0.94,
+      "exclusive_identifier_overlap": [
+        "aster-17"
+      ],
+      "semantic_concept_overlap": [
+        "audit_or_adjudication",
+        "causal_attribution",
+        "efficacy_claim",
+        "investigational_intervention",
+        "missing_evidence",
+        "rescue_intervention",
+        "uncertainty",
+        "unverified_source"
+      ],
+      "semantic_numeric_overlap": [
+        "17",
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-XLT-ES-RENAL-01",
+      "language": "es",
+      "family": "cross_language",
+      "target": "renal",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+      "reasons": [
+        "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+      ],
+      "record_similarity": 0.556664,
+      "risk_score": 0.94,
+      "exclusive_identifier_overlap": [
+        "borealis-9",
+        "rx-404"
+      ],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "hydration_confounder",
+        "missing_evidence",
+        "renal_clearance",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2",
+        "404",
+        "42",
+        "68",
+        "9"
+      ],
+      "mosaic_reference_matches": [
+        {
+          "reference_id": "S5FRESH-LIN8-REG-001",
+          "record_similarity": 0.556664,
+          "exclusive_anchor_count": 8
+        }
+      ]
+    },
+    {
+      "case_id": "CAL-XLT-ES-RENAL-02",
+      "language": "es",
+      "family": "cross_language",
+      "target": "renal",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+      "reasons": [
+        "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+      ],
+      "record_similarity": 0.525016,
+      "risk_score": 0.94,
+      "exclusive_identifier_overlap": [
+        "borealis-9",
+        "rx-404"
+      ],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "hydration_confounder",
+        "missing_evidence",
+        "renal_clearance",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2",
+        "404",
+        "9"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-XLT-JA-ASTER-01",
+      "language": "ja",
+      "family": "cross_language",
+      "target": "aster",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [
+        "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+      ],
+      "record_similarity": 0.518696,
+      "risk_score": 0.94,
+      "exclusive_identifier_overlap": [
+        "aster-17",
+        "qz-881"
+      ],
+      "semantic_concept_overlap": [
+        "audit_or_adjudication",
+        "biomarker_change",
+        "causal_attribution",
+        "efficacy_claim",
+        "hypothesis_only",
+        "investigational_intervention",
+        "missing_evidence",
+        "protocol_deviation",
+        "rescue_intervention",
+        "uncertainty",
+        "unverified_source"
+      ],
+      "semantic_numeric_overlap": [
+        "17",
+        "2",
+        "37",
+        "881"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-XLT-JA-ASTER-02",
+      "language": "ja",
+      "family": "cross_language",
+      "target": "aster",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [
+        "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+      ],
+      "record_similarity": 0.509472,
+      "risk_score": 0.94,
+      "exclusive_identifier_overlap": [
+        "aster-17"
+      ],
+      "semantic_concept_overlap": [
+        "audit_or_adjudication",
+        "causal_attribution",
+        "efficacy_claim",
+        "investigational_intervention",
+        "missing_evidence",
+        "rescue_intervention",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "17",
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-XLT-JA-RENAL-01",
+      "language": "ja",
+      "family": "cross_language",
+      "target": "renal",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+      "reasons": [
+        "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+      ],
+      "record_similarity": 0.568477,
+      "risk_score": 0.94,
+      "exclusive_identifier_overlap": [
+        "borealis-9",
+        "rx-404"
+      ],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "hydration_confounder",
+        "missing_evidence",
+        "renal_clearance",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2",
+        "404",
+        "42",
+        "68",
+        "9"
+      ],
+      "mosaic_reference_matches": [
+        {
+          "reference_id": "S5FRESH-LIN8-REG-001",
+          "record_similarity": 0.568477,
+          "exclusive_anchor_count": 8
+        }
+      ]
+    },
+    {
+      "case_id": "CAL-XLT-JA-RENAL-02",
+      "language": "ja",
+      "family": "cross_language",
+      "target": "renal",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+      "reasons": [
+        "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+      ],
+      "record_similarity": 0.549698,
+      "risk_score": 0.94,
+      "exclusive_identifier_overlap": [
+        "borealis-9",
+        "rx-404"
+      ],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "hydration_confounder",
+        "missing_evidence",
+        "renal_clearance",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2",
+        "404",
+        "9"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-MOSAIC-01",
+      "language": "en",
+      "family": "mosaic_noise",
+      "target": "aster+renal",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+      "reasons": [
+        "MULTI_PROTECTED_REFERENCE_MOSAIC"
+      ],
+      "record_similarity": 0.613265,
+      "risk_score": 0.96,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "hydration_confounder",
+        "missing_evidence",
+        "renal_clearance",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2",
+        "42",
+        "68"
+      ],
+      "mosaic_reference_matches": [
+        {
+          "reference_id": "S5FRESH-LIN8-HO-001",
+          "record_similarity": 0.593778,
+          "exclusive_anchor_count": 19
+        },
+        {
+          "reference_id": "S5FRESH-LIN8-REG-001",
+          "record_similarity": 0.613265,
+          "exclusive_anchor_count": 20
+        }
+      ]
+    },
+    {
+      "case_id": "CAL-MOSAIC-02",
+      "language": "en",
+      "family": "mosaic_noise",
+      "target": "aster+renal",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+      "reasons": [
+        "MULTI_PROTECTED_REFERENCE_MOSAIC"
+      ],
+      "record_similarity": 0.613526,
+      "risk_score": 0.96,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "hydration_confounder",
+        "missing_evidence",
+        "renal_clearance",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2",
+        "42",
+        "68"
+      ],
+      "mosaic_reference_matches": [
+        {
+          "reference_id": "S5FRESH-LIN8-HO-001",
+          "record_similarity": 0.595114,
+          "exclusive_anchor_count": 19
+        },
+        {
+          "reference_id": "S5FRESH-LIN8-REG-001",
+          "record_similarity": 0.613526,
+          "exclusive_anchor_count": 20
+        }
+      ]
+    },
+    {
+      "case_id": "CAL-MOSAIC-03",
+      "language": "en",
+      "family": "mosaic_noise",
+      "target": "aster+renal",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+      "reasons": [
+        "MULTI_PROTECTED_REFERENCE_MOSAIC"
+      ],
+      "record_similarity": 0.599259,
+      "risk_score": 0.96,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "hydration_confounder",
+        "missing_evidence",
+        "renal_clearance",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2",
+        "42",
+        "68"
+      ],
+      "mosaic_reference_matches": [
+        {
+          "reference_id": "S5FRESH-LIN8-HO-001",
+          "record_similarity": 0.583337,
+          "exclusive_anchor_count": 19
+        },
+        {
+          "reference_id": "S5FRESH-LIN8-REG-001",
+          "record_similarity": 0.599259,
+          "exclusive_anchor_count": 20
+        }
+      ]
+    },
+    {
+      "case_id": "CAL-MOSAIC-04",
+      "language": "en",
+      "family": "mosaic_noise",
+      "target": "aster+renal",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+      "reasons": [
+        "MULTI_PROTECTED_REFERENCE_MOSAIC"
+      ],
+      "record_similarity": 0.612882,
+      "risk_score": 0.96,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "hydration_confounder",
+        "missing_evidence",
+        "renal_clearance",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2",
+        "42",
+        "68"
+      ],
+      "mosaic_reference_matches": [
+        {
+          "reference_id": "S5FRESH-LIN8-HO-001",
+          "record_similarity": 0.593778,
+          "exclusive_anchor_count": 19
+        },
+        {
+          "reference_id": "S5FRESH-LIN8-REG-001",
+          "record_similarity": 0.612882,
+          "exclusive_anchor_count": 20
+        }
+      ]
+    },
+    {
+      "case_id": "CAL-MOSAIC-05",
+      "language": "en",
+      "family": "mosaic_noise",
+      "target": "aster+renal",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+      "reasons": [
+        "MULTI_PROTECTED_REFERENCE_MOSAIC"
+      ],
+      "record_similarity": 0.613526,
+      "risk_score": 0.96,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "hydration_confounder",
+        "missing_evidence",
+        "renal_clearance",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2",
+        "42",
+        "68"
+      ],
+      "mosaic_reference_matches": [
+        {
+          "reference_id": "S5FRESH-LIN8-HO-001",
+          "record_similarity": 0.595114,
+          "exclusive_anchor_count": 19
+        },
+        {
+          "reference_id": "S5FRESH-LIN8-REG-001",
+          "record_similarity": 0.613526,
+          "exclusive_anchor_count": 20
+        }
+      ]
+    },
+    {
+      "case_id": "CAL-MOSAIC-06",
+      "language": "en",
+      "family": "mosaic_noise",
+      "target": "aster+renal",
+      "expected": "BLOCK",
+      "decision": "BLOCK",
+      "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+      "reasons": [
+        "MULTI_PROTECTED_REFERENCE_MOSAIC"
+      ],
+      "record_similarity": 0.599259,
+      "risk_score": 0.96,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "hydration_confounder",
+        "missing_evidence",
+        "renal_clearance",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2",
+        "42",
+        "68"
+      ],
+      "mosaic_reference_matches": [
+        {
+          "reference_id": "S5FRESH-LIN8-HO-001",
+          "record_similarity": 0.583337,
+          "exclusive_anchor_count": 19
+        },
+        {
+          "reference_id": "S5FRESH-LIN8-REG-001",
+          "record_similarity": 0.599259,
+          "exclusive_anchor_count": 20
+        }
+      ]
+    },
+    {
+      "case_id": "CAL-CLEAN-ZH-01",
+      "language": "zh",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.494313,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "investigational_intervention",
+        "missing_evidence",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-ZH-02",
+      "language": "zh",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.499312,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "missing_evidence",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-ZH-03",
+      "language": "zh",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.499049,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "confounding",
+        "missing_evidence",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-ZH-04",
+      "language": "zh",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.492387,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "audit_or_adjudication",
+        "biomarker_change",
+        "causal_attribution",
+        "efficacy_claim",
+        "hypothesis_only",
+        "missing_evidence",
+        "protocol_deviation",
+        "rescue_intervention",
+        "treatment_recommendation",
+        "uncertainty",
+        "unverified_source"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-ZH-05",
+      "language": "zh",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.49918,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "missing_evidence",
+        "treatment_recommendation",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-ZH-06",
+      "language": "zh",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.499708,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "missing_evidence",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-ES-01",
+      "language": "es",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.478203,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "missing_evidence",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-ES-02",
+      "language": "es",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.477898,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "missing_evidence",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-ES-03",
+      "language": "es",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.472195,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "confounding",
+        "missing_evidence",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-ES-04",
+      "language": "es",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.461679,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "audit_or_adjudication",
+        "biomarker_change",
+        "causal_attribution",
+        "efficacy_claim",
+        "hypothesis_only",
+        "missing_evidence",
+        "protocol_deviation",
+        "rescue_intervention",
+        "treatment_recommendation",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-ES-05",
+      "language": "es",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.481166,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "missing_evidence",
+        "treatment_recommendation",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-ES-06",
+      "language": "es",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.476927,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "missing_evidence",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-JA-01",
+      "language": "ja",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.496917,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "missing_evidence",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-JA-02",
+      "language": "ja",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.499994,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "missing_evidence",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-JA-03",
+      "language": "ja",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.499733,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "confounding",
+        "missing_evidence",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-JA-04",
+      "language": "ja",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.489342,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "audit_or_adjudication",
+        "biomarker_change",
+        "causal_attribution",
+        "efficacy_claim",
+        "hypothesis_only",
+        "missing_evidence",
+        "protocol_deviation",
+        "rescue_intervention",
+        "treatment_recommendation",
+        "uncertainty",
+        "unverified_source"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-JA-05",
+      "language": "ja",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.499342,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "missing_evidence",
+        "treatment_recommendation",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    },
+    {
+      "case_id": "CAL-CLEAN-JA-06",
+      "language": "ja",
+      "family": "clean_near_neighbour",
+      "target": "none",
+      "expected": "ALLOW",
+      "decision": "ALLOW",
+      "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+      "reasons": [],
+      "record_similarity": 0.500519,
+      "risk_score": 0.736666,
+      "exclusive_identifier_overlap": [],
+      "semantic_concept_overlap": [
+        "causal_attribution",
+        "missing_evidence",
+        "uncertainty"
+      ],
+      "semantic_numeric_overlap": [
+        "2"
+      ],
+      "mosaic_reference_matches": []
+    }
+  ],
+  "limitations": [
+    "All matrix cases are synthetic, authored after v0.8 exposure, and cannot count as fresh evidence.",
+    "Language coverage is limited to Chinese, Japanese, and Spanish translations from English references.",
+    "The deterministic lexicon is inspectable but does not establish general multilingual semantic equivalence.",
+    "Gold review remains incomplete; no clinical or model-training claim is made."
+  ]
+}

@@ -4,7 +4,7 @@
   "eval_name": "multilingual-mosaic-exposed-repair-calibration",
   "evidence_class": "development_exposed_calibration",
   "fresh_evidence": false,
-  "method_version": "s5-lineage-multilingual-mosaic-v0.8.1",
+  "method_version": "s5-lineage-multilingual-mosaic-v0.8.1-matrix-calibrated",
   "data_isolation": {
     "future_fresh_suite_used": false,
     "legacy_development_candidate_count": 225,

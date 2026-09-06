@@ -10,8 +10,10 @@ on:
       - 'scripts/export_training_data.py'
       - 'scripts/export_training_data_v073.py'
       - 'scripts/calibrate_s5_lineage_v081.py'
+      - 'scripts/calibrate_s5_lineage_v081_matrix.py'
       - 'scripts/eval_s5_boundary_regression_v081.py'
       - 'medical/stage-evals/S5/calibration-v0.8.1.json'
+      - 'medical/stage-evals/S5/calibration-matrix-v0.8.1.json'
       - 'medical/stage-evals/S5/regression-v0.8.1.json'
       - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
       - 'medical/stage-evals/S5/S5_V0.8.1_MULTILINGUAL_MOSAIC_REPAIR_REPORT.md'
@@ -30,8 +32,10 @@ on:
       - 'scripts/export_training_data.py'
       - 'scripts/export_training_data_v073.py'
       - 'scripts/calibrate_s5_lineage_v081.py'
+      - 'scripts/calibrate_s5_lineage_v081_matrix.py'
       - 'scripts/eval_s5_boundary_regression_v081.py'
       - 'medical/stage-evals/S5/calibration-v0.8.1.json'
+      - 'medical/stage-evals/S5/calibration-matrix-v0.8.1.json'
       - 'medical/stage-evals/S5/regression-v0.8.1.json'
       - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
       - '.github/workflows/s5-v081-multilingual-mosaic-repair.yml'
@@ -61,6 +65,7 @@ jobs:
             scripts/export_training_data.py \
             scripts/export_training_data_v073.py \
             scripts/calibrate_s5_lineage_v081.py \
+            scripts/calibrate_s5_lineage_v081_matrix.py \
             scripts/eval_s5_boundary_regression_v081.py
 
       - name: Preserve immutable v0.8 fresh FAIL
@@ -77,6 +82,11 @@ jobs:
           python scripts/eval_s5_boundary_regression_v081.py --out /tmp/s5-v081-regression.json
           cmp /tmp/s5-v081-regression.json medical/stage-evals/S5/regression-v0.8.1.json
 
+      - name: Reproduce broader multilingual and mosaic matrix
+        run: |
+          python scripts/calibrate_s5_lineage_v081_matrix.py --out /tmp/s5-v081-matrix.json
+          cmp /tmp/s5-v081-matrix.json medical/stage-evals/S5/calibration-matrix-v0.8.1.json
+
       - name: Preserve frozen v0.7.3 regression behavior
         run: |
           python scripts/eval_s5_boundary_regression_v073.py --out /tmp/s5-v073-regression.json
@@ -88,6 +98,7 @@ jobs:
           import json
           from pathlib import Path
           c=json.loads(Path('/tmp/s5-v081-calibration.json').read_text())
+          m=json.loads(Path('/tmp/s5-v081-matrix.json').read_text())
           r=json.loads(Path('/tmp/s5-v081-regression.json').read_text())
           assert c['selection_gate']=='PASS'
           assert c['fresh_evidence'] is False
@@ -97,6 +108,17 @@ jobs:
           assert c['v08_exposed_matrix']['attack_block_rate']==1.0
           assert c['v08_exposed_matrix']['clean_false_block_rate']==0.0
           assert c['v08_exposed_matrix']['clean_review_rate']==0.0
+          assert m['selection_gate']=='PASS'
+          assert m['fresh_evidence'] is False
+          assert m['metrics']['cross_language_count']==12
+          assert m['metrics']['cross_language_block_rate']==1.0
+          assert m['metrics']['mosaic_noise_count']==6
+          assert m['metrics']['mosaic_reasoned_block_rate']==1.0
+          assert m['metrics']['clean_near_neighbour_count']==18
+          assert m['metrics']['clean_false_block_rate']==0.0
+          assert m['metrics']['clean_review_rate']==0.0
+          assert m['stage_release']=='BLOCKED_GOLD_REVIEW'
+          assert m['s6_automatic_trust']=='BLOCKED'
           assert r['regression_gate']=='PASS'
           assert r['failed_gates']==[]
           assert r['stage_release']=='BLOCKED_GOLD_REVIEW'

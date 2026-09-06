@@ -31,7 +31,7 @@ for _name in dir(_base):
     if not _name.startswith("__"):
         globals()[_name] = getattr(_base, _name)
 
-METHOD_VERSION = "s5-lineage-multilingual-mosaic-v0.8.1"
+METHOD_VERSION = "s5-lineage-multilingual-mosaic-v0.8.1-matrix-calibrated"
 MOSAIC_MIN_REFERENCES = 2
 MOSAIC_MIN_ANCHORS_PER_REFERENCE = 8
 MOSAIC_MIN_TOTAL_ANCHORS = 16
@@ -43,26 +43,33 @@ REVIEW_MIN_DENSE_ANCHORS = 8
 # shared schema vocabulary, not case identity.
 _IDENTIFIER_RE = re.compile(r"\b[a-z][a-z0-9]{1,20}-[a-z0-9]{1,20}\b", re.IGNORECASE)
 _CJK_RE = re.compile(r"[\u3400-\u9fff]")
+_KANA_RE = re.compile(r"[\u3040-\u30ff]")
+_NUMBER_RE = re.compile(r"(?<![\w-])\d+(?:\.\d+)?(?![\w-])")
 
-# Small, inspectable bilingual ontology. Entries describe reasoning roles rather
+# Small, inspectable multilingual ontology. Entries describe reasoning roles rather
 # than v0.8 case IDs, drug names or benchmark-specific graph nodes.
 _CONCEPT_PATTERNS: dict[str, tuple[str, ...]] = {
-    "protocol_deviation": ("protocol deviation", "conduct departure", "departed from plan", "方案偏离", "偏离方案"),
-    "investigational_intervention": ("investigational", "experimental", "研究性", "试验性"),
-    "rescue_intervention": ("rescue dose", "rescue intervention", "补救用药", "补救措施"),
-    "unverified_source": ("unverified", "not verified", "未经核实", "尚未核实"),
-    "missing_evidence": ("missing", "absent", "unavailable", "cannot be inspected", "缺失", "不可用", "无法核查"),
-    "audit_or_adjudication": ("audit", "adjudication", "审计", "裁定"),
-    "hypothesis_only": ("hypothesis-level", "hypothesis generating", "supports a hypothesis", "只能形成假设", "假设层面"),
-    "efficacy_claim": ("efficacy", "clinically effective", "patient benefit", "临床疗效", "治疗效果"),
-    "causal_attribution": ("causal", "causally", "attribution", "因果", "归因"),
-    "treatment_recommendation": ("treatment recommendation", "recommendation is requested", "治疗建议", "用药建议"),
-    "biomarker_change": ("biomarker", "marker change", "phospho-marker", "标志物", "磷酸化"),
-    "renal_clearance": ("renal clearance", "clearance estimate", "renal exposure", "肾清除", "清除率", "肾暴露"),
-    "hydration_confounder": ("hydration", "fluid intervention", "补液", "水化"),
-    "confounding": ("confounder", "confounding", "混杂"),
-    "uncertainty": ("uncertain", "uncertainty", "provisional", "不确定", "暂缓"),
+    "protocol_deviation": ("protocol deviation", "conduct departure", "departed from plan", "方案偏离", "偏离方案", "desviación del protocolo", "プロトコル逸脱"),
+    "investigational_intervention": ("investigational", "experimental", "研究性", "试验性", "en investigación", "experimental", "治験中", "実験的"),
+    "rescue_intervention": ("rescue dose", "rescue intervention", "补救用药", "补救措施", "dosis de rescate", "intervención de rescate", "レスキュー投与", "救済介入"),
+    "unverified_source": ("unverified", "not verified", "未经核实", "尚未核实", "no verificado", "sin verificar", "未確認", "検証されていない"),
+    "missing_evidence": ("missing", "absent", "unavailable", "cannot be inspected", "缺失", "不可用", "无法核查", "faltante", "no disponible", "ausente", "欠落", "利用できない"),
+    "audit_or_adjudication": ("audit", "adjudication", "审计", "裁定", "auditoría", "adjudicación", "監査", "判定"),
+    "hypothesis_only": ("hypothesis-level", "hypothesis generating", "supports a hypothesis", "只能形成假设", "假设层面", "nivel de hipótesis", "genera una hipótesis", "仮説レベル", "仮説生成"),
+    "efficacy_claim": ("efficacy", "clinically effective", "patient benefit", "临床疗效", "治疗效果", "eficacia", "beneficio clínico", "有効性", "臨床的利益"),
+    "causal_attribution": ("causal", "causally", "attribution", "因果", "归因", "causal", "atribución", "因果", "帰属"),
+    "treatment_recommendation": ("treatment recommendation", "recommendation is requested", "治疗建议", "用药建议", "recomendación terapéutica", "治療推奨"),
+    "biomarker_change": ("biomarker", "marker change", "phospho-marker", "标志物", "磷酸化", "biomarcador", "marcador fosforilado", "バイオマーカー", "リン酸化マーカー"),
+    "renal_clearance": ("renal clearance", "clearance estimate", "renal exposure", "肾清除", "清除率", "肾暴露", "aclaramiento renal", "exposición renal", "腎クリアランス", "腎曝露"),
+    "hydration_confounder": ("hydration", "fluid intervention", "补液", "水化", "hidratación", "intervención de líquidos", "補液", "水分介入"),
+    "confounding": ("confounder", "confounding", "混杂", "factor de confusión", "confusión", "交絡", "交絡因子"),
+    "uncertainty": ("uncertain", "uncertainty", "provisional", "不确定", "暂缓", "incierto", "incertidumbre", "provisional", "不確実", "暫定"),
 }
+
+_SPANISH_MARKERS = (
+    "desviación", "protocolo", "rescate", "evidencia", "eficacia", "causal",
+    "auditoría", "adjudicación", "hidratación", "aclaramiento", "incertidumbre",
+)
 
 
 def _record_value(case: dict[str, Any]) -> dict[str, Any]:
@@ -81,8 +88,19 @@ def _concepts(case: dict[str, Any]) -> set[str]:
     }
 
 
-def _uses_cjk(case: dict[str, Any]) -> bool:
-    return bool(_CJK_RE.search(_canonical_json(_record_value(case))))
+def _language(case: dict[str, Any]) -> str:
+    text = _normalized_text(_record_value(case))
+    if _KANA_RE.search(text):
+        return "ja"
+    if _CJK_RE.search(text):
+        return "zh"
+    if sum(marker in text for marker in _SPANISH_MARKERS) >= 2:
+        return "es"
+    return "en"
+
+
+def _numbers(case: dict[str, Any]) -> set[str]:
+    return set(_NUMBER_RE.findall(_normalized_text(_record_value(case))))
 
 
 class ReferenceIndex(_base.ReferenceIndex):
@@ -121,14 +139,17 @@ def _decision_for_pair(
     candidate_concepts = _concepts(candidate)
     reference_concepts = set(index.reference_concepts.get(reference.case_id, ())) if index else _concepts(reference.case)
     concept_overlap = sorted(candidate_concepts & reference_concepts)
-    cross_language = _uses_cjk(candidate) != _uses_cjk(reference.case)
+    candidate_language = _language(candidate)
+    reference_language = _language(reference.case)
+    cross_language = candidate_language != reference_language
+    numeric_overlap = sorted(_numbers(candidate) & _numbers(reference.case))
 
     multilingual_match = bool(
         cross_language
         and (
             len(identifier_overlap) >= 2
             or (identifier_overlap and len(concept_overlap) >= 3)
-            or len(concept_overlap) >= 7
+            or (len(concept_overlap) >= 7 and len(numeric_overlap) >= 2)
         )
     )
     if multilingual_match:
@@ -154,6 +175,9 @@ def _decision_for_pair(
 
     pair["exclusive_identifier_overlap"] = identifier_overlap
     pair["semantic_concept_overlap"] = concept_overlap
+    pair["semantic_numeric_overlap"] = numeric_overlap
+    pair["candidate_language"] = candidate_language
+    pair["reference_language"] = reference_language
     pair["cross_language_pair"] = cross_language
     return pair
 
@@ -214,6 +238,9 @@ def detect_lineage(
         "exclusive_anchor_overlap": best.get("exclusive_anchor_overlap", []),
         "exclusive_identifier_overlap": best.get("exclusive_identifier_overlap", []),
         "semantic_concept_overlap": best.get("semantic_concept_overlap", []),
+        "semantic_numeric_overlap": best.get("semantic_numeric_overlap", []),
+        "candidate_language": best.get("candidate_language", "unknown"),
+        "reference_language": best.get("reference_language", "unknown"),
         "cross_language_pair": best.get("cross_language_pair", False),
         "mosaic_reference_matches": [
             {

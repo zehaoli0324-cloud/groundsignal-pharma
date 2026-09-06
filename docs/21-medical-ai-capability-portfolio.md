@@ -107,8 +107,8 @@ image model clinically valid; a medical expert review does not prove training-da
 
 ## 5. Current sequencing
 
-1. Finish S5 lineage repair and broader development calibration.
-2. Freeze the repaired S5 implementation and obtain a new independent fresh result.
+1. Preserve the completed S5 v0.8.1 broader development calibration as exposed-only evidence.
+2. Explicitly freeze the repaired S5 implementation, then obtain a new independent fresh result.
 3. Complete expert gold review independently.
 4. Only then start dedicated S6 medical-question, report and Agent model runs.
 5. Add real-source medication/report datasets before claiming M3.
