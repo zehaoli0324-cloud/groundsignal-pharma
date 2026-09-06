@@ -68,7 +68,7 @@ fixture / development check
 | S3a Proposition Extraction | 原子医学命题抽取 | fresh F1 98.90%；critical recall 100%；mandatory abstention 6/6 | bounded CONDITIONAL PASS；长/噪声/多源文本不足 |
 | S3b Evidence Relation | 支持/反驳/证据不足关系 | 40/40，relation accuracy 100%，high-risk false-support 0 | bounded CONDITIONAL PASS；需扩大真实来源 |
 | S4 Medical KG Construction / Update | 知识图谱时间状态、冲突、不变量 | 首次 fresh 18/20 FAIL；修复后新 fresh 20/20 PASS；must-reject 7/7 | CONDITIONAL PASS；persistent real-source graph 未证实，production ingest disabled |
-| S5 Controlled Case / Benchmark Factory | benchmark 分区、gold、训练导出、身份/来源/血缘 | v0.2→v0.8 七轮独立 fresh 找到 F4–F31；v0.8 post-freeze 首测暴露跨语言和多源拼接缺口 | **RELEASE BLOCKED**；先保存 v0.8，再做 exposed repair；gold review 仍未完成 |
+| S5 Controlled Case / Benchmark Factory | benchmark 分区、gold、训练导出、身份/来源/血缘 | v0.2→v0.8 七轮独立 fresh 找到 F4–F31；v0.8.1 exposed repair 阻断 4/4 攻击并放行 2/2 clean | **RELEASE BLOCKED**；需扩大多语言/拼接校准后再 fresh；gold review 仍未完成 |
 | S6 Model / RAG / Agent Harness | 模型/检索增强生成/Agent 运行可复现与证据注入 | runner + fixture + CI scaffold | 不能正式推进 dedicated S6 release eval，因 S5 未 bounded release |
 | S7 Evaluation & Safety Gate | rubric、多层评分、安全门禁 | protocol + rubric v0.2 + regression gate | 缺 human/Judge calibration 与真实模型 scoring |
 | S8 Failure Diagnosis | 错误聚类、根因、干预路由 | taxonomy + intervention router | 缺 multi-model × multi-case failure clusters |
@@ -104,6 +104,7 @@ v0.7.1           deterministic F24/F27 repair                                   
 v0.7.2           record/field/span hybrid + exporter validation                    exposed PASS
 v0.7.3           protected-exclusive index + broader calibration                   development PASS
 v0.8              cross-language/abstraction/field-flattening/mosaic                fresh FAIL
+v0.8.1            bilingual concepts + identifier evidence + mosaic aggregation      exposed PASS
 ```
 
 S5 目前已经形成的防线：
@@ -122,6 +123,7 @@ S5 目前已经形成的防线：
 - v0.7.3 在 30 个受保护 reference、45 个 allowed-dev reference、163 个可归因污染变体和 62 个 clean/shared hard negatives 上完成算法、阈值、索引和延迟校准；
 - v0.8 在冻结提交之后创建全新 family：F29 语义抽象与 F30 跨字段展开被阻断，但 F28 跨语言被 `ALLOW`、F31 多受保护源拼接仅为 `REVIEW`；
 - v0.8 的英文同领域 clean control 也进入 `REVIEW`，因此不能用“把所有 REVIEW 改成 BLOCK”作为无代价修复；
+- v0.8.1 在不采用 REVIEW 全阻断的前提下，将 F28–F31 全部阻断并让两个 clean control 回到 `ALLOW`；旧 225-case 开发矩阵维持 163/163 污染阻断、0/62 误拦截和 0/62 clean review；
 - 每次 fresh first observation 用 Git blob/历史 commit 固化，不会因修复被覆盖。
 
 ## 6. 我们现在的“优化结果”应该怎样解读
@@ -149,11 +151,12 @@ S4 bounded independent evidence          established
 S5 v0.7 independent fresh                FAIL (immutable)
 S5 v0.7.3 development calibration        PASS (not fresh)
 S5 v0.8 independent fresh                FAIL (immutable: F28/F31)
+S5 v0.8.1 exposed repair                 PASS (not fresh)
 S5 bounded independent release           NOT ESTABLISHED
 S5 gold review                           INCOMPLETE
 S6 automatic trust                       BLOCKED
 ```
 
-v0.7.3 已固定到 `62b791cef47d1f5c7296220557db970d618b7bcf`，v0.8 首次 fresh FAIL 必须永久保存。下一轮只能把 v0.8 当作 exposed evidence，围绕跨语言语义匹配、多源聚合风险和 review-resolution policy（复核结果如何影响训练边界的规则）做通用修复与更宽的干净对照校准。修复冻结后还需要另一轮真正独立 fresh；Gold review 仍是另一条独立门槛。
+v0.8 首次 fresh FAIL 已永久保存，v0.8.1 只能作为 exposed repair evidence。下一步要扩大语言、医学任务和 clean near-neighbour（同领域近邻负例）覆盖，再冻结候选实现；冻结后还需要另一轮真正独立 fresh。Gold review 仍是另一条独立门槛。
 
 本仓库当前没有真实用户验证、专家 gold approval、模型训练收益或临床验证数据时，均明确记录为“没有”，不会用 synthetic/CI 结果替代。

@@ -219,10 +219,10 @@ def main() -> int:
     p.add_argument("--out", required=True, type=Path)
     args = p.parse_args()
 
-    trust = load_module(ROOT / "scripts/s5_trust_policy.py", "s5_trust_v073")
+    trust = load_module(ROOT / "scripts/s5_trust_policy_v073.py", "s5_trust_v073")
     legacy_v071 = load_module(ROOT / "scripts/s5_trust_policy_v071.py", "s5_trust_v071_exposed")
     legacy_v061 = load_module(ROOT / "scripts/s5_trust_policy_v061.py", "s5_trust_v061_exposed")
-    exporter = load_module(ROOT / "scripts/export_training_data.py", "s5_export_v073")
+    exporter = load_module(ROOT / "scripts/export_training_data_v073.py", "s5_export_v073")
     detector = load_module(ROOT / "scripts/s5_lineage_detector_v073.py", "s5_lineage_detector_v073_eval")
 
     observed_blob = git_blob_sha(FIRST_OBS)

@@ -21,7 +21,7 @@
 | S3a | Proposition Extraction | bounded CONDITIONAL PASS | fresh F1 98.90%; critical recall 100%; mandatory abstention 6/6 | longer/noisier real-source coverage |
 | S3b | Evidence Relation | bounded CONDITIONAL PASS | 40/40 relation; high-risk false-support 0 | broader real-source relation set |
 | S4 | Medical KG Construction / Update | CONDITIONAL PASS | first fresh 18/20 FAIL → repair regression 20/20 → new independent fresh 20/20; must-reject 7/7 | persistent real-source graph |
-| S5 | Controlled Case / Benchmark Factory | **v0.8 FRESH LINEAGE FAIL / INDEPENDENT RELEASE BLOCKED** | v0.7.3 development calibration PASS; post-freeze v0.8 finds F28 cross-language and F31 mosaic failures | preserve v0.8; exposed repair + broader multilingual clean calibration; gold remains separate |
+| S5 | Controlled Case / Benchmark Factory | **v0.8.1 EXPOSED REPAIR PASS / INDEPENDENT RELEASE BLOCKED** | immutable v0.8 F28/F31 FAIL; v0.8.1 blocks 4/4 exposed attacks and allows 2/2 clean controls | broaden multilingual/mosaic development calibration, freeze, then new fresh; gold remains separate |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release |
 | S7 | Evaluation & Safety Gate | Protocol only | rubric v0.2 + regression gate protocol | human/Judge calibration + real model runs |
 | S8 | Failure Diagnosis | Scaffold | taxonomy + intervention router | multi-model × multi-case clusters |
@@ -57,6 +57,7 @@ v0.7.1           deterministic builder repair F24/F27                      PARTI
 v0.7.2           hybrid lineage + exporter validation exposed regression   PASS
 v0.7.3           broader hard negatives + algorithm/cost calibration        DEVELOPMENT PASS
 v0.8 fresh       F28 cross-language + F31 multi-source mosaic                FAIL
+v0.8.1           multilingual concepts + multi-reference aggregation          EXPOSED PASS
 ```
 
 Each fresh FAIL remains permanent evidence; later repair never overwrites it.
@@ -135,7 +136,24 @@ acceptable repair by itself.
 Evidence: `medical/stage-evals/S5/fresh-first-observation-v0.8.json` and
 `medical/stage-evals/S5/S5_V0.8_FRESH_LINEAGE_REPORT.md`.
 
-## 7. Current release decision
+## 7. S5 v0.8.1 exposed repair
+
+v0.8.1 preserves the v0.8 first observation and uses it only as exposed regression evidence.
+
+```text
+legacy v0.7.3 development contamination       163/163 BLOCK
+legacy v0.7.3 clean controls                    62/62 ALLOW
+v0.8 exposed F28-F31                              4/4 BLOCK
+v0.8 exposed clean controls                        2/2 ALLOW
+builder / exporter regression                     PASS / PASS
+fresh evidence                                           no
+```
+
+The repair combines an inspectable bilingual concept mapping, protected identifier evidence and
+multi-reference aggregation. It does not convert every `REVIEW` into `BLOCK`. Broader multilingual
+clean calibration is still required before the next implementation freeze.
+
+## 8. Current release decision
 
 ```text
 S3 bounded conditional evidence            established
@@ -143,6 +161,7 @@ S4 bounded independent evidence            established
 S5 v0.7 independent first observation      FAIL (immutable)
 S5 v0.7.3 development calibration          PASS (not fresh)
 S5 v0.8 independent first observation      FAIL (immutable)
+S5 v0.8.1 exposed repair                   PASS (not fresh)
 S5 bounded independent release             NOT ESTABLISHED
 S5 gold review                             INCOMPLETE
 S6 automatic trust                         BLOCKED
@@ -151,14 +170,14 @@ S6 automatic trust                         BLOCKED
 The repository still has no real-user validation, completed expert gold approval, demonstrated model-training gain,
 or clinical validation. Synthetic/CI evidence is not substituted for those claims.
 
-## 8. Next sequence
+## 9. Next sequence
 
 1. keep v0.7 first observation immutable
 2. treat v0.7.3 only as development/exposed evidence
 3. keep the v0.7.3 target and v0.8 first observation immutable
-4. treat F28/F31 and the English clean review as exposed repair/calibration evidence only
-5. compare multilingual semantic methods and an explicit review-resolution policy on broader clean controls
-6. freeze the repaired implementation before creating another fresh suite
+4. treat v0.8.1 only as exposed repair evidence
+5. expand multilingual/mosaic development calibration across more languages and clean near-neighbours
+6. freeze the selected implementation before creating another fresh suite
 7. require an independent fresh PASS before any bounded release claim
 8. keep gold review as a separate release blocker
 9. only after bounded S5 release proceed to S6 dedicated evaluation

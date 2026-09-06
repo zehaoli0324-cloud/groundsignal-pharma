@@ -1,6 +1,6 @@
 # Algorithm Handoff — S5 v0.7 Semantic Lineage Detection
 
-> Handoff status: **v0.8 FRESH FAIL PRESERVED; F28/F31 EXPOSED REPAIR REQUIRED**
+> Handoff status: **v0.8.1 EXPOSED REPAIR PASS; BROADER CALIBRATION REQUIRED BEFORE FREEZE**
 > Evidence source: S5 v0.7 independent fresh first observation  
 > Repair scope for algorithm team: **F25 + F26 only**. F24/F27 remain deterministic platform/eval-infrastructure work.
 
@@ -34,6 +34,17 @@ The next algorithm round may now use F28/F31 as exposed data. It must address mu
 equivalence and how `REVIEW` is resolved at the export boundary, while expanding clean multilingual
 controls. A blanket REVIEW→BLOCK conversion is disallowed because a frozen clean control already
 entered review. No next fresh suite may be used during repair or threshold selection.
+
+## v0.8.1 repair checkpoint
+
+The current candidate adds bilingual reasoning concepts, protected-exclusive hyphenated identifiers,
+multi-reference mosaic aggregation and stricter evidence for `REVIEW`. It blocks all four exposed
+v0.8 attacks, allows both v0.8 clean controls, and preserves the v0.7.3 development matrix at
+163/163 contamination blocks with 0/62 false blocks and 0/62 clean reviews.
+
+This satisfies the exposed repair checkpoint, not the next freeze checkpoint. Only two multilingual
+clean controls are currently available. Expand the development corpus across languages, task families
+and clean near-neighbours before freezing a candidate for another independent fresh suite.
 
 ## 1. Objective
 

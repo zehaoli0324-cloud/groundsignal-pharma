@@ -10,6 +10,8 @@ GroundSignal Medical 是一个面向医疗大模型开发的 **evidence-grounded
 
 它不是静态医学题库，也不是单纯的知识图谱。项目把 **版本化医学证据、任务导向知识图谱、controlled case families、模型/RAG/Agent Harness、失败归因、训练数据导出与安全回归** 接成一条开发闭环。
 
+项目的正式能力版图现包括：**医学问答、辅助诊疗、用药安全、医学影像、报告解读、医疗 Agent、多模态医疗模型、Benchmark、评测 Agent 和训练数据**。这些方向共享同一套证据、知识图谱、分区隔离和分阶段评测底座，但成熟度分别记录；“纳入版图”不等于“已经具备临床能力”。完整边界与各方向完成标准见 [`docs/21-medical-ai-capability-portfolio.md`](docs/21-medical-ai-capability-portfolio.md)。
+
 ```text
 Real User Needs / Clinical Workflows
                 ↓
