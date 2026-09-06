@@ -1,19 +1,21 @@
-name: S5 v0.3 Second Fresh Boundary First Observation
+name: S5 v0.3 Second Fresh Boundary Historical Preservation
 
 on:
   push:
     paths:
-      - 'medical/stage-evals/S5/fresh-boundary-v0.3/**'
-      - 'scripts/eval_s5_fresh_boundary_v03.py'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.3.json'
+      - 'medical/stage-evals/S5/failures-v0.3.json'
+      - 'medical/stage-evals/S5/S5_V0.3_FRESH_BOUNDARY_FAIL_REPORT.md'
       - '.github/workflows/s5-v03-second-fresh-boundary.yml'
   pull_request:
     paths:
-      - 'medical/stage-evals/S5/fresh-boundary-v0.3/**'
-      - 'scripts/eval_s5_fresh_boundary_v03.py'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.3.json'
+      - 'medical/stage-evals/S5/failures-v0.3.json'
+      - 'medical/stage-evals/S5/S5_V0.3_FRESH_BOUNDARY_FAIL_REPORT.md'
       - '.github/workflows/s5-v03-second-fresh-boundary.yml'
 
 jobs:
-  first-observation:
+  preserve-first-observation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,43 +25,32 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Verify frozen v0.2.1 implementation identity
+      - name: Protect committed v0.3 first-observation blob
         run: |
-          freeze='c938dc86c992f13015585b813aad11c2dca55b24'
-          test "$(git rev-parse "$freeze":scripts/materialize_s5_cases.py)" = 'c2d339c1a993c7f8f8d098d21d9a07eb49a14544'
-          test "$(git rev-parse "$freeze":scripts/export_training_data.py)" = '65a908861ab2d0566f62518bea6359c77a8f293a'
-          test "$(git rev-parse "$freeze":scripts/model_harness.py)" = 'e6c90ab88c476c38b765d61ae8c9e2b471c8e2a2'
-          test "$(git rev-parse "$freeze":scripts/s5_release_gate.py)" = '8431e1e4c299df8c051ef19e7a69db3d1d199715'
-          test "$(git rev-parse "$freeze":medical/schemas/clinical-case.schema.json)" = '473edfd800b717513582a1100f9b8f4fe0814e0a'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.3.json)" = '47e1669f724f8b2cab285ec0f689cb3819e068e2'
 
-      - name: Syntax and fresh-family integrity
+      - name: Reproduce the first observation at its exact commit
         run: |
-          python -m py_compile scripts/eval_s5_fresh_boundary_v03.py
-          python scripts/validate_medical_case_families.py \
-            --root medical/stage-evals/S5/fresh-boundary-v0.3/families \
-            --expect-families 1 \
-            --expect-cases 5 \
-            --expect-cases-per-family 5 \
-            --rubric-version medical-clinical-v0.2
-
-      - name: Run immutable first-use v0.3 evaluation
-        id: fresh_eval
-        run: |
-          mkdir -p /tmp/groundsignal-s5-v03
+          first_commit='67df0439fba62d38a8afa0b15cca3e4e25cd05d7'
+          cp medical/stage-evals/S5/fresh-first-observation-v0.3.json /tmp/s5-v03-expected.json
+          rm -rf /tmp/groundsignal-s5-v03-first
+          git worktree add --detach /tmp/groundsignal-s5-v03-first "$first_commit"
+          cd /tmp/groundsignal-s5-v03-first
           set +e
-          python scripts/eval_s5_fresh_boundary_v03.py \
-            --out /tmp/groundsignal-s5-v03/fresh-first-observation-v0.3.json
+          python scripts/eval_s5_fresh_boundary_v03.py --out /tmp/s5-v03-reproduced.json
           status=$?
           set -e
-          echo "evaluator_exit=$status" >> "$GITHUB_OUTPUT"
-          test "$status" -eq 0 -o "$status" -eq 1
-          echo '--- S5_V03_FIRST_OBSERVATION_BEGIN ---'
-          cat /tmp/groundsignal-s5-v03/fresh-first-observation-v0.3.json
-          echo '--- S5_V03_FIRST_OBSERVATION_END ---'
-
-      - name: Upload raw first observation
-        uses: actions/upload-artifact@v4
-        with:
-          name: s5-v03-first-observation
-          path: /tmp/groundsignal-s5-v03/fresh-first-observation-v0.3.json
-          if-no-files-found: error
+          test "$status" -eq 1
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected=json.loads(Path('/tmp/s5-v03-expected.json').read_text(encoding='utf-8'))
+          observed=json.loads(Path('/tmp/s5-v03-reproduced.json').read_text(encoding='utf-8'))
+          assert observed == expected
+          assert observed['fresh_structural_gate'] == 'FAIL'
+          assert observed['hard_gate_failures'] == ['S5-F8','S5-F9','S5-F10','S5-F11']
+          assert observed['precondition_failures'] == []
+          assert observed['stage_release'] == 'BLOCKED_GOLD_REVIEW'
+          assert observed['s6_automatic_trust'] == 'BLOCKED'
+          print('S5 v0.3 first fresh FAIL reproduced exactly at its original implementation snapshot.')
+          PY
