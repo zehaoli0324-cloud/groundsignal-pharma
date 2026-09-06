@@ -49,6 +49,12 @@ removed concept-only blocking unless case-specific identity or a distinctive num
 present. This satisfies the development calibration checkpoint and makes the candidate ready for an
 explicit freeze decision. It remains synthetic exposed evidence, not S5 release evidence.
 
+The pre-freeze attestation at `medical/stage-evals/S5/freeze-readiness-v0.8.1.json` pins 22 runtime,
+compatibility and evidence artifacts with both Git blob SHA-1 and SHA-256. Its independent verifier
+passes every content and gate check, but deliberately records `candidate_frozen=false` and
+`freeze_commit=null`. Merge approval is therefore still the authority boundary that materializes the
+freeze; the attestation cannot grant that authority itself.
+
 ## 1. Objective
 
 Build a reusable semantic-lineage detector that can identify whether a candidate training/source record is derived from protected benchmark/held-out content after paraphrase, field-level edits, wrapper changes, or partial fragment reuse.

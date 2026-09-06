@@ -11,9 +11,12 @@ on:
       - 'scripts/export_training_data_v073.py'
       - 'scripts/calibrate_s5_lineage_v081.py'
       - 'scripts/calibrate_s5_lineage_v081_matrix.py'
+      - 'scripts/verify_s5_v081_freeze_readiness.py'
       - 'scripts/eval_s5_boundary_regression_v081.py'
       - 'medical/stage-evals/S5/calibration-v0.8.1.json'
       - 'medical/stage-evals/S5/calibration-matrix-v0.8.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-v0.8.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json'
       - 'medical/stage-evals/S5/regression-v0.8.1.json'
       - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
       - 'medical/stage-evals/S5/S5_V0.8.1_MULTILINGUAL_MOSAIC_REPAIR_REPORT.md'
@@ -33,9 +36,12 @@ on:
       - 'scripts/export_training_data_v073.py'
       - 'scripts/calibrate_s5_lineage_v081.py'
       - 'scripts/calibrate_s5_lineage_v081_matrix.py'
+      - 'scripts/verify_s5_v081_freeze_readiness.py'
       - 'scripts/eval_s5_boundary_regression_v081.py'
       - 'medical/stage-evals/S5/calibration-v0.8.1.json'
       - 'medical/stage-evals/S5/calibration-matrix-v0.8.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-v0.8.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json'
       - 'medical/stage-evals/S5/regression-v0.8.1.json'
       - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
       - '.github/workflows/s5-v081-multilingual-mosaic-repair.yml'
@@ -66,11 +72,20 @@ jobs:
             scripts/export_training_data_v073.py \
             scripts/calibrate_s5_lineage_v081.py \
             scripts/calibrate_s5_lineage_v081_matrix.py \
+            scripts/verify_s5_v081_freeze_readiness.py \
             scripts/eval_s5_boundary_regression_v081.py
 
       - name: Preserve immutable v0.8 fresh FAIL
         run: |
           test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.8.json)" = '8d2d96890915aa981652f78e3ff52242c7c0f51c'
+
+      - name: Verify pinned pre-freeze attestation
+        run: |
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/freeze-readiness-v0.8.1.json)" = 'f7ecf1663adebeb7b81eaa681ca142b1f749f833'
+          test "$(git rev-parse HEAD:scripts/verify_s5_v081_freeze_readiness.py)" = '0104aec8a34297e7859091651605ff96c5aa9207'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json)" = '9568b8762896279f935e11a86d4dc6efb63b46fa'
+          python scripts/verify_s5_v081_freeze_readiness.py --out /tmp/s5-v081-freeze-readiness.json
+          cmp /tmp/s5-v081-freeze-readiness.json medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json
 
       - name: Reproduce v0.8.1 calibration
         run: |

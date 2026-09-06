@@ -148,6 +148,8 @@ v0.8 exposed clean controls                        2/2 ALLOW
 broader translation attacks                      12/12 BLOCK
 noisy multi-reference mosaics                      6/6 BLOCK
 multilingual clean near-neighbours                18/18 ALLOW
+pre-freeze pinned artifacts                       22/22 VERIFIED
+candidate frozen                                         no
 builder / exporter regression                     PASS / PASS
 fresh evidence                                           no
 ```
@@ -155,6 +157,9 @@ fresh evidence                                           no
 The repair combines an inspectable multilingual concept mapping, protected identifier evidence and
 multi-reference aggregation. It does not convert every `REVIEW` into `BLOCK`. The expanded 36-case
 development matrix passes without false block/review; it is synthetic exposed evidence, not fresh.
+The pre-freeze attestation also pins the candidate's runtime, transitive compatibility files and
+evidence outputs with Git blob SHA-1 plus SHA-256. All 22 paths verify, while the attestation
+explicitly records `candidate_frozen=false` and a null freeze commit.
 
 ## 8. Current release decision
 
