@@ -1,0 +1,10 @@
+{
+  "version": "s3a-compositional-frame-v0.5.5",
+  "implementation_last_change_commit": "3caad022ab9b070a206a4d2307d74cc78093fcc9",
+  "safety_evaluator_last_change_commit": "419bd6f0af79ba3b8665ff5dc09995c9f37d4e82",
+  "workflow_source_commit": "7fd97d8f207ca699369cc342d6c6e58aaa375c33",
+  "github_run_id": "34003220909",
+  "fresh_validation": "NOT_RUN",
+  "release_gate": "FAIL",
+  "historical_fresh_results_modified": false
+}

@@ -1,0 +1,165 @@
+{
+  "benchmark_id": "S3a-scope-safety-heldout-v0.5.2",
+  "metrics": {
+    "gold_propositions": 73,
+    "predicted_propositions": 73,
+    "true_positive": 70,
+    "precision": 0.958904109589041,
+    "recall": 0.958904109589041,
+    "f1": 0.958904109589041,
+    "critical_proposition_recall": 0.9454545454545454,
+    "polarity_accuracy_on_structural_matches": 1.0,
+    "polarity_structural_matches": 70,
+    "population_accuracy_on_semantic_matches": 1.0,
+    "population_semantic_matches": 70,
+    "condition_binding_accuracy_on_semantic_matches": 0.958904109589041,
+    "condition_semantic_matches": 73,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": true,
+    "critical_recall": false,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": true
+  },
+  "release_gate": "FAIL",
+  "failures": [
+    {
+      "item_id": "S3A52-005",
+      "text": "For a new starter, eGFR from 36 through 44 is a range in which initiation is not recommended; for someone continuing therapy, the same renal value instead calls for benefit-risk review.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "REASSESS_BENEFIT_RISK",
+          "object": "benefit_risk",
+          "polarity": "POSITIVE",
+          "conditions": [],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "REASSESS_BENEFIT_RISK",
+          "benefit_risk",
+          [
+            [
+              [
+                "high",
+                44
+              ],
+              [
+                "low",
+                36
+              ],
+              [
+                "operator",
+                "RANGE"
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          "existing_user",
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A52-010",
+      "text": "Although eGFR below 45 requires benefit-risk review for an existing user, a platelet count below 100 does not by itself trigger discontinuation.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "DISCONTINUE",
+          "object": "drug",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "DISCONTINUE",
+          "drug",
+          [
+            [
+              [
+                "operator",
+                "LT"
+              ],
+              [
+                "value",
+                45
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          "existing_user",
+          "NEGATIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    },
+    {
+      "item_id": "S3A52-037",
+      "text": "For a patient beginning therapy, initiation is not recommended below eGFR 42. By contrast, a patient already taking the medicine at the same eGFR should have benefit and risk reassessed rather than automatically discontinue.",
+      "missing_gold": [
+        {
+          "subject": "drug_use",
+          "predicate": "REASSESS_BENEFIT_RISK",
+          "object": "benefit_risk",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "EQ",
+              "value": 42
+            }
+          ],
+          "population": "existing_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_use",
+          "REASSESS_BENEFIT_RISK",
+          "benefit_risk",
+          [
+            [
+              [
+                "operator",
+                "LT"
+              ],
+              [
+                "value",
+                42
+              ],
+              [
+                "variable",
+                "egfr"
+              ]
+            ]
+          ],
+          "existing_user",
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "benchmark_id": "S3a-typed-event-shadow-heldout-v0.5.4",
+  "mandatory_silent_non_abstention": [],
+  "mandatory_silent_non_abstention_count": 0,
+  "mandatory_partial_truth_emission": [],
+  "mandatory_partial_truth_emission_count": 0,
+  "high_risk_false_positives": [
+    {
+      "item_id": "S3A54F-019",
+      "type": "endpoint_success_escalation",
+      "prediction": {
+        "subject": "study",
+        "predicate": "ACHIEVES_ENDPOINT",
+        "object": "primary_endpoint",
+        "polarity": "POSITIVE",
+        "conditions": [],
+        "population": null,
+        "confidence": 1.0,
+        "source_span": "The study is ACTIVE, NOT RECRUITING and specifies a primary endpoint. Nothing in the supplied results establishes that the endpoint was met."
+      }
+    }
+  ],
+  "high_risk_false_positive_count": 1,
+  "gate_checks": {
+    "silent_unknown_critical_non_abstention_count": true,
+    "partial_truth_emission_count": true,
+    "high_risk_false_positive_count": false
+  },
+  "release_gate": "FAIL"
+}

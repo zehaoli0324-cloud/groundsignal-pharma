@@ -1,0 +1,56 @@
+{
+  "benchmark_id": "S3a-typed-event-shadow-heldout-v0.5.4",
+  "metrics": {
+    "gold_propositions": 61,
+    "predicted_propositions": 61,
+    "true_positive": 60,
+    "precision": 0.9836065573770492,
+    "recall": 0.9836065573770492,
+    "f1": 0.9836065573770492,
+    "critical_proposition_recall": 0.9782608695652174,
+    "polarity_accuracy_on_structural_matches": 1.0,
+    "polarity_structural_matches": 60,
+    "population_accuracy_on_semantic_matches": 1.0,
+    "population_semantic_matches": 60,
+    "condition_binding_accuracy_on_semantic_matches": 1.0,
+    "condition_semantic_matches": 60,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": true,
+    "critical_recall": true,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": true
+  },
+  "release_gate": "PASS",
+  "failures": [
+    {
+      "item_id": "S3A54F-019",
+      "text": "The study is ACTIVE, NOT RECRUITING and specifies a primary endpoint. Nothing in the supplied results establishes that the endpoint was met.",
+      "missing_gold": [
+        {
+          "subject": "evidence",
+          "predicate": "ESTABLISHES_ENDPOINT_ACHIEVEMENT",
+          "object": "primary_endpoint",
+          "polarity": "NEGATIVE",
+          "conditions": [],
+          "population": null,
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "study",
+          "ACHIEVES_ENDPOINT",
+          "primary_endpoint",
+          [],
+          null,
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    }
+  ]
+}

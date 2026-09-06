@@ -1,0 +1,62 @@
+{
+  "benchmark_id": "S3a-semantic-frame-heldout-v0.4",
+  "metrics": {
+    "gold_propositions": 56,
+    "predicted_propositions": 56,
+    "true_positive": 55,
+    "precision": 0.9821428571428571,
+    "recall": 0.9821428571428571,
+    "f1": 0.9821428571428571,
+    "critical_proposition_recall": 0.9767441860465116,
+    "polarity_accuracy_on_structural_matches": 1.0,
+    "polarity_structural_matches": 55,
+    "population_accuracy_on_semantic_matches": 1.0,
+    "population_semantic_matches": 55,
+    "condition_binding_accuracy_on_semantic_matches": 0.9821428571428571,
+    "condition_semantic_matches": 56,
+    "evaluate_population": true
+  },
+  "gate_checks": {
+    "f1": true,
+    "critical_recall": true,
+    "polarity_accuracy": true,
+    "population_accuracy": true,
+    "condition_accuracy": true
+  },
+  "release_gate": "PASS",
+  "failures": [
+    {
+      "item_id": "S3A4-021",
+      "text": "At eGFR below 25, patients already taking the drug should discontinue it, whereas patients being newly started should not initiate it.",
+      "missing_gold": [
+        {
+          "subject": "drug_initiation",
+          "predicate": "INITIATION_NOT_RECOMMENDED",
+          "object": "initiation",
+          "polarity": "POSITIVE",
+          "conditions": [
+            {
+              "variable": "egfr",
+              "operator": "LT",
+              "value": 25
+            }
+          ],
+          "population": "new_or_initiating_user",
+          "critical": true
+        }
+      ],
+      "extra_predicted_signatures": [
+        [
+          "drug_initiation",
+          "INITIATION_NOT_RECOMMENDED",
+          "initiation",
+          [],
+          "new_or_initiating_user",
+          "POSITIVE"
+        ]
+      ],
+      "abstain": false,
+      "unresolved_spans": []
+    }
+  ]
+}
