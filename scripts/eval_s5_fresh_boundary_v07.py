@@ -1,0 +1,320 @@
+#!/usr/bin/env python3
+"""S5 v0.7 genuinely fresh lineage-generalization first observation.
+
+Target implementation is frozen before every v0.7 evaluator/fixture exists.
+This suite tests cross-split semantic duplication, paraphrased/partial benchmark
+lineage laundering, and NFKC compatibility-equivalent identity.
+"""
+from __future__ import annotations
+
+import argparse
+import copy
+import hashlib
+import importlib.util
+import json
+import tempfile
+import unicodedata
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+EVAL_ROOT = ROOT / "medical/stage-evals/S5/fresh-boundary-v0.7"
+DEFAULT_PROTOCOL = EVAL_ROOT / "protocol-v0.7.json"
+DEFAULT_SUITE = EVAL_ROOT / "suite-fresh-boundary-v0.7.json"
+DEFAULT_SCHEMA = ROOT / "medical/schemas/clinical-case.schema.json"
+
+CARRIER_SUITE = ROOT / "medical/stage-evals/S5/fresh-boundary-v0.4/suite-fresh-boundary-v0.4.json"
+CARRIER_ROOT = ROOT / "medical/stage-evals/S5/fresh-boundary-v0.4/families"
+ORDINARY_SOURCE = ROOT / "medical/examples/clinical-medication-safety-001.json"
+
+CROSS_SUITE = EVAL_ROOT / "cross-split-authority/suite-cross-split-v0.7.json"
+CROSS_ROOT = EVAL_ROOT / "cross-split-authority/families"
+CROSS_DEV = CROSS_ROOT / "S5FRESH-CROSS-SPLIT-001/cases/S5FRESH-BND7-CROSS-DEV-001.json"
+CROSS_HO = CROSS_ROOT / "S5FRESH-CROSS-SPLIT-001/cases/S5FRESH-BND7-CROSS-HO-001.json"
+PARAPHRASED = EVAL_ROOT / "attack-sources/paraphrased-heldout-ordinary.json"
+PARTIAL = EVAL_ROOT / "attack-sources/partial-heldout-ordinary.json"
+NFKC_SUITE = EVAL_ROOT / "nfkc-authority/suite-nfkc-v0.7.json"
+NFKC_ROOT = EVAL_ROOT / "nfkc-authority/families"
+NFKC_ORDINARY = EVAL_ROOT / "attack-sources/nfkc-collision-ordinary.json"
+NFKC_BENCHMARK_ID = "S5FRESH-BND7-ID-A"
+NFKC_ORDINARY_ID = "S5FRESH-BND7-ID-Ａ"
+
+
+def load_json(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_module(path: Path, name: str):
+    spec = importlib.util.spec_from_file_location(name, path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"cannot import {path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def git_blob_sha(path: Path) -> str:
+    data = path.read_bytes()
+    h = hashlib.sha1()
+    h.update(f"blob {len(data)}\0".encode("utf-8"))
+    h.update(data)
+    return h.hexdigest()
+
+
+def approved_eval(case_id: str) -> dict[str, Any]:
+    return {
+        "case_id": case_id,
+        "training_candidate": {
+            "review_status": "approved",
+            "type": "sft",
+            "ideal_response": "synthetic v0.7 lineage-generalization probe response",
+        },
+    }
+
+
+def export_probe(exporter: Any, case: dict[str, Any]) -> dict[str, Any]:
+    try:
+        result = exporter.export_row(approved_eval(str(case["case_id"])), case, None)
+        return {"blocked": False, "exported": result is not None, "error_type": None}
+    except PermissionError as exc:
+        return {"blocked": True, "exported": False, "error_type": type(exc).__name__}
+    except Exception as exc:
+        return {
+            "blocked": False,
+            "exported": False,
+            "error_type": type(exc).__name__,
+            "unexpected_error": str(exc),
+        }
+
+
+def schema_exemption_aligned(schema: dict[str, Any]) -> bool:
+    if "graph_eval" in set(schema.get("required") or []):
+        return False
+    for block in schema.get("allOf") or []:
+        for alt in block.get("anyOf") or []:
+            if "decision_contract_exemption" in set(alt.get("required") or []):
+                return True
+    return False
+
+
+def policy_probe(trust: Any, exporter: Any, suite: Path, root: Path, ordinary: list[Path], version: str) -> dict[str, Any]:
+    builder_rejected = False
+    validator_rejected = False
+    policy = None
+    try:
+        policy = trust.build_policy([(suite, root)], ordinary_sources=ordinary, policy_version=version)
+    except ValueError:
+        builder_rejected = True
+    if policy is not None:
+        try:
+            exporter._validate_policy_content(policy, version)
+        except PermissionError:
+            validator_rejected = True
+    return {
+        "policy_builder_rejected": builder_rejected,
+        "policy_content_validator_rejected": validator_rejected,
+        "pass": builder_rejected or validator_rejected,
+    }
+
+
+def main() -> int:
+    p = argparse.ArgumentParser()
+    p.add_argument("--protocol", type=Path, default=DEFAULT_PROTOCOL)
+    p.add_argument("--suite", type=Path, default=DEFAULT_SUITE)
+    p.add_argument("--schema", type=Path, default=DEFAULT_SCHEMA)
+    p.add_argument("--out", type=Path, required=True)
+    args = p.parse_args()
+
+    protocol = load_json(args.protocol)
+    eval_suite = load_json(args.suite)
+    schema = load_json(args.schema)
+    freeze = str(protocol["target_implementation_freeze_commit"])
+
+    target_rows: dict[str, dict[str, Any]] = {}
+    for rel, expected in protocol["target_blob_contract"].items():
+        observed = git_blob_sha(ROOT / rel)
+        target_rows[rel] = {"expected_blob": expected, "observed_blob": observed, "match": observed == expected}
+    frozen_identity = {
+        "freeze_commit": freeze,
+        "suite_declares_same_freeze": eval_suite.get("implementation_freeze_commit") == freeze,
+        "target_blobs": target_rows,
+    }
+    frozen_identity["pass"] = bool(frozen_identity["suite_declares_same_freeze"] and all(x["match"] for x in target_rows.values()))
+
+    materializer = load_module(ROOT / "scripts/materialize_s5_cases.py", "s5_materializer_v07_frozen")
+    exporter = load_module(ROOT / "scripts/export_training_data.py", "s5_exporter_v07_frozen")
+    trust = load_module(ROOT / "scripts/s5_trust_policy.py", "s5_trust_v07_frozen")
+    release_gate = load_module(ROOT / "scripts/s5_release_gate.py", "s5_release_v07_frozen")
+    harness = load_module(ROOT / "scripts/model_harness.py", "s5_harness_v07_frozen")
+
+    trust_root = exporter.trust_root_status()
+    trust_root["pass"] = bool(trust_root.get("pass"))
+
+    with tempfile.TemporaryDirectory(prefix="groundsignal-s5-v07-") as td:
+        td_path = Path(td)
+        carrier_out = td_path / "carrier"
+        summary = materializer.materialize(CARRIER_SUITE, CARRIER_ROOT, carrier_out)
+        paths = sorted(x for x in carrier_out.rglob("*.json") if x.name != "materialization-manifest.json")
+        cases = [load_json(x) for x in paths]
+        by_split: dict[str, dict[str, Any]] = {}
+        split_counts: dict[str, int] = {}
+        for case in cases:
+            split = str((case.get("benchmark_provenance") or {}).get("split") or "")
+            by_split.setdefault(split, case)
+            split_counts[split] = split_counts.get(split, 0) + 1
+        materialization = {
+            "family_count": summary.get("family_count"),
+            "case_count": summary.get("case_count"),
+            "split_counts": dict(sorted(split_counts.items())),
+            "training_eligible_count": summary.get("training_eligible_count"),
+            "training_blocked_count": summary.get("training_blocked_count"),
+        }
+        materialization["pass"] = materialization == {
+            "family_count": 1,
+            "case_count": 5,
+            "split_counts": {"dev": 3, "heldout": 1, "regression": 1},
+            "training_eligible_count": 3,
+            "training_blocked_count": 2,
+        }
+
+        bdev = export_probe(exporter, by_split["dev"])
+        breg = export_probe(exporter, by_split["regression"])
+        bho = export_probe(exporter, by_split["heldout"])
+        baseline = {"dev": bdev, "regression": breg, "heldout": bho}
+        baseline["pass"] = bool(bdev["exported"] and breg["blocked"] and bho["blocked"])
+
+        ordinary_loaded = exporter.load_cases(ORDINARY_SOURCE)["clinical-medication-safety-001"]
+        ordinary_result = export_probe(exporter, ordinary_loaded)
+        ordinary_baseline = {**ordinary_result, "pass": ordinary_result["exported"]}
+
+        cross_dev = load_json(CROSS_DEV)
+        cross_ho = load_json(CROSS_HO)
+        f24_base = policy_probe(
+            trust, exporter, CROSS_SUITE, CROSS_ROOT, [], "s5-trust-root-v0.7-cross-split-attack"
+        )
+        f24 = {
+            "probe": "dev and heldout benchmark cases have identical semantic core but different case_id/title/tags",
+            "semantic_core_equal": trust.semantic_core_sha256(cross_dev) == trust.semantic_core_sha256(cross_ho),
+            "dev_case_id": cross_dev["case_id"],
+            "heldout_case_id": cross_ho["case_id"],
+            **f24_base,
+        }
+        f24["pass"] = bool(f24["semantic_core_equal"] and f24_base["pass"])
+
+        f25_base = policy_probe(
+            trust, exporter, CARRIER_SUITE, CARRIER_ROOT, [PARAPHRASED], "s5-trust-root-v0.7-paraphrase-attack"
+        )
+        f25 = {
+            "probe": "light paraphrase of heldout-derived ordinary source bypasses exact semantic-core lineage fingerprint",
+            "derived_from_case_id": load_json(PARAPHRASED).get("derived_from_case_id"),
+            **f25_base,
+        }
+
+        f26_base = policy_probe(
+            trust, exporter, CARRIER_SUITE, CARRIER_ROOT, [PARTIAL], "s5-trust-root-v0.7-partial-lineage-attack"
+        )
+        partial_obj = load_json(PARTIAL)
+        f26 = {
+            "probe": "ordinary source reuses evaluation-critical fragments from heldout while changing other semantic-core fields",
+            "derived_fragments_from_case_id": partial_obj.get("derived_fragments_from_case_id"),
+            "reused_fields": partial_obj.get("reused_fields"),
+            **f26_base,
+        }
+
+        f27_base = policy_probe(
+            trust, exporter, NFKC_SUITE, NFKC_ROOT, [NFKC_ORDINARY], "s5-trust-root-v0.7-nfkc-attack"
+        )
+        f27 = {
+            "probe": "benchmark and ordinary case_id are distinct under NFC but equal under Unicode NFKC compatibility normalization",
+            "benchmark_case_id": NFKC_BENCHMARK_ID,
+            "ordinary_case_id": NFKC_ORDINARY_ID,
+            "nfc_equal": unicodedata.normalize("NFC", NFKC_BENCHMARK_ID) == unicodedata.normalize("NFC", NFKC_ORDINARY_ID),
+            "nfkc_equal": unicodedata.normalize("NFKC", NFKC_BENCHMARK_ID) == unicodedata.normalize("NFKC", NFKC_ORDINARY_ID),
+            **f27_base,
+        }
+        f27["pass"] = bool(f27["nfkc_equal"] and f27_base["pass"])
+
+        exemption = copy.deepcopy(by_split["dev"])
+        exemption.pop("benchmark_provenance", None)
+        exemption.pop("graph_eval", None)
+        exemption["decision_contract_exemption"] = {"type": "NON_REASONING_CONTROL", "rationale": "v0.7 alignment control"}
+        materializer_accepts_exemption = True
+        try:
+            materializer.validate_decision_contract(exemption)
+        except ValueError:
+            materializer_accepts_exemption = False
+        decision_alignment = {
+            "materializer_accepts_exemption": materializer_accepts_exemption,
+            "schema_accepts_exemption_shape": schema_exemption_aligned(schema),
+        }
+        decision_alignment["pass"] = bool(decision_alignment["materializer_accepts_exemption"] and decision_alignment["schema_accepts_exemption_shape"])
+
+        sentinel = "S5_FRESH_V07_GOLD_SENTINEL_DO_NOT_EXPOSE"
+        prompt_case = copy.deepcopy(by_split["dev"])
+        prompt_case["expected_behavior"]["must_include"].append(sentinel)
+        prompt_case["graph_eval"]["expected_reasoning_path"].append(sentinel)
+        prompt_case["safety"]["critical_errors"].append(sentinel)
+        rendered = harness.build_user_prompt(prompt_case, "")
+        prompt_leakage = {"sentinel_leaked": sentinel in rendered, "pass": sentinel not in rendered}
+
+    gold = release_gate.evaluate(CARRIER_SUITE, CARRIER_ROOT)
+    gold_containment = {
+        "gold_approved_count": gold.get("gold_approved_count"),
+        "pending_gold_count": gold.get("pending_gold_count"),
+        "release_ready": gold.get("release_ready"),
+        "decision": gold.get("decision"),
+    }
+    gold_containment["pass"] = bool(
+        gold_containment["gold_approved_count"] == 0
+        and gold_containment["pending_gold_count"] == 1
+        and gold_containment["release_ready"] is False
+        and gold_containment["decision"] == "BLOCKED_GOLD_REVIEW"
+    )
+
+    hard_gates = {"S5-F24": f24, "S5-F25": f25, "S5-F26": f26, "S5-F27": f27}
+    hard_failures = [name for name, gate in hard_gates.items() if not gate["pass"]]
+    preconditions = {
+        "FROZEN_TARGET_IDENTITY": frozen_identity,
+        "AUTHENTICATED_TRUST_ROOT": trust_root,
+        "CARRIER_MATERIALIZATION": materialization,
+        "BASELINE_PARTITION_EXPORT_GUARD": baseline,
+        "ORDINARY_SOURCE_BASELINE_EXPORT": ordinary_baseline,
+        "DECISION_CONTRACT_ALIGNMENT": decision_alignment,
+        "MODEL_PROMPT_GOLD_LEAKAGE": prompt_leakage,
+        "GOLD_RELEASE_CONTAINMENT": gold_containment,
+    }
+    precondition_failures = [name for name, gate in preconditions.items() if not gate["pass"]]
+    fresh_pass = not hard_failures and not precondition_failures
+
+    result = {
+        "stage": "S5",
+        "version": "v0.7",
+        "eval_name": "sixth-fresh-lineage-generalization-first-observation",
+        "evidence_class": "independent_fresh_structural",
+        "fresh_evidence": True,
+        "first_observation": True,
+        "target_implementation_freeze_commit": freeze,
+        "eval_suite_id": eval_suite.get("suite_id"),
+        "carrier_suite_id": eval_suite.get("carrier_suite_id"),
+        **preconditions,
+        **hard_gates,
+        "hard_gate_failures": hard_failures,
+        "precondition_failures": precondition_failures,
+        "fresh_structural_gate": "PASS" if fresh_pass else "FAIL",
+        "stage_release": "BLOCKED_GOLD_REVIEW",
+        "s6_automatic_trust": "BLOCKED",
+        "notes": [
+            "All v0.7 evaluator logic and attack fixtures were authored after the v0.6.1 implementation freeze.",
+            "Previously registered v0.4 cases are used only as authenticated carrier controls.",
+            "No v0.7 implementation repair is applied before this first observation.",
+            "No expert approval, clinical validation, real-user evidence, or model-training gain is inferred."
+        ]
+    }
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    args.out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if fresh_pass else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

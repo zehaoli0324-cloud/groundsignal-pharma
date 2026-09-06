@@ -1,0 +1,11 @@
+{
+  "family_id": "S5FRESH-CROSS-SPLIT-001",
+  "title": "Fresh v0.7 cross-split semantic duplicate family",
+  "status": "structural_only",
+  "data_origin": "synthetic",
+  "target_capabilities": ["cross-split semantic isolation"],
+  "cases": [
+    {"case_id": "S5FRESH-BND7-CROSS-DEV-001", "path": "cases/S5FRESH-BND7-CROSS-DEV-001.json", "split": "dev", "variant_type": "base"},
+    {"case_id": "S5FRESH-BND7-CROSS-HO-001", "path": "cases/S5FRESH-BND7-CROSS-HO-001.json", "split": "heldout", "variant_type": "heldout"}
+  ]
+}

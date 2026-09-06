@@ -1,0 +1,9 @@
+{
+  "family_id": "S5FRESH-NFKC-001",
+  "title": "Fresh v0.7 NFKC identity family",
+  "status": "structural_only",
+  "data_origin": "synthetic",
+  "cases": [
+    {"case_id": "S5FRESH-BND7-ID-A", "path": "cases/S5FRESH-BND7-ID-A.json", "split": "dev", "variant_type": "base"}
+  ]
+}

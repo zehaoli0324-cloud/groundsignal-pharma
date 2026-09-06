@@ -1,0 +1,36 @@
+{
+  "stage": "S5",
+  "version": "v0.7",
+  "eval_name": "sixth-fresh-lineage-generalization-first-observation",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "first_observation": true,
+  "target_implementation_freeze_commit": "b2e2696bae9cf57bbf255e67e64dd63bd8773ff8",
+  "target_blob_contract": {
+    "scripts/export_training_data.py": "923a7f35d55de0fcd80d5c60c31c6295cc6c2851",
+    "scripts/s5_trust_policy.py": "893eeb35d323960a364e1294bffbbd57499f56bf",
+    "scripts/materialize_s5_cases.py": "ecca14f947e7922bb277c1149f07d51f34f605cf",
+    "scripts/s5_release_gate.py": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+    "scripts/model_harness.py": "e6c90ab88c476c38b765d61ae8c9e2b471c8e2a2",
+    "medical/schemas/clinical-case.schema.json": "473edfd800b717513582a1100f9b8f4fe0814e0a",
+    "medical/configs/s5-trust-policy-registry-v0.4.1.json": "b9637e31df679e49b36d49ea96177a8100fd5c2a",
+    "medical/configs/s5-trust-root-v0.4.1.json": "57adc5384818a4254192ed53e8ba60eee5d70e48"
+  },
+  "hard_gates": [
+    "S5-F24 CROSS_SPLIT_SEMANTIC_DUPLICATE_NOT_REJECTED",
+    "S5-F25 PARAPHRASED_HELDOUT_DERIVED_ORDINARY_LAUNDERING",
+    "S5-F26 PARTIAL_HELDOUT_FRAGMENT_REUSE_NOT_DETECTED",
+    "S5-F27 NFKC_COMPATIBILITY_CASE_ID_COLLISION"
+  ],
+  "preconditions": [
+    "frozen target identity",
+    "authenticated trust root",
+    "carrier materialization",
+    "baseline partition export guard",
+    "ordinary-source baseline export",
+    "decision-contract alignment",
+    "model prompt gold leakage",
+    "gold release containment"
+  ],
+  "freshness_declaration": "All v0.7 evaluator logic and attack fixtures are authored after the target implementation freeze. No v0.7 attack is used to modify the implementation before first observation."
+}

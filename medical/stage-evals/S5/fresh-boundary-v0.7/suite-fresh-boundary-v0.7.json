@@ -1,0 +1,11 @@
+{
+  "stage": "S5",
+  "suite_id": "S5-FRESH-LINEAGE-GENERALIZATION-v0.7",
+  "version": "v0.7",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "implementation_freeze_commit": "b2e2696bae9cf57bbf255e67e64dd63bd8773ff8",
+  "carrier_suite_id": "S5-FRESH-BOUNDARY-v0.4",
+  "purpose": "Fresh post-v0.6.1 generalization test for cross-split semantic duplication, paraphrased/partial benchmark lineage laundering, and compatibility-equivalent case identity.",
+  "release_use": "evaluation_only"
+}

@@ -1,0 +1,14 @@
+{
+  "stage": "S5",
+  "suite_id": "S5-FRESH-NFKC-v0.7",
+  "version": "v0.7",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "implementation_freeze_commit": "b2e2696bae9cf57bbf255e67e64dd63bd8773ff8",
+  "source_snapshot_commit": null,
+  "family_ids": ["S5FRESH-NFKC-001"],
+  "allowed_training_splits": ["dev"],
+  "prohibited_training_splits": ["regression", "heldout"],
+  "purpose": "Attack compatibility-equivalent case identity.",
+  "release_use": "evaluation_only"
+}

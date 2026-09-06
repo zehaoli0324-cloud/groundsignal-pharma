@@ -1,0 +1,64 @@
+name: S5 v0.7 Fresh Lineage-Generalization First-Observation Capture
+
+on:
+  push:
+    paths:
+      - 'scripts/eval_s5_fresh_boundary_v07.py'
+      - 'medical/stage-evals/S5/fresh-boundary-v0.7/**'
+      - '.github/workflows/s5-v07-fresh-lineage-generalization-capture.yml'
+  pull_request:
+    paths:
+      - 'scripts/eval_s5_fresh_boundary_v07.py'
+      - 'medical/stage-evals/S5/fresh-boundary-v0.7/**'
+      - '.github/workflows/s5-v07-fresh-lineage-generalization-capture.yml'
+
+jobs:
+  capture-first-observation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check evaluator
+        run: python -m py_compile scripts/eval_s5_fresh_boundary_v07.py
+
+      - name: Preserve v0.6 immutable first observation
+        run: |
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.6.json)" = 'f855e853ea2af9705cd3db478a3a40848459e0ea'
+
+      - name: Confirm v0.6.1 exposed repair remains green before fresh observation
+        run: |
+          mkdir -p /tmp/groundsignal-s5-v07
+          python scripts/eval_s5_boundary_regression_v061.py --out /tmp/groundsignal-s5-v07/v061.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/groundsignal-s5-v07/v061.json', encoding='utf-8'))
+          assert d['regression_gate'] == 'PASS'
+          assert d['failed_gates'] == []
+          print('S5 v0.6.1 exposed regression remains PASS before v0.7 first observation.')
+          PY
+
+      - name: Capture v0.7 first observation without repairing it
+        id: fresh
+        run: |
+          set +e
+          python scripts/eval_s5_fresh_boundary_v07.py --out /tmp/groundsignal-s5-v07/v07-first.json
+          status=$?
+          set -e
+          echo "$status" > /tmp/groundsignal-s5-v07/v07-exit-status.txt
+          cat /tmp/groundsignal-s5-v07/v07-first.json
+          echo "evaluator_exit_status=$status" >> "$GITHUB_OUTPUT"
+          test -s /tmp/groundsignal-s5-v07/v07-first.json
+
+      - name: Upload immutable first-observation candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: s5-v07-first-observation
+          path: |
+            /tmp/groundsignal-s5-v07/v07-first.json
+            /tmp/groundsignal-s5-v07/v07-exit-status.txt
+          if-no-files-found: error
