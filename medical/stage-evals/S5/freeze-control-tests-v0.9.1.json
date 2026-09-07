@@ -1,0 +1,89 @@
+{
+  "stage": "S5",
+  "version": "v0.9.1-freeze-control-tests-v0.1",
+  "evidence_class": "development_process_guard_test",
+  "fresh_evidence": false,
+  "first_observation": false,
+  "scenario_count": 14,
+  "scenario_pass_count": 14,
+  "test_gate": "PASS",
+  "scenarios": [
+    {
+      "name": "current_pre_freeze_state_blocks_cleanly",
+      "result": "PASS",
+      "observed": "BLOCKED_NOT_FROZEN"
+    },
+    {
+      "name": "invalid_authority_inputs_rejected",
+      "result": "PASS",
+      "observed": "FREEZE_COMMIT_INVALID,APPROVAL_REFERENCE_INVALID"
+    },
+    {
+      "name": "unavailable_commit_rejected",
+      "result": "PASS",
+      "observed": "FREEZE_COMMIT_UNAVAILABLE"
+    },
+    {
+      "name": "noncanonical_commit_rejected",
+      "result": "PASS",
+      "observed": "FREEZE_COMMIT_NOT_CANONICAL_MAIN_TIP,FREEZE_COMMIT_NOT_ON_CANONICAL_MAIN"
+    },
+    {
+      "name": "candidate_byte_drift_rejected",
+      "result": "PASS",
+      "observed": "FREEZE_ARTIFACT_MISMATCH:requirements-s5-lineage-calibration.txt"
+    },
+    {
+      "name": "control_plane_byte_drift_rejected",
+      "result": "PASS",
+      "observed": "FREEZE_CONTROL_PLANE_ARTIFACT_MISMATCH:scripts/s5_v091_freeze_control.py"
+    },
+    {
+      "name": "preseeded_receipt_rejected",
+      "result": "PASS",
+      "observed": "RECEIPT_PREEXISTED_AT_FREEZE"
+    },
+    {
+      "name": "preseeded_fresh_root_rejected",
+      "result": "PASS",
+      "observed": "NEXT_FRESH_ASSETS_PREEXISTED_AT_FREEZE"
+    },
+    {
+      "name": "canonical_exact_candidate_materializes_bounded_receipt",
+      "result": "PASS",
+      "observed": "receipt_built"
+    },
+    {
+      "name": "verified_receipt_opens_authoring_only",
+      "result": "PASS",
+      "observed": "ALLOW_AFTER_VERIFIED_FREEZE"
+    },
+    {
+      "name": "malformed_receipt_fails_closed",
+      "result": "PASS",
+      "observed": "FAIL_CLOSED"
+    },
+    {
+      "name": "fresh_before_receipt_fails_closed",
+      "result": "PASS",
+      "observed": "FAIL_CLOSED"
+    },
+    {
+      "name": "post_freeze_assets_without_protocol_rejected",
+      "result": "PASS",
+      "observed": "FAIL_CLOSED"
+    },
+    {
+      "name": "gold_privilege_escalation_rejected",
+      "result": "PASS",
+      "observed": "FAIL_CLOSED"
+    }
+  ],
+  "receipt_materialized": false,
+  "v0.10_assets_created": false,
+  "candidate_frozen": false,
+  "gold_approved": false,
+  "stage_release": "BLOCKED_NEXT_FRESH_AND_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "note": "The positive path uses mocked canonical Git state; no real receipt or fresh asset is created."
+}

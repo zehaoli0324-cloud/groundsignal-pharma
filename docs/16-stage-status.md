@@ -21,7 +21,7 @@
 | S3a | Proposition Extraction | bounded CONDITIONAL PASS | fresh F1 98.90%; critical recall 100%; mandatory abstention 6/6 | longer/noisier real-source coverage |
 | S3b | Evidence Relation | bounded CONDITIONAL PASS | 40/40 relation; high-risk false-support 0 | broader real-source relation set |
 | S4 | Medical KG Construction / Update | CONDITIONAL PASS | first fresh 18/20 FAIL → repair regression 20/20 → new independent fresh 20/20; must-reject 7/7 | persistent real-source graph |
-| S5 | Controlled Case / Benchmark Factory | **v0.9.1 READY FOR FREEZE DECISION / RELEASE BLOCKED** | exposed repair PASS; 24/24 candidate pins + 18/18 v0.9 asset hashes + 6/6 negative tests; `candidate_frozen=false` | explicit dependency merges and canonical freeze, then new post-freeze fresh suite; Gold remains separate |
+| S5 | Controlled Case / Benchmark Factory | **v0.9.1 CANDIDATE + CONTROL PLANE READY / RELEASE BLOCKED** | 24/24 candidate pins; 8/8 control pins; 14/14 freeze/admission tests; v0.10 `BLOCKED_NOT_FROZEN` | explicit dependency merges and canonical freeze, then new post-freeze fresh suite; Gold remains separate |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release |
 | S7 | Evaluation & Safety Gate | Protocol only | rubric v0.2 + regression gate protocol | human/Judge calibration + real model runs |
 | S8 | Failure Diagnosis | Scaffold | taxonomy + intervention router | multi-model × multi-case clusters |
@@ -205,6 +205,8 @@ S5 v0.8.1 exposed repair                   PASS (not fresh)
 S5 v0.9 independent first observation      FAIL (immutable)
 S5 v0.9.1 exposed repair                    PASS (not fresh)
 S5 v0.9.1 pre-freeze readiness              PASS (24 pins; candidate not frozen)
+S5 v0.9.1 control-plane readiness            PASS (8 pins; control plane not frozen)
+S5 v0.10 authoring admission                 BLOCKED_NOT_FROZEN
 S5 bounded independent release             NOT ESTABLISHED
 S5 gold review                             INCOMPLETE
 S6 automatic trust                         BLOCKED

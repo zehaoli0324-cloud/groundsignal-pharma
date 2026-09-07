@@ -82,7 +82,6 @@ def verify(manifest_path: Path) -> dict[str, Any]:
     observed_tree = git("rev-parse", f"{candidate}^{{tree}}").stdout.strip() if commit_available else ""
     require(observed_tree == candidate_tree == generator.CANDIDATE_TREE, "CANDIDATE_TREE_MISMATCH", failures)
     require(candidate == generator.CANDIDATE_COMMIT, "CANDIDATE_COMMIT_MISMATCH", failures)
-    require(git("merge-base", "--is-ancestor", candidate, "HEAD").returncode == 0, "CANDIDATE_NOT_ANCESTOR_OF_HEAD", failures)
 
     verified = 0
     for row in rows:

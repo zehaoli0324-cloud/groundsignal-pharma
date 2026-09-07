@@ -10,11 +10,24 @@ on:
       - 'scripts/generate_s5_v091_freeze_readiness.py'
       - 'scripts/verify_s5_v091_freeze_readiness.py'
       - 'scripts/test_s5_v091_freeze_readiness.py'
+      - 'scripts/s5_v091_freeze_control.py'
+      - 'scripts/materialize_s5_v091_freeze_receipt.py'
+      - 'scripts/check_s5_v10_fresh_admission.py'
+      - 'scripts/test_s5_v091_freeze_control.py'
+      - 'scripts/generate_s5_v091_control_plane_readiness.py'
+      - 'scripts/verify_s5_v091_control_plane_readiness.py'
       - 'medical/stage-evals/S5/regression-v0.9.1.json'
       - 'medical/stage-evals/S5/freeze-readiness-v0.9.1.json'
       - 'medical/stage-evals/S5/freeze-readiness-check-v0.9.1.json'
       - 'medical/stage-evals/S5/freeze-readiness-tests-v0.9.1.json'
+      - 'medical/stage-evals/S5/control-plane-readiness-v0.9.1.json'
+      - 'medical/stage-evals/S5/control-plane-readiness-check-v0.9.1.json'
+      - 'medical/stage-evals/S5/next-fresh-admission-v0.10.json'
+      - 'medical/stage-evals/S5/freeze-control-tests-v0.9.1.json'
+      - 'medical/stage-evals/S5/freeze-receipt-v0.9.1.json'
+      - 'medical/stage-evals/S5/fresh-lineage-v0.10/**'
       - 'medical/stage-evals/S5/S5_V0.9.1_SCRIPT_ROLE_REPAIR_REPORT.md'
+      - 'medical/stage-evals/S5/S5_V0.9.1_FREEZE_CONTROL_REPORT.md'
       - '.github/workflows/s5-v091-script-role-repair.yml'
       - 'README.md'
       - 'docs/16-stage-status.md'
@@ -29,11 +42,24 @@ on:
       - 'scripts/generate_s5_v091_freeze_readiness.py'
       - 'scripts/verify_s5_v091_freeze_readiness.py'
       - 'scripts/test_s5_v091_freeze_readiness.py'
+      - 'scripts/s5_v091_freeze_control.py'
+      - 'scripts/materialize_s5_v091_freeze_receipt.py'
+      - 'scripts/check_s5_v10_fresh_admission.py'
+      - 'scripts/test_s5_v091_freeze_control.py'
+      - 'scripts/generate_s5_v091_control_plane_readiness.py'
+      - 'scripts/verify_s5_v091_control_plane_readiness.py'
       - 'medical/stage-evals/S5/regression-v0.9.1.json'
       - 'medical/stage-evals/S5/freeze-readiness-v0.9.1.json'
       - 'medical/stage-evals/S5/freeze-readiness-check-v0.9.1.json'
       - 'medical/stage-evals/S5/freeze-readiness-tests-v0.9.1.json'
+      - 'medical/stage-evals/S5/control-plane-readiness-v0.9.1.json'
+      - 'medical/stage-evals/S5/control-plane-readiness-check-v0.9.1.json'
+      - 'medical/stage-evals/S5/next-fresh-admission-v0.10.json'
+      - 'medical/stage-evals/S5/freeze-control-tests-v0.9.1.json'
+      - 'medical/stage-evals/S5/freeze-receipt-v0.9.1.json'
+      - 'medical/stage-evals/S5/fresh-lineage-v0.10/**'
       - 'medical/stage-evals/S5/S5_V0.9.1_SCRIPT_ROLE_REPAIR_REPORT.md'
+      - 'medical/stage-evals/S5/S5_V0.9.1_FREEZE_CONTROL_REPORT.md'
       - '.github/workflows/s5-v091-script-role-repair.yml'
       - 'README.md'
       - 'docs/16-stage-status.md'
@@ -64,7 +90,13 @@ jobs:
             scripts/eval_s5_boundary_regression_v091.py \
             scripts/generate_s5_v091_freeze_readiness.py \
             scripts/verify_s5_v091_freeze_readiness.py \
-            scripts/test_s5_v091_freeze_readiness.py
+            scripts/test_s5_v091_freeze_readiness.py \
+            scripts/s5_v091_freeze_control.py \
+            scripts/materialize_s5_v091_freeze_receipt.py \
+            scripts/check_s5_v10_fresh_admission.py \
+            scripts/test_s5_v091_freeze_control.py \
+            scripts/generate_s5_v091_control_plane_readiness.py \
+            scripts/verify_s5_v091_control_plane_readiness.py
           python -m json.tool medical/stage-evals/S5/regression-v0.9.1.json >/dev/null
           test "$(git hash-object medical/stage-evals/S5/fresh-first-observation-v0.9.json)" = \
             '522c8f4ed39293d2ea01c81f48ffacc1d1ef4340'
@@ -94,6 +126,43 @@ jobs:
           assert result['gold_approved'] is False
           assert result['s6_automatic_trust']=='BLOCKED'
           assert tests['scenario_pass_count']==tests['scenario_count']==6
+          PY
+
+      - name: Reproduce freeze and v0.10 control-plane evidence
+        run: |
+          test ! -e medical/stage-evals/S5/freeze-receipt-v0.9.1.json
+          test ! -e medical/stage-evals/S5/fresh-lineage-v0.10
+          python scripts/generate_s5_v091_control_plane_readiness.py \
+            --out /tmp/s5-v091-control-plane.json
+          cmp /tmp/s5-v091-control-plane.json \
+            medical/stage-evals/S5/control-plane-readiness-v0.9.1.json
+          python scripts/verify_s5_v091_control_plane_readiness.py \
+            --out /tmp/s5-v091-control-plane-check.json
+          cmp /tmp/s5-v091-control-plane-check.json \
+            medical/stage-evals/S5/control-plane-readiness-check-v0.9.1.json
+          python scripts/check_s5_v10_fresh_admission.py \
+            --out /tmp/s5-v10-admission.json
+          cmp /tmp/s5-v10-admission.json \
+            medical/stage-evals/S5/next-fresh-admission-v0.10.json
+          python scripts/test_s5_v091_freeze_control.py \
+            --out /tmp/s5-v091-freeze-control-tests.json
+          cmp /tmp/s5-v091-freeze-control-tests.json \
+            medical/stage-evals/S5/freeze-control-tests-v0.9.1.json
+          python - <<'PY'
+          import json
+          control=json.load(open('/tmp/s5-v091-control-plane-check.json'))
+          admission=json.load(open('/tmp/s5-v10-admission.json'))
+          tests=json.load(open('/tmp/s5-v091-freeze-control-tests.json'))
+          assert control['verification_gate']=='PASS'
+          assert control['verified_path_count']==control['required_path_count']==8
+          assert control['candidate_frozen'] is False
+          assert admission['admission_decision']=='BLOCKED_NOT_FROZEN'
+          assert admission['fresh_authoring_allowed'] is False
+          assert admission['gold_approved'] is False
+          assert admission['s6_automatic_trust']=='BLOCKED'
+          assert tests['scenario_pass_count']==tests['scenario_count']==14
+          assert tests['receipt_materialized'] is False
+          assert tests['v0.10_assets_created'] is False
           PY
 
       - name: Reproduce exposed repair regression

@@ -106,6 +106,12 @@ escalation and fresh-asset digest drift. This makes the candidate ready for an e
 decision but does not freeze it. A new suite may be authored only after dependency merges and a
 canonical freeze are explicitly approved and completed.
 
+The accompanying control plane pins 8 freeze/admission artifacts. Its receipt materializer requires
+the exact canonical `origin/main` tip, explicit approval, all 24 candidate pins and all 8 control
+pins. The v0.10 guard additionally requires future assets to prove they were authored only after a
+separately committed receipt. The current decision is `BLOCKED_NOT_FROZEN`; all 14 state tests pass
+without creating a real receipt, fresh case, Gold approval or S6 trust transition.
+
 ## 1. Objective
 
 Build a reusable semantic-lineage detector that can identify whether a candidate training/source record is derived from protected benchmark/held-out content after paraphrase, field-level edits, wrapper changes, or partial fragment reuse.

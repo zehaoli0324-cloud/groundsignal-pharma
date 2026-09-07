@@ -1,0 +1,30 @@
+{
+  "stage": "S5",
+  "version": "v0.9.1",
+  "verification": "pre-freeze-control-plane-readiness",
+  "evidence_class": "development_process_integrity_attestation_verification",
+  "fresh_evidence": false,
+  "first_observation": false,
+  "manifest_git_blob_sha1": "5835d0351d4f691c7876e5b16f386a8245963a9d",
+  "manifest_sha256": "39d52afc035d67ab65aff204e52bd82a0b585f07c464c331e2316452e781cabd",
+  "required_path_count": 8,
+  "verified_path_count": 8,
+  "boundary_checks": {
+    "scope": true,
+    "not_fresh": true,
+    "not_frozen": true,
+    "receipt_absent": true,
+    "authoring_blocked": true,
+    "gold_false": true,
+    "release_blocked": true,
+    "s6_blocked": true
+  },
+  "failures": [],
+  "verification_gate": "PASS",
+  "control_plane_status": "READY_FOR_EXPLICIT_FREEZE_DECISION",
+  "control_plane_frozen": false,
+  "candidate_frozen": false,
+  "gold_approved": false,
+  "stage_release": "BLOCKED_NEXT_FRESH_AND_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED"
+}

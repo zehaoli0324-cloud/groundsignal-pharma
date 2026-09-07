@@ -139,6 +139,7 @@ S5 目前已经形成的防线：
 - v0.9 暴露两个互补缺口：未见语言脚本的语义召回不足，以及数字与模板相似压过临床变量类型差异导致的精度不足。后续修复必须同时检查 recall 与 false block，不能只降低阈值或无限扩充词表。
 - v0.9.1 用可检查的韩文概念映射修复 F32，并只在结构化实验室测量角色明确且互斥、且没有更强血缘证据时解除 dense-anchor 误拦截；5/5 已暴露攻击、4/4 clean 与全部历史矩阵通过。该结果明确记录为 exposed repair，不覆盖 v0.9 FAIL，也不产生 fresh 或 Gold 证据。
 - v0.9.1 冻结前证明固定 24 个实现、传递依赖和证据文件，并从不可变首次观测逐项复核 18 个 v0.9 fresh 资产；精确清单通过，缺 pin、哈希漂移、重复 pin、权限升级和 fresh 资产摘要漂移等 6/6 场景通过。该证明只说明候选可提交冻结决策，`candidate_frozen=false`。
+- v0.9.1 控制平面另固定 8 个冻结与准入文件，14/14 状态测试覆盖非 canonical 提交、候选/控制平面漂移、提前写入 receipt/fresh 目录、畸形凭证、无协议资产和伪造 Gold。当前未生成凭证或 v0.10 资产，准入明确为 `BLOCKED_NOT_FROZEN`。
 
 ## 6. 我们现在的“优化结果”应该怎样解读
 
@@ -169,6 +170,8 @@ S5 v0.8.1 exposed repair                 PASS (not fresh)
 S5 v0.9 independent fresh                FAIL (immutable: F32 + clean false block)
 S5 v0.9.1 exposed repair                 PASS (not fresh)
 S5 v0.9.1 pre-freeze readiness           PASS (candidate not frozen)
+S5 v0.9.1 control-plane readiness         PASS (control plane not frozen)
+S5 v0.10 authoring                        BLOCKED_NOT_FROZEN
 S5 bounded independent release           NOT ESTABLISHED
 S5 gold review                           INCOMPLETE
 S6 automatic trust                       BLOCKED
