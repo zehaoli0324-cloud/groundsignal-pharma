@@ -1,6 +1,6 @@
 # Algorithm Handoff — S5 v0.7 Semantic Lineage Detection
 
-> Handoff status: **v0.9.1 CANONICALLY FROZEN; v0.9 FRESH FAIL PRESERVED**
+> Handoff status: **v0.10 FRESH FAIL PRESERVED; NEXT REPAIR IS EXPOSED ONLY**
 > Evidence source: S5 v0.7 independent fresh first observation  
 > Repair scope for algorithm team: **F25 + F26 only**. F24/F27 remain deterministic platform/eval-infrastructure work.
 
@@ -112,6 +112,29 @@ pins. The v0.10 guard additionally requires future assets to prove they were aut
 separately committed receipt. The current decision is `ALLOW_AFTER_VERIFIED_FREEZE` with zero v0.10
 assets; all 14 state tests pass. The transition creates no fresh result, Gold approval, bounded
 release or S6 trust transition.
+
+## v0.10 post-freeze result
+
+The receipt was published at `fda5d0b281eddfbf9d200941ffadc8628e9ed19c`. Only afterward, the
+independent evaluator, 19 JSON assets and expected outcomes were frozen at
+`ae92eba2e3cb5570fd6ae345a211a90572cf85bb` before the detector was executed. All eight process and
+containment preconditions passed, so the first-observation `FAIL` is valid fresh evidence:
+
+```text
+F37 Cyrillic unseen-script translation          ALLOW (FAIL)
+F38 cross-turn negation/scope                    BLOCK
+F39 coordinate/codebook multimodal compression  BLOCK
+F40 unseen laboratory ontology/ratio alias      BLOCK
+F41 dialogue-distributed multi-record braid      ALLOW (FAIL)
+cardiac MRI clean near-neighbour                 REVIEW (FAIL)
+other clean controls                             4/4 ALLOW
+```
+
+The next algorithm round may use F37, F41 and the cardiac MRI control only as exposed material. It
+must improve unseen-script semantic recall and dialogue-level multi-reference aggregation while
+protecting same-domain acquisition-context precision. It must preserve the v0.10 authoring commit
+and first-observation bytes, cannot call its repair result fresh, and cannot authorize Gold, bounded
+release or S6 automatic trust. A new freeze and a genuinely independent fresh suite are required.
 
 ## 1. Objective
 

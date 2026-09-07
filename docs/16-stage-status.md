@@ -21,7 +21,7 @@
 | S3a | Proposition Extraction | bounded CONDITIONAL PASS | fresh F1 98.90%; critical recall 100%; mandatory abstention 6/6 | longer/noisier real-source coverage |
 | S3b | Evidence Relation | bounded CONDITIONAL PASS | 40/40 relation; high-risk false-support 0 | broader real-source relation set |
 | S4 | Medical KG Construction / Update | CONDITIONAL PASS | first fresh 18/20 FAIL → repair regression 20/20 → new independent fresh 20/20; must-reject 7/7 | persistent real-source graph |
-| S5 | Controlled Case / Benchmark Factory | **v0.9.1 CANONICALLY FROZEN / RELEASE BLOCKED** | freeze `cdc89298`; 24/24 candidate pins; 8/8 control pins; v0.10 `ALLOW_AFTER_VERIFIED_FREEZE` with 0 assets | independent post-freeze v0.10 suite; Gold remains separate |
+| S5 | Controlled Case / Benchmark Factory | **v0.10 FRESH FAIL / RELEASE BLOCKED** | valid post-freeze first observation: F37/F41 + cardiac-MRI clean failure | exposed repair without rewriting v0.10; then new freeze/fresh cycle; Gold separate |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release |
 | S7 | Evaluation & Safety Gate | Protocol only | rubric v0.2 + regression gate protocol | human/Judge calibration + real model runs |
 | S8 | Failure Diagnosis | Scaffold | taxonomy + intervention router | multi-model × multi-case clusters |
@@ -207,7 +207,8 @@ S5 v0.9.1 exposed repair                    PASS (not fresh)
 S5 v0.9.1 pre-freeze readiness              PASS (historical 24-pin attestation)
 S5 v0.9.1 control-plane readiness            PASS (historical 8-pin attestation)
 S5 v0.9.1 canonical freeze                   ESTABLISHED (cdc89298)
-S5 v0.10 authoring admission                 ALLOW_AFTER_VERIFIED_FREEZE (0 assets)
+S5 v0.10 authoring admission                 ALLOW_AFTER_VERIFIED_FREEZE (19 assets)
+S5 v0.10 independent first observation       FAIL (immutable: F37/F41 + cardiac MRI clean)
 S5 bounded independent release             NOT ESTABLISHED
 S5 gold review                             INCOMPLETE
 S6 automatic trust                         BLOCKED
@@ -227,4 +228,6 @@ or clinical validation. Synthetic/CI evidence is not substituted for those claim
 7. preserve the immutable v0.9 first-observation FAIL
 8. retain the passing F32 and numeric near-neighbour v0.9.1 repair only as exposed evidence
 9. preserve the v0.9.1 canonical freeze at `cdc89298693aa9c5222f15ed9bd62a57e140fbc6` and its separate receipt
-10. author v0.10 only after the receipt is published; require an independent fresh PASS and separate Gold review before any bounded release or S6 evaluation
+10. preserve the v0.10 authoring commit and first-observation FAIL byte-for-byte
+11. treat F37, F41 and the cardiac MRI clean failure only as exposed repair inputs
+12. after repair, require a new canonical freeze, genuinely independent fresh PASS and separate Gold review before bounded release or S6 evaluation

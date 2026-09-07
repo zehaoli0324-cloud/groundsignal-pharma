@@ -107,6 +107,7 @@ v0.8              cross-language/abstraction/field-flattening/mosaic            
 v0.8.1            36-case multilingual + mosaic development matrix                   development PASS
 v0.9   F32–F36    unseen script, typed-role neighbour, graph/alias/mosaic attacks     fresh FAIL
 v0.9.1            Korean concept + typed measurement-role repair                       exposed PASS
+v0.10  F37–F41    Cyrillic, dialogue scope/braid, codebook, lab ontology               fresh FAIL
 ```
 
 S5 目前已经形成的防线：
@@ -140,6 +141,7 @@ S5 目前已经形成的防线：
 - v0.9.1 用可检查的韩文概念映射修复 F32，并只在结构化实验室测量角色明确且互斥、且没有更强血缘证据时解除 dense-anchor 误拦截；5/5 已暴露攻击、4/4 clean 与全部历史矩阵通过。该结果明确记录为 exposed repair，不覆盖 v0.9 FAIL，也不产生 fresh 或 Gold 证据。
 - v0.9.1 冻结前证明固定 24 个实现、传递依赖和证据文件，并从不可变首次观测逐项复核 18 个 v0.9 fresh 资产；精确清单通过，缺 pin、哈希漂移、重复 pin、权限升级和 fresh 资产摘要漂移等 6/6 场景通过。该历史证明继续保留 `candidate_frozen=false`，冻结状态由单独凭证建立，不回写历史证据。
 - v0.9.1 控制平面另固定 8 个冻结与准入文件，14/14 状态测试覆盖非 canonical 提交、候选/控制平面漂移、提前写入 receipt/fresh 目录、畸形凭证、无协议资产和伪造 Gold。获批依赖合并后，canonical freeze `cdc89298` 通过 24/24 与 8/8 复核，v0.10 准入转为 `ALLOW_AFTER_VERIFIED_FREEZE`，但资产数仍为 0。
+- v0.10 的 19 个 JSON 资产和 evaluator 在凭证发布之后独立冻结，唯一首次观测的八项前置条件全部通过，但结构门禁为 FAIL：F37 西里尔字母改写与 F41 跨多病例对话拼接被 `ALLOW`，心脏 MRI 干净近邻进入 `REVIEW`；其余 3/5 攻击和 4/5 clean control 通过。该输出不可改写，后续只能作为 exposed repair 输入。
 
 ## 6. 我们现在的“优化结果”应该怎样解读
 
@@ -172,12 +174,13 @@ S5 v0.9.1 exposed repair                 PASS (not fresh)
 S5 v0.9.1 pre-freeze readiness           PASS (historical attestation)
 S5 v0.9.1 control-plane readiness         PASS (historical attestation)
 S5 v0.9.1 canonical freeze                ESTABLISHED (cdc89298)
-S5 v0.10 authoring                        ALLOW_AFTER_VERIFIED_FREEZE (0 assets)
+S5 v0.10 authoring                        FROZEN (19 assets; ae92eba2)
+S5 v0.10 independent fresh                FAIL (immutable: F37/F41 + cardiac MRI clean)
 S5 bounded independent release           NOT ESTABLISHED
 S5 gold review                           INCOMPLETE
 S6 automatic trust                       BLOCKED
 ```
 
-v0.8 与 v0.9 两次首次 fresh FAIL 均已永久保存。v0.9.1 已修复两个暴露失败、通过历史回归并在 `cdc89298` 正式冻结；这仍不是 fresh PASS。下一步只能在冻结凭证发布之后，由独立评测方创建全新的 post-freeze v0.10 suite。Gold review 仍是另一条独立门槛。
+v0.8、v0.9 与 v0.10 三次首次 fresh FAIL 均已永久保存。v0.10 暴露的 F37、F41 和 cardiac-MRI clean failure 可进入下一轮暴露修复，但修复结果不得称为 fresh。修复后仍需重新冻结并创建完全独立的新 fresh suite；Gold review 仍是另一条独立门槛。
 
 本仓库当前没有真实用户验证、专家 gold approval、模型训练收益或临床验证数据时，均明确记录为“没有”，不会用 synthetic/CI 结果替代。

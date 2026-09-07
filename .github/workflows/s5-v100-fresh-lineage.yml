@@ -1,0 +1,120 @@
+name: S5 v0.10 Fresh Lineage First Observation
+
+on:
+  push:
+    paths:
+      - 'scripts/eval_s5_fresh_lineage_v10.py'
+      - 'medical/stage-evals/S5/fresh-lineage-v0.10/**'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.10.json'
+      - 'medical/stage-evals/S5/S5_V0.10_FRESH_FIRST_OBSERVATION_REPORT.md'
+      - '.github/workflows/s5-v100-fresh-lineage.yml'
+      - '.github/workflows/s5-v091-script-role-repair.yml'
+      - 'README.md'
+      - 'docs/16-stage-status.md'
+      - 'docs/17-evaluation-methods-and-optimization-ledger.md'
+      - 'docs/20-s5-v07-algorithm-handoff.md'
+  pull_request:
+    paths:
+      - 'scripts/eval_s5_fresh_lineage_v10.py'
+      - 'medical/stage-evals/S5/fresh-lineage-v0.10/**'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.10.json'
+      - 'medical/stage-evals/S5/S5_V0.10_FRESH_FIRST_OBSERVATION_REPORT.md'
+      - '.github/workflows/s5-v100-fresh-lineage.yml'
+      - '.github/workflows/s5-v091-script-role-repair.yml'
+      - 'README.md'
+      - 'docs/16-stage-status.md'
+      - 'docs/17-evaluation-methods-and-optimization-ledger.md'
+      - 'docs/20-s5-v07-algorithm-handoff.md'
+
+jobs:
+  preserve-first-observation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: requirements-s5-lineage-calibration.txt
+      - name: Install pinned evaluation dependency
+        run: pip install -r requirements-s5-lineage-calibration.txt
+
+      - name: Syntax, JSON and immutable-output checks
+        run: |
+          python -m py_compile scripts/eval_s5_fresh_lineage_v10.py
+          find medical/stage-evals/S5/fresh-lineage-v0.10 -type f -name '*.json' -print0 \
+            | xargs -0 -n1 python -m json.tool >/dev/null
+          python -m json.tool medical/stage-evals/S5/fresh-first-observation-v0.10.json >/dev/null
+          test "$(git hash-object medical/stage-evals/S5/fresh-first-observation-v0.10.json)" = \
+            'e5405e0ee797abca973a097b9c895f9c9bcd88c7'
+          test "$(sha256sum medical/stage-evals/S5/fresh-first-observation-v0.10.json | cut -d' ' -f1)" = \
+            '9dc3262599f24dd477df08a26f6e821d9e06c1bde77f48b30bafda7d352108ff'
+
+      - name: Verify chronology and frozen authoring tree
+        run: |
+          freeze='cdc89298693aa9c5222f15ed9bd62a57e140fbc6'
+          receipt='fda5d0b281eddfbf9d200941ffadc8628e9ed19c'
+          authoring='ae92eba2e3cb5570fd6ae345a211a90572cf85bb'
+          git merge-base --is-ancestor "$freeze" "$receipt"
+          git merge-base --is-ancestor "$receipt" "$authoring"
+          ! git cat-file -e "$freeze":medical/stage-evals/S5/freeze-receipt-v0.9.1.json
+          ! git cat-file -e "$receipt":medical/stage-evals/S5/fresh-lineage-v0.10
+          test "$(git rev-parse "$authoring"^)" = "$receipt"
+          test "$(git rev-parse "$authoring":medical/stage-evals/S5/fresh-lineage-v0.10)" = \
+            "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-lineage-v0.10)"
+          test "$(git rev-parse "$authoring":scripts/eval_s5_fresh_lineage_v10.py)" = \
+            "$(git rev-parse HEAD:scripts/eval_s5_fresh_lineage_v10.py)"
+
+      - name: Reproduce immutable v0.10 first observation
+        run: |
+          git worktree add --detach /tmp/s5-v10-authoring ae92eba2e3cb5570fd6ae345a211a90572cf85bb
+          set +e
+          (cd /tmp/s5-v10-authoring && python scripts/eval_s5_fresh_lineage_v10.py --out /tmp/s5-v10-replay.json)
+          rc=$?
+          set -e
+          test "$rc" -eq 1
+          cmp /tmp/s5-v10-replay.json medical/stage-evals/S5/fresh-first-observation-v0.10.json
+
+      - name: Confirm valid fresh FAIL and containment
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('/tmp/s5-v10-replay.json').read_text())
+          for key in (
+              'FROZEN_TARGET_IDENTITY', 'FRESHNESS_CHRONOLOGY', 'AUTHORING_ADMISSION',
+              'AUTHORING_COMMIT_INTEGRITY', 'AUTHENTICATED_TRUST_ROOT',
+              'FRESH_SUITE_MATERIALIZATION', 'FRESH_SUITE_BASELINE',
+              'GOLD_RELEASE_CONTAINMENT',
+          ):
+              assert d[key]['pass'] is True, key
+          assert d['fresh_evidence'] is True
+          assert d['first_observation'] is True
+          assert d['fresh_structural_gate']=='FAIL'
+          assert d['hard_gate_failures']==['S5-F37', 'S5-F41']
+          assert d['clean_control_failures']==['CLEAN-CARDIAC-MRI']
+          assert d['precondition_failures']==[]
+          assert d['gold_approved'] is False
+          assert d['stage_release']=='BLOCKED_FRESH_AND_GOLD_REVIEW'
+          assert d['s6_automatic_trust']=='BLOCKED'
+          print('S5 v0.10 fresh FAIL preserved; Gold, bounded release and S6 trust remain blocked.')
+          PY
+
+      - name: Preserve v0.9.1 exposed repair regression
+        run: |
+          python scripts/eval_s5_boundary_regression_v091.py --out /tmp/s5-v091-regression.json
+          cmp /tmp/s5-v091-regression.json medical/stage-evals/S5/regression-v0.9.1.json
+
+      - name: Preserve immutable v0.9 first observation
+        run: |
+          test "$(git hash-object medical/stage-evals/S5/fresh-first-observation-v0.9.json)" = \
+            '522c8f4ed39293d2ea01c81f48ffacc1d1ef4340'
+          git worktree add --detach /tmp/s5-v09-authoring 42f60341e6daf04196118b85ea6895434d2ec02e
+          set +e
+          (cd /tmp/s5-v09-authoring && python scripts/eval_s5_fresh_lineage_v09.py --out /tmp/s5-v09-replay.json)
+          rc=$?
+          set -e
+          test "$rc" -eq 1
+          cmp /tmp/s5-v09-replay.json medical/stage-evals/S5/fresh-first-observation-v0.9.json

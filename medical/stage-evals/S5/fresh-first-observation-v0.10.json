@@ -1,0 +1,734 @@
+{
+  "stage": "S5",
+  "version": "v0.10",
+  "eval_name": "ninth-fresh-post-v0.9.1-freeze-lineage-first-observation",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "first_observation": true,
+  "target_implementation_freeze_commit": "cdc89298693aa9c5222f15ed9bd62a57e140fbc6",
+  "freeze_receipt_materialization_commit": "fda5d0b281eddfbf9d200941ffadc8628e9ed19c",
+  "suite_authoring_commit": "ae92eba2e3cb5570fd6ae345a211a90572cf85bb",
+  "eval_suite_id": "S5-FRESH-LINEAGE-v0.10",
+  "fresh_asset_sha256": {
+    "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f37-cyrillic-unseen-script.json": "7a17c0092e8120306cdc53dc4798031ca45b5709e8d211d7b07ef86dfddcbebb",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f38-cross-turn-negation-scope.json": "0d7daabaf1f79f44f5261cf66981b5101bcd4a80ca3671b5dd7e8afcc1476729",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f39-coordinate-codebook-modality.json": "34fe10c232418497df19f40a1a37edcb13851aa1a9026335342999df1a8cb046",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f40-unseen-lab-ontology-ratio.json": "ec7850089647faaafc22f825c2b7831a62016fe0c5f8208fc5b57b7335c313ab",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f41-dialogue-distributed-braid.json": "a86eba72470d4aed5a01b88d9990fb42d4f41ae1695d1dc258540f4546c00667",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-cardiac-mri.json": "db37395e8f65bfa4ce808b8918747be2c2a394a202beeceb867bc385fb55a7d6",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-dialogue-multi-record.json": "4eac8ef3514d19944bf9d066a7d5770c0c743004acaee9810688811981045d79",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-negation-scope.json": "ee22d289571a44c0a0bec0eb3c1f3f314f84bd4660a7196d53914db55f1bcc7c",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-numeric-ontology-neighbour.json": "2b7d106b1e66bc3eef2068b44fa340b46166aba3b7394f7d8d67ac42e9722070",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-russian-same-domain.json": "119b057ad44dd8ed499e1f1b929401d4613b9351f02bd92c7a95a4c63b8b14e8",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-DEV-001.json": "932f195db2bbe25b3e8b011d22b66ee7c09a04fff535ccd6c18b71684882bc3a",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-DEV-002.json": "6965603b94548a02698ede75bb3264f8c4e900f6cf9bfc755682849cd7253d97",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-DEV-003.json": "8fc4b090db51807c2671e970b8c053e424acf123c3f9973f13f4a02941b402da",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-HO-001.json": "d8793ce03213e4f7280997c9196a9d2b96efbf33e8950ab3deb4257786e0e590",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-HO-002.json": "9495cccc3d26d1ead2348b73770229a8e00b82e4dce5dd5a993df9ea712cfe36",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-REG-001.json": "d9022af1bdf877d8c818a1cc4b9cdf5010350759b75fa7de6a8f16bcc1016a66",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/manifest.json": "b6e3b8ac1d910fba1c8416e254beeff6b19e21ea6742bc60f75f922f33182701",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/protocol-v0.10.json": "59496cbcdcd8760d072a9827c06a82f631919ac431df3507d52a40feddd11bcc",
+    "medical/stage-evals/S5/fresh-lineage-v0.10/suite-fresh-lineage-v0.10.json": "9d560cd5dc2c8c3a328aad8b99a7b9eed8a2c7e6d843c1c67bd94c5bb28fa52d"
+  },
+  "FROZEN_TARGET_IDENTITY": {
+    "freeze_commit": "cdc89298693aa9c5222f15ed9bd62a57e140fbc6",
+    "suite_declares_same_freeze": true,
+    "freeze_on_origin_main": true,
+    "target_blobs": {
+      "scripts/s5_lineage_detector_v091.py": {
+        "expected_blob": "d88e406737bed94665a83c208b2152b67e7e3299",
+        "observed_blob": "d88e406737bed94665a83c208b2152b67e7e3299",
+        "freeze_commit_blob": "d88e406737bed94665a83c208b2152b67e7e3299",
+        "match": true
+      },
+      "scripts/s5_trust_policy_v091.py": {
+        "expected_blob": "6b86e0a014923d763c05fdfc528c36b730135262",
+        "observed_blob": "6b86e0a014923d763c05fdfc528c36b730135262",
+        "freeze_commit_blob": "6b86e0a014923d763c05fdfc528c36b730135262",
+        "match": true
+      },
+      "scripts/export_training_data_v091.py": {
+        "expected_blob": "9c656199d053f3df44a06bd606cc19d251b692eb",
+        "observed_blob": "9c656199d053f3df44a06bd606cc19d251b692eb",
+        "freeze_commit_blob": "9c656199d053f3df44a06bd606cc19d251b692eb",
+        "match": true
+      },
+      "scripts/s5_lineage_detector_v081.py": {
+        "expected_blob": "f3132ebcbca186d47e31c5c8365ec264b908a102",
+        "observed_blob": "f3132ebcbca186d47e31c5c8365ec264b908a102",
+        "freeze_commit_blob": "f3132ebcbca186d47e31c5c8365ec264b908a102",
+        "match": true
+      },
+      "scripts/s5_trust_policy_v071.py": {
+        "expected_blob": "a201d1bbaecb28e30543d9123d0ae257574fa20f",
+        "observed_blob": "a201d1bbaecb28e30543d9123d0ae257574fa20f",
+        "freeze_commit_blob": "a201d1bbaecb28e30543d9123d0ae257574fa20f",
+        "match": true
+      },
+      "scripts/export_training_data_v061.py": {
+        "expected_blob": "923a7f35d55de0fcd80d5c60c31c6295cc6c2851",
+        "observed_blob": "923a7f35d55de0fcd80d5c60c31c6295cc6c2851",
+        "freeze_commit_blob": "923a7f35d55de0fcd80d5c60c31c6295cc6c2851",
+        "match": true
+      },
+      "scripts/materialize_s5_cases.py": {
+        "expected_blob": "ecca14f947e7922bb277c1149f07d51f34f605cf",
+        "observed_blob": "ecca14f947e7922bb277c1149f07d51f34f605cf",
+        "freeze_commit_blob": "ecca14f947e7922bb277c1149f07d51f34f605cf",
+        "match": true
+      },
+      "scripts/s5_release_gate.py": {
+        "expected_blob": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+        "observed_blob": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+        "freeze_commit_blob": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+        "match": true
+      }
+    },
+    "pass": true
+  },
+  "FRESHNESS_CHRONOLOGY": {
+    "receipt_materialization_commit": "fda5d0b281eddfbf9d200941ffadc8628e9ed19c",
+    "freeze_is_ancestor_of_receipt": true,
+    "receipt_is_ancestor_of_authoring_head": true,
+    "receipt_matches_publication_commit": true,
+    "fresh_assets_absent_at_receipt_commit": true,
+    "pass": true
+  },
+  "AUTHORING_ADMISSION": {
+    "decision": "ALLOW_AFTER_VERIFIED_FREEZE",
+    "receipt_valid": true,
+    "fresh_assets_present": true,
+    "fresh_protocol_valid": true,
+    "fresh_authoring_allowed": true,
+    "failures": [],
+    "pass": true
+  },
+  "AUTHORING_COMMIT_INTEGRITY": {
+    "authoring_commit": "ae92eba2e3cb5570fd6ae345a211a90572cf85bb",
+    "working_tree_clean_before_first_observation": true,
+    "protocol_and_assets_committed": true,
+    "pass": true
+  },
+  "AUTHENTICATED_TRUST_ROOT": {
+    "registry_version": "s5-trust-policy-registry-v0.4.1",
+    "registry_path": "medical/configs/s5-trust-policy-registry-v0.4.1.json",
+    "registry_git_blob_sha1": "b9637e31df679e49b36d49ea96177a8100fd5c2a",
+    "default_policy_id": "s5-trust-root-v0.4.1",
+    "default_policy_path": "medical/configs/s5-trust-root-v0.4.1.json",
+    "default_policy_git_blob_sha1": "57adc5384818a4254192ed53e8ba60eee5d70e48",
+    "registered_policy_count": 2,
+    "pass": true
+  },
+  "FRESH_SUITE_MATERIALIZATION": {
+    "family_count": 1,
+    "case_count": 6,
+    "split_counts": {
+      "dev": 3,
+      "heldout": 2,
+      "regression": 1
+    },
+    "training_eligible_count": 3,
+    "training_blocked_count": 3,
+    "pass": true
+  },
+  "FRESH_SUITE_BASELINE": {
+    "policy_and_exporter_accepted": true,
+    "error": null,
+    "pass": true
+  },
+  "GOLD_RELEASE_CONTAINMENT": {
+    "gold_approved_count": 0,
+    "pending_gold_count": 1,
+    "release_ready": false,
+    "decision": "BLOCKED_GOLD_REVIEW",
+    "pass": true
+  },
+  "hard_gates": {
+    "S5-F37": {
+      "failure_name": "CYRILLIC_UNSEEN_SCRIPT_TRANSLATION",
+      "ground_truth": {
+        "derived_from": [
+          "S5FRESH-LIN10-HO-001"
+        ],
+        "transformation": "human-authored Russian Cyrillic translation with identifiers removed, decimals verbalized and clinical roles preserved"
+      },
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f37-cyrillic-unseen-script.json",
+      "policy_builder_rejected": false,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": false,
+      "error": null,
+      "detector_trace": {
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN10-HO-001",
+        "record_similarity": 0.338365,
+        "risk_score": 0.653918,
+        "exclusive_anchor_overlap": [
+          "coag",
+          "snapshot"
+        ],
+        "exclusive_identifier_overlap": [],
+        "semantic_concept_overlap": [
+          "uncertainty"
+        ],
+        "semantic_numeric_overlap": [
+          "2"
+        ],
+        "mosaic_reference_matches": [],
+        "candidate_language": "en",
+        "reference_language": "en",
+        "cross_language_pair": false,
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "reasons": [],
+        "method_version": "s5-lineage-script-role-v0.9.1-exposed"
+      },
+      "pass": false
+    },
+    "S5-F38": {
+      "failure_name": "CROSS_TURN_NEGATION_SCOPE_FRAGMENTATION",
+      "ground_truth": {
+        "derived_from": [
+          "S5FRESH-LIN10-REG-001"
+        ],
+        "transformation": "protected facts fragmented across dialogue roles with negation scope, entity masking and biomarker abstraction"
+      },
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f38-cross-turn-negation-scope.json",
+      "policy_builder_rejected": true,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": true,
+      "error": "S5 v0.9.1 exposed lineage policy rejected: ordinary source 'medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f38-cross-turn-negation-scope.json' is protected-benchmark derived; nearest='S5FRESH-LIN10-REG-001', reasons=PROTECTED_EXCLUSIVE_FIELD_REUSE,PROTECTED_EXCLUSIVE_SPAN_REUSE",
+      "detector_trace": {
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN10-REG-001",
+        "record_similarity": 0.591848,
+        "risk_score": 0.96,
+        "exclusive_anchor_overlap": [
+          "after",
+          "both",
+          "causal",
+          "causal_boundary",
+          "caused",
+          "decline",
+          "fell",
+          "filtration",
+          "fluid",
+          "fluid_gap",
+          "hydration",
+          "identifiability",
+          "identifiable",
+          "intake",
+          "interval",
+          "kidney",
+          "ledger",
+          "markers",
+          "oral",
+          "proves",
+          "record",
+          "recover",
+          "reference",
+          "retain",
+          "secretion",
+          "sequence"
+        ],
+        "exclusive_identifier_overlap": [],
+        "semantic_concept_overlap": [
+          "biomarker_change",
+          "causal_attribution",
+          "hydration_confounder",
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "semantic_numeric_overlap": [
+          "1",
+          "2",
+          "8"
+        ],
+        "mosaic_reference_matches": [
+          {
+            "reference_id": "S5FRESH-LIN10-REG-001",
+            "record_similarity": 0.591848,
+            "exclusive_anchor_count": 26
+          }
+        ],
+        "candidate_language": "en",
+        "reference_language": "en",
+        "cross_language_pair": false,
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "reasons": [
+          "PROTECTED_EXCLUSIVE_FIELD_REUSE",
+          "PROTECTED_EXCLUSIVE_SPAN_REUSE"
+        ],
+        "method_version": "s5-lineage-script-role-v0.9.1-exposed"
+      },
+      "pass": true
+    },
+    "S5-F39": {
+      "failure_name": "COORDINATE_CODEBOOK_MODALITY_COMPRESSION",
+      "ground_truth": {
+        "derived_from": [
+          "S5FRESH-LIN10-HO-002"
+        ],
+        "transformation": "coordinate and codebook serialization with percentage-to-ratio conversion, modality masking and relation preservation"
+      },
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f39-coordinate-codebook-modality.json",
+      "policy_builder_rejected": true,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": true,
+      "error": "S5 v0.9.1 exposed lineage policy rejected: ordinary source 'medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f39-coordinate-codebook-modality.json' is protected-benchmark derived; nearest='S5FRESH-LIN10-HO-002', reasons=DENSE_PROTECTED_ANCHOR_REUSE,PROTECTED_EXCLUSIVE_FIELD_REUSE",
+      "detector_trace": {
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN10-HO-002",
+        "record_similarity": 0.623719,
+        "risk_score": 0.92,
+        "exclusive_anchor_overlap": [
+          "12",
+          "acquisition",
+          "archive",
+          "baseline",
+          "causal",
+          "causal_boundary",
+          "caused",
+          "comparability",
+          "comparable",
+          "contrast",
+          "follow",
+          "four",
+          "ignoring",
+          "images",
+          "independently",
+          "inflammation",
+          "interpret",
+          "myocarditis",
+          "observation",
+          "retrieve",
+          "sequence",
+          "software",
+          "source",
+          "timing",
+          "treat",
+          "verified",
+          "version"
+        ],
+        "exclusive_identifier_overlap": [
+          "follow-up",
+          "non-comparable"
+        ],
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "semantic_numeric_overlap": [
+          "12",
+          "2"
+        ],
+        "mosaic_reference_matches": [
+          {
+            "reference_id": "S5FRESH-LIN10-HO-002",
+            "record_similarity": 0.623719,
+            "exclusive_anchor_count": 27
+          }
+        ],
+        "candidate_language": "en",
+        "reference_language": "en",
+        "cross_language_pair": false,
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "reasons": [
+          "DENSE_PROTECTED_ANCHOR_REUSE",
+          "PROTECTED_EXCLUSIVE_FIELD_REUSE"
+        ],
+        "method_version": "s5-lineage-script-role-v0.9.1-exposed"
+      },
+      "pass": true
+    },
+    "S5-F40": {
+      "failure_name": "UNSEEN_LAB_ONTOLOGY_AND_RATIO_ALIAS",
+      "ground_truth": {
+        "derived_from": [
+          "S5FRESH-LIN10-HO-001"
+        ],
+        "transformation": "unseen coagulation ontology alias, complement-ratio conversion, access-device paraphrase and identifier wording"
+      },
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f40-unseen-lab-ontology-ratio.json",
+      "policy_builder_rejected": true,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": true,
+      "error": "S5 v0.9.1 exposed lineage policy rejected: ordinary source 'medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f40-unseen-lab-ontology-ratio.json' is protected-benchmark derived; nearest='S5FRESH-LIN10-HO-001', reasons=DENSE_PROTECTED_ANCHOR_REUSE,MULTI_PROTECTED_REFERENCE_MOSAIC,PROTECTED_EXCLUSIVE_FIELD_REUSE",
+      "detector_trace": {
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN10-HO-001",
+        "record_similarity": 0.630245,
+        "risk_score": 0.96,
+        "exclusive_anchor_overlap": [
+          "618",
+          "access",
+          "anti",
+          "anticoagulant",
+          "anticoagulation",
+          "been",
+          "both",
+          "causal",
+          "causal_boundary",
+          "caused",
+          "coag",
+          "collection",
+          "discordant",
+          "dose",
+          "effect",
+          "either",
+          "escalate",
+          "excessive",
+          "exposure",
+          "factor",
+          "flushed",
+          "identifiability",
+          "identifiable",
+          "line",
+          "order",
+          "peripheral",
+          "privilege",
+          "repeat",
+          "retain",
+          "site",
+          "site_gap",
+          "specimen"
+        ],
+        "exclusive_identifier_overlap": [],
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "semantic_numeric_overlap": [
+          "0",
+          "2",
+          "618"
+        ],
+        "mosaic_reference_matches": [
+          {
+            "reference_id": "S5FRESH-LIN10-HO-001",
+            "record_similarity": 0.630245,
+            "exclusive_anchor_count": 32
+          },
+          {
+            "reference_id": "S5FRESH-LIN10-REG-001",
+            "record_similarity": 0.52162,
+            "exclusive_anchor_count": 14
+          }
+        ],
+        "candidate_language": "en",
+        "reference_language": "en",
+        "cross_language_pair": false,
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "reasons": [
+          "DENSE_PROTECTED_ANCHOR_REUSE",
+          "MULTI_PROTECTED_REFERENCE_MOSAIC",
+          "PROTECTED_EXCLUSIVE_FIELD_REUSE"
+        ],
+        "method_version": "s5-lineage-script-role-v0.9.1-exposed"
+      },
+      "pass": true
+    },
+    "S5-F41": {
+      "failure_name": "DIALOGUE_DISTRIBUTED_MULTI_RECORD_BRAID",
+      "ground_truth": {
+        "derived_from": [
+          "S5FRESH-LIN10-HO-001",
+          "S5FRESH-LIN10-REG-001",
+          "S5FRESH-LIN10-HO-002"
+        ],
+        "transformation": "multi-reference content braided across dialogue roles with entity masking, ratio conversion and per-record provenance gaps"
+      },
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f41-dialogue-distributed-braid.json",
+      "policy_builder_rejected": false,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": false,
+      "error": null,
+      "detector_trace": {
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN10-REG-001",
+        "record_similarity": 0.498841,
+        "risk_score": 0.783999,
+        "exclusive_anchor_overlap": [
+          "503",
+          "after",
+          "causal",
+          "causal_boundary",
+          "collection",
+          "filtration",
+          "fluid",
+          "intake",
+          "kidney",
+          "ledger",
+          "participant",
+          "record",
+          "recover",
+          "remain",
+          "secretion"
+        ],
+        "exclusive_identifier_overlap": [],
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "semantic_numeric_overlap": [
+          "1",
+          "2",
+          "503"
+        ],
+        "mosaic_reference_matches": [],
+        "candidate_language": "en",
+        "reference_language": "en",
+        "cross_language_pair": false,
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "reasons": [],
+        "method_version": "s5-lineage-script-role-v0.9.1-exposed"
+      },
+      "pass": false
+    }
+  },
+  "clean_controls": {
+    "CLEAN-RUSSIAN-SAME-DOMAIN": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-russian-same-domain.json",
+      "policy_builder_rejected": false,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": false,
+      "error": null,
+      "detector_trace": {
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN10-HO-002",
+        "record_similarity": 0.393058,
+        "risk_score": 0.739147,
+        "exclusive_anchor_overlap": [],
+        "exclusive_identifier_overlap": [],
+        "semantic_concept_overlap": [
+          "uncertainty"
+        ],
+        "semantic_numeric_overlap": [
+          "2"
+        ],
+        "mosaic_reference_matches": [],
+        "candidate_language": "en",
+        "reference_language": "en",
+        "cross_language_pair": false,
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "reasons": [],
+        "method_version": "s5-lineage-script-role-v0.9.1-exposed"
+      },
+      "pass": true
+    },
+    "CLEAN-NUMERIC-ONTOLOGY-NEIGHBOUR": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-numeric-ontology-neighbour.json",
+      "policy_builder_rejected": false,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": false,
+      "error": null,
+      "detector_trace": {
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN10-HO-001",
+        "record_similarity": 0.513559,
+        "risk_score": 0.708547,
+        "exclusive_anchor_overlap": [
+          "618",
+          "anticoagulation",
+          "assays",
+          "line",
+          "peripheral",
+          "snapshot"
+        ],
+        "exclusive_identifier_overlap": [],
+        "semantic_concept_overlap": [
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "semantic_numeric_overlap": [
+          "0",
+          "2",
+          "618",
+          "91"
+        ],
+        "mosaic_reference_matches": [],
+        "candidate_language": "en",
+        "reference_language": "en",
+        "cross_language_pair": false,
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "reasons": [],
+        "method_version": "s5-lineage-script-role-v0.9.1-exposed"
+      },
+      "pass": true
+    },
+    "CLEAN-CARDIAC-MRI": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-cardiac-mri.json",
+      "policy_builder_rejected": false,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": false,
+      "error": null,
+      "detector_trace": {
+        "decision": "REVIEW",
+        "nearest_reference_id": "S5FRESH-LIN10-HO-002",
+        "record_similarity": 0.608458,
+        "risk_score": 0.849506,
+        "exclusive_anchor_overlap": [
+          "acquisition",
+          "archive",
+          "baseline",
+          "caused",
+          "comparable",
+          "dicom",
+          "follow",
+          "inflammation",
+          "myocarditis",
+          "parameters",
+          "scanner",
+          "sequence",
+          "software",
+          "source",
+          "troponin",
+          "verified",
+          "version"
+        ],
+        "exclusive_identifier_overlap": [
+          "drug-caused",
+          "follow-up"
+        ],
+        "semantic_concept_overlap": [
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "semantic_numeric_overlap": [
+          "2"
+        ],
+        "mosaic_reference_matches": [
+          {
+            "reference_id": "S5FRESH-LIN10-HO-002",
+            "record_similarity": 0.608458,
+            "exclusive_anchor_count": 17
+          }
+        ],
+        "candidate_language": "en",
+        "reference_language": "en",
+        "cross_language_pair": false,
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "reasons": [],
+        "method_version": "s5-lineage-script-role-v0.9.1-exposed"
+      },
+      "pass": false
+    },
+    "CLEAN-DIALOGUE-MULTI-RECORD": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-dialogue-multi-record.json",
+      "policy_builder_rejected": false,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": false,
+      "error": null,
+      "detector_trace": {
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN10-HO-001",
+        "record_similarity": 0.461969,
+        "risk_score": 0.705307,
+        "exclusive_anchor_overlap": [
+          "signal"
+        ],
+        "exclusive_identifier_overlap": [],
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "semantic_numeric_overlap": [
+          "2"
+        ],
+        "mosaic_reference_matches": [],
+        "candidate_language": "en",
+        "reference_language": "en",
+        "cross_language_pair": false,
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "reasons": [],
+        "method_version": "s5-lineage-script-role-v0.9.1-exposed"
+      },
+      "pass": true
+    },
+    "CLEAN-NEGATION-SCOPE": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-negation-scope.json",
+      "policy_builder_rejected": false,
+      "exporter_policy_validator_rejected": false,
+      "boundary_blocked": false,
+      "error": null,
+      "detector_trace": {
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN10-REG-001",
+        "record_similarity": 0.465183,
+        "risk_score": 0.708547,
+        "exclusive_anchor_overlap": [
+          "caused",
+          "intake",
+          "record",
+          "whether"
+        ],
+        "exclusive_identifier_overlap": [],
+        "semantic_concept_overlap": [
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "semantic_numeric_overlap": [
+          "2"
+        ],
+        "mosaic_reference_matches": [],
+        "candidate_language": "en",
+        "reference_language": "en",
+        "cross_language_pair": false,
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "reasons": [],
+        "method_version": "s5-lineage-script-role-v0.9.1-exposed"
+      },
+      "pass": true
+    }
+  },
+  "hard_gate_failures": [
+    "S5-F37",
+    "S5-F41"
+  ],
+  "clean_control_failures": [
+    "CLEAN-CARDIAC-MRI"
+  ],
+  "precondition_failures": [],
+  "fresh_structural_gate": "FAIL",
+  "gold_approved": false,
+  "stage_release": "BLOCKED_FRESH_AND_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "notes": [
+    "All v0.10 assets and expected outcomes were committed before the frozen detector was first executed.",
+    "The five transformations and five clean controls are absent from v0.9 and v0.9.1 exposed repair calibration.",
+    "The first observation is retained unchanged whether PASS or FAIL.",
+    "No implementation repair, Gold approval, bounded release, clinical validation or S6 trust claim is made."
+  ]
+}
