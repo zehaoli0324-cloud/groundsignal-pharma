@@ -1,6 +1,6 @@
 # Algorithm Handoff — S5 v0.7 Semantic Lineage Detection
 
-> Handoff status: **v0.8.1 BROADER DEVELOPMENT CALIBRATION PASS; READY FOR EXPLICIT FREEZE DECISION**
+> Handoff status: **v0.8.1 CANONICALLY FROZEN; v0.9 INDEPENDENT FRESH AUTHORIZED**
 > Evidence source: S5 v0.7 independent fresh first observation  
 > Repair scope for algorithm team: **F25 + F26 only**. F24/F27 remain deterministic platform/eval-infrastructure work.
 
@@ -50,34 +50,37 @@ present. This satisfies the development calibration checkpoint and makes the can
 explicit freeze decision. It remains synthetic exposed evidence, not S5 release evidence.
 
 The pre-freeze attestation at `medical/stage-evals/S5/freeze-readiness-v0.8.1.json` pins 22 runtime,
-compatibility and evidence artifacts with both Git blob SHA-1 and SHA-256. Its independent verifier
-passes every content and gate check, but deliberately records `candidate_frozen=false` and
-`freeze_commit=null`. Merge approval is therefore still the authority boundary that materializes the
-freeze; the attestation cannot grant that authority itself.
+compatibility and evidence artifacts with both Git blob SHA-1 and SHA-256. Its historical fields stay
+unchanged. PR #4 was explicitly approved and squash merged as
+`b5dffbe366904a46d3b6a44172a4f1626daa8924`; the separate canonical receipt materializes the
+freeze without rewriting the pre-freeze record.
 
 `scripts/check_s5_next_fresh_admission.py` adds a second authority boundary. Before any v0.9 fresh
 asset may exist, it requires a canonical freeze receipt, verifies that the named commit is an ancestor
 of `origin/main`, and compares all 22 pinned blobs against that commit. Once fresh assets exist, their
-protocol must also name the same freeze commit and state that authoring occurred afterward. With PR
-#4 still open, the correct current decision is `BLOCKED_NOT_FROZEN`; injecting an early fresh file is
-a hard failure, not a development warning.
+protocol must also name the same freeze commit and state that authoring occurred afterward. The
+current decision is `ALLOW_AFTER_VERIFIED_FREEZE`, with zero v0.9 assets. This is authoring authority,
+not a fresh result or release signal.
 
 `scripts/materialize_s5_v081_freeze_receipt.py` is the only documented receipt path. It requires the
 exact canonical `origin/main` tip, a non-placeholder `user-approval:` reference and an unchanged
 22-file candidate. The resulting receipt asserts neither fresh evidence nor gold approval and keeps
-S5 release plus S6 automatic trust blocked. While PR #4 remains open, materialization must fail.
+S5 release plus S6 automatic trust blocked. The materialized receipt validates all 22 candidate and
+9 control-plane pins at the canonical merge commit.
 
 The candidate-byte attestation and the control plane are intentionally separate. The former pins 22
 algorithm, dependency and evidence artifacts; `control-plane-readiness-v0.8.1.json` pins 9 files that
 authorize and verify freeze/fresh transitions. Its verifier checks both content hashes and 10 state
-boundaries, while still recording `control_plane_frozen=false` and no canonical receipt.
+boundaries. That immutable pre-freeze manifest still records `control_plane_frozen=false`; the
+separate canonical receipt now records the completed transition.
 
 Receipt contract v0.3 joins the independent candidate and control-plane checks only at freeze time.
 The same canonical `main` tip must contain all 22 candidate and all 9 control-plane pins. Missing or
 incorrect control-plane hashes/counts, legacy receipt schemas and drifted gate bytes are rejected.
 The freeze commit must also predate both the canonical receipt and the v0.9 fresh tree; either one
 already present at that commit is a chronology failure.
-This contract creates no receipt while PR #4 remains open and changes no fresh, gold or S6 status.
+The receipt now exists on a post-freeze branch and changes only authoring admission. It creates no
+fresh, gold, release or S6 trust claim.
 
 ## 1. Objective
 

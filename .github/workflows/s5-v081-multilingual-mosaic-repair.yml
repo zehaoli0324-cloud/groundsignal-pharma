@@ -25,6 +25,8 @@ on:
       - 'medical/stage-evals/S5/next-fresh-admission-v0.9.json'
       - 'medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json'
       - 'medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json'
+      - 'medical/stage-evals/S5/freeze-receipt-v0.8.1.json'
+      - 'medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.9.json'
       - 'medical/stage-evals/S5/control-plane-readiness-v0.8.1.json'
       - 'medical/stage-evals/S5/control-plane-readiness-check-v0.8.1.json'
       - 'medical/stage-evals/S5/regression-v0.8.1.json'
@@ -60,6 +62,8 @@ on:
       - 'medical/stage-evals/S5/next-fresh-admission-v0.9.json'
       - 'medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json'
       - 'medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json'
+      - 'medical/stage-evals/S5/freeze-receipt-v0.8.1.json'
+      - 'medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.9.json'
       - 'medical/stage-evals/S5/control-plane-readiness-v0.8.1.json'
       - 'medical/stage-evals/S5/control-plane-readiness-check-v0.8.1.json'
       - 'medical/stage-evals/S5/regression-v0.8.1.json'
@@ -122,7 +126,13 @@ jobs:
           test "$(git rev-parse HEAD:scripts/test_s5_v081_freeze_receipt_materializer.py)" = '3f706851396de615c067317f82c90696f3ba040c'
           test "$(git rev-parse HEAD:medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json)" = '6c478d08f95fb229c39e4a95a1a4280859a0342a'
           python scripts/check_s5_next_fresh_admission.py --out /tmp/s5-v09-admission.json
-          cmp /tmp/s5-v09-admission.json medical/stage-evals/S5/next-fresh-admission-v0.9.json
+          if test -f medical/stage-evals/S5/freeze-receipt-v0.8.1.json; then
+            test "$(git hash-object medical/stage-evals/S5/freeze-receipt-v0.8.1.json)" = '3d12b1fbab782fc37ce3372fe2448c1dcc29e0b6'
+            test "$(git hash-object medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.9.json)" = '7be5591b310af3c09944bc6a6d03b5caf2f1ff00'
+            cmp /tmp/s5-v09-admission.json medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.9.json
+          else
+            cmp /tmp/s5-v09-admission.json medical/stage-evals/S5/next-fresh-admission-v0.9.json
+          fi
           python scripts/test_s5_next_fresh_admission.py --out /tmp/s5-v09-admission-tests.json
           cmp /tmp/s5-v09-admission-tests.json medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json
           python scripts/test_s5_v081_freeze_receipt_materializer.py --out /tmp/s5-v081-receipt-tests.json
