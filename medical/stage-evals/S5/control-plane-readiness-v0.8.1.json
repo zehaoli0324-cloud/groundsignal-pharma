@@ -1,0 +1,72 @@
+{
+  "stage": "S5",
+  "version": "v0.8.1",
+  "attestation": "pre-freeze-control-plane-readiness",
+  "evidence_class": "development_process_integrity_attestation",
+  "fresh_evidence": false,
+  "control_plane_frozen": false,
+  "candidate_frozen": false,
+  "freeze_commit": null,
+  "canonical_freeze_receipt_present": false,
+  "next_fresh_authoring": "BLOCKED_NOT_FROZEN",
+  "gold_approved": false,
+  "bounded_release": "BLOCKED_NEXT_FRESH",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "pinned_control_plane_artifacts": [
+    {
+      "path": "scripts/check_s5_next_fresh_admission.py",
+      "size_bytes": 12112,
+      "git_blob_sha1": "5c3191ecc4f44a74789e63220ea4af69568424b8",
+      "sha256": "57dd568d0db95cb26846ca6cc4fe780d567f0221d33f31cc2968e4c9b9e72756"
+    },
+    {
+      "path": "scripts/test_s5_next_fresh_admission.py",
+      "size_bytes": 13566,
+      "git_blob_sha1": "c15fb0d57ac881929f85938aad689a063347aa19",
+      "sha256": "dff81c40c181b13c1bbcec77b460ee538501bc0ccd1b279d93f6df246ff96f22"
+    },
+    {
+      "path": "scripts/materialize_s5_v081_freeze_receipt.py",
+      "size_bytes": 7982,
+      "git_blob_sha1": "bdb60f5de546d2f70871caa3507556509c33dabc",
+      "sha256": "3e6407e5c0be4015cceeb4a468234e54cf275c8d7fbdf643f67c407023792136"
+    },
+    {
+      "path": "scripts/test_s5_v081_freeze_receipt_materializer.py",
+      "size_bytes": 8327,
+      "git_blob_sha1": "3f706851396de615c067317f82c90696f3ba040c",
+      "sha256": "aab637823f2157730b36670f66fd77f0876e160f7d24dcfb8f69b97d92c31a3f"
+    },
+    {
+      "path": "scripts/verify_s5_v081_control_plane_readiness.py",
+      "size_bytes": 5061,
+      "git_blob_sha1": "1410554c3947ca3e2be189b8ca220b0f88349605",
+      "sha256": "4e8c67481ada33b7d2a58672adf33e81c367edf896c53a616aababd7937c1848"
+    },
+    {
+      "path": "medical/stage-evals/S5/next-fresh-admission-v0.9.json",
+      "size_bytes": 943,
+      "git_blob_sha1": "b73126c77f5601e6381d085c037251c60d0012a7",
+      "sha256": "41507dc9ca9ac72cbad51c96426aa7d77e4fac6fbcc7fdde54e112fbe373cfe7"
+    },
+    {
+      "path": "medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json",
+      "size_bytes": 4268,
+      "git_blob_sha1": "b080609599063736dcc1de76c9aa1d328c80e3ed",
+      "sha256": "ee941efa7bce9dbc9e25eb015839ba793bbd5f175cc85a9e15c3f108936b969d"
+    },
+    {
+      "path": "medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json",
+      "size_bytes": 2065,
+      "git_blob_sha1": "6c478d08f95fb229c39e4a95a1a4280859a0342a",
+      "sha256": "6dbcbaa87966d66e8887ee12a344cab0fcd59c97c169dcb328b49aee562bf726"
+    },
+    {
+      "path": "medical/stage-evals/S5/freeze-readiness-v0.8.1.json",
+      "size_bytes": 6185,
+      "git_blob_sha1": "f7ecf1663adebeb7b81eaa681ca142b1f749f833",
+      "sha256": "19eb026dc6b46182e0c1f82529ed28dcb4d94440325ad31671dfb7ce6d3507b3"
+    }
+  ]
+}

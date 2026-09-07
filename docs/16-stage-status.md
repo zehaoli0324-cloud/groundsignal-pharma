@@ -21,7 +21,7 @@
 | S3a | Proposition Extraction | bounded CONDITIONAL PASS | fresh F1 98.90%; critical recall 100%; mandatory abstention 6/6 | longer/noisier real-source coverage |
 | S3b | Evidence Relation | bounded CONDITIONAL PASS | 40/40 relation; high-risk false-support 0 | broader real-source relation set |
 | S4 | Medical KG Construction / Update | CONDITIONAL PASS | first fresh 18/20 FAIL → repair regression 20/20 → new independent fresh 20/20; must-reject 7/7 | persistent real-source graph |
-| S5 | Controlled Case / Benchmark Factory | **v0.8 FRESH LINEAGE FAIL / INDEPENDENT RELEASE BLOCKED** | v0.7.3 development calibration PASS; post-freeze v0.8 finds F28 cross-language and F31 mosaic failures | preserve v0.8; exposed repair + broader multilingual clean calibration; gold remains separate |
+| S5 | Controlled Case / Benchmark Factory | **v0.8.1 DEVELOPMENT MATRIX PASS / INDEPENDENT RELEASE BLOCKED** | immutable v0.8 F28/F31 FAIL; expanded v0.8.1 blocks 18/18 attacks and allows 18/18 clean near-neighbours | explicitly freeze, then new independent fresh; gold remains separate |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release |
 | S7 | Evaluation & Safety Gate | Protocol only | rubric v0.2 + regression gate protocol | human/Judge calibration + real model runs |
 | S8 | Failure Diagnosis | Scaffold | taxonomy + intervention router | multi-model × multi-case clusters |
@@ -57,6 +57,7 @@ v0.7.1           deterministic builder repair F24/F27                      PARTI
 v0.7.2           hybrid lineage + exporter validation exposed regression   PASS
 v0.7.3           broader hard negatives + algorithm/cost calibration        DEVELOPMENT PASS
 v0.8 fresh       F28 cross-language + F31 multi-source mosaic                FAIL
+v0.8.1           36-case multilingual + mosaic development matrix             DEVELOPMENT PASS
 ```
 
 Each fresh FAIL remains permanent evidence; later repair never overwrites it.
@@ -135,7 +136,58 @@ acceptable repair by itself.
 Evidence: `medical/stage-evals/S5/fresh-first-observation-v0.8.json` and
 `medical/stage-evals/S5/S5_V0.8_FRESH_LINEAGE_REPORT.md`.
 
-## 7. Current release decision
+## 7. S5 v0.8.1 exposed repair
+
+v0.8.1 preserves the v0.8 first observation and uses it only as exposed regression evidence.
+
+```text
+legacy v0.7.3 development contamination       163/163 BLOCK
+legacy v0.7.3 clean controls                    62/62 ALLOW
+v0.8 exposed F28-F31                              4/4 BLOCK
+v0.8 exposed clean controls                        2/2 ALLOW
+broader translation attacks                      12/12 BLOCK
+noisy multi-reference mosaics                      6/6 BLOCK
+multilingual clean near-neighbours                18/18 ALLOW
+pre-freeze pinned artifacts                       22/22 VERIFIED
+pre-freeze control-plane artifacts                  9/9 VERIFIED
+candidate frozen                                         no
+v0.9 fresh authoring admission             BLOCKED_NOT_FROZEN
+v0.9 admission adversarial scenarios                  13/13 PASS
+freeze receipt materializer scenarios                   9/9 PASS
+canonical freeze receipt                               absent
+builder / exporter regression                     PASS / PASS
+fresh evidence                                           no
+```
+
+The repair combines an inspectable multilingual concept mapping, protected identifier evidence and
+multi-reference aggregation. It does not convert every `REVIEW` into `BLOCK`. The expanded 36-case
+development matrix passes without false block/review; it is synthetic exposed evidence, not fresh.
+The pre-freeze attestation also pins the candidate's runtime, transitive compatibility files and
+evidence outputs with Git blob SHA-1 plus SHA-256. All 22 paths verify, while the attestation
+explicitly records `candidate_frozen=false` and a null freeze commit.
+The next-fresh admission guard therefore permits no v0.9 asset. A negative injection test confirms
+that even one file under the reserved fresh root fails CI unless a canonical-main freeze receipt is
+present, its 22 pinned artifacts match, and the new protocol names that exact freeze commit.
+Its deterministic adversarial suite covers 13 states: missing/malformed/self-asserted receipts,
+unavailable or unmerged commits, pre-freeze assets, the simulated valid transition, and missing,
+mismatched or matching post-freeze protocols, an incorrect control-plane pin, and preseeded receipt/fresh trees. The positive transition uses mocked Git history and is
+explicitly development process evidence—not a real freeze, fresh result or release signal.
+The receipt materializer adds the inverse transition: it refuses invalid approval references,
+unavailable/non-canonical commits and any drift in the 22 pinned artifacts. Only the exact
+`origin/main` tip can yield a receipt, and even that receipt records `fresh_evidence=false`,
+`gold_approved=false`, S5 release blocked and S6 trust blocked. Its 9/9 tests use simulated Git state;
+no canonical receipt exists while PR #4 remains open.
+The separate control-plane attestation pins the admission guard, receipt materializer, both test
+runners, their committed evidence, the current admission decision, the candidate attestation and its
+own verifier. All 9/9 paths and 10/10 boundary assertions pass. This prevents a green candidate hash
+from hiding drift in the code that decides whether later fresh authoring is authorized. It remains a
+pre-freeze development attestation with `control_plane_frozen=false`.
+Receipt schema v0.3 binds both attestations at one canonical freeze commit. The materializer
+requires all 22 candidate and all 9 control-plane blobs to match; the admission guard rejects legacy
+or partial receipts, control-plane hash/count mismatches and pinned gate-byte drift. It also requires
+the freeze commit itself to contain neither a receipt nor the v0.9 fresh tree, preserving chronology.
+
+## 8. Current release decision
 
 ```text
 S3 bounded conditional evidence            established
@@ -143,6 +195,7 @@ S4 bounded independent evidence            established
 S5 v0.7 independent first observation      FAIL (immutable)
 S5 v0.7.3 development calibration          PASS (not fresh)
 S5 v0.8 independent first observation      FAIL (immutable)
+S5 v0.8.1 exposed repair                   PASS (not fresh)
 S5 bounded independent release             NOT ESTABLISHED
 S5 gold review                             INCOMPLETE
 S6 automatic trust                         BLOCKED
@@ -151,14 +204,15 @@ S6 automatic trust                         BLOCKED
 The repository still has no real-user validation, completed expert gold approval, demonstrated model-training gain,
 or clinical validation. Synthetic/CI evidence is not substituted for those claims.
 
-## 8. Next sequence
+## 9. Next sequence
 
 1. keep v0.7 first observation immutable
 2. treat v0.7.3 only as development/exposed evidence
 3. keep the v0.7.3 target and v0.8 first observation immutable
-4. treat F28/F31 and the English clean review as exposed repair/calibration evidence only
-5. compare multilingual semantic methods and an explicit review-resolution policy on broader clean controls
-6. freeze the repaired implementation before creating another fresh suite
-7. require an independent fresh PASS before any bounded release claim
-8. keep gold review as a separate release blocker
-9. only after bounded S5 release proceed to S6 dedicated evaluation
+4. treat v0.8.1 only as exposed repair evidence
+5. retain the passing 36-case multilingual/mosaic development matrix as exposed evidence
+6. freeze the selected implementation and record a canonical-main freeze receipt
+7. only after the admission guard opens, create another independent fresh suite
+8. require an independent fresh PASS before any bounded release claim
+9. keep gold review as a separate release blocker
+10. only after bounded S5 release proceed to S6 dedicated evaluation

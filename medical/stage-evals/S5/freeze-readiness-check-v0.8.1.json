@@ -1,0 +1,33 @@
+{
+  "stage": "S5",
+  "version": "v0.8.1",
+  "verification": "pre-freeze-readiness",
+  "evidence_class": "development_exposed_attestation_verification",
+  "fresh_evidence": false,
+  "manifest_git_blob_sha1": "f7ecf1663adebeb7b81eaa681ca142b1f749f833",
+  "manifest_sha256": "19eb026dc6b46182e0c1f82529ed28dcb4d94440325ad31671dfb7ce6d3507b3",
+  "required_path_count": 22,
+  "verified_path_count": 22,
+  "checks": {
+    "attestation_is_not_fresh": true,
+    "candidate_not_yet_frozen": true,
+    "calibration_pass_not_fresh": true,
+    "matrix_pass_not_fresh": true,
+    "matrix_attack_rate": true,
+    "matrix_mosaic_rate": true,
+    "matrix_clean_false_block_rate": true,
+    "matrix_clean_review_rate": true,
+    "regression_pass_not_fresh": true,
+    "v08_fresh_fail_preserved": true,
+    "gold_incomplete": true,
+    "release_blocked": true,
+    "s6_blocked": true
+  },
+  "failures": [],
+  "verification_gate": "PASS",
+  "candidate_status": "READY_FOR_EXPLICIT_FREEZE_DECISION",
+  "candidate_frozen": false,
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "next_step": "Materialize a freeze commit only after explicit merge approval; then author a new independent fresh suite."
+}

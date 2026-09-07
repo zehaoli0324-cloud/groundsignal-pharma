@@ -68,7 +68,7 @@ fixture / development check
 | S3a Proposition Extraction | 原子医学命题抽取 | fresh F1 98.90%；critical recall 100%；mandatory abstention 6/6 | bounded CONDITIONAL PASS；长/噪声/多源文本不足 |
 | S3b Evidence Relation | 支持/反驳/证据不足关系 | 40/40，relation accuracy 100%，high-risk false-support 0 | bounded CONDITIONAL PASS；需扩大真实来源 |
 | S4 Medical KG Construction / Update | 知识图谱时间状态、冲突、不变量 | 首次 fresh 18/20 FAIL；修复后新 fresh 20/20 PASS；must-reject 7/7 | CONDITIONAL PASS；persistent real-source graph 未证实，production ingest disabled |
-| S5 Controlled Case / Benchmark Factory | benchmark 分区、gold、训练导出、身份/来源/血缘 | v0.2→v0.8 七轮独立 fresh 找到 F4–F31；v0.8 post-freeze 首测暴露跨语言和多源拼接缺口 | **RELEASE BLOCKED**；先保存 v0.8，再做 exposed repair；gold review 仍未完成 |
+| S5 Controlled Case / Benchmark Factory | benchmark 分区、gold、训练导出、身份/来源/血缘 | v0.2→v0.8 七轮独立 fresh 找到 F4–F31；v0.8.1 扩展开发矩阵阻断 18/18 污染并放行 18/18 clean | **RELEASE BLOCKED**；明确冻结后再做独立 fresh；gold review 仍未完成 |
 | S6 Model / RAG / Agent Harness | 模型/检索增强生成/Agent 运行可复现与证据注入 | runner + fixture + CI scaffold | 不能正式推进 dedicated S6 release eval，因 S5 未 bounded release |
 | S7 Evaluation & Safety Gate | rubric、多层评分、安全门禁 | protocol + rubric v0.2 + regression gate | 缺 human/Judge calibration 与真实模型 scoring |
 | S8 Failure Diagnosis | 错误聚类、根因、干预路由 | taxonomy + intervention router | 缺 multi-model × multi-case failure clusters |
@@ -104,6 +104,7 @@ v0.7.1           deterministic F24/F27 repair                                   
 v0.7.2           record/field/span hybrid + exporter validation                    exposed PASS
 v0.7.3           protected-exclusive index + broader calibration                   development PASS
 v0.8              cross-language/abstraction/field-flattening/mosaic                fresh FAIL
+v0.8.1            36-case multilingual + mosaic development matrix                   development PASS
 ```
 
 S5 目前已经形成的防线：
@@ -122,6 +123,14 @@ S5 目前已经形成的防线：
 - v0.7.3 在 30 个受保护 reference、45 个 allowed-dev reference、163 个可归因污染变体和 62 个 clean/shared hard negatives 上完成算法、阈值、索引和延迟校准；
 - v0.8 在冻结提交之后创建全新 family：F29 语义抽象与 F30 跨字段展开被阻断，但 F28 跨语言被 `ALLOW`、F31 多受保护源拼接仅为 `REVIEW`；
 - v0.8 的英文同领域 clean control 也进入 `REVIEW`，因此不能用“把所有 REVIEW 改成 BLOCK”作为无代价修复；
+- v0.8.1 在不采用 REVIEW 全阻断的前提下，将 F28–F31 全部阻断并让两个 clean control 回到 `ALLOW`；旧 225-case 开发矩阵维持 163/163 污染阻断、0/62 误拦截和 0/62 clean review；
+- v0.8.1 扩展矩阵新增 12 个英→中/日/西翻译污染、6 个带噪声双源拼接和 18 个多语言同领域干净近邻：污染 18/18 阻断，干净 18/18 放行；这些均为 synthetic exposed development evidence，不是 fresh；
+- v0.8.1 冻结前清单用 Git blob SHA-1 与 SHA-256 双重固定 22 个实现、兼容依赖和证据文件，22/22 复验通过；清单仍明确 `candidate_frozen=false`，只有获批合并后才能产生正式 freeze commit；
+- v0.9 fresh 准入门禁当前返回 `BLOCKED_NOT_FROZEN`；无冻结回执时注入任意 fresh 文件都会 fail-closed，回执还必须证明冻结提交已进入 canonical `main` 且 22 个固定文件逐一匹配；
+- 准入门禁新增 13 个确定性对抗状态测试，覆盖畸形/自证回执、不可用或未合并提交、提前写入、控制平面错配、预埋回执/fresh 目录、缺失/错配协议和模拟合法转换；13/13 通过，但模拟正路径不构成真实冻结或 fresh 证据；
+- 冻结凭证生成器升级为 v0.3 并通过 9/9 状态测试：除了 22/22 候选与 9/9 控制平面文件匹配，还要求冻结提交中不存在预埋凭证或 v0.9 fresh 目录；测试均为模拟过程证据，当前没有真实凭证；
+- 独立固定 9 个控制平面文件（fresh 准入、冻结凭证生成器、测试、证据和校验器），Git blob SHA-1 与 SHA-256 均匹配，9/9 路径和 10/10 状态边界通过；这仍是冻结前开发证明，不是 fresh PASS；
+- canonical 冻结凭证现将两份证明绑定到同一个 `main` 提交；旧版或只固定候选、不固定控制平面的凭证会 fail-closed，避免算法未漂移但授权门禁已被替换；
 - 每次 fresh first observation 用 Git blob/历史 commit 固化，不会因修复被覆盖。
 
 ## 6. 我们现在的“优化结果”应该怎样解读
@@ -149,11 +158,12 @@ S4 bounded independent evidence          established
 S5 v0.7 independent fresh                FAIL (immutable)
 S5 v0.7.3 development calibration        PASS (not fresh)
 S5 v0.8 independent fresh                FAIL (immutable: F28/F31)
+S5 v0.8.1 exposed repair                 PASS (not fresh)
 S5 bounded independent release           NOT ESTABLISHED
 S5 gold review                           INCOMPLETE
 S6 automatic trust                       BLOCKED
 ```
 
-v0.7.3 已固定到 `62b791cef47d1f5c7296220557db970d618b7bcf`，v0.8 首次 fresh FAIL 必须永久保存。下一轮只能把 v0.8 当作 exposed evidence，围绕跨语言语义匹配、多源聚合风险和 review-resolution policy（复核结果如何影响训练边界的规则）做通用修复与更宽的干净对照校准。修复冻结后还需要另一轮真正独立 fresh；Gold review 仍是另一条独立门槛。
+v0.8 首次 fresh FAIL 已永久保存，v0.8.1 只能作为 exposed repair evidence。扩展开发矩阵已完成并达到预设门槛，下一步是明确冻结候选实现；冻结后还需要另一轮真正独立 fresh。Gold review 仍是另一条独立门槛。
 
 本仓库当前没有真实用户验证、专家 gold approval、模型训练收益或临床验证数据时，均明确记录为“没有”，不会用 synthetic/CI 结果替代。

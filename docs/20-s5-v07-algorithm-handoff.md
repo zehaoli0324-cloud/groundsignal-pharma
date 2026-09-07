@@ -1,6 +1,6 @@
 # Algorithm Handoff — S5 v0.7 Semantic Lineage Detection
 
-> Handoff status: **v0.8 FRESH FAIL PRESERVED; F28/F31 EXPOSED REPAIR REQUIRED**
+> Handoff status: **v0.8.1 BROADER DEVELOPMENT CALIBRATION PASS; READY FOR EXPLICIT FREEZE DECISION**
 > Evidence source: S5 v0.7 independent fresh first observation  
 > Repair scope for algorithm team: **F25 + F26 only**. F24/F27 remain deterministic platform/eval-infrastructure work.
 
@@ -34,6 +34,50 @@ The next algorithm round may now use F28/F31 as exposed data. It must address mu
 equivalence and how `REVIEW` is resolved at the export boundary, while expanding clean multilingual
 controls. A blanket REVIEW→BLOCK conversion is disallowed because a frozen clean control already
 entered review. No next fresh suite may be used during repair or threshold selection.
+
+## v0.8.1 repair checkpoint
+
+The current candidate adds bilingual reasoning concepts, protected-exclusive hyphenated identifiers,
+multi-reference mosaic aggregation and stricter evidence for `REVIEW`. It blocks all four exposed
+v0.8 attacks, allows both v0.8 clean controls, and preserves the v0.7.3 development matrix at
+163/163 contamination blocks with 0/62 false blocks and 0/62 clean reviews.
+
+The broader follow-up matrix adds 12 English-to-Chinese/Japanese/Spanish contaminated translations,
+6 noisy two-reference mosaics and 18 multilingual clean near-neighbours. All 18 contaminated cases
+block, all 6 mosaics carry the explicit mosaic reason, and all 18 clean cases allow. The matrix also
+removed concept-only blocking unless case-specific identity or a distinctive numeric constellation is
+present. This satisfies the development calibration checkpoint and makes the candidate ready for an
+explicit freeze decision. It remains synthetic exposed evidence, not S5 release evidence.
+
+The pre-freeze attestation at `medical/stage-evals/S5/freeze-readiness-v0.8.1.json` pins 22 runtime,
+compatibility and evidence artifacts with both Git blob SHA-1 and SHA-256. Its independent verifier
+passes every content and gate check, but deliberately records `candidate_frozen=false` and
+`freeze_commit=null`. Merge approval is therefore still the authority boundary that materializes the
+freeze; the attestation cannot grant that authority itself.
+
+`scripts/check_s5_next_fresh_admission.py` adds a second authority boundary. Before any v0.9 fresh
+asset may exist, it requires a canonical freeze receipt, verifies that the named commit is an ancestor
+of `origin/main`, and compares all 22 pinned blobs against that commit. Once fresh assets exist, their
+protocol must also name the same freeze commit and state that authoring occurred afterward. With PR
+#4 still open, the correct current decision is `BLOCKED_NOT_FROZEN`; injecting an early fresh file is
+a hard failure, not a development warning.
+
+`scripts/materialize_s5_v081_freeze_receipt.py` is the only documented receipt path. It requires the
+exact canonical `origin/main` tip, a non-placeholder `user-approval:` reference and an unchanged
+22-file candidate. The resulting receipt asserts neither fresh evidence nor gold approval and keeps
+S5 release plus S6 automatic trust blocked. While PR #4 remains open, materialization must fail.
+
+The candidate-byte attestation and the control plane are intentionally separate. The former pins 22
+algorithm, dependency and evidence artifacts; `control-plane-readiness-v0.8.1.json` pins 9 files that
+authorize and verify freeze/fresh transitions. Its verifier checks both content hashes and 10 state
+boundaries, while still recording `control_plane_frozen=false` and no canonical receipt.
+
+Receipt contract v0.3 joins the independent candidate and control-plane checks only at freeze time.
+The same canonical `main` tip must contain all 22 candidate and all 9 control-plane pins. Missing or
+incorrect control-plane hashes/counts, legacy receipt schemas and drifted gate bytes are rejected.
+The freeze commit must also predate both the canonical receipt and the v0.9 fresh tree; either one
+already present at that commit is a chronology failure.
+This contract creates no receipt while PR #4 remains open and changes no fresh, gold or S6 status.
 
 ## 1. Objective
 

@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""GroundSignal S5 training export boundary, v0.8.1 exposed repair.
-
-The v0.7.3 entry point is preserved in `export_training_data_v073.py`. This
-entry point keeps the authenticated path/blob/payload checks and adds the
-v0.8.1 multilingual and multi-reference lineage decisions.
-"""
+"""Frozen GroundSignal S5 training export boundary for v0.7.3."""
 from __future__ import annotations
 
 import importlib.util
@@ -23,8 +18,8 @@ def _load(name: str, path: Path):
     return module
 
 
-_legacy = _load("export_training_data_v061_legacy", _HERE / "export_training_data_v061.py")
-_lineage = _load("s5_lineage_detector_v081_export", _HERE / "s5_lineage_detector_v081.py")
+_legacy = _load("export_training_data_v061_legacy_v073", _HERE / "export_training_data_v061.py")
+_lineage = _load("s5_lineage_detector_v073_export_frozen", _HERE / "s5_lineage_detector_v073.py")
 
 for _name in dir(_legacy):
     if not _name.startswith("__"):
@@ -53,45 +48,36 @@ def _collect_authenticated_policy_records(
             for case_id, entry in (family.get("cases") or {}).items():
                 path = _legacy._resolve_repo_path(entry.get("source_case_path"))
                 case, _ = _legacy._authenticated_json(
-                    path,
-                    str(entry.get("source_case_git_blob_sha1") or ""),
-                    f"v0.8.1 lineage source case {case_id!r}",
+                    path, str(entry.get("source_case_git_blob_sha1") or ""),
+                    f"v0.7.3 lineage source case {case_id!r}",
                 )
-                benchmark.append(
-                    {
-                        "case_id": str(case_id),
-                        "split": str(entry.get("split") or ""),
-                        "case": case,
-                        "source": f"{suite_id}/{family_id}/{case_id}",
-                    }
-                )
+                benchmark.append({
+                    "case_id": str(case_id), "split": str(entry.get("split") or ""),
+                    "case": case, "source": f"{suite_id}/{family_id}/{case_id}",
+                })
     ordinary: list[dict[str, Any]] = []
     for rel, entry in (policy.get("ordinary_training_sources") or {}).items():
         path = _legacy._resolve_repo_path(rel)
         case, _ = _legacy._authenticated_json(
-            path,
-            str((entry or {}).get("git_blob_sha1") or ""),
-            f"v0.8.1 lineage ordinary source {rel!r}",
+            path, str((entry or {}).get("git_blob_sha1") or ""),
+            f"v0.7.3 lineage ordinary source {rel!r}",
         )
         ordinary.append({"case": case, "source": rel})
     return benchmark, ordinary
 
 
 def _validate_policy_content(policy: Dict[str, Any], expected_policy_id: str) -> None:
-    # Reuse the preserved validator for authenticated path/blob/payload/TOCTOU
-    # checks, but execute it under the stronger NFKC identifier contract.
     _orig_validate_policy_content(policy, expected_policy_id)
     benchmark, ordinary = _collect_authenticated_policy_records(policy)
     try:
         _lineage.validate_policy_records(benchmark, ordinary)
     except ValueError as exc:
-        raise PermissionError(f"S5 export blocked: v0.8.1 lineage policy violation: {exc}") from exc
+        raise PermissionError(f"S5 export blocked: v0.7.3 lineage policy violation: {exc}") from exc
 
 
 _legacy.canonical_case_id = canonical_case_id
 _legacy._require_canonical_case_id = _require_canonical_case_id
 _legacy._validate_policy_content = _validate_policy_content
-
 LINEAGE_METHOD_VERSION = _lineage.METHOD_VERSION
 
 

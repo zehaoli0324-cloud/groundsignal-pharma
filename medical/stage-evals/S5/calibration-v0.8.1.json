@@ -1,0 +1,254 @@
+{
+  "stage": "S5",
+  "version": "v0.8.1",
+  "eval_name": "multilingual-mosaic-exposed-repair-calibration",
+  "evidence_class": "development_exposed_calibration",
+  "fresh_evidence": false,
+  "method_version": "s5-lineage-multilingual-mosaic-v0.8.1-matrix-calibrated",
+  "data_isolation": {
+    "future_fresh_suite_used": false,
+    "legacy_development_candidate_count": 225,
+    "legacy_protected_reference_count": 30,
+    "legacy_allowed_reference_count": 45,
+    "v0.8_exposed_protected_reference_count": 2,
+    "v0.8_exposed_allowed_reference_count": 3,
+    "v0.8_exposed_attack_count": 4,
+    "v0.8_exposed_clean_count": 2
+  },
+  "legacy_v073_matrix": {
+    "tp": 163,
+    "fp": 0,
+    "fn": 0,
+    "tn": 62,
+    "precision": 1.0,
+    "recall": 1.0,
+    "clean_false_block_rate": 0.0,
+    "clean_review_rate": 0.0,
+    "by_transformation": {
+      "distributed_fragment_reuse": {
+        "total": 24,
+        "blocked": 24,
+        "reviewed": 0,
+        "recall": 1.0
+      },
+      "evidence_graph_composition": {
+        "total": 30,
+        "blocked": 30,
+        "reviewed": 0,
+        "recall": 1.0
+      },
+      "presentation_only": {
+        "total": 30,
+        "blocked": 30,
+        "reviewed": 0,
+        "recall": 1.0
+      },
+      "prompt_paraphrase": {
+        "total": 30,
+        "blocked": 30,
+        "reviewed": 0,
+        "recall": 1.0
+      },
+      "prompt_span_reuse": {
+        "total": 30,
+        "blocked": 30,
+        "reviewed": 0,
+        "recall": 1.0
+      },
+      "single_evidence_field": {
+        "total": 19,
+        "blocked": 19,
+        "reviewed": 0,
+        "recall": 1.0
+      }
+    }
+  },
+  "v08_exposed_matrix": {
+    "attack_block_rate": 1.0,
+    "clean_false_block_rate": 0.0,
+    "clean_review_rate": 0.0,
+    "attacks": [
+      {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f28-cross-language.json",
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+        "reasons": [
+          "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE"
+        ],
+        "record_similarity": 0.485912,
+        "risk_score": 0.94,
+        "exclusive_identifier_overlap": [
+          "aster-17",
+          "qz-881"
+        ],
+        "semantic_concept_overlap": [
+          "audit_or_adjudication",
+          "biomarker_change",
+          "causal_attribution",
+          "confounding",
+          "efficacy_claim",
+          "hypothesis_only",
+          "investigational_intervention",
+          "missing_evidence",
+          "protocol_deviation",
+          "rescue_intervention",
+          "treatment_recommendation",
+          "uncertainty",
+          "unverified_source"
+        ],
+        "mosaic_reference_matches": []
+      },
+      {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f29-semantic-abstraction.json",
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+        "reasons": [
+          "PROTECTED_EXCLUSIVE_FIELD_REUSE"
+        ],
+        "record_similarity": 0.561715,
+        "risk_score": 0.92,
+        "exclusive_identifier_overlap": [],
+        "semantic_concept_overlap": [
+          "audit_or_adjudication",
+          "biomarker_change",
+          "causal_attribution",
+          "confounding",
+          "efficacy_claim",
+          "hypothesis_only",
+          "investigational_intervention",
+          "missing_evidence",
+          "protocol_deviation",
+          "rescue_intervention",
+          "treatment_recommendation",
+          "uncertainty"
+        ],
+        "mosaic_reference_matches": [
+          {
+            "reference_id": "S5FRESH-LIN8-HO-001",
+            "record_similarity": 0.561715,
+            "exclusive_anchor_count": 16
+          }
+        ]
+      },
+      {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f30-cross-field-flattening.json",
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+        "reasons": [
+          "DENSE_PROTECTED_ANCHOR_REUSE"
+        ],
+        "record_similarity": 0.785779,
+        "risk_score": 0.803962,
+        "exclusive_identifier_overlap": [
+          "aster-17",
+          "hypothesis-level",
+          "phospho-marker",
+          "protocol-deviation",
+          "qz-881",
+          "seventy-two"
+        ],
+        "semantic_concept_overlap": [
+          "audit_or_adjudication",
+          "biomarker_change",
+          "causal_attribution",
+          "confounding",
+          "efficacy_claim",
+          "hypothesis_only",
+          "investigational_intervention",
+          "missing_evidence",
+          "protocol_deviation",
+          "rescue_intervention",
+          "uncertainty",
+          "unverified_source"
+        ],
+        "mosaic_reference_matches": [
+          {
+            "reference_id": "S5FRESH-LIN8-HO-001",
+            "record_similarity": 0.785779,
+            "exclusive_anchor_count": 39
+          }
+        ]
+      },
+      {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f31-multi-protected-mosaic.json",
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+        "reasons": [
+          "MULTI_PROTECTED_REFERENCE_MOSAIC"
+        ],
+        "record_similarity": 0.613265,
+        "risk_score": 0.96,
+        "exclusive_identifier_overlap": [],
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "hydration_confounder",
+          "missing_evidence",
+          "renal_clearance",
+          "uncertainty"
+        ],
+        "mosaic_reference_matches": [
+          {
+            "reference_id": "S5FRESH-LIN8-HO-001",
+            "record_similarity": 0.593778,
+            "exclusive_anchor_count": 19
+          },
+          {
+            "reference_id": "S5FRESH-LIN8-REG-001",
+            "record_similarity": 0.613265,
+            "exclusive_anchor_count": 20
+          }
+        ]
+      }
+    ],
+    "clean_controls": [
+      {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.8/clean-sources/clean-chinese-same-domain.json",
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN8-REG-001",
+        "reasons": [],
+        "record_similarity": 0.515033,
+        "risk_score": 0.726489,
+        "exclusive_identifier_overlap": [],
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "mosaic_reference_matches": []
+      },
+      {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.8/clean-sources/clean-english-same-domain.json",
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN8-HO-001",
+        "reasons": [],
+        "record_similarity": 0.553248,
+        "risk_score": 0.847331,
+        "exclusive_identifier_overlap": [],
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "mosaic_reference_matches": []
+      }
+    ]
+  },
+  "rule_contract": {
+    "cross_language": "block on cross-script protected identifier/concept agreement",
+    "mosaic": {
+      "minimum_references": 2,
+      "minimum_anchors_per_reference": 8,
+      "minimum_total_anchors": 16,
+      "minimum_record_similarity": 0.52
+    },
+    "review_minimum_dense_anchors": 8
+  },
+  "selection_gate": "PASS",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "limitations": [
+    "v0.8 is exposed after its immutable first observation and therefore is regression evidence only.",
+    "The multilingual ontology is deterministic and bilingual; it is not a general neural semantic model.",
+    "Only two v0.8 clean controls exist, so another broader development calibration is required before the next fresh freeze."
+  ]
+}

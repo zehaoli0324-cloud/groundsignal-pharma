@@ -1,0 +1,70 @@
+{
+  "stage": "S5",
+  "version": "v0.8.1",
+  "eval_name": "multilingual-mosaic-exposed-boundary-regression",
+  "evidence_class": "repaired_exposed_regression",
+  "fresh_evidence": false,
+  "immutable_v08_first_observation": {
+    "expected_blob": "8d2d96890915aa981652f78e3ff52242c7c0f51c",
+    "observed_blob": "8d2d96890915aa981652f78e3ff52242c7c0f51c",
+    "pass": true
+  },
+  "baseline_policy_accepted": true,
+  "attacks": {
+    "f28-cross-language": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f28-cross-language.json",
+      "expected": "BLOCK",
+      "builder_rejected": true,
+      "exporter_rejected": true,
+      "observed": "BLOCK",
+      "pass": true
+    },
+    "f29-semantic-abstraction": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f29-semantic-abstraction.json",
+      "expected": "BLOCK",
+      "builder_rejected": true,
+      "exporter_rejected": true,
+      "observed": "BLOCK",
+      "pass": true
+    },
+    "f30-cross-field-flattening": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f30-cross-field-flattening.json",
+      "expected": "BLOCK",
+      "builder_rejected": true,
+      "exporter_rejected": true,
+      "observed": "BLOCK",
+      "pass": true
+    },
+    "f31-multi-protected-mosaic": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f31-multi-protected-mosaic.json",
+      "expected": "BLOCK",
+      "builder_rejected": true,
+      "exporter_rejected": true,
+      "observed": "BLOCK",
+      "pass": true
+    }
+  },
+  "clean_controls": {
+    "clean-chinese-same-domain": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.8/clean-sources/clean-chinese-same-domain.json",
+      "expected": "ALLOW",
+      "builder_rejected": false,
+      "exporter_rejected": false,
+      "observed": "ALLOW",
+      "pass": true
+    },
+    "clean-english-same-domain": {
+      "source": "medical/stage-evals/S5/fresh-lineage-v0.8/clean-sources/clean-english-same-domain.json",
+      "expected": "ALLOW",
+      "builder_rejected": false,
+      "exporter_rejected": false,
+      "observed": "ALLOW",
+      "pass": true
+    }
+  },
+  "regression_gate": "PASS",
+  "failed_gates": [],
+  "gold_approved_count": 0,
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED"
+}

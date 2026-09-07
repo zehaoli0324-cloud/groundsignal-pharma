@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""S5 trust-policy entry point, v0.8.1 exposed multilingual/mosaic repair.
-
-The complete v0.7.3 entry point is preserved in `s5_trust_policy_v073.py`.
-This entry point retains its authority rules and uses the v0.8.1 detector for
-cross-language and multi-protected-source lineage.
-"""
+"""Frozen S5 trust-policy entry point for v0.7.3."""
 from __future__ import annotations
 
 import importlib.util
@@ -12,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 _HERE = Path(__file__).resolve().parent
-POLICY_VERSION = "s5-trust-root-v0.8.1"
+POLICY_VERSION = "s5-trust-root-v0.7.3"
 
 
 def _load(name: str, path: Path):
@@ -24,15 +19,14 @@ def _load(name: str, path: Path):
     return module
 
 
-_legacy = _load("s5_trust_policy_v071_legacy", _HERE / "s5_trust_policy_v071.py")
-_lineage = _load("s5_lineage_detector_v081", _HERE / "s5_lineage_detector_v081.py")
+_legacy = _load("s5_trust_policy_v071_legacy_v073", _HERE / "s5_trust_policy_v071.py")
+_lineage = _load("s5_lineage_detector_v073_frozen", _HERE / "s5_lineage_detector_v073.py")
 
 for _name in dir(_legacy):
     if not _name.startswith("__"):
         globals()[_name] = getattr(_legacy, _name)
 
-# New version marker overrides the re-exported v0.7.1 constant.
-POLICY_VERSION = "s5-trust-root-v0.8.1"
+POLICY_VERSION = "s5-trust-root-v0.7.3"
 _orig_build_policy = _legacy.build_policy
 
 
@@ -53,14 +47,10 @@ def _collect_policy_records(policy: dict[str, Any]) -> tuple[list[dict[str, Any]
         for family_id, family in (suite.get("families") or {}).items():
             for case_id, entry in (family.get("cases") or {}).items():
                 path = _legacy.repo_path(entry["source_case_path"])
-                benchmark.append(
-                    {
-                        "case_id": str(case_id),
-                        "split": str(entry.get("split") or ""),
-                        "case": _legacy.load_json(path),
-                        "source": f"{suite_id}/{family_id}/{case_id}",
-                    }
-                )
+                benchmark.append({
+                    "case_id": str(case_id), "split": str(entry.get("split") or ""),
+                    "case": _legacy.load_json(path), "source": f"{suite_id}/{family_id}/{case_id}",
+                })
     ordinary: list[dict[str, Any]] = []
     for rel in (policy.get("ordinary_training_sources") or {}):
         path = _legacy.repo_path(rel)
@@ -76,25 +66,19 @@ def _validate_lineage(policy: dict[str, Any]) -> dict[str, Any]:
 def build_policy(
     suite_specs: list[tuple[Path, Path]] | None = None,
     ordinary_sources: list[Path] | None = None,
-    *,
-    policy_version: str = POLICY_VERSION,
+    *, policy_version: str = POLICY_VERSION,
 ) -> dict[str, Any]:
-    policy = _orig_build_policy(
-        suite_specs,
-        ordinary_sources,
-        policy_version=policy_version,
-    )
+    policy = _orig_build_policy(suite_specs, ordinary_sources, policy_version=policy_version)
     try:
         _validate_lineage(policy)
     except ValueError as exc:
-        raise ValueError(f"S5 v0.8.1 lineage policy rejected: {exc}") from exc
+        raise ValueError(f"S5 v0.7.3 lineage policy rejected: {exc}") from exc
     return policy
 
 
 _legacy.canonical_case_id = canonical_case_id
 _legacy.require_canonical_case_id = require_canonical_case_id
 _legacy.build_policy = build_policy
-
 LINEAGE_METHOD_VERSION = _lineage.METHOD_VERSION
 
 

@@ -1,0 +1,32 @@
+{
+  "stage": "S5",
+  "version": "v0.8.1",
+  "verification": "pre-freeze-control-plane-readiness",
+  "evidence_class": "development_process_integrity_attestation",
+  "fresh_evidence": false,
+  "manifest_git_blob_sha1": "21b4d27b3f5e6e677fa343a831020a1ae077201d",
+  "manifest_sha256": "b7146d484cdfd1846e359506020ebf8132f9682c4bb6d284f9e622396c811f89",
+  "required_path_count": 9,
+  "verified_path_count": 9,
+  "boundary_checks": {
+    "scope_is_s5_v081": true,
+    "not_fresh_evidence": true,
+    "control_plane_not_frozen": true,
+    "candidate_not_frozen": true,
+    "canonical_receipt_absent": true,
+    "next_fresh_blocked": true,
+    "gold_not_approved": true,
+    "bounded_release_blocked": true,
+    "stage_release_blocked": true,
+    "s6_blocked": true
+  },
+  "failures": [],
+  "verification_gate": "PASS",
+  "control_plane_status": "READY_FOR_EXPLICIT_FREEZE_DECISION",
+  "control_plane_frozen": false,
+  "candidate_frozen": false,
+  "canonical_freeze_receipt_present": false,
+  "bounded_release": "BLOCKED_NEXT_FRESH",
+  "stage_release": "BLOCKED_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED"
+}

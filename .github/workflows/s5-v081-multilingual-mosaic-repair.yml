@@ -1,0 +1,234 @@
+name: S5 v0.8.1 Multilingual Mosaic Exposed Repair
+
+on:
+  push:
+    paths:
+      - 'requirements-s5-lineage-calibration.txt'
+      - 'scripts/s5_lineage_detector_v081.py'
+      - 'scripts/s5_trust_policy.py'
+      - 'scripts/s5_trust_policy_v073.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/export_training_data_v073.py'
+      - 'scripts/calibrate_s5_lineage_v081.py'
+      - 'scripts/calibrate_s5_lineage_v081_matrix.py'
+      - 'scripts/verify_s5_v081_freeze_readiness.py'
+      - 'scripts/check_s5_next_fresh_admission.py'
+      - 'scripts/test_s5_next_fresh_admission.py'
+      - 'scripts/materialize_s5_v081_freeze_receipt.py'
+      - 'scripts/test_s5_v081_freeze_receipt_materializer.py'
+      - 'scripts/verify_s5_v081_control_plane_readiness.py'
+      - 'scripts/eval_s5_boundary_regression_v081.py'
+      - 'medical/stage-evals/S5/calibration-v0.8.1.json'
+      - 'medical/stage-evals/S5/calibration-matrix-v0.8.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-v0.8.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json'
+      - 'medical/stage-evals/S5/next-fresh-admission-v0.9.json'
+      - 'medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json'
+      - 'medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json'
+      - 'medical/stage-evals/S5/control-plane-readiness-v0.8.1.json'
+      - 'medical/stage-evals/S5/control-plane-readiness-check-v0.8.1.json'
+      - 'medical/stage-evals/S5/regression-v0.8.1.json'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
+      - 'medical/stage-evals/S5/S5_V0.8.1_MULTILINGUAL_MOSAIC_REPAIR_REPORT.md'
+      - 'docs/16-stage-status.md'
+      - 'docs/17-evaluation-methods-and-optimization-ledger.md'
+      - 'docs/20-s5-v07-algorithm-handoff.md'
+      - 'docs/21-medical-ai-capability-portfolio.md'
+      - 'README.md'
+      - '.github/workflows/s5-v081-multilingual-mosaic-repair.yml'
+  pull_request:
+    paths:
+      - 'requirements-s5-lineage-calibration.txt'
+      - 'scripts/s5_lineage_detector_v081.py'
+      - 'scripts/s5_trust_policy.py'
+      - 'scripts/s5_trust_policy_v073.py'
+      - 'scripts/export_training_data.py'
+      - 'scripts/export_training_data_v073.py'
+      - 'scripts/calibrate_s5_lineage_v081.py'
+      - 'scripts/calibrate_s5_lineage_v081_matrix.py'
+      - 'scripts/verify_s5_v081_freeze_readiness.py'
+      - 'scripts/check_s5_next_fresh_admission.py'
+      - 'scripts/test_s5_next_fresh_admission.py'
+      - 'scripts/materialize_s5_v081_freeze_receipt.py'
+      - 'scripts/test_s5_v081_freeze_receipt_materializer.py'
+      - 'scripts/verify_s5_v081_control_plane_readiness.py'
+      - 'scripts/eval_s5_boundary_regression_v081.py'
+      - 'medical/stage-evals/S5/calibration-v0.8.1.json'
+      - 'medical/stage-evals/S5/calibration-matrix-v0.8.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-v0.8.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json'
+      - 'medical/stage-evals/S5/next-fresh-admission-v0.9.json'
+      - 'medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json'
+      - 'medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json'
+      - 'medical/stage-evals/S5/control-plane-readiness-v0.8.1.json'
+      - 'medical/stage-evals/S5/control-plane-readiness-check-v0.8.1.json'
+      - 'medical/stage-evals/S5/regression-v0.8.1.json'
+      - 'medical/stage-evals/S5/fresh-first-observation-v0.8.json'
+      - '.github/workflows/s5-v081-multilingual-mosaic-repair.yml'
+
+jobs:
+  calibrate-and-regress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: requirements-s5-lineage-calibration.txt
+      - name: Install pinned calibration dependency
+        run: pip install -r requirements-s5-lineage-calibration.txt
+
+      - name: Syntax check
+        run: |
+          python -m py_compile \
+            scripts/s5_lineage_detector_v073.py \
+            scripts/s5_lineage_detector_v081.py \
+            scripts/s5_trust_policy.py \
+            scripts/s5_trust_policy_v073.py \
+            scripts/export_training_data.py \
+            scripts/export_training_data_v073.py \
+            scripts/calibrate_s5_lineage_v081.py \
+            scripts/calibrate_s5_lineage_v081_matrix.py \
+            scripts/verify_s5_v081_freeze_readiness.py \
+            scripts/check_s5_next_fresh_admission.py \
+            scripts/test_s5_next_fresh_admission.py \
+            scripts/materialize_s5_v081_freeze_receipt.py \
+            scripts/test_s5_v081_freeze_receipt_materializer.py \
+            scripts/verify_s5_v081_control_plane_readiness.py \
+            scripts/eval_s5_boundary_regression_v081.py
+
+      - name: Preserve immutable v0.8 fresh FAIL
+        run: |
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/fresh-first-observation-v0.8.json)" = '8d2d96890915aa981652f78e3ff52242c7c0f51c'
+
+      - name: Verify pinned pre-freeze attestation
+        run: |
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/freeze-readiness-v0.8.1.json)" = 'f7ecf1663adebeb7b81eaa681ca142b1f749f833'
+          test "$(git rev-parse HEAD:scripts/verify_s5_v081_freeze_readiness.py)" = '0104aec8a34297e7859091651605ff96c5aa9207'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json)" = '9568b8762896279f935e11a86d4dc6efb63b46fa'
+          python scripts/verify_s5_v081_freeze_readiness.py --out /tmp/s5-v081-freeze-readiness.json
+          cmp /tmp/s5-v081-freeze-readiness.json medical/stage-evals/S5/freeze-readiness-check-v0.8.1.json
+
+      - name: Enforce next-fresh authoring admission
+        run: |
+          test "$(git rev-parse HEAD:scripts/check_s5_next_fresh_admission.py)" = '5c3191ecc4f44a74789e63220ea4af69568424b8'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/next-fresh-admission-v0.9.json)" = 'b73126c77f5601e6381d085c037251c60d0012a7'
+          test "$(git rev-parse HEAD:scripts/test_s5_next_fresh_admission.py)" = 'c15fb0d57ac881929f85938aad689a063347aa19'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json)" = 'b080609599063736dcc1de76c9aa1d328c80e3ed'
+          test "$(git rev-parse HEAD:scripts/materialize_s5_v081_freeze_receipt.py)" = 'bdb60f5de546d2f70871caa3507556509c33dabc'
+          test "$(git rev-parse HEAD:scripts/test_s5_v081_freeze_receipt_materializer.py)" = '3f706851396de615c067317f82c90696f3ba040c'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json)" = '6c478d08f95fb229c39e4a95a1a4280859a0342a'
+          python scripts/check_s5_next_fresh_admission.py --out /tmp/s5-v09-admission.json
+          cmp /tmp/s5-v09-admission.json medical/stage-evals/S5/next-fresh-admission-v0.9.json
+          python scripts/test_s5_next_fresh_admission.py --out /tmp/s5-v09-admission-tests.json
+          cmp /tmp/s5-v09-admission-tests.json medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json
+          python scripts/test_s5_v081_freeze_receipt_materializer.py --out /tmp/s5-v081-receipt-tests.json
+          cmp /tmp/s5-v081-receipt-tests.json medical/stage-evals/S5/freeze-receipt-materializer-tests-v0.8.1.json
+
+      - name: Verify pinned pre-freeze control plane
+        run: |
+          test "$(git rev-parse HEAD:scripts/verify_s5_v081_control_plane_readiness.py)" = '1410554c3947ca3e2be189b8ca220b0f88349605'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/control-plane-readiness-v0.8.1.json)" = '21b4d27b3f5e6e677fa343a831020a1ae077201d'
+          test "$(git rev-parse HEAD:medical/stage-evals/S5/control-plane-readiness-check-v0.8.1.json)" = 'a6b5e49cad9ab107ffc44c972547876fe9d1f420'
+          python scripts/verify_s5_v081_control_plane_readiness.py \
+            --out /tmp/s5-v081-control-plane-readiness.json
+          cmp /tmp/s5-v081-control-plane-readiness.json \
+            medical/stage-evals/S5/control-plane-readiness-check-v0.8.1.json
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          source=Path('medical/stage-evals/S5/control-plane-readiness-v0.8.1.json')
+          tampered=json.loads(source.read_text())
+          tampered['pinned_control_plane_artifacts'][0]['sha256']='0'*64
+          Path('/tmp/s5-v081-control-plane-tampered.json').write_text(json.dumps(tampered))
+          PY
+          set +e
+          python scripts/verify_s5_v081_control_plane_readiness.py \
+            --manifest /tmp/s5-v081-control-plane-tampered.json \
+            --out /tmp/s5-v081-control-plane-negative.json
+          rc=$?
+          set -e
+          test "$rc" -eq 1
+          python - <<'PY'
+          import json
+          result=json.load(open('/tmp/s5-v081-control-plane-negative.json'))
+          assert result['verification_gate']=='FAIL'
+          assert 'PIN_MISMATCH:scripts/check_s5_next_fresh_admission.py:sha256' in result['failures']
+          PY
+
+          tmp="$(mktemp -d)"
+          mkdir -p "$tmp/fresh-lineage-v0.9"
+          touch "$tmp/fresh-lineage-v0.9/unauthorized.json"
+          set +e
+          python scripts/check_s5_next_fresh_admission.py \
+            --receipt "$tmp/missing-receipt.json" \
+            --fresh-root "$tmp/fresh-lineage-v0.9" \
+            --out "$tmp/negative.json"
+          rc=$?
+          set -e
+          test "$rc" -eq 1
+          python - "$tmp/negative.json" <<'PY'
+          import json,sys
+          result=json.load(open(sys.argv[1]))
+          assert result['guard_gate']=='FAIL'
+          assert result['fresh_authoring_allowed'] is False
+          assert 'UNAUTHORIZED_FRESH_ASSETS_BEFORE_VERIFIED_FREEZE' in result['failures']
+          PY
+
+      - name: Reproduce v0.8.1 calibration
+        run: |
+          python scripts/calibrate_s5_lineage_v081.py --out /tmp/s5-v081-calibration.json
+          cmp /tmp/s5-v081-calibration.json medical/stage-evals/S5/calibration-v0.8.1.json
+
+      - name: Run builder and exporter regression
+        run: |
+          python scripts/eval_s5_boundary_regression_v081.py --out /tmp/s5-v081-regression.json
+          cmp /tmp/s5-v081-regression.json medical/stage-evals/S5/regression-v0.8.1.json
+
+      - name: Reproduce broader multilingual and mosaic matrix
+        run: |
+          python scripts/calibrate_s5_lineage_v081_matrix.py --out /tmp/s5-v081-matrix.json
+          cmp /tmp/s5-v081-matrix.json medical/stage-evals/S5/calibration-matrix-v0.8.1.json
+
+      - name: Preserve frozen v0.7.3 regression behavior
+        run: |
+          python scripts/eval_s5_boundary_regression_v073.py --out /tmp/s5-v073-regression.json
+          cmp /tmp/s5-v073-regression.json medical/stage-evals/S5/regression-v0.7.3.json
+
+      - name: Confirm evidence boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path('/tmp/s5-v081-calibration.json').read_text())
+          m=json.loads(Path('/tmp/s5-v081-matrix.json').read_text())
+          r=json.loads(Path('/tmp/s5-v081-regression.json').read_text())
+          assert c['selection_gate']=='PASS'
+          assert c['fresh_evidence'] is False
+          assert c['legacy_v073_matrix']['recall']==1.0
+          assert c['legacy_v073_matrix']['clean_false_block_rate']==0.0
+          assert c['legacy_v073_matrix']['clean_review_rate']==0.0
+          assert c['v08_exposed_matrix']['attack_block_rate']==1.0
+          assert c['v08_exposed_matrix']['clean_false_block_rate']==0.0
+          assert c['v08_exposed_matrix']['clean_review_rate']==0.0
+          assert m['selection_gate']=='PASS'
+          assert m['fresh_evidence'] is False
+          assert m['metrics']['cross_language_count']==12
+          assert m['metrics']['cross_language_block_rate']==1.0
+          assert m['metrics']['mosaic_noise_count']==6
+          assert m['metrics']['mosaic_reasoned_block_rate']==1.0
+          assert m['metrics']['clean_near_neighbour_count']==18
+          assert m['metrics']['clean_false_block_rate']==0.0
+          assert m['metrics']['clean_review_rate']==0.0
+          assert m['stage_release']=='BLOCKED_GOLD_REVIEW'
+          assert m['s6_automatic_trust']=='BLOCKED'
+          assert r['regression_gate']=='PASS'
+          assert r['failed_gates']==[]
+          assert r['stage_release']=='BLOCKED_GOLD_REVIEW'
+          assert r['s6_automatic_trust']=='BLOCKED'
+          print('S5 v0.8.1 exposed repair PASS; fresh release and S6 trust remain blocked.')
+          PY

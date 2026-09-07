@@ -6,7 +6,9 @@ on:
       - 'requirements-s5-lineage-calibration.txt'
       - 'scripts/s5_lineage_detector_v073.py'
       - 'scripts/s5_trust_policy.py'
+      - 'scripts/s5_trust_policy_v073.py'
       - 'scripts/export_training_data.py'
+      - 'scripts/export_training_data_v073.py'
       - 'scripts/calibrate_s5_lineage_v073.py'
       - 'scripts/eval_s5_boundary_regression_v073.py'
       - 'medical/stage-evals/S5/calibration-first-observation-v0.7.3.json'
@@ -23,7 +25,9 @@ on:
       - 'requirements-s5-lineage-calibration.txt'
       - 'scripts/s5_lineage_detector_v073.py'
       - 'scripts/s5_trust_policy.py'
+      - 'scripts/s5_trust_policy_v073.py'
       - 'scripts/export_training_data.py'
+      - 'scripts/export_training_data_v073.py'
       - 'scripts/calibrate_s5_lineage_v073.py'
       - 'scripts/eval_s5_boundary_regression_v073.py'
       - 'medical/stage-evals/S5/calibration-first-observation-v0.7.3.json'
@@ -53,8 +57,10 @@ jobs:
             scripts/s5_lineage_detector.py \
             scripts/s5_lineage_detector_v073.py \
             scripts/s5_trust_policy.py \
+            scripts/s5_trust_policy_v073.py \
             scripts/s5_trust_policy_v072.py \
             scripts/export_training_data.py \
+            scripts/export_training_data_v073.py \
             scripts/export_training_data_v072.py \
             scripts/calibrate_s5_lineage_v073.py \
             scripts/eval_s5_boundary_regression_v073.py
