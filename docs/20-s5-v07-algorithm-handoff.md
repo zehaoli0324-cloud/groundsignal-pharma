@@ -1,6 +1,6 @@
 # Algorithm Handoff — S5 v0.7 Semantic Lineage Detection
 
-> Handoff status: **v0.9.1 EXPOSED REPAIR PASS; v0.9 FRESH FAIL PRESERVED**
+> Handoff status: **v0.9.1 CANONICALLY FROZEN; v0.9 FRESH FAIL PRESERVED**
 > Evidence source: S5 v0.7 independent fresh first observation  
 > Repair scope for algorithm team: **F25 + F26 only**. F24/F27 remain deterministic platform/eval-infrastructure work.
 
@@ -102,15 +102,16 @@ This is exposed repair evidence. The v0.9 first-observation blob remains unchang
 A 24-artifact pre-freeze attestation additionally verifies the exact implementation, transitive
 dependencies and evidence bytes at candidate commit `1b72274`; the immutable v0.9 observation binds
 all 18 fresh assets. Six fail-closed scenarios reject missing/duplicate/drifted pins, privilege
-escalation and fresh-asset digest drift. This makes the candidate ready for an explicit freeze
-decision but does not freeze it. A new suite may be authored only after dependency merges and a
-canonical freeze are explicitly approved and completed.
+escalation and fresh-asset digest drift. The approved dependency merges placed the exact candidate
+tree on canonical `main` as `cdc89298693aa9c5222f15ed9bd62a57e140fbc6`; a separate receipt now
+records the freeze without rewriting the historical pre-freeze attestation.
 
 The accompanying control plane pins 8 freeze/admission artifacts. Its receipt materializer requires
 the exact canonical `origin/main` tip, explicit approval, all 24 candidate pins and all 8 control
 pins. The v0.10 guard additionally requires future assets to prove they were authored only after a
-separately committed receipt. The current decision is `BLOCKED_NOT_FROZEN`; all 14 state tests pass
-without creating a real receipt, fresh case, Gold approval or S6 trust transition.
+separately committed receipt. The current decision is `ALLOW_AFTER_VERIFIED_FREEZE` with zero v0.10
+assets; all 14 state tests pass. The transition creates no fresh result, Gold approval, bounded
+release or S6 trust transition.
 
 ## 1. Objective
 

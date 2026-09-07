@@ -12,7 +12,7 @@ GroundSignal Medical 是一个面向医疗大模型开发的 **evidence-grounded
 
 项目的正式能力版图现包括：**医学问答、辅助诊疗、用药安全、医学影像、报告解读、医疗 Agent、多模态医疗模型、Benchmark、评测 Agent 和训练数据**。这些方向共享同一套证据、知识图谱、分区隔离和分阶段评测底座，但成熟度分别记录；“纳入版图”不等于“已经具备临床能力”。完整边界与各方向完成标准见 [`docs/21-medical-ai-capability-portfolio.md`](docs/21-medical-ai-capability-portfolio.md)。
 
-> **当前 S5 门禁：** v0.8.1 已在 `b5dffbe366904a46d3b6a44172a4f1626daa8924` 正式冻结。v0.9 fresh 首次观测仍是不可变 **FAIL**。v0.9.1 已在暴露数据上修复 F32 韩文召回与数字近邻误拦截；冻结前证明固定 24 个候选文件和 8 个控制平面文件。冻结/准入的 14/14 状态测试通过，但 `candidate_frozen=false`，v0.10 authoring 为 `BLOCKED_NOT_FROZEN`。这只是 **exposed repair PASS**，不是 fresh PASS。`gold_approved=false`，S5 bounded release 与 S6 自动信任继续阻断。
+> **当前 S5 门禁：** v0.9 fresh 首次观测仍是不可变 **FAIL**。v0.9.1 已在暴露数据上修复 F32 韩文召回与数字近邻误拦截，并在 canonical `main` 提交 `cdc89298693aa9c5222f15ed9bd62a57e140fbc6` 正式冻结；凭证验证 24/24 个候选文件、8/8 个控制平面文件，且冻结时尚无凭证或 v0.10 资产。v0.10 authoring 现为 `ALLOW_AFTER_VERIFIED_FREEZE`，但资产数仍为 0。v0.9.1 依然只是 **exposed repair PASS**，不是 fresh PASS；`gold_approved=false`，S5 bounded release 与 S6 自动信任继续阻断。
 
 ```text
 Real User Needs / Clinical Workflows

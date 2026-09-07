@@ -23,6 +23,7 @@ on:
       - 'medical/stage-evals/S5/control-plane-readiness-v0.9.1.json'
       - 'medical/stage-evals/S5/control-plane-readiness-check-v0.9.1.json'
       - 'medical/stage-evals/S5/next-fresh-admission-v0.10.json'
+      - 'medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.10.json'
       - 'medical/stage-evals/S5/freeze-control-tests-v0.9.1.json'
       - 'medical/stage-evals/S5/freeze-receipt-v0.9.1.json'
       - 'medical/stage-evals/S5/fresh-lineage-v0.10/**'
@@ -55,6 +56,7 @@ on:
       - 'medical/stage-evals/S5/control-plane-readiness-v0.9.1.json'
       - 'medical/stage-evals/S5/control-plane-readiness-check-v0.9.1.json'
       - 'medical/stage-evals/S5/next-fresh-admission-v0.10.json'
+      - 'medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.10.json'
       - 'medical/stage-evals/S5/freeze-control-tests-v0.9.1.json'
       - 'medical/stage-evals/S5/freeze-receipt-v0.9.1.json'
       - 'medical/stage-evals/S5/fresh-lineage-v0.10/**'
@@ -130,7 +132,6 @@ jobs:
 
       - name: Reproduce freeze and v0.10 control-plane evidence
         run: |
-          test ! -e medical/stage-evals/S5/freeze-receipt-v0.9.1.json
           test ! -e medical/stage-evals/S5/fresh-lineage-v0.10
           python scripts/generate_s5_v091_control_plane_readiness.py \
             --out /tmp/s5-v091-control-plane.json
@@ -142,8 +143,19 @@ jobs:
             medical/stage-evals/S5/control-plane-readiness-check-v0.9.1.json
           python scripts/check_s5_v10_fresh_admission.py \
             --out /tmp/s5-v10-admission.json
-          cmp /tmp/s5-v10-admission.json \
-            medical/stage-evals/S5/next-fresh-admission-v0.10.json
+          if test -f medical/stage-evals/S5/freeze-receipt-v0.9.1.json; then
+            python scripts/materialize_s5_v091_freeze_receipt.py \
+              --freeze-commit cdc89298693aa9c5222f15ed9bd62a57e140fbc6 \
+              --approval-reference user-approval:chatgpt-2026-09-07-pr5-pr6-pr7-freeze \
+              --out /tmp/s5-v091-freeze-receipt.json
+            cmp /tmp/s5-v091-freeze-receipt.json \
+              medical/stage-evals/S5/freeze-receipt-v0.9.1.json
+            cmp /tmp/s5-v10-admission.json \
+              medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.10.json
+          else
+            cmp /tmp/s5-v10-admission.json \
+              medical/stage-evals/S5/next-fresh-admission-v0.10.json
+          fi
           python scripts/test_s5_v091_freeze_control.py \
             --out /tmp/s5-v091-freeze-control-tests.json
           cmp /tmp/s5-v091-freeze-control-tests.json \
@@ -156,8 +168,13 @@ jobs:
           assert control['verification_gate']=='PASS'
           assert control['verified_path_count']==control['required_path_count']==8
           assert control['candidate_frozen'] is False
-          assert admission['admission_decision']=='BLOCKED_NOT_FROZEN'
-          assert admission['fresh_authoring_allowed'] is False
+          if admission['receipt_present']:
+              assert admission['admission_decision']=='ALLOW_AFTER_VERIFIED_FREEZE'
+              assert admission['fresh_authoring_allowed'] is True
+              assert admission['freeze_commit']=='cdc89298693aa9c5222f15ed9bd62a57e140fbc6'
+          else:
+              assert admission['admission_decision']=='BLOCKED_NOT_FROZEN'
+              assert admission['fresh_authoring_allowed'] is False
           assert admission['gold_approved'] is False
           assert admission['s6_automatic_trust']=='BLOCKED'
           assert tests['scenario_pass_count']==tests['scenario_count']==14
