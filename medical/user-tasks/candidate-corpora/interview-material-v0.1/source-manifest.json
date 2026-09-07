@@ -1,0 +1,30 @@
+{
+  "manifest_version": "unverified-interview-corpus-v0.1",
+  "trust_status": "UNVERIFIED_INTERVIEW_MATERIAL",
+  "source_files_committed": false,
+  "answer_text_committed": false,
+  "eligible_for_trust_root": false,
+  "eligible_for_knowledge_graph": false,
+  "eligible_for_training_export": false,
+  "sources": [
+    {
+      "source_id": "interview-medical-data-product-manager-125",
+      "filename": "医疗大数据产品经理面试逐字稿125题.docx",
+      "sha256": "55b93a5b7b433c8cf4515631b28581ead9a4ebb79d8dfe3283b5a12fbff8da1a",
+      "question_count": 125
+    },
+    {
+      "source_id": "interview-medical-structured-hot-topics-23",
+      "filename": "医疗结构化面试热点23题.docx",
+      "sha256": "c736c530c2ed67643495ed8b3992b4aac15602117c2b78be107b20bd233ea9d3",
+      "question_count": 23
+    }
+  ],
+  "outputs": {
+    "inventory_count": 148,
+    "retained_user_question_candidates": 122,
+    "evaluation_seed_count": 122,
+    "risk_seed_count": 5,
+    "priority_review_count": 16
+  }
+}

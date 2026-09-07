@@ -12,6 +12,9 @@ on:
       - 'scripts/validate_medical_case_families.py'
       - 'scripts/validate_medical_knowledge_sources.py'
       - 'scripts/build_medical_knowledge_graph.py'
+      - 'scripts/import_unverified_interview_corpus.py'
+      - 'scripts/validate_unverified_interview_corpus.py'
+      - 'scripts/test_import_unverified_interview_corpus.py'
       - 'scripts/s2_source_router.py'
       - 'scripts/eval_s2_source_routing.py'
       - 'scripts/s2_intent_router.py'
@@ -32,6 +35,9 @@ on:
       - 'scripts/validate_medical_case_families.py'
       - 'scripts/validate_medical_knowledge_sources.py'
       - 'scripts/build_medical_knowledge_graph.py'
+      - 'scripts/import_unverified_interview_corpus.py'
+      - 'scripts/validate_unverified_interview_corpus.py'
+      - 'scripts/test_import_unverified_interview_corpus.py'
       - 'scripts/s2_source_router.py'
       - 'scripts/eval_s2_source_routing.py'
       - 'scripts/s2_intent_router.py'
@@ -62,6 +68,9 @@ jobs:
             scripts/validate_medical_case_families.py \
             scripts/validate_medical_knowledge_sources.py \
             scripts/build_medical_knowledge_graph.py \
+            scripts/import_unverified_interview_corpus.py \
+            scripts/validate_unverified_interview_corpus.py \
+            scripts/test_import_unverified_interview_corpus.py \
             scripts/s2_source_router.py \
             scripts/eval_s2_source_routing.py \
             scripts/s2_intent_router.py \
@@ -70,6 +79,11 @@ jobs:
             scripts/s3_structured_claim_verifier.py \
             scripts/s3_claimframe_verifier.py \
             scripts/eval_s3_claim_verification.py
+
+      - name: Validate quarantined interview-derived candidates
+        run: |
+          python -m unittest scripts/test_import_unverified_interview_corpus.py
+          python scripts/validate_unverified_interview_corpus.py
 
       - name: Validate P0 medical case families
         run: |

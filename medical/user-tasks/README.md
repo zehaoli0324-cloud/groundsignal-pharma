@@ -97,3 +97,9 @@ Before a scenario family becomes a benchmark fixture, require:
 - [ ] case does not contain identifiable patient information;
 - [ ] evidence and licensing/provenance are recorded;
 - [ ] reviewer status is recorded.
+
+## 7. Unverified candidate corpora
+
+`candidate-corpora/` is an explicit quarantine namespace for useful but untrusted task-ideation material. Content in this namespace must not be used as medical truth, knowledge-graph evidence, training data, or a benchmark split merely because it is committed to the repository.
+
+The first imported corpus is `candidate-corpora/interview-material-v0.1/`: 148 questions extracted from two user-supplied interview documents, with source answers excluded. Its retained questions require independent premise verification and evidence reconstruction before promotion.
