@@ -1,0 +1,45 @@
+{
+  "stage": "S5",
+  "version": "v0.9.1-freeze-readiness-tests-v0.1",
+  "evidence_class": "development_process_guard_test",
+  "fresh_evidence": false,
+  "first_observation": false,
+  "scenario_count": 6,
+  "scenario_pass_count": 6,
+  "test_gate": "PASS",
+  "scenarios": [
+    {
+      "name": "exact_manifest_passes",
+      "result": "PASS"
+    },
+    {
+      "name": "missing_pin_rejected",
+      "result": "PASS",
+      "observed_gate": "FAIL"
+    },
+    {
+      "name": "hash_drift_rejected",
+      "result": "PASS",
+      "observed_gate": "FAIL"
+    },
+    {
+      "name": "duplicate_pin_rejected",
+      "result": "PASS",
+      "observed_gate": "FAIL"
+    },
+    {
+      "name": "privilege_escalation_rejected",
+      "result": "PASS",
+      "observed_gate": "FAIL"
+    },
+    {
+      "name": "fresh_asset_contract_drift_rejected",
+      "result": "PASS",
+      "observed_gate": "FAIL"
+    }
+  ],
+  "candidate_frozen": false,
+  "gold_approved": false,
+  "stage_release": "BLOCKED_NEXT_FRESH_AND_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED"
+}

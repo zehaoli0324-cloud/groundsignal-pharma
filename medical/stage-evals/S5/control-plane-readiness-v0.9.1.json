@@ -1,0 +1,68 @@
+{
+  "stage": "S5",
+  "version": "v0.9.1",
+  "attestation": "pre-freeze-control-plane-readiness",
+  "evidence_class": "development_process_integrity_attestation",
+  "fresh_evidence": false,
+  "first_observation": false,
+  "control_plane_frozen": false,
+  "candidate_frozen": false,
+  "freeze_commit": null,
+  "canonical_freeze_receipt_present": false,
+  "next_fresh_authoring": "BLOCKED_NOT_FROZEN",
+  "gold_approved": false,
+  "bounded_release": "BLOCKED_NEXT_FRESH_AND_GOLD_REVIEW",
+  "stage_release": "BLOCKED_NEXT_FRESH_AND_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "pinned_control_plane_artifact_count": 8,
+  "pinned_control_plane_artifacts": [
+    {
+      "path": "scripts/s5_v091_freeze_control.py",
+      "size_bytes": 16433,
+      "git_blob_sha1": "8be4b707eb4ecf74d40c6f9c42f4479084c63969",
+      "sha256": "ebdd857a4a2c5140942375d4d26d542b91b1c99877770c16ac0ba3c0caa4e96c"
+    },
+    {
+      "path": "scripts/materialize_s5_v091_freeze_receipt.py",
+      "size_bytes": 1027,
+      "git_blob_sha1": "a0ff7f73d0754e999134c39f9c8c40dc5b4ad25f",
+      "sha256": "3113908ce2ad97e2c2234a7d387938e6f6eb84c4039c65c4f3fedc61969c1c2d"
+    },
+    {
+      "path": "scripts/check_s5_v10_fresh_admission.py",
+      "size_bytes": 982,
+      "git_blob_sha1": "f3165fa565a9b3140f466be1b5b7b6152de6ccd7",
+      "sha256": "cf9171e4aa7edbd8c216417ba2a6302a3e77fcb69d9148273b5d9372311d3b91"
+    },
+    {
+      "path": "scripts/test_s5_v091_freeze_control.py",
+      "size_bytes": 10269,
+      "git_blob_sha1": "70598cd39d94e45cf055cfd59d19e3e98c943906",
+      "sha256": "3dd4d9d86fa66085ddfe4d6466f9f56762d5c7fbfee0ce359d3a06ce2ea047f0"
+    },
+    {
+      "path": "scripts/generate_s5_v091_control_plane_readiness.py",
+      "size_bytes": 2303,
+      "git_blob_sha1": "957521c131ca8c01f6b2d8429106d0ce3823ccea",
+      "sha256": "00748b09ef8efc9233f1490f67ce97b7feeb539b397fae8236ed6ec2323e4a2e"
+    },
+    {
+      "path": "scripts/verify_s5_v091_control_plane_readiness.py",
+      "size_bytes": 4795,
+      "git_blob_sha1": "87ded5dce2e2726c411bde3c3a18e03aca34d57f",
+      "sha256": "f9f900f17a295710972ab653914e15f7ea5d4cc7d380b3936c527646bbdce146"
+    },
+    {
+      "path": "medical/stage-evals/S5/freeze-readiness-v0.9.1.json",
+      "size_bytes": 7957,
+      "git_blob_sha1": "ebf61ef53419490a77c1182a0190efd44bd3d246",
+      "sha256": "167a718958f2aee58ed3861551ed2de70a624159e3e394ac3e08b66f1d5674aa"
+    },
+    {
+      "path": "medical/stage-evals/S5/freeze-readiness-check-v0.9.1.json",
+      "size_bytes": 1304,
+      "git_blob_sha1": "a694a03dbc07ac3136b15b4b5f3349220425466a",
+      "sha256": "df8171d40befc816774b052544638424c6cf5f70213328bd0e27ffe63065dc31"
+    }
+  ]
+}

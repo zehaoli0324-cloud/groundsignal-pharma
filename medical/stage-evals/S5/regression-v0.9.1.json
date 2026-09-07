@@ -1,0 +1,373 @@
+{
+  "stage": "S5",
+  "version": "v0.9.1",
+  "eval_name": "script-role-exposed-repair-regression",
+  "evidence_class": "repaired_exposed_regression",
+  "fresh_evidence": false,
+  "first_observation": false,
+  "method_version": "s5-lineage-script-role-v0.9.1-exposed",
+  "immutable_v09_first_observation": {
+    "expected_blob": "522c8f4ed39293d2ea01c81f48ffacc1d1ef4340",
+    "observed_blob": "522c8f4ed39293d2ea01c81f48ffacc1d1ef4340",
+    "pass": true,
+    "preserved_result": "FAIL"
+  },
+  "v09_exposed_attacks": {
+    "f32-unseen-script-korean": {
+      "expected": "BLOCK",
+      "observed": "BLOCK",
+      "builder_rejected": true,
+      "exporter_rejected": true,
+      "trace": {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f32-unseen-script-korean.json",
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN9-HO-001",
+        "reasons": [
+          "SCRIPT_SEMANTIC_LINEAGE_REUSE"
+        ],
+        "candidate_language": "ko",
+        "semantic_concept_overlap": [
+          "audit_or_adjudication",
+          "causal_attribution",
+          "confounding",
+          "investigational_intervention",
+          "missing_evidence",
+          "uncertainty",
+          "unverified_source"
+        ],
+        "candidate_measurement_roles": [
+          "neurophysiology"
+        ],
+        "reference_measurement_roles": [
+          "neurophysiology"
+        ],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [
+          "S5FRESH-LIN9-HO-001",
+          "S5FRESH-LIN9-HO-002"
+        ],
+        "record_similarity": 0.379203,
+        "risk_score": 0.94
+      },
+      "pass": true
+    },
+    "f33-unit-time-alias": {
+      "expected": "BLOCK",
+      "observed": "BLOCK",
+      "builder_rejected": true,
+      "exporter_rejected": true,
+      "trace": {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f33-unit-time-alias.json",
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN9-REG-001",
+        "reasons": [
+          "PROTECTED_EXCLUSIVE_FIELD_REUSE"
+        ],
+        "candidate_language": "en",
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "candidate_measurement_roles": [
+          "hepatic_enzyme"
+        ],
+        "reference_measurement_roles": [
+          "hepatic_enzyme"
+        ],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "record_similarity": 0.595791,
+        "risk_score": 0.92
+      },
+      "pass": true
+    },
+    "f34-graph-role-compression": {
+      "expected": "BLOCK",
+      "observed": "BLOCK",
+      "builder_rejected": true,
+      "exporter_rejected": true,
+      "trace": {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f34-graph-role-compression.json",
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN9-HO-002",
+        "reasons": [
+          "DENSE_PROTECTED_ANCHOR_REUSE",
+          "PROTECTED_EXCLUSIVE_FIELD_REUSE"
+        ],
+        "candidate_language": "en",
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "missing_evidence",
+          "uncertainty",
+          "unverified_source"
+        ],
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "record_similarity": 0.639646,
+        "risk_score": 0.92
+      },
+      "pass": true
+    },
+    "f35-subthreshold-three-source-mosaic": {
+      "expected": "BLOCK",
+      "observed": "BLOCK",
+      "builder_rejected": true,
+      "exporter_rejected": true,
+      "trace": {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f35-subthreshold-three-source-mosaic.json",
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN9-HO-001",
+        "reasons": [
+          "MULTI_PROTECTED_REFERENCE_MOSAIC",
+          "PROTECTED_EXCLUSIVE_FIELD_REUSE"
+        ],
+        "candidate_language": "en",
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "candidate_measurement_roles": [
+          "hepatic_enzyme",
+          "neurophysiology"
+        ],
+        "reference_measurement_roles": [
+          "neurophysiology"
+        ],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "record_similarity": 0.53739,
+        "risk_score": 0.96
+      },
+      "pass": true
+    },
+    "f36-code-switched-identifier-wording": {
+      "expected": "BLOCK",
+      "observed": "BLOCK",
+      "builder_rejected": true,
+      "exporter_rejected": true,
+      "trace": {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f36-code-switched-identifier-wording.json",
+        "decision": "BLOCK",
+        "nearest_reference_id": "S5FRESH-LIN9-HO-001",
+        "reasons": [
+          "MULTILINGUAL_SEMANTIC_LINEAGE_REUSE",
+          "PROTECTED_EXCLUSIVE_FIELD_REUSE"
+        ],
+        "candidate_language": "es",
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "confounding",
+          "investigational_intervention",
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [
+          "neurophysiology"
+        ],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "record_similarity": 0.564583,
+        "risk_score": 0.94
+      },
+      "pass": true
+    }
+  },
+  "v09_exposed_clean_controls": {
+    "clean-japanese-imaging": {
+      "expected": "ALLOW",
+      "observed": "ALLOW",
+      "builder_rejected": false,
+      "exporter_rejected": false,
+      "trace": {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.9/clean-sources/clean-japanese-imaging.json",
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN9-HO-002",
+        "reasons": [],
+        "candidate_language": "ja",
+        "semantic_concept_overlap": [
+          "missing_evidence",
+          "uncertainty",
+          "unverified_source"
+        ],
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "record_similarity": 0.483935,
+        "risk_score": 0.849506
+      },
+      "pass": true
+    },
+    "clean-korean-same-domain": {
+      "expected": "ALLOW",
+      "observed": "ALLOW",
+      "builder_rejected": false,
+      "exporter_rejected": false,
+      "trace": {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.9/clean-sources/clean-korean-same-domain.json",
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN9-REG-001",
+        "reasons": [],
+        "candidate_language": "ko",
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [
+          "hepatic_enzyme"
+        ],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "record_similarity": 0.460797,
+        "risk_score": 0.726489
+      },
+      "pass": true
+    },
+    "clean-multi-case-summary": {
+      "expected": "ALLOW",
+      "observed": "ALLOW",
+      "builder_rejected": false,
+      "exporter_rejected": false,
+      "trace": {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.9/clean-sources/clean-multi-case-summary.json",
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN9-REG-001",
+        "reasons": [],
+        "candidate_language": "en",
+        "semantic_concept_overlap": [
+          "causal_attribution",
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "candidate_measurement_roles": [],
+        "reference_measurement_roles": [
+          "hepatic_enzyme"
+        ],
+        "typed_role_mismatch_references": [],
+        "script_semantic_match_references": [],
+        "record_similarity": 0.482509,
+        "risk_score": 0.705307
+      },
+      "pass": true
+    },
+    "clean-numeric-near-neighbour": {
+      "expected": "ALLOW",
+      "observed": "ALLOW",
+      "builder_rejected": false,
+      "exporter_rejected": false,
+      "trace": {
+        "source": "medical/stage-evals/S5/fresh-lineage-v0.9/clean-sources/clean-numeric-near-neighbour.json",
+        "decision": "ALLOW",
+        "nearest_reference_id": "S5FRESH-LIN9-HO-001",
+        "reasons": [],
+        "candidate_language": "en",
+        "semantic_concept_overlap": [
+          "missing_evidence",
+          "uncertainty"
+        ],
+        "candidate_measurement_roles": [
+          "glucose"
+        ],
+        "reference_measurement_roles": [
+          "neurophysiology"
+        ],
+        "typed_role_mismatch_references": [
+          "S5FRESH-LIN9-REG-001"
+        ],
+        "script_semantic_match_references": [],
+        "record_similarity": 0.507178,
+        "risk_score": 0.713348
+      },
+      "pass": true
+    }
+  },
+  "historical_regression": {
+    "legacy_v073": {
+      "tp": 163,
+      "fp": 0,
+      "fn": 0,
+      "tn": 62,
+      "precision": 1.0,
+      "recall": 1.0,
+      "clean_false_block_rate": 0.0,
+      "clean_review_rate": 0.0,
+      "by_transformation": {
+        "distributed_fragment_reuse": {
+          "total": 24,
+          "blocked": 24,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "evidence_graph_composition": {
+          "total": 30,
+          "blocked": 30,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "presentation_only": {
+          "total": 30,
+          "blocked": 30,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "prompt_paraphrase": {
+          "total": 30,
+          "blocked": 30,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "prompt_span_reuse": {
+          "total": 30,
+          "blocked": 30,
+          "reviewed": 0,
+          "recall": 1.0
+        },
+        "single_evidence_field": {
+          "total": 19,
+          "blocked": 19,
+          "reviewed": 0,
+          "recall": 1.0
+        }
+      }
+    },
+    "v08": {
+      "attack_decisions": {
+        "BLOCK": 4
+      },
+      "clean_decisions": {
+        "ALLOW": 2
+      },
+      "attack_count": 4,
+      "clean_count": 2
+    },
+    "v081_matrix": {
+      "translation_block_rate": 1.0,
+      "mosaic_reasoned_block_rate": 1.0,
+      "clean_false_block_rate": 0.0,
+      "clean_review_rate": 0.0,
+      "counts": {
+        "translations": 12,
+        "mosaics": 6,
+        "clean": 18
+      }
+    }
+  },
+  "repair_gate": "PASS",
+  "failed_gates": [],
+  "gold_approved_count": 0,
+  "stage_release": "BLOCKED_NEXT_FRESH_AND_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "limitations": [
+    "v0.9 cases are exposed after their immutable first observation and cannot establish fresh evidence.",
+    "Hangul support is an inspectable deterministic lexicon, not general multilingual semantic understanding.",
+    "Typed-role downgrading currently covers lab measurement identity and requires absence of stronger lineage evidence.",
+    "A new suite may be authored only after this candidate is reviewed and explicitly frozen."
+  ]
+}
