@@ -1,6 +1,6 @@
 # Algorithm Handoff — S5 v0.7 Semantic Lineage Detection
 
-> Handoff status: **v0.8.1 CANONICALLY FROZEN; v0.9 INDEPENDENT FRESH FAIL**
+> Handoff status: **v0.9.1 EXPOSED REPAIR PASS; v0.9 FRESH FAIL PRESERVED**
 > Evidence source: S5 v0.7 independent fresh first observation  
 > Repair scope for algorithm team: **F25 + F26 only**. F24/F27 remain deterministic platform/eval-infrastructure work.
 
@@ -88,6 +88,23 @@ glucose/meal-timing case was blocked as if it were the protected ALT/specimen-ha
 other contamination attacks and three other clean controls passed. The result isolates both an
 unseen-script recall gap and a typed-clinical-role precision gap; it does not authorize threshold
 tuning against the fresh suite or any S5/S6 release claim.
+
+## v0.9.1 repair checkpoint
+
+The candidate adds an inspectable Korean/Hangul concept layer for the exposed F32 translation and a
+typed measurement-role precision guard for the exposed numeric clean neighbour. Typed-role mismatch
+can downgrade only a dense-anchor-only block and cannot override identifier, exact-field or near-field
+lineage evidence. The candidate blocks all 5 exposed v0.9 attacks, allows all 4 exposed v0.9 clean
+controls, and preserves v0.7.3, v0.8 and v0.8.1 historical matrices without regression.
+
+This is exposed repair evidence. The v0.9 first-observation blob remains unchanged and records FAIL;
+`gold_approved=false`, S5 bounded release is not established and S6 automatic trust remains blocked.
+A 24-artifact pre-freeze attestation additionally verifies the exact implementation, transitive
+dependencies and evidence bytes at candidate commit `1b72274`; the immutable v0.9 observation binds
+all 18 fresh assets. Six fail-closed scenarios reject missing/duplicate/drifted pins, privilege
+escalation and fresh-asset digest drift. This makes the candidate ready for an explicit freeze
+decision but does not freeze it. A new suite may be authored only after dependency merges and a
+canonical freeze are explicitly approved and completed.
 
 ## 1. Objective
 
