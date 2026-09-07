@@ -1,0 +1,13 @@
+{
+  "stage": "S5",
+  "suite_id": "S5-FRESH-LINEAGE-v0.9",
+  "version": "v0.9",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "implementation_freeze_commit": "b5dffbe366904a46d3b6a44172a4f1626daa8924",
+  "family_ids": ["S5FRESH-LINEAGE-009"],
+  "allowed_training_splits": ["dev"],
+  "prohibited_training_splits": ["regression", "heldout"],
+  "purpose": "Post-freeze evaluation of lineage laundering through unseen scripts, unit and time conversion, compressed graphs, and subthreshold multi-source mosaics.",
+  "release_use": "evaluation_only"
+}
