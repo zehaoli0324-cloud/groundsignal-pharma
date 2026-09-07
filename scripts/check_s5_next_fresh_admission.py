@@ -17,8 +17,10 @@ DEFAULT_FRESH_ROOT = ROOT / "medical/stage-evals/S5/fresh-lineage-v0.9"
 ATTESTATION = ROOT / "medical/stage-evals/S5/freeze-readiness-v0.8.1.json"
 CONTROL_PLANE = ROOT / "medical/stage-evals/S5/control-plane-readiness-v0.8.1.json"
 CONTROL_PLANE_VERIFIER = ROOT / "scripts/verify_s5_v081_control_plane_readiness.py"
+CANONICAL_RECEIPT_REL = "medical/stage-evals/S5/freeze-receipt-v0.8.1.json"
+NEXT_FRESH_ROOT_REL = "medical/stage-evals/S5/fresh-lineage-v0.9"
 EXPECTED_ATTESTATION_BLOB = "f7ecf1663adebeb7b81eaa681ca142b1f749f833"
-EXPECTED_RECEIPT_GENERATOR = "s5-freeze-receipt-v0.2"
+EXPECTED_RECEIPT_GENERATOR = "s5-freeze-receipt-v0.3"
 COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 APPROVAL_RE = re.compile(r"^user-approval:[A-Za-z0-9._:/#-]{8,}$")
 
@@ -80,6 +82,11 @@ def validate_receipt(
         failures.append("ATTESTATION_PIN_MISMATCH")
     if receipt.get("control_plane_attestation_git_blob_sha1") != control_plane_blob:
         failures.append("CONTROL_PLANE_ATTESTATION_PIN_MISMATCH")
+    if (
+        receipt.get("freeze_receipt_absent_at_freeze") is not True
+        or receipt.get("next_fresh_assets_absent_at_freeze") is not True
+    ):
+        failures.append("FREEZE_CHRONOLOGY_CLAIM_INVALID")
     if not COMMIT_RE.fullmatch(freeze_commit):
         failures.append("FREEZE_COMMIT_INVALID")
         return False, failures
@@ -91,6 +98,10 @@ def validate_receipt(
         failures.append("FREEZE_COMMIT_NOT_ANCESTOR")
     if git("merge-base", "--is-ancestor", freeze_commit, "origin/main").returncode != 0:
         failures.append("FREEZE_COMMIT_NOT_ON_CANONICAL_MAIN")
+    if git("cat-file", "-e", f"{freeze_commit}:{CANONICAL_RECEIPT_REL}").returncode == 0:
+        failures.append("RECEIPT_PREEXISTED_AT_FREEZE")
+    if git("cat-file", "-e", f"{freeze_commit}:{NEXT_FRESH_ROOT_REL}").returncode == 0:
+        failures.append("NEXT_FRESH_ASSETS_PREEXISTED_AT_FREEZE")
     observed_tree = git("show", "-s", "--format=%T", freeze_commit)
     if observed_tree.returncode != 0 or observed_tree.stdout.strip() != receipt.get("freeze_tree_sha"):
         failures.append("FREEZE_TREE_MISMATCH")

@@ -72,9 +72,11 @@ algorithm, dependency and evidence artifacts; `control-plane-readiness-v0.8.1.js
 authorize and verify freeze/fresh transitions. Its verifier checks both content hashes and 10 state
 boundaries, while still recording `control_plane_frozen=false` and no canonical receipt.
 
-Receipt contract v0.2 joins the independent candidate and control-plane checks only at freeze time.
+Receipt contract v0.3 joins the independent candidate and control-plane checks only at freeze time.
 The same canonical `main` tip must contain all 22 candidate and all 9 control-plane pins. Missing or
 incorrect control-plane hashes/counts, legacy receipt schemas and drifted gate bytes are rejected.
+The freeze commit must also predate both the canonical receipt and the v0.9 fresh tree; either one
+already present at that commit is a chronology failure.
 This contract creates no receipt while PR #4 remains open and changes no fresh, gold or S6 status.
 
 ## 1. Objective

@@ -23,7 +23,16 @@ def load_module():
     return module
 
 
-def fake_git_factory(module, commit: str, tree: str, *, canonical: bool, drift_path: str | None = None):
+def fake_git_factory(
+    module,
+    commit: str,
+    tree: str,
+    *,
+    canonical: bool,
+    drift_path: str | None = None,
+    preexisting_receipt: bool = False,
+    preexisting_fresh: bool = False,
+):
     attestation = json.loads(ATTESTATION.read_text(encoding="utf-8"))
     control_plane = json.loads(CONTROL_PLANE.read_text(encoding="utf-8"))
     pinned = {row["path"]: row["git_blob_sha1"] for row in attestation["pinned_artifacts"]}
@@ -40,7 +49,14 @@ def fake_git_factory(module, commit: str, tree: str, *, canonical: bool, drift_p
 
     def fake_git(*args: str):
         if args[:2] == ("cat-file", "-e"):
-            return done(args, 0)
+            target = args[2]
+            if target == f"{commit}^{{commit}}":
+                return done(args, 0)
+            if target == f"{commit}:{module.RECEIPT_REL}":
+                return done(args, 0 if preexisting_receipt else 1)
+            if target == f"{commit}:{module.NEXT_FRESH_ROOT_REL}":
+                return done(args, 0 if preexisting_fresh else 1)
+            return done(args, 1)
         if args == ("rev-parse", "origin/main"):
             return done(args, 0, (commit if canonical else "9" * 40) + "\n")
         if args[:2] == ("merge-base", "--is-ancestor"):
@@ -97,6 +113,16 @@ def run() -> dict:
     assert receipt is None and f"FREEZE_CONTROL_PLANE_ARTIFACT_MISMATCH:{drift_path}" in failures
     scenarios.append({"name": "control_plane_byte_drift_rejected", "result": "PASS", "failures": sorted(failures)})
 
+    module.git = fake_git_factory(module, commit, tree, canonical=True, preexisting_receipt=True)
+    receipt, failures = module.build_receipt(commit, "user-approval:fixture-0001")
+    assert receipt is None and "RECEIPT_PREEXISTED_AT_FREEZE" in failures
+    scenarios.append({"name": "preseeded_receipt_rejected", "result": "PASS", "failures": sorted(failures)})
+
+    module.git = fake_git_factory(module, commit, tree, canonical=True, preexisting_fresh=True)
+    receipt, failures = module.build_receipt(commit, "user-approval:fixture-0001")
+    assert receipt is None and "NEXT_FRESH_ASSETS_PREEXISTED_AT_FREEZE" in failures
+    scenarios.append({"name": "preseeded_next_fresh_assets_rejected", "result": "PASS", "failures": sorted(failures)})
+
     module.git = fake_git_factory(module, commit, tree, canonical=True)
     receipt, failures = module.build_receipt(commit, "user-approval:fixture-0001")
     assert failures == [] and receipt is not None
@@ -105,6 +131,8 @@ def run() -> dict:
     assert receipt["pinned_artifact_count"] == receipt["verified_artifact_count"] == 22
     assert receipt["control_plane_pinned_artifact_count"] == 9
     assert receipt["control_plane_verified_artifact_count"] == 9
+    assert receipt["freeze_receipt_absent_at_freeze"] is True
+    assert receipt["next_fresh_assets_absent_at_freeze"] is True
     assert receipt["fresh_evidence"] is False and receipt["gold_approved"] is False
     assert receipt["bounded_release"] == "BLOCKED_NEXT_FRESH"
     assert receipt["stage_release"] == "BLOCKED_GOLD_REVIEW"

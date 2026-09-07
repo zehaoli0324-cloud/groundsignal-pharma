@@ -38,7 +38,7 @@ def receipt(*, commit: str, tree: str, **overrides: Any) -> dict[str, Any]:
         "stage": "S5",
         "version": "v0.8.1",
         "receipt_type": "canonical_freeze_receipt",
-        "generator_version": "s5-freeze-receipt-v0.2",
+        "generator_version": "s5-freeze-receipt-v0.3",
         "candidate_frozen": True,
         "control_plane_frozen": True,
         "merged_pr": 4,
@@ -52,6 +52,8 @@ def receipt(*, commit: str, tree: str, **overrides: Any) -> dict[str, Any]:
         "verified_artifact_count": 22,
         "control_plane_pinned_artifact_count": 9,
         "control_plane_verified_artifact_count": 9,
+        "freeze_receipt_absent_at_freeze": True,
+        "next_fresh_assets_absent_at_freeze": True,
         "fresh_evidence": False,
         "gold_approved": False,
         "bounded_release": "BLOCKED_NEXT_FRESH",
@@ -62,7 +64,15 @@ def receipt(*, commit: str, tree: str, **overrides: Any) -> dict[str, Any]:
     return value
 
 
-def fake_git_factory(module, commit: str, tree: str, *, on_main: bool):
+def fake_git_factory(
+    module,
+    commit: str,
+    tree: str,
+    *,
+    on_main: bool,
+    preexisting_receipt: bool = False,
+    preexisting_fresh: bool = False,
+):
     attestation = json.loads(ATTESTATION_PATH.read_text(encoding="utf-8"))
     control_plane = json.loads(CONTROL_PLANE_PATH.read_text(encoding="utf-8"))
     pinned = {row["path"]: row["git_blob_sha1"] for row in attestation["pinned_artifacts"]}
@@ -75,8 +85,16 @@ def fake_git_factory(module, commit: str, tree: str, *, on_main: bool):
     )
 
     def fake_git(*args: str):
-        if args[:2] == ("cat-file", "-e") and args[2] == f"{commit}^{{commit}}":
-            return module.subprocess.CompletedProcess(["git", *args], 0, "", "")
+        if args[:2] == ("cat-file", "-e"):
+            target = args[2]
+            if target == f"{commit}^{{commit}}":
+                return module.subprocess.CompletedProcess(["git", *args], 0, "", "")
+            if target == f"{commit}:{module.CANONICAL_RECEIPT_REL}":
+                code = 0 if preexisting_receipt else 1
+                return module.subprocess.CompletedProcess(["git", *args], code, "", "")
+            if target == f"{commit}:{module.NEXT_FRESH_ROOT_REL}":
+                code = 0 if preexisting_fresh else 1
+                return module.subprocess.CompletedProcess(["git", *args], code, "", "")
         if args[:2] == ("merge-base", "--is-ancestor") and args[2] == commit:
             is_canonical_check = args[3] == "origin/main"
             return module.subprocess.CompletedProcess(
@@ -145,6 +163,8 @@ def run() -> dict[str, Any]:
             approval_reference="TODO",
             attestation_git_blob_sha1="0" * 40,
             control_plane_attestation_git_blob_sha1="0" * 40,
+            freeze_receipt_absent_at_freeze=False,
+            next_fresh_assets_absent_at_freeze=False,
         ))
         result = module.evaluate(invalid, tmp / "empty-fresh")
         require(result, gate="FAIL", decision="FAIL_CLOSED", failures={
@@ -152,6 +172,7 @@ def run() -> dict[str, Any]:
             "MERGED_PR_MISMATCH", "EXPLICIT_APPROVAL_MISSING", "ATTESTATION_PIN_MISMATCH",
             "FREEZE_COMMIT_INVALID", "RECEIPT_GENERATOR_INVALID", "APPROVAL_REFERENCE_INVALID",
             "CONTROL_PLANE_NOT_FROZEN", "CONTROL_PLANE_ATTESTATION_PIN_MISMATCH",
+            "FREEZE_CHRONOLOGY_CLAIM_INVALID",
         })
         record("self_asserted_authority_is_rejected", result)
 
@@ -198,6 +219,26 @@ def run() -> dict[str, Any]:
             "CONTROL_PLANE_ATTESTATION_PIN_MISMATCH",
         })
         record("receipt_without_exact_control_plane_pin_is_rejected", result)
+
+        module.git = fake_git_factory(
+            module, simulated_commit, simulated_tree, on_main=True, preexisting_receipt=True
+        )
+        result = module.evaluate(valid_receipt, tmp / "empty-fresh")
+        require(result, gate="FAIL", decision="FAIL_CLOSED", failures={
+            "RECEIPT_PREEXISTED_AT_FREEZE",
+        })
+        record("receipt_preseeded_in_freeze_commit_is_rejected", result)
+
+        module.git = fake_git_factory(
+            module, simulated_commit, simulated_tree, on_main=True, preexisting_fresh=True
+        )
+        result = module.evaluate(valid_receipt, tmp / "empty-fresh")
+        require(result, gate="FAIL", decision="FAIL_CLOSED", failures={
+            "NEXT_FRESH_ASSETS_PREEXISTED_AT_FREEZE",
+        })
+        record("fresh_assets_preseeded_in_freeze_commit_are_rejected", result)
+
+        module.git = fake_git_factory(module, simulated_commit, simulated_tree, on_main=True)
 
         result = module.evaluate(valid_receipt, tmp / "empty-fresh")
         require(result, gate="PASS", decision="ALLOW_AFTER_VERIFIED_FREEZE", failures=set())

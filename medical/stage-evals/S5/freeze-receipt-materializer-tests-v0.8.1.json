@@ -3,8 +3,8 @@
   "version": "v0.8.1-freeze-receipt-tests-v0.1",
   "evidence_class": "development_process_guard_test",
   "fresh_evidence": false,
-  "scenario_count": 7,
-  "scenario_pass_count": 7,
+  "scenario_count": 9,
+  "scenario_pass_count": 9,
   "test_gate": "PASS",
   "scenarios": [
     {
@@ -49,6 +49,20 @@
       "result": "PASS",
       "failures": [
         "FREEZE_CONTROL_PLANE_ARTIFACT_MISMATCH:scripts/check_s5_next_fresh_admission.py"
+      ]
+    },
+    {
+      "name": "preseeded_receipt_rejected",
+      "result": "PASS",
+      "failures": [
+        "RECEIPT_PREEXISTED_AT_FREEZE"
+      ]
+    },
+    {
+      "name": "preseeded_next_fresh_assets_rejected",
+      "result": "PASS",
+      "failures": [
+        "NEXT_FRESH_ASSETS_PREEXISTED_AT_FREEZE"
       ]
     },
     {

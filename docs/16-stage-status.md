@@ -152,8 +152,8 @@ pre-freeze pinned artifacts                       22/22 VERIFIED
 pre-freeze control-plane artifacts                  9/9 VERIFIED
 candidate frozen                                         no
 v0.9 fresh authoring admission             BLOCKED_NOT_FROZEN
-v0.9 admission adversarial scenarios                  11/11 PASS
-freeze receipt materializer scenarios                   7/7 PASS
+v0.9 admission adversarial scenarios                  13/13 PASS
+freeze receipt materializer scenarios                   9/9 PASS
 canonical freeze receipt                               absent
 builder / exporter regression                     PASS / PASS
 fresh evidence                                           no
@@ -168,23 +168,24 @@ explicitly records `candidate_frozen=false` and a null freeze commit.
 The next-fresh admission guard therefore permits no v0.9 asset. A negative injection test confirms
 that even one file under the reserved fresh root fails CI unless a canonical-main freeze receipt is
 present, its 22 pinned artifacts match, and the new protocol names that exact freeze commit.
-Its deterministic adversarial suite covers 11 states: missing/malformed/self-asserted receipts,
+Its deterministic adversarial suite covers 13 states: missing/malformed/self-asserted receipts,
 unavailable or unmerged commits, pre-freeze assets, the simulated valid transition, and missing,
-mismatched or matching post-freeze protocols, plus an incorrect control-plane pin. The positive transition uses mocked Git history and is
+mismatched or matching post-freeze protocols, an incorrect control-plane pin, and preseeded receipt/fresh trees. The positive transition uses mocked Git history and is
 explicitly development process evidence—not a real freeze, fresh result or release signal.
 The receipt materializer adds the inverse transition: it refuses invalid approval references,
 unavailable/non-canonical commits and any drift in the 22 pinned artifacts. Only the exact
 `origin/main` tip can yield a receipt, and even that receipt records `fresh_evidence=false`,
-`gold_approved=false`, S5 release blocked and S6 trust blocked. Its 7/7 tests use simulated Git state;
+`gold_approved=false`, S5 release blocked and S6 trust blocked. Its 9/9 tests use simulated Git state;
 no canonical receipt exists while PR #4 remains open.
 The separate control-plane attestation pins the admission guard, receipt materializer, both test
 runners, their committed evidence, the current admission decision, the candidate attestation and its
 own verifier. All 9/9 paths and 10/10 boundary assertions pass. This prevents a green candidate hash
 from hiding drift in the code that decides whether later fresh authoring is authorized. It remains a
 pre-freeze development attestation with `control_plane_frozen=false`.
-Receipt schema v0.2 now binds both attestations at one canonical freeze commit. The materializer
+Receipt schema v0.3 binds both attestations at one canonical freeze commit. The materializer
 requires all 22 candidate and all 9 control-plane blobs to match; the admission guard rejects legacy
-or partial receipts, control-plane hash/count mismatches and pinned gate-byte drift.
+or partial receipts, control-plane hash/count mismatches and pinned gate-byte drift. It also requires
+the freeze commit itself to contain neither a receipt nor the v0.9 fresh tree, preserving chronology.
 
 ## 8. Current release decision
 

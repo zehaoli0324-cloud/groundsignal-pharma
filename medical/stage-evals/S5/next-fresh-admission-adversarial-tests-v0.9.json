@@ -3,8 +3,8 @@
   "version": "v0.9-admission-tests-v0.1",
   "evidence_class": "development_process_guard_test",
   "fresh_evidence": false,
-  "scenario_count": 11,
-  "scenario_pass_count": 11,
+  "scenario_count": 13,
+  "scenario_pass_count": 13,
   "test_gate": "PASS",
   "scenarios": [
     {
@@ -35,6 +35,7 @@
         "CONTROL_PLANE_ATTESTATION_PIN_MISMATCH",
         "CONTROL_PLANE_NOT_FROZEN",
         "EXPLICIT_APPROVAL_MISSING",
+        "FREEZE_CHRONOLOGY_CLAIM_INVALID",
         "FREEZE_COMMIT_INVALID",
         "MERGED_PR_MISMATCH",
         "RECEIPT_GENERATOR_INVALID",
@@ -77,6 +78,24 @@
       "fresh_authoring_allowed": false,
       "expected_failures_observed": [
         "CONTROL_PLANE_ATTESTATION_PIN_MISMATCH"
+      ]
+    },
+    {
+      "name": "receipt_preseeded_in_freeze_commit_is_rejected",
+      "guard_gate": "FAIL",
+      "admission_decision": "FAIL_CLOSED",
+      "fresh_authoring_allowed": false,
+      "expected_failures_observed": [
+        "RECEIPT_PREEXISTED_AT_FREEZE"
+      ]
+    },
+    {
+      "name": "fresh_assets_preseeded_in_freeze_commit_are_rejected",
+      "guard_gate": "FAIL",
+      "admission_decision": "FAIL_CLOSED",
+      "fresh_authoring_allowed": false,
+      "expected_failures_observed": [
+        "NEXT_FRESH_ASSETS_PREEXISTED_AT_FREEZE"
       ]
     },
     {

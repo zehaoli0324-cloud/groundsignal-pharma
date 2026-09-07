@@ -19,8 +19,10 @@ ROOT = Path(__file__).resolve().parents[1]
 ATTESTATION = ROOT / "medical/stage-evals/S5/freeze-readiness-v0.8.1.json"
 CONTROL_PLANE = ROOT / "medical/stage-evals/S5/control-plane-readiness-v0.8.1.json"
 CONTROL_PLANE_VERIFIER = ROOT / "scripts/verify_s5_v081_control_plane_readiness.py"
+RECEIPT_REL = "medical/stage-evals/S5/freeze-receipt-v0.8.1.json"
+NEXT_FRESH_ROOT_REL = "medical/stage-evals/S5/fresh-lineage-v0.9"
 EXPECTED_ATTESTATION_BLOB = "f7ecf1663adebeb7b81eaa681ca142b1f749f833"
-GENERATOR_VERSION = "s5-freeze-receipt-v0.2"
+GENERATOR_VERSION = "s5-freeze-receipt-v0.3"
 EXPECTED_PR = 4
 COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 APPROVAL_RE = re.compile(r"^user-approval:[A-Za-z0-9._:/#-]{8,}$")
@@ -88,6 +90,10 @@ def build_receipt(freeze_commit: str, approval_reference: str) -> tuple[dict[str
         failures.append("FREEZE_COMMIT_NOT_CANONICAL_MAIN_TIP")
     if git("merge-base", "--is-ancestor", freeze_commit, "origin/main").returncode != 0:
         failures.append("FREEZE_COMMIT_NOT_ON_CANONICAL_MAIN")
+    if git("cat-file", "-e", f"{freeze_commit}:{RECEIPT_REL}").returncode == 0:
+        failures.append("RECEIPT_PREEXISTED_AT_FREEZE")
+    if git("cat-file", "-e", f"{freeze_commit}:{NEXT_FRESH_ROOT_REL}").returncode == 0:
+        failures.append("NEXT_FRESH_ASSETS_PREEXISTED_AT_FREEZE")
 
     observed_attestation = git("rev-parse", f"{freeze_commit}:{ATTESTATION.relative_to(ROOT)}")
     if observed_attestation.returncode != 0 or observed_attestation.stdout.strip() != EXPECTED_ATTESTATION_BLOB:
@@ -142,6 +148,8 @@ def build_receipt(freeze_commit: str, approval_reference: str) -> tuple[dict[str
         "verified_artifact_count": verified_count,
         "control_plane_pinned_artifact_count": control_pinned_count,
         "control_plane_verified_artifact_count": control_verified_count,
+        "freeze_receipt_absent_at_freeze": True,
+        "next_fresh_assets_absent_at_freeze": True,
         "fresh_evidence": False,
         "gold_approved": False,
         "bounded_release": "BLOCKED_NEXT_FRESH",

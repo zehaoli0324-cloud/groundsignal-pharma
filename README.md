@@ -12,7 +12,7 @@ GroundSignal Medical 是一个面向医疗大模型开发的 **evidence-grounded
 
 项目的正式能力版图现包括：**医学问答、辅助诊疗、用药安全、医学影像、报告解读、医疗 Agent、多模态医疗模型、Benchmark、评测 Agent 和训练数据**。这些方向共享同一套证据、知识图谱、分区隔离和分阶段评测底座，但成熟度分别记录；“纳入版图”不等于“已经具备临床能力”。完整边界与各方向完成标准见 [`docs/21-medical-ai-capability-portfolio.md`](docs/21-medical-ai-capability-portfolio.md)。
 
-> **当前 S5 门禁：** v0.8 首次 fresh FAIL 保持不可变；v0.8.1 的 36-case 多语言/拼接开发矩阵通过，22/22 个候选文件和 9/9 个门禁控制平面文件均完成双哈希核验，但仍只属于 synthetic exposed/development evidence，且 `candidate_frozen=false`。v0.9 fresh authoring 当前为 `BLOCKED_NOT_FROZEN`；11/11 个准入对抗场景与 7/7 个冻结凭证生成测试通过。v0.2 凭证必须同时固定候选与控制平面，且只接受精确的 canonical `main` tip 和可追溯用户批准引用；当前不会产生真实凭证。S5 独立 release 与 gold review 未完成，S6 不得自动信任 S5 输出。
+> **当前 S5 门禁：** v0.8 首次 fresh FAIL 保持不可变；v0.8.1 的 36-case 多语言/拼接开发矩阵通过，22/22 个候选文件和 9/9 个门禁控制平面文件均完成双哈希核验，但仍只属于 synthetic exposed/development evidence，且 `candidate_frozen=false`。v0.9 fresh authoring 当前为 `BLOCKED_NOT_FROZEN`；13/13 个准入对抗场景与 9/9 个冻结凭证生成测试通过。v0.3 凭证同时固定候选与控制平面，并证明冻结提交中尚无预埋凭证或 v0.9 fresh 资产；当前不会产生真实凭证。S5 独立 release 与 gold review 未完成，S6 不得自动信任 S5 输出。
 
 ```text
 Real User Needs / Clinical Workflows
