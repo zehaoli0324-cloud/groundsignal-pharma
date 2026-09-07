@@ -1,6 +1,6 @@
 # GroundSignal Medical — 10-stage 状态总览
 
-> Updated: 2026-09-06  
+> Updated: 2026-09-07
 > Release posture: **S5 BLOCKED; therefore S6 automatic trust remains BLOCKED**
 
 ## 术语表
@@ -21,7 +21,7 @@
 | S3a | Proposition Extraction | bounded CONDITIONAL PASS | fresh F1 98.90%; critical recall 100%; mandatory abstention 6/6 | longer/noisier real-source coverage |
 | S3b | Evidence Relation | bounded CONDITIONAL PASS | 40/40 relation; high-risk false-support 0 | broader real-source relation set |
 | S4 | Medical KG Construction / Update | CONDITIONAL PASS | first fresh 18/20 FAIL → repair regression 20/20 → new independent fresh 20/20; must-reject 7/7 | persistent real-source graph |
-| S5 | Controlled Case / Benchmark Factory | **v0.8.1 DEVELOPMENT MATRIX PASS / INDEPENDENT RELEASE BLOCKED** | immutable v0.8 F28/F31 FAIL; expanded v0.8.1 blocks 18/18 attacks and allows 18/18 clean near-neighbours | explicitly freeze, then new independent fresh; gold remains separate |
+| S5 | Controlled Case / Benchmark Factory | **v0.8.1 CANONICALLY FROZEN / INDEPENDENT RELEASE BLOCKED** | immutable v0.8 F28/F31 FAIL; v0.8.1 development matrix PASS; 22/22 candidate + 9/9 control-plane freeze receipt verified | author new independent v0.9 fresh; gold remains separate |
 | S6 | Model / RAG / Agent Harness | Scaffold + fixture proof | reproducible runner, evidence injection, CI fixture | dedicated S6 eval only after S5 bounded release |
 | S7 | Evaluation & Safety Gate | Protocol only | rubric v0.2 + regression gate protocol | human/Judge calibration + real model runs |
 | S8 | Failure Diagnosis | Scaffold | taxonomy + intervention router | multi-model × multi-case clusters |
@@ -150,11 +150,13 @@ noisy multi-reference mosaics                      6/6 BLOCK
 multilingual clean near-neighbours                18/18 ALLOW
 pre-freeze pinned artifacts                       22/22 VERIFIED
 pre-freeze control-plane artifacts                  9/9 VERIFIED
-candidate frozen                                         no
-v0.9 fresh authoring admission             BLOCKED_NOT_FROZEN
+candidate frozen                                        yes
+freeze commit                              b5dffbe366904a46d3b6a44172a4f1626daa8924
+v0.9 fresh authoring admission       ALLOW_AFTER_VERIFIED_FREEZE
 v0.9 admission adversarial scenarios                  13/13 PASS
 freeze receipt materializer scenarios                   9/9 PASS
-canonical freeze receipt                               absent
+canonical freeze receipt                       present / valid
+v0.9 fresh assets                                      0
 builder / exporter regression                     PASS / PASS
 fresh evidence                                           no
 ```
@@ -162,12 +164,12 @@ fresh evidence                                           no
 The repair combines an inspectable multilingual concept mapping, protected identifier evidence and
 multi-reference aggregation. It does not convert every `REVIEW` into `BLOCK`. The expanded 36-case
 development matrix passes without false block/review; it is synthetic exposed evidence, not fresh.
-The pre-freeze attestation also pins the candidate's runtime, transitive compatibility files and
-evidence outputs with Git blob SHA-1 plus SHA-256. All 22 paths verify, while the attestation
-explicitly records `candidate_frozen=false` and a null freeze commit.
-The next-fresh admission guard therefore permits no v0.9 asset. A negative injection test confirms
-that even one file under the reserved fresh root fails CI unless a canonical-main freeze receipt is
-present, its 22 pinned artifacts match, and the new protocol names that exact freeze commit.
+The pre-freeze attestation pins the candidate's runtime, transitive compatibility files and evidence
+outputs with Git blob SHA-1 plus SHA-256. PR #4 was explicitly approved and squash merged as
+`b5dffbe366904a46d3b6a44172a4f1626daa8924`; the canonical receipt now binds that commit to all
+22 candidate and 9 control-plane pins. The admission guard therefore allows v0.9 authoring, while
+still confirming that no v0.9 asset exists yet. Once assets exist, their protocol must name the same
+freeze commit or the guard fails closed.
 Its deterministic adversarial suite covers 13 states: missing/malformed/self-asserted receipts,
 unavailable or unmerged commits, pre-freeze assets, the simulated valid transition, and missing,
 mismatched or matching post-freeze protocols, an incorrect control-plane pin, and preseeded receipt/fresh trees. The positive transition uses mocked Git history and is
@@ -176,12 +178,13 @@ The receipt materializer adds the inverse transition: it refuses invalid approva
 unavailable/non-canonical commits and any drift in the 22 pinned artifacts. Only the exact
 `origin/main` tip can yield a receipt, and even that receipt records `fresh_evidence=false`,
 `gold_approved=false`, S5 release blocked and S6 trust blocked. Its 9/9 tests use simulated Git state;
-no canonical receipt exists while PR #4 remains open.
+the pre-freeze baseline remains immutable development-process evidence.
 The separate control-plane attestation pins the admission guard, receipt materializer, both test
 runners, their committed evidence, the current admission decision, the candidate attestation and its
 own verifier. All 9/9 paths and 10/10 boundary assertions pass. This prevents a green candidate hash
 from hiding drift in the code that decides whether later fresh authoring is authorized. It remains a
-pre-freeze development attestation with `control_plane_frozen=false`.
+pre-freeze development attestation. The canonical receipt, rather than rewriting this historical
+record, establishes `control_plane_frozen=true` at the merge commit.
 Receipt schema v0.3 binds both attestations at one canonical freeze commit. The materializer
 requires all 22 candidate and all 9 control-plane blobs to match; the admission guard rejects legacy
 or partial receipts, control-plane hash/count mismatches and pinned gate-byte drift. It also requires
@@ -211,8 +214,8 @@ or clinical validation. Synthetic/CI evidence is not substituted for those claim
 3. keep the v0.7.3 target and v0.8 first observation immutable
 4. treat v0.8.1 only as exposed repair evidence
 5. retain the passing 36-case multilingual/mosaic development matrix as exposed evidence
-6. freeze the selected implementation and record a canonical-main freeze receipt
-7. only after the admission guard opens, create another independent fresh suite
+6. preserve the canonical-main freeze receipt for `b5dffbe366904a46d3b6a44172a4f1626daa8924`
+7. create another independent v0.9 fresh suite under the now-open admission guard
 8. require an independent fresh PASS before any bounded release claim
 9. keep gold review as a separate release blocker
 10. only after bounded S5 release proceed to S6 dedicated evaluation
