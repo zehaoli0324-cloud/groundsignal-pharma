@@ -1,0 +1,44 @@
+name: Interview Candidate Promotion Pilot v0.1
+
+on:
+  push:
+    paths:
+      - 'medical/user-tasks/candidate-corpora/interview-material-v0.1/**'
+      - 'medical/user-tasks/promotion-pilots/interview-pilot-v0.1/**'
+      - 'scripts/validate_unverified_interview_corpus.py'
+      - 'scripts/validate_interview_promotion_pilot.py'
+      - '.github/workflows/interview-promotion-pilot-v01.yml'
+  pull_request:
+    paths:
+      - 'medical/user-tasks/candidate-corpora/interview-material-v0.1/**'
+      - 'medical/user-tasks/promotion-pilots/interview-pilot-v0.1/**'
+      - 'scripts/validate_unverified_interview_corpus.py'
+      - 'scripts/validate_interview_promotion_pilot.py'
+      - '.github/workflows/interview-promotion-pilot-v01.yml'
+
+jobs:
+  validate-promotion-boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate quarantined source corpus
+        run: python scripts/validate_unverified_interview_corpus.py
+      - name: Validate stage promotion pilot
+        run: |
+          python scripts/validate_interview_promotion_pilot.py \
+            --out /tmp/interview-promotion-pilot-validation.json
+          cmp /tmp/interview-promotion-pilot-validation.json \
+            medical/user-tasks/promotion-pilots/interview-pilot-v0.1/validation-result.json
+          python - <<'PY'
+          import json
+          result=json.load(open('/tmp/interview-promotion-pilot-validation.json'))
+          assert result['validation_gate']=='PASS'
+          assert result['records']==3
+          assert result['evidence_snapshots_frozen']==0
+          assert result['gold_approved_count']==0
+          assert result['knowledge_graph_eligible_count']==0
+          assert result['training_export_eligible_count']==0
+          PY
