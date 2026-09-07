@@ -1,0 +1,34 @@
+{
+  "stage": "S5",
+  "version": "v0.9",
+  "eval_name": "eighth-fresh-post-repair-lineage-first-observation",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "first_observation": true,
+  "authored_after_freeze": true,
+  "target_implementation_freeze_commit": "b5dffbe366904a46d3b6a44172a4f1626daa8924",
+  "freeze_receipt_materialization_commit": "ffe040b0295e666f96e7dac7099fdb6e5fe8d720",
+  "target_blob_contract": {
+    "scripts/s5_lineage_detector_v081.py": "f3132ebcbca186d47e31c5c8365ec264b908a102",
+    "scripts/s5_trust_policy.py": "f3977a97954d72ba9d4dbe14f136ebe82cbfab8a",
+    "scripts/export_training_data.py": "de4c0b23e50095a7e40daabdc29a55e78e5c5b87",
+    "scripts/s5_trust_policy_v071.py": "a201d1bbaecb28e30543d9123d0ae257574fa20f",
+    "scripts/export_training_data_v061.py": "923a7f35d55de0fcd80d5c60c31c6295cc6c2851",
+    "scripts/materialize_s5_cases.py": "ecca14f947e7922bb277c1149f07d51f34f605cf",
+    "scripts/s5_release_gate.py": "8431e1e4c299df8c051ef19e7a69db3d1d199715"
+  },
+  "hard_gates": [
+    "S5-F32 UNSEEN_SCRIPT_TRANSLATION",
+    "S5-F33 UNIT_TIME_ALIAS_LAUNDERING",
+    "S5-F34 GRAPH_ROLE_COMPRESSION",
+    "S5-F35 SUBTHRESHOLD_THREE_SOURCE_MOSAIC",
+    "S5-F36 IDENTIFIER_WORDING_AND_CODE_SWITCHING"
+  ],
+  "clean_controls": [
+    "CLEAN-KOREAN-SAME-DOMAIN",
+    "CLEAN-NUMERIC-NEAR-NEIGHBOUR",
+    "CLEAN-MULTI-CASE-SUMMARY",
+    "CLEAN-JAPANESE-IMAGING"
+  ],
+  "freshness_declaration": "All v0.9 protocol, benchmark cases, attacks, clean controls, evaluator logic and expected outcomes were authored after the canonical v0.8.1 freeze and its separate receipt materialization. None appeared in v0.8 or the v0.8.1 development calibration. The frozen target implementation must not change before first observation."
+}

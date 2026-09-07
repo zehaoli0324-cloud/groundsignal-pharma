@@ -128,7 +128,7 @@ jobs:
           python scripts/check_s5_next_fresh_admission.py --out /tmp/s5-v09-admission.json
           if test -f medical/stage-evals/S5/freeze-receipt-v0.8.1.json; then
             test "$(git hash-object medical/stage-evals/S5/freeze-receipt-v0.8.1.json)" = '3d12b1fbab782fc37ce3372fe2448c1dcc29e0b6'
-            test "$(git hash-object medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.9.json)" = '7be5591b310af3c09944bc6a6d03b5caf2f1ff00'
+            test "$(git hash-object medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.9.json)" = '9f92c46fac7001e9c0adedb1a5a45b0f66fc88aa'
             cmp /tmp/s5-v09-admission.json medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.9.json
           else
             cmp /tmp/s5-v09-admission.json medical/stage-evals/S5/next-fresh-admission-v0.9.json

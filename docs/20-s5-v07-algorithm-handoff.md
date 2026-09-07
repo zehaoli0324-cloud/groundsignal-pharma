@@ -1,6 +1,6 @@
 # Algorithm Handoff — S5 v0.7 Semantic Lineage Detection
 
-> Handoff status: **v0.8.1 CANONICALLY FROZEN; v0.9 INDEPENDENT FRESH AUTHORIZED**
+> Handoff status: **v0.8.1 CANONICALLY FROZEN; v0.9 INDEPENDENT FRESH FAIL**
 > Evidence source: S5 v0.7 independent fresh first observation  
 > Repair scope for algorithm team: **F25 + F26 only**. F24/F27 remain deterministic platform/eval-infrastructure work.
 
@@ -59,8 +59,8 @@ freeze without rewriting the pre-freeze record.
 asset may exist, it requires a canonical freeze receipt, verifies that the named commit is an ancestor
 of `origin/main`, and compares all 22 pinned blobs against that commit. Once fresh assets exist, their
 protocol must also name the same freeze commit and state that authoring occurred afterward. The
-current decision is `ALLOW_AFTER_VERIFIED_FREEZE`, with zero v0.9 assets. This is authoring authority,
-not a fresh result or release signal.
+current decision is `ALLOW_AFTER_VERIFIED_FREEZE`, with 18 protocol-valid v0.9 JSON assets. This
+confirms authoring chronology only; the separate first observation is FAIL and release remains blocked.
 
 `scripts/materialize_s5_v081_freeze_receipt.py` is the only documented receipt path. It requires the
 exact canonical `origin/main` tip, a non-placeholder `user-approval:` reference and an unchanged
@@ -81,6 +81,13 @@ The freeze commit must also predate both the canonical receipt and the v0.9 fres
 already present at that commit is a chronology failure.
 The receipt now exists on a post-freeze branch and changes only authoring admission. It creates no
 fresh, gold, release or S6 trust claim.
+
+The authorized v0.9 suite was then authored in a separate commit and observed exactly once. It failed
+on F32 (a Korean, identifier-free translation was allowed) and on a clean numeric near-neighbour (a
+glucose/meal-timing case was blocked as if it were the protected ALT/specimen-handling case). Four
+other contamination attacks and three other clean controls passed. The result isolates both an
+unseen-script recall gap and a typed-clinical-role precision gap; it does not authorize threshold
+tuning against the fresh suite or any S5/S6 release claim.
 
 ## 1. Objective
 

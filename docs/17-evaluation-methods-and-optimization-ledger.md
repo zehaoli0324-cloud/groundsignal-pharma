@@ -127,12 +127,14 @@ S5 目前已经形成的防线：
 - v0.8.1 扩展矩阵新增 12 个英→中/日/西翻译污染、6 个带噪声双源拼接和 18 个多语言同领域干净近邻：污染 18/18 阻断，干净 18/18 放行；这些均为 synthetic exposed development evidence，不是 fresh；
 - v0.8.1 冻结前清单用 Git blob SHA-1 与 SHA-256 双重固定 22 个实现、兼容依赖和证据文件，22/22 复验通过；PR #4 获用户明确批准后 squash merge，正式 freeze commit 为 `b5dffbe366904a46d3b6a44172a4f1626daa8924`；
 - canonical 冻结凭证验证该 `main` 提交上的 22/22 候选与 9/9 控制平面文件，并保留 `fresh_evidence=false`、`gold_approved=false`、S5 release 与 S6 trust blocked；
-- v0.9 fresh 准入门禁现返回 `ALLOW_AFTER_VERIFIED_FREEZE`，但 fresh 资产数仍为 0；后续任意 fresh 协议必须指向同一 freeze commit，否则 fail-closed；
+- v0.9 fresh 准入门禁对 18 个已提交资产返回 `ALLOW_AFTER_VERIFIED_FREEZE`，且协议正确指向同一 freeze commit；这只证明时间顺序与授权有效，不代表 fresh 测试通过；
 - 准入门禁新增 13 个确定性对抗状态测试，覆盖畸形/自证回执、不可用或未合并提交、提前写入、控制平面错配、预埋回执/fresh 目录、缺失/错配协议和模拟合法转换；13/13 通过，但模拟正路径不构成真实冻结或 fresh 证据；
 - 冻结凭证生成器升级为 v0.3 并通过 9/9 状态测试：除了 22/22 候选与 9/9 控制平面文件匹配，还要求冻结提交中不存在预埋凭证或 v0.9 fresh 目录；正式凭证现已在合并后单独物化，不回写冻结提交；
 - 独立固定 9 个控制平面文件（fresh 准入、冻结凭证生成器、测试、证据和校验器），Git blob SHA-1 与 SHA-256 均匹配，9/9 路径和 10/10 状态边界通过；这仍是冻结前开发证明，不是 fresh PASS；
 - canonical 冻结凭证现将两份证明绑定到同一个 `main` 提交；旧版或只固定候选、不固定控制平面的凭证会 fail-closed，避免算法未漂移但授权门禁已被替换；
 - 每次 fresh first observation 用 Git blob/历史 commit 固化，不会因修复被覆盖。
+- v0.9 在正式冻结与凭证之后新增 5 类未见污染攻击和 4 个干净对照；首次观测保留为 FAIL：F32 韩文等价改写无标识符时被 `ALLOW`，数字/编号相同但临床变量不同的 clean case 被 `BLOCK`；其余 4 个攻击与 3 个 clean control 通过，且冻结、时间顺序、准入、材料化、Gold/S6 隔离前置条件全部通过。
+- v0.9 暴露两个互补缺口：未见语言脚本的语义召回不足，以及数字与模板相似压过临床变量类型差异导致的精度不足。后续修复必须同时检查 recall 与 false block，不能只降低阈值或无限扩充词表。
 
 ## 6. 我们现在的“优化结果”应该怎样解读
 
@@ -160,11 +162,12 @@ S5 v0.7 independent fresh                FAIL (immutable)
 S5 v0.7.3 development calibration        PASS (not fresh)
 S5 v0.8 independent fresh                FAIL (immutable: F28/F31)
 S5 v0.8.1 exposed repair                 PASS (not fresh)
+S5 v0.9 independent fresh                FAIL (immutable: F32 + clean false block)
 S5 bounded independent release           NOT ESTABLISHED
 S5 gold review                           INCOMPLETE
 S6 automatic trust                       BLOCKED
 ```
 
-v0.8 首次 fresh FAIL 已永久保存，v0.8.1 只能作为 exposed repair evidence。候选实现已在 canonical `main` 冻结，下一步是在不再修改候选与门禁字节的前提下编写 v0.9 独立 fresh。Gold review 仍是另一条独立门槛。
+v0.8 与 v0.9 两次首次 fresh FAIL 均已永久保存。v0.8.1 是已冻结实现，但 v0.9 证明它仍不能独立发布。下一步只能把 F32 与数字 clean failure 作为 exposed v0.9.1 修复数据；修复冻结后还需全新的独立 fresh。Gold review 仍是另一条独立门槛。
 
 本仓库当前没有真实用户验证、专家 gold approval、模型训练收益或临床验证数据时，均明确记录为“没有”，不会用 synthetic/CI 结果替代。
