@@ -1,0 +1,13 @@
+{
+  "pilot_version": "interview-promotion-pilot-v0.1",
+  "records": 3,
+  "candidate_links_verified": 3,
+  "route_plans_defined": 3,
+  "evidence_snapshots_frozen": 0,
+  "gold_approved_count": 0,
+  "knowledge_graph_eligible_count": 0,
+  "training_export_eligible_count": 0,
+  "authority_files_checked": 4,
+  "validation_gate": "PASS",
+  "errors": []
+}

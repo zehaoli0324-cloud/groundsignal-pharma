@@ -53,3 +53,8 @@ quarantined question
 ```
 
 No promotion occurs automatically.
+
+The first controlled-use checkpoint is documented in
+`../../promotion-pilots/interview-pilot-v0.1/`. It defines S2 source routes for three priority
+questions while keeping S3 evidence, S4 knowledge-graph ingestion, S5 Gold/split assignment and all
+training/downstream use blocked.
