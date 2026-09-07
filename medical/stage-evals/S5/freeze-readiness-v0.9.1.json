@@ -1,0 +1,192 @@
+{
+  "stage": "S5",
+  "version": "v0.9.1",
+  "attestation_type": "pre_freeze_readiness",
+  "evidence_class": "development_exposed_attestation",
+  "fresh_evidence": false,
+  "first_observation": false,
+  "candidate_frozen": false,
+  "freeze_commit": null,
+  "candidate_implementation_commit": "1b722744545c9da34d086422be03489e35169548",
+  "candidate_implementation_tree": "63f984bb2b7738a98936dd0f34c65814527fdefe",
+  "candidate_status": "READY_FOR_EXPLICIT_FREEZE_DECISION",
+  "gold_approved": false,
+  "bounded_release": "BLOCKED_NEXT_FRESH_AND_GOLD_REVIEW",
+  "stage_release": "BLOCKED_NEXT_FRESH_AND_GOLD_REVIEW",
+  "s6_automatic_trust": "BLOCKED",
+  "immutable_history": {
+    "v0.8.1_freeze_commit": "b5dffbe366904a46d3b6a44172a4f1626daa8924",
+    "v0.9_receipt_commit": "ffe040b0295e666f96e7dac7099fdb6e5fe8d720",
+    "v0.9_authoring_commit": "42f60341e6daf04196118b85ea6895434d2ec02e",
+    "v0.9_first_observation_commit": "ebd036f5c2d683b29c8f306f76f5b2de920eaf87",
+    "v0.9_first_observation_git_blob_sha1": "522c8f4ed39293d2ea01c81f48ffacc1d1ef4340",
+    "v0.9_first_observation_result": "FAIL",
+    "v0.9_hard_gate_failures": [
+      "S5-F32"
+    ],
+    "v0.9_clean_control_failures": [
+      "CLEAN-NUMERIC-NEAR-NEIGHBOUR"
+    ]
+  },
+  "pinned_artifact_count": 24,
+  "pinned_artifacts": [
+    {
+      "path": "requirements-s5-lineage-calibration.txt",
+      "size_bytes": 20,
+      "git_blob_sha1": "fa718f1fba42c55b393f7624ae21d8a9c669cd9a",
+      "sha256": "b7875d52522a3b14aa586ad3636757f622b39a6d5fc032eaaaf48b716d887eac"
+    },
+    {
+      "path": "scripts/s5_lineage_detector_v073.py",
+      "size_bytes": 17103,
+      "git_blob_sha1": "ad9571c1941dc623bcbdb7919488289c4dbc071c",
+      "sha256": "534512fb9e86483c7f486a3a791ccbaff902203527b1cda17404afdbf951dd30"
+    },
+    {
+      "path": "scripts/s5_lineage_detector_v081.py",
+      "size_bytes": 14885,
+      "git_blob_sha1": "f3132ebcbca186d47e31c5c8365ec264b908a102",
+      "sha256": "6c92b2193db9100fad218634e88033be90941d860a520b33d2e2346630517a58"
+    },
+    {
+      "path": "scripts/s5_lineage_detector_v091.py",
+      "size_bytes": 10310,
+      "git_blob_sha1": "d88e406737bed94665a83c208b2152b67e7e3299",
+      "sha256": "d8cdf4c2f1055662e29b50221dfab650c58e00d626fcef9da536ebc3cf256bfe"
+    },
+    {
+      "path": "scripts/s5_trust_policy_v071.py",
+      "size_bytes": 11792,
+      "git_blob_sha1": "a201d1bbaecb28e30543d9123d0ae257574fa20f",
+      "sha256": "ed6d1effa0d18659f2823fbf219c1db4bbb78983280feb08308c3adbd19c540d"
+    },
+    {
+      "path": "scripts/s5_trust_policy_v091.py",
+      "size_bytes": 2911,
+      "git_blob_sha1": "6b86e0a014923d763c05fdfc528c36b730135262",
+      "sha256": "d39f9e87efcc6ab86c39d176121bc9a2f21dddcbbf8b1ee6e5cf89fc5da2b642"
+    },
+    {
+      "path": "scripts/export_training_data_v061.py",
+      "size_bytes": 34389,
+      "git_blob_sha1": "923a7f35d55de0fcd80d5c60c31c6295cc6c2851",
+      "sha256": "f3c906170fb075606b6d929d0a3fb642a7517cab085134d0ea799f0e562b1005"
+    },
+    {
+      "path": "scripts/export_training_data_v091.py",
+      "size_bytes": 3350,
+      "git_blob_sha1": "9c656199d053f3df44a06bd606cc19d251b692eb",
+      "sha256": "2d35c06bd22a5b755d299138b1bd0e8ad741c067ead32c710c6b3f10f33f8de2"
+    },
+    {
+      "path": "scripts/calibrate_s5_lineage_v073.py",
+      "size_bytes": 27562,
+      "git_blob_sha1": "6cda836396ef77143137c874b9a4365444e5d3d8",
+      "sha256": "ab1820fca2a7b2b6ddef5d269fabf89a1eaaf8d17223702ef1adf08755cb4be4"
+    },
+    {
+      "path": "scripts/calibrate_s5_lineage_v081_matrix.py",
+      "size_bytes": 15721,
+      "git_blob_sha1": "5156e58f06e55654d522f19837fd335059c9cce2",
+      "sha256": "79d46cd1012b9c849c40a479b24f23d05c452d0870666a5cecb1fa691231cc57"
+    },
+    {
+      "path": "scripts/eval_s5_boundary_regression_v073.py",
+      "size_bytes": 13048,
+      "git_blob_sha1": "7f1aa1beea88969b247cf32e1204f141521e5bfc",
+      "sha256": "52432bc2122d94100abc5894c245fa2ef068f64520226a3528529229f2246c18"
+    },
+    {
+      "path": "scripts/eval_s5_boundary_regression_v081.py",
+      "size_bytes": 5246,
+      "git_blob_sha1": "3635b4028f2ea6a0cc503189a6daf1c8cfd30922",
+      "sha256": "1865ddc379a1d17fa362bb89c304903d6a1f22c8a26e4c46ae60c0f47352045c"
+    },
+    {
+      "path": "scripts/eval_s5_boundary_regression_v091.py",
+      "size_bytes": 11165,
+      "git_blob_sha1": "65e939d9b0b115d4e5ee0c55dc2be4d12e1fa3b3",
+      "sha256": "75b43a80b7ee1bc6c4d20baccffec2b3c80a2f57b99f8a718594f7255a3f4eef"
+    },
+    {
+      "path": "scripts/eval_s5_fresh_lineage_v09.py",
+      "size_bytes": 15666,
+      "git_blob_sha1": "f192e46c64c2f14621ecdfb21355b7085c6d9e2f",
+      "sha256": "6bc4e536180680e5a477ad39c7dd43720f00cc584a3a9bb07599c58e9fc2b956"
+    },
+    {
+      "path": "scripts/s5_release_gate.py",
+      "size_bytes": 2306,
+      "git_blob_sha1": "8431e1e4c299df8c051ef19e7a69db3d1d199715",
+      "sha256": "60783f6f57bce4326f27385732b06ae308df74ea40ffe027182acbb43034fe51"
+    },
+    {
+      "path": "medical/configs/s5-trust-root-v0.4.1.json",
+      "size_bytes": 5599,
+      "git_blob_sha1": "57adc5384818a4254192ed53e8ba60eee5d70e48",
+      "sha256": "1edfa6bb7e10877de82ccbf629819b47bb5f0141a4ea71ba1432dbcc32f31531"
+    },
+    {
+      "path": "medical/configs/s5-trust-policy-registry-v0.4.1.json",
+      "size_bytes": 381,
+      "git_blob_sha1": "b9637e31df679e49b36d49ea96177a8100fd5c2a",
+      "sha256": "940319205836ef0d394394230e6f64130a8fcc90c32345f76ae2d977541efc78"
+    },
+    {
+      "path": "medical/stage-evals/S5/calibration-v0.7.3.json",
+      "size_bytes": 12419,
+      "git_blob_sha1": "ed80a012f032aa77d89510bf960633981e2c3490",
+      "sha256": "6f18840628c6ccaece91691f4ad98a5d0752c48b3a7653312a9b63d742a28a17"
+    },
+    {
+      "path": "medical/stage-evals/S5/regression-v0.7.3.json",
+      "size_bytes": 4114,
+      "git_blob_sha1": "6d19dc3180e795dff373e715470c0bdf20fdfabe",
+      "sha256": "679c9e219f6d3c50c894f75e08c56880aaae12dfbb47c8bb2623547b99f47e50"
+    },
+    {
+      "path": "medical/stage-evals/S5/calibration-matrix-v0.8.1.json",
+      "size_bytes": 30299,
+      "git_blob_sha1": "fa31f257fdc0d4de1e93d12d71f717aa0d10973f",
+      "sha256": "7bd343e0c6fd8b1799f8b65479c8a19173edebc1acf2f9ed6dc12b5e6b7fdc36"
+    },
+    {
+      "path": "medical/stage-evals/S5/regression-v0.8.1.json",
+      "size_bytes": 2327,
+      "git_blob_sha1": "391373426d9ce707a384021006237a1a999543f3",
+      "sha256": "729dbe48581df0aff65d134b0a5c4dc8b08096f7850d13a5e611fff2732457ca"
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-first-observation-v0.9.json",
+      "size_bytes": 23190,
+      "git_blob_sha1": "522c8f4ed39293d2ea01c81f48ffacc1d1ef4340",
+      "sha256": "4ebdda20632d1fb16ad5481d7a4064910ebb85d29a68034a2d13ab4a34f7b450"
+    },
+    {
+      "path": "medical/stage-evals/S5/receipt-publication-equivalence-v0.9.json",
+      "size_bytes": 1477,
+      "git_blob_sha1": "60e39eaa52b7f8fb326f537eee35d84e6a9924bf",
+      "sha256": "d5eb9b1d5391d5731935f40bf705fd51639ceb0e0572acb353451a3039b947b0"
+    },
+    {
+      "path": "medical/stage-evals/S5/regression-v0.9.1.json",
+      "size_bytes": 11506,
+      "git_blob_sha1": "b5110b99c0fffe0a1aec2737dd18e35b7bdb1c53",
+      "sha256": "1835f4b1b52deb5032be60333d751b65ee75c3c19e8954819e8e8d11feb5f82b"
+    }
+  ],
+  "v0.9_fresh_asset_contract": {
+    "source": "medical/stage-evals/S5/fresh-first-observation-v0.9.json",
+    "asset_count": 18,
+    "path_sha256_aggregate": "a5764bb96a820edc82b0693a241d01a82f88b7b424d168d3e93cf9c8d6c41134"
+  },
+  "required_gates": {
+    "v0.9_first_observation": "FAIL_PRESERVED",
+    "v0.9.1_exposed_repair": "PASS_NOT_FRESH",
+    "historical_regression": "PASS",
+    "gold_review": "INCOMPLETE",
+    "bounded_release": "NOT_ESTABLISHED",
+    "s6_automatic_trust": "BLOCKED"
+  },
+  "next_step": "After dependency merges and explicit approval, freeze the exact candidate on canonical main; only then may an independent evaluator author a new fresh suite."
+}

@@ -138,6 +138,7 @@ S5 目前已经形成的防线：
 - v0.9 在正式冻结与凭证之后新增 5 类未见污染攻击和 4 个干净对照；首次观测保留为 FAIL：F32 韩文等价改写无标识符时被 `ALLOW`，数字/编号相同但临床变量不同的 clean case 被 `BLOCK`；其余 4 个攻击与 3 个 clean control 通过，且冻结、时间顺序、准入、材料化、Gold/S6 隔离前置条件全部通过。
 - v0.9 暴露两个互补缺口：未见语言脚本的语义召回不足，以及数字与模板相似压过临床变量类型差异导致的精度不足。后续修复必须同时检查 recall 与 false block，不能只降低阈值或无限扩充词表。
 - v0.9.1 用可检查的韩文概念映射修复 F32，并只在结构化实验室测量角色明确且互斥、且没有更强血缘证据时解除 dense-anchor 误拦截；5/5 已暴露攻击、4/4 clean 与全部历史矩阵通过。该结果明确记录为 exposed repair，不覆盖 v0.9 FAIL，也不产生 fresh 或 Gold 证据。
+- v0.9.1 冻结前证明固定 24 个实现、传递依赖和证据文件，并从不可变首次观测逐项复核 18 个 v0.9 fresh 资产；精确清单通过，缺 pin、哈希漂移、重复 pin、权限升级和 fresh 资产摘要漂移等 6/6 场景通过。该证明只说明候选可提交冻结决策，`candidate_frozen=false`。
 
 ## 6. 我们现在的“优化结果”应该怎样解读
 
@@ -167,11 +168,12 @@ S5 v0.8 independent fresh                FAIL (immutable: F28/F31)
 S5 v0.8.1 exposed repair                 PASS (not fresh)
 S5 v0.9 independent fresh                FAIL (immutable: F32 + clean false block)
 S5 v0.9.1 exposed repair                 PASS (not fresh)
+S5 v0.9.1 pre-freeze readiness           PASS (candidate not frozen)
 S5 bounded independent release           NOT ESTABLISHED
 S5 gold review                           INCOMPLETE
 S6 automatic trust                       BLOCKED
 ```
 
-v0.8 与 v0.9 两次首次 fresh FAIL 均已永久保存。v0.9.1 已修复两个暴露失败且历史回归通过，但仍不是独立证据。下一步是评审并冻结候选，再由独立评测方创建全新的 post-freeze suite。Gold review 仍是另一条独立门槛。
+v0.8 与 v0.9 两次首次 fresh FAIL 均已永久保存。v0.9.1 已修复两个暴露失败、通过历史回归并完成冻结前证明，但仍不是独立证据或正式冻结。下一步是在明确批准下按依赖顺序合并并物化 canonical freeze，再由独立评测方创建全新的 post-freeze suite。Gold review 仍是另一条独立门槛。
 
 本仓库当前没有真实用户验证、专家 gold approval、模型训练收益或临床验证数据时，均明确记录为“没有”，不会用 synthetic/CI 结果替代。

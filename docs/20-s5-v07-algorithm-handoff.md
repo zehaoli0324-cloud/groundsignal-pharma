@@ -99,7 +99,12 @@ controls, and preserves v0.7.3, v0.8 and v0.8.1 historical matrices without regr
 
 This is exposed repair evidence. The v0.9 first-observation blob remains unchanged and records FAIL;
 `gold_approved=false`, S5 bounded release is not established and S6 automatic trust remains blocked.
-A new suite may be authored only after this candidate is reviewed and explicitly frozen.
+A 24-artifact pre-freeze attestation additionally verifies the exact implementation, transitive
+dependencies and evidence bytes at candidate commit `1b72274`; the immutable v0.9 observation binds
+all 18 fresh assets. Six fail-closed scenarios reject missing/duplicate/drifted pins, privilege
+escalation and fresh-asset digest drift. This makes the candidate ready for an explicit freeze
+decision but does not freeze it. A new suite may be authored only after dependency merges and a
+canonical freeze are explicitly approved and completed.
 
 ## 1. Objective
 

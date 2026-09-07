@@ -7,7 +7,13 @@ on:
       - 'scripts/s5_trust_policy_v091.py'
       - 'scripts/export_training_data_v091.py'
       - 'scripts/eval_s5_boundary_regression_v091.py'
+      - 'scripts/generate_s5_v091_freeze_readiness.py'
+      - 'scripts/verify_s5_v091_freeze_readiness.py'
+      - 'scripts/test_s5_v091_freeze_readiness.py'
       - 'medical/stage-evals/S5/regression-v0.9.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-v0.9.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-check-v0.9.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-tests-v0.9.1.json'
       - 'medical/stage-evals/S5/S5_V0.9.1_SCRIPT_ROLE_REPAIR_REPORT.md'
       - '.github/workflows/s5-v091-script-role-repair.yml'
       - 'README.md'
@@ -20,7 +26,13 @@ on:
       - 'scripts/s5_trust_policy_v091.py'
       - 'scripts/export_training_data_v091.py'
       - 'scripts/eval_s5_boundary_regression_v091.py'
+      - 'scripts/generate_s5_v091_freeze_readiness.py'
+      - 'scripts/verify_s5_v091_freeze_readiness.py'
+      - 'scripts/test_s5_v091_freeze_readiness.py'
       - 'medical/stage-evals/S5/regression-v0.9.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-v0.9.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-check-v0.9.1.json'
+      - 'medical/stage-evals/S5/freeze-readiness-tests-v0.9.1.json'
       - 'medical/stage-evals/S5/S5_V0.9.1_SCRIPT_ROLE_REPAIR_REPORT.md'
       - '.github/workflows/s5-v091-script-role-repair.yml'
       - 'README.md'
@@ -49,10 +61,40 @@ jobs:
             scripts/s5_lineage_detector_v091.py \
             scripts/s5_trust_policy_v091.py \
             scripts/export_training_data_v091.py \
-            scripts/eval_s5_boundary_regression_v091.py
+            scripts/eval_s5_boundary_regression_v091.py \
+            scripts/generate_s5_v091_freeze_readiness.py \
+            scripts/verify_s5_v091_freeze_readiness.py \
+            scripts/test_s5_v091_freeze_readiness.py
           python -m json.tool medical/stage-evals/S5/regression-v0.9.1.json >/dev/null
           test "$(git hash-object medical/stage-evals/S5/fresh-first-observation-v0.9.json)" = \
             '522c8f4ed39293d2ea01c81f48ffacc1d1ef4340'
+
+      - name: Reproduce pre-freeze readiness evidence
+        run: |
+          python scripts/generate_s5_v091_freeze_readiness.py \
+            --out /tmp/s5-v091-freeze-readiness.json
+          cmp /tmp/s5-v091-freeze-readiness.json \
+            medical/stage-evals/S5/freeze-readiness-v0.9.1.json
+          python scripts/verify_s5_v091_freeze_readiness.py \
+            --out /tmp/s5-v091-freeze-readiness-check.json
+          cmp /tmp/s5-v091-freeze-readiness-check.json \
+            medical/stage-evals/S5/freeze-readiness-check-v0.9.1.json
+          python scripts/test_s5_v091_freeze_readiness.py \
+            --out /tmp/s5-v091-freeze-readiness-tests.json
+          cmp /tmp/s5-v091-freeze-readiness-tests.json \
+            medical/stage-evals/S5/freeze-readiness-tests-v0.9.1.json
+          python - <<'PY'
+          import json
+          result=json.load(open('/tmp/s5-v091-freeze-readiness-check.json'))
+          tests=json.load(open('/tmp/s5-v091-freeze-readiness-tests.json'))
+          assert result['verification_gate']=='PASS'
+          assert result['verified_path_count']==result['required_path_count']==24
+          assert result['v0.9_fresh_asset_count']==18
+          assert result['candidate_frozen'] is False
+          assert result['gold_approved'] is False
+          assert result['s6_automatic_trust']=='BLOCKED'
+          assert tests['scenario_pass_count']==tests['scenario_count']==6
+          PY
 
       - name: Reproduce exposed repair regression
         run: |
