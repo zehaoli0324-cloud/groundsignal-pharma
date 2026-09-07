@@ -1,0 +1,15 @@
+{
+  "family_id": "S5FRESH-LINEAGE-010",
+  "title": "Fresh v0.10 post-freeze dialogue and ontology lineage family",
+  "status": "structural_only",
+  "data_origin": "synthetic",
+  "target_capabilities": ["unseen-script lineage", "cross-turn scope recovery", "coordinate-codebook recovery", "laboratory ontology normalization", "dialogue-distributed multi-reference aggregation"],
+  "cases": [
+    {"case_id": "S5FRESH-LIN10-DEV-001", "path": "cases/S5FRESH-LIN10-DEV-001.json", "split": "dev", "variant_type": "allowed-control"},
+    {"case_id": "S5FRESH-LIN10-DEV-002", "path": "cases/S5FRESH-LIN10-DEV-002.json", "split": "dev", "variant_type": "allowed-control"},
+    {"case_id": "S5FRESH-LIN10-DEV-003", "path": "cases/S5FRESH-LIN10-DEV-003.json", "split": "dev", "variant_type": "allowed-control"},
+    {"case_id": "S5FRESH-LIN10-HO-001", "path": "cases/S5FRESH-LIN10-HO-001.json", "split": "heldout", "variant_type": "protected-reference"},
+    {"case_id": "S5FRESH-LIN10-REG-001", "path": "cases/S5FRESH-LIN10-REG-001.json", "split": "regression", "variant_type": "protected-reference"},
+    {"case_id": "S5FRESH-LIN10-HO-002", "path": "cases/S5FRESH-LIN10-HO-002.json", "split": "heldout", "variant_type": "protected-reference"}
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "stage": "S5",
+  "suite_id": "S5-FRESH-LINEAGE-v0.10",
+  "version": "v0.10",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "implementation_freeze_commit": "cdc89298693aa9c5222f15ed9bd62a57e140fbc6",
+  "family_ids": ["S5FRESH-LINEAGE-010"],
+  "allowed_training_splits": ["dev"],
+  "prohibited_training_splits": ["regression", "heldout"],
+  "purpose": "Post-freeze evaluation of lineage laundering through unseen Cyrillic script, dialogue-distributed scope, coordinate codebooks, unseen laboratory ontology aliases and cross-record braiding.",
+  "release_use": "evaluation_only"
+}
