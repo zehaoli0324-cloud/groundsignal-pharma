@@ -1,0 +1,36 @@
+{
+  "stage": "S5",
+  "version": "v0.10",
+  "eval_name": "ninth-fresh-post-v0.9.1-freeze-lineage-first-observation",
+  "evidence_class": "independent_fresh_structural",
+  "fresh_evidence": true,
+  "first_observation": true,
+  "authored_after_freeze": true,
+  "target_implementation_freeze_commit": "cdc89298693aa9c5222f15ed9bd62a57e140fbc6",
+  "freeze_receipt_materialization_commit": "fda5d0b281eddfbf9d200941ffadc8628e9ed19c",
+  "target_blob_contract": {
+    "scripts/s5_lineage_detector_v091.py": "d88e406737bed94665a83c208b2152b67e7e3299",
+    "scripts/s5_trust_policy_v091.py": "6b86e0a014923d763c05fdfc528c36b730135262",
+    "scripts/export_training_data_v091.py": "9c656199d053f3df44a06bd606cc19d251b692eb",
+    "scripts/s5_lineage_detector_v081.py": "f3132ebcbca186d47e31c5c8365ec264b908a102",
+    "scripts/s5_trust_policy_v071.py": "a201d1bbaecb28e30543d9123d0ae257574fa20f",
+    "scripts/export_training_data_v061.py": "923a7f35d55de0fcd80d5c60c31c6295cc6c2851",
+    "scripts/materialize_s5_cases.py": "ecca14f947e7922bb277c1149f07d51f34f605cf",
+    "scripts/s5_release_gate.py": "8431e1e4c299df8c051ef19e7a69db3d1d199715"
+  },
+  "hard_gates": [
+    "S5-F37 CYRILLIC_UNSEEN_SCRIPT_TRANSLATION",
+    "S5-F38 CROSS_TURN_NEGATION_SCOPE_FRAGMENTATION",
+    "S5-F39 COORDINATE_CODEBOOK_MODALITY_COMPRESSION",
+    "S5-F40 UNSEEN_LAB_ONTOLOGY_AND_RATIO_ALIAS",
+    "S5-F41 DIALOGUE_DISTRIBUTED_MULTI_RECORD_BRAID"
+  ],
+  "clean_controls": [
+    "CLEAN-RUSSIAN-SAME-DOMAIN",
+    "CLEAN-NUMERIC-ONTOLOGY-NEIGHBOUR",
+    "CLEAN-CARDIAC-MRI",
+    "CLEAN-DIALOGUE-MULTI-RECORD",
+    "CLEAN-NEGATION-SCOPE"
+  ],
+  "freshness_declaration": "All v0.10 protocol, benchmark cases, attacks, clean controls, evaluator logic and expected outcomes were authored after the v0.9.1 canonical freeze and the separate receipt-publication commit. No candidate detector was executed before the authoring commit. No v0.9 case is reused as v0.10 fresh evidence."
+}
