@@ -1,686 +1,457 @@
 # GroundSignal Medical
 
-### Knowledge-Graph-Grounded Medical Model Evaluation & Post-training Infrastructure
+### 面向医疗大模型的证据链、分阶段评测与训练后闭环原型
 
 [![medical-development-ci](https://github.com/zehaoli0324-cloud/groundsignal-pharma/actions/workflows/medical-development-ci.yml/badge.svg)](https://github.com/zehaoli0324-cloud/groundsignal-pharma/actions/workflows/medical-development-ci.yml)
 
-> **真实用户任务 → 医学证据/知识图谱 → Model / RAG / Agent → 多层评测 → Failure Diagnosis → Post-training Data → Held-out Regression**
+> **把“模型答错了”拆解为：知识、检索、证据、推理、工具、评分器或数据污染中的哪一层出了问题；再把失败转化为可执行优化，并在全新留出案例上验证修复。**
 
-GroundSignal Medical 是一个面向医疗大模型开发的 **evidence-grounded evaluation platform prototype**。
+GroundSignal Medical 是一个面向**医学问答、辅助诊疗、用药安全、报告解读和医疗 Agent（智能体）**的评测与数据工程原型。它不是静态题库，也不是单纯的医学知识库，而是一条可以持续迭代的模型开发闭环：
 
-它不是静态医学题库，也不是单纯的知识图谱。项目把 **版本化医学证据、任务导向知识图谱、controlled case families、模型/RAG/Agent Harness、失败归因、训练数据导出与安全回归** 接成一条开发闭环。
-
-项目的正式能力版图现包括：**医学问答、辅助诊疗、用药安全、医学影像、报告解读、医疗 Agent、多模态医疗模型、Benchmark、评测 Agent 和训练数据**。这些方向共享同一套证据、知识图谱、分区隔离和分阶段评测底座，但成熟度分别记录；“纳入版图”不等于“已经具备临床能力”。完整边界与各方向完成标准见 [`docs/21-medical-ai-capability-portfolio.md`](docs/21-medical-ai-capability-portfolio.md)。
-
-> **当前 S5 门禁：** v0.9 fresh 首次观测仍是不可变 **FAIL**。v0.9.1 已在暴露数据上修复 F32 韩文召回与数字近邻误拦截，并在 canonical `main` 提交 `cdc89298693aa9c5222f15ed9bd62a57e140fbc6` 正式冻结；凭证验证 24/24 个候选文件、8/8 个控制平面文件，且冻结时尚无凭证或 v0.10 资产。v0.10 authoring 现为 `ALLOW_AFTER_VERIFIED_FREEZE`，但资产数仍为 0。v0.9.1 依然只是 **exposed repair PASS**，不是 fresh PASS；`gold_approved=false`，S5 bounded release 与 S6 自动信任继续阻断。
-
-```text
-Real User Needs / Clinical Workflows
-                ↓
-        User Task Bank
-                ↓
-     Controlled Case Families
-                ↓
- Evidence + Temporal Knowledge Graph
-                ↓
-      Model / RAG / Agent Harness
-                ↓
- Answer + Retrieval + Tool Trajectory
-                ↓
-      Multi-layer Evaluation
-                ↓
-         Failure Taxonomy
-                ↓
-       Intervention Router
-                ↓
- Retrieval / Prompt / SFT / Preference / Agent / Judge
-                ↓
-       Candidate Model/System
-                ↓
-       Held-out Regression Gate
-                └────────────────────→ loop
-```
-
-## Why this project exists
-
-医疗模型最危险、也最难定位的问题，往往不是“知识点答错”这么简单：
-
-```text
-III 期阳性             → 被升级成“已经获批”
-旧版指南               → 被当作当前真值
-有来源 URL             → 但来源并不支持这个 claim
-低 serum iron          → 被直接升级成“确诊缺铁”
-影像写 indeterminate   → 被升级成“癌症”或降级成“良性”
-RAG 已经找到关键证据   → 最终回答却没有使用
-Agent 已有充分证据     → 仍然不断搜索
-信息不足               → 模型仍强行给结论
-```
-
-GroundSignal 的核心问题不是：
-
-> “模型答案和 reference answer 有多像？”
-
-而是：
-
-> **模型使用了什么事实、形成了什么关系、证据是否足够、时间状态是否正确、哪里发生了 claim escalation，以及这个 failure 应该由 retrieval、prompt、SFT、preference、Agent trajectory 还是 evaluator 修复？**
+**真实任务 → 权威医学证据 → 知识图谱 → 受控评测案例 → 模型/检索/Agent 执行 → 分层评分 → 错误归因 → 数据或系统干预 → 全新留出回归**
 
 ---
 
-# Current Checkpoint
+## 给面试官的 30 秒版本
 
-截至 **2026-09-05**，P0 数据资产已经完成并通过 CI integrity check：
+医疗大模型的风险往往不只体现在最终答案。模型可能引用了真实来源，但来源并不支持当前结论；可能检索到了正确指南，却没有在回答中使用；也可能在病例信息不足时越过证据边界，给出过强的诊断或用药建议。
 
-- **12 个 scenario families**
-- **60 个 controlled evaluation cases**
-- 每个 family 固定 **5 个 case**
-- 每个 family 包含 held-out / regression 设计
-- case ↔ evidence passage ↔ graph node/edge 引用完整性由 CI 自动检查
-- 统一评分协议：`medical-clinical-v0.2`
+GroundSignal Medical 将这一过程拆成 **10 个可独立观察和评测的阶段**，建立了由 **25 类权威知识源、48 个医疗任务种子、12 个受控场景家族和 60 个评测案例**组成的原型资产，并从最终回答、知识图谱、检索过程和 Agent 轨迹四个层面进行评测。系统不仅报告分数，还定位失败发生在哪一层、应该采取什么干预，以及修复是否能通过新的留出测试而不引入医疗安全回退。
 
-> **Important:** 60 个 case 已完成工程与证据契约构建，不等于 60 个 case 已完成最终临床专家验证。各 family 的 `status` / `review` 字段保留这一边界。
+### 当前规模
 
-## P0 case families
+| 维度 | 当前资产 | 它解决的问题 |
+|---|---:|---|
+| 系统生命周期 | **10 个阶段** | 连接用户需求、数据、知识、执行、评测、训练和回归 |
+| 医学知识源注册 | **25 类来源** | 按权威性、用途、时间和司法辖区选择证据 |
+| 用户任务种子 | **48 个** | 从产品任务出发，而不是只做医学考试题 |
+| 场景家族 | **12 个** | 覆盖用药安全、分诊、临床推理、报告解读、多轮对话和 Agent |
+| 受控评测案例 | **60 个** | 每个家族含基础、变量、对抗/回归和留出案例 |
+| 评测层 | **4 层** | 区分回答、图谱、检索和 Agent 轨迹问题 |
+| 安全策略 | **硬门禁** | 严重医学错误不能被较高平均分抵消 |
+| 优化出口 | **多类干预路由** | 将失败路由到知识、检索、提示词、训练数据、Agent 或评分器 |
 
-| Family | Task | 主要能力 / Failure |
+> **边界说明：**这些数字表示已经建立的工程资产和评测契约，不表示已经形成全面医学知识库，也不表示系统已经完成临床验证。60 个案例尚未全部获得临床专家金标准审核。
+
+---
+
+## 为什么需要这样的系统
+
+普通评测通常只比较模型输出与参考答案是否相似，但医疗模型可能以错误过程得到“看起来正确”的答案，也可能因为表达方式不同而被错误扣分。
+
+| 表面现象 | 真正需要识别的风险 |
+|---|---|
+| “III 期试验结果阳性” | 是否被错误升级成“药物已经获批” |
+| 找到了一个来源链接 | 该段证据是否真正支持模型的具体主张 |
+| 检索到最新版指南 | 回答是否使用了最新版，而不是沿用旧知识 |
+| 血清铁降低 | 是否在缺少其他指标时直接宣称确诊缺铁 |
+| 影像报告写“不确定” | 是否被擅自升级为恶性或降级为良性 |
+| Agent 调用了工具 | 是否选对工具、使用结果并在合适时停止 |
+| 平均分提高 | 是否同时新增了禁忌药建议或危险漏诊 |
+
+核心评测问题不是“模型回答与标准答案有多像”，而是：
+
+> **模型使用了什么事实，形成了什么医学关系，证据是否足够、是否仍然有效，推理在哪一步越界，以及失败应该由数据、检索、推理、Agent 轨迹还是评分系统修复？**
+
+---
+
+# 一、系统架构：从任务到可信改进
+
+| 阶段 | 核心问题 | 主要输出 |
 |---|---|---|
-| `MEDSAFE-001` | Metformin × renal function | threshold reasoning / medication safety / abstention |
-| `MEDSAFE-002` | Apixaban × OTC NSAID | interaction reasoning / clarification / safety |
-| `TRIAGE-001` | Acute chest symptoms | red-flag recognition / false reassurance |
-| `TRIAGE-003` | Neurologic warning signs | salience / anchoring / escalation boundary |
-| `CLINREASON-001` | IDA vs inflammation anemia | differential reasoning / metric salience / mixed state |
-| `CLINREASON-005` | Multifactorial AKI | competing hypotheses / evidence update / anchoring |
-| `REPORT-001` | CBC interpretation | observation vs diagnosis / over-interpretation |
-| `REPORT-004` | Indeterminate radiology finding | report grounding / uncertainty preservation |
-| `EVIDENCE-002` | Cross-trial comparison | comparability / superiority overclaim / calibrated update |
-| `EVIDENCE-003` | New RCT vs guideline | temporal truth / source role / supersession |
-| `MULTITURN-001` | Medication clarification | critical-slot collection / correction propagation |
-| `AGENT-001` | Current-label retrieval | tool selection / stale-result recovery / stop correctness / held-out transfer |
+| S1 用户需求 | 用户真正需要模型完成什么任务？ | 任务分类、风险优先级、场景家族 |
+| S2 来源路由 | 这个主张应该查哪个权威来源？ | 候选文档、版本、检索轨迹 |
+| S3 证据核验 | 该段证据是否支持当前主张？ | 原子主张、证据关系、时间状态 |
+| S4 图谱构建 | 如何表示事实、冲突和更新？ | 可追溯节点、关系与时间前沿 |
+| S5 案例工厂 | 如何把问题变成诊断实验？ | 受控家族、隐藏集、回归集 |
+| S6 系统执行 | 答案由什么模型和配置产生？ | 回答、检索与工具调用轨迹 |
+| S7 多层评分 | 回答和执行过程是否正确安全？ | 分数、证据缺口、严重错误 |
+| S8 错误归因 | 失败属于哪一层、根因假设是什么？ | 错误分类与能力画像 |
+| S9 优化干预 | 最小且合适的修复方式是什么？ | 数据、检索、策略或 Agent 干预 |
+| S10 留出回归 | 修复是否泛化且没有引入安全回退？ | 基线—候选比较与发布门禁 |
 
-每个 family 不是 5 道随机题，而是一个 **controlled experiment**：
-
-```text
-Base
-+ controlled variant
-+ controlled variant
-+ adversarial / regression variant
-+ held-out variant
-```
-
-例如 `MEDSAFE-001`：
-
-```text
-eGFR 27   → 命中 <30 rule
-eGFR 31   → 不能机械套用 <30 rule
-缺 eGFR   → 应先澄清而不是强行判断
-加入 distractor → 核心判断应保持稳定
-eGFR 29 held-out → 检查 threshold generalization
-```
-
-因此训练后可以发现：
-
-```text
-base case ↑
-但 missing-information case ↓
-→ 模型可能变得更敢答，但 abstention 被破坏
-```
-
-这比只报告一个平均准确率更适合模型迭代。
+这里的 Benchmark（基准评测集）不是一批随机问题，而是由**任务定义、证据快照、受控变量、评分规则、隐藏案例、严重错误门禁和版本血缘**共同组成的诊断实验。
 
 ---
 
-# 1. Medical Knowledge Graph = Versioned Truth Substrate
+# 二、医学知识库与知识图谱：为评测建立可追溯真值
 
-`medical/knowledge-graph/` 不是为了“画一张大图”，而是给评测、RAG 归因和 Post-training provenance 提供统一真值层。
+## 1. 25 类知识源不是简单堆积
 
-核心节点包括：
+当前知识源注册表包含 17 个基础来源与 8 个补充来源，覆盖：
 
-```text
-CASE
-SYMPTOM / SIGN
-LAB_RESULT / VITAL
-IMAGING_FINDING / PATHOLOGY_FINDING
-CONDITION / DIFFERENTIAL
-MEDICATION / DRUG_CLASS
-CONTRAINDICATION / INTERACTION / MONITORING_RULE
-GUIDELINE_RECOMMENDATION / LABEL_RECOMMENDATION
-DOCUMENT / DOCUMENT_VERSION / EVIDENCE_PASSAGE
-TEMPORAL_EVENT
-```
+- 药品说明书与监管事实：DailyMed、Drugs@FDA、FDA 安全通报、EMA、NMPA/CDE；
+- 指南与公共卫生：NHC、AHA、CDC、NKF；
+- 临床试验与文献：ClinicalTrials.gov、PubMed；
+- 术语与结构化标准：RxNorm、LOINC；
+- 药理与安全：FDA 药物相互作用、药物基因组学、肾/肝功能指导原则、LiverTox、FAERS；
+- 患者教育与辅助发现来源：MedlinePlus、Merck Manual 等。
 
-核心关系包括：
+平台不会把所有来源当成同等真值，而是先判断：
 
-```text
-HAS_SYMPTOM / HAS_LAB / TAKES
-SUPPORTS / MAY_SUPPORT / CONTRADICTS
-CONTRAINDICATED_IN / INTERACTS_WITH
-RECOMMENDED_BY / SUPPORTED_BY
-SUPERSEDES
-REQUIRES_TEST
-TRIGGERS_TRIAGE_ACTION
-```
+**医学主张类型 → 有权回答的来源 → 文档版本/日期/司法辖区 → 支持该主张的原文段落 → 更新、冲突或废止关系**
 
-关系状态显式区分：
+例如，ClinicalTrials.gov 可以证明一项试验已注册或处于某个状态，但不能单独证明治疗有效；FAERS 可以提示安全信号，但不能直接证明因果关系。**来源权威不等于证据适用，发现来源也不等于获得临床结论。**
 
-```text
-OBSERVED
-DERIVED
-HYPOTHESIS
-DISPUTED
-SUPERSEDED
-UNKNOWN
-```
+## 2. 从“来源链接”升级为证据链
 
-### 为什么图谱能改善评测
+GroundSignal 使用的证据契约是：
 
-例如报告写：
+**来源文档 → 文档版本/日期/司法辖区 → 章节或段落定位 → 原子医学主张 → 证据角色与适用范围 → 知识图谱节点/关系 → 评测案例与评分约束**
 
-```text
-indeterminate lesion
-→ recommends MRI for further characterization
-```
+同一份证据因此可以同时服务于医学事实性、引文蕴含、证据充分性、旧知识识别、检索召回、图谱评分、Agent 工具结果核验和训练数据来源追踪。
 
-允许的图谱关系是：
+## 3. 知识图谱不是为了“画一张大图”
 
-```text
-finding:indeterminate
-→ RECOMMENDS_FOLLOWUP
-MRI
-```
+知识图谱显式区分：
+
+- 观察事实 ≠ 推导结果 ≠ 待验证假设；
+- 相关性 ≠ 因果关系；
+- 作用机制 ≠ 临床结局 ≠ 治疗建议；
+- 风险因素 ≠ 已发生事件；
+- 新研究 ≠ 已更新指南。
+
+图谱节点覆盖病例、症状、体征、实验室指标、影像发现、疾病、药物、禁忌、相互作用、指南建议、文档版本和时间事件；关系保留来源段落、审核状态、适用范围及时间状态。
+
+例如影像报告只写“不确定病灶，建议 MRI 进一步表征”，合法关系是：
+
+**不确定影像发现 → 建议进一步检查 → MRI**
 
 而不是：
 
-```text
-indeterminate
-→ CONFIRMS
-cancer
-```
+**不确定影像发现 → 证实 → 癌症**
 
-模型可以使用任意自然语言表达；评分关注的是它有没有保留合法语义关系、有没有创造 evidence 不支持的 edge。
+这种设计允许模型自由表达自然语言，同时仍能检测它是否创造了证据不支持的医学关系。
 
-详细设计：[`medical/knowledge-graph/README.md`](medical/knowledge-graph/README.md)
+详细说明：
 
----
-
-# 2. Evidence & Temporal Truth
-
-GroundSignal 从早期的：
-
-```text
-claim → source_url
-```
-
-升级为：
-
-```text
-claim
-→ evidence_passage_id
-→ document / version / date
-→ section / paragraph / table
-→ evidence role
-→ claim scope
-→ valid_from / valid_to
-→ contradiction / supersession
-```
-
-这使同一个 truth layer 可以同时服务：
-
-- factuality
-- citation entailment
-- evidence sufficiency
-- RAG Recall@K
-- source hierarchy
-- stale knowledge detection
-- guideline / label update
-- Agent retrieval
-- Post-training provenance
-
-数据来源采用 **authoritative public evidence + explicitly synthetic controlled fixtures**。Synthetic fixture 用于控制变量实验时会显式标记，不冒充真实临床事实。
-
-规范：[`medical/truth-layer/README.md`](medical/truth-layer/README.md)
+- [知识图谱构建方法](medical/knowledge-graph/HOW_IT_IS_BUILT.md)
+- [知识搜索与核验协议](medical/knowledge-base/SEARCH_AND_VERIFICATION_PROTOCOL.md)
+- [知识覆盖矩阵](medical/knowledge-base/COVERAGE_MATRIX.md)
 
 ---
 
-# 3. Real User Tasks, not Medical Exam Questions
+# 三、Benchmark 工厂：把真实问题变成可诊断实验
 
-平台先定义用户任务，再生成 benchmark case。
+## 1. 先定义任务，再生成题目
 
-当前 `medical/user-tasks/SEED_TASK_BANK.md` 有 **48 个 designer-generated scenario seeds**，覆盖：
+当前 48 个任务种子覆盖医学问答、用药安全、症状分诊、鉴别诊断、检验/影像/病理报告解读、临床证据比较、多轮医疗对话、医疗 Agent 工具调用，以及多模态评测预留接口。
 
-- Medication safety
-- Symptom / triage
-- Clinical reasoning
-- Lab / report interpretation
-- Evidence-grounded treatment comparison
-- Multi-turn medical dialogue
-- Medical Agent / tool use
-- Multimodal-ready tasks
+这些种子是产品和评测假设，不冒充真实用户日志。真实用户问题需要经过脱敏、抽象、证据绑定和专家审核，才能进入正式评测集。
 
-这些 seed 是 **产品/评测假设**，不是“真实用户日志”。
+## 2. 一个场景家族就是一个受控实验
 
-真实任务发现流程单独记录在：
+当前 12 个场景家族、60 个案例，每个家族固定包含：
 
-[`medical/user-tasks/USER_RESEARCH_PLAN.md`](medical/user-tasks/USER_RESEARCH_PLAN.md)
+**基础案例 + 关键变量变化 + 第二个受控变化 + 对抗/回归案例 + 全新留出案例**
 
-目标是：
+以“二甲双胍与肾功能”为例：
 
-```text
-real workflow / user need
-→ de-identify / abstract
-→ synthetic or licensed case
-→ evidence grounding
-→ controlled variants
-→ expert review
-→ benchmark
-```
-
----
-
-# 4. Four-layer Evaluation
-
-统一评测协议：
-
-[`medical/evaluation/rubrics/medical-clinical-v0.2.md`](medical/evaluation/rubrics/medical-clinical-v0.2.md)
-
-## E1 — Final Answer
-
-```text
-Factual correctness
-Evidence sufficiency
-Temporal validity
-Clinical reasoning
-Uncertainty calibration
-Task usefulness
-Communication
-Safety
-```
-
-## E2 — Knowledge-Graph Grounding
-
-```text
-required-node recall
-required-edge recall
-unsupported-edge rate
-evidence-linked claim precision
-valid reasoning path rate
-temporal graph accuracy
-```
-
-## E3 — RAG / Retrieval
-
-```text
-Evidence Recall@K
-Critical Passage Recall@K
-Evidence Precision@K
-Current-version recall
-Source hierarchy
-Contradiction / supersession recall
-```
-
-核心归因规则：
-
-```text
-critical passage 没进 top-K
-→ retrieval-side failure candidate
-
-critical passage 已进 context，但答案仍错
-→ generation / reasoning / evidence-use failure candidate
-```
-
-## E4 — Agent Trajectory
-
-```text
-Tool selection
-Query quality
-Current-source recall
-Bad-result recovery
-Tool-result utilization
-Stop correctness
-Clarification action
-Trajectory safety
-Held-out generalization
-```
-
----
-
-# 5. Safety is a Gate, not an Average-score Penalty
-
-医疗模型不能只看：
-
-```text
-Model A = 84.2
-Model B = 85.7
-```
-
-如果 B 新增了 pre-registered critical medical safety error，它不应因为均分更高而通过 release gate。
-
-当前 critical-error classes 包括：
-
-- contraindicated medication recommendation
-- unsupported dose / prescription change
-- red-flag miss / false reassurance
-- fabricated patient fact used in reasoning
-- association/signal → causal claim
-- superseded critical rule treated as current
-- fabricated source / citation / passage
-- Agent 在要求取证前先做 high-risk claim
-- critical tool result retrieved but silently ignored
-
-`Regression Gate` 会把这些错误作为 blocker，而不是普通扣分项。
-
----
-
-# 6. Model / RAG / Agent Harness
-
-`scripts/model_harness.py` 记录：
-
-```text
-provider / model_id / model_version
-prompt_version
-temperature
-RAG on/off
-retriever_version / top_k
-tools
-snapshot_id
-response
-latency / usage
-run_id
-```
-
-当前 v0.1 支持：
-
-- fixture / CI dry-run
-- OpenAI-compatible chat endpoint adapter
-- closed-book
-- frozen evidence injection / RAG-style context
-- multi-model config matrix
-
-> Production retriever/reranker 与真实 Agent tool executor 尚未完成，这是下一阶段系统验证的一部分。
-
----
-
-# 7. Failure → Post-training
-
-GroundSignal 不把所有 bad case 都解释成“加训练数据”。
-
-```text
-Observed Failure
-        ↓
-Capability Hypothesis
-        ↓
-Intervention Router
-        ↓
-┌──────────────┬──────────────┬──────────────┐
-│ Retrieval    │ SFT          │ Preference   │
-│ / Reranker   │ / reasoning  │ / safety     │
-├──────────────┼──────────────┼──────────────┤
-│ Agent traj.  │ Judge calib. │ Prompt/policy│
-└──────────────┴──────────────┴──────────────┘
-        ↓
-Candidate model/system
-        ↓
-Held-out Regression
-```
-
-典型路由：
-
-| Failure | 默认 intervention candidate |
+| 受控变化 | 预期行为 |
 |---|---|
-| `STALE_KNOWLEDGE` | retrieval / temporal truth refresh |
-| `KNOWLEDGE_MISSING` | retrieval first; broad gap → domain data / MidTrain candidate |
-| `RETRIEVAL_MISS` | index / query rewrite / reranker |
-| `REASONING_FAILURE` | reasoning SFT / decomposition |
-| `OVERCLAIM` | preference / evidence-grounded SFT |
-| `UNSAFE_RECOMMENDATION` | safety SFT + preference + gate |
-| `FAILURE_TO_CLARIFY` | multi-turn SFT / policy |
-| `BAD_TOOL_SELECTION` | Agent trajectory / tool routing |
-| `TOOL_RESULT_IGNORED` | Agent/evidence-use trajectory |
-| `JUDGE_INCONSISTENCY` | judge calibration / deterministic check |
+| eGFR 27 | 识别小于 30 的风险规则 |
+| eGFR 31 | 不能机械套用小于 30 的规则 |
+| 缺少 eGFR | 先追问，不强行判断 |
+| 加入无关信息 | 核心判断保持稳定 |
+| eGFR 29 留出案例 | 检查阈值推理能否泛化 |
 
-完整接口：[`posttrain/README.md`](posttrain/README.md)
+这种设计能够发现平均准确率看不到的问题：如果基础题得分上升、但缺失信息案例下降，模型可能只是变得更敢回答，拒答和澄清能力反而被破坏。
 
-训练数据契约已经定义：
+## 3. Benchmark 数据本身也必须被评测
 
-```text
-posttrain/schemas/
-  sft-example.schema.json
-  preference-example.schema.json
-  agent-trajectory.schema.json
-  judge-label.schema.json
-```
+案例进入评测前需要检查：
 
-每条 production training candidate 必须保留：
+- 案例标识与文件路径是否一致；
+- 训练、开发、留出和回归分区是否隔离；
+- 案例是否引用真实存在的证据段落；
+- 必需/禁止的图谱节点和关系是否完整；
+- 评分规则版本是否冻结；
+- 是否发生复制、改写、翻译、字段拆分或多源拼接造成的数据泄漏；
+- 修复后的实现是否重新面对真正未见过的数据。
 
-```text
-source_case
-source_run
-failure_type
-evidence_passage_ids
-graph_version
-review_status
-builder_version
-split
-intended_intervention
-regression_suite
-```
+项目保留每次全新评测的第一次结果，即使结果是失败，也不允许在修复后覆盖历史。这是为了区分：
 
-**Eval failure ≠ automatically approved training data.**
+- **已暴露回归**：只能证明旧错误没有再次出现；
+- **全新留出评测**：才能为未知数据上的泛化提供证据。
 
 ---
 
-# 8. Regression before Claiming Improvement
+# 四、四层评测：知道模型错在哪里
 
-训练或系统修改后必须回到 held-out case family：
+## E1：最终回答
 
-```text
-Baseline
-vs
-Candidate
+检查医学事实、证据充分性、时间有效性、临床推理、不确定性、任务帮助性、沟通质量和安全性。
 
-factuality ↑ ?
-reasoning ↑ ?
-overclaim ↓ ?
-retrieval ↑ ?
-Agent behavior ↑ ?
-abstention preserved ?
-critical safety errors = 0 new ?
-```
+## E2：知识图谱对齐
 
-只有 held-out / regression 通过，才能把 intervention 从“优化假设”升级成“有证据支持的改进”。
+检查必需节点/关系召回、不受支持关系比例、证据关联精度、有效推理路径和时间图谱准确性。
 
----
+## E3：检索增强生成
 
-# 9. Pharma Track remains useful
+RAG（Retrieval-Augmented Generation，检索增强生成）评测检查关键证据能否进入前 K 条结果、当前版本是否召回、来源层级是否正确，以及冲突或废止证据是否被识别。
 
-原有 `pharma/` 与 `benchmark/` 保留为 **real-world temporal medical/pharma evidence track**，继续提供：
+- 关键证据没有进入上下文：优先检查检索、索引、查询或重排序；
+- 关键证据已经进入上下文但回答仍错：优先检查推理、证据使用或生成策略。
 
-- ClinicalTrials / FDA / NMPA 等状态变化
-- drug / target / trial / event / claim / evidence graph
-- temporal truth
-- source hierarchy
-- stale knowledge bad cases
-- evidence-grounded decision reasoning
+## E4：Agent 轨迹
 
-它不再是整个项目的终点，而是 Medical Platform 的一个真实动态 evidence domain。
+检查工具选择、查询质量、最新来源召回、错误结果恢复、工具结果使用、澄清动作、停止时机、轨迹安全和留出泛化。
+
+“调用过工具”不等于 Agent 能力良好。Agent 必须选对工具、理解结果、更新状态，并在证据充足或继续搜索无价值时停止。
 
 ---
 
-# Repository Layout
+# 五、安全是门禁，不是普通扣分项
 
-```text
-medical/
-  case-families/             # 12 P0 families / 60 controlled cases
-  knowledge-graph/           # task-oriented versioned truth graph
-  truth-layer/               # paragraph-level evidence contracts
-  user-tasks/                # task seed bank + user-research plan
-  evaluation/                # evaluation protocol + frozen rubric
-  schemas/                   # case / family / graph / evidence / run schemas
-  configs/                   # harness / intervention / regression configs
-  examples/                  # vertical-slice fixtures
+如果模型 B 的平均分从 84.2 提高到 85.7，却新增了禁忌药推荐、危险症状漏报或伪造来源，它不应通过。
 
-posttrain/
-  README.md                  # Eval → post-training contract
-  schemas/                   # SFT / preference / Agent / Judge schemas
+当前严重错误门禁包括：
 
-scripts/
-  model_harness.py
-  intervention_router.py
-  export_training_data.py
-  regression_gate.py
-  validate_medical_case_families.py
-  ...                        # existing pharma intelligence scripts
+- 推荐禁忌药物；
+- 无依据修改剂量或处方；
+- 漏掉危险信号或给予错误安慰；
+- 编造患者事实；
+- 把相关性或安全信号升级为因果结论；
+- 把已废止规则当作当前真值；
+- 编造来源、引用或证据段落；
+- Agent 在完成必要取证前给出高风险结论；
+- 已获得关键工具结果但在回答中忽略。
 
-pharma/                      # real-world pharma evidence graph
-benchmark/                   # earlier decision-intelligence/model-diagnosis benchmark
-docs/                        # architecture / roadmap / safety boundaries
-.github/workflows/           # CI integrity + vertical-slice checks
-```
+这些错误会直接阻断回归放行，不能被其他维度的高分抵消。
 
 ---
 
-# Quick Start
+# 六、从 Bad Case 到可验证优化
 
-## 1. Validate the benchmark asset
+GroundSignal 不把所有失败都简单解释成“再加一些训练数据”。
 
-```bash
-python scripts/validate_medical_case_families.py \
-  --expect-families 12 \
-  --expect-cases 60 \
-  --expect-cases-per-family 5 \
-  --rubric-version medical-clinical-v0.2
-```
+| 失败类型 | 优先检查或干预 |
+|---|---|
+| 旧知识仍被使用 | 知识快照、时间图谱与检索索引 |
+| 关键证据没有召回 | 查询改写、索引或重排序器 |
+| 证据存在但推理错误 | 推理拆解、监督微调数据 |
+| 证据不足仍强结论 | 偏好数据、拒答与证据约束 |
+| 未追问关键信息 | 多轮策略和澄清训练数据 |
+| 工具选择错误 | Agent 工具路由和轨迹数据 |
+| 工具结果被忽略 | 状态更新和证据使用轨迹 |
+| 评分器不稳定 | 人工/模型评分器校准 |
 
-The validator checks:
+SFT（Supervised Fine-Tuning，监督微调）数据、偏好对、Agent 轨迹和评分器标签都保留来源案例、失败类型、证据段落、图谱版本、审核状态和目标干预。**评测失败不会自动成为训练数据**，必须先通过来源、分区和审核门禁。
 
-```text
-manifest → case path
-case_id consistency
-family / case counts
-held-out split presence
-case → evidence passage references
-case → required graph nodes/edges
-graph → evidence passage references
-rubric version consistency
-```
-
-## 2. Run the existing vertical-slice fixture
-
-```bash
-python scripts/model_harness.py \
-  --cases medical/examples/clinical-medication-safety-001.json \
-  --config medical/configs/model-matrix.fixture.json \
-  --evidence medical/examples/evidence.jsonl \
-  --out /tmp/groundsignal-runs.jsonl
-```
-
-## 3. Route failures
-
-```bash
-python scripts/intervention_router.py \
-  --eval medical/examples/eval-baseline.jsonl \
-  --rules medical/configs/intervention-rules.json \
-  --out /tmp/routed.jsonl
-```
-
-## 4. Export reviewed training candidates
-
-```bash
-python scripts/export_training_data.py \
-  --cases medical/examples/clinical-medication-safety-001.json \
-  --runs /tmp/groundsignal-runs.jsonl \
-  --eval medical/examples/eval-baseline.jsonl \
-  --out-dir /tmp/training
-```
-
-## 5. Run regression gate
-
-```bash
-python scripts/regression_gate.py \
-  --baseline medical/examples/eval-baseline.jsonl \
-  --candidate medical/examples/eval-candidate.jsonl \
-  --policy medical/configs/regression-policy.medication-safety-v0.1.json \
-  --out /tmp/regression-report.json
-```
+修复之后，系统比较基线与候选版本：目标能力是否提高、不支持的强结论是否减少、必要拒答是否保留、Agent 行为是否改善、是否新增安全错误，以及改进能否在未见案例上复现。
 
 ---
 
-# What is implemented vs what is proven
+# 七、三个代表性 Bad Case
 
-## Implemented
+## Bad Case 1：看到关键词，却没理解否定范围
 
-- versioned Evidence / Claim / Graph data contracts
-- 48 medical user-task seeds
-- 12 controlled case families / 60 cases
-- knowledge-graph evaluation contracts
-- paragraph-level evidence provenance
-- clinical / medication safety gates
-- temporal truth / supersession cases
-- multi-turn state-update cases
-- Agent retrieval / recovery / stop / held-out cases
-- model harness scaffold
-- failure taxonomy + intervention router
-- reviewed SFT / preference export path
-- Post-training schemas
-- held-out regression gate
-- CI integrity validation
+用户要求“中国国家临床路径，不查询 CDE 受理或审评状态”。旧路由器把“中国”和“CDE”放进同一特征组；当 CDE 被否定时，“中国”这个正确的司法辖区信息也被一起删除，最后错误回退到 PubMed。
 
-## Already demonstrated in repository
+修复不是增加一个句子特例，而是拆分**实体、司法辖区、任务意图和否定作用域**，并分别保留极性。该失败随后进入已暴露回归集；下一次泛化证明必须使用实现冻结后创建的新案例。
 
-- pharma evidence graph + temporal events
-- claim provenance audit
-- stale-knowledge real-world bad case
-- controlled benchmark design
-- reproducible vertical-slice fixture
-- full P0 12-family / 60-case referential-integrity validation in CI
+## Bad Case 2：晚到旧事实覆盖了当前争议
 
-## Not yet proven
+同一医学语义槽位出现两个新的冲突事实，正确状态应为“争议未解决”。系统之后又收到一条日期更早、但录入更晚的事实。旧实现把录入时间误认为事实时间，使旧事实重新成为当前结论。
 
-- clinician-reviewed gold for the complete 60-case set
-- production-scale guideline / label ingestion
-- real multi-provider run across all 60 cases
-- production retriever/reranker Recall@K results
-- live Medical Agent tool execution results
-- multimodal benchmark with licensed/open images
-- calibrated LLM-as-Judge vs clinician agreement
-- actual SFT / DPO / RL intervention with held-out improvement
-- sustained improvement on a real medical model checkpoint
+修复方式是重写时间状态机：当前时间前沿由有效或争议状态共同定义；任何更早事实不能越过它，同日新冲突必须加入完整争议集合。旧全新集第一次运行 18/20 失败被永久保留；修复后旧回归 20/20，再创建独立新集并达到 20/20。
 
-These are intentionally kept separate from implemented infrastructure.
+## Bad Case 3：评测数据被翻译后绕过污染检测
+
+一条受保护的留出案例被翻译为韩文并移除明显标识符后，旧系统错误放行；与此同时，一条临床变量不同但数字模板相似的干净记录被误拦截。
+
+这说明简单调整文本相似度阈值会在召回和误杀之间摇摆。系统随后结合跨语言概念、结构化医学测量角色、标识符和字段级血缘证据进行判断。修复在已暴露数据上通过，但项目仍将第一次全新评测失败永久保留，并继续阻止自动信任，直到新的冻结后留出集完成。
 
 ---
 
-# Safety & Data Boundary
+# 八、当前阶段证据
 
-This repository is for **research, evaluation and model-development infrastructure**. It is not a patient-facing clinical decision system and does not replace professional medical care.
+仓库快照截至 **2026-09-07**：
 
-Clinical cases committed to the repository must be:
+| 阶段 | 当前状态 | 已有证据 | 尚需完成 |
+|---|---|---|---|
+| S1 | 部分完成 | 48 个任务种子、风险矩阵和用户研究计划 | 真实访谈或脱敏产品日志验证 |
+| S2 | 有条件通过 | 全新路由集 91.7%；S2→S3 联合 94.44% | 扩展真实来源及否定/排除表达 |
+| S3a | 有界有条件通过 | 全新集 F1 98.90%，关键主张召回 100%，强制拒答 6/6 | 更长、更嘈杂的真实文档 |
+| S3b | 有界有条件通过 | 当前关系集 40/40，高风险错误支持为 0 | 扩展真实证据关系 |
+| S4 | 有条件通过 | 首次全新 18/20 失败；修复回归 20/20；独立新集 20/20 | 持久化真实来源图谱 |
+| S5 | **仍阻断放行** | v0.9.1 已规范冻结；候选文件 24/24、控制文件 8/8 验证 | 冻结后独立 v0.10 与专家审核 |
+| S6 | 原型与夹具验证 | 可复现运行器、证据注入和配置矩阵 | S5 放行后的独立模型/Agent评测 |
+| S7 | 评测协议完成 | 四层规则与严重错误门禁 | 人工/模型评分器校准和真实模型运行 |
+| S8 | 原型 | 错误分类与干预路由器 | 多模型、多案例错误聚类 |
+| S9 | 接口完成 | 多类训练数据契约和导出边界 | 真实训练或系统干预实验 |
+| S10 | 回归契约完成 | 基线—候选夹具与门禁 | 真实干预后的留出提升证据 |
 
-```text
-public
-or licensed
-or de-identified
-or synthetic
-```
-
-Do not commit identifiable patient information.
-
-Medical safety principles are documented in:
-
-[`docs/11-clinical-safety-boundaries.md`](docs/11-clinical-safety-boundaries.md)
+这里最重要的不是所有阶段都显示“通过”，而是系统能够发现失败、保留第一次失败、区分修复旧题与未知泛化、在证据不足时阻止后续阶段自动信任，并明确下一步需要什么证据。
 
 ---
 
-# Core Principle
+# 九、可迁移价值
 
-```text
-Evaluation is not the end of model development.
+| 可复用组件 | 更换领域时如何处理 |
+|---|---|
+| 十阶段生命周期 | 直接保留 |
+| 证据、主张、版本和时间契约 | 直接保留 |
+| 受控场景家族与隐藏/回归分区 | 直接保留 |
+| 四层评测和严重错误门禁 | 保留框架，替换领域规则 |
+| 模型/Agent运行记录 | 直接保留 |
+| 错误分类、干预路由和回归流程 | 直接保留 |
+| 医学来源注册表 | 根据疾病、国家和产品补充 |
+| 知识图谱节点与关系 | 保留通用模式，增加领域实体 |
+| 具体金标准与临床规则 | 必须由新领域证据和专家重新建立 |
 
-A useful medical evaluation system should:
-find the failure,
-locate the evidence boundary,
-attribute the failure to the right subsystem,
-route an intervention,
-and prove the fix on held-out cases without creating a new safety regression.
-```
+同一底座可以迁移到医学问答、用药安全、检验/影像/病理报告解读、临床证据整理、医疗搜索、多轮医疗 Agent、多模态模型评测，以及从 Bad Case 生产监督微调、偏好和 Agent 轨迹数据。
 
-Architecture: [`docs/14-kg-grounded-medical-eval-platform.md`](docs/14-kg-grounded-medical-eval-platform.md)  
-Roadmap: [`docs/13-medical-model-development-roadmap.md`](docs/13-medical-model-development-roadmap.md)
+迁移的原则不是复制旧答案，而是复用**任务建模、证据治理、评测分层、失败归因和留出验证方法**。
+
+---
+
+# 十、项目中体现的个人工作与 Agent 能力
+
+本项目由 **李泽豪**主导问题定义、系统分层、评测方法设计、医学语义约束、案例体系构建和持续迭代。
+
+## 1. 将医学问题转化为工程契约
+
+我把“证据是否充分”“结论是否越界”“是否应该追问或停止”等医学判断，转换成证据字段、知识图谱关系、必需/禁止主张、评分维度和安全门禁，使其能够被代码检查和重复运行。
+
+## 2. 构建 Benchmark 平台，而不只是编写题目
+
+我设计了任务种子、受控场景家族、案例生成、证据绑定、分区隔离、独立真值、自动验证、隐藏案例、错误分类和回归放行的完整结构。平台能够回答“为什么错、改哪里、如何证明修复”，而不只输出准确率。
+
+## 3. 驾驭长流程 Agent
+
+在研发过程中，我使用 Agentic Coding（智能体辅助开发）完成仓库理解、任务拆解、代码实现、测试生成、失败诊断、文档同步和多轮迭代，但不把 Agent 的自我报告当作完成证据。
+
+每轮工作都通过以下方式约束：
+
+- 预先规定任务、允许行动和停止条件；
+- 将复杂目标拆成独立阶段与检查点；
+- 要求工具输出、文件、测试和提交记录作为证据；
+- 使用故障注入和对抗案例检查脆弱点；
+- 冻结实现后再创建全新留出集；
+- 保留第一次失败，不用修复后的结果覆盖；
+- 用持续集成和回归测试防止旧能力退化；
+- 区分“已经实现”“受控范围内证明”和“尚未证明”。
+
+因此，这里的 Agent 能力不是“让模型生成更多代码”，而是**定义任务、配置工具、管理状态、设置门禁、审计结果，并让多轮迭代最终收敛为可验证系统**。
+
+## 4. 从实验科研迁移到模型评测
+
+我的生命科学研究训练强调假设、实验、证据、反证和复现。GroundSignal 将同一方法迁移到大模型评测：
+
+**观察 Bad Case → 提出根因假设 → 设计最小受控实验 → 冻结评测条件 → 保留第一次结果 → 修改数据或系统 → 使用新留出集验证**
+
+这使医学专业判断、Benchmark 工程和 Agent 系统开发形成统一方法论。
+
+---
+
+# 十一、仓库结构
+
+| 目录 | 内容 |
+|---|---|
+| medical/case-families | 12 个场景家族与 60 个受控案例 |
+| medical/knowledge-base | 来源注册、检索核验协议与覆盖矩阵 |
+| medical/knowledge-graph | 面向评测的版本化医学知识图谱 |
+| medical/truth-layer | 段落级证据与主张契约 |
+| medical/user-tasks | 48 个任务种子与用户研究计划 |
+| medical/evaluation | 四层评测协议和评分规则 |
+| medical/stage-evals | 分阶段全新测试、回归与失败记录 |
+| medical/schemas | 案例、图谱、证据与运行记录结构 |
+| posttrain/schemas | 监督微调、偏好、Agent 轨迹与评分器数据契约 |
+| scripts | 运行器、图谱构建、验证、路由、导出和回归脚本 |
+| pharma | 药物、靶点、试验和监管事件的时间证据轨 |
+| docs | 架构、阶段状态、评测账本、边界和路线图 |
+
+---
+
+# 十二、快速运行
+
+## 验证 12 个家族和 60 个案例
+
+    python scripts/validate_medical_case_families.py \
+      --expect-families 12 \
+      --expect-cases 60 \
+      --expect-cases-per-family 5 \
+      --rubric-version medical-clinical-v0.2
+
+## 运行模型或证据注入夹具
+
+    python scripts/model_harness.py \
+      --cases medical/examples/clinical-medication-safety-001.json \
+      --config medical/configs/model-matrix.fixture.json \
+      --evidence medical/examples/evidence.jsonl \
+      --out /tmp/groundsignal-runs.jsonl
+
+## 路由错误并执行回归门禁
+
+    python scripts/intervention_router.py \
+      --eval medical/examples/eval-baseline.jsonl \
+      --rules medical/configs/intervention-rules.json \
+      --out /tmp/routed.jsonl
+
+    python scripts/regression_gate.py \
+      --baseline medical/examples/eval-baseline.jsonl \
+      --candidate medical/examples/eval-candidate.jsonl \
+      --policy medical/configs/regression-policy.medication-safety-v0.1.json \
+      --out /tmp/regression-report.json
+
+---
+
+# 十三、已经实现与尚未证明
+
+## 已经实现
+
+- 医疗来源注册、版本与证据契约；
+- 48 个医疗任务种子；
+- 12 个受控场景家族和 60 个案例；
+- 知识图谱构建与图谱评测接口；
+- 段落级证据来源追踪；
+- 医学和用药安全硬门禁；
+- 时间真值、冲突与废止关系案例；
+- 多轮状态更新和 Agent 检索/恢复/停止案例；
+- 可复现模型运行器；
+- 错误分类与干预路由；
+- 多类训练数据结构和审核边界；
+- 全新留出与回归门禁；
+- 持续集成完整性检查。
+
+## 尚未证明
+
+- 60 个案例全部通过临床专家金标准审核；
+- 生产规模的指南和药品说明书采集；
+- 全量多模型实测结果；
+- 生产级检索器和重排序器指标；
+- 真实医疗 Agent 工具执行效果；
+- 基于合规影像数据的多模态评测；
+- 大模型评分器与临床专家的一致性校准；
+- 真实训练干预后的留出提升；
+- 真实临床工作流中的安全性与有效性。
+
+项目应被准确描述为：
+
+> **一个具有高可追溯证据、受控评测设计和严格回归纪律的医疗大模型评测与训练后基础设施原型。**
+
+它不是医疗器械，不是自主诊断系统，也不能替代医生、药师或其他合格医疗专业人员。
+
+---
+
+# 进一步阅读
+
+- [项目完整介绍](docs/GroundSignal-Medical-项目介绍.md)
+- [十阶段生命周期](docs/15-system-stages.md)
+- [各阶段当前状态](docs/16-stage-status.md)
+- [评测方法与优化结果账本](docs/17-evaluation-methods-and-optimization-ledger.md)
+- [医疗 AI 能力版图](docs/21-medical-ai-capability-portfolio.md)
+- [知识搜索与核验协议](medical/knowledge-base/SEARCH_AND_VERIFICATION_PROTOCOL.md)
+- [医学知识覆盖矩阵](medical/knowledge-base/COVERAGE_MATRIX.md)
+- [知识图谱构建方法](medical/knowledge-graph/HOW_IT_IS_BUILT.md)
+- [统一医疗评测规则](medical/evaluation/rubrics/medical-clinical-v0.2.md)
+- [临床安全边界](docs/11-clinical-safety-boundaries.md)
+
+---
+
+## Core principle
+
+> **Evaluation is not the end of model development.**
+>
+> 有价值的医疗评测系统应当能够发现失败、定位证据边界、识别责任层、路由干预，并在不产生新安全回退的前提下，用全新案例证明修复。
