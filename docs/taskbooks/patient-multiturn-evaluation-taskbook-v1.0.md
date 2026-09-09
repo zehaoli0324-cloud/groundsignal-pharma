@@ -1,4 +1,4 @@
-> 当前实施入口为 [任务书 v1.1](patient-multiturn-evaluation-taskbook-v1.1.md)。本文由同目录 Word 原件按段落和表格顺序转换。原件内容、拟实施范围与阈值保持不变。2026-09-09 的接入方式、黑盒研究边界及本次代码实际交付范围见 [患者评测适配方案](../../medical/patient-eval/ADAPTATION_PLAN.md)。
+> 历史任务书归档。新旧要求已合并为独立完整的 [统一任务书 v1.2](patient-evaluation-master-taskbook-v1.2.md)，当前实施以该版为准。本文由同目录 Word 原件按段落和表格顺序转换，原件内容保持不变。
 
 # GroundSignal Medical
 

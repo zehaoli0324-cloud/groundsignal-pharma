@@ -2,12 +2,36 @@
 
 这是 GroundSignal 的开发子系统：把会话证据、评分、受控故障与修复回放连起来，并允许导入小荷等只能观察回答的平台记录。当前是 Python 3.11 标准库实现的命令行核心，不是患者咨询产品。
 
-- [最新任务书 v1.1](../../docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.1.md)
+- [统一任务书 v1.2](../../docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)
+- [十阶段职责与验收拆分](STAGE_DECOMPOSITION.md)
+- [动态试评 v0.2 场景、采集与评分材料](pilot/v0.2/README.md)
 - [原任务书全文](../../docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.0.md) · [Word 原件](../../docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.0.docx)
 - [现有项目适配方案、黑盒研究协议和学习路线](ADAPTATION_PLAN.md)
 - [数据合同与评分约定](schemas/README.md)
 
-## 现在能运行什么
+## 当前 v0.2 动态试评
+
+六个合成家族各有清晰和压力变体，共十二场景。患者只在模型问到或预先规定的事件触发时披露信息；未知、纠正、催促和错误复述都有操作员侧记录。规则问句识别可能漏掉口语表达，人工采集支持带理由的识别纠正；这种模拟器误差必须与被测模型不足分开评估。
+
+```bash
+python -m scripts.patient_eval.pilot_cli validate
+python -m scripts.patient_eval.pilot_cli demo --out /tmp/patient-pilot-v02
+python -m scripts.patient_eval.pilot_cli review-packet --sessions /tmp/patient-pilot-v02/sessions.json --out /tmp/patient-review-v02
+```
+
+`demo` 的目标是离线问询夹具，不调用真实模型，不产生临床成绩。它执行两种流程、共二十四条动态会话，验证问询分支、记录、评分入口和审评包。全部临床项等待人工判定。
+
+真实模型对照命令如下，须替换服务地址和模型，并在环境中配置密钥：
+
+```bash
+python -m scripts.patient_eval.pilot_cli study --base-url https://YOUR_PROVIDER/v1 --model YOUR_MODEL --key-env PATIENT_MODEL_API_KEY --out medical/patient-eval/local/study-v02 --repeats 1 --seed 7
+```
+
+两种流程均保留完整对话与相同输出预算。候选流程仅增加从可见用户原话抽取的事实记录，实验考察“抽取、状态与提示”的组合干预；额外输入开销据实记录，不能声称隔离了模型训练算法。每条会话完成即落盘，输出目录存在会拒绝，防止静默覆盖或重复调用。本版不自动续跑。
+
+小荷应用由人工操作，`collect-start`／`collect-reply` 逐步给出应复制的患者文本并记录模型原文；`review-packet` 隔离平台元数据与操作员映射，`apply-review` 将裁决后的证据判定写回会话，`agreement` 计算两名评审者的一致性。具体命令与模板见 [采集协议](pilot/v0.2/COLLECTION_PROTOCOL.md) 和 [评分细则](pilot/v0.2/SCORING_GUIDE.md)。有序质量等级、严重错误和判据是否通过分别保存，不由分数自动推断临床真值。
+
+## 保留的 v0.1 专项机制
 
 | 核心 | 实际用途 | 本版边界 |
 | --- | --- | --- |

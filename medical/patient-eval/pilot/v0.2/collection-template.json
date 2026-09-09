@@ -1,0 +1,55 @@
+{
+  "template": true,
+  "schema_version": "patient-collection-template/v0.2",
+  "purpose": "字段说明与空表；不是可导入会话，不含任何真实平台结果。实际采集优先用pilot_cli collect-start/collect-reply。",
+  "session_required_fields": {
+    "session_id": "唯一、匿名运行编号，每次重试均新建；非账号身份",
+    "scenario_id": "suite.json中现有scenario_id",
+    "family_id": "对应family_id",
+    "variant": "clear或pressure",
+    "platform": "实际平台名称及界面模式，不猜底层模型",
+    "observability": "必须为black_box",
+    "status": "completed、target_error或measurement_invalid；失效需要独立测量原因",
+    "turns": "按user/assistant交替的完整实际消息数组，从user开始；completed以assistant结束",
+    "trace": "空数组；不得填推测的内部日志",
+    "observations": "未评时为空；最终人审后才加入证据标注",
+    "metadata": "按metadata_required_fields填写"
+  },
+  "turn_fields": {
+    "turn_id": "会话内唯一，例如u1、a1",
+    "role": "user或assistant",
+    "content": "完整实际输入或回答；不可空或改写"
+  },
+  "metadata_required_fields": {
+    "collected_at": "带时区的真实采集时间，如YYYY-MM-DDTHH:MM:SS+08:00；不是示例日期",
+    "app_version": "实际可见版本；不可见时unknown",
+    "platform_mode": "记录联网、记忆、思考、个性化等模式；无法核实写unknown",
+    "conversation_reset": "是否确认新会话，boolean；本试评要求true",
+    "input_mode": "text",
+    "comparison_lane": "free_dialogue；不可混合fixed_prefix结果",
+    "question_source": "synthetic或deidentified_real，不能把真实来源写合成",
+    "deidentification_confirmed": "boolean，操作者声明，非自动审批",
+    "use_authorized": "boolean，操作者确认使用权限，非程序证明",
+    "session_protocol_id": "patient-pilot-v02-free-dialogue",
+    "operator": "匿名操作者编号",
+    "clinical_approval": "本公开合成套件固定false；不能自填true绕过外部审核"
+  },
+  "recommended_metadata_fields": {
+    "suite_sha256": "冻结suite的SHA-256摘要",
+    "rubric_version": "patient-pilot-rubric/v0.2",
+    "started_at": "带时区开始时间",
+    "ended_at": "带时区结束时间",
+    "device": "设备和系统，避免唯一识别号",
+    "network_condition": "网络条件",
+    "account_alias": "本地匿名账号代号，不存账号身份",
+    "memory_state": "on/off/unknown",
+    "web_state": "on/off/unknown",
+    "wait_budget_seconds": "主试评固定120",
+    "max_assistant_turns": "固定10，收尾也占预算",
+    "repeat_id": "该条件第几次独立重复",
+    "planned_order": "预先生成的顺序位置",
+    "error_evidence": "服务报错或采集失效的可见证据与时间",
+    "protocol_deviations": "实际披露或采集偏差，不能留作无记录排除"
+  },
+  "rows": []
+}

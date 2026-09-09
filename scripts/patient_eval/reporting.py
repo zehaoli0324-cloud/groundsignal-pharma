@@ -137,6 +137,9 @@ def render_report(bundle: dict) -> str:
         f'<p>目标服务失败 {_text(target_errors)} 条；独立测量无效 {_text(invalid)} 条。目标服务失败必须保留在任务结果中，不能当作测量无效删除。</p>',
         '</section>',
     ]
+    if bundle.get("measurement_quality"):
+        parts.extend(['<section><h2>评测系统自身的质量</h2><p>披露规则和抽取器的缺口先单独复核，不能自动归给被测模型。</p>',
+                      f'<pre>{_json(bundle["measurement_quality"])}</pre></section>'])
     for score in scores:
         parts.extend([
             f'<section><h2>评分：{_text(score.get("session_id", "未标识会话"))}</h2>',

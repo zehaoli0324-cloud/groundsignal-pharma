@@ -1,0 +1,25 @@
+{
+  "template": true,
+  "schema_version": "patient-annotation-template/v0.2",
+  "purpose": "双人独立0/1/2分标注空表；不是已评结果，不可直接作为score会话导入。",
+  "rubric_version": "patient-pilot-rubric/v0.2",
+  "rating_fields": {
+    "item_id": "review-packet提供的盲评条目编号；同一会话同一判据两人使用相同编号",
+    "reviewer_id": "匿名评审者编号，每条一位，不能合并两人或裁决者",
+    "rubric_version": "两人必须使用同一个冻结版本",
+    "rating": "0、1、2或null；未评／不适用不填0",
+    "serious_error": "true、false或null；临床严重错误独立判断，不按rating推算"
+  },
+  "review_packet_item_fields": {
+    "criterion": "来自冻结标准，不由评分者改题",
+    "turns": "盲化后实际对话，不编辑",
+    "outcome": "最终人工判据结论；初始unassessed",
+    "evidence_turn_ids": "实际存在的回合编号数组",
+    "reason": "机会、截止轮、行为证据及结论理由",
+    "reviewer_id": "独立评审或最终裁决者匿名编号",
+    "rubric_version": "patient-pilot-rubric/v0.2"
+  },
+  "agreement_input": "agreement命令接受从rows导出的纯数组，每条仅需rating_fields规定字段。不能把本模板对象当成已评分数组。",
+  "final_observations": "保留两份独立评分；裁决后通过apply-review生成唯一observations。rating不自动转换outcome；C4的fail需要独立确认严重错误。",
+  "rows": []
+}

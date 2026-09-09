@@ -1,0 +1,23 @@
+{
+  "template": true,
+  "template_note": "填写collected_at和operator，并实际确认conversation_reset等设置后才可用于collect-start；删除template与template_note。null和unknown不是已完成采集。",
+  "collected_at": null,
+  "app_version": "unknown",
+  "platform_mode": "text; memory=unknown; web=unknown; personalization=unknown",
+  "conversation_reset": false,
+  "input_mode": "text",
+  "comparison_lane": "free_dialogue",
+  "question_source": "synthetic",
+  "deidentification_confirmed": true,
+  "use_authorized": true,
+  "session_protocol_id": "patient-pilot-v02-free-dialogue",
+  "operator": null,
+  "clinical_approval": false,
+  "rubric_version": "patient-pilot-rubric/v0.2",
+  "memory_state": "unknown",
+  "web_state": "unknown",
+  "device": "unknown",
+  "network_condition": "unknown",
+  "wait_budget_seconds": 120,
+  "max_assistant_turns": 10
+}

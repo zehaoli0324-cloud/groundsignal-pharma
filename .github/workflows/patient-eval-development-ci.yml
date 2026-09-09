@@ -34,3 +34,9 @@ jobs:
         run: python -m scripts.patient_eval import --input medical/patient-eval/development/manual-transcript.example.json --out /tmp/patient-manual.json
       - name: Evaluate synthetic manual import
         run: python -m scripts.patient_eval evaluate --sessions /tmp/patient-manual.json --out /tmp/patient-manual-report
+      - name: Validate twelve dynamic pilot scenarios
+        run: python -m scripts.patient_eval.pilot_cli validate
+      - name: Run offline dynamic patient study
+        run: python -m scripts.patient_eval.pilot_cli demo --out /tmp/patient-pilot-v02
+      - name: Generate blinded human review packet
+        run: python -m scripts.patient_eval.pilot_cli review-packet --sessions /tmp/patient-pilot-v02/sessions.json --out /tmp/patient-pilot-review

@@ -43,9 +43,9 @@ GroundSignal Medical 的做法，是把一条完整的医疗模型工作链拆�
 
 新增的 [患者评测入口](medical/patient-eval/README.md) 面向语义不清、多轮纠正和患者解释等任务，统一规划八个能力模块。它同时支持自建系统的内部过程评测，以及小荷等只能观察回答的平台会话导入；黑盒缺陷的内部原因保持证据分级的假设。
 
-当前交付包含可见事实状态机、BM25 词项检索与适用性过滤、固定多轮前缀回放、纠正事件丢失的故障与修复对照、人工评分接口、家族配对统计和离线报告。首版为 **4 个合成家族、8 个开发变体**，与原有 60 个案例分别计数；尚未进行小荷真实评测或完整临床评分，也不改变现有阶段准入结论。
+当前交付包含动态患者问询、可见用户文本抽取与事实状态更新、人工采集、盲评材料、评分者一致性，以及同一模型的普通流程／状态增强流程对照脚本。v0.2 提供 **6 个合成家族、12 个动态试评场景**；v0.1 的 8 个固定前缀变体作为独立机制回归保留。它们与原有 60 个案例分别计数，不能相加宣称独立患者样本量。尚未采集小荷真实回答或完成临床评分。
 
-完整范围见 [最新任务书 v1.1](docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.1.md) 和 [现有项目适配方案](medical/patient-eval/ADAPTATION_PLAN.md)。在仓库根目录运行 `python -m scripts.patient_eval demo --out /tmp/patient-eval-demo` 可生成机制验证报告。
+完整范围见 [统一任务书 v1.2](docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)、[十阶段职责与验收拆分](medical/patient-eval/STAGE_DECOMPOSITION.md) 和 [采集与评分说明](medical/patient-eval/pilot/v0.2/README.md)。在仓库根目录运行 `python -m scripts.patient_eval.pilot_cli demo --out /tmp/patient-pilot-demo` 可生成动态交互开发报告。既有 S5 冻结检查已改为只读验证历史收据，具体依据见 [集成记录](medical/patient-eval/S5_INTEGRATION_STATUS.md)，不改变正式准入要求。
 
 ---
 

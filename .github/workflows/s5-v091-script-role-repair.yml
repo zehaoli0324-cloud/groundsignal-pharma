@@ -12,6 +12,8 @@ on:
       - 'scripts/test_s5_v091_freeze_readiness.py'
       - 'scripts/s5_v091_freeze_control.py'
       - 'scripts/materialize_s5_v091_freeze_receipt.py'
+      - 'scripts/verify_s5_v091_historical_receipt.py'
+      - 'scripts/test_s5_v091_historical_receipt.py'
       - 'scripts/check_s5_v10_fresh_admission.py'
       - 'scripts/test_s5_v091_freeze_control.py'
       - 'scripts/generate_s5_v091_control_plane_readiness.py'
@@ -45,6 +47,8 @@ on:
       - 'scripts/test_s5_v091_freeze_readiness.py'
       - 'scripts/s5_v091_freeze_control.py'
       - 'scripts/materialize_s5_v091_freeze_receipt.py'
+      - 'scripts/verify_s5_v091_historical_receipt.py'
+      - 'scripts/test_s5_v091_historical_receipt.py'
       - 'scripts/check_s5_v10_fresh_admission.py'
       - 'scripts/test_s5_v091_freeze_control.py'
       - 'scripts/generate_s5_v091_control_plane_readiness.py'
@@ -95,6 +99,8 @@ jobs:
             scripts/test_s5_v091_freeze_readiness.py \
             scripts/s5_v091_freeze_control.py \
             scripts/materialize_s5_v091_freeze_receipt.py \
+            scripts/verify_s5_v091_historical_receipt.py \
+            scripts/test_s5_v091_historical_receipt.py \
             scripts/check_s5_v10_fresh_admission.py \
             scripts/test_s5_v091_freeze_control.py \
             scripts/generate_s5_v091_control_plane_readiness.py \
@@ -144,12 +150,10 @@ jobs:
           python scripts/check_s5_v10_fresh_admission.py \
             --out /tmp/s5-v10-admission.json
           if test -f medical/stage-evals/S5/freeze-receipt-v0.9.1.json; then
-            python scripts/materialize_s5_v091_freeze_receipt.py \
-              --freeze-commit cdc89298693aa9c5222f15ed9bd62a57e140fbc6 \
-              --approval-reference user-approval:chatgpt-2026-09-07-pr5-pr6-pr7-freeze \
-              --out /tmp/s5-v091-freeze-receipt.json
-            cmp /tmp/s5-v091-freeze-receipt.json \
-              medical/stage-evals/S5/freeze-receipt-v0.9.1.json
+            # Existing receipts are historical evidence. Materializing a new
+            # receipt requires the current main tip and must remain stricter.
+            python scripts/verify_s5_v091_historical_receipt.py \
+              --out /tmp/s5-v091-historical-receipt-check.json
             cmp /tmp/s5-v10-admission.json \
               medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.10.json
           else
@@ -160,6 +164,7 @@ jobs:
             --out /tmp/s5-v091-freeze-control-tests.json
           cmp /tmp/s5-v091-freeze-control-tests.json \
             medical/stage-evals/S5/freeze-control-tests-v0.9.1.json
+          python scripts/test_s5_v091_historical_receipt.py
           python - <<'PY'
           import json
           control=json.load(open('/tmp/s5-v091-control-plane-check.json'))
