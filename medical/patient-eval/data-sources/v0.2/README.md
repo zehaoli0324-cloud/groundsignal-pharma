@@ -60,6 +60,21 @@ python -m scripts.patient_eval.candidate_review compare-reviews \
 
 报告另外列出双方已编写的事实证据、披露条件、评分锚点及隐私片段差异。它们需要人工裁决，不把文字不同直接解释为医学分歧。当前模板固定上游提案；发现漏标事实先记在完整性理由中，后续单独编写，不能将提案数量视为完整真值分母。
 
+### 生成公开阻断队列
+
+完成格式适配和官方 `validate-review` 校验后，可以从私有原始包与审阅稿生成只含候选编号、条目编号、枚举阻断类型和聚合分母的公开队列：
+
+```bash
+python -m scripts.patient_eval.candidate_blockers \
+  --original medical/patient-eval/local/<trusted-original>.json \
+  --review medical/patient-eval/local/<validated-review>.json \
+  --source-review medical/patient-eval/local/<submitted-review>.json \
+  --expected-source-sha256 <sha256> \
+  --out medical/patient-eval/local/<public-projection>.json
+```
+
+生成器会先重新调用现有官方合同校验器，并核对提交文件的 SHA-256；输入不一致或输出文件已存在时直接拒绝。公开投影不会复制患者文字、来源对话编号、证据片段、审阅理由、审阅者身份或本地路径。`candidate_selection=READY` 只表示可以进入开发候选选择，`dynamic_authoring=READY` 只表示可以编写受控开发脚本；两者都不等于临床可运行。临床关键规则仍须合适人员裁决，`clinical_runnable`、Clinical Gold 和 S6 自动信任保持阻断。
+
 ## 下一步的交付条件
 
 两名评审完成原始意见后，先解决错位、否定范围、主体时间、披露与评分分歧，保留初评和裁决版本。随后挑选适合的小批病例，另行编写并测试动态脚本，再进行小荷和通用模型的同条件采集。

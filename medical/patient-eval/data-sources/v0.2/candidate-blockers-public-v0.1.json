@@ -1,0 +1,1503 @@
+{
+  "admission": {
+    "clinical_gold": false,
+    "dynamic_scenario_ready": false,
+    "formal_approval": false,
+    "gold_approved": false,
+    "s6_automatic_trust": "BLOCKED"
+  },
+  "candidates": [
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "CORRECTION_RELATION_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "turn-30-action-0",
+            "field": "review.facts.correction_of_candidate_id"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "clinical_semantic_adjudication"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0001",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "BLOCKED"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0002",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0003",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "CORRECTION_RELATION_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "turn-18-action-0",
+            "field": "review.facts.correction_of_candidate_id"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "clinical_semantic_adjudication"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0004",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "BLOCKED"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "candidate_selection",
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "FACT_DECISION_UNCERTAIN",
+          "evidence_location": {
+            "entry_id": "turn-7-action-0",
+            "field": "review.facts.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "clinical_semantic_adjudication"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "candidate_selection",
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "FACT_DECISION_UNCERTAIN",
+          "evidence_location": {
+            "entry_id": "turn-25-action-0",
+            "field": "review.facts.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "clinical_semantic_adjudication"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0005",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "BLOCKED",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "BLOCKED"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "candidate_selection",
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "PRIVACY_REVIEW_REQUIRED",
+          "evidence_location": {
+            "entry_id": "privacy",
+            "field": "review.privacy.decision"
+          },
+          "required_role": "privacy_reviewer",
+          "resolution_class": "human_privacy_review"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0006",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "BLOCKED",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "BLOCKED"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0007",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0008",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "candidate_selection",
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "FACT_DECISION_UNCERTAIN",
+          "evidence_location": {
+            "entry_id": "turn-14-action-0",
+            "field": "review.facts.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "clinical_semantic_adjudication"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "candidate_selection",
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "FACT_DECISION_UNCERTAIN",
+          "evidence_location": {
+            "entry_id": "turn-28-action-0",
+            "field": "review.facts.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "clinical_semantic_adjudication"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0009",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "BLOCKED",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "BLOCKED"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0010",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0011",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "candidate_selection",
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "FACT_DECISION_UNCERTAIN",
+          "evidence_location": {
+            "entry_id": "turn-11-action-0",
+            "field": "review.facts.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "clinical_semantic_adjudication"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0012",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "BLOCKED",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "BLOCKED"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "candidate_selection",
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "PRIVACY_REVIEW_REQUIRED",
+          "evidence_location": {
+            "entry_id": "privacy",
+            "field": "review.privacy.decision"
+          },
+          "required_role": "privacy_reviewer",
+          "resolution_class": "human_privacy_review"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0013",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "BLOCKED",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "BLOCKED"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0014",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0015",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0016",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0017",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0018",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0019",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0020",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "candidate_selection",
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "NO_INCLUDED_FACTS",
+          "evidence_location": {
+            "entry_id": "facts",
+            "field": "review.facts.decision"
+          },
+          "required_role": "source_data_reviewer",
+          "resolution_class": "human_source_review"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0021",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "BLOCKED",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "BLOCKED"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0022",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0023",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0024",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0025",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0026",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0027",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "candidate_selection",
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "FACT_DECISION_UNCERTAIN",
+          "evidence_location": {
+            "entry_id": "turn-8-action-0",
+            "field": "review.facts.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "clinical_semantic_adjudication"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0028",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "BLOCKED",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "BLOCKED"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0029",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "CORRECTION_RELATION_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "turn-2-action-0",
+            "field": "review.facts.correction_of_candidate_id"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "clinical_semantic_adjudication"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0030",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "BLOCKED"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0031",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0032",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0033",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0034",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0035",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "candidate_selection",
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "FACT_DECISION_UNCERTAIN",
+          "evidence_location": {
+            "entry_id": "turn-31-action-0",
+            "field": "review.facts.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "clinical_semantic_adjudication"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "candidate_selection",
+            "dynamic_authoring",
+            "clinical_runnable"
+          ],
+          "code": "FACT_DECISION_UNCERTAIN",
+          "evidence_location": {
+            "entry_id": "turn-31-action-1",
+            "field": "review.facts.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "clinical_semantic_adjudication"
+        },
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0036",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "BLOCKED",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "BLOCKED"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0037",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0038",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0039",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0040",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0041",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0042",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0043",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0044",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0045",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0046",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0047",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0048",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0049",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    },
+    {
+      "blockers": [
+        {
+          "automatic_fix": false,
+          "blocks": [
+            "clinical_runnable"
+          ],
+          "code": "CLINICAL_RUBRIC_ADJUDICATION",
+          "evidence_location": {
+            "entry_id": "risk.boundary",
+            "field": "review.rubrics.decision"
+          },
+          "required_role": "qualified_clinical_reviewer",
+          "resolution_class": "qualified_clinical_adjudication"
+        }
+      ],
+      "candidate_id": "C0050",
+      "development_exposed": true,
+      "states": {
+        "candidate_selection": "READY",
+        "clinical_runnable": "BLOCKED",
+        "dynamic_authoring": "READY"
+      }
+    }
+  ],
+  "canonical_review_sha256": "060cdd00151e85d4a53b64b43e8bb8f75bc7dbdf5fc64edd5a83dc3fe0e0be87",
+  "development_exposed": true,
+  "global_blockers": [
+    {
+      "automatic_fix": false,
+      "blocks": [
+        "clinical_runnable"
+      ],
+      "code": "AI_REVIEW_NOT_CLINICAL_TRUTH",
+      "required_role": "independent_human_and_qualified_clinical_review"
+    },
+    {
+      "automatic_fix": false,
+      "blocks": [
+        "clinical_runnable",
+        "s6_automatic_trust"
+      ],
+      "code": "FORMAL_ADMISSION_NOT_GRANTED",
+      "required_role": "authorized_case_admission_workflow"
+    }
+  ],
+  "limitations": [
+    "Blocker detection is deterministic workflow triage, not medical adjudication.",
+    "READY means eligible for the named development step only; it does not mean clinically runnable.",
+    "Exposed source-derived candidates are development material, not fresh held-out evidence."
+  ],
+  "packet_sha256": "7b1a3d00e097c455ebd40055e81d7a5498527acb6ba54bcb577c654d63e8f38d",
+  "privacy": {
+    "contains_local_or_library_path": false,
+    "contains_patient_text": false,
+    "contains_review_reason": false,
+    "contains_reviewer_identity": false,
+    "contains_source_dialogue_id": false
+  },
+  "schema_version": "candidate-blocker-queue/v0.1",
+  "scope": "development_only",
+  "source_review_sha256": "0377aac34f5c04d58d218d8b036f314bdc8fda039a585edfb3766f5cff33c668",
+  "summary": {
+    "blocker_code_counts": {
+      "CLINICAL_RUBRIC_ADJUDICATION": 50,
+      "CORRECTION_RELATION_ADJUDICATION": 3,
+      "FACT_DECISION_UNCERTAIN": 8,
+      "NO_INCLUDED_FACTS": 1,
+      "PRIVACY_REVIEW_REQUIRED": 2
+    },
+    "candidate_blocker_count": 64,
+    "candidate_count": 50,
+    "candidate_state_counts": {
+      "candidate_selection": {
+        "BLOCKED": 8,
+        "READY": 42
+      },
+      "clinical_runnable": {
+        "BLOCKED": 50
+      },
+      "dynamic_authoring": {
+        "BLOCKED": 11,
+        "READY": 39
+      }
+    },
+    "human_or_clinical_resolution_count": 64,
+    "mechanical_auto_fixable_count": 0,
+    "observed_feature_counts": {
+      "correction_relations": 3,
+      "critical_clinical_rubrics": 50,
+      "included_conflict_polarities": 0,
+      "no_included_fact_candidates": 1,
+      "privacy_review_required_candidates": 2,
+      "uncertain_facts": 8
+    },
+    "resolution_class_counts": {
+      "clinical_semantic_adjudication": 11,
+      "human_privacy_review": 2,
+      "human_source_review": 1,
+      "qualified_clinical_adjudication": 50
+    }
+  },
+  "validation": {
+    "candidate_count": 50,
+    "facts_decided": 765,
+    "facts_missing": 0,
+    "official_contract": "PASS",
+    "rubrics_decided": 300,
+    "rubrics_missing": 0
+  }
+}
