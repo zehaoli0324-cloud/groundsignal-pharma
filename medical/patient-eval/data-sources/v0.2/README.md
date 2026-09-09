@@ -112,6 +112,27 @@ python -m scripts.patient_eval.dynamic_case_drafts \
 
 [v0.4 状态机合同](../../schemas/dynamic-case-state-machine-v0.4.json)及[公开聚合审计](dynamic-case-draft-audit-public-v0.1.json)只适用于已暴露开发材料。草稿还需自然语言连贯性复核、触发语义复核、评分机会映射、停止策略、双人独立审阅和合适人员的临床规则裁决；这些完成前 `clinical_runnable`、Clinical Gold、动态场景就绪和 S6 自动信任均保持阻断。
 
+### 离线就绪度检查
+
+`dynamic_case_offline` 将真实来源草稿与合成执行夹具分成两条硬隔离路径。真实来源草稿只重新绑定 N1–N4 的完整证据链并进行静态检查，不能进入执行器；执行器只接受同时标为 `scope=synthetic_fixture`、`source=synthetic`、`execution_mode=SYNTHETIC_CONTRACT_TEST_ONLY` 和 `clinical_runnable=SYNTHETIC_ONLY` 的合成对象。
+
+```bash
+python -m scripts.patient_eval.dynamic_case_offline \
+  --original medical/patient-eval/local/<trusted-original>.json \
+  --review medical/patient-eval/local/<validated-review>.json \
+  --source-review medical/patient-eval/local/<submitted-review>.json \
+  --expected-source-sha256 <sha256> \
+  --blockers medical/patient-eval/data-sources/v0.2/candidate-blockers-public-v0.1.json \
+  --selection medical/patient-eval/data-sources/v0.2/candidate-development-selection-public-v0.1.json \
+  --private-drafts medical/patient-eval/local/<dynamic-case-drafts>.json \
+  --n4-audit medical/patient-eval/data-sources/v0.2/dynamic-case-draft-audit-public-v0.1.json \
+  --out medical/patient-eval/data-sources/v0.2/<offline-readiness-audit>.json
+```
+
+静态检查只回答 opening 是否引用未来事实、事件是否重复披露、`never` 事实是否进入可见转移及自动匹配是否关闭。它不生成真实来源会话，不把“零静态发现”解释为模型没有泄漏，也不产生模型得分。没有执行时，质量、任务完成和安全一律保存为 `UNASSESSED`，测量状态保存为 `NOT_RUN`；评分机会的“未映射”和运行时“未到达”分别计数。
+
+[公开离线就绪审计](dynamic-case-offline-readiness-public-v0.1.json)仅含病例编号、枚举状态和分母。只有病例完成独立审阅、临床裁决、触发/停止映射及自然语言渲染并另行获得准入后，后续流程才能生成真实离线会话和盲评包。
+
 ## 下一步的交付条件
 
 两名评审完成原始意见后，先解决错位、否定范围、主体时间、披露与评分分歧，保留初评和裁决版本。随后挑选适合的小批病例，另行编写并测试动态脚本，再进行小荷和通用模型的同条件采集。
