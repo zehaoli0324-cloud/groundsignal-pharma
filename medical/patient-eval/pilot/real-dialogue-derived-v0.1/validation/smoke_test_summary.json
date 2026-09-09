@@ -1,0 +1,45 @@
+{
+  "cases": [
+    {
+      "case_id": "GS-PUB-DYN-001",
+      "closed": true,
+      "outputs": [
+        {"input":"孩子现在喝什么奶？","output":"现在主要喝配方奶。"},
+        {"input":"出生时喝过多久？","output":"孩子出生后也短暂喝过配方奶。 出生时喝过配方奶，喝了几件。"},
+        {"input":"还有没有需要补充的？","output":"刚才打错了，是喝了几天，不是几件。"},
+        {"input":"/stop","output":"好的，谢谢。"}
+      ],
+      "pending_correction": false,
+      "record_count": 9,
+      "stop_reason": "explicit_stop"
+    },
+    {
+      "case_id": "GS-PUB-DYN-002",
+      "closed": true,
+      "outputs": [
+        {"input":"医院做了什么检查？","output":"补充一下，医院检查后说其实并不缺钙。"},
+        {"input":"现在吃什么补充剂？","output":"目前在吃含维生素D的补充剂，也有一种钙剂。"},
+        {"input":"/stop","output":"好的，谢谢。"}
+      ],
+      "pending_correction": false,
+      "record_count": 7,
+      "stop_reason": "explicit_stop"
+    },
+    {
+      "case_id": "GS-PUB-DYN-003",
+      "closed": true,
+      "outputs": [
+        {"input":"阿奇霉素怎么吃的？","output":"昨天开始自行吃阿奇霉素，白天和晚上都加服过，但每片具体含量不知道。"},
+        {"input":"有没有呼吸困难？","output":"我买到的一种药很便宜，家人后来又买了更贵的，是不是便宜的效果差？ 是否真正呼吸困难目前没有明确记录，只有鼻塞。"},
+        {"input":"现在还有什么症状？","output":"开始是干咳，后来出现少量黄痰和鼻塞，咳嗽也更重。 现在咽喉痛、鼻塞，咳嗽仍然很明显。"},
+        {"input":"/stop","output":"好的，谢谢。"}
+      ],
+      "pending_correction": false,
+      "record_count": 9,
+      "stop_reason": "explicit_stop"
+    }
+  ],
+  "passed": true,
+  "real_model_calls": 0,
+  "schema_version": "groundsignal-public-smoke/v0.1"
+}

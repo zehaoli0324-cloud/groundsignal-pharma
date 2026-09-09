@@ -1,0 +1,21 @@
+{
+  "clinical_gold": false,
+  "formal_approval": false,
+  "interpretation": "Release gate for a synthetic/deidentified derivative; not proof of zero re-identification risk or clinical validity.",
+  "passed": true,
+  "privacy_gate": {
+    "direct_identifier_findings": 0,
+    "exact_full_text_matches": 0,
+    "pdf_render_checked": true,
+    "private_reference_pattern_findings": 0,
+    "workbook_display_text_scanned": true
+  },
+  "published_file_count": 26,
+  "schema_version": "groundsignal-public-release-validation/v0.3",
+  "structure": {
+    "fixed_replay_cases": 6,
+    "fixed_replay_checkpoints": 10,
+    "public_case_cards": 12,
+    "runnable_dynamic_cases": 3
+  }
+}

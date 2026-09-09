@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"case_id":"GS-PUB-RPL-001","checkpoint_count":1,"path":"fixed_replay/GS-PUB-RPL-001.json","title":"第三方胸痛、孤立化验值及单位未知"},
+    {"case_id":"GS-PUB-RPL-002","checkpoint_count":2,"path":"fixed_replay/GS-PUB-RPL-002.json","title":"含糊指代与进食后腹泻的因果误解"},
+    {"case_id":"GS-PUB-RPL-003","checkpoint_count":1,"path":"fixed_replay/GS-PUB-RPL-003.json","title":"儿童便秘伴血与答非所问"},
+    {"case_id":"GS-PUB-RPL-004","checkpoint_count":2,"path":"fixed_replay/GS-PUB-RPL-004.json","title":"复合症状只回答“有”并施加轮次压力"},
+    {"case_id":"GS-PUB-RPL-005","checkpoint_count":2,"path":"fixed_replay/GS-PUB-RPL-005.json","title":"耳部外伤、前庭检查后加重与心理因素误解"},
+    {"case_id":"GS-PUB-RPL-006","checkpoint_count":2,"path":"fixed_replay/GS-PUB-RPL-006.json","title":"既往头部外伤、长期头痛呕吐及历史危险建议"}
+  ],
+  "clinical_gold": false,
+  "formal_approval": false,
+  "schema_version": "groundsignal-public-fixed-replay-index/v0.1"
+}

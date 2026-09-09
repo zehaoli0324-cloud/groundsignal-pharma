@@ -1,0 +1,9 @@
+runs/
+local/
+private/
+*.jsonl
+*.log
+*review*.json
+*review*.html
+*transcript*
+.DS_Store

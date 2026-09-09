@@ -1,0 +1,12 @@
+{
+  "binary_workbook_scan": "performed_by_release_validator",
+  "direct_identifier_findings": 0,
+  "exact_full_text_matches": 0,
+  "interpretation": "No public dialogue/sample string of length at least 12 exactly matched the selected private dialogue material. This is a release gate, not proof of zero re-identification risk.",
+  "minimum_normalized_length": 12,
+  "passed": true,
+  "private_reference_pattern_findings": 0,
+  "private_reference_samples_compared": 69,
+  "public_samples_checked": 89,
+  "schema_version": "groundsignal-public-privacy-leakage-audit/v0.1"
+}
