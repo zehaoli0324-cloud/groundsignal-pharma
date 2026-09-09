@@ -60,6 +60,95 @@ python -m scripts.patient_eval.candidate_review compare-reviews \
 
 报告另外列出双方已编写的事实证据、披露条件、评分锚点及隐私片段差异。它们需要人工裁决，不把文字不同直接解释为医学分歧。当前模板固定上游提案；发现漏标事实先记在完整性理由中，后续单独编写，不能将提案数量视为完整真值分母。
 
+### 生成公开阻断队列
+
+完成格式适配和官方 `validate-review` 校验后，可以从私有原始包与审阅稿生成只含候选编号、条目编号、枚举阻断类型和聚合分母的公开队列：
+
+```bash
+python -m scripts.patient_eval.candidate_blockers \
+  --original medical/patient-eval/local/<trusted-original>.json \
+  --review medical/patient-eval/local/<validated-review>.json \
+  --source-review medical/patient-eval/local/<submitted-review>.json \
+  --expected-source-sha256 <sha256> \
+  --out medical/patient-eval/local/<public-projection>.json
+```
+
+生成器会先重新调用现有官方合同校验器，并核对提交文件的 SHA-256；输入不一致或输出文件已存在时直接拒绝。公开投影不会复制患者文字、来源对话编号、证据片段、审阅理由、审阅者身份或本地路径。`candidate_selection=READY` 只表示可以进入开发候选选择，`dynamic_authoring=READY` 只表示可以编写受控开发脚本；两者都不等于临床可运行。临床关键规则仍须合适人员裁决，`clinical_runnable`、Clinical Gold 和 S6 自动信任保持阻断。
+
+阻断队列通过后，可以冻结一个不读取模型回答的结构多样性开发清单：
+
+```bash
+python -m scripts.patient_eval.candidate_selection \
+  --original medical/patient-eval/local/<trusted-original>.json \
+  --review medical/patient-eval/local/<validated-review>.json \
+  --source-review medical/patient-eval/local/<submitted-review>.json \
+  --expected-source-sha256 <sha256> \
+  --blockers medical/patient-eval/local/<exact-blocker-projection>.json \
+  --count 12 \
+  --out medical/patient-eval/local/<selection-projection>.json
+```
+
+选择器要求阻断队列能由私有审阅稿逐字节等价重建，并只接收至少含一条初始事实和一条问到才披露或定时披露事实的候选。排序依次扩大结构标签覆盖、最大化已选病例间的归一化距离、提高结构复杂度，再用绑定候选包和编号的 SHA-256 打破平局。相似度分组只用于避免同组选入多例；未经校准的词面相似组不能被包装成医学病例家族。
+
+### 生成私有动态病例草稿
+
+冻结清单通过后，使用 `dynamic_case_drafts` 同时生成受控本地草稿和不含患者文字的公开审计：
+
+```bash
+python -m scripts.patient_eval.dynamic_case_drafts \
+  --original medical/patient-eval/local/<trusted-original>.json \
+  --review medical/patient-eval/local/<validated-review>.json \
+  --source-review medical/patient-eval/local/<submitted-review>.json \
+  --expected-source-sha256 <sha256> \
+  --blockers medical/patient-eval/data-sources/v0.2/candidate-blockers-public-v0.1.json \
+  --selection medical/patient-eval/data-sources/v0.2/candidate-development-selection-public-v0.1.json \
+  --private-out medical/patient-eval/local/<dynamic-case-drafts>.json \
+  --public-out medical/patient-eval/data-sources/v0.2/<text-free-audit>.json
+```
+
+生成器重新执行官方审阅合同、阻断队列和冻结清单的精确重建，任一输入发生漂移都会拒绝。患者证据片段、自然语言触发草稿、评分锚点和严重错误定义只进入忽略目录中的私有包；公开报告仅保留编号、枚举状态和计数。
+
+当前有限状态机只接收操作员确认的 `OPERATOR_OPEN`、`OPERATOR_CONFIRM:<event>` 和 `OPERATOR_STOP`。未裁决的问询示例或定时条件不会被当作自动匹配规则；问到才披露和定时披露事实不能进入 opening，`never` 事实没有可见转移。评分触发回合、响应回合和结构化截止均保持 `UNRESOLVED`，而不是根据自由文本猜测。
+
+[v0.4 状态机合同](../../schemas/dynamic-case-state-machine-v0.4.json)及[公开聚合审计](dynamic-case-draft-audit-public-v0.1.json)只适用于已暴露开发材料。草稿还需自然语言连贯性复核、触发语义复核、评分机会映射、停止策略、双人独立审阅和合适人员的临床规则裁决；这些完成前 `clinical_runnable`、Clinical Gold、动态场景就绪和 S6 自动信任均保持阻断。
+
+### 离线就绪度检查
+
+`dynamic_case_offline` 将真实来源草稿与合成执行夹具分成两条硬隔离路径。真实来源草稿只重新绑定 N1–N4 的完整证据链并进行静态检查，不能进入执行器；执行器只接受同时标为 `scope=synthetic_fixture`、`source=synthetic`、`execution_mode=SYNTHETIC_CONTRACT_TEST_ONLY` 和 `clinical_runnable=SYNTHETIC_ONLY` 的合成对象。
+
+```bash
+python -m scripts.patient_eval.dynamic_case_offline \
+  --original medical/patient-eval/local/<trusted-original>.json \
+  --review medical/patient-eval/local/<validated-review>.json \
+  --source-review medical/patient-eval/local/<submitted-review>.json \
+  --expected-source-sha256 <sha256> \
+  --blockers medical/patient-eval/data-sources/v0.2/candidate-blockers-public-v0.1.json \
+  --selection medical/patient-eval/data-sources/v0.2/candidate-development-selection-public-v0.1.json \
+  --private-drafts medical/patient-eval/local/<dynamic-case-drafts>.json \
+  --n4-audit medical/patient-eval/data-sources/v0.2/dynamic-case-draft-audit-public-v0.1.json \
+  --out medical/patient-eval/data-sources/v0.2/<offline-readiness-audit>.json
+```
+
+静态检查只回答 opening 是否引用未来事实、事件是否重复披露、`never` 事实是否进入可见转移及自动匹配是否关闭。它不生成真实来源会话，不把“零静态发现”解释为模型没有泄漏，也不产生模型得分。没有执行时，质量、任务完成和安全一律保存为 `UNASSESSED`，测量状态保存为 `NOT_RUN`；评分机会的“未映射”和运行时“未到达”分别计数。
+
+[公开离线就绪审计](dynamic-case-offline-readiness-public-v0.1.json)仅含病例编号、枚举状态和分母。只有病例完成独立审阅、临床裁决、触发/停止映射及自然语言渲染并另行获得准入后，后续流程才能生成真实离线会话和盲评包。
+
+### 夜间 v0.4 证据闭环
+
+`nightly_v04_closeout` 只读取 N1–N5 的五份去敏公开产物，复核版本、准入状态、隐私声明、输入哈希、冻结候选顺序和跨阶段内容哈希。它还固定核对 50 个候选、64 条阻断、12 个草稿、57 条未映射/未评评分机会以及 0 次真实来源执行等分母；任何产物被替换、病例顺序漂移或未运行结果被升级都会拒绝生成索引。
+
+```bash
+python -m scripts.patient_eval.nightly_v04_closeout \
+  --validation medical/patient-eval/data-sources/v0.2/semantic-review-validation-public-v0.1.json \
+  --blockers medical/patient-eval/data-sources/v0.2/candidate-blockers-public-v0.1.json \
+  --selection medical/patient-eval/data-sources/v0.2/candidate-development-selection-public-v0.1.json \
+  --draft-audit medical/patient-eval/data-sources/v0.2/dynamic-case-draft-audit-public-v0.1.json \
+  --readiness-audit medical/patient-eval/data-sources/v0.2/dynamic-case-offline-readiness-public-v0.1.json \
+  --out medical/patient-eval/data-sources/v0.2/<new-evidence-index>.json
+```
+
+[公开证据索引](nightly-v04-evidence-index-public-v0.1.json)的 `ENGINEERING_EVIDENCE_COMPLETE_CLINICAL_REVIEW_BLOCKED` 仅表示工程证据链闭合，不表示病例内容正确、已完成双人独立审阅、已获得临床准入或已经观察到模型安全表现。当前唯一开放的下一道门是人工与临床复核；在其解决前，真实来源病例执行、离线会话和盲评包继续阻断。
+
 ## 下一步的交付条件
 
 两名评审完成原始意见后，先解决错位、否定范围、主体时间、披露与评分分歧，保留初评和裁决版本。随后挑选适合的小批病例，另行编写并测试动态脚本，再进行小荷和通用模型的同条件采集。

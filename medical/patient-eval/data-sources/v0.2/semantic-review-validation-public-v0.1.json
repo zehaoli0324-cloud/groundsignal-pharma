@@ -1,0 +1,63 @@
+{
+  "schema_version": "candidate-review-public-validation/v0.1",
+  "date": "2026-09-09",
+  "scope": "development_only",
+  "source_review_sha256": "0377aac34f5c04d58d218d8b036f314bdc8fda039a585edfb3766f5cff33c668",
+  "packet_sha256": "7b1a3d00e097c455ebd40055e81d7a5498527acb6ba54bcb577c654d63e8f38d",
+  "validation": {
+    "validator": "scripts.patient_eval.candidate_review.validate_review",
+    "validator_source_commit": "f28696aa93410e34068edd7203280b40926033eb",
+    "structurally_valid": true,
+    "candidate_count": 50,
+    "privacy_decided": 50,
+    "completeness_decided": 50,
+    "facts_decided": 765,
+    "facts_missing": 0,
+    "rubrics_decided": 300,
+    "rubrics_missing": 0,
+    "rubric_applicability_decided": 300,
+    "rubric_applicability_missing": 0
+  },
+  "review_summary": {
+    "included_facts": 451,
+    "excluded_facts": 306,
+    "uncertain_facts": 8,
+    "drafted_rubrics": 231,
+    "excluded_rubrics": 69,
+    "privacy_clear_candidates": 48,
+    "needs_redaction_candidates": 2
+  },
+  "admission": {
+    "formal_approval": false,
+    "clinical_gold": false,
+    "dynamic_scenario_ready": false,
+    "s6_automatic_trust": "BLOCKED"
+  },
+  "remaining_blockers": {
+    "correction_relation_candidates": [
+      "C0001"
+    ],
+    "no_included_fact_candidates": [
+      "C0021"
+    ],
+    "needs_redaction_candidates": [
+      "C0006",
+      "C0013"
+    ],
+    "uncertain_fact_candidate_count": 5,
+    "uncertain_fact_count": 8,
+    "clinical_adjudication_required": true
+  },
+  "privacy": {
+    "contains_patient_text": false,
+    "contains_review_file": false,
+    "contains_reviewer_identity": false,
+    "contains_local_or_library_path": false
+  },
+  "limitations": [
+    "The official validator establishes contract and immutable-packet consistency, not clinical correctness.",
+    "This replay reconstructed the blank review fields from the bound immutable packet; it did not independently redownload and authenticate the pinned ReMeDi source bytes.",
+    "The private review remains AI-assisted and is not evidence of licensed-physician review or independent dual review.",
+    "The candidates are exposed development material and cannot be renamed as fresh held-out evidence."
+  ]
+}
