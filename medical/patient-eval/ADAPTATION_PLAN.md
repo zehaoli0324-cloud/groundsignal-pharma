@@ -1,8 +1,8 @@
 # GroundSignal 患者多轮评测适配方案
 
-> 本页保留 v0.1 的适配分析。当前统一要求见 [任务书 v1.2](../../docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)，各阶段边界见 [S1–S10 拆分](STAGE_DECOMPOSITION.md)，最新交付见 [v0.2 试评说明](pilot/v0.2/README.md)。
+> 本页保留 v0.1 的适配分析。当前统一要求见 [任务书 v1.2](../../docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)，各阶段边界见 [S1–S10 拆分](STAGE_DECOMPOSITION.md)，最新交付见 [v0.3 交接](../../docs/handoffs/2026-09-09-patient-eval-v03-handoff.md)。
 
-2026-09-09 设计补充：[文献适配任务书 v1.3](../../docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md)把论文方法映射为六个算法与工程工作包；这些是待实施要求，功能开发仍暂停。
+2026-09-09 设计补充：[文献适配任务书 v1.3](../../docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md)把论文方法映射为六个算法与工程工作包；v0.3 已实现 L1–L4 的部分核心，真实平台试评与独立人工校准尚未开始。
 
 日期：2026-09-09。适配基线：主分支提交 `baabe88ab908ebcf29b592ea542aa37d40acca26`，以本次分支的实际父提交为准。
 

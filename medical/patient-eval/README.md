@@ -5,11 +5,14 @@
 - [统一任务书 v1.2](../../docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)
 - [十阶段职责与验收拆分](STAGE_DECOMPOSITION.md)
 - [动态试评 v0.2 场景、采集与评分材料](pilot/v0.2/README.md)
+- [v0.3 独立评分操作](REVIEW_V0.3.md) · [本轮验证](VALIDATION_V0.3.md) · [问询校准](calibration/v0.3/README.md)
 - [原任务书全文](../../docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.0.md) · [Word 原件](../../docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.0.docx)
 - [现有项目适配方案、黑盒研究协议和学习路线](ADAPTATION_PLAN.md)
 - [数据合同与评分约定](schemas/README.md)
 
-## 当前 v0.2 动态试评
+## 当前动态试评：v0.2 场景与 v0.3 评分
+
+新建审评包默认使用 v0.3，独立记录质量、安全和评分机会；旧格式需显式加 `--review-version legacy`。下列目录名只是输出位置，实际版本以记录中的字段为准。操作步骤与部分评分示例见 [v0.3 说明](REVIEW_V0.3.md)。
 
 六个合成家族各有清晰和压力变体，共十二场景。患者只在模型问到或预先规定的事件触发时披露信息；未知、纠正、催促和错误复述都有操作员侧记录。规则问句识别可能漏掉口语表达，人工采集支持带理由的识别纠正；这种模拟器误差必须与被测模型不足分开评估。
 

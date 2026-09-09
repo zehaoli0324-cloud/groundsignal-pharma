@@ -2,7 +2,7 @@
 
 **医疗大模型评测工具：记录证据、检索和对话过程，定位错误并验证修复。**
 
-[运行示例](#快速运行) · [进度与交接](docs/handoffs/2026-09-09-project-handoff.md) · [任务书](docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)
+[运行示例](#快速运行) · [进度与交接](docs/handoffs/2026-09-09-patient-eval-v03-handoff.md) · [任务书](docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)
 
 项目围绕三个问题开发：模型用了什么证据？错误发生在哪一步？修改后是否解决了问题？目前已实现证据处理、受控案例检查和患者多轮评测原型。
 
@@ -12,7 +12,7 @@
 
 - **证据处理。** 根据问题选择医学来源，抽取带出处的主张，用知识图谱记录适用条件、版本和冲突。实现了[来源路由](scripts/s2_intent_router_v04.py)、[语义抽取](scripts/s3_semantic_extractor.py)和[图谱更新](scripts/s4_truth_ledger_v011.py)。
 - **受控案例。** 建立 12 个家族、60 个案例，改变关键条件来检查模型行为；另有来源追踪、分区污染检测和历史结果保留。[案例目录](medical/case-families/) · [阶段评测](medical/stage-evals/)
-- **患者对话评测。** 新增 6 个家族、12 个合成变体，覆盖含糊表达、事实纠正、催促和误解修复。交互器按问询披露信息，配套人工采集、评分和同一模型的状态增强对照脚本。[代码](scripts/patient_eval/) · [场景与协议](medical/patient-eval/pilot/v0.2/)
+- **患者对话评测。** 6 个家族、12 个合成变体，覆盖含糊表达、事实纠正、催促和误解修复。交互器按问询披露信息；质量、安全和评分机会分别记录，配套双人评分及同一模型的状态增强对照。[代码](scripts/patient_eval/) · [评分操作](medical/patient-eval/REVIEW_V0.3.md)
 
 ## 已有结果
 
@@ -22,7 +22,7 @@
 |---|---|---|
 | 来源路由 v0.3 | 24 条受控留出查询中，首选来源命中 22 条；保留两条失败 | [报告](medical/stage-evals/S2/V0.3_REPORT.md) |
 | 时间知识图谱 v0.1.1 | 修复“晚到旧事实覆盖当前争议”：原失败集从 18/20 到 20/20，随后新建的 20 条轨迹全部通过 | [首次失败](medical/stage-evals/S4/S4_V0.1_FRESH_FAIL_REPORT.md) · [修复与新集](medical/stage-evals/S4/S4_V0.1.1_FRESH_PASS_REPORT.md) |
-| 患者评测 v0.2 | 12 个变体、两种流程生成 24 条离线会话；102 项软件测试通过，152 个语义／临床判据待人工评分 | [验证记录](medical/patient-eval/VALIDATION_V0.2.md) |
+| 患者评测 v0.3 | 161 项软件测试通过；48 条已暴露问询表达的披露匹配从 23/48 到 48/48；24 条离线会话的 152 个判据仍待人工评分 | [验证与限制](medical/patient-eval/VALIDATION_V0.3.md) |
 
 例如，在受控演示中，用户先说“症状开始时间是昨天”，后说“更正，症状开始时间是前天”。系统记录更正消息、抽取后的事实、实际传给模型的上下文和后续回答。自建流程可据此排查抽取、状态更新或消息传递；对只能看到回答的平台，只记录行为缺陷与待验证原因。
 
@@ -44,14 +44,14 @@ python -m scripts.patient_eval.pilot_cli demo --out medical/patient-eval/local/r
 
 ## 当前范围
 
-截至 2026-09-09，开发暂停，本轮只整理文档。真实平台采集、临床审核及真实模型改进实验均未完成。交互器的口语识别、评分质量与安全结果的分离、评分机会判定仍有已知缺口，详见[交接文档](docs/handoffs/2026-09-09-project-handoff.md)。
+截至 2026-09-09，已补齐版本化披露规则、独立评分和分项一致性检查。真实平台采集、独立口语校准、临床审核及真实模型改进实验均未完成；开发样本结果不能代表真实患者效果。下一步见[交接文档](docs/handoffs/2026-09-09-patient-eval-v03-handoff.md)。
 
 现有案例属于开发资产；案例准入阶段的历史冻结检查已修复，正式研究准入仍未通过。本项目不用于向患者提供诊疗建议。
 
 ## 文档
 
 - [十阶段任务拆分](medical/patient-eval/STAGE_DECOMPOSITION.md)：每阶段的输入、输出和验收。
-- [文献设计补充](docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md)：论文方法对应的算法、工程任务与验收，尚未实施。
+- [文献设计补充](docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md)：论文方法对应的算法、工程任务及实施进度。
 - [知识来源与核验](medical/knowledge-base/SEARCH_AND_VERIFICATION_PROTOCOL.md) · [图谱构建](medical/knowledge-graph/HOW_IT_IS_BUILT.md)。
 - [采集与评分材料](medical/patient-eval/pilot/v0.2/README.md)：披露规则、采集模板与人工评分细则。
-- [进度与交接](docs/handoffs/2026-09-09-project-handoff.md)：已交付内容、已知问题和恢复工作的入口。
+- [进度与交接](docs/handoffs/2026-09-09-patient-eval-v03-handoff.md)：本轮交付、证据边界和下一步。

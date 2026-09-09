@@ -1,0 +1,547 @@
+{
+  "schema_version": "patient-question-calibration.v0.3",
+  "provenance": {
+    "source": "synthetic_agent_assisted",
+    "clinical_gold": false,
+    "independent_human_annotation": false,
+    "fresh_held_out": false,
+    "label_policy": "Only a direct current request licenses a supported fact; quotes, third-party instructions and negated requests do not. Unsupported intent remains unmapped.",
+    "split_policy": "Both declared splits are exposed development examples. Regression label is organizational, not an independent holdout."
+  },
+  "fact_patterns": {
+    "onset": [
+      "什么时候",
+      "多久",
+      "开始时间",
+      "起始时间"
+    ],
+    "age": [
+      "年龄",
+      "几岁",
+      "多大"
+    ],
+    "allergy": [
+      "过敏"
+    ],
+    "fever": [
+      "发热",
+      "发烧"
+    ],
+    "medicine": [
+      "药名",
+      "什么药"
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "dev-001",
+      "declared_split": "development_design",
+      "category": "direct",
+      "text": "年龄是多少？",
+      "expected_slots": [
+        "age"
+      ],
+      "legacy_observed_slots_before_change": [
+        "age"
+      ]
+    },
+    {
+      "case_id": "dev-002",
+      "declared_split": "development_design",
+      "category": "direct",
+      "text": "请问你今年几岁？",
+      "expected_slots": [
+        "age"
+      ],
+      "legacy_observed_slots_before_change": [
+        "age"
+      ]
+    },
+    {
+      "case_id": "dev-003",
+      "declared_split": "development_design",
+      "category": "direct",
+      "text": "这是什么药？",
+      "expected_slots": [
+        "medicine"
+      ],
+      "legacy_observed_slots_before_change": [
+        "medicine"
+      ]
+    },
+    {
+      "case_id": "dev-004",
+      "declared_split": "development_regression",
+      "category": "direct",
+      "text": "请告诉我药名。",
+      "expected_slots": [
+        "medicine"
+      ],
+      "legacy_observed_slots_before_change": [
+        "medicine"
+      ]
+    },
+    {
+      "case_id": "dev-005",
+      "declared_split": "development_design",
+      "category": "direct",
+      "text": "有没有过敏？",
+      "expected_slots": [
+        "allergy"
+      ],
+      "legacy_observed_slots_before_change": [
+        "allergy"
+      ]
+    },
+    {
+      "case_id": "dev-006",
+      "declared_split": "development_design",
+      "category": "direct",
+      "text": "是否发热？",
+      "expected_slots": [
+        "fever"
+      ],
+      "legacy_observed_slots_before_change": [
+        "fever"
+      ]
+    },
+    {
+      "case_id": "dev-007",
+      "declared_split": "development_design",
+      "category": "direct",
+      "text": "什么时候开始的？",
+      "expected_slots": [
+        "onset"
+      ],
+      "legacy_observed_slots_before_change": [
+        "onset"
+      ]
+    },
+    {
+      "case_id": "dev-008",
+      "declared_split": "development_regression",
+      "category": "direct",
+      "text": "这种状况持续几天了？",
+      "expected_slots": [
+        "onset"
+      ],
+      "legacy_observed_slots_before_change": []
+    },
+    {
+      "case_id": "dev-009",
+      "declared_split": "development_design",
+      "category": "paraphrase",
+      "text": "不舒服已经持续多长时间？",
+      "expected_slots": [
+        "onset"
+      ],
+      "legacy_observed_slots_before_change": []
+    },
+    {
+      "case_id": "dev-010",
+      "declared_split": "development_design",
+      "category": "paraphrase",
+      "text": "症状出现到现在有多少天？",
+      "expected_slots": [
+        "onset"
+      ],
+      "legacy_observed_slots_before_change": []
+    },
+    {
+      "case_id": "dev-011",
+      "declared_split": "development_design",
+      "category": "paraphrase",
+      "text": "能说一下开始时间吗？",
+      "expected_slots": [
+        "onset"
+      ],
+      "legacy_observed_slots_before_change": [
+        "onset"
+      ]
+    },
+    {
+      "case_id": "dev-012",
+      "declared_split": "development_regression",
+      "category": "paraphrase",
+      "text": "你有发烧吗",
+      "expected_slots": [
+        "fever"
+      ],
+      "legacy_observed_slots_before_change": [
+        "fever"
+      ]
+    },
+    {
+      "case_id": "dev-013",
+      "declared_split": "development_design",
+      "category": "paraphrase",
+      "text": "请补充一下年龄。",
+      "expected_slots": [
+        "age"
+      ],
+      "legacy_observed_slots_before_change": []
+    },
+    {
+      "case_id": "dev-014",
+      "declared_split": "development_design",
+      "category": "paraphrase",
+      "text": "药名麻烦说一下。",
+      "expected_slots": [
+        "medicine"
+      ],
+      "legacy_observed_slots_before_change": []
+    },
+    {
+      "case_id": "dev-015",
+      "declared_split": "development_design",
+      "category": "paraphrase",
+      "text": "你是否没有过敏？",
+      "expected_slots": [
+        "allergy"
+      ],
+      "legacy_observed_slots_before_change": [
+        "allergy"
+      ]
+    },
+    {
+      "case_id": "dev-016",
+      "declared_split": "development_regression",
+      "category": "paraphrase",
+      "text": "现在没有发热，对吗？",
+      "expected_slots": [
+        "fever"
+      ],
+      "legacy_observed_slots_before_change": []
+    },
+    {
+      "case_id": "dev-017",
+      "declared_split": "development_design",
+      "category": "negated_request",
+      "text": "年龄不用说。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": []
+    },
+    {
+      "case_id": "dev-018",
+      "declared_split": "development_design",
+      "category": "negated_request",
+      "text": "不用告诉我药名。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "medicine"
+      ]
+    },
+    {
+      "case_id": "dev-019",
+      "declared_split": "development_design",
+      "category": "negated_request",
+      "text": "暂时不要回答是否过敏。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "allergy"
+      ]
+    },
+    {
+      "case_id": "dev-020",
+      "declared_split": "development_regression",
+      "category": "negated_request",
+      "text": "我不是问你有没有发热。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "fever"
+      ]
+    },
+    {
+      "case_id": "dev-021",
+      "declared_split": "development_design",
+      "category": "negated_request",
+      "text": "先不问什么时候开始的。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "onset"
+      ]
+    },
+    {
+      "case_id": "dev-022",
+      "declared_split": "development_design",
+      "category": "negated_request",
+      "text": "请不要补充年龄和药名。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": []
+    },
+    {
+      "case_id": "dev-023",
+      "declared_split": "development_design",
+      "category": "negated_request",
+      "text": "药名是什么？不必现在回复我。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "medicine"
+      ]
+    },
+    {
+      "case_id": "dev-024",
+      "declared_split": "development_regression",
+      "category": "negated_request",
+      "text": "有没有过敏？以上问题暂时不用回答。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "allergy"
+      ]
+    },
+    {
+      "case_id": "dev-025",
+      "declared_split": "development_design",
+      "category": "reported_or_quoted",
+      "text": "先告诉医生起始时间，不必现在回复我。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "onset"
+      ]
+    },
+    {
+      "case_id": "dev-026",
+      "declared_split": "development_design",
+      "category": "reported_or_quoted",
+      "text": "医生问你年龄是多少。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "age"
+      ]
+    },
+    {
+      "case_id": "dev-027",
+      "declared_split": "development_design",
+      "category": "reported_or_quoted",
+      "text": "示例问句是“有没有过敏？”",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "allergy"
+      ]
+    },
+    {
+      "case_id": "dev-028",
+      "declared_split": "development_regression",
+      "category": "reported_or_quoted",
+      "text": "把“药名是什么？”留给下次问诊。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "medicine"
+      ]
+    },
+    {
+      "case_id": "dev-029",
+      "declared_split": "development_design",
+      "category": "reported_or_quoted",
+      "text": "请向护士说明是否发热。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "fever"
+      ]
+    },
+    {
+      "case_id": "dev-030",
+      "declared_split": "development_design",
+      "category": "reported_or_quoted",
+      "text": "家属之前问过什么时候开始的。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "onset"
+      ]
+    },
+    {
+      "case_id": "dev-031",
+      "declared_split": "development_design",
+      "category": "reported_or_quoted",
+      "text": "病历写着“年龄是多少”，这里只是转述。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "age"
+      ]
+    },
+    {
+      "case_id": "dev-032",
+      "declared_split": "development_regression",
+      "category": "reported_or_quoted",
+      "text": "下次请告诉医生吃了什么药。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "medicine"
+      ]
+    },
+    {
+      "case_id": "dev-033",
+      "declared_split": "development_design",
+      "category": "multi_scope",
+      "text": "有没有过敏和发热？",
+      "expected_slots": [
+        "allergy",
+        "fever"
+      ],
+      "legacy_observed_slots_before_change": [
+        "allergy",
+        "fever"
+      ]
+    },
+    {
+      "case_id": "dev-034",
+      "declared_split": "development_design",
+      "category": "multi_scope",
+      "text": "年龄是多少，药名是什么？",
+      "expected_slots": [
+        "age",
+        "medicine"
+      ],
+      "legacy_observed_slots_before_change": [
+        "age",
+        "medicine"
+      ]
+    },
+    {
+      "case_id": "dev-035",
+      "declared_split": "development_design",
+      "category": "multi_scope",
+      "text": "不用说药名，请告诉我有没有过敏。",
+      "expected_slots": [
+        "allergy"
+      ],
+      "legacy_observed_slots_before_change": [
+        "allergy"
+      ]
+    },
+    {
+      "case_id": "dev-036",
+      "declared_split": "development_regression",
+      "category": "multi_scope",
+      "text": "年龄不用说，但什么时候开始的？",
+      "expected_slots": [
+        "onset"
+      ],
+      "legacy_observed_slots_before_change": [
+        "onset"
+      ]
+    },
+    {
+      "case_id": "dev-037",
+      "declared_split": "development_design",
+      "category": "multi_scope",
+      "text": "不用说年龄和药名，只回答是否发热？",
+      "expected_slots": [
+        "fever"
+      ],
+      "legacy_observed_slots_before_change": [
+        "fever"
+      ]
+    },
+    {
+      "case_id": "dev-038",
+      "declared_split": "development_design",
+      "category": "multi_scope",
+      "text": "医生问“药名是什么”，我现在问你几岁？",
+      "expected_slots": [
+        "age"
+      ],
+      "legacy_observed_slots_before_change": [
+        "age",
+        "medicine"
+      ]
+    },
+    {
+      "case_id": "dev-039",
+      "declared_split": "development_design",
+      "category": "multi_scope",
+      "text": "“有没有发热？”只是例句。你有没有过敏？",
+      "expected_slots": [
+        "allergy"
+      ],
+      "legacy_observed_slots_before_change": [
+        "allergy",
+        "fever"
+      ]
+    },
+    {
+      "case_id": "dev-040",
+      "declared_split": "development_regression",
+      "category": "multi_scope",
+      "text": "先不问过敏，药名是什么？是否发热？",
+      "expected_slots": [
+        "medicine",
+        "fever"
+      ],
+      "legacy_observed_slots_before_change": [
+        "fever",
+        "medicine"
+      ]
+    },
+    {
+      "case_id": "dev-041",
+      "declared_split": "development_design",
+      "category": "non_request_or_unsupported",
+      "text": "我会记录药名。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": []
+    },
+    {
+      "case_id": "dev-042",
+      "declared_split": "development_design",
+      "category": "non_request_or_unsupported",
+      "text": "年龄和药名需要核实。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": []
+    },
+    {
+      "case_id": "dev-043",
+      "declared_split": "development_design",
+      "category": "non_request_or_unsupported",
+      "text": "我不知道年龄是多少。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "age"
+      ]
+    },
+    {
+      "case_id": "dev-044",
+      "declared_split": "development_regression",
+      "category": "non_request_or_unsupported",
+      "text": "年龄是多少这个问题以后再讨论。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "age"
+      ]
+    },
+    {
+      "case_id": "dev-045",
+      "declared_split": "development_design",
+      "category": "non_request_or_unsupported",
+      "text": "发热可能需要记录吗？",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": [
+        "fever"
+      ]
+    },
+    {
+      "case_id": "dev-046",
+      "declared_split": "development_design",
+      "category": "non_request_or_unsupported",
+      "text": "你的新型复杂量表是哪一种？",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": []
+    },
+    {
+      "case_id": "dev-047",
+      "declared_split": "development_design",
+      "category": "non_request_or_unsupported",
+      "text": "先这样，谢谢你。",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": []
+    },
+    {
+      "case_id": "dev-048",
+      "declared_split": "development_regression",
+      "category": "non_request_or_unsupported",
+      "text": "这个药物的作用机制是什么？",
+      "expected_slots": [],
+      "legacy_observed_slots_before_change": []
+    }
+  ]
+}

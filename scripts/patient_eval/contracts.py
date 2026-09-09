@@ -11,6 +11,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from .review_contract import REVIEW_VERSION, validate_review_observation
+
 
 MODULES = {f"C{i}" for i in range(1, 9)}
 
@@ -81,6 +83,10 @@ def validate_session(session: dict) -> None:
     require(session.get("observability") in {"instrumented", "black_box"}, "invalid observability")
     status = session.get("status")
     require(status in {"completed", "target_error", "measurement_invalid"}, "invalid session status")
+    metadata = session.get("metadata", {})
+    require(isinstance(metadata, dict), "metadata must be an object")
+    if "review_version" in metadata:
+        require(metadata["review_version"] == REVIEW_VERSION, "unsupported session review_version")
     validate_turns(session.get("turns"), completed=status == "completed")
     require(isinstance(session.get("trace"), list), "trace must be a list")
     if session["observability"] == "black_box":
@@ -110,6 +116,12 @@ def validate_session(session: dict) -> None:
         if observation["source"] == "human":
             require(nonempty(observation.get("reviewer_id")), "human annotation requires reviewer_id")
             require(nonempty(observation.get("rubric_version")), "human annotation requires rubric_version")
+        if "review_version" in observation:
+            require(observation["review_version"] == REVIEW_VERSION, "unsupported review_version")
+            validate_review_observation(observation, session["turns"])
+        else:
+            require(not ({"quality_status", "opportunity"} & set(observation)),
+                    "independent review fields require explicit review_version; legacy is not auto-upgraded")
 
 
 def visible_prefix(scenario: dict) -> list[dict]:
