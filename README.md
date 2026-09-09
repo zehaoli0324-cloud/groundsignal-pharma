@@ -2,7 +2,7 @@
 
 **医疗大模型评测工具：记录证据、检索和对话过程，定位错误并验证修复。**
 
-[运行示例](#快速运行) · [进度与交接](docs/handoffs/2026-09-09-patient-eval-v03-handoff.md) · [任务书](docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)
+[运行示例](#快速运行) · [进度与交接](docs/handoffs/2026-09-09-candidate-review-handoff.md) · [任务书](docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)
 
 项目围绕三个问题开发：模型用了什么证据？错误发生在哪一步？修改后是否解决了问题？目前已实现证据处理、受控案例检查和患者多轮评测原型。
 
@@ -13,6 +13,7 @@
 - **证据处理。** 根据问题选择医学来源，抽取带出处的主张，用知识图谱记录适用条件、版本和冲突。实现了[来源路由](scripts/s2_intent_router_v04.py)、[语义抽取](scripts/s3_semantic_extractor.py)和[图谱更新](scripts/s4_truth_ledger_v011.py)。
 - **受控案例。** 建立 12 个家族、60 个案例，改变关键条件来检查模型行为；另有来源追踪、分区污染检测和历史结果保留。[案例目录](medical/case-families/) · [阶段评测](medical/stage-evals/)
 - **患者对话评测。** 6 个家族、12 个合成变体，覆盖含糊表达、事实纠正、催促和误解修复。交互器按问询披露信息；质量、安全和评分机会分别记录，配套双人评分及同一模型的状态增强对照。[代码](scripts/patient_eval/) · [评分操作](medical/patient-eval/REVIEW_V0.3.md)
+- **真实数据审阅。** 核验 1,557 段 ReMeDi 对话，为其中 50 段生成带原文定位的事实与披露草稿、独立审阅页面和分歧清单；尚未形成医学标准答案。[接入与审阅](medical/patient-eval/data-sources/v0.2/README.md)
 
 ## 已有结果
 
@@ -44,7 +45,7 @@ python -m scripts.patient_eval.pilot_cli demo --out medical/patient-eval/local/r
 
 ## 当前范围
 
-截至 2026-09-09，已补齐版本化披露规则、独立评分和分项一致性检查。真实平台采集、独立口语校准、临床审核及真实模型改进实验均未完成；开发样本结果不能代表真实患者效果。下一步见[交接文档](docs/handoffs/2026-09-09-patient-eval-v03-handoff.md)。
+截至 2026-09-09，已补齐披露校准、独立评分和真实对话审阅工具。真实平台采集、独立口语校准、临床审核及真实模型改进实验均未完成；开发样本结果不能代表真实患者效果。下一步见[交接文档](docs/handoffs/2026-09-09-candidate-review-handoff.md)。
 
 现有案例属于开发资产；案例准入阶段的历史冻结检查已修复，正式研究准入仍未通过。本项目不用于向患者提供诊疗建议。
 
@@ -54,4 +55,5 @@ python -m scripts.patient_eval.pilot_cli demo --out medical/patient-eval/local/r
 - [文献设计补充](docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md)：论文方法对应的算法、工程任务及实施进度。
 - [知识来源与核验](medical/knowledge-base/SEARCH_AND_VERIFICATION_PROTOCOL.md) · [图谱构建](medical/knowledge-graph/HOW_IT_IS_BUILT.md)。
 - [采集与评分材料](medical/patient-eval/pilot/v0.2/README.md)：披露规则、采集模板与人工评分细则。
-- [进度与交接](docs/handoffs/2026-09-09-patient-eval-v03-handoff.md)：本轮交付、证据边界和下一步。
+- [算法与工程学习手册（HTML）](docs/learning/groundsignal-learning-guide.html)：术语、代码用途、基础练习与模型训练的关系；下载后用浏览器打开。
+- [进度与交接](docs/handoffs/2026-09-09-candidate-review-handoff.md)：本轮交付、证据边界和下一步。

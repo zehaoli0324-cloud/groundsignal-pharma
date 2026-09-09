@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="GroundSignal 医疗对话测评的算法、工程与模型训练入门。区分已经实现的工具、可观察的模型缺陷与待验证的内部原因。">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; connect-src 'none'">
+<title>GroundSignal · 算法与工程学习手册</title>
+<style>
+:root{--ink:#203b41;--muted:#5e7072;--accent:#126b64;--line:#d9e4e2;--paper:#fff;--bg:#f0f5f3}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 system-ui,-apple-system,'Noto Sans CJK SC','Microsoft YaHei',sans-serif}
+header{background:#153e43;color:#fff;padding:42px max(24px,calc((100vw - 1080px)/2));border-bottom:6px solid #7ed0b0}
+.eyebrow{font-size:13px;letter-spacing:.14em;color:#a9d5c9}.hero-title{font-size:clamp(27px,4vw,42px);line-height:1.35;margin:12px 0}.subtitle{max-width:830px;color:#d8ebe6;margin:12px 0}
+.meta{font-size:13px;color:#b6d2cc}.toolbar{display:flex;align-items:center;gap:14px;margin-top:22px;flex-wrap:wrap}
+button{font:inherit;font-size:14px;border:1px solid #a1cfc0;border-radius:6px;background:#e7f5ed;color:#194e49;padding:8px 14px;cursor:pointer}
+.layout{max-width:1080px;margin:auto;padding:26px 22px 44px}nav{display:flex;flex-wrap:wrap;gap:7px 18px;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:22px;font-size:14px}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}a:hover{color:#06403c}nav a{text-decoration:none}
+.lead{background:#deeee8;border-left:4px solid var(--accent);padding:15px 20px;border-radius:0 8px 8px 0;margin:0 0 24px}
+section{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:24px 28px;margin:20px 0;box-shadow:0 2px 4px #173c3c04}
+h1,h2,h3{font-weight:700;line-height:1.4}h2{font-size:23px;margin:0 0 17px;color:#164f4b}h3{font-size:17px;margin:22px 0 8px}p{margin:11px 0}strong{color:#143f40}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:18px 0;table-layout:fixed}th,td{text-align:left;vertical-align:top;padding:12px 13px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}th{background:#e7f1ed;color:#28594f;font-weight:650}tbody tr:nth-child(even){background:#f8fbfa}th:first-child{width:25%}td p{margin:0 0 6px}
+ul,ol{padding-left:24px}li{margin:7px 0}code{font-size:.9em;background:#edf3f1;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}blockquote{border-left:3px solid #86b7a5;background:#f4f9f6;padding:10px 16px;margin:16px 0}
+details{border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin:12px 0}summary{cursor:pointer;font-weight:600;color:#27594f}.source-note,footer{color:var(--muted);font-size:13px}footer{border-top:1px solid var(--line);padding-top:18px}
+@media(max-width:640px){body{font-size:15px}.layout{padding:18px 12px}section{padding:18px 14px}header{padding:28px 20px}h2{font-size:20px}th,td{padding:9px 6px;font-size:12px}nav{gap:8px 12px}.source-note{font-size:12px}}
+@media print{@page{size:A4;margin:16mm 14mm}body{background:white;font-size:10.5pt;line-height:1.55}header{padding:0 0 16px;background:white;color:var(--ink);border-bottom:2px solid var(--accent)}.eyebrow,.subtitle,.meta{color:var(--muted)}.hero-title{font-size:24pt}.toolbar,nav{display:none}.layout{padding:12px 0;max-width:none}section{box-shadow:none;padding:14px 0;border:0;border-radius:0;margin:12px 0}h2{font-size:16pt;break-after:avoid}h3{break-after:avoid}table{font-size:9pt;table-layout:fixed}tr{break-inside:avoid}th,td{padding:7px}thead{display:table-header-group}p{orphans:3;widows:3}a{color:inherit;text-decoration:none}footer{font-size:9pt}.lead{padding:10px 14px}}
+</style></head><body>
+<header><div class="eyebrow">GROUNDSIGNAL PHARMA · 学习手册 01</div>
+<h1 class="hero-title">算法做什么，工程保证什么？</h1>
+<p class="subtitle">从医疗对话测评出发，理解我们写的代码、要测的大模型能力，以及它们与训练的关系。</p>
+<div class="meta">2026-09-09 · 面向初学者 · 建议先读 1–4，再按作业顺序练习</div>
+<div class="toolbar"><button type="button" onclick="window.print()">打印 / 另存为 PDF</button><span class="meta">可离线阅读；学习示例不包含患者原文。</span></div></header>
+<div class="layout"><nav aria-label="手册目录"><a href="#learning-02">1. 先认识正在使用的算法</a><a href="#learning-03">2. 为什么还需要工程</a><a href="#learning-04">3. 专业数据怎么变成测试题</a><a href="#learning-05">4. 测到什么，才能讨论模型缺陷</a><a href="#learning-06">5. 模型训练这些词是什么关系</a><a href="#learning-07">6. 按这个顺序学习，每步交一份小作业</a></nav>
+<aside class="lead"><strong>先记住：</strong>我们在建设一套可信的“测量工具”。测量工具本身也会犯错，必须先检查它，再讨论被测模型的缺陷。</aside>
+<p class="source-note">LLM = Large Language Model，大语言模型；NLP = Natural Language Processing，自然语言处理；RAG = Retrieval-Augmented Generation，检索增强生成，指回答时先找资料再利用资料生成内容。</p>
+<main><section id="learning-02" aria-labelledby="learning-title-02">
+<h2 id="learning-title-02">1. 先认识正在使用的算法</h2>
+<div class="table-wrap"><table><thead><tr>
+<th scope="col">方法</th>
+<th scope="col">通俗解释与项目用途</th>
+<th scope="col">当前边界</th>
+</tr></thead><tbody>
+<tr>
+<td>FSM：Finite State Machine，有限状态机</td>
+<td>像一份有条件的问诊剧本：问题命中某项信息才披露，满足前提才触发纠正或压力事件。</td>
+<td>已实现确定性的患者状态与事件控制；不是训练出来的患者模型。</td>
+</tr>
+<tr>
+<td>Unicode：统一字符编码；NFKC：Normalization Form Compatibility Composition，兼容分解后组合的规范化</td>
+<td>先统一部分字符写法，例如全角字母，再匹配问题。否定与纠正另靠明确规则识别。</td>
+<td>已实现有限中文规则；规范化不会自动理解语义，也可能改变字符表现，因此原文必须保留。</td>
+</tr>
+<tr>
+<td>Character n-gram，连续字符片段；Jaccard，相似集合交并比</td>
+<td>把患者话语切成连续三个字，计算“共同片段数÷全部不同片段数”，筛出值得人工检查的相似候选。</td>
+<td>本轮已实现候选间比较；排除医生模板。相似不证明同一患者，没有匹配也不证明测试集独立。</td>
+</tr>
+<tr>
+<td>BM25：Best Matching 25，词频相关性排序</td>
+<td>综合词语在文档中的频率、稀有程度和文档长度，为证据排序。</td>
+<td>自有组件已实现，并先过滤日期和适用人群；词面相关不代表医学依据充分。</td>
+</tr>
+<tr>
+<td>Paired design，配对实验</td>
+<td>同一场景与模型配置分别运行原方案和改进方案，比较差值，减少病例差异的干扰。</td>
+<td>自动脚本目前只接合成开发场景，随机安排“原对话／增加可见事实记录”。两组路径可能不同，测的是整套干预效果。</td>
+</tr>
+<tr>
+<td>Bootstrap，自助重采样；CI：Confidence Interval，置信区间</td>
+<td>从已观测病例家族中反复有放回抽样，观察平均改进值的不确定性。</td>
+<td>已实现按家族等权统计；病例少时区间仍不可靠，不能把同一病例多轮当成大量独立样本。</td>
+</tr>
+<tr>
+<td>Weighted Cohen’s kappa，加权科恩一致性系数</td>
+<td>比较两人对同一回答的评分，扣除按评分比例可能出现的偶然一致，并区分轻微与较大分歧。</td>
+<td>已实现按判据统计。两人一致可能是一起判断错；类别过于单一时系数可能无法定义。</td>
+</tr>
+</tbody></table></div>
+<p>这些概念可分别核对<a href="https://web.stanford.edu/class/archive/cs/cs103/cs103.1242/lectures/14/">有限自动机讲义</a>、<a href="https://unicode.org/reports/tr15/">Unicode 规范</a>、<a href="https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables">词频排序说明</a>、<a href="https://docs.scipy.org/doc/scipy-1.16.2/reference/generated/scipy.stats.bootstrap.html">重采样说明</a>与<a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html">加权一致性说明</a>。项目自己实现了相应的小型算法，不代表使用了这些页面的软件库。</p>
+<details class="code-evidence"><summary>对应代码与核验依据</summary><ul>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/scripts/patient_eval/patient.py">患者状态与披露</a>（固定基线版本）</li>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/scripts/patient_eval/patient_intent.py">问题规范化与直接问询规则</a>（固定基线版本）</li>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/scripts/patient_eval/extraction.py">可见事实抽取与纠正</a>（固定基线版本）</li>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/scripts/patient_eval/retrieval.py">词频证据排序</a>（固定基线版本）</li>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/scripts/patient_eval/study.py">两组组合干预</a>（固定基线版本）</li>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/scripts/patient_eval/reporting.py">家族配对与重采样</a>（固定基线版本）</li>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/scripts/patient_eval/agreement.py">评分者一致性</a>（固定基线版本）</li>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/main/scripts/patient_eval/candidate_similarity.py">本轮候选相似度</a>（本轮新增；以主分支合并内容为准）</li>
+</ul></details>
+</section>
+<section id="learning-03" aria-labelledby="learning-title-03">
+<h2 id="learning-title-03">2. 为什么还需要工程</h2>
+<p><strong>Schema，数据结构约定</strong>，规定每条记录必须有什么字段、证据指向哪轮。未知、否定、冲突要分开，空评分不能自动变成零分。<strong>Provenance，来源与加工记录</strong>，说明数据从哪里来、经过什么处理、谁复核过。</p>
+<p><strong>SHA-256：Secure Hash Algorithm 256-bit，256 位安全散列算法</strong>，为文件或固定格式内容计算“指纹”，帮助发现版本变化；它证明不了医学正确性，也不是加密或匿名化。<a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">标准说明</a></p>
+<p>工程里的 <strong>CI：Continuous Integration，持续集成</strong>，指修改代码后自动运行检查；它与统计中的置信区间只是缩写相同。我们合并的是实际通过检查的那次提交，不能拿旧提交的绿灯替代新提交。<a href="https://docs.github.com/en/actions/get-started/continuous-integration">GitHub 说明</a></p>
+<p><strong>API：Application Programming Interface，应用程序接口</strong>，是程序向模型服务发送消息、接收回答的约定。现有适配器限制超时与重试次数，记录每次失败、可见输入及返回用量；未知开销不填成零。日志用于排查我们是否漏传消息，不能冒充第三方内部日志。</p><p>第五阶段的历史冻结材料按原版本核对；程序通过不会自动取得专家标准答案资格。本轮患者原文与替换映射留在本地审阅，公共报告只输出受限统计。隐私规则提供复核线索，零命中不代表已经脱敏完成。</p>
+<details class="code-evidence"><summary>对应代码与核验依据</summary><ul>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/scripts/patient_eval/contracts.py">记录结构验证</a>（固定基线版本）</li>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/scripts/patient_eval/source_intake.py">取数版本与来源校验</a>（固定基线版本）</li>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/medical/patient-eval/S5_INTEGRATION_STATUS.md">第五阶段冻结检查边界</a>（固定基线版本）</li>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/main/scripts/patient_eval/candidate_privacy.py">本轮隐私复核线索</a>（本轮新增；以主分支合并内容为准）</li>
+</ul></details>
+</section>
+<section id="learning-04" aria-labelledby="learning-title-04">
+<h2 id="learning-title-04">3. 专业数据怎么变成测试题</h2>
+<p>本轮工具把来源对话变成<strong>待审事实卡</strong>：保留原话、来源轮次、标注范围，以及否定、未知、纠正等线索。历史医生回答不能直接当标准答案；患者问“是不是某种病”也不能自动登记为已经患病。后续才出现的信息不能偷偷补进最初提问。</p>
+<p>已实现的是草稿生成、范围核对、隐私线索与相似度审计；尚需人工确认事实主体、时间、否定范围和披露规则，再做独立医学评分。两位真实评审的意见不能由程序代填。</p>
+<p>本轮 50 段候选中，765 个标注提案有 745 个范围对齐、20 个不匹配；这只验证位置，不验证医学结论。旧抽取器仅产生 1 条观测、留下 842 个未解析片段，说明规则覆盖需要补足；它们不是独立标注下的错误率。先测清处理器的偏差，再评价模型，才能避免把题目处理失败算到模型头上。</p>
+<details class="code-evidence"><summary>对应代码与核验依据</summary><ul>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/main/scripts/patient_eval/candidate_facts.py">本轮患者事实草稿</a>（本轮新增；以主分支合并内容为准）</li>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/main/scripts/patient_eval/candidate_review.py">本轮候选审阅编排</a>（本轮新增；以主分支合并内容为准）</li>
+</ul></details>
+</section>
+<section id="learning-05" aria-labelledby="learning-title-05">
+<h2 id="learning-title-05">4. 测到什么，才能讨论模型缺陷</h2>
+<div class="table-wrap"><table><thead><tr>
+<th scope="col">想测的能力</th>
+<th scope="col">可区分的实验</th>
+<th scope="col">结论边界</th>
+</tr></thead><tbody>
+<tr>
+<td>澄清与主动追问</td>
+<td>同病例完整描述和含糊描述配对，检查是否问到关键缺失信息。</td>
+<td>先排除患者交互器漏披露。</td>
+</tr>
+<tr>
+<td>否定、纠正与记忆</td>
+<td>比较近处／远处纠正，并插入无关轮次，检查最终是否采用有效更新。</td>
+<td>遗漏可来自策略或上下文传递，黑盒不能直接定位内部原因。</td>
+</tr>
+<tr>
+<td>风险升级与用户解释</td>
+<td>在专业审核后加入会改变处置的条件，检查建议、依据与下一步是否相应改变。</td>
+<td>不能只凭是否出现某个警示词判断安全。</td>
+</tr>
+<tr>
+<td>证据利用与工具失败</td>
+<td>控制有无相关资料、资料过期与工具不可用，分别看引用、适用性与恢复行为。</td>
+<td>自有组件已有部分检索和恢复重放；真实平台实验还要另做受控采集。</td>
+</tr>
+<tr><td>服务稳定性与记录完整性</td><td>同配置重复运行，保留超时、空回答、截断、端到端延迟与未完成任务。</td><td>可观察产品服务质量；网络、应用和模型都可能参与，不能只凭超时认定服务器算法故障。</td></tr></tbody></table></div>
+<p><strong>Black box，黑盒</strong>，就是只看到输入与输出。因此可以说“长对话后纠正利用率下降”，不能直接说“内部记忆算法坏了”。<strong>Ablation，消融实验</strong>，是在尽量固定其他条件时，撤掉一个组件比较结果。自有组件已有丢失纠正／恢复传递的重放；进一步拆开抽取、记忆记录与额外提示的贡献，仍需专门实验。</p>
+<details class="code-evidence"><summary>对应代码与核验依据</summary><ul>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/scripts/patient_eval/diagnosis.py">黑盒归因与受控重放限制</a>（固定基线版本）</li>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/scripts/patient_eval/runner.py">自有故障与恢复重放</a>（固定基线版本）</li>
+</ul></details>
+</section>
+<section id="learning-06" aria-labelledby="learning-title-06">
+<h2 id="learning-title-06">5. 模型训练这些词是什么关系</h2>
+<p><strong>Pretraining，预训练</strong>，先从大规模数据学习基础模式；常见语言模型通过预测下一个 token（文本片段）学习。<strong>Post-training，后训练</strong>，在预训练之后继续优化行为，不是一种固定算法。<a href="https://huggingface.co/learn/llm-course/en/chapter1/4">预训练与微调入门</a></p><p><strong>Fine-tuning，微调</strong>，是在已有模型参数上继续学习特定任务。监督微调和偏好优化/强化学习是常见的后训练做法；每个模型不一定都经历所有步骤。</p>
+<p><strong>SFT：Supervised Fine-Tuning，监督微调</strong>，用输入与示范回答教模型怎么答。<strong>RL：Reinforcement Learning，强化学习</strong>，利用奖励学习行动策略。<strong>DPO：Direct Preference Optimization，直接偏好优化</strong>，用同一问题的较好／较差回答更新模型；原始方法不需要另训显式奖励模型，也不等同于在线强化学习。<a href="https://huggingface.co/docs/trl/en/sft_trainer">监督微调</a>、<a href="https://huggingface.co/learn/deep-rl-course/en/unit1/rl-framework">强化学习框架</a>、<a href="https://huggingface.co/docs/trl/en/dpo_trainer">直接偏好优化</a></p>
+<p><strong>RLHF：Reinforcement Learning from Human Feedback，人类反馈强化学习</strong>，用人类反馈构造奖励，再优化模型行为。奖励若只偏爱“像医生的文风”，也可能鼓励流畅但错误的回答；可靠评分是训练的前提。<a href="https://huggingface.co/blog/rlhf">人类反馈强化学习说明</a></p><p><strong>PEFT：Parameter-Efficient Fine-Tuning，参数高效微调</strong>，关注“少更新哪些参数”；<strong>LoRA：Low-Rank Adaptation，低秩适配</strong>，是其中一种方法，用小矩阵表示权重增量。它可以与监督微调或偏好优化结合，二者不是同一层面的分类。<a href="https://huggingface.co/docs/peft/en/package_reference/lora">方法说明</a></p>
+<p><strong>本项目当前不训练模型。</strong> 检索把资料找出来供回答时参考，状态增强把已有信息整理后加入输入，都不因此改变模型权重。先获得可信错误样本与独立复测集，才有理由决定以后是否训练。</p>
+<div class="table-wrap"><table><thead><tr>
+<th scope="col">观察到的缺陷</th>
+<th scope="col">先查什么</th>
+<th scope="col">何时考虑训练</th>
+</tr></thead><tbody>
+<tr>
+<td>知识缺口</td>
+<td>资料是否缺失、过期或不适用，先试检索补证据。</td>
+<td>系统性领域缺口才考虑继续预训练。</td>
+</tr>
+<tr>
+<td>不会澄清或解释</td>
+<td>提示、规则与评分是否合理。</td>
+<td>有可靠示范时做监督微调。</td>
+</tr>
+<tr>
+<td>多轮策略不稳</td>
+<td>先排除状态和工具传递问题。</td>
+<td>有可靠奖励或偏好标注再考虑强化学习或直接偏好优化。</td>
+</tr>
+<tr>
+<td>上下文漏传</td>
+<td>检查接口、截断与历史保存。</td>
+<td>先修工程，训练不能恢复没有送达的信息。</td>
+</tr>
+</tbody></table></div>
+<p>这是待验证的改进假设，不能据此声称已识别第三方的训练缺陷。</p>
+<details class="code-evidence"><summary>对应代码与核验依据</summary><ul>
+<li><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9/scripts/patient_eval/study.py">状态增强保留完整历史且不训练模型</a>（固定基线版本）</li>
+</ul></details>
+</section>
+<section id="learning-07" aria-labelledby="learning-title-07">
+<h2 id="learning-title-07">6. 按这个顺序学习，每步交一份小作业</h2>
+<div class="table-wrap"><table><thead><tr>
+<th scope="col">学习主题</th>
+<th scope="col">练习题型与可检查的产出</th>
+</tr></thead><tbody>
+<tr>
+<td>① Python 基础：字符串、列表、字典、函数与异常</td>
+<td>编程：把三轮人工对话转成带角色和轮次的记录，错误角色必须报错。</td>
+</tr>
+<tr>
+<td>② 集合、条件判断、正则表达式与文本范围</td>
+<td>手算加编程：算两句话的片段交并比；指出“没有发热”与“没问是否发热”的区别。</td>
+</tr>
+<tr>
+<td>③ 状态、事件与转移</td>
+<td>画图加追踪：设计四项患者信息的披露过程，证明纠正前后不会使用未来信息。</td>
+</tr>
+<tr>
+<td>④ 抽样、均值、方差与配对对照</td>
+<td>实验设计：写清实验单位、唯一干预、固定条件和缺失结果处理，解释为何按病例家族重采样。</td>
+</tr>
+<tr>
+<td>⑤ 评分规则、混淆矩阵与一致性</td>
+<td>标注题：两人独立评同一批合成回答，解释分歧；分别记录质量、安全和评分机会。</td>
+</tr>
+<tr>
+<td>⑥ 文件散列、版本控制、测试与失败恢复</td>
+<td>排错题：故意改一个证据轮次，确认验证失败；恢复后重跑，说明为什么冻结记录不能重写。</td>
+</tr>
+<tr>
+<td>⑦ 模型概率、损失函数与训练方式</td>
+<td>概念辨析：把“补检索资料、写示范答案、标偏好、用低秩矩阵训练”分别归类，并提出如何独立复测。</td>
+</tr>
+</tbody></table></div>
+<p class="source-note">这里的“章节”指通用教材主题，不是某本书的章节编号。第七步再补：线性代数的矩阵与秩、机器学习的损失函数与梯度下降、强化学习的状态—行动—奖励。</p><details><summary>两道起步题与答案</summary><p><strong>集合题：</strong>A={甲乙丙,乙丙丁}，B={甲乙丙,乙丙戊}。交集 1 项，并集 3 项，Jaccard=1/3。它只能比较片段，不能判断医学含义相同。</p><p><strong>事实题：</strong>“没有发热”可作为阴性表达提案；“没有问过是否发热”只说明没问，发热状态仍未知。先标否定作用的范围，再讨论是否更新患者状态。</p></details><p>先完成前六项，再深入训练。每项都能对应当前代码、一个明确缺陷和一种验证方法。</p>
+</section>
+</main>
+<footer><p>范围：患者多轮评测主线及本轮真实对话候选审阅。既有 S1–S5 全部历史算法不在本册展开；详见仓库阶段文档。文中的“已实现”指代码与机制，尚无真实医疗模型效果或临床准入结论。</p>
+<p><a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma">项目仓库</a> · <a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/main/medical/patient-eval/data-sources/v0.2/README.md">本轮审阅操作</a> · <a href="https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/main/medical/patient-eval/STAGE_DECOMPOSITION.md">十阶段任务</a></p></footer></div>
+<script>let folded=[];addEventListener('beforeprint',()=>{folded=[...document.querySelectorAll('details:not([open])')];folded.forEach(x=>x.open=true)});addEventListener('afterprint',()=>{folded.forEach(x=>x.open=false);folded=[]});</script>
+</body></html>

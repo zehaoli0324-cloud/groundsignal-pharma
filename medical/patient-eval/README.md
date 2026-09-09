@@ -7,6 +7,7 @@
 - [动态试评 v0.2 场景、采集与评分材料](pilot/v0.2/README.md)
 - [v0.3 独立评分操作](REVIEW_V0.3.md) · [本轮验证](VALIDATION_V0.3.md) · [问询校准](calibration/v0.3/README.md)
 - [专业数据接入](data-sources/v0.1/README.md)：现有材料审计、八个候选来源、首个中文医患对话集的实际接入与质量检查。
+- [真实候选审阅](data-sources/v0.2/README.md)：50 段对话的事实、隐私、披露和两人复核；[基础学习手册](../../docs/learning/groundsignal-learning-guide.html)解释算法、工程和训练的关系。
 - [原任务书全文](../../docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.0.md) · [Word 原件](../../docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.0.docx)
 - [现有项目适配方案、黑盒研究协议和学习路线](ADAPTATION_PLAN.md)
 - [数据合同与评分约定](schemas/README.md)
