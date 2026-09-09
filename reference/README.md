@@ -4,6 +4,8 @@
 > Date: 2026-09-09  
 > Purpose: papers, supplementary materials, source metadata, and reading notes for GroundSignal Medical. This directory is not a dataset release directory.
 
+2026-09-09：已核对附件中的关键方法，见[文献方法与设计取舍](METHODS_TO_DESIGN.md)和[文献补充任务书 v1.3](../docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md)。附件 MedXIAOHE 为 v4。下方清单表示已核验的附件内容，不表示论文二进制已上传；本次仅更新设计文档，代码开发与真实实验暂停。
+
 ## Recommended reading order
 
 ### Phase 1 — read these four first
