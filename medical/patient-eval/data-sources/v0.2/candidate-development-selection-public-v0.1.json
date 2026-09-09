@@ -1,0 +1,757 @@
+{
+  "admission": {
+    "clinical_gold": false,
+    "clinical_runnable_count": 0,
+    "dynamic_scenario_ready": false,
+    "formal_approval": false,
+    "gold_approved": false,
+    "s6_automatic_trust": "BLOCKED"
+  },
+  "blocker_queue_sha256": "68af032b454122c025c9b0e7430659dcbc8bcf7858bae1ebde9868f1e236d412",
+  "candidate_decisions": [
+    {
+      "candidate_id": "C0001",
+      "decision": "NOT_SELECTED",
+      "reason": "DYNAMIC_AUTHORING_BLOCKED"
+    },
+    {
+      "candidate_id": "C0002",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0003",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0004",
+      "decision": "NOT_SELECTED",
+      "reason": "DYNAMIC_AUTHORING_BLOCKED"
+    },
+    {
+      "candidate_id": "C0005",
+      "decision": "NOT_SELECTED",
+      "reason": "DYNAMIC_AUTHORING_BLOCKED"
+    },
+    {
+      "candidate_id": "C0006",
+      "decision": "NOT_SELECTED",
+      "reason": "DYNAMIC_AUTHORING_BLOCKED"
+    },
+    {
+      "candidate_id": "C0007",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0008",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0009",
+      "decision": "NOT_SELECTED",
+      "reason": "DYNAMIC_AUTHORING_BLOCKED"
+    },
+    {
+      "candidate_id": "C0010",
+      "decision": "NOT_SELECTED",
+      "reason": "INITIAL_DISCLOSURE_MISSING"
+    },
+    {
+      "candidate_id": "C0011",
+      "decision": "NOT_SELECTED",
+      "reason": "INITIAL_DISCLOSURE_MISSING"
+    },
+    {
+      "candidate_id": "C0012",
+      "decision": "NOT_SELECTED",
+      "reason": "DYNAMIC_AUTHORING_BLOCKED"
+    },
+    {
+      "candidate_id": "C0013",
+      "decision": "NOT_SELECTED",
+      "reason": "DYNAMIC_AUTHORING_BLOCKED"
+    },
+    {
+      "candidate_id": "C0014",
+      "decision": "NOT_SELECTED",
+      "reason": "INITIAL_DISCLOSURE_MISSING"
+    },
+    {
+      "candidate_id": "C0015",
+      "decision": "SELECTED",
+      "reason": "STRUCTURAL_DIVERSITY_SELECTION"
+    },
+    {
+      "candidate_id": "C0016",
+      "decision": "NOT_SELECTED",
+      "reason": "INITIAL_DISCLOSURE_MISSING"
+    },
+    {
+      "candidate_id": "C0017",
+      "decision": "SELECTED",
+      "reason": "STRUCTURAL_DIVERSITY_SELECTION"
+    },
+    {
+      "candidate_id": "C0018",
+      "decision": "NOT_SELECTED",
+      "reason": "INITIAL_DISCLOSURE_MISSING"
+    },
+    {
+      "candidate_id": "C0019",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0020",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0021",
+      "decision": "NOT_SELECTED",
+      "reason": "DYNAMIC_AUTHORING_BLOCKED"
+    },
+    {
+      "candidate_id": "C0022",
+      "decision": "SELECTED",
+      "reason": "STRUCTURAL_DIVERSITY_SELECTION"
+    },
+    {
+      "candidate_id": "C0023",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0024",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0025",
+      "decision": "NOT_SELECTED",
+      "reason": "INITIAL_DISCLOSURE_MISSING"
+    },
+    {
+      "candidate_id": "C0026",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0027",
+      "decision": "NOT_SELECTED",
+      "reason": "INITIAL_DISCLOSURE_MISSING"
+    },
+    {
+      "candidate_id": "C0028",
+      "decision": "NOT_SELECTED",
+      "reason": "DYNAMIC_AUTHORING_BLOCKED"
+    },
+    {
+      "candidate_id": "C0029",
+      "decision": "SELECTED",
+      "reason": "STRUCTURAL_DIVERSITY_SELECTION"
+    },
+    {
+      "candidate_id": "C0030",
+      "decision": "NOT_SELECTED",
+      "reason": "DYNAMIC_AUTHORING_BLOCKED"
+    },
+    {
+      "candidate_id": "C0031",
+      "decision": "SELECTED",
+      "reason": "STRUCTURAL_DIVERSITY_SELECTION"
+    },
+    {
+      "candidate_id": "C0032",
+      "decision": "SELECTED",
+      "reason": "STRUCTURAL_DIVERSITY_SELECTION"
+    },
+    {
+      "candidate_id": "C0033",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0034",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0035",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0036",
+      "decision": "NOT_SELECTED",
+      "reason": "DYNAMIC_AUTHORING_BLOCKED"
+    },
+    {
+      "candidate_id": "C0037",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0038",
+      "decision": "SELECTED",
+      "reason": "STRUCTURAL_DIVERSITY_SELECTION"
+    },
+    {
+      "candidate_id": "C0039",
+      "decision": "SELECTED",
+      "reason": "STRUCTURAL_DIVERSITY_SELECTION"
+    },
+    {
+      "candidate_id": "C0040",
+      "decision": "SELECTED",
+      "reason": "STRUCTURAL_DIVERSITY_SELECTION"
+    },
+    {
+      "candidate_id": "C0041",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0042",
+      "decision": "SELECTED",
+      "reason": "STRUCTURAL_DIVERSITY_SELECTION"
+    },
+    {
+      "candidate_id": "C0043",
+      "decision": "NOT_SELECTED",
+      "reason": "INITIAL_DISCLOSURE_MISSING"
+    },
+    {
+      "candidate_id": "C0044",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0045",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0046",
+      "decision": "SELECTED",
+      "reason": "STRUCTURAL_DIVERSITY_SELECTION"
+    },
+    {
+      "candidate_id": "C0047",
+      "decision": "SELECTED",
+      "reason": "STRUCTURAL_DIVERSITY_SELECTION"
+    },
+    {
+      "candidate_id": "C0048",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    },
+    {
+      "candidate_id": "C0049",
+      "decision": "NOT_SELECTED",
+      "reason": "INITIAL_DISCLOSURE_MISSING"
+    },
+    {
+      "candidate_id": "C0050",
+      "decision": "NOT_SELECTED",
+      "reason": "FIXED_SELECTION_CAP"
+    }
+  ],
+  "canonical_review_sha256": "060cdd00151e85d4a53b64b43e8bb8f75bc7dbdf5fc64edd5a83dc3fe0e0be87",
+  "decision_reason_counts": {
+    "DYNAMIC_AUTHORING_BLOCKED": 11,
+    "FIXED_SELECTION_CAP": 18,
+    "INITIAL_DISCLOSURE_MISSING": 9,
+    "STRUCTURAL_DIVERSITY_SELECTION": 12
+  },
+  "development_exposed": true,
+  "eligible_feature_ranges": {
+    "absent_fact_count": {
+      "maximum": 4,
+      "minimum": 0
+    },
+    "drafted_behavioral_rubric_count": {
+      "maximum": 5,
+      "minimum": 3
+    },
+    "included_fact_count": {
+      "maximum": 20,
+      "minimum": 2
+    },
+    "initial_fact_count": {
+      "maximum": 3,
+      "minimum": 1
+    },
+    "on_question_fact_count": {
+      "maximum": 13,
+      "minimum": 1
+    },
+    "scheduled_fact_count": {
+      "maximum": 9,
+      "minimum": 0
+    },
+    "turn_count": {
+      "maximum": 49,
+      "minimum": 4
+    },
+    "unknown_fact_count": {
+      "maximum": 2,
+      "minimum": 0
+    }
+  },
+  "limitations": [
+    "Structural diversity is not clinical diversity or medical representativeness.",
+    "Zero lexical near-duplicate cues at an uncalibrated threshold does not establish independence.",
+    "No verified source families or controlled variants are available; none are invented.",
+    "Selected exposed candidates remain development material and are not clinically runnable."
+  ],
+  "packet_sha256": "7b1a3d00e097c455ebd40055e81d7a5498527acb6ba54bcb577c654d63e8f38d",
+  "privacy": {
+    "contains_local_or_library_path": false,
+    "contains_patient_text": false,
+    "contains_review_reason": false,
+    "contains_reviewer_identity": false,
+    "contains_source_dialogue_id": false
+  },
+  "schema_version": "candidate-development-selection/v0.1",
+  "scope": "development_only",
+  "selected_candidates": [
+    {
+      "candidate_id": "C0042",
+      "clinical_runnable": "BLOCKED",
+      "development_exposed": true,
+      "features": {
+        "absent_fact_count": 1,
+        "drafted_behavioral_rubric_count": 5,
+        "included_fact_count": 15,
+        "initial_fact_count": 1,
+        "on_question_fact_count": 7,
+        "scheduled_fact_count": 7,
+        "turn_count": 49,
+        "unknown_fact_count": 1
+      },
+      "selection_rank": 1,
+      "selection_trace": {
+        "minimum_normalised_distance": 0.59375,
+        "new_structural_tag_count": 7,
+        "normalised_complexity": 0.59375
+      },
+      "structural_tags": [
+        "AT_LEAST_20_TURNS",
+        "AT_LEAST_5_DYNAMIC_FACTS",
+        "HAS_ABSENT",
+        "HAS_EXPLICIT_UNKNOWN",
+        "HAS_INITIAL",
+        "HAS_ON_QUESTION",
+        "HAS_SCHEDULED"
+      ]
+    },
+    {
+      "candidate_id": "C0039",
+      "clinical_runnable": "BLOCKED",
+      "development_exposed": true,
+      "features": {
+        "absent_fact_count": 0,
+        "drafted_behavioral_rubric_count": 3,
+        "included_fact_count": 2,
+        "initial_fact_count": 1,
+        "on_question_fact_count": 1,
+        "scheduled_fact_count": 0,
+        "turn_count": 4,
+        "unknown_fact_count": 0
+      },
+      "selection_rank": 2,
+      "selection_trace": {
+        "minimum_normalised_distance": 0.59375,
+        "new_structural_tag_count": 0,
+        "normalised_complexity": 0.0
+      },
+      "structural_tags": [
+        "HAS_INITIAL",
+        "HAS_ON_QUESTION"
+      ]
+    },
+    {
+      "candidate_id": "C0032",
+      "clinical_runnable": "BLOCKED",
+      "development_exposed": true,
+      "features": {
+        "absent_fact_count": 3,
+        "drafted_behavioral_rubric_count": 4,
+        "included_fact_count": 19,
+        "initial_fact_count": 3,
+        "on_question_fact_count": 13,
+        "scheduled_fact_count": 3,
+        "turn_count": 28,
+        "unknown_fact_count": 0
+      },
+      "selection_rank": 3,
+      "selection_trace": {
+        "minimum_normalised_distance": 0.516666666667,
+        "new_structural_tag_count": 0,
+        "normalised_complexity": 0.632638888889
+      },
+      "structural_tags": [
+        "AT_LEAST_20_TURNS",
+        "AT_LEAST_5_DYNAMIC_FACTS",
+        "HAS_ABSENT",
+        "HAS_INITIAL",
+        "HAS_ON_QUESTION",
+        "HAS_SCHEDULED"
+      ]
+    },
+    {
+      "candidate_id": "C0047",
+      "clinical_runnable": "BLOCKED",
+      "development_exposed": true,
+      "features": {
+        "absent_fact_count": 2,
+        "drafted_behavioral_rubric_count": 3,
+        "included_fact_count": 14,
+        "initial_fact_count": 2,
+        "on_question_fact_count": 3,
+        "scheduled_fact_count": 9,
+        "turn_count": 25,
+        "unknown_fact_count": 0
+      },
+      "selection_rank": 4,
+      "selection_trace": {
+        "minimum_normalised_distance": 0.386805555556,
+        "new_structural_tag_count": 0,
+        "normalised_complexity": 0.4125
+      },
+      "structural_tags": [
+        "AT_LEAST_20_TURNS",
+        "AT_LEAST_5_DYNAMIC_FACTS",
+        "HAS_ABSENT",
+        "HAS_INITIAL",
+        "HAS_ON_QUESTION",
+        "HAS_SCHEDULED"
+      ]
+    },
+    {
+      "candidate_id": "C0046",
+      "clinical_runnable": "BLOCKED",
+      "development_exposed": true,
+      "features": {
+        "absent_fact_count": 2,
+        "drafted_behavioral_rubric_count": 4,
+        "included_fact_count": 8,
+        "initial_fact_count": 1,
+        "on_question_fact_count": 5,
+        "scheduled_fact_count": 2,
+        "turn_count": 39,
+        "unknown_fact_count": 0
+      },
+      "selection_rank": 5,
+      "selection_trace": {
+        "minimum_normalised_distance": 0.322916666667,
+        "new_structural_tag_count": 0,
+        "normalised_complexity": 0.333333333333
+      },
+      "structural_tags": [
+        "AT_LEAST_20_TURNS",
+        "AT_LEAST_5_DYNAMIC_FACTS",
+        "HAS_ABSENT",
+        "HAS_INITIAL",
+        "HAS_ON_QUESTION",
+        "HAS_SCHEDULED"
+      ]
+    },
+    {
+      "candidate_id": "C0017",
+      "clinical_runnable": "BLOCKED",
+      "development_exposed": true,
+      "features": {
+        "absent_fact_count": 0,
+        "drafted_behavioral_rubric_count": 4,
+        "included_fact_count": 10,
+        "initial_fact_count": 1,
+        "on_question_fact_count": 3,
+        "scheduled_fact_count": 6,
+        "turn_count": 24,
+        "unknown_fact_count": 2
+      },
+      "selection_rank": 6,
+      "selection_trace": {
+        "minimum_normalised_distance": 0.315972222222,
+        "new_structural_tag_count": 0,
+        "normalised_complexity": 0.402777777778
+      },
+      "structural_tags": [
+        "AT_LEAST_20_TURNS",
+        "AT_LEAST_5_DYNAMIC_FACTS",
+        "HAS_EXPLICIT_UNKNOWN",
+        "HAS_INITIAL",
+        "HAS_ON_QUESTION",
+        "HAS_SCHEDULED"
+      ]
+    },
+    {
+      "candidate_id": "C0031",
+      "clinical_runnable": "BLOCKED",
+      "development_exposed": true,
+      "features": {
+        "absent_fact_count": 4,
+        "drafted_behavioral_rubric_count": 4,
+        "included_fact_count": 20,
+        "initial_fact_count": 1,
+        "on_question_fact_count": 13,
+        "scheduled_fact_count": 6,
+        "turn_count": 47,
+        "unknown_fact_count": 0
+      },
+      "selection_rank": 7,
+      "selection_trace": {
+        "minimum_normalised_distance": 0.257638888889,
+        "new_structural_tag_count": 0,
+        "normalised_complexity": 0.640277777778
+      },
+      "structural_tags": [
+        "AT_LEAST_20_TURNS",
+        "AT_LEAST_5_DYNAMIC_FACTS",
+        "HAS_ABSENT",
+        "HAS_INITIAL",
+        "HAS_ON_QUESTION",
+        "HAS_SCHEDULED"
+      ]
+    },
+    {
+      "candidate_id": "C0040",
+      "clinical_runnable": "BLOCKED",
+      "development_exposed": true,
+      "features": {
+        "absent_fact_count": 1,
+        "drafted_behavioral_rubric_count": 4,
+        "included_fact_count": 6,
+        "initial_fact_count": 3,
+        "on_question_fact_count": 1,
+        "scheduled_fact_count": 2,
+        "turn_count": 25,
+        "unknown_fact_count": 0
+      },
+      "selection_rank": 8,
+      "selection_trace": {
+        "minimum_normalised_distance": 0.250694444444,
+        "new_structural_tag_count": 0,
+        "normalised_complexity": 0.332638888889
+      },
+      "structural_tags": [
+        "AT_LEAST_20_TURNS",
+        "HAS_ABSENT",
+        "HAS_INITIAL",
+        "HAS_ON_QUESTION",
+        "HAS_SCHEDULED"
+      ]
+    },
+    {
+      "candidate_id": "C0022",
+      "clinical_runnable": "BLOCKED",
+      "development_exposed": true,
+      "features": {
+        "absent_fact_count": 0,
+        "drafted_behavioral_rubric_count": 3,
+        "included_fact_count": 17,
+        "initial_fact_count": 1,
+        "on_question_fact_count": 8,
+        "scheduled_fact_count": 8,
+        "turn_count": 44,
+        "unknown_fact_count": 1
+      },
+      "selection_rank": 9,
+      "selection_trace": {
+        "minimum_normalised_distance": 0.208333333333,
+        "new_structural_tag_count": 0,
+        "normalised_complexity": 0.461805555556
+      },
+      "structural_tags": [
+        "AT_LEAST_20_TURNS",
+        "AT_LEAST_5_DYNAMIC_FACTS",
+        "HAS_EXPLICIT_UNKNOWN",
+        "HAS_INITIAL",
+        "HAS_ON_QUESTION",
+        "HAS_SCHEDULED"
+      ]
+    },
+    {
+      "candidate_id": "C0015",
+      "clinical_runnable": "BLOCKED",
+      "development_exposed": true,
+      "features": {
+        "absent_fact_count": 0,
+        "drafted_behavioral_rubric_count": 4,
+        "included_fact_count": 12,
+        "initial_fact_count": 2,
+        "on_question_fact_count": 3,
+        "scheduled_fact_count": 7,
+        "turn_count": 39,
+        "unknown_fact_count": 0
+      },
+      "selection_rank": 10,
+      "selection_trace": {
+        "minimum_normalised_distance": 0.205555555556,
+        "new_structural_tag_count": 0,
+        "normalised_complexity": 0.409722222222
+      },
+      "structural_tags": [
+        "AT_LEAST_20_TURNS",
+        "AT_LEAST_5_DYNAMIC_FACTS",
+        "HAS_INITIAL",
+        "HAS_ON_QUESTION",
+        "HAS_SCHEDULED"
+      ]
+    },
+    {
+      "candidate_id": "C0029",
+      "clinical_runnable": "BLOCKED",
+      "development_exposed": true,
+      "features": {
+        "absent_fact_count": 0,
+        "drafted_behavioral_rubric_count": 3,
+        "included_fact_count": 5,
+        "initial_fact_count": 2,
+        "on_question_fact_count": 3,
+        "scheduled_fact_count": 0,
+        "turn_count": 16,
+        "unknown_fact_count": 1
+      },
+      "selection_rank": 11,
+      "selection_trace": {
+        "minimum_normalised_distance": 0.2,
+        "new_structural_tag_count": 0,
+        "normalised_complexity": 0.2
+      },
+      "structural_tags": [
+        "HAS_EXPLICIT_UNKNOWN",
+        "HAS_INITIAL",
+        "HAS_ON_QUESTION"
+      ]
+    },
+    {
+      "candidate_id": "C0038",
+      "clinical_runnable": "BLOCKED",
+      "development_exposed": true,
+      "features": {
+        "absent_fact_count": 0,
+        "drafted_behavioral_rubric_count": 4,
+        "included_fact_count": 10,
+        "initial_fact_count": 1,
+        "on_question_fact_count": 8,
+        "scheduled_fact_count": 1,
+        "turn_count": 34,
+        "unknown_fact_count": 1
+      },
+      "selection_rank": 12,
+      "selection_trace": {
+        "minimum_normalised_distance": 0.197916666667,
+        "new_structural_tag_count": 0,
+        "normalised_complexity": 0.350694444444
+      },
+      "structural_tags": [
+        "AT_LEAST_20_TURNS",
+        "AT_LEAST_5_DYNAMIC_FACTS",
+        "HAS_EXPLICIT_UNKNOWN",
+        "HAS_INITIAL",
+        "HAS_ON_QUESTION",
+        "HAS_SCHEDULED"
+      ]
+    }
+  ],
+  "selected_feature_coverage": {
+    "absent_fact_count": {
+      "maximum": 4,
+      "minimum": 0,
+      "sum": 13
+    },
+    "drafted_behavioral_rubric_count": {
+      "maximum": 5,
+      "minimum": 3,
+      "sum": 45
+    },
+    "included_fact_count": {
+      "maximum": 20,
+      "minimum": 2,
+      "sum": 138
+    },
+    "initial_fact_count": {
+      "maximum": 3,
+      "minimum": 1,
+      "sum": 19
+    },
+    "on_question_fact_count": {
+      "maximum": 13,
+      "minimum": 1,
+      "sum": 68
+    },
+    "scheduled_fact_count": {
+      "maximum": 9,
+      "minimum": 0,
+      "sum": 51
+    },
+    "turn_count": {
+      "maximum": 49,
+      "minimum": 4,
+      "sum": 374
+    },
+    "unknown_fact_count": {
+      "maximum": 2,
+      "minimum": 0,
+      "sum": 6
+    }
+  },
+  "selection_config": {
+    "eligibility_gate": [
+      "dynamic_authoring=READY from exact recomputed blocker queue",
+      "at least one included initial-disclosure fact",
+      "at least one included on-question or scheduled fact"
+    ],
+    "feature_names": [
+      "turn_count",
+      "included_fact_count",
+      "initial_fact_count",
+      "on_question_fact_count",
+      "scheduled_fact_count",
+      "absent_fact_count",
+      "unknown_fact_count",
+      "drafted_behavioral_rubric_count"
+    ],
+    "model_answers_used": false,
+    "requested_count": 12,
+    "selection_order": [
+      "maximise new structural tags",
+      "maximise minimum normalised L1 distance to selected candidates",
+      "maximise mean normalised structural complexity",
+      "SHA-256(packet_sha256:candidate_id) ascending tie-break"
+    ],
+    "similarity_guard": "at most one candidate per uncalibrated similarity component",
+    "source_guard": "at most one candidate per exact private source dialogue identity"
+  },
+  "selection_rule_sha256": "833d6bbc36fbac77dbe8cfb6a80b476620c68325c26c28fede79b6a141b156cc",
+  "selection_status": "FROZEN_DEVELOPMENT_IDS",
+  "source_and_similarity_audit": {
+    "compared_pair_count": 1225,
+    "exact_pair_count": 0,
+    "family_pair_design": "UNSUPPORTED_DO_NOT_INVENT",
+    "near_pair_count": 0,
+    "private_source_dialogue_count": 50,
+    "private_unique_source_dialogue_count": 50,
+    "selected_unique_source_dialogue_count": 12,
+    "similarity_threshold": 0.85,
+    "similarity_threshold_status": "uncalibrated_review_cue",
+    "source_group_suggestion_count": 0
+  },
+  "source_review_sha256": "0377aac34f5c04d58d218d8b036f314bdc8fda039a585edfb3766f5cff33c668",
+  "validation": {
+    "blocker_queue_exact_recomputation": "PASS",
+    "candidate_count": 50,
+    "dynamic_authoring_gate_ready_count": 39,
+    "eligible_selection_count": 30,
+    "model_answers_read": false,
+    "official_review_contract": "PASS",
+    "requested_count": 12,
+    "selected_count": 12
+  }
+}
