@@ -1,0 +1,416 @@
+{
+  "admission": {
+    "clinical_gold": false,
+    "dynamic_scenario_ready": false,
+    "formal_approval": false,
+    "gold_approved": false,
+    "s6_automatic_trust": "BLOCKED"
+  },
+  "canonical_review_sha256": "060cdd00151e85d4a53b64b43e8bb8f75bc7dbdf5fc64edd5a83dc3fe0e0be87",
+  "cases": [
+    {
+      "blockers": [
+        "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED",
+        "INDEPENDENT_DUAL_REVIEW_REQUIRED",
+        "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED",
+        "SCORING_OPPORTUNITY_MAPPING_REQUIRED",
+        "STOP_POLICY_AUTHORING_REQUIRED",
+        "TRIGGER_SEMANTIC_REVIEW_REQUIRED"
+      ],
+      "candidate_id": "C0042",
+      "case_id": "DEV04-C0042",
+      "clinical_runnable": "BLOCKED",
+      "correction_relation_count": 0,
+      "critical_drafted_rubric_count": 1,
+      "development_exposed": true,
+      "disclosure_policy_counts": {
+        "initial": 1,
+        "on_question": 7,
+        "scheduled": 7
+      },
+      "drafted_rubric_count": 6,
+      "fsm_transition_count": 16,
+      "included_fact_count": 15,
+      "polarity_counts": {
+        "absent": 1,
+        "present": 13,
+        "unknown": 1
+      },
+      "structured_scoring_opportunity_count": 0
+    },
+    {
+      "blockers": [
+        "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED",
+        "INDEPENDENT_DUAL_REVIEW_REQUIRED",
+        "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED",
+        "SCORING_OPPORTUNITY_MAPPING_REQUIRED",
+        "STOP_POLICY_AUTHORING_REQUIRED",
+        "TRIGGER_SEMANTIC_REVIEW_REQUIRED"
+      ],
+      "candidate_id": "C0039",
+      "case_id": "DEV04-C0039",
+      "clinical_runnable": "BLOCKED",
+      "correction_relation_count": 0,
+      "critical_drafted_rubric_count": 1,
+      "development_exposed": true,
+      "disclosure_policy_counts": {
+        "initial": 1,
+        "on_question": 1
+      },
+      "drafted_rubric_count": 4,
+      "fsm_transition_count": 3,
+      "included_fact_count": 2,
+      "polarity_counts": {
+        "present": 2
+      },
+      "structured_scoring_opportunity_count": 0
+    },
+    {
+      "blockers": [
+        "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED",
+        "INDEPENDENT_DUAL_REVIEW_REQUIRED",
+        "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED",
+        "SCORING_OPPORTUNITY_MAPPING_REQUIRED",
+        "STOP_POLICY_AUTHORING_REQUIRED",
+        "TRIGGER_SEMANTIC_REVIEW_REQUIRED"
+      ],
+      "candidate_id": "C0032",
+      "case_id": "DEV04-C0032",
+      "clinical_runnable": "BLOCKED",
+      "correction_relation_count": 0,
+      "critical_drafted_rubric_count": 1,
+      "development_exposed": true,
+      "disclosure_policy_counts": {
+        "initial": 3,
+        "on_question": 13,
+        "scheduled": 3
+      },
+      "drafted_rubric_count": 5,
+      "fsm_transition_count": 18,
+      "included_fact_count": 19,
+      "polarity_counts": {
+        "absent": 3,
+        "present": 16
+      },
+      "structured_scoring_opportunity_count": 0
+    },
+    {
+      "blockers": [
+        "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED",
+        "INDEPENDENT_DUAL_REVIEW_REQUIRED",
+        "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED",
+        "SCORING_OPPORTUNITY_MAPPING_REQUIRED",
+        "STOP_POLICY_AUTHORING_REQUIRED",
+        "TRIGGER_SEMANTIC_REVIEW_REQUIRED"
+      ],
+      "candidate_id": "C0047",
+      "case_id": "DEV04-C0047",
+      "clinical_runnable": "BLOCKED",
+      "correction_relation_count": 0,
+      "critical_drafted_rubric_count": 1,
+      "development_exposed": true,
+      "disclosure_policy_counts": {
+        "initial": 2,
+        "on_question": 3,
+        "scheduled": 9
+      },
+      "drafted_rubric_count": 4,
+      "fsm_transition_count": 14,
+      "included_fact_count": 14,
+      "polarity_counts": {
+        "absent": 2,
+        "present": 12
+      },
+      "structured_scoring_opportunity_count": 0
+    },
+    {
+      "blockers": [
+        "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED",
+        "INDEPENDENT_DUAL_REVIEW_REQUIRED",
+        "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED",
+        "SCORING_OPPORTUNITY_MAPPING_REQUIRED",
+        "STOP_POLICY_AUTHORING_REQUIRED",
+        "TRIGGER_SEMANTIC_REVIEW_REQUIRED"
+      ],
+      "candidate_id": "C0046",
+      "case_id": "DEV04-C0046",
+      "clinical_runnable": "BLOCKED",
+      "correction_relation_count": 0,
+      "critical_drafted_rubric_count": 1,
+      "development_exposed": true,
+      "disclosure_policy_counts": {
+        "initial": 1,
+        "on_question": 5,
+        "scheduled": 2
+      },
+      "drafted_rubric_count": 5,
+      "fsm_transition_count": 9,
+      "included_fact_count": 8,
+      "polarity_counts": {
+        "absent": 2,
+        "present": 6
+      },
+      "structured_scoring_opportunity_count": 0
+    },
+    {
+      "blockers": [
+        "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED",
+        "INDEPENDENT_DUAL_REVIEW_REQUIRED",
+        "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED",
+        "SCORING_OPPORTUNITY_MAPPING_REQUIRED",
+        "STOP_POLICY_AUTHORING_REQUIRED",
+        "TRIGGER_SEMANTIC_REVIEW_REQUIRED"
+      ],
+      "candidate_id": "C0017",
+      "case_id": "DEV04-C0017",
+      "clinical_runnable": "BLOCKED",
+      "correction_relation_count": 0,
+      "critical_drafted_rubric_count": 1,
+      "development_exposed": true,
+      "disclosure_policy_counts": {
+        "initial": 1,
+        "on_question": 3,
+        "scheduled": 6
+      },
+      "drafted_rubric_count": 5,
+      "fsm_transition_count": 11,
+      "included_fact_count": 10,
+      "polarity_counts": {
+        "present": 8,
+        "unknown": 2
+      },
+      "structured_scoring_opportunity_count": 0
+    },
+    {
+      "blockers": [
+        "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED",
+        "INDEPENDENT_DUAL_REVIEW_REQUIRED",
+        "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED",
+        "SCORING_OPPORTUNITY_MAPPING_REQUIRED",
+        "STOP_POLICY_AUTHORING_REQUIRED",
+        "TRIGGER_SEMANTIC_REVIEW_REQUIRED"
+      ],
+      "candidate_id": "C0031",
+      "case_id": "DEV04-C0031",
+      "clinical_runnable": "BLOCKED",
+      "correction_relation_count": 0,
+      "critical_drafted_rubric_count": 1,
+      "development_exposed": true,
+      "disclosure_policy_counts": {
+        "initial": 1,
+        "on_question": 13,
+        "scheduled": 6
+      },
+      "drafted_rubric_count": 5,
+      "fsm_transition_count": 21,
+      "included_fact_count": 20,
+      "polarity_counts": {
+        "absent": 4,
+        "present": 16
+      },
+      "structured_scoring_opportunity_count": 0
+    },
+    {
+      "blockers": [
+        "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED",
+        "INDEPENDENT_DUAL_REVIEW_REQUIRED",
+        "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED",
+        "SCORING_OPPORTUNITY_MAPPING_REQUIRED",
+        "STOP_POLICY_AUTHORING_REQUIRED",
+        "TRIGGER_SEMANTIC_REVIEW_REQUIRED"
+      ],
+      "candidate_id": "C0040",
+      "case_id": "DEV04-C0040",
+      "clinical_runnable": "BLOCKED",
+      "correction_relation_count": 0,
+      "critical_drafted_rubric_count": 1,
+      "development_exposed": true,
+      "disclosure_policy_counts": {
+        "initial": 3,
+        "on_question": 1,
+        "scheduled": 2
+      },
+      "drafted_rubric_count": 5,
+      "fsm_transition_count": 5,
+      "included_fact_count": 6,
+      "polarity_counts": {
+        "absent": 1,
+        "present": 5
+      },
+      "structured_scoring_opportunity_count": 0
+    },
+    {
+      "blockers": [
+        "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED",
+        "INDEPENDENT_DUAL_REVIEW_REQUIRED",
+        "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED",
+        "SCORING_OPPORTUNITY_MAPPING_REQUIRED",
+        "STOP_POLICY_AUTHORING_REQUIRED",
+        "TRIGGER_SEMANTIC_REVIEW_REQUIRED"
+      ],
+      "candidate_id": "C0022",
+      "case_id": "DEV04-C0022",
+      "clinical_runnable": "BLOCKED",
+      "correction_relation_count": 0,
+      "critical_drafted_rubric_count": 1,
+      "development_exposed": true,
+      "disclosure_policy_counts": {
+        "initial": 1,
+        "on_question": 8,
+        "scheduled": 8
+      },
+      "drafted_rubric_count": 4,
+      "fsm_transition_count": 18,
+      "included_fact_count": 17,
+      "polarity_counts": {
+        "present": 16,
+        "unknown": 1
+      },
+      "structured_scoring_opportunity_count": 0
+    },
+    {
+      "blockers": [
+        "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED",
+        "INDEPENDENT_DUAL_REVIEW_REQUIRED",
+        "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED",
+        "SCORING_OPPORTUNITY_MAPPING_REQUIRED",
+        "STOP_POLICY_AUTHORING_REQUIRED",
+        "TRIGGER_SEMANTIC_REVIEW_REQUIRED"
+      ],
+      "candidate_id": "C0015",
+      "case_id": "DEV04-C0015",
+      "clinical_runnable": "BLOCKED",
+      "correction_relation_count": 0,
+      "critical_drafted_rubric_count": 1,
+      "development_exposed": true,
+      "disclosure_policy_counts": {
+        "initial": 2,
+        "on_question": 3,
+        "scheduled": 7
+      },
+      "drafted_rubric_count": 5,
+      "fsm_transition_count": 12,
+      "included_fact_count": 12,
+      "polarity_counts": {
+        "present": 12
+      },
+      "structured_scoring_opportunity_count": 0
+    },
+    {
+      "blockers": [
+        "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED",
+        "INDEPENDENT_DUAL_REVIEW_REQUIRED",
+        "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED",
+        "SCORING_OPPORTUNITY_MAPPING_REQUIRED",
+        "STOP_POLICY_AUTHORING_REQUIRED",
+        "TRIGGER_SEMANTIC_REVIEW_REQUIRED"
+      ],
+      "candidate_id": "C0029",
+      "case_id": "DEV04-C0029",
+      "clinical_runnable": "BLOCKED",
+      "correction_relation_count": 0,
+      "critical_drafted_rubric_count": 1,
+      "development_exposed": true,
+      "disclosure_policy_counts": {
+        "initial": 2,
+        "on_question": 3
+      },
+      "drafted_rubric_count": 4,
+      "fsm_transition_count": 5,
+      "included_fact_count": 5,
+      "polarity_counts": {
+        "present": 4,
+        "unknown": 1
+      },
+      "structured_scoring_opportunity_count": 0
+    },
+    {
+      "blockers": [
+        "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED",
+        "INDEPENDENT_DUAL_REVIEW_REQUIRED",
+        "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED",
+        "SCORING_OPPORTUNITY_MAPPING_REQUIRED",
+        "STOP_POLICY_AUTHORING_REQUIRED",
+        "TRIGGER_SEMANTIC_REVIEW_REQUIRED"
+      ],
+      "candidate_id": "C0038",
+      "case_id": "DEV04-C0038",
+      "clinical_runnable": "BLOCKED",
+      "correction_relation_count": 0,
+      "critical_drafted_rubric_count": 1,
+      "development_exposed": true,
+      "disclosure_policy_counts": {
+        "initial": 1,
+        "on_question": 8,
+        "scheduled": 1
+      },
+      "drafted_rubric_count": 5,
+      "fsm_transition_count": 11,
+      "included_fact_count": 10,
+      "polarity_counts": {
+        "present": 9,
+        "unknown": 1
+      },
+      "structured_scoring_opportunity_count": 0
+    }
+  ],
+  "development_exposed": true,
+  "fsm_contract_version": "dynamic-case-state-machine/v0.4",
+  "limitations": [
+    "Evidence fragments and authoring text exist only in the ignored private bundle.",
+    "Operator-confirmed transitions are authoring scaffolds, not validated language understanding.",
+    "Structured trigger turns, response turns and deadlines remain unresolved rather than guessed.",
+    "All source-derived cases are exposed development material and are not clinically runnable."
+  ],
+  "packet_sha256": "7b1a3d00e097c455ebd40055e81d7a5498527acb6ba54bcb577c654d63e8f38d",
+  "privacy": {
+    "contains_evidence_spans": false,
+    "contains_local_or_library_path": false,
+    "contains_patient_text": false,
+    "contains_review_reason": false,
+    "contains_reviewer_identity": false,
+    "contains_source_dialogue_id": false
+  },
+  "private_bundle_sha256": "16e1ca463d39c79ee6aa5f5eefb9a8258c50ebd30bd96a8fc7d4b3975a8004bd",
+  "schema_version": "dynamic-case-draft-audit/v0.1",
+  "scope": "development_only",
+  "selection_sha256": "b985faf43422971cfc42464bb451d08167940825d8f978e6350eb9924e507210",
+  "source_review_sha256": "0377aac34f5c04d58d218d8b036f314bdc8fda039a585edfb3766f5cff33c668",
+  "summary": {
+    "case_blocker_counts": {
+      "CLINICAL_RUBRIC_ADJUDICATION_REQUIRED": 12,
+      "INDEPENDENT_DUAL_REVIEW_REQUIRED": 12,
+      "NATURAL_LANGUAGE_RENDERING_REVIEW_REQUIRED": 12,
+      "SCORING_OPPORTUNITY_MAPPING_REQUIRED": 12,
+      "STOP_POLICY_AUTHORING_REQUIRED": 12,
+      "TRIGGER_SEMANTIC_REVIEW_REQUIRED": 12
+    },
+    "clinical_runnable_count": 0,
+    "correction_relation_count": 0,
+    "critical_drafted_rubric_count": 12,
+    "disclosure_policy_counts": {
+      "initial": 19,
+      "on_question": 68,
+      "scheduled": 51
+    },
+    "drafted_rubric_count": 57,
+    "fsm_transition_count": 143,
+    "included_fact_count": 138,
+    "polarity_counts": {
+      "absent": 13,
+      "present": 119,
+      "unknown": 6
+    },
+    "private_case_draft_count": 12,
+    "selected_candidate_count": 12,
+    "structured_scoring_opportunity_count": 0
+  },
+  "validation": {
+    "automatic_natural_language_matching_enabled_count": 0,
+    "blocker_queue_exact_recomputation": "PASS",
+    "model_answers_read": false,
+    "official_review_contract": "PASS",
+    "private_case_contract": "12/12 PASS",
+    "selection_exact_recomputation": "PASS"
+  }
+}

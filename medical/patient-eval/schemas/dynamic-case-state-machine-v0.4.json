@@ -1,0 +1,45 @@
+{
+  "admission": {
+    "clinical_gold": false,
+    "dynamic_scenario_ready": false,
+    "formal_approval": false,
+    "gold_approved": false,
+    "s6_automatic_trust": "BLOCKED"
+  },
+  "automatic_natural_language_matching": false,
+  "event_contracts": [
+    {
+      "event": "OPERATOR_OPEN",
+      "from": "NOT_OPENED",
+      "required_guard": "ALWAYS",
+      "to": "ACTIVE"
+    },
+    {
+      "event_prefix": "OPERATOR_CONFIRM:",
+      "from": "ACTIVE",
+      "required_guard": "EVENT_NOT_PREVIOUSLY_DISCLOSED",
+      "to": "ACTIVE"
+    },
+    {
+      "event": "OPERATOR_STOP",
+      "from": "ACTIVE",
+      "required_guard": "ALWAYS",
+      "to": "CLOSED"
+    }
+  ],
+  "invariants": [
+    "opening output references only facts whose disclosure policy is initial",
+    "on-question and scheduled facts require an explicit operator-confirm event",
+    "a dynamic fact is disclosed at most once",
+    "never-disclose facts have no visible transition",
+    "unadjudicated trigger text is authoring metadata and is not executable",
+    "all scoring drafts remain blocked until opportunity mapping and review are complete"
+  ],
+  "scope": "development_only",
+  "schema_version": "dynamic-case-state-machine/v0.4",
+  "states": [
+    "NOT_OPENED",
+    "ACTIVE",
+    "CLOSED"
+  ]
+}

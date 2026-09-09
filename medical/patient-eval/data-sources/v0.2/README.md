@@ -90,6 +90,28 @@ python -m scripts.patient_eval.candidate_selection \
 
 选择器要求阻断队列能由私有审阅稿逐字节等价重建，并只接收至少含一条初始事实和一条问到才披露或定时披露事实的候选。排序依次扩大结构标签覆盖、最大化已选病例间的归一化距离、提高结构复杂度，再用绑定候选包和编号的 SHA-256 打破平局。相似度分组只用于避免同组选入多例；未经校准的词面相似组不能被包装成医学病例家族。
 
+### 生成私有动态病例草稿
+
+冻结清单通过后，使用 `dynamic_case_drafts` 同时生成受控本地草稿和不含患者文字的公开审计：
+
+```bash
+python -m scripts.patient_eval.dynamic_case_drafts \
+  --original medical/patient-eval/local/<trusted-original>.json \
+  --review medical/patient-eval/local/<validated-review>.json \
+  --source-review medical/patient-eval/local/<submitted-review>.json \
+  --expected-source-sha256 <sha256> \
+  --blockers medical/patient-eval/data-sources/v0.2/candidate-blockers-public-v0.1.json \
+  --selection medical/patient-eval/data-sources/v0.2/candidate-development-selection-public-v0.1.json \
+  --private-out medical/patient-eval/local/<dynamic-case-drafts>.json \
+  --public-out medical/patient-eval/data-sources/v0.2/<text-free-audit>.json
+```
+
+生成器重新执行官方审阅合同、阻断队列和冻结清单的精确重建，任一输入发生漂移都会拒绝。患者证据片段、自然语言触发草稿、评分锚点和严重错误定义只进入忽略目录中的私有包；公开报告仅保留编号、枚举状态和计数。
+
+当前有限状态机只接收操作员确认的 `OPERATOR_OPEN`、`OPERATOR_CONFIRM:<event>` 和 `OPERATOR_STOP`。未裁决的问询示例或定时条件不会被当作自动匹配规则；问到才披露和定时披露事实不能进入 opening，`never` 事实没有可见转移。评分触发回合、响应回合和结构化截止均保持 `UNRESOLVED`，而不是根据自由文本猜测。
+
+[v0.4 状态机合同](../../schemas/dynamic-case-state-machine-v0.4.json)及[公开聚合审计](dynamic-case-draft-audit-public-v0.1.json)只适用于已暴露开发材料。草稿还需自然语言连贯性复核、触发语义复核、评分机会映射、停止策略、双人独立审阅和合适人员的临床规则裁决；这些完成前 `clinical_runnable`、Clinical Gold、动态场景就绪和 S6 自动信任均保持阻断。
+
 ## 下一步的交付条件
 
 两名评审完成原始意见后，先解决错位、否定范围、主体时间、披露与评分分歧，保留初评和裁决版本。随后挑选适合的小批病例，另行编写并测试动态脚本，再进行小荷和通用模型的同条件采集。
