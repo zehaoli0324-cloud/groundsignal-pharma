@@ -194,6 +194,8 @@
 - S5 历史收据只读测试：14/14 通过。
 - 相同输入的私有包及公开审计确定性重放：逐字节一致。
 - 新增公开文件的禁用路径/标识扫描、私有值重叠检查和 `git diff --check`：通过。
+- N4 功能提交：`d19efcbcb1e460d0b33f6686521385156532dcdb`；远端树 `26ce9a438a269def681a51c7723960b892f4bbc5` 与本地受测树一致。
+- GitHub 持续集成：2/2 工作流通过；草稿合并请求保持打开、未合并、未启用自动合并。
 
 本轮只证明结构化草稿能在不泄漏公开内容的前提下确定性生成，并且未来事实不会被编入 opening 转移。证据片段不是完整自然语言病例回复；操作员确认也不是已验证的语义分类器。`gold_approved=false`、`formal_approval=false`、`clinical_gold=false`、`dynamic_scenario_ready=false`、`s6_automatic_trust=BLOCKED` 均保持不变。
 
