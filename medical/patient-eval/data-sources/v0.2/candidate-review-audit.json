@@ -1,0 +1,59 @@
+{
+  "algorithm_versions": {
+    "fact_draft": "candidate-fact-draft/v0.1",
+    "legacy_extractor": "visible-chinese-rules/v0.2",
+    "preparation": "candidate-review/v0.1",
+    "privacy_scanner": "candidate-privacy-cues/v0.1",
+    "similarity": "candidate-similarity/v0.1"
+  },
+  "candidate_count": 50,
+  "clinical_gold": false,
+  "completed_dual_reviews": 0,
+  "dynamic_scenario_ready": false,
+  "fact_counters": {
+    "actions_missing_or_nonlist_turns": 0,
+    "empty_patient_turns": 0,
+    "exact_spans": 745,
+    "later_candidates": 685,
+    "lexical_review_cues": 429,
+    "malformed_actions": 0,
+    "mismatch_spans": 20,
+    "missing_spans": 0,
+    "opening_candidates": 80,
+    "patient_action_annotations": 765,
+    "patient_turns": 642,
+    "upstream_inquire_candidates": 160
+  },
+  "formal_approval": false,
+  "human_reviewed_candidates": 0,
+  "interpretation": "Deterministic first 50 candidates are not representative or independent held-out data. Privacy cues need human review; zero cues are not clearance. Legacy unparsed clauses are unsupported coverage, not measured error rate. No model evaluation was performed.",
+  "legacy_baseline_counters": {
+    "current_fact_keys": 1,
+    "observation_events": 1,
+    "observed_patient_turns": 642,
+    "unparsed_clauses": 842
+  },
+  "privacy_cue_counts": {},
+  "schema_version": "candidate-preparation-audit/v0.1",
+  "selection_method": "first_50_unique_usable_dialogues_ordered_by_content_sha256",
+  "similarity_configuration": {
+    "scope": "provided_candidates_patient_speech_only",
+    "threshold": 0.85,
+    "threshold_status": "uncalibrated_review_cue"
+  },
+  "similarity_counts": {
+    "compared_pair_count": 1225,
+    "eligible_candidate_count": 50,
+    "exact_pair_count": 0,
+    "near_pair_count": 0,
+    "possible_pair_count": 1225,
+    "skipped_pair_count": 0
+  },
+  "source": "ReMeDi-base",
+  "source_file_sha256": {
+    "MIT-license.txt": "8effa9b9543b2d7fd40b799051202b5eeb2966004baba2be40e7a0a378fe60e4",
+    "ReMeDi-base.json": "b27b6b1222255cc87cbc6cc0fb6ce7de98e0b6341f5ea61892bb92f247383458"
+  },
+  "turn_count": 1286,
+  "upstream_commit": "f94bb9abfba48f467669d2454771bbe263cc4ae5"
+}
