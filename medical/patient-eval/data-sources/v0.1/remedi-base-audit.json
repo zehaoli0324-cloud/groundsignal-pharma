@@ -1,0 +1,67 @@
+{
+  "annotation_scope": "actions presence and container structure only; clinical correctness unreviewed",
+  "candidate_selection": "first 50 or fewer unique usable dialogues ordered by content SHA-256",
+  "candidate_selection_count": 50,
+  "clinical_gold": false,
+  "clinical_label_correctness_verified": false,
+  "counts": {
+    "action_entries": 44566,
+    "actions_empty_turns": 146,
+    "actions_missing_or_nonlist_turns": 0,
+    "actions_nonempty_turns": 36145,
+    "actions_present_turns": 36291,
+    "adjacent_same_role_pairs": 10808,
+    "dialogues": 1557,
+    "dialogues_with_adjacent_same_role": 1518,
+    "duplicate_dialogue_ids": 0,
+    "duplicate_turn_ids": 0,
+    "empty_dialogues": 0,
+    "empty_sentences": 3,
+    "exact_normalized_duplicate_dialogues": 20,
+    "invalid_roles": 0,
+    "malformed_dialogues": 0,
+    "malformed_turns": 0,
+    "message_nonempty_turns": 36288,
+    "missing_dialogue_ids": 0,
+    "missing_turn_ids": 0,
+    "nondict_action_entries": 0,
+    "schema_usable_unique_dialogues": 1535,
+    "turns": 36291
+  },
+  "deidentification_verified": false,
+  "duplicate_definition": "usable dialogues; role + NFKC and whitespace-normalized sentence sequence",
+  "dynamic_scenario_ready": false,
+  "files": {
+    "MIT-license.txt": {
+      "bytes": 1066,
+      "git_blob": "3d5238e789df847576ba47726d05faa082b79e52",
+      "path": "MIT-license.txt",
+      "sha256": "8effa9b9543b2d7fd40b799051202b5eeb2966004baba2be40e7a0a378fe60e4"
+    },
+    "ReMeDi-base.json": {
+      "bytes": 16596996,
+      "git_blob": "fa444d7e10841c0485223db6b51d0c36e335619f",
+      "path": "data/ReMeDi-base.json",
+      "sha256": "b27b6b1222255cc87cbc6cc0fb6ce7de98e0b6341f5ea61892bb92f247383458"
+    }
+  },
+  "first_role_counts": {
+    "patient": 1557
+  },
+  "independent_held_out": false,
+  "last_role_counts": {
+    "doctor": 1520,
+    "patient": 37
+  },
+  "license": "MIT",
+  "public_exposed": true,
+  "role_counts": {
+    "doctor": 18403,
+    "patient": 17888
+  },
+  "schema_version": "medical-source-audit/v0.1",
+  "sequence_policy": "original bytes and turn order preserved; repeated roles are descriptive, not invalid",
+  "source": "ReMeDi-base",
+  "source_material_only": true,
+  "upstream_commit": "f94bb9abfba48f467669d2454771bbe263cc4ae5"
+}

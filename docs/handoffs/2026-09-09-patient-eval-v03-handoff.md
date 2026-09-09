@@ -28,6 +28,7 @@
 1. [v0.3 操作说明](../../medical/patient-eval/REVIEW_V0.3.md)：生成盲评包、部分审评、双人一致性、导入报告及质量对照。
 2. [披露校准材料](../../medical/patient-eval/calibration/v0.3/README.md)：分类规则、已知表达、原算法输出、分母与边界。
 3. [文献补充任务书 v1.3](../taskbooks/patient-evaluation-literature-addendum-v1.3.md)：本轮只落地 L1–L4 的必要核心；证据工具控制、真实文本处理和自动评分器仍待后续证据驱动。
+4. [随后新增的专业数据接入包](../../medical/patient-eval/data-sources/v0.1/README.md)：已固定并本地核验 ReMeDi-base 的 1,557 段对话，取得 50 个待审阅候选；它们尚不是动态病例、医学标准答案或独立测试题。公开仓库保留代码、来源和聚合审计。
 
 ## 下一轮的具体顺序
 

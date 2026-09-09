@@ -1,6 +1,6 @@
 # 文献方法如何进入 GroundSignal 的设计
 
-日期：2026-09-09。文献设计补充 v1.3；患者评测代码仍为 v0.2，功能开发暂停。
+日期：2026-09-09。下文保留文献设计补充 v1.3 的方法依据；随后已实施的部分见 [v0.3 交接](../docs/handoffs/2026-09-09-patient-eval-v03-handoff.md)，专业数据核验与接入见 [数据方案](../medical/patient-eval/data-sources/v0.1/README.md)。论文归档、数据取得和有效测试题分别登记。
 
 本文记录论文证据与设计取舍，不宣布新功能已经实现。实施顺序与验收见[文献补充任务书](../docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md)。
 “论文事实”来自附件方法与实验章节；“迁移设计”是本项目提出、仍需验证的方案。页码指本次附件页序。
