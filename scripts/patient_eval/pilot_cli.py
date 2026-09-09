@@ -7,8 +7,9 @@ from pathlib import Path
 from .agreement import rater_agreement
 from .cli import read_json, save_bundle
 from .contracts import require
+from .review_contract import REVIEW_VERSION
 from .pilot import (DEFAULT_PILOT, advance_collection, apply_review, compare_intervention, load_pilot_suite, make_review_packet,
-                    new_collection, score_pilot, write_new_json)
+                    new_collection, review_rating_rows, score_pilot, write_new_json)
 
 
 class ProtocolFixtureClient:
@@ -38,7 +39,7 @@ class ProtocolFixtureClient:
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Dynamic patient pilot v0.2; development only")
+    parser = argparse.ArgumentParser(description="Dynamic patient pilot with v0.3 independent review; development only")
     commands = parser.add_subparsers(dest="command", required=True)
     names = ("validate", "demo", "study", "score", "compare", "review-packet", "apply-review", "collect-start", "collect-reply")
     children = {name: commands.add_parser(name) for name in names}
@@ -55,6 +56,8 @@ def main(argv=None):
     children["apply-review"].add_argument("--packet", required=True)
     children["apply-review"].add_argument("--operator-key", required=True)
     children["compare"].add_argument("--criterion", required=True)
+    children["compare"].add_argument("--metric", choices=("outcome", "quality"), default="outcome")
+    children["review-packet"].add_argument("--review-version", choices=("v0.3", "legacy"), default="v0.3")
     real = children["study"]
     for name in ("base-url", "model", "key-env"):
         real.add_argument("--" + name, required=True)
@@ -77,9 +80,16 @@ def main(argv=None):
     agreement = commands.add_parser("agreement")
     for name in ("ratings", "reviewer-a", "reviewer-b", "out"):
         agreement.add_argument("--" + name, required=True)
+    export = commands.add_parser("export-ratings")
+    for name in ("packet", "reviewer-id", "out"):
+        export.add_argument("--" + name, required=True)
     args = parser.parse_args(argv)
     try:
-        if args.command == "agreement":
+        if args.command == "export-ratings":
+            rows = review_rating_rows(read_json(args.packet), args.reviewer_id)
+            write_new_json(args.out, rows)
+            result = {"rows": len(rows), "out": args.out, "original_session_binding": "requires apply-review"}
+        elif args.command == "agreement":
             result = rater_agreement(read_json(args.ratings), args.reviewer_a, args.reviewer_b)
             write_new_json(args.out, result)
         else:
@@ -106,14 +116,17 @@ def main(argv=None):
                 save_bundle(args.out, bundle)
                 result = {"out": args.out, "sessions": len(bundle["sessions"])}
             elif args.command == "compare":
-                result = compare_intervention(suite, read_json(args.sessions), args.criterion, seed=args.seed)
+                result = compare_intervention(suite, read_json(args.sessions), args.criterion, seed=args.seed, metric=args.metric)
                 write_new_json(args.out, result)
             elif args.command == "review-packet":
-                result = make_review_packet(suite, read_json(args.sessions), args.out, seed=args.seed)
+                result = make_review_packet(suite, read_json(args.sessions), args.out, seed=args.seed,
+                                            review_version=REVIEW_VERSION if args.review_version == "v0.3" else None)
             elif args.command == "apply-review":
                 sessions = apply_review(suite, read_json(args.sessions), read_json(args.packet), read_json(args.operator_key))
                 write_new_json(args.out, sessions)
-                result = {"out": args.out, "sessions": len(sessions), "clinical_truth": "human_adjudicated_only"}
+                result = {"out": args.out, "sessions": len(sessions),
+                          "human_observations": sum(o["source"] == "human" for s in sessions for o in s["observations"]),
+                          "clinical_approval": False}
             elif args.command == "collect-start":
                 require(args.scenario in by_id, "unknown scenario")
                 journal = new_collection(by_id[args.scenario], read_json(args.metadata), args.platform, args.session_id)

@@ -40,3 +40,11 @@ jobs:
         run: python -m scripts.patient_eval.pilot_cli demo --out /tmp/patient-pilot-v02
       - name: Generate blinded human review packet
         run: python -m scripts.patient_eval.pilot_cli review-packet --sessions /tmp/patient-pilot-v02/sessions.json --out /tmp/patient-pilot-review
+      - name: Keep blank v0.3 reviews explicitly unknown
+        run: python -m scripts.patient_eval.pilot_cli apply-review --sessions /tmp/patient-pilot-v02/sessions.json --packet /tmp/patient-pilot-review/reviewer-packet.json --operator-key /tmp/patient-pilot-review/operator-key.json --out /tmp/patient-pilot-v03-unreviewed.json
+      - name: Render independent quality safety and opportunity report
+        run: python -m scripts.patient_eval.pilot_cli score --sessions /tmp/patient-pilot-v03-unreviewed.json --out /tmp/patient-pilot-v03-report
+      - name: Calibrate patient question rules on exposed developer cases
+        run: python -m scripts.patient_eval.calibrate_patient --out /tmp/patient-question-v03-calibration.json
+      - name: Audit pressure relation declarations without model scoring
+        run: python -m scripts.patient_eval.relations --out /tmp/patient-pressure-v03-audit.json

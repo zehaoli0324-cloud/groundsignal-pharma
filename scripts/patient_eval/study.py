@@ -84,12 +84,13 @@ def run_dialogue(scenario: dict, client, arm: str, repeat_id: int = 0) -> dict:
     marked measurement_invalid. Budget exhaustion is recorded, not task success.
     """
     from .patient import PatientSimulator
+    from .patient_intent import DEFAULT_CLASSIFIER_VERSION
 
     _validate_study_scenario(scenario)
     require(arm in ARMS, "unknown intervention arm")
     require(type(repeat_id) is int and repeat_id >= 0, "repeat_id must be nonnegative")
     require(callable(client), "client must be callable")
-    simulator = PatientSimulator(deepcopy(scenario["patient"]))
+    simulator = PatientSimulator(deepcopy(scenario["patient"]), classifier_version=DEFAULT_CLASSIFIER_VERSION)
     extractor = VisibleFactExtractor() if arm == "state_augmented" else None
     config = _client_config(client)
     started = datetime.now(timezone.utc).isoformat()
@@ -189,6 +190,8 @@ def run_dialogue(scenario: dict, client, arm: str, repeat_id: int = 0) -> dict:
                                   "event_ids": deepcopy(patient_turn.get("event_ids", [])),
                                   "disclosed": deepcopy(patient_turn.get("disclosed", [])),
                                   "classification": deepcopy(patient_turn.get("classification")),
+                                  "classifier_version": DEFAULT_CLASSIFIER_VERSION,
+                                  "intent_decision": deepcopy(patient_turn.get("intent_decision")),
                                   "done": patient_turn["done"], "stop_reason": patient_turn.get("stop_reason")})
             if patient_turn["done"]:
                 termination = patient_turn.get("stop_reason") or "patient_protocol_complete"
@@ -234,6 +237,7 @@ def run_dialogue(scenario: dict, client, arm: str, repeat_id: int = 0) -> dict:
             "use_authorized": True, "session_protocol_id": scenario["protocol_id"], "operator": "automated_study",
             "arm": arm, "repeat_id": repeat_id, "target_config": config, "model": config.get("model", "unspecified"),
             "scenario_sha256": _digest(scenario), "system_policy_sha256": _digest(SYSTEM_POLICY),
+            "patient_classifier_version": DEFAULT_CLASSIFIER_VERSION,
             "termination_reason": termination, "task_success": None, "clinical_approval": False,
             "simulator_audit_complete": not audit_errors, "audit_errors": audit_errors,
             "planned_event_ids": [event["id"] for event in scenario["patient"].get("events", [])],
@@ -296,6 +300,8 @@ def run_study(suite: dict, client, out: str | Path, repeats: int = 1, seed: int 
     directory is rejected before any request, so no session is silently replaced
     or charged a second time. A future resume must explicitly verify both hashes.
     """
+    from .patient_intent import DEFAULT_CLASSIFIER_VERSION
+
     require(suite.get("scope") == "development_only", "formal admission is not implemented")
     require(callable(client), "client must be callable")
     scenarios = suite.get("scenarios")
@@ -304,7 +310,8 @@ def run_study(suite: dict, client, out: str | Path, repeats: int = 1, seed: int 
         _validate_study_scenario(scenario)
     config = {"client": _client_config(client), "seed": seed, "repeats": repeats,
               "arms": list(ARMS), "system_policy_sha256": _digest(SYSTEM_POLICY),
-              "extractor_version": VisibleFactExtractor.version}
+              "extractor_version": VisibleFactExtractor.version,
+              "patient_classifier_version": DEFAULT_CLASSIFIER_VERSION}
     directory = Path(out)
     directory.mkdir(parents=True, exist_ok=False)
     manifest = {"schema_version": "patient-study/v0.2", "scope": "development_only",

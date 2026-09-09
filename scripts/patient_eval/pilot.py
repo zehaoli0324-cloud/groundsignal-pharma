@@ -12,9 +12,11 @@ import json
 from pathlib import Path
 import random
 
-from .contracts import require, validate_session
+from .contracts import nonempty, require, validate_session
 from .importers import import_blackbox
 from .patient import PatientSimulator
+from .patient_intent import DEFAULT_CLASSIFIER_VERSION, LEGACY_CLASSIFIER_VERSION
+from .review_contract import REVIEW_VERSION, validate_review_observation
 from .runner import digest
 from .scoring import aggregate_scores, score_session
 from .diagnosis import diagnose
@@ -108,11 +110,12 @@ def score_pilot(suite, sessions):
             require(observation["criterion_id"] in criteria, "unknown observation criterion")
             ordinal = observation.get("ordinal_rating")
             require(ordinal is None or type(ordinal) is int and ordinal in {0, 1, 2}, "invalid ordinal rating")
-            if observation["source"] != "human" or observation["outcome"] == "unassessed":
+            is_v03 = observation.get("review_version") == REVIEW_VERSION
+            if observation["source"] != "human" or observation["outcome"] == "unassessed" and not is_v03:
                 continue
             require(observation["rubric_version"] == suite.get("rubric_version", "patient-pilot-rubric/v0.2"),
                     "pilot annotation rubric version mismatch")
-            if criteria[observation["criterion_id"]]["critical"]:
+            if not is_v03 and criteria[observation["criterion_id"]]["critical"]:
                 if observation["outcome"] == "fail":
                     require(observation.get("serious_error") is True, "critical failure requires an explicit serious-error judgment")
                 elif observation["outcome"] == "pass":
@@ -148,8 +151,20 @@ def write_new_json(path, value):
         handle.write("\n")
 
 
-def make_review_packet(suite, sessions, out, seed=7):
+def _blank_opportunity():
+    return {"status": "unassessed", "trigger_turn_id": None, "response_turn_id": None,
+            "deadline_reached": None, "reason": "", "noncompletion_reason": None}
+
+
+def _review_set_identity(items):
+    return digest({"review_version": REVIEW_VERSION,
+                   "items": [{key: item[key] for key in ("item_id", "criterion", "turns", "session_status")}
+                             for item in items]})
+
+
+def make_review_packet(suite, sessions, out, seed=7, review_version=None):
     """Separate reviewer materials from platform identities and hidden scripts."""
+    require(review_version in {None, REVIEW_VERSION}, "unsupported review version")
     score_pilot(suite, sessions)  # validate before exporting any clinical material
     out = Path(out)
     require(not out.exists(), "review output directory already exists")
@@ -171,11 +186,17 @@ def make_review_packet(suite, sessions, out, seed=7):
                           "reviewer_id": "", "rubric_version": suite.get("rubric_version", "patient-pilot-rubric/v0.2")})
             rating_rows.append({"item_id": item_id, "reviewer_id": "", "rubric_version": suite.get("rubric_version", "patient-pilot-rubric/v0.2"),
                                 "rating": None, "serious_error": None})
+            if review_version == REVIEW_VERSION:
+                items[-1].update(review_version=REVIEW_VERSION, quality_status="unassessed",
+                                 opportunity=_blank_opportunity())
+                rating_rows[-1].update(review_version=REVIEW_VERSION, criterion_id=criterion["id"],
+                                       quality_status="unassessed", opportunity_status="unassessed")
     out.mkdir(parents=True)
-    write_new_json(out / "reviewer-packet.json", {"scope": "development_only", "items": items,
+    version_fields = {"review_version": REVIEW_VERSION, "review_set_sha256": _review_set_identity(items)} if review_version else {}
+    write_new_json(out / "reviewer-packet.json", {**version_fields, "scope": "development_only", "items": items,
                    "blinding_limit": "Only metadata is blinded; original response text may reveal the platform."})
     write_new_json(out / "ratings-template.json", {"template": True, "rows": rating_rows})
-    write_new_json(out / "operator-key.json", {"seed": seed, "mapping": mapping,
+    write_new_json(out / "operator-key.json", {**version_fields, "seed": seed, "mapping": mapping,
                    "instruction": "Operator only. Do not give this key or patient scripts to blinded reviewers."})
     return {"sessions": len(ordered), "review_items": len(items), "out": str(out)}
 
@@ -188,6 +209,16 @@ def apply_review(suite, sessions, packet, operator_key):
     scenarios = {s["scenario_id"]: s for s in suite["scenarios"]}
     mapping = operator_key.get("mapping", {})
     require(isinstance(packet.get("items"), list) and isinstance(mapping, dict), "invalid review packet/key")
+    version = packet.get("review_version")
+    require(version in {None, REVIEW_VERSION} and operator_key.get("review_version") == version,
+            "review packet/key version mismatch")
+    if version == REVIEW_VERSION:
+        require(packet.get("review_set_sha256") == operator_key.get("review_set_sha256") == _review_set_identity(packet["items"]),
+                "review set identity changed; retain the original complete packet")
+        for session in sessions:
+            require(all(o.get("review_version") == REVIEW_VERSION for o in session["observations"]),
+                    "legacy judgments require separate explicit re-review; do not silently migrate them")
+            session["metadata"]["review_version"] = REVIEW_VERSION
     seen = set()
     for item in packet["items"]:
         item_id = item.get("item_id", "")
@@ -201,15 +232,26 @@ def apply_review(suite, sessions, packet, operator_key):
         require(criterion_id in criteria and item.get("criterion") == criteria[criterion_id], "review criterion changed")
         visible = [{k: t[k] for k in ("turn_id", "role", "content")} for t in session["turns"]]
         require(item.get("turns") == visible, "reviewed text does not match the original session")
+        require(item.get("session_status") == session["status"], "reviewed session status changed")
+        require(item.get("review_version") == version, "review item version mismatch")
         rating = item.get("rating")
         require(rating is None or type(rating) is int and rating in {0, 1, 2}, "invalid ordinal rating")
         serious = item.get("serious_error")
         require(serious is None or type(serious) is bool, "invalid serious_error label")
         outcome = item.get("outcome", "unassessed")
         require(outcome in {"pass", "fail", "unassessed", "not_applicable"}, "invalid human outcome")
-        if outcome == "unassessed":
+        if version == REVIEW_VERSION:
+            # An untouched template is missing review, never a zero or safety pass.
+            untouched = (outcome == "unassessed" and rating is None and serious is None
+                         and item.get("quality_status") == "unassessed"
+                         and item.get("opportunity") == _blank_opportunity()
+                         and not item.get("reviewer_id") and not item.get("reason")
+                         and not item.get("evidence_turn_ids"))
+            if untouched:
+                continue
+        elif outcome == "unassessed":
             continue  # high ordinal ratings never imply a pass
-        if criteria[criterion_id]["critical"]:
+        if version is None and criteria[criterion_id]["critical"]:
             require(outcome != "fail" or serious is True, "critical failure requires an explicit serious-error judgment")
             require(outcome != "pass" or serious is False, "critical pass requires an explicit no-serious-error judgment")
         require(item.get("rubric_version") == suite.get("rubric_version", "patient-pilot-rubric/v0.2"), "review rubric version mismatch")
@@ -219,6 +261,9 @@ def apply_review(suite, sessions, packet, operator_key):
                        "reviewer_id": item.get("reviewer_id"), "rubric_version": item.get("rubric_version"),
                        "reason": item.get("reason"), "evidence_turn_ids": item.get("evidence_turn_ids"),
                        "ordinal_rating": rating, "serious_error": serious}
+        if version == REVIEW_VERSION:
+            observation.update(review_version=REVIEW_VERSION, quality_status=item.get("quality_status"),
+                               opportunity=deepcopy(item.get("opportunity")))
         if item.get("applicability") == "legitimate_stop":
             observation["applicability"] = "legitimate_stop"
         session["observations"].append(observation)
@@ -227,12 +272,60 @@ def apply_review(suite, sessions, packet, operator_key):
     return sessions
 
 
-def compare_intervention(suite, sessions, criterion_id, seed=7):
+def review_rating_rows(packet, reviewer_id):
+    """Export independent labels for agreement, including untouched/missing rows.
+
+    This is a formatting step. apply_review remains responsible for binding the
+    packet to original collected sessions before any model report is produced.
+    """
+    require(packet.get("review_version") == REVIEW_VERSION, "ratings export requires v0.3 packet")
+    require(isinstance(reviewer_id, str) and bool(reviewer_id.strip()), "reviewer_id required")
+    require(isinstance(packet.get("items"), list) and bool(packet["items"]), "empty review packet")
+    require(packet.get("review_set_sha256") == _review_set_identity(packet["items"]), "review set identity changed")
+    rows, seen = [], set()
+    for item in packet["items"]:
+        require(item.get("review_version") == REVIEW_VERSION, "review item version mismatch")
+        require(item.get("reviewer_id") in {"", reviewer_id}, "packet contains another reviewer's judgments")
+        require(item["item_id"] not in seen, "duplicate review item")
+        seen.add(item["item_id"])
+        opportunity = deepcopy(item["opportunity"])
+        untouched = (item.get("outcome") == "unassessed" and item.get("rating") is None
+                     and item.get("serious_error") is None and item.get("quality_status") == "unassessed"
+                     and opportunity == _blank_opportunity() and not item.get("reviewer_id")
+                     and not item.get("reason") and not item.get("evidence_turn_ids"))
+        require(item.get("outcome") in {"pass", "fail", "unassessed", "not_applicable"}, "invalid outcome")
+        require(nonempty(item.get("rubric_version")), "rubric_version required")
+        if not untouched:
+            require(item.get("reviewer_id") == reviewer_id and nonempty(item.get("reason")),
+                    "review decisions require original reviewer identity and rationale")
+            if item["outcome"] in {"pass", "fail", "not_applicable"}:
+                require(bool(item.get("evidence_turn_ids")), "decided observations require evidence")
+        # Blank templates have no written rationale because no decision exists.
+        if opportunity == _blank_opportunity():
+            opportunity["reason"] = "Review not supplied"
+        observation = {"review_version": REVIEW_VERSION, "outcome": item["outcome"], "source": "human",
+                       "quality_status": item["quality_status"], "ordinal_rating": item["rating"],
+                       "serious_error": item["serious_error"], "opportunity": opportunity,
+                       "evidence_turn_ids": item["evidence_turn_ids"]}
+        validate_review_observation(observation, item["turns"])
+        rows.append({"item_id": item["item_id"], "criterion_id": item["criterion"]["id"],
+                     "review_set_sha256": packet["review_set_sha256"],
+                     "review_version": REVIEW_VERSION, "reviewer_id": reviewer_id,
+                     "rubric_version": item["rubric_version"], "rating": item["rating"],
+                     "quality_status": item["quality_status"], "serious_error": item["serious_error"],
+                     "opportunity_status": item["opportunity"]["status"]})
+    return rows
+
+
+def compare_intervention(suite, sessions, criterion_id, seed=7, metric="outcome"):
     """Compare adjudicated criterion completion; never fill missing reviews."""
+    require(metric in {"outcome", "quality"}, "unsupported comparison metric")
     bundle = score_pilot(suite, sessions)
     scored = {s["session_id"]: s for s in bundle["scores"]}
-    configs, policies, models, rows = set(), set(), set(), []
+    configs, policies, models, classifiers, semantics, rows = set(), set(), set(), set(), set(), []
     for session in bundle["sessions"]:
+        require(scored[session["session_id"]]["review_semantics"] != "mixed",
+                "do not compare sessions containing mixed review semantics")
         metadata = session["metadata"]
         arm = metadata.get("arm")
         require(arm in {"baseline", "state_augmented"}, "intervention comparison requires declared study arms")
@@ -243,26 +336,45 @@ def compare_intervention(suite, sessions, criterion_id, seed=7):
         configs.add(digest(metadata["target_config"]))
         policies.add(metadata["system_policy_sha256"])
         models.add(session["platform"])
+        classifiers.add(metadata.get("patient_classifier_version", "literal-v0.2"))
         result = next((r for r in scored[session["session_id"]]["criterion_results"] if r["criterion_id"] == criterion_id), None)
         require(result is not None, "selected criterion is not shared by every scenario")
         require(not scored[session["session_id"]]["excluded_from_target_metrics"],
                 "resolve independent invalid measurements before comparing complete pairs")
-        require(result["outcome"] in {"pass", "fail"},
-                "selected criterion requires adjudication on every pair; unknown or inapplicable is not a score")
+        semantics.add(result.get("review_version", "legacy"))
+        if metric == "quality":
+            require(result.get("review_version") == REVIEW_VERSION and result.get("quality_status") == "assessed",
+                    "quality comparison requires v0.3 quality ratings on every pair; missing is not zero")
+            value = result["ordinal_rating"] / 2
+        else:
+            if result.get("review_version") == REVIEW_VERSION:
+                require(result.get("task_completion_outcome") in {"completed", "incomplete"},
+                        "selected criterion requires task completion adjudication on every pair")
+                value = int(result["task_completion_outcome"] == "completed")
+            else:
+                require(result["outcome"] in {"pass", "fail"},
+                        "selected criterion requires adjudication on every pair; unknown or inapplicable is not a score")
+                value = int(result["outcome"] == "pass")
         rows.append({"family_id": session["family_id"], "scenario_id": session["scenario_id"],
                      "variant": session["variant"], "repeat_id": metadata.get("repeat_id"),
-                     "platform": arm, "score": int(result["outcome"] == "pass"),
+                     "platform": arm, "score": value,
                      "comparison_lane": metadata["comparison_lane"], "protocol_id": metadata["session_protocol_id"]})
     require(len(configs) == len(policies) == len(models) == 1, "both arms must use the same model, configuration and fixed policy")
+    require(len(classifiers) == len(semantics) == 1, "do not pool patient classifier or review semantics versions")
     comparison = paired_family_comparison(rows, "baseline", "state_augmented", seed=seed)
     comparison.update(criterion_id=criterion_id, target_platform=next(iter(models)),
+                      metric=metric, review_semantics=next(iter(semantics)),
+                      patient_classifier_version=next(iter(classifiers)),
                       target_quality_summary=bundle["aggregate"],
                       interpretation="判据完成率的家族配对差；服务失败计未完成。严重错误与未评临床项单列，不代表临床总体效果。")
+    if metric == "quality":
+        comparison.update(score_scale="ordinal 0–2 normalized to 0–1", mean_delta_rating_points=2 * comparison["mean_delta"],
+                          interpretation="同一判据质量分的家族配对差；仅接受完整评分配对，不把缺失或服务失败自动填成 0。服务完成率及严重错误另列；序数均值仅作探索性描述。")
     return comparison
 
 
 def new_collection(scenario, metadata, platform, session_id):
-    sim = PatientSimulator(scenario["patient"])
+    sim = PatientSimulator(scenario["patient"], classifier_version=DEFAULT_CLASSIFIER_VERSION)
     opening = sim.opening()
     record = {"session_id": session_id, "scenario_id": scenario["scenario_id"], "family_id": scenario["family_id"],
               "variant": scenario["variant"], "platform": platform, "observability": "black_box",
@@ -272,10 +384,12 @@ def new_collection(scenario, metadata, platform, session_id):
     record = import_blackbox(record)
     record["status"] = "in_progress"  # journals are not completed evaluation records
     record["metadata"]["scenario_sha256"] = digest(scenario)
+    record["metadata"]["patient_classifier_version"] = DEFAULT_CLASSIFIER_VERSION
     require(metadata["session_protocol_id"] == scenario["protocol_id"] and metadata["comparison_lane"] == "free_dialogue",
             "manual collection protocol mismatch")
     require(metadata["question_source"] == scenario["source"], "question source mismatch")
     return {"schema_version": "patient-collection/v0.2", "scenario_sha256": digest(scenario),
+            "patient_classifier_version": DEFAULT_CLASSIFIER_VERSION,
             "session": record, "responses": [], "done": False, "next_patient_message": opening["content"],
             "notice": "Copy only next_patient_message. In-progress user messages are drafts until submitted to the app."}
 
@@ -294,7 +408,10 @@ def advance_collection(scenario, journal, assistant_text, finish=False, target_e
     if requested_slots is not None:
         require(isinstance(classification_note, str) and bool(classification_note.strip()),
                 "manual question classification requires an audit note")
-    sim = PatientSimulator(scenario["patient"])
+    version = journal.get("patient_classifier_version", LEGACY_CLASSIFIER_VERSION)
+    require(journal["session"]["metadata"].get("patient_classifier_version", LEGACY_CLASSIFIER_VERSION) == version,
+            "journal patient classifier version mismatch")
+    sim = PatientSimulator(scenario["patient"], classifier_version=version)
     turns = [{"turn_id": "u1", "role": "user", "content": sim.opening()["content"]}]
     for index, response in enumerate(journal["responses"], 1):
         turns.append({"turn_id": f"a{index}", "role": "assistant", "content": response["content"]})

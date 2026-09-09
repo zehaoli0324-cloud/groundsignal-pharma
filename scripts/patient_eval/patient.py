@@ -7,16 +7,17 @@ Natural-language matching is a conservative *collection aid*, not a clinical
 understanding model or a scoring rule. An operator can supply requested_slots
 when reviewing an unfamiliar question; that decision belongs in the run trace.
 
-Only ``content`` is patient speech. ``disclosed``, event IDs and ``snapshot`` are
-operator-side records and must never be appended to a target's messages.
+Only ``content`` is patient speech. ``disclosed``, intent decisions, event IDs
+and ``snapshot`` are operator-side records, never target messages.
 """
 
 from __future__ import annotations
 
 from copy import deepcopy
 import math
-import re
-import unicodedata
+from .patient_intent import (
+    CLASSIFIER_VERSIONS, DEFAULT_CLASSIFIER_VERSION, classify_requested_slots,
+)
 
 
 _SPEC_FIELDS = frozenset({
@@ -29,11 +30,6 @@ _EVENT_FIELDS = frozenset({
 })
 _UPDATE_FIELDS = frozenset({"slot", "value", "status", "answer"})
 _UNMATCHED = "我不确定你具体想问哪一项，能换个问法吗？"
-_QUESTION = re.compile(
-    r"[?？]|请问|是否|多久|什么|哪|告诉|能否|多少|几|有没有|有无|可否|能不能|吗(?:呀|呢)?$"
-)
-# Keep the question mark inside a clause so it can license a literal match.
-_CLAUSES = re.compile(r"[^，,。；;！!\n?？]+[?？]?")
 
 
 def _require(condition: bool, message: str) -> None:
@@ -125,10 +121,6 @@ def validate_patient_spec(spec: dict) -> None:
                 _require(_nonempty(update["answer"]), "updated answer must be nonempty")
 
 
-def _normalized(text: str) -> str:
-    return unicodedata.normalize("NFKC", text).casefold().strip()
-
-
 class PatientSimulator:
     """A repeatable finite state machine with explicit disclosure provenance.
 
@@ -145,8 +137,10 @@ class PatientSimulator:
     the list cannot jump over an untriggered earlier event.
     """
 
-    def __init__(self, spec: dict) -> None:
+    def __init__(self, spec: dict, classifier_version: str = DEFAULT_CLASSIFIER_VERSION) -> None:
         validate_patient_spec(spec)
+        _require(classifier_version in CLASSIFIER_VERSIONS, "unsupported patient classifier version")
+        self._classifier_version = classifier_version
         self._spec = deepcopy(spec)
         self._facts = deepcopy(spec["facts"])
         self._opened = False
@@ -156,6 +150,11 @@ class PatientSimulator:
         self._event_log: list[dict] = []
         self._done = False
         self._stop_reason: str | None = None
+
+    @property
+    def classifier_version(self) -> str:
+        """A session's rule version cannot be switched midway through replay."""
+        return self._classifier_version
 
     def opening(self) -> dict:
         if not self._opened:
@@ -169,13 +168,9 @@ class PatientSimulator:
         }
 
     def _inferred_slots(self, text: str) -> list[str]:
-        clauses = [clause.strip() for clause in _CLAUSES.findall(_normalized(text))]
-        questions = [clause for clause in clauses if _QUESTION.search(clause)]
-        return [
-            slot for slot, fact in self._facts.items()
-            if any(_normalized(pattern) in clause
-                   for pattern in fact["ask_patterns"] for clause in questions)
-        ]
+        # Kept for callers inspecting the former private helper. Decisions are
+        # produced and logged in respond(), without exposing them as speech.
+        return classify_requested_slots(text, self._facts, self.classifier_version)["requested_slots"]
 
     def _response(self, content: str | None, classification: str,
                   disclosed: list[str] | None = None, event_ids: list[str] | None = None) -> dict:
@@ -186,6 +181,11 @@ class PatientSimulator:
             "done": self._done,
             "stop_reason": self._stop_reason,
             "classification": classification,
+            "classifier_version": self.classifier_version,
+            # Like disclosed/event_ids, this is operator metadata. Only content
+            # is patient speech and may enter the target conversation.
+            "intent_decision": deepcopy(self._event_log[-1].get("intent_decision"))
+            if self._event_log else None,
         }
 
     def _stop(self, reason: str, classification: str) -> dict:
@@ -194,6 +194,9 @@ class PatientSimulator:
         self._event_log.append({
             "assistant_turn": self._assistant_turn_count,
             "kind": "stop",
+            "classifier_version": self.classifier_version,
+            "intent_decision": {"classifier_version": self.classifier_version,
+                                "mode": "not_evaluated", "reason": reason},
             "reason": reason,
             "closing_message": self._spec["closing_message"],
             "not_reached_event_ids": [event["id"] for event in self._spec["events"][self._next_event:]],
@@ -236,15 +239,28 @@ class PatientSimulator:
                     "event_id": event["id"],
                     "kind": event["kind"],
                     "disclosed": list(updated_slots),
+                    "classifier_version": self.classifier_version,
+                    "intent_decision": {"classifier_version": self.classifier_version,
+                                        "mode": "not_evaluated",
+                                        "reason": "scheduled_event_preempted"},
                 })
                 return self._response(event["content"], "event", updated_slots, [event["id"]])
 
-        slots = list(requested_slots) if requested_slots is not None else self._inferred_slots(assistant_text)
+        if requested_slots is None:
+            decision = classify_requested_slots(assistant_text, self._facts, self.classifier_version)
+            decision["mode"] = "automatic"
+        else:
+            decision = {"classifier_version": self.classifier_version, "mode": "explicit_override",
+                        "requested_slots": list(requested_slots), "clauses": [],
+                        "reason": "operator_supplied_slots"}
+        slots = decision["requested_slots"]
         if not slots:
             self._event_log.append({
                 "assistant_turn": self._assistant_turn_count,
                 "kind": "unmatched",
-                "mapping": "explicit" if requested_slots is not None else "literal_question_rules",
+                "mapping": "explicit" if requested_slots is not None else self.classifier_version,
+                "classifier_version": self.classifier_version,
+                "intent_decision": deepcopy(decision),
             })
             return self._response(_UNMATCHED, "unmatched")
         for slot in slots:
@@ -254,13 +270,16 @@ class PatientSimulator:
             "assistant_turn": self._assistant_turn_count,
             "kind": "question",
             "disclosed": list(slots),
-            "mapping": "explicit" if requested_slots is not None else "literal_question_rules",
+            "mapping": "explicit" if requested_slots is not None else self.classifier_version,
+            "classifier_version": self.classifier_version,
+            "intent_decision": deepcopy(decision),
         })
         return self._response("\n".join(self._facts[slot]["answer"] for slot in slots), "question", slots)
 
     def snapshot(self) -> dict:
         """Detached operator-only state; NEVER include this in target messages."""
         return deepcopy({
+            "classifier_version": self.classifier_version,
             "opened": self._opened,
             "assistant_turn_count": self._assistant_turn_count,
             "disclosed": self._disclosed,

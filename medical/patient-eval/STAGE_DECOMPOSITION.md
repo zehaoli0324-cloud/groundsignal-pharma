@@ -2,7 +2,7 @@
 
 日期：2026-09-09。本文件细化既有 S1–S10 编号，不重排历史阶段，不把新的开发测试当成历史研究阶段已放行。整体要求见[合并主任务书 v1.2](../../docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)。
 
-[文献设计补充 v1.3](../../docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md)将压力、交互、评分、校准、证据工具和真实文本工作映射到现有阶段；均为待实施项，不改变下述阶段的实际完成状态。
+[文献设计补充 v1.3](../../docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md)将压力、交互、评分、校准、证据工具和真实文本工作映射到现有阶段。v0.3 已推进 S6 的问询校准、S7 的独立评分和 S10 的分项一致性与质量对照，详见 [最新交接](../../docs/handoffs/2026-09-09-patient-eval-v03-handoff.md)；下文仍是各阶段完整要求，不表示整阶段已验收。
 
 **S1–S10 表示建设流程，C1–C8 表示能力，E1–E4 表示被评对象。** 例如 C3 事实更新在 S5 被设计成场景，在 S6 执行，在 S7 判分，在 S8 排查，在 S9 修改，在 S10 复测。不能把八能力改名成八阶段后遗漏数据、评分器与独立测试质量。
 
