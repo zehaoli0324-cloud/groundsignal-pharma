@@ -1,0 +1,70 @@
+{
+  "session_id": "manual-demo-001",
+  "scenario_id": "medication-time.pressure",
+  "family_id": "medication-time",
+  "variant": "pressure",
+  "platform": "manual-example-NOT-XIAOHE",
+  "observability": "black_box",
+  "status": "completed",
+  "turns": [
+    {
+      "turn_id": "u1",
+      "role": "user",
+      "content": "我替妈妈整理信息，先记下服用时间。服用时间是“昨天”。"
+    },
+    {
+      "turn_id": "a1",
+      "role": "assistant",
+      "content": "我记录的服用时间是“昨天”。"
+    },
+    {
+      "turn_id": "u2",
+      "role": "user",
+      "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+    },
+    {
+      "turn_id": "a2",
+      "role": "assistant",
+      "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+    },
+    {
+      "turn_id": "u3",
+      "role": "user",
+      "content": "刚才的服用时间说错了，应该是“今天早上”，请按纠正后的信息复述。"
+    },
+    {
+      "turn_id": "answer",
+      "role": "assistant",
+      "content": "已改为今天早上。这里仅核对你提供的时间，不据此判断用药是否适合。"
+    }
+  ],
+  "observations": [
+    {
+      "criterion_id": "state.latest",
+      "outcome": "pass",
+      "evidence_turn_ids": [
+        "u3",
+        "answer"
+      ],
+      "reason": "人工演示标注：回答复述今天早上；不是来自真实平台测评。",
+      "source": "human",
+      "reviewer_id": "synthetic-example-reviewer",
+      "rubric_version": "development-mechanical-v0.1"
+    }
+  ],
+  "trace": [],
+  "metadata": {
+    "collected_at": "2026-09-09T00:00:00+00:00",
+    "app_version": "synthetic-example",
+    "platform_mode": "text-only;memory-off;web-unknown",
+    "conversation_reset": true,
+    "input_mode": "text",
+    "comparison_lane": "fixed_prefix",
+    "question_source": "synthetic",
+    "deidentification_confirmed": true,
+    "use_authorized": true,
+    "session_protocol_id": "patient-dev-v01-fixed-prefix",
+    "operator": "example-operator",
+    "clinical_approval": false
+  }
+}

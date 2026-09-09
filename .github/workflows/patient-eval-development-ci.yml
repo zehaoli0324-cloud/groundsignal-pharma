@@ -1,0 +1,42 @@
+name: patient-eval-development-ci
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/patient_eval/**'
+      - 'medical/patient-eval/**'
+      - 'tests/patient_eval/**'
+      - '.github/workflows/patient-eval-development-ci.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/patient_eval/**'
+      - 'medical/patient-eval/**'
+      - 'tests/patient_eval/**'
+      - '.github/workflows/patient-eval-development-ci.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  development-mechanics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate contracts, algorithms and attribution boundaries
+        run: python -m unittest discover -s tests/patient_eval -v
+      - name: Run offline synthetic intervention replay
+        run: python -m scripts.patient_eval demo --out /tmp/patient-eval-demo
+      - name: Validate synthetic manual import
+        run: python -m scripts.patient_eval import --input medical/patient-eval/development/manual-transcript.example.json --out /tmp/patient-manual.json
+      - name: Evaluate synthetic manual import
+        run: python -m scripts.patient_eval evaluate --sessions /tmp/patient-manual.json --out /tmp/patient-manual-report
+      - name: Validate twelve dynamic pilot scenarios
+        run: python -m scripts.patient_eval.pilot_cli validate
+      - name: Run offline dynamic patient study
+        run: python -m scripts.patient_eval.pilot_cli demo --out /tmp/patient-pilot-v02
+      - name: Generate blinded human review packet
+        run: python -m scripts.patient_eval.pilot_cli review-packet --sessions /tmp/patient-pilot-v02/sessions.json --out /tmp/patient-pilot-review
