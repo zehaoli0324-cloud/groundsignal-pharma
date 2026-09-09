@@ -2,6 +2,8 @@
 
 > 本页保留 v0.1 的适配分析。当前统一要求见 [任务书 v1.2](../../docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)，各阶段边界见 [S1–S10 拆分](STAGE_DECOMPOSITION.md)，最新交付见 [v0.2 试评说明](pilot/v0.2/README.md)。
 
+2026-09-09 设计补充：[文献适配任务书 v1.3](../../docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md)把论文方法映射为六个算法与工程工作包；这些是待实施要求，功能开发仍暂停。
+
 日期：2026-09-09。适配基线：主分支提交 `baabe88ab908ebcf29b592ea542aa37d40acca26`，以本次分支的实际父提交为准。
 
 > 决策：并入 GroundSignal，形成独立的 `patient-eval` 子系统。当前交付是合成开发场景的算法与工程原型，以及小荷等黑盒平台的人工采集接入框架。当前任务入口见 [实施任务书 v1.1](../../docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.1.md)，完整基础要求见 [v1.0](../../docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.0.md)；[Word 原件](../../docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.0.docx)保持原样。本方案补充黑盒研究设计和分阶段适配边界，不把规划中的工作列为已完成。

@@ -51,6 +51,7 @@ python -m scripts.patient_eval.pilot_cli demo --out medical/patient-eval/local/r
 ## 文档
 
 - [十阶段任务拆分](medical/patient-eval/STAGE_DECOMPOSITION.md)：每阶段的输入、输出和验收。
+- [文献设计补充](docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md)：论文方法对应的算法、工程任务与验收，尚未实施。
 - [知识来源与核验](medical/knowledge-base/SEARCH_AND_VERIFICATION_PROTOCOL.md) · [图谱构建](medical/knowledge-graph/HOW_IT_IS_BUILT.md)。
 - [采集与评分材料](medical/patient-eval/pilot/v0.2/README.md)：披露规则、采集模板与人工评分细则。
 - [进度与交接](docs/handoffs/2026-09-09-project-handoff.md)：已交付内容、已知问题和恢复工作的入口。
