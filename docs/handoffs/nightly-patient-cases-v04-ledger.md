@@ -246,6 +246,8 @@
 - 患者评测模块测试：246/246 通过。
 - S5 历史收据只读测试：14/14 通过。
 - 公开就绪度审计确定性重放逐字节一致；明确分母断言、JSON 解析、禁用路径/标识扫描、私有值重叠检查和 `git diff --check` 均通过。
+- N5 功能提交：`8943c38c23681563f6236efde1c5f8a9c50bcce1`；远端树 `fb14045c33366226389600960ead2c067b007e80` 与本地受测树一致。
+- GitHub 持续集成：2/2 工作流通过；草稿合并请求保持打开、未合并、未启用自动合并。
 
 `gold_approved=false`、`formal_approval=false`、`clinical_gold=false`、`dynamic_scenario_ready=false`、`s6_automatic_trust=BLOCKED` 保持不变。本轮没有调用模型或真实医疗平台，没有生成训练数据，也没有修改 S5 冻结证据。
 
