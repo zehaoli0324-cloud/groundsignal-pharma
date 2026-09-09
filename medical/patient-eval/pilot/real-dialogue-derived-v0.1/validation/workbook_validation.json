@@ -1,0 +1,6 @@
+{
+  "formula_error_scan": "{\"kind\":\"notice\",\"message\":\"Cell search matched 0 entries.\"}",
+  "passed": true,
+  "schema_version": "groundsignal-public-workbook-validation/v0.1",
+  "summary_inspection": "{\"kind\":\"table\",\"sheet\":\"汇总\",\"address\":\"A1:D8\",\"rows\":8,\"cols\":4,\"values\":[[\"指标\",\"动态问诊\",\"固定重放\",\"说明\"],[\"计划运行\",6,0,\"按轨道登记\"],[\"完成运行\",0,0,\"状态为 COMPLETE\"],[\"评分机会已触发\",0,0,\"仅 TRIGGERED\"],[\"已评分条目\",0,0,\"TRIGGERED 且有分数\"],[\"轨道内平均分\",\"\",\"\",\"不得跨轨道平均\"],[\"严重错误数\",0,0,\"单独计数\"],[\"跨轨道总分\",\"禁止\",\"禁止\",\"两个轨道测量对象不同\"]]}"
+}

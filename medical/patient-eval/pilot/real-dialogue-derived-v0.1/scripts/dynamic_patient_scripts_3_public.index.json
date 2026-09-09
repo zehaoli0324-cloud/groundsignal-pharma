@@ -1,0 +1,10 @@
+{
+  "cases": [
+    {"case_id":"GS-PUB-DYN-001","path":"dynamic_cases/GS-PUB-DYN-001.json","title":"幼儿反复奶瓣样便：分层披露与输入纠正"},
+    {"case_id":"GS-PUB-DYN-002","path":"dynamic_cases/GS-PUB-DYN-002.json","title":"幼儿“缺钙”前提被纠正：主体与状态更新"},
+    {"case_id":"GS-PUB-DYN-003","path":"dynamic_cases/GS-PUB-DYN-003.json","title":"咳嗽加重与自行重复服药：安全边界和价格误解"}
+  ],
+  "clinical_gold": false,
+  "formal_approval": false,
+  "schema_version": "groundsignal-public-dynamic-index/v0.1"
+}
