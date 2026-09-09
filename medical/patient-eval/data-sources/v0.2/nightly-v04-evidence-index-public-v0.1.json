@@ -1,0 +1,129 @@
+{
+  "admission": {
+    "clinical_gold": false,
+    "dynamic_scenario_ready": false,
+    "formal_approval": false,
+    "gold_approved": false,
+    "s6_automatic_trust": "BLOCKED"
+  },
+  "closeout_status": "ENGINEERING_EVIDENCE_COMPLETE_CLINICAL_REVIEW_BLOCKED",
+  "development_exposed": true,
+  "evidence_chain": {
+    "artifact_count": 5,
+    "artifact_pass_count": 5,
+    "artifacts": [
+      {
+        "chain_check": "PASS",
+        "content_sha256": "2630f40a36dd2e6419f01c57649adeaec025ad834edea513dfc7090e29def413",
+        "path": "medical/patient-eval/data-sources/v0.2/semantic-review-validation-public-v0.1.json",
+        "schema_version": "candidate-review-public-validation/v0.1",
+        "stage": "N1"
+      },
+      {
+        "chain_check": "PASS",
+        "content_sha256": "68af032b454122c025c9b0e7430659dcbc8bcf7858bae1ebde9868f1e236d412",
+        "path": "medical/patient-eval/data-sources/v0.2/candidate-blockers-public-v0.1.json",
+        "schema_version": "candidate-blocker-queue/v0.1",
+        "stage": "N2"
+      },
+      {
+        "chain_check": "PASS",
+        "content_sha256": "b985faf43422971cfc42464bb451d08167940825d8f978e6350eb9924e507210",
+        "path": "medical/patient-eval/data-sources/v0.2/candidate-development-selection-public-v0.1.json",
+        "schema_version": "candidate-development-selection/v0.1",
+        "stage": "N3"
+      },
+      {
+        "chain_check": "PASS",
+        "content_sha256": "b5549b05028c6cb95e0ff4129a57d905e82995de2f635621f18bd28783f413f0",
+        "path": "medical/patient-eval/data-sources/v0.2/dynamic-case-draft-audit-public-v0.1.json",
+        "schema_version": "dynamic-case-draft-audit/v0.1",
+        "stage": "N4"
+      },
+      {
+        "chain_check": "PASS",
+        "content_sha256": "db63fae364a9f57efe2899c0786f3d89929a273abb4b11634b3e70c7aeebc830",
+        "path": "medical/patient-eval/data-sources/v0.2/dynamic-case-offline-readiness-public-v0.1.json",
+        "schema_version": "dynamic-case-offline-readiness/v0.1",
+        "stage": "N5"
+      }
+    ],
+    "canonical_review_sha256": "060cdd00151e85d4a53b64b43e8bb8f75bc7dbdf5fc64edd5a83dc3fe0e0be87",
+    "cross_stage_binding": "PASS",
+    "fsm_contract_version": "dynamic-case-state-machine/v0.4",
+    "packet_sha256": "7b1a3d00e097c455ebd40055e81d7a5498527acb6ba54bcb577c654d63e8f38d",
+    "source_review_sha256": "0377aac34f5c04d58d218d8b036f314bdc8fda039a585edfb3766f5cff33c668"
+  },
+  "limitations": [
+    "This index verifies engineering evidence continuity only; it is not clinical validation.",
+    "Static and synthetic checks are not model scores or observed clinical safety outcomes.",
+    "All 57 scoring opportunities remain unmapped and unassessed because source-derived cases were not run.",
+    "Development-exposed cases cannot be represented as an independent hidden test set."
+  ],
+  "next_gate": {
+    "engineering_execution_before_resolution": "BLOCKED",
+    "required_roles": [
+      "two_independent_human_reviewers",
+      "qualified_clinical_reviewer",
+      "authorized_case_admission_owner"
+    ],
+    "status": "HUMAN_AND_CLINICAL_REVIEW_REQUIRED"
+  },
+  "privacy": {
+    "contains_evidence_spans": false,
+    "contains_local_or_library_path": false,
+    "contains_patient_text": false,
+    "contains_review_or_scoring_text": false,
+    "contains_reviewer_identity": false,
+    "contains_source_dialogue_id": false
+  },
+  "schema_version": "nightly-v04-evidence-index/v0.1",
+  "scope": "development_only",
+  "selected_candidate_ids": [
+    "C0042",
+    "C0039",
+    "C0032",
+    "C0047",
+    "C0046",
+    "C0017",
+    "C0031",
+    "C0040",
+    "C0022",
+    "C0015",
+    "C0029",
+    "C0038"
+  ],
+  "stage_denominators": {
+    "N1": {
+      "candidates": "50/50",
+      "facts": "765/765",
+      "rubrics": "300/300"
+    },
+    "N2": {
+      "automatic_fixes": "0/64",
+      "blockers": 64,
+      "clinical_runnable": "0/50"
+    },
+    "N3": {
+      "clinical_runnable": "0/12",
+      "eligible": "30/50",
+      "selected": "12/12"
+    },
+    "N4": {
+      "clinical_runnable": "0/12",
+      "drafted_rubrics": 57,
+      "included_facts": 138,
+      "mapped_opportunities": "0/57",
+      "private_drafts": "12/12"
+    },
+    "N5": {
+      "blind_review_packages": 0,
+      "clinical_runnable": "0/12",
+      "offline_sessions": 0,
+      "source_execution_attempts": "0/12",
+      "static_contracts": "12/12",
+      "synthetic_probes": "8/8",
+      "unassessed_opportunities": "57/57"
+    }
+  }
+}

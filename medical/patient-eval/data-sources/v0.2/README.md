@@ -133,6 +133,22 @@ python -m scripts.patient_eval.dynamic_case_offline \
 
 [公开离线就绪审计](dynamic-case-offline-readiness-public-v0.1.json)仅含病例编号、枚举状态和分母。只有病例完成独立审阅、临床裁决、触发/停止映射及自然语言渲染并另行获得准入后，后续流程才能生成真实离线会话和盲评包。
 
+### 夜间 v0.4 证据闭环
+
+`nightly_v04_closeout` 只读取 N1–N5 的五份去敏公开产物，复核版本、准入状态、隐私声明、输入哈希、冻结候选顺序和跨阶段内容哈希。它还固定核对 50 个候选、64 条阻断、12 个草稿、57 条未映射/未评评分机会以及 0 次真实来源执行等分母；任何产物被替换、病例顺序漂移或未运行结果被升级都会拒绝生成索引。
+
+```bash
+python -m scripts.patient_eval.nightly_v04_closeout \
+  --validation medical/patient-eval/data-sources/v0.2/semantic-review-validation-public-v0.1.json \
+  --blockers medical/patient-eval/data-sources/v0.2/candidate-blockers-public-v0.1.json \
+  --selection medical/patient-eval/data-sources/v0.2/candidate-development-selection-public-v0.1.json \
+  --draft-audit medical/patient-eval/data-sources/v0.2/dynamic-case-draft-audit-public-v0.1.json \
+  --readiness-audit medical/patient-eval/data-sources/v0.2/dynamic-case-offline-readiness-public-v0.1.json \
+  --out medical/patient-eval/data-sources/v0.2/<new-evidence-index>.json
+```
+
+[公开证据索引](nightly-v04-evidence-index-public-v0.1.json)的 `ENGINEERING_EVIDENCE_COMPLETE_CLINICAL_REVIEW_BLOCKED` 仅表示工程证据链闭合，不表示病例内容正确、已完成双人独立审阅、已获得临床准入或已经观察到模型安全表现。当前唯一开放的下一道门是人工与临床复核；在其解决前，真实来源病例执行、离线会话和盲评包继续阻断。
+
 ## 下一步的交付条件
 
 两名评审完成原始意见后，先解决错位、否定范围、主体时间、披露与评分分歧，保留初评和裁决版本。随后挑选适合的小批病例，另行编写并测试动态脚本，再进行小荷和通用模型的同条件采集。
