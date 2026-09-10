@@ -1,0 +1,48 @@
+R5 first observed verification
+Input commit: 2a1e5710ea0f06fb7a899b3a89e6d3539cdf73f8
+
+First drill invocation: python -m scripts.patient_eval.readiness_diagnosis --out /workspace/scratch/52ba3ac24ecb/readiness-r5-first-report.json
+Exit code: 0
+{"passed": true, "checks_passed": 15, "checks_total": 15, "external_model_calls": 0, "real_source_sessions": 0}
+
+First targeted verification: python -m unittest tests.patient_eval.test_readiness_diagnosis tests.patient_eval.test_evaluation tests.patient_eval.test_pipeline.PipelineTests -v
+Exit code: 0
+test_existing_result_is_not_overwritten_or_rerun (tests.patient_eval.test_readiness_diagnosis.ReadinessDiagnosisTests.test_existing_result_is_not_overwritten_or_rerun) ... ok
+test_fixed_replay_has_raw_evidence_and_no_network (tests.patient_eval.test_readiness_diagnosis.ReadinessDiagnosisTests.test_fixed_replay_has_raw_evidence_and_no_network) ... ok
+test_good_answer_and_declared_pass_cannot_substitute_for_state_repair (tests.patient_eval.test_readiness_diagnosis.ReadinessDiagnosisTests.test_good_answer_and_declared_pass_cannot_substitute_for_state_repair) ... ok
+test_real_source_never_enters_this_drill (tests.patient_eval.test_readiness_diagnosis.ReadinessDiagnosisTests.test_real_source_never_enters_this_drill) ... ok
+test_unverified_restoration_fails_report_and_exit_without_losing_evidence (tests.patient_eval.test_readiness_diagnosis.ReadinessDiagnosisTests.test_unverified_restoration_fails_report_and_exit_without_losing_evidence) ... ok
+test_black_box_cannot_be_upgraded_by_claimed_internal_controls (tests.patient_eval.test_evaluation.DiagnosisTests.test_black_box_cannot_be_upgraded_by_claimed_internal_controls) ... ok
+test_blackbox_probe_does_not_upgrade_automated_medical_judgments (tests.patient_eval.test_evaluation.DiagnosisTests.test_blackbox_probe_does_not_upgrade_automated_medical_judgments) ... ok
+test_blackbox_probe_rejects_confounded_or_unmatched_controls (tests.patient_eval.test_evaluation.DiagnosisTests.test_blackbox_probe_rejects_confounded_or_unmatched_controls) ... ok
+test_component_claim_rejects_missing_transitions_wrong_answer_and_forged_pass (tests.patient_eval.test_evaluation.DiagnosisTests.test_component_claim_rejects_missing_transitions_wrong_answer_and_forged_pass) ... ok
+test_control_rejects_changed_context_config_fault_or_evidence (tests.patient_eval.test_evaluation.DiagnosisTests.test_control_rejects_changed_context_config_fault_or_evidence) ... ok
+test_controlled_clinical_claim_without_reviewer_cannot_verify_cause (tests.patient_eval.test_evaluation.DiagnosisTests.test_controlled_clinical_claim_without_reviewer_cannot_verify_cause) ... ok
+test_injected_fault_with_success_is_not_counted_as_defect (tests.patient_eval.test_evaluation.DiagnosisTests.test_injected_fault_with_success_is_not_counted_as_defect) ... ok
+test_injection_without_observed_recovery_does_not_prove_cause (tests.patient_eval.test_evaluation.DiagnosisTests.test_injection_without_observed_recovery_does_not_prove_cause) ... ok
+test_matched_instrumented_reversal_verifies_only_this_test (tests.patient_eval.test_evaluation.DiagnosisTests.test_matched_instrumented_reversal_verifies_only_this_test) ... ok
+test_same_wrong_output_has_multiple_candidates_without_root_cause_claim (tests.patient_eval.test_evaluation.DiagnosisTests.test_same_wrong_output_has_multiple_candidates_without_root_cause_claim) ... ok
+test_single_factor_blackbox_probe_supports_behavior_not_internal_cause (tests.patient_eval.test_evaluation.DiagnosisTests.test_single_factor_blackbox_probe_supports_behavior_not_internal_cause) ... ok
+test_deterministic_clinical_claim_cannot_certify_safety (tests.patient_eval.test_evaluation.ScoringTests.test_deterministic_clinical_claim_cannot_certify_safety) ... ok
+test_human_critical_failure_cannot_be_offset_by_pass (tests.patient_eval.test_evaluation.ScoringTests.test_human_critical_failure_cannot_be_offset_by_pass) ... ok
+test_human_medical_claim_requires_reviewer_and_rubric (tests.patient_eval.test_evaluation.ScoringTests.test_human_medical_claim_requires_reviewer_and_rubric) ... ok
+test_invalid_evidence_and_duplicate_observations_are_rejected (tests.patient_eval.test_evaluation.ScoringTests.test_invalid_evidence_and_duplicate_observations_are_rejected) ... ok
+test_invalid_measurement_excluded_but_target_error_retained (tests.patient_eval.test_evaluation.ScoringTests.test_invalid_measurement_excluded_but_target_error_retained) ... ok
+test_measurement_exclusion_requires_independent_reason_and_component (tests.patient_eval.test_evaluation.ScoringTests.test_measurement_exclusion_requires_independent_reason_and_component) ... ok
+test_missing_medical_review_is_unknown_not_safe (tests.patient_eval.test_evaluation.ScoringTests.test_missing_medical_review_is_unknown_not_safe) ... ok
+test_no_critical_criteria_does_not_establish_critical_safety (tests.patient_eval.test_evaluation.ScoringTests.test_no_critical_criteria_does_not_establish_critical_safety) ... ok
+test_public_scoring_rejects_illegal_roles_and_incomplete_completed_turns (tests.patient_eval.test_evaluation.ScoringTests.test_public_scoring_rejects_illegal_roles_and_incomplete_completed_turns) ... ok
+test_target_failure_counts_required_probes_but_is_not_clinical_truth (tests.patient_eval.test_evaluation.ScoringTests.test_target_failure_counts_required_probes_but_is_not_clinical_truth) ... ok
+test_target_failure_does_not_make_required_probe_inapplicable (tests.patient_eval.test_evaluation.ScoringTests.test_target_failure_does_not_make_required_probe_inapplicable) ... ok
+test_cli_demo_runs_without_network_and_preserves_unknown_clinical_results (tests.patient_eval.test_pipeline.PipelineTests.test_cli_demo_runs_without_network_and_preserves_unknown_clinical_results) ... ok
+test_development_success_does_not_admit_test_split (tests.patient_eval.test_pipeline.PipelineTests.test_development_success_does_not_admit_test_split) ... ok
+test_hidden_annotations_never_enter_model_messages (tests.patient_eval.test_pipeline.PipelineTests.test_hidden_annotations_never_enter_model_messages) ... ok
+test_mismatched_and_extra_prefixes_cannot_be_compared (tests.patient_eval.test_pipeline.PipelineTests.test_mismatched_and_extra_prefixes_cannot_be_compared) ... ok
+test_real_event_loss_and_replay_verify_only_development_mechanism (tests.patient_eval.test_pipeline.PipelineTests.test_real_event_loss_and_replay_verify_only_development_mechanism) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.075s
+
+OK
+
+Exploration note: an initial lookup assumed tests/patient_eval/test_diagnosis.py existed; rg/sed returned missing-file errors (exit 2). File discovery located diagnosis tests in test_evaluation.py and test_pipeline.py. No product test failure occurred.

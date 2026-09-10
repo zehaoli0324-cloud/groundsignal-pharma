@@ -1,0 +1,20 @@
+{
+  "schema_version": "readiness-import-drill/v0.1",
+  "fixture_source": "synthetic",
+  "external_model_calls": 0,
+  "real_transcripts_imported": 0,
+  "sessions": 1,
+  "outcomes": {
+    "fail": 0,
+    "not_applicable": 0,
+    "pass": 0,
+    "unassessed": 4
+  },
+  "complete_evaluations": 0,
+  "source_files": {
+    "medical/patient-eval/readiness/bound-import-example-v0.1.json": "b7e99d12c3780946ac36b9a439848f38598d255af97b528e5b7c87307554d838",
+    "scripts/patient_eval/import_batch.py": "5f22c5b96b071cd655cd8a6c29bd90ae1e10010bc6f6b1468e9f3c4592feba94",
+    "scripts/patient_eval/scoring_worklist.py": "cdafd632bbc64b5f702bb5868107beb034f4cf044771b1832ebfa62639049402"
+  },
+  "interpretation": "One existing synthetic transcript imported into the existing scorer; all four unreviewed criteria remain unassessed. No clinical or independent validation."
+}

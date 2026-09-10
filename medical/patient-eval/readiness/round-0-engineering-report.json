@@ -1,0 +1,99 @@
+{
+  "schema_version": "readiness-drill/v0.1",
+  "source": "synthetic",
+  "passed": true,
+  "checks_passed": 9,
+  "checks_total": 9,
+  "checks": [
+    {
+      "check": "normal_sessions_persisted",
+      "passed": true,
+      "observed": {
+        "persisted": 2,
+        "planned": 2
+      }
+    },
+    {
+      "check": "timeout_classified",
+      "passed": true,
+      "observed": {
+        "status": "target_error",
+        "termination": "transport_error"
+      }
+    },
+    {
+      "check": "empty_classified",
+      "passed": true,
+      "observed": {
+        "status": "target_error",
+        "termination": "invalid_response_schema"
+      }
+    },
+    {
+      "check": "invalid_adapter_classified",
+      "passed": true,
+      "observed": {
+        "status": "measurement_invalid",
+        "termination": "collector_contract_error"
+      }
+    },
+    {
+      "check": "interruption_preserves_checkpoint",
+      "passed": true,
+      "observed": {
+        "persisted": 1,
+        "planned": 2,
+        "manifest_status": "running"
+      }
+    },
+    {
+      "check": "same_config_directory_reuse_rejected",
+      "passed": true,
+      "observed": {
+        "rejected": true,
+        "new_client_calls": 0,
+        "old_checkpoint_unchanged": true
+      }
+    },
+    {
+      "check": "changed_config_directory_reuse_rejected",
+      "passed": true,
+      "observed": {
+        "rejected": true,
+        "new_client_calls": 0,
+        "old_checkpoint_unchanged": true
+      }
+    },
+    {
+      "check": "new_directory_replay",
+      "passed": true,
+      "observed": {
+        "persisted": 2,
+        "recovery_kind": "fresh_replay_not_resume"
+      }
+    },
+    {
+      "check": "resume_limitation_explicit",
+      "passed": true,
+      "observed": {
+        "resume_supported": false
+      }
+    }
+  ],
+  "external_model_calls": 0,
+  "real_source_sessions": 0,
+  "clinical_gold": false,
+  "clinical_approval": false,
+  "dynamic_scenario_ready": false,
+  "s6_automatic_trust": "BLOCKED",
+  "model_quality_assessed": false,
+  "human_handoff_verified": false,
+  "resume_supported": false,
+  "interrupted_checkpoint_sha256": "246ec6a7ecef5a734d4b3c4532c485033c07b629ba3bd85c48ed4a1372157c08",
+  "failure_statuses": {
+    "timeout": "target_error",
+    "empty": "target_error",
+    "invalid_adapter": "measurement_invalid"
+  },
+  "interpretation": "Local scripted engineering evidence only. Fresh replay repeats completed work; it is not resume or a model improvement result."
+}

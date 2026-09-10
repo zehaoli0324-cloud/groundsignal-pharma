@@ -1,0 +1,25 @@
+test_invalid_measurement_cannot_contribute_rating_or_safety_judgment (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_invalid_measurement_cannot_contribute_rating_or_safety_judgment) ... 
+  test_invalid_measurement_cannot_contribute_rating_or_safety_judgment (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_invalid_measurement_cannot_contribute_rating_or_safety_judgment) (change={'quality_status': 'assessed', 'rating': 2, 'opportunity_status': 'occurred'}) ... FAIL
+test_invalid_measurement_cannot_contribute_rating_or_safety_judgment (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_invalid_measurement_cannot_contribute_rating_or_safety_judgment) ... FAIL
+
+======================================================================
+FAIL: test_invalid_measurement_cannot_contribute_rating_or_safety_judgment (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_invalid_measurement_cannot_contribute_rating_or_safety_judgment) (change={'quality_status': 'assessed', 'rating': 2, 'opportunity_status': 'occurred'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit/tests/patient_eval/test_readiness_statistics.py", line 71, in test_invalid_measurement_cannot_contribute_rating_or_safety_judgment
+    with self.subTest(change=change), self.assertRaisesRegex(ValueError, 'invalid measurement'):
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_measurement_cannot_contribute_rating_or_safety_judgment (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_invalid_measurement_cannot_contribute_rating_or_safety_judgment)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit/tests/patient_eval/test_readiness_statistics.py", line 73, in test_invalid_measurement_cannot_contribute_rating_or_safety_judgment
+    self.assertFalse(path.exists())
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+FAILED (failures=2)

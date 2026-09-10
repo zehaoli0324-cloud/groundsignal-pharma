@@ -1,0 +1,16 @@
+test_case_session_and_repeat_units_are_not_interchangeable (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_case_session_and_repeat_units_are_not_interchangeable) ... ok
+test_case_with_no_session_remains_visible_with_zero_counts (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_case_with_no_session_remains_visible_with_zero_counts) ... ok
+test_existing_database_is_not_overwritten (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_existing_database_is_not_overwritten) ... ok
+test_hand_checkable_denominators_and_three_queries (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_hand_checkable_denominators_and_three_queries) ... ok
+test_input_bundle_is_unchanged_and_report_is_deterministic (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_input_bundle_is_unchanged_and_report_is_deterministic) ... ok
+test_invalid_measurement_cannot_contribute_rating_or_safety_judgment (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_invalid_measurement_cannot_contribute_rating_or_safety_judgment) ... ok
+test_invalid_measurement_may_retain_explicit_unknown_reviewer_row (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_invalid_measurement_may_retain_explicit_unknown_reviewer_row) ... ok
+test_invalid_source_and_relations_fail_before_database_creation (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_invalid_source_and_relations_fail_before_database_creation) ... ok
+test_published_sql_matches_executed_queries (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_published_sql_matches_executed_queries) ... ok
+test_service_completion_keeps_target_error_and_excludes_invalid_measurement (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_service_completion_keeps_target_error_and_excludes_invalid_measurement) ... ok
+test_unassessed_not_reached_and_missing_rows_never_become_zero (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_unassessed_not_reached_and_missing_rows_never_become_zero) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.049s
+
+OK

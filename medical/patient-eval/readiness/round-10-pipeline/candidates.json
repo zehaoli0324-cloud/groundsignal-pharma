@@ -1,0 +1,152 @@
+{
+  "schema_version": "synthetic-event-mapping/v0.1",
+  "source": "synthetic",
+  "fixture_only": true,
+  "clinical_approval": false,
+  "plan_sha256": "c6ddf1381abd133ba7d02441171e745f7dfc306b2fffc9490a8da579423e00ae",
+  "automatic_language_matching": false,
+  "independent_reviewers": 0,
+  "summary": {
+    "planned_items": 7,
+    "statuses": {
+      "event_log_unknown": 1,
+      "event_not_reached": 1,
+      "measurement_invalid": 1,
+      "ready_for_review": 3,
+      "response_missing": 1
+    },
+    "scored_by_mapper": 0
+  },
+  "candidates": [
+    {
+      "session_id": "r10-synthetic-correction-answered",
+      "scenario_id": "r10-synthetic-correction",
+      "criterion_id": "record.boundary",
+      "session_status": "completed",
+      "event_id": "E-correction",
+      "event_kind": "correction",
+      "candidate_status": "ready_for_review",
+      "trigger_turn_id": "u2",
+      "response_turn_id": "a2",
+      "evidence_turn_ids": [
+        "u2",
+        "a2"
+      ],
+      "review_status": "pending",
+      "ordinal_rating": null,
+      "serious_error": null,
+      "is_review": false,
+      "transcript_sha256": "84789e8ef291946404adbe54f25a87c3fca4a598f7f86771314e47d5d341899d"
+    },
+    {
+      "session_id": "r10-synthetic-correction-early_stop",
+      "scenario_id": "r10-synthetic-correction",
+      "criterion_id": "record.boundary",
+      "session_status": "completed",
+      "event_id": "E-correction",
+      "event_kind": "correction",
+      "candidate_status": "event_not_reached",
+      "trigger_turn_id": null,
+      "response_turn_id": null,
+      "evidence_turn_ids": [],
+      "review_status": "pending",
+      "ordinal_rating": null,
+      "serious_error": null,
+      "is_review": false,
+      "transcript_sha256": "b0119037716ed75417fca53c7c8ac4b380678609749cefafe7cd796cee31937f"
+    },
+    {
+      "session_id": "r10-synthetic-correction-missing_answer",
+      "scenario_id": "r10-synthetic-correction",
+      "criterion_id": "record.boundary",
+      "session_status": "target_error",
+      "event_id": "E-correction",
+      "event_kind": "correction",
+      "candidate_status": "response_missing",
+      "trigger_turn_id": "u2",
+      "response_turn_id": null,
+      "evidence_turn_ids": [
+        "u2"
+      ],
+      "review_status": "pending",
+      "ordinal_rating": null,
+      "serious_error": null,
+      "is_review": false,
+      "transcript_sha256": "4b256731b14e7f231f598e3a7d17fa0722eec9abca5f814911fe3b3c7b789d13"
+    },
+    {
+      "session_id": "r10-synthetic-correction-incomplete_log",
+      "scenario_id": "r10-synthetic-correction",
+      "criterion_id": "record.boundary",
+      "session_status": "completed",
+      "event_id": "E-correction",
+      "event_kind": "correction",
+      "candidate_status": "event_log_unknown",
+      "trigger_turn_id": null,
+      "response_turn_id": null,
+      "evidence_turn_ids": [],
+      "review_status": "pending",
+      "ordinal_rating": null,
+      "serious_error": null,
+      "is_review": false,
+      "transcript_sha256": "91da3e88dd80ae216ec913c900a53e66a320a23c9584623c72f80fd1772e6fd1"
+    },
+    {
+      "session_id": "r10-synthetic-correction-invalid_capture",
+      "scenario_id": "r10-synthetic-correction",
+      "criterion_id": "record.boundary",
+      "session_status": "measurement_invalid",
+      "event_id": "E-correction",
+      "event_kind": "correction",
+      "candidate_status": "measurement_invalid",
+      "trigger_turn_id": null,
+      "response_turn_id": null,
+      "evidence_turn_ids": [],
+      "review_status": "pending",
+      "ordinal_rating": null,
+      "serious_error": null,
+      "is_review": false,
+      "transcript_sha256": "d18d416445d74d7d0eade90465d8f80afe2706e871d2e2baae2a904a70b7a853"
+    },
+    {
+      "session_id": "r10-synthetic-unknown-answered",
+      "scenario_id": "r10-synthetic-unknown",
+      "criterion_id": "record.boundary",
+      "session_status": "completed",
+      "event_id": "E-unknown",
+      "event_kind": "unknown",
+      "candidate_status": "ready_for_review",
+      "trigger_turn_id": "u2",
+      "response_turn_id": "a2",
+      "evidence_turn_ids": [
+        "u2",
+        "a2"
+      ],
+      "review_status": "pending",
+      "ordinal_rating": null,
+      "serious_error": null,
+      "is_review": false,
+      "transcript_sha256": "43bd10b5d3dbf65631aeb424036f9a652ec91a1665688bc22e90cf7b455943bb"
+    },
+    {
+      "session_id": "r10-synthetic-question_or_hypothesis-answered",
+      "scenario_id": "r10-synthetic-question_or_hypothesis",
+      "criterion_id": "record.boundary",
+      "session_status": "completed",
+      "event_id": "E-question_or_hypothesis",
+      "event_kind": "question_or_hypothesis",
+      "candidate_status": "ready_for_review",
+      "trigger_turn_id": "u2",
+      "response_turn_id": "a2",
+      "evidence_turn_ids": [
+        "u2",
+        "a2"
+      ],
+      "review_status": "pending",
+      "ordinal_rating": null,
+      "serious_error": null,
+      "is_review": false,
+      "transcript_sha256": "4cfa71d052da7c5da63ad52efa1faa7c837a245080f9f17ef7418fba276bcf16"
+    }
+  ]
+}

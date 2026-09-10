@@ -1,0 +1,43 @@
+{
+  "schema_version": "readiness-rule-validation/v0.1",
+  "structurally_valid": true,
+  "source": "synthetic",
+  "pack_sha256": "bf2ed6ee428d9b6bab1084b13f9bcd3d6a2fd8e6f8299d5c2227ed531940845b",
+  "rules_validated": 3,
+  "rules_total": 3,
+  "author_examples": 9,
+  "rules": [
+    {
+      "criterion_id": "correction.absorbed",
+      "trigger_turn_id": "u2",
+      "response_turn_id": "a2",
+      "author_examples": 3,
+      "file": "correction-opportunity-v0.1.json",
+      "sha256": "c4b22e1ad528ec72d42deb1ce91d057f090584d4561236f8272b474b32672b9f"
+    },
+    {
+      "criterion_id": "questioning.unknown",
+      "trigger_turn_id": "u1",
+      "response_turn_id": "a1",
+      "author_examples": 3,
+      "file": "unknown-opportunity-v0.1.json",
+      "sha256": "8d509df5363bfae58773a0fc40342fc8e80dea1294ed0d01c525bf46a74efbb1"
+    },
+    {
+      "criterion_id": "question.not_assertion",
+      "trigger_turn_id": "u1",
+      "response_turn_id": "a1",
+      "author_examples": 3,
+      "file": "question-opportunity-v0.1.json",
+      "sha256": "76ecbf9e9965136f881e6ba45e26b35817c033306edfdde5510148145dbb68fa"
+    }
+  ],
+  "independent_rater_count": 0,
+  "real_v04_opportunities_mapped": 0,
+  "semantic_scoring_validated": false,
+  "clinical_validity_assessed": false,
+  "clinical_gold": false,
+  "formal_approval": false,
+  "dynamic_scenario_ready": false,
+  "s6_automatic_trust": "BLOCKED"
+}

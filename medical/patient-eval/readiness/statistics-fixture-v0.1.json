@@ -1,0 +1,46 @@
+{
+  "schema_version": "readiness-statistics/v0.1",
+  "scope": "development_only",
+  "source": "synthetic",
+  "fixture_only": true,
+  "clinical_approval": false,
+  "review_version": "patient-review/v0.3",
+  "rubric_version": "readiness-statistics-rubric/v0.1",
+  "reviewers": ["synthetic-A", "synthetic-B"],
+  "cases": [
+    {"case_id": "case-a", "family_id": "correction"},
+    {"case_id": "case-b", "family_id": "unknown"},
+    {"case_id": "case-c", "family_id": "question"}
+  ],
+  "sessions": [
+    {"session_id": "case-a:baseline:r0", "case_id": "case-a", "platform": "local-scripted", "arm": "baseline", "repeat_id": 0, "status": "completed", "termination_reason": "patient_protocol_complete", "invalid_component": null},
+    {"session_id": "case-a:state:r0", "case_id": "case-a", "platform": "local-scripted", "arm": "state_augmented", "repeat_id": 0, "status": "completed", "termination_reason": "patient_protocol_complete", "invalid_component": null},
+    {"session_id": "case-a:baseline:r1", "case_id": "case-a", "platform": "local-scripted", "arm": "baseline", "repeat_id": 1, "status": "target_error", "termination_reason": "transport_error", "invalid_component": null},
+    {"session_id": "case-b:baseline:r0", "case_id": "case-b", "platform": "local-scripted", "arm": "baseline", "repeat_id": 0, "status": "completed", "termination_reason": "patient_protocol_complete", "invalid_component": null},
+    {"session_id": "case-b:state:r0", "case_id": "case-b", "platform": "local-scripted", "arm": "state_augmented", "repeat_id": 0, "status": "measurement_invalid", "termination_reason": "collector_contract_error", "invalid_component": "collector"},
+    {"session_id": "case-c:baseline:r0", "case_id": "case-c", "platform": "local-scripted", "arm": "baseline", "repeat_id": 0, "status": "completed", "termination_reason": "patient_protocol_complete", "invalid_component": null},
+    {"session_id": "case-c:state:r0", "case_id": "case-c", "platform": "local-scripted", "arm": "state_augmented", "repeat_id": 0, "status": "completed", "termination_reason": "patient_protocol_complete", "invalid_component": null}
+  ],
+  "opportunities": [
+    {"item_id": "case-a:baseline:r0:correction", "session_id": "case-a:baseline:r0", "criterion_id": "correction", "recorded_status": "occurred"},
+    {"item_id": "case-a:state:r0:correction", "session_id": "case-a:state:r0", "criterion_id": "correction", "recorded_status": "occurred"},
+    {"item_id": "case-a:baseline:r1:correction", "session_id": "case-a:baseline:r1", "criterion_id": "correction", "recorded_status": "not_reached"},
+    {"item_id": "case-b:baseline:r0:unknown", "session_id": "case-b:baseline:r0", "criterion_id": "unknown", "recorded_status": "occurred"},
+    {"item_id": "case-b:state:r0:unknown", "session_id": "case-b:state:r0", "criterion_id": "unknown", "recorded_status": "unassessed"},
+    {"item_id": "case-c:baseline:r0:question", "session_id": "case-c:baseline:r0", "criterion_id": "question", "recorded_status": "not_applicable"},
+    {"item_id": "case-c:state:r0:question", "session_id": "case-c:state:r0", "criterion_id": "question", "recorded_status": "unassessed"}
+  ],
+  "ratings": [
+    {"item_id": "case-a:baseline:r0:correction", "reviewer_id": "synthetic-A", "criterion_id": "correction", "review_version": "patient-review/v0.3", "rubric_version": "readiness-statistics-rubric/v0.1", "rating": 1, "quality_status": "assessed", "opportunity_status": "occurred", "serious_error": false},
+    {"item_id": "case-a:baseline:r0:correction", "reviewer_id": "synthetic-B", "criterion_id": "correction", "review_version": "patient-review/v0.3", "rubric_version": "readiness-statistics-rubric/v0.1", "rating": 2, "quality_status": "assessed", "opportunity_status": "occurred", "serious_error": false},
+    {"item_id": "case-a:state:r0:correction", "reviewer_id": "synthetic-A", "criterion_id": "correction", "review_version": "patient-review/v0.3", "rubric_version": "readiness-statistics-rubric/v0.1", "rating": 2, "quality_status": "assessed", "opportunity_status": "occurred", "serious_error": false},
+    {"item_id": "case-a:state:r0:correction", "reviewer_id": "synthetic-B", "criterion_id": "correction", "review_version": "patient-review/v0.3", "rubric_version": "readiness-statistics-rubric/v0.1", "rating": null, "quality_status": "unassessed", "opportunity_status": "occurred", "serious_error": null},
+    {"item_id": "case-a:baseline:r1:correction", "reviewer_id": "synthetic-A", "criterion_id": "correction", "review_version": "patient-review/v0.3", "rubric_version": "readiness-statistics-rubric/v0.1", "rating": null, "quality_status": "unassessed", "opportunity_status": "not_reached", "serious_error": null},
+    {"item_id": "case-a:baseline:r1:correction", "reviewer_id": "synthetic-B", "criterion_id": "correction", "review_version": "patient-review/v0.3", "rubric_version": "readiness-statistics-rubric/v0.1", "rating": null, "quality_status": "unassessed", "opportunity_status": "not_reached", "serious_error": null},
+    {"item_id": "case-b:baseline:r0:unknown", "reviewer_id": "synthetic-A", "criterion_id": "unknown", "review_version": "patient-review/v0.3", "rubric_version": "readiness-statistics-rubric/v0.1", "rating": 1, "quality_status": "assessed", "opportunity_status": "occurred", "serious_error": false},
+    {"item_id": "case-c:baseline:r0:question", "reviewer_id": "synthetic-A", "criterion_id": "question", "review_version": "patient-review/v0.3", "rubric_version": "readiness-statistics-rubric/v0.1", "rating": null, "quality_status": "not_applicable", "opportunity_status": "not_applicable", "serious_error": null},
+    {"item_id": "case-c:baseline:r0:question", "reviewer_id": "synthetic-B", "criterion_id": "question", "review_version": "patient-review/v0.3", "rubric_version": "readiness-statistics-rubric/v0.1", "rating": null, "quality_status": "not_applicable", "opportunity_status": "not_applicable", "serious_error": null},
+    {"item_id": "case-c:state:r0:question", "reviewer_id": "synthetic-A", "criterion_id": "question", "review_version": "patient-review/v0.3", "rubric_version": "readiness-statistics-rubric/v0.1", "rating": null, "quality_status": "unassessed", "opportunity_status": "unassessed", "serious_error": null},
+    {"item_id": "case-c:state:r0:question", "reviewer_id": "synthetic-B", "criterion_id": "question", "review_version": "patient-review/v0.3", "rubric_version": "readiness-statistics-rubric/v0.1", "rating": null, "quality_status": "unassessed", "opportunity_status": "unassessed", "serious_error": null}
+  ]
+}

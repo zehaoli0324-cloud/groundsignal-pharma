@@ -1,0 +1,27 @@
+R3 input commit: 4ceeddf9ca804c478b2d30e0e4c6d7f35cd7f2ef
+
+First test before implementation:
+python -m unittest tests.patient_eval.test_resumable_study -v
+ImportError: cannot import name 'run_resumable_study' from 'scripts.patient_eval.recovery'
+Ran 1 test in 0.000s
+FAILED (errors=1)
+exit_code=1
+
+First targeted test after implementation:
+python -m unittest tests.patient_eval.test_resumable_study -v
+Ran 9 tests in 0.065s
+OK
+exit_code=0
+
+Full patient-eval regression and fixed synthetic drill:
+python -m unittest discover -s tests/patient_eval -p 'test_*.py' -v
+Ran 301 tests in 3.597s
+OK
+
+python -m scripts.patient_eval.resumable_drill --out /workspace/scratch/52ba3ac24ecb/readiness-r3-first-drill
+passed=true
+checks_passed=8
+checks_total=8
+external_model_calls=0
+real_source_sessions=0
+exit_code=0

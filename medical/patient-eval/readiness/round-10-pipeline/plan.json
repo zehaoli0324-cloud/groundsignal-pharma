@@ -1,0 +1,119 @@
+{
+  "schema_version": "synthetic-event-mapping/v0.1",
+  "source": "synthetic",
+  "fixture_only": true,
+  "clinical_approval": false,
+  "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38",
+  "rules": [
+    {
+      "scenario_id": "r10-synthetic-correction",
+      "scenario_sha256": "a04ca1f34357fa217290f1e7d3a4296611990db95c09151393d5581236f8a876",
+      "criterion_id": "record.boundary",
+      "event_id": "E-correction",
+      "event_kind": "correction",
+      "response_policy": "next_assistant"
+    },
+    {
+      "scenario_id": "r10-synthetic-unknown",
+      "scenario_sha256": "f483645acf5971f18602be05ef5d796e21efd568706d4f4dd7e429704b15915d",
+      "criterion_id": "record.boundary",
+      "event_id": "E-unknown",
+      "event_kind": "unknown",
+      "response_policy": "next_assistant"
+    },
+    {
+      "scenario_id": "r10-synthetic-question_or_hypothesis",
+      "scenario_sha256": "b0dd6ae4bab6c04777a95ade0efc47c34ab9f1dd5d05f234b4e59bc1adb311db",
+      "criterion_id": "record.boundary",
+      "event_id": "E-question_or_hypothesis",
+      "event_kind": "question_or_hypothesis",
+      "response_policy": "next_assistant"
+    }
+  ],
+  "session_events": [
+    {
+      "session_id": "r10-synthetic-correction-answered",
+      "transcript_sha256": "84789e8ef291946404adbe54f25a87c3fca4a598f7f86771314e47d5d341899d",
+      "complete": true,
+      "annotation_source": "synthetic_author_draft",
+      "events": [
+        {
+          "event_id": "E-correction",
+          "event_kind": "correction",
+          "turn_id": "u2",
+          "content_sha256": "ad53a365c3f001370e783e6cb6680bfba57ec385194ac2b95f8258b3ea5c23dd"
+        }
+      ]
+    },
+    {
+      "session_id": "r10-synthetic-correction-early_stop",
+      "transcript_sha256": "b0119037716ed75417fca53c7c8ac4b380678609749cefafe7cd796cee31937f",
+      "complete": true,
+      "annotation_source": "synthetic_author_draft",
+      "events": []
+    },
+    {
+      "session_id": "r10-synthetic-correction-missing_answer",
+      "transcript_sha256": "4b256731b14e7f231f598e3a7d17fa0722eec9abca5f814911fe3b3c7b789d13",
+      "complete": true,
+      "annotation_source": "synthetic_author_draft",
+      "events": [
+        {
+          "event_id": "E-correction",
+          "event_kind": "correction",
+          "turn_id": "u2",
+          "content_sha256": "ad53a365c3f001370e783e6cb6680bfba57ec385194ac2b95f8258b3ea5c23dd"
+        }
+      ]
+    },
+    {
+      "session_id": "r10-synthetic-correction-incomplete_log",
+      "transcript_sha256": "91da3e88dd80ae216ec913c900a53e66a320a23c9584623c72f80fd1772e6fd1",
+      "complete": false,
+      "annotation_source": "synthetic_author_draft",
+      "events": []
+    },
+    {
+      "session_id": "r10-synthetic-correction-invalid_capture",
+      "transcript_sha256": "d18d416445d74d7d0eade90465d8f80afe2706e871d2e2baae2a904a70b7a853",
+      "complete": true,
+      "annotation_source": "synthetic_author_draft",
+      "events": [
+        {
+          "event_id": "E-correction",
+          "event_kind": "correction",
+          "turn_id": "u2",
+          "content_sha256": "ad53a365c3f001370e783e6cb6680bfba57ec385194ac2b95f8258b3ea5c23dd"
+        }
+      ]
+    },
+    {
+      "session_id": "r10-synthetic-unknown-answered",
+      "transcript_sha256": "43bd10b5d3dbf65631aeb424036f9a652ec91a1665688bc22e90cf7b455943bb",
+      "complete": true,
+      "annotation_source": "synthetic_author_draft",
+      "events": [
+        {
+          "event_id": "E-unknown",
+          "event_kind": "unknown",
+          "turn_id": "u2",
+          "content_sha256": "316faba97cbbc35e49eddf2f9f0fa0cf93fa1de34c709bdaf46ed76daea7a252"
+        }
+      ]
+    },
+    {
+      "session_id": "r10-synthetic-question_or_hypothesis-answered",
+      "transcript_sha256": "4cfa71d052da7c5da63ad52efa1faa7c837a245080f9f17ef7418fba276bcf16",
+      "complete": true,
+      "annotation_source": "synthetic_author_draft",
+      "events": [
+        {
+          "event_id": "E-question_or_hypothesis",
+          "event_kind": "question_or_hypothesis",
+          "turn_id": "u2",
+          "content_sha256": "5ba66fd65f344323e37de465292a10bc8a7ace33d5a104f986362f1d5f461ff2"
+        }
+      ]
+    }
+  ]
+}

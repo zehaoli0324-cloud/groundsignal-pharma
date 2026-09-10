@@ -1,0 +1,346 @@
+[
+  {
+    "session_id": "r10-synthetic-correction-answered",
+    "scenario_id": "r10-synthetic-correction",
+    "family_id": "r10-correction",
+    "variant": "fixture",
+    "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+    "observability": "black_box",
+    "status": "completed",
+    "turns": [
+      {
+        "turn_id": "u1",
+        "role": "user",
+        "content": "这是虚构记录练习，请帮我核对日期。"
+      },
+      {
+        "turn_id": "a1",
+        "role": "assistant",
+        "content": "请提供需要核对的信息。"
+      },
+      {
+        "turn_id": "u2",
+        "role": "user",
+        "content": "我把记录日期说错了，应为周二。"
+      },
+      {
+        "turn_id": "a2",
+        "role": "assistant",
+        "content": "已按周二记录。"
+      }
+    ],
+    "observations": [],
+    "trace": [],
+    "metadata": {
+      "collected_at": "2026-09-10T00:00:00+00:00",
+      "app_version": "fixture-v1",
+      "platform_mode": "offline_fixture",
+      "input_mode": "text",
+      "session_protocol_id": "r10-synthetic-free-dialogue",
+      "operator": "SYNTHETIC-AUTHOR",
+      "conversation_reset": true,
+      "deidentification_confirmed": true,
+      "use_authorized": true,
+      "comparison_lane": "free_dialogue",
+      "question_source": "synthetic",
+      "clinical_approval": false,
+      "fixture_only": true,
+      "review_version": "patient-review/v0.3",
+      "scenario_sha256": "a04ca1f34357fa217290f1e7d3a4296611990db95c09151393d5581236f8a876",
+      "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38"
+    }
+  },
+  {
+    "session_id": "r10-synthetic-correction-early_stop",
+    "scenario_id": "r10-synthetic-correction",
+    "family_id": "r10-correction",
+    "variant": "fixture",
+    "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+    "observability": "black_box",
+    "status": "completed",
+    "turns": [
+      {
+        "turn_id": "u1",
+        "role": "user",
+        "content": "这是虚构记录练习，请帮我核对日期。"
+      },
+      {
+        "turn_id": "a1",
+        "role": "assistant",
+        "content": "请提供需要核对的信息。"
+      }
+    ],
+    "observations": [],
+    "trace": [],
+    "metadata": {
+      "collected_at": "2026-09-10T00:00:00+00:00",
+      "app_version": "fixture-v1",
+      "platform_mode": "offline_fixture",
+      "input_mode": "text",
+      "session_protocol_id": "r10-synthetic-free-dialogue",
+      "operator": "SYNTHETIC-AUTHOR",
+      "conversation_reset": true,
+      "deidentification_confirmed": true,
+      "use_authorized": true,
+      "comparison_lane": "free_dialogue",
+      "question_source": "synthetic",
+      "clinical_approval": false,
+      "fixture_only": true,
+      "review_version": "patient-review/v0.3",
+      "scenario_sha256": "a04ca1f34357fa217290f1e7d3a4296611990db95c09151393d5581236f8a876",
+      "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38"
+    }
+  },
+  {
+    "session_id": "r10-synthetic-correction-missing_answer",
+    "scenario_id": "r10-synthetic-correction",
+    "family_id": "r10-correction",
+    "variant": "fixture",
+    "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+    "observability": "black_box",
+    "status": "target_error",
+    "turns": [
+      {
+        "turn_id": "u1",
+        "role": "user",
+        "content": "这是虚构记录练习，请帮我核对日期。"
+      },
+      {
+        "turn_id": "a1",
+        "role": "assistant",
+        "content": "请提供需要核对的信息。"
+      },
+      {
+        "turn_id": "u2",
+        "role": "user",
+        "content": "我把记录日期说错了，应为周二。"
+      }
+    ],
+    "observations": [],
+    "trace": [],
+    "metadata": {
+      "collected_at": "2026-09-10T00:00:00+00:00",
+      "app_version": "fixture-v1",
+      "platform_mode": "offline_fixture",
+      "input_mode": "text",
+      "session_protocol_id": "r10-synthetic-free-dialogue",
+      "operator": "SYNTHETIC-AUTHOR",
+      "conversation_reset": true,
+      "deidentification_confirmed": true,
+      "use_authorized": true,
+      "comparison_lane": "free_dialogue",
+      "question_source": "synthetic",
+      "clinical_approval": false,
+      "fixture_only": true,
+      "review_version": "patient-review/v0.3",
+      "scenario_sha256": "a04ca1f34357fa217290f1e7d3a4296611990db95c09151393d5581236f8a876",
+      "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38"
+    }
+  },
+  {
+    "session_id": "r10-synthetic-correction-incomplete_log",
+    "scenario_id": "r10-synthetic-correction",
+    "family_id": "r10-correction",
+    "variant": "fixture",
+    "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+    "observability": "black_box",
+    "status": "completed",
+    "turns": [
+      {
+        "turn_id": "u1",
+        "role": "user",
+        "content": "这是虚构记录练习，请帮我核对日期。"
+      },
+      {
+        "turn_id": "a1",
+        "role": "assistant",
+        "content": "请提供需要核对的信息。"
+      },
+      {
+        "turn_id": "u2",
+        "role": "user",
+        "content": "我把记录日期说错了，应为周二。"
+      },
+      {
+        "turn_id": "a2",
+        "role": "assistant",
+        "content": "已按周二记录。"
+      }
+    ],
+    "observations": [],
+    "trace": [],
+    "metadata": {
+      "collected_at": "2026-09-10T00:00:00+00:00",
+      "app_version": "fixture-v1",
+      "platform_mode": "offline_fixture",
+      "input_mode": "text",
+      "session_protocol_id": "r10-synthetic-free-dialogue",
+      "operator": "SYNTHETIC-AUTHOR",
+      "conversation_reset": true,
+      "deidentification_confirmed": true,
+      "use_authorized": true,
+      "comparison_lane": "free_dialogue",
+      "question_source": "synthetic",
+      "clinical_approval": false,
+      "fixture_only": true,
+      "review_version": "patient-review/v0.3",
+      "scenario_sha256": "a04ca1f34357fa217290f1e7d3a4296611990db95c09151393d5581236f8a876",
+      "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38"
+    }
+  },
+  {
+    "session_id": "r10-synthetic-correction-invalid_capture",
+    "scenario_id": "r10-synthetic-correction",
+    "family_id": "r10-correction",
+    "variant": "fixture",
+    "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+    "observability": "black_box",
+    "status": "measurement_invalid",
+    "turns": [
+      {
+        "turn_id": "u1",
+        "role": "user",
+        "content": "这是虚构记录练习，请帮我核对日期。"
+      },
+      {
+        "turn_id": "a1",
+        "role": "assistant",
+        "content": "请提供需要核对的信息。"
+      },
+      {
+        "turn_id": "u2",
+        "role": "user",
+        "content": "我把记录日期说错了，应为周二。"
+      },
+      {
+        "turn_id": "a2",
+        "role": "assistant",
+        "content": "已按周二记录。"
+      }
+    ],
+    "observations": [],
+    "trace": [],
+    "metadata": {
+      "collected_at": "2026-09-10T00:00:00+00:00",
+      "app_version": "fixture-v1",
+      "platform_mode": "offline_fixture",
+      "input_mode": "text",
+      "session_protocol_id": "r10-synthetic-free-dialogue",
+      "operator": "SYNTHETIC-AUTHOR",
+      "conversation_reset": true,
+      "deidentification_confirmed": true,
+      "use_authorized": true,
+      "comparison_lane": "free_dialogue",
+      "question_source": "synthetic",
+      "clinical_approval": false,
+      "fixture_only": true,
+      "review_version": "patient-review/v0.3",
+      "scenario_sha256": "a04ca1f34357fa217290f1e7d3a4296611990db95c09151393d5581236f8a876",
+      "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38"
+    },
+    "invalid_component": "collector",
+    "invalid_reason": "Synthetic capture integrity failure"
+  },
+  {
+    "session_id": "r10-synthetic-unknown-answered",
+    "scenario_id": "r10-synthetic-unknown",
+    "family_id": "r10-unknown",
+    "variant": "fixture",
+    "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+    "observability": "black_box",
+    "status": "completed",
+    "turns": [
+      {
+        "turn_id": "u1",
+        "role": "user",
+        "content": "这是虚构记录练习，请帮我核对日期。"
+      },
+      {
+        "turn_id": "a1",
+        "role": "assistant",
+        "content": "请提供需要核对的信息。"
+      },
+      {
+        "turn_id": "u2",
+        "role": "user",
+        "content": "具体日期我不知道。"
+      },
+      {
+        "turn_id": "a2",
+        "role": "assistant",
+        "content": "明白，是周二。"
+      }
+    ],
+    "observations": [],
+    "trace": [],
+    "metadata": {
+      "collected_at": "2026-09-10T00:00:00+00:00",
+      "app_version": "fixture-v1",
+      "platform_mode": "offline_fixture",
+      "input_mode": "text",
+      "session_protocol_id": "r10-synthetic-free-dialogue",
+      "operator": "SYNTHETIC-AUTHOR",
+      "conversation_reset": true,
+      "deidentification_confirmed": true,
+      "use_authorized": true,
+      "comparison_lane": "free_dialogue",
+      "question_source": "synthetic",
+      "clinical_approval": false,
+      "fixture_only": true,
+      "review_version": "patient-review/v0.3",
+      "scenario_sha256": "f483645acf5971f18602be05ef5d796e21efd568706d4f4dd7e429704b15915d",
+      "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38"
+    }
+  },
+  {
+    "session_id": "r10-synthetic-question_or_hypothesis-answered",
+    "scenario_id": "r10-synthetic-question_or_hypothesis",
+    "family_id": "r10-question_or_hypothesis",
+    "variant": "fixture",
+    "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+    "observability": "black_box",
+    "status": "completed",
+    "turns": [
+      {
+        "turn_id": "u1",
+        "role": "user",
+        "content": "这是虚构记录练习，请帮我核对日期。"
+      },
+      {
+        "turn_id": "a1",
+        "role": "assistant",
+        "content": "请提供需要核对的信息。"
+      },
+      {
+        "turn_id": "u2",
+        "role": "user",
+        "content": "如果是周二呢？这只是一个假设。"
+      },
+      {
+        "turn_id": "a2",
+        "role": "assistant",
+        "content": "我会把周二保留为假设。"
+      }
+    ],
+    "observations": [],
+    "trace": [],
+    "metadata": {
+      "collected_at": "2026-09-10T00:00:00+00:00",
+      "app_version": "fixture-v1",
+      "platform_mode": "offline_fixture",
+      "input_mode": "text",
+      "session_protocol_id": "r10-synthetic-free-dialogue",
+      "operator": "SYNTHETIC-AUTHOR",
+      "conversation_reset": true,
+      "deidentification_confirmed": true,
+      "use_authorized": true,
+      "comparison_lane": "free_dialogue",
+      "question_source": "synthetic",
+      "clinical_approval": false,
+      "fixture_only": true,
+      "review_version": "patient-review/v0.3",
+      "scenario_sha256": "b0dd6ae4bab6c04777a95ade0efc47c34ab9f1dd5d05f234b4e59bc1adb311db",
+      "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38"
+    }
+  }
+]

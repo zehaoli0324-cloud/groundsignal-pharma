@@ -1,0 +1,27 @@
+2026-09-10 — documentation-only handoff check
+Input commit: b45ed12b3d0a01fb4dbc921a7c41bd74bd49ed21
+Input tree: 73b9a931239fa0a3e0407300293f0038905dcdba
+Environment: Python 3.12.14, Linux
+
+First exploration failure (preserved):
+rg: scripts/patient_eval/clinical_console_template.html: No such file or directory (os error 2)
+Resolved by listing existing files: scripts/patient_eval/clinical_console_assets/index.html,
+app.js, core.js, console.css, choices.js. No product defect inferred.
+
+First documentation-entry check output (exit 0):
+relative links: 6 PASS
+CLI help and flags PASS: scripts.patient_eval.readiness_drill
+CLI help and flags PASS: scripts.patient_eval.resumable_drill
+CLI help and flags PASS: scripts.patient_eval.readiness_statistics
+CLI help and flags PASS: scripts.patient_eval.readiness_diagnosis
+CLI help and flags PASS: scripts.patient_eval.readiness_rules
+CLI help and flags PASS: scripts.patient_eval.clinical_console
+frozen commit/tree: PASS
+UI action labels: PASS (not browser acceptance)
+No drills rerun; no real inputs; no model calls; human acceptance remains pending.
+
+Method: extract six `python -m` commands from HANDOFF_CHECKLIST.md,
+append --help, require exit 0 and each documented option in help output;
+resolve all Markdown relative links, verify git HEAD and tree, check two UI labels.
+No assertions of browser usability, clinical correctness, independent skills or human reproduction.
+Existing engineering counts in the checklist are historical expected outcomes, not new trial results.
