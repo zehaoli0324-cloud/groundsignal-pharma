@@ -1,0 +1,26 @@
+{
+  "schema_version": "resumable-readiness-drill/v0.1",
+  "source": "synthetic",
+  "passed": true,
+  "checks_passed": 8,
+  "checks_total": 8,
+  "checks": [
+    {"check": "intentional_interruption_recorded", "passed": true, "observed": {"status": "interrupted"}},
+    {"check": "one_checkpoint_persisted", "passed": true, "observed": {"persisted": 1, "planned": 2}},
+    {"check": "lock_released_after_handled_interrupt", "passed": true, "observed": {"lock_present": false}},
+    {"check": "checkpoint_digest_bound_and_unchanged", "passed": true, "observed": {"unchanged": true}},
+    {"check": "only_pending_session_invoked", "passed": true, "observed": {"resume_calls": 3, "full_calls": 6, "persisted_session_calls": 3}},
+    {"check": "resume_completed_all_sessions", "passed": true, "observed": {"status": "completed", "persisted": 2}},
+    {"check": "replay_risk_disclosed", "passed": true, "observed": {"delivery_semantics": "at_least_once_for_uncheckpointed_session"}},
+    {"check": "lock_released_after_completion", "passed": true, "observed": {"lock_present": false}}
+  ],
+  "external_model_calls": 0,
+  "real_source_sessions": 0,
+  "clinical_approval": false,
+  "s5_freeze_modified": false,
+  "s6_automatic_trust": "BLOCKED",
+  "training_data_generated": false,
+  "personal_skill_verified": false,
+  "human_handoff_verified": false,
+  "interpretation": "Synthetic local recovery evidence only. Digest binding detects accidental checkpoint changes relative to the manifest; it is not an external trust root. An uncheckpointed request may be replayed after interruption."
+}

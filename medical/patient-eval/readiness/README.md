@@ -55,3 +55,7 @@ python -m scripts.patient_eval.readiness_drill --out medical/patient-eval/local/
 ## R2：只读恢复前检查
 
 阅读 [恢复合同](RECOVERY_CONTRACT.md)，运行 `python -m scripts.patient_eval.recovery --drill-out medical/patient-eval/local/recovery-first`。本轮能指出输入、配置、调度、检查点或目录残留的不一致，不修改原结果。即使内部一致性通过，仍明确禁止续跑：旧格式缺少可信会话摘要、排他锁和恢复执行器。不会改变上述R0演练的历史含义。
+
+## R3：新格式最小显式续跑
+
+运行 `python -m scripts.patient_eval.resumable_drill --out medical/patient-eval/local/resume-first`。新v0.3格式绑定输入、配置、调度、相关代码摘要和每条会话文件摘要，并使用排他锁。固定合成演练8/8通过：中断保存1/2，恢复只调用剩余会话，旧会话字节不变。未落盘请求仍可能重放，不能声称绝对只调用一次；真实平台和真实病例均未验证。
