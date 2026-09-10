@@ -1,9 +1,9 @@
-# 医生点选审阅 v0.2
+# 医生点选审阅 v0.2.2
 
-请下载新文件 `console-v0.2.1-default-selected.html`，页头标有“默认勾选修正版 0.2.1”。旧文件名入口同步更新。
+请下载新文件 [console-v0.2.2-interaction-records.html](console-v0.2.2-interaction-records.html)，页头标有“默认勾选版 0.2.2”。旧版本文件保留作历史记录。
 默认进入医生点选模式，一次显示一条；常规审阅和声明都无需输入文字。
 四个板块均提供“这一栏怎么判断”及可展开的选项说明与例子；六类评测重点另附具体情境解释。
-四个板块默认勾选常规判断，并显示“已预选 · 待你确认”。点击“确认并下一项”后才计入已答；直接跳转或保存不会确认尚未看过的题。已有回答优先显示，恢复答卷时不会用默认值覆盖人工选择。
+四个板块默认勾选常规判断，并显示“已预选 · 待你确认”。预选本身不计入已选，点击“确认并下一项”后保存并计入已确认；主动改选会立即保存为已选，但在点击确认前不计入已确认。直接跳转或保存不会确认尚未看过的题。已有回答优先显示，恢复答卷时不会用默认值覆盖人工选择。
 
 ## 给评审者
 
@@ -20,19 +20,19 @@
 ## 给研究人员
 
 医生点选与详细编辑模式是两个独立草稿，切换模式不会自动合并意见。更换来源会重置两者。
-医生答卷格式为 `clinical-console-choice-bundle/v0.2`，包含清空先前意见后的来源包与本次点选记录。
+新版医生答卷格式为 `clinical-console-choice-bundle/v0.3`，包含来源包、答案及逐题操作记录。旧v0.2点选答卷仍能恢复和核验；恢复时原答案不变，缺失的旧界面版本和确认方式保留未知。新旧版答卷也可比较。
 旧 `candidate-review/v0.1` 草稿仍通过详细编辑模式恢复；不能把点选答卷直接交给旧验证入口。
 
 核验点选答卷并生成兼容原流程的草稿：
 
 ```bash
-python -m scripts.patient_eval.clinical_console validate-choices --original ORIGINAL.json --answers doctor-choices-reviewer-A.json --review-out medical/patient-eval/local/choices-review-A.json
+python -m scripts.patient_eval.clinical_console validate-choices --original ORIGINAL.json --answers doctor-choices-v0.3-reviewer-A.json --review-out medical/patient-eval/local/choices-review-A.json
 ```
 
 对比两份点选答卷：
 
 ```bash
-python -m scripts.patient_eval.clinical_console compare-choices --original ORIGINAL.json --answers-a doctor-choices-reviewer-A.json --answers-b doctor-choices-reviewer-B.json
+python -m scripts.patient_eval.clinical_console compare-choices --original ORIGINAL.json --answers-a doctor-choices-v0.3-reviewer-A.json --answers-b doctor-choices-v0.3-reviewer-B.json
 ```
 
 大写文件名替换为受控原件路径。派生草稿必须写入被忽略的 `medical/patient-eval/local/`，且不覆盖旧文件。
@@ -56,9 +56,12 @@ python -m scripts.patient_eval.clinical_console compare-choices --original ORIGI
 本页不将先前评审或模型的意见预填为标准。后续应由研究人员准备具体标准，再交合适人员审阅。
 点选答卷不构成临床批准、医学金标准、真实模型成绩或动态病例准入。
 
-## 验证范围
+## 操作记录与验证范围
 
-19 项针对性测试通过：旧流程 12 项、点选流程 7 项。含 Node.js 选项保存恢复、前后端枚举一致、
-Python 官方格式验证、来源篡改拒绝、逐轮隐私、未答与分歧分离、不补造评分标准。
+逐题记录界面版本、最近一次预选展示、主动改选，以及确认方式（沿用预选、改选后确认、重新确认旧答案）。原始导入版本和原答案单独保留；改变答案或跳过会清除旧确认，不能沿用已失效的确认。
+
+记录是离线程序输出的未签名数据，不证明真实身份、阅读注意力或临床正确性。它不是完整点击历史，不记录耗时；`display`表示最近一次页面呈现，`confirmation`中的预选字段表示确认当时的呈现。旧版导入后发生的新操作只说明新版里的行为，不补造旧版历史。详细字段和合成核验见 [T02操作记录说明](readiness/INTERACTION_RECORDS_REVIEW.md)。
+
+26项针对性测试通过：原19项，加7项记录与兼容性测试；其中调用Node.js完成10组状态操作检查，并对11种不一致记录进行前后端拒绝核验。
 未进行实际浏览器点击、下载或视觉验收，不能据此声称医生耗时已降低到某个分钟数。
 页面不联网，不自动保存，不含真实患者数据；含真实资料的导出答卷须按原受控流程流转。

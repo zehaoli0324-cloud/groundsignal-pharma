@@ -11,7 +11,7 @@
     conflicts:{pending:'暂不声明',none:'自述无相关利益冲突',present:'存在或可能存在，交负责人核对'}
   };
   function blank(packet){return {schema_version:'clinical-console-choices/v0.2',local_only:true,packet_sha256:packet.packet_sha256,reviewer_id:'',authority:'self_declared_unsigned_not_approval',formal_approval:false,clinical_gold:false,dynamic_scenario_ready:false,s6_automatic_trust:'BLOCKED',profile:{background:'pending',independence:'pending',conflicts:'pending'},items:packet.items.map(i=>({candidate_id:i.candidate_id,facts:i.review.facts.map(f=>({fact_id:f.fact_id,answer:'pending'})),privacy:i.turns.map(t=>({turn_id:t.turn_id,answer:'pending'})),rubrics:i.review.rubrics.map(r=>({criterion_id:r.criterion_id,answer:'pending'})),completeness:'pending'}))};}
-  function validate(packet,a){
+  function validateLegacy(packet,a){
     const expected=blank(packet), fail=(ok)=>{if(!ok)throw new Error('答卷字段、选项、来源或病例编号不匹配。');};
     const keys=(x,y)=>fail(x&&typeof x==='object'&&Object.keys(x).sort().join('|')===Object.keys(y).sort().join('|'));
     keys(a,expected);
@@ -32,7 +32,83 @@
     else item[section][index].answer=displayAnswer(section,item[section][index].answer);
   }
   function reviewOptions(section){return Object.fromEntries(Object.entries(options[section]).filter(([k])=>k!=='pending'));}
-  const api={options,blank,validate,counts,suggested,displayAnswer,confirmAnswer};
+  const UI_VERSION='0.2.2', ANSWERS_VERSION='clinical-console-choices/v0.3', BUNDLE_VERSION='clinical-console-choice-bundle/v0.3';
+  const copy=x=>JSON.parse(JSON.stringify(x));
+  function rows(a){return a.items.flatMap(i=>[
+    ...['facts','privacy','rubrics'].flatMap(section=>i[section].map((r,index)=>({candidate_id:i.candidate_id,section,item_id:r[{facts:'fact_id',privacy:'turn_id',rubrics:'criterion_id'}[section]],answer:r.answer,index}))),
+    {candidate_id:i.candidate_id,section:'completeness',item_id:'completeness',answer:i.completeness,index:0}
+  ]);}
+  function track(a){
+    const origin=a.schema_version,result=copy(a);result.schema_version=ANSWERS_VERSION;
+    result.interaction={schema_version:'clinical-console-interaction/v0.1',export_ui_version:UI_VERSION,origin_answers_version:origin,records:rows(a).map(r=>({candidate_id:r.candidate_id,section:r.section,item_id:r.item_id,
+      origin:{answers_version:origin,answer:r.answer,ui_version:origin===ANSWERS_VERSION?UI_VERSION:null},
+      display:null,selection:null,confirmation:null,last_action:origin===ANSWERS_VERSION?'unseen':'legacy_unknown'}))};return result;
+  }
+  function newAnswers(packet){const a=blank(packet);a.schema_version=ANSWERS_VERSION;return track(a);}
+  function validateInteraction(a){
+    const fail=ok=>{if(!ok)throw new Error('答卷操作记录与答案不一致。');};
+    const keys=(x,want)=>fail(x&&typeof x==='object'&&!Array.isArray(x)&&Object.keys(x).sort().join('|')===want.sort().join('|'));
+    const meta=a.interaction;keys(meta,['schema_version','export_ui_version','origin_answers_version','records']);
+    fail(meta.schema_version==='clinical-console-interaction/v0.1'&&meta.export_ui_version===UI_VERSION);
+    fail(['clinical-console-choices/v0.2',ANSWERS_VERSION].includes(meta.origin_answers_version));
+    const expected=rows(a);fail(Array.isArray(meta.records)&&meta.records.length===expected.length);
+    meta.records.forEach((r,n)=>{
+      const e=expected[n],valid=v=>typeof v==='string'&&Object.hasOwn(options[e.section],v),legacy=meta.origin_answers_version==='clinical-console-choices/v0.2';
+      keys(r,['candidate_id','section','item_id','origin','display','selection','confirmation','last_action']);
+      for(const k of ['candidate_id','section','item_id'])fail(r[k]===e[k]);
+      keys(r.origin,['answers_version','answer','ui_version']);fail(r.origin.answers_version===meta.origin_answers_version&&valid(r.origin.answer));
+      fail(r.origin.ui_version===(legacy?null:UI_VERSION));if(!legacy)fail(r.origin.answer==='pending');
+      if(r.display!==null){keys(r.display,['ui_version','preset_shown','answer']);fail(r.display.ui_version===UI_VERSION&&typeof r.display.preset_shown==='boolean'&&valid(r.display.answer)&&r.display.answer!=='pending');if(r.display.preset_shown)fail(r.display.answer===suggested[e.section]);}
+      fail(r.selection===null||(valid(r.selection)&&r.selection!=='pending'));
+      if(r.confirmation!==null){const c=r.confirmation;keys(c,['ui_version','method','answer','preset_shown']);fail(c.ui_version===UI_VERSION&&['preset','selection','existing_answer'].includes(c.method)&&typeof c.preset_shown==='boolean'&&c.answer===e.answer&&c.answer!=='pending');
+        if(c.method==='preset')fail(r.selection===null&&c.preset_shown&&c.answer===suggested[e.section]);
+        if(c.method==='selection')fail(r.selection===c.answer);
+        if(c.method==='existing_answer')fail(legacy&&r.selection===null&&c.answer===r.origin.answer&&!c.preset_shown);
+      }
+      fail(['unseen','viewed','selected','confirmed','skipped','legacy_unknown'].includes(r.last_action));
+      if(r.last_action==='confirmed')fail(r.confirmation!==null&&r.display!==null);
+      else fail(r.confirmation===null);
+      if(r.last_action==='selected')fail(r.selection===e.answer&&e.answer!=='pending'&&r.display!==null);
+      if(['unseen','viewed','skipped'].includes(r.last_action))fail(e.answer==='pending'&&r.selection===null);
+      if(r.last_action==='unseen')fail(!legacy&&r.display===null);
+      if(r.last_action==='viewed')fail(!legacy&&r.display!==null);
+      if(r.last_action==='legacy_unknown')fail(legacy&&e.answer===r.origin.answer&&r.selection===null);
+    });return a;
+  }
+  function validate(packet,a){
+    if(a?.schema_version==='clinical-console-choices/v0.2')return validateLegacy(packet,a);
+    if(a?.schema_version!==ANSWERS_VERSION)throw new Error('不支持的答卷版本。');
+    const legacy=copy(a);delete legacy.interaction;legacy.schema_version='clinical-console-choices/v0.2';validateLegacy(packet,legacy);validateInteraction(a);return a;
+  }
+  function restoreAnswers(packet,a){validate(packet,a);return a.schema_version===ANSWERS_VERSION?copy(a):track(a);}
+  function record(a,caseIndex,section,index){
+    const item=a.items[caseIndex],id=section==='completeness'?'completeness':item[section][index][{facts:'fact_id',privacy:'turn_id',rubrics:'criterion_id'}[section]];
+    const r=a.interaction.records.find(r=>r.candidate_id===item.candidate_id&&r.section===section&&r.item_id===id);
+    if(!r)throw new Error('缺少本题操作记录。');return r;
+  }
+  function valueAt(a,c,s,i){return s==='completeness'?a.items[c].completeness:a.items[c][s][i].answer;}
+  function setAt(a,c,s,i,v){if(s==='completeness')a.items[c].completeness=v;else a.items[c][s][i].answer=v;}
+  function recordDisplay(a,c,s,i){
+    const r=record(a,c,s,i),value=valueAt(a,c,s,i),display={ui_version:UI_VERSION,preset_shown:value==='pending',answer:displayAnswer(s,value)};
+    const changed=JSON.stringify(r.display)!==JSON.stringify(display);r.display=display;if(r.last_action==='unseen')r.last_action='viewed';return changed;
+  }
+  function recordSelection(a,c,s,i,value){
+    if(value==='pending'||!Object.hasOwn(options[s],value))throw new Error('不支持的选择。');
+    recordDisplay(a,c,s,i);const r=record(a,c,s,i);setAt(a,c,s,i,value);r.selection=value;r.confirmation=null;r.last_action='selected';
+  }
+  function recordConfirmation(a,c,s,i){
+    recordDisplay(a,c,s,i);const r=record(a,c,s,i),before=valueAt(a,c,s,i);
+    confirmAnswer(a.items[c],s,i);const value=valueAt(a,c,s,i);
+    if(!r.confirmation)r.confirmation={ui_version:UI_VERSION,method:r.selection!==null?'selection':before==='pending'?'preset':'existing_answer',answer:value,preset_shown:r.display.preset_shown};
+    r.last_action='confirmed';
+  }
+  function recordSkip(a,c,s,i){const r=record(a,c,s,i);setAt(a,c,s,i,'pending');r.selection=null;r.confirmation=null;r.last_action='skipped';}
+  function bundle(packet,a){validate(packet,a);return {schema_version:a.schema_version===ANSWERS_VERSION?BUNDLE_VERSION:'clinical-console-choice-bundle/v0.2',packet:copy(packet),answers:copy(a)};}
+  function restoreBundle(b){
+    if(!b||Object.keys(b).sort().join('|')!=='answers|packet|schema_version'||b.schema_version!==(b.answers?.schema_version===ANSWERS_VERSION?BUNDLE_VERSION:'clinical-console-choice-bundle/v0.2'))throw new Error('请选择受支持的点选答卷。');
+    return restoreAnswers(b.packet,b.answers);
+  }
+  const api={options,blank,validate,counts,suggested,displayAnswer,confirmAnswer,UI_VERSION,newAnswers,restoreAnswers,recordDisplay,recordSelection,recordConfirmation,recordSkip,bundle,restoreBundle};
   if(typeof module!=='undefined'&&module.exports){module.exports=api;return;}root.ConsoleChoices=api;
 
   const box=document.getElementById('quick-app');let answers=null,caseIndex=0,stage='facts',rowIndex=0,quickDirty=false,profileOpen=false;
@@ -74,25 +150,24 @@
   function explainSection(parent){const help=sectionHelp[stage];const wrap=el('section',undefined,'review-help');wrap.append(el('h3','这一栏怎么判断？'),el('p',help.intro));const details=el('details');details.append(el('summary','查看选项说明与例子'));for(const [title,text] of help.examples){const p=el('p');p.append(el('strong',title+'：'),document.createTextNode(text));details.append(p);}wrap.append(details);parent.append(wrap);}
   function fileButton(title,handler){const l=el('label',title,'button secondary'),f=el('input');f.type='file';f.accept='.json,application/json';f.hidden=true;f.onchange=async()=>{try{await handler(await read(f.files[0]));}catch(e){notice(e.message,true);}finally{f.value='';}};l.append(f);return l;}
   function selectedReviewer(){return document.getElementById('quick-reviewer')?.value||'';}
-  function exportAnswers(){try{if(!source||!answers)throw new Error('请先导入资料或体验示例。');answers.reviewer_id=selectedReviewer();validate(source,answers);download({schema_version:'clinical-console-choice-bundle/v0.2',packet:C.clone(source),answers:C.clone(answers)},'doctor-choices-'+answers.reviewer_id+'.json');notice('已请求下载答卷。请确认文件已保存；未答题保持未答，之后可继续。');}catch(e){notice(e.message,true);}}
-  function reset(){answers=source?blank(source):null;caseIndex=0;rowIndex=0;stage='facts';quickDirty=false;render();}
+  function exportAnswers(){try{if(!source||!answers)throw new Error('请先导入资料或体验示例。');answers.reviewer_id=selectedReviewer();validate(source,answers);download(bundle(source,answers),'doctor-choices-v0.3-'+answers.reviewer_id+'.json');notice('已请求下载答卷。请确认文件已保存；未答题保持未答，之后可继续。');}catch(e){notice(e.message,true);}}
+  function reset(){answers=source?newAnswers(source):null;caseIndex=0;rowIndex=0;stage='facts';quickDirty=false;render();}
   function render(){
     const reviewer=answers?.reviewer_id||selectedReviewer?.()||'';
     box.replaceChildren();const top=el('div',undefined,'quick-top');top.append(el('h1','看原文，点选判断。'),el('p','每题已预选常用答案。符合时点“确认并下一项”，有问题再改选；可随时保存。','muted'));box.append(top);
     const tools=el('div',undefined,'toolbar');
     tools.append(fileButton('导入审阅资料',p=>{C.checkPacket(p);if(dirty&&!confirm('当前修改可能尚未保存。确定更换资料？'))return;install(p);notice('已清空既有意见，开始自己的点选审阅。');}),button('体验合成示例',()=>{if(dirty&&!confirm('当前修改可能尚未保存。确定载入示例？'))return;install(data.demo);notice('这是完全合成的操作示例。');}),fileButton('继续自己的答卷',b=>{
       const who=selectedReviewer();if(!who)throw new Error('请先选择你的评审席位。');
-      if(b.schema_version!=='clinical-console-choice-bundle/v0.2')throw new Error('请选择点选版导出的答卷。');
-      C.checkPacket(b.packet);validate(b.packet,b.answers);if(b.answers.reviewer_id!==who)throw new Error('答卷与所选席位不同；请由负责人核对分配。');
+      C.checkPacket(b.packet);const restored=restoreBundle(b);if(b.answers.reviewer_id!==who)throw new Error('答卷与所选席位不同；请由负责人核对分配。');
       if(source)C.compatible(source,b.packet);
       if(dirty&&!confirm('用保存的答卷替换当前修改？'))return;
-      install(b.packet);answers=C.clone(b.answers);quickDirty=false;render();notice('已恢复原答卷，未回答的题仍留空。');
+      install(b.packet);answers=restored;quickDirty=false;render();notice('已恢复原答案；旧答卷没有记录的确认方式仍为未知。');
     }),button('保存并交回答卷',exportAnswers,''));box.append(tools);
     const identity=el('label','你的评审席位（由负责人分配）'),select=el('select');select.id='quick-reviewer';for(const [v,l]of [['','请选择席位'],['reviewer-A','评审 A'],['reviewer-B','评审 B'],['reviewer-C','评审 C']]){const o=el('option',l);o.value=v;select.append(o);}select.value=reviewer;select.onchange=()=>{if(answers){answers.reviewer_id=select.value;mark();}};identity.append(select);box.append(identity);
     const msg=el('p','','muted');msg.id='quick-message';msg.setAttribute('role','status');msg.setAttribute('aria-live','polite');box.append(msg);
     if(!source||!answers){const e=el('div',undefined,'quick-empty');e.append(el('h2','先导入资料，或体验一例。'),el('p','医生只需选择答案；暂时看不懂或不属于自己的专业，可选择交他人复核。'));box.append(e);return;}
-    const item=source.items[caseIndex],a=answers.items[caseIndex],count=counts(a);
-    const bar=el('div',undefined,'quick-casebar'),caseSelect=el('select');caseSelect.setAttribute('aria-label','选择病例');source.items.forEach((i,n)=>{const c=counts(answers.items[n]),o=el('option',i.candidate_id+' · 已答 '+c.answered+'/'+c.total);o.value=String(n);caseSelect.append(o);});caseSelect.value=String(caseIndex);caseSelect.onchange=()=>{caseIndex=Number(caseSelect.value);rowIndex=0;render();};bar.append(caseSelect,el('span','本例已答 '+count.answered+' / '+count.total+' 项','muted'));box.append(bar);
+    const item=source.items[caseIndex],a=answers.items[caseIndex],count=counts(a),confirmed=answers.interaction.records.filter(r=>r.candidate_id===a.candidate_id&&r.confirmation!==null).length;
+    const bar=el('div',undefined,'quick-casebar'),caseSelect=el('select');caseSelect.setAttribute('aria-label','选择病例');source.items.forEach((i,n)=>{const c=counts(answers.items[n]),o=el('option',i.candidate_id+' · 已答 '+c.answered+'/'+c.total);o.value=String(n);caseSelect.append(o);});caseSelect.value=String(caseIndex);caseSelect.onchange=()=>{caseIndex=Number(caseSelect.value);rowIndex=0;render();};bar.append(caseSelect,el('span','本例已选 '+count.answered+' / '+count.total+' 项 · 已确认 '+confirmed+' 项','muted'));box.append(bar);
     const tabs=el('nav',undefined,'quick-tabs');tabs.setAttribute('aria-label','审阅内容');for(const [s,title] of [['facts','核对事实'],['privacy','检查隐私'],['rubrics','评测重点'],['completeness','材料完整性']]){const b=button(title,()=>{stage=s;rowIndex=0;render();},stage===s?'':'secondary');b.setAttribute('aria-pressed',String(stage===s));tabs.append(b);}box.append(tabs);
     const layout=el('div',undefined,'quick-layout'),context=el('section',undefined,'quick-context'),question=el('section',undefined,'quick-question');layout.append(context,question);box.append(layout);
     context.append(el('h2','原始对话'),el('p','历史医生回复仅作上下文，不是标准答案。','muted'));
@@ -101,9 +176,10 @@
     for(const t of item.turns){const d=el('div',undefined,'turn '+t.role+(t===activeTurn?' current-turn':''));d.append(el('small',t.turn_id+' · '+(t.role==='patient'?'患者':'历史医生')),el('p',t.content));context.append(d);}
     question.append(el('p',list.length?'第 '+(rowIndex+1)+' / '+list.length+' 项':'本部分没有条目','muted'));
     explainSection(question);
+    if(list.length&&document.body.classList.contains('quick-mode')&&recordDisplay(answers,caseIndex,stage,rowIndex))mark();
     const currentAnswer=stage==='completeness'?a.completeness:list[rowIndex]?.answer;
     if(list.length)question.append(el('p',currentAnswer==='pending'?'已预选 · 待你确认。看完本题后点击下方确认按钮；也可暂时跳过。':'已记录你的选择，可修改后继续。',currentAnswer==='pending'?'choice-preset-note':'muted'));
-    const change=(v)=>{if(stage==='completeness')a.completeness=v;else list[rowIndex].answer=v;mark();render();};
+    const change=(v)=>{recordSelection(answers,caseIndex,stage,rowIndex,v);mark();render();};
     if(stage==='facts'&&list.length){
       const f=item.fact_draft.fact_candidates[rowIndex],r=list[rowIndex],snippet=f.upstream_annotation?.text;
       question.append(el('h2','这条摘录能作为患者信息吗？'),el('p',typeof snippet==='string'&&snippet?snippet:'来源没有有效摘录，请结合原文判断。','quick-excerpt'));
@@ -136,15 +212,15 @@
     }
     const actions=el('div',undefined,'quick-actions'),prev=button('上一项',()=>{rowIndex--;render();});prev.disabled=rowIndex===0;
     const last=stage==='completeness'&&caseIndex===source.items.length-1;
-    const next=button(list.length?(last?'确认本题':rowIndex<list.length-1?'确认并下一项':'确认并下一部分'):'下一部分',()=>{if(list.length){confirmAnswer(a,stage,rowIndex);mark();}advance();},'');
-    const skip=button('暂时跳过',()=>{if(list.length){if(stage==='completeness')a.completeness='pending';else list[rowIndex].answer='pending';mark();}advance();});
+    const next=button(list.length?(last?'确认本题':rowIndex<list.length-1?'确认并下一项':'确认并下一部分'):'下一部分',()=>{if(list.length){recordConfirmation(answers,caseIndex,stage,rowIndex);mark();}advance();},'');
+    const skip=button('暂时跳过',()=>{if(list.length){recordSkip(answers,caseIndex,stage,rowIndex);mark();}advance();});
     actions.append(prev,next,skip,button('保存答卷',exportAnswers));question.append(actions);
     const profile=el('details',undefined,'quick-profile');profile.open=profileOpen;profile.ontoggle=()=>{profileOpen=profile.open;};profile.append(el('summary','评审声明（点选一次，适用于本份答卷）'));for(const [k,title]of [['background','专业背景'],['independence','是否独立完成'],['conflicts','利益冲突']])picker(title,options[k],answers.profile[k],v=>{answers.profile[k]=v;mark();render();},profile);box.append(profile);
     box.append(el('p','答卷仅保存在下载文件里。席位与声明由负责人核对；点选完成不等于临床批准。','muted'));
     if(quickDirty)notice('有修改，请在关闭页面前保存答卷。');
   }
   document.addEventListener('console-source-installed',reset);
-  for(const [id,quick]of [['view-quick',true],['view-detailed',false]])document.getElementById(id).onclick=()=>{document.body.classList.toggle('quick-mode',quick);document.getElementById('view-quick').setAttribute('aria-pressed',String(quick));document.getElementById('view-detailed').setAttribute('aria-pressed',String(!quick));};
+  for(const [id,quick]of [['view-quick',true],['view-detailed',false]])document.getElementById(id).onclick=()=>{document.body.classList.toggle('quick-mode',quick);document.getElementById('view-quick').setAttribute('aria-pressed',String(quick));document.getElementById('view-detailed').setAttribute('aria-pressed',String(!quick));if(quick)render();};
   // The two modes have separate drafts; changing the source resets both.
   reset();
 })(globalThis);

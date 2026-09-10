@@ -67,3 +67,7 @@ python -m scripts.patient_eval.readiness_drill --out medical/patient-eval/local/
 ## R5：失败归因与受控恢复
 
 阅读 [完整合成失败分析](FAILURE_ANALYSIS_REVIEW.md)。运行 `python -m scripts.patient_eval.readiness_diagnosis --out diagnosis-first.json`，得到含原文、结构化输入、两次状态轨迹和评分的报告。3个既有公开合成用例的状态规则失败→通过，6种证据不足情形不能确认内部原因，合计15/15工程检查通过。这里恢复的是已有注入故障，不是新发现并修复了真实模型或线上系统缺陷。输出路径必须不存在；保留失败文件和报错。个人解释、他人复现和真实闭环仍待验收。
+
+## R6：答卷版本、预选展示与确认来源
+
+使用 [默认勾选版0.2.2](../console-v0.2.2-interaction-records.html)，四项默认答案不变。阅读 [操作记录说明](INTERACTION_RECORDS_REVIEW.md)：新版自动记录展示、改选与确认，新旧答卷可恢复和核验。旧版没有记录的界面与确认信息保持未知。前端状态、后端校验和原流程26项测试通过；实际浏览器下载恢复和另一人验收仍待完成。

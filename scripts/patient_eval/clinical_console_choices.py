@@ -5,6 +5,8 @@ score anchors or admission. Keep the choice bundle alongside the legacy projecti
 """
 from __future__ import annotations
 
+from copy import deepcopy
+
 from .candidate_review import validate_review
 from .clinical_console import FLAGS, independent_packet
 
@@ -40,7 +42,7 @@ def _keys(value, expected, label):
     _require(isinstance(value, dict) and set(value) == set(expected), label + ' fields changed')
 
 
-def validate_choices(original: dict, bundle: dict) -> tuple[dict, dict]:
+def _validate_legacy_choices(original: dict, bundle: dict) -> tuple[dict, dict]:
     _keys(bundle, {'schema_version', 'packet', 'answers'}, 'choice bundle')
     _require(bundle['schema_version'] == 'clinical-console-choice-bundle/v0.2', 'unsupported choice bundle')
     validate_review(original, bundle['packet'])  # authenticates original digest and immutable evidence
@@ -123,6 +125,29 @@ def validate_choices(original: dict, bundle: dict) -> tuple[dict, dict]:
               'clinical_credentials_verified': False, 'independence_verified': False, **FLAGS,
               'interpretation': '点选答卷是语义与适用性复核；须保留原答卷。派生草稿不补造事实配置或评分标准。'}
     return report, result
+
+
+
+def validate_choices(original: dict, bundle: dict) -> tuple[dict, dict]:
+    from .clinical_console_interactions import ANSWER_VERSION, LEGACY_VERSION, validate_interactions, summarize_interactions
+    _keys(bundle, {'schema_version', 'packet', 'answers'}, 'choice bundle')
+    if bundle['schema_version'] == 'clinical-console-choice-bundle/v0.2':
+        report, review = _validate_legacy_choices(original, bundle)
+        report['interaction_summary'] = summarize_interactions(bundle['answers'])
+        return report, review
+    _require(bundle['schema_version'] == 'clinical-console-choice-bundle/v0.3', 'unsupported choice bundle')
+    _require(isinstance(bundle['answers'], dict) and bundle['answers'].get('schema_version') == ANSWER_VERSION,
+             'answer/bundle version mismatch')
+    _require('interaction' in bundle['answers'], 'missing interaction records')
+    legacy = deepcopy(bundle)
+    legacy['schema_version'] = 'clinical-console-choice-bundle/v0.2'
+    legacy['answers'].pop('interaction')
+    legacy['answers']['schema_version'] = LEGACY_VERSION
+    report, review = _validate_legacy_choices(original, legacy)
+    report['interaction_summary'] = validate_interactions(bundle['answers'])
+    report['schema_version'] = 'clinical-console-choices-validation/v0.3'
+    report['interpretation'] += ' 操作记录区分展示、改选和确认；不证明阅读、身份或临床正确。旧记录缺失不回填。'
+    return report, review
 
 
 def compare_choices(original: dict, a: dict, b: dict) -> dict:
