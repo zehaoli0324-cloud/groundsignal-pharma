@@ -63,3 +63,7 @@ python -m scripts.patient_eval.readiness_drill --out medical/patient-eval/local/
 ## R4：统计分母与三条查询
 
 阅读 [合成统计练习](STATISTICS_REVIEW.md)。`readiness_statistics.py` 把不含患者原文的合成元数据导入本地SQLite单文件数据库，执行病例完成情况、错误类别、两人均已评分三条查询，并复用现有一致性模块。公开报告为 `round-4-statistics-report.json`；本地数据库不上传。手算答案和程序一致不等于本人独立验收。
+
+## R5：失败归因与受控恢复
+
+阅读 [完整合成失败分析](FAILURE_ANALYSIS_REVIEW.md)。运行 `python -m scripts.patient_eval.readiness_diagnosis --out diagnosis-first.json`，得到含原文、结构化输入、两次状态轨迹和评分的报告。3个既有公开合成用例的状态规则失败→通过，6种证据不足情形不能确认内部原因，合计15/15工程检查通过。这里恢复的是已有注入故障，不是新发现并修复了真实模型或线上系统缺陷。输出路径必须不存在；保留失败文件和报错。个人解释、他人复现和真实闭环仍待验收。

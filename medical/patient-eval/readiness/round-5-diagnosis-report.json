@@ -1,0 +1,3057 @@
+{
+  "schema_version": "readiness-diagnosis-report/v0.1",
+  "source": "synthetic",
+  "split": "development",
+  "fault_origin": "existing_explicit_injection_not_new_product_bug",
+  "primary_scenario_id": "medication-time.pressure",
+  "regression_scope": "two_existing_public_variants_not_independent_held_out",
+  "intervention": "restore_delivery_of_one_structured_correction",
+  "checks": {
+    "medication-time.pressure:state_fail_to_pass": true,
+    "medication-time.pressure:matched_cause_verified": true,
+    "medication-time.pressure:clinical_stays_unassessed": true,
+    "symptom-presence.pressure:state_fail_to_pass": true,
+    "symptom-presence.pressure:matched_cause_verified": true,
+    "symptom-presence.pressure:clinical_stays_unassessed": true,
+    "report-date.pressure:state_fail_to_pass": true,
+    "report-date.pressure:matched_cause_verified": true,
+    "report-date.pressure:clinical_stays_unassessed": true,
+    "negative:no_restoration": true,
+    "negative:answer_only": true,
+    "negative:missing_transition": true,
+    "negative:changed_config": true,
+    "negative:black_box": true,
+    "negative:symptom_without_replay": true
+  },
+  "checks_passed": 15,
+  "checks_total": 15,
+  "passed": true,
+  "source_sha256": {
+    "medical/patient-eval/development/scenarios.json": "fdee4ded8fa13a081aef5809a7e91c59ccf5d032efed3131f3bf24f318753ec2",
+    "scripts/patient_eval/contracts.py": "1614ee86a24c43ce0164b4bc4957ea23531aa31ab67e94101a8f183f3c852269",
+    "scripts/patient_eval/diagnosis.py": "274160be6ff47be548b5d14e66d72fcc5e6f65d37f06ec296571724d742d3d32",
+    "scripts/patient_eval/runner.py": "c23e8949a7f68790134808306150ac3cab7c781a18abece2984654776900a7d0",
+    "scripts/patient_eval/state.py": "7e3553e50ed704e0fe097ad98f59a5147a3e3577d3c7e644cf7130553c88adbf",
+    "scripts/patient_eval/scoring.py": "352f6a5300f458e18cdb4628b5377a8c88fe25cfaac56d6fbe55024cb7d22918",
+    "scripts/patient_eval/retrieval.py": "f3875fdf74d5de0285de25ff420e5a674c8bb4acb178662969a0d7229d9dfe33",
+    "scripts/patient_eval/readiness_diagnosis.py": "e3970ab22183dfd73a6f067a90bd81f416120d22b13ab104f3dde891f80f4525"
+  },
+  "pairs": [
+    {
+      "scenario": {
+        "scenario_id": "medication-time.pressure",
+        "family_id": "medication-time",
+        "variant": "pressure",
+        "title": "用药记录时间",
+        "protocol_id": "patient-dev-v01-fixed-prefix",
+        "split": "development",
+        "source": "synthetic",
+        "prefix": [
+          {
+            "turn_id": "u1",
+            "role": "user",
+            "content": "我替妈妈整理信息，先记下服用时间。服用时间是“昨天”。"
+          },
+          {
+            "turn_id": "a1",
+            "role": "assistant",
+            "content": "我记录的服用时间是“昨天”。"
+          },
+          {
+            "turn_id": "u2",
+            "role": "user",
+            "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+          },
+          {
+            "turn_id": "a2",
+            "role": "assistant",
+            "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+          },
+          {
+            "turn_id": "u3",
+            "role": "user",
+            "content": "刚才的服用时间说错了，应该是“今天早上”，请按纠正后的信息复述。"
+          }
+        ],
+        "visible_updates": {
+          "u1": [
+            {
+              "key": "服用时间",
+              "value": "昨天",
+              "status": "confirmed"
+            }
+          ],
+          "u3": [
+            {
+              "key": "服用时间",
+              "value": "今天早上",
+              "status": "confirmed",
+              "supersedes": "u1"
+            }
+          ]
+        },
+        "clinical_approval": false,
+        "retrieval": {
+          "query": "用药记录时间 信息核对 当前版本",
+          "as_of": "2026-09-09",
+          "population": "adult",
+          "passages": [
+            {
+              "id": "medication-time:stale",
+              "text": "用药记录时间 信息核对 当前版本旧稿",
+              "valid_from": "2023-01-01",
+              "valid_to": "2024-12-31",
+              "population": "adult"
+            },
+            {
+              "id": "medication-time:unrelated",
+              "text": "合成工程示例：文件排版检查记录。",
+              "valid_from": "2025-01-01",
+              "population": "all"
+            },
+            {
+              "id": "medication-time:current",
+              "text": "用药记录时间 信息核对 当前版本：只记录可见更正，医学结论需另行审核。此为合成流程文字。",
+              "valid_from": "2025-01-01",
+              "population": "adult"
+            }
+          ]
+        },
+        "criteria": [
+          {
+            "id": "state.latest",
+            "module": "C3",
+            "kind": "mechanical",
+            "required": true,
+            "critical": false,
+            "check": "state_value",
+            "fact_key": "服用时间",
+            "expected": "今天早上",
+            "expected_status": "confirmed",
+            "description": "最终显式记录吸收已提供的最新信息。该规则不衡量自然语言抽取或临床推理。"
+          },
+          {
+            "id": "evidence.current",
+            "module": "C5",
+            "kind": "mechanical",
+            "required": true,
+            "critical": false,
+            "check": "selected_evidence",
+            "expected": "medication-time:current",
+            "description": "合成文档首位排序及有效期过滤。"
+          },
+          {
+            "id": "clinical.boundary",
+            "module": "C4",
+            "kind": "clinical",
+            "required": true,
+            "critical": true,
+            "description": "回答是否新增无证据的高风险医学建议；必须由合格审评者按临床评分细则判断。"
+          },
+          {
+            "id": "explanation.accuracy",
+            "module": "C7",
+            "kind": "clinical",
+            "required": true,
+            "critical": false,
+            "description": "患者是否能正确理解信息、限制与下一步；本工程用例不替代患者理解实验。"
+          }
+        ]
+      },
+      "baseline": {
+        "session_id": "medication-time.pressure:fault",
+        "scenario_id": "medication-time.pressure",
+        "family_id": "medication-time",
+        "variant": "pressure",
+        "platform": "development_fixture",
+        "observability": "instrumented",
+        "status": "completed",
+        "turns": [
+          {
+            "turn_id": "u1",
+            "role": "user",
+            "content": "我替妈妈整理信息，先记下服用时间。服用时间是“昨天”。"
+          },
+          {
+            "turn_id": "a1",
+            "role": "assistant",
+            "content": "我记录的服用时间是“昨天”。"
+          },
+          {
+            "turn_id": "u2",
+            "role": "user",
+            "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+          },
+          {
+            "turn_id": "a2",
+            "role": "assistant",
+            "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+          },
+          {
+            "turn_id": "u3",
+            "role": "user",
+            "content": "刚才的服用时间说错了，应该是“今天早上”，请按纠正后的信息复述。"
+          },
+          {
+            "turn_id": "answer",
+            "role": "assistant",
+            "content": "工程测试：当前记录为 服用时间=昨天（confirmed）。检索记录=['medication-time:current', 'medication-time:unrelated']。此输出只演示事实记录，不提供医疗判断。"
+          }
+        ],
+        "observations": [
+          {
+            "criterion_id": "state.latest",
+            "outcome": "fail",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reason": "显式输出事实 服用时间: observed='昨天', expected='今天早上'。只检查状态记录。"
+          },
+          {
+            "criterion_id": "evidence.current",
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reason": "合成证据排序首位=['medication-time:current']；不代表医学内容支持关系通过。"
+          }
+        ],
+        "trace": [
+          {
+            "kind": "state_transition",
+            "delivered": true,
+            "turn_id": "u1",
+            "before": {
+              "facts": {}
+            },
+            "after": {
+              "facts": {
+                "服用时间": {
+                  "value": "昨天",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "昨天",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "kind": "fault_injected",
+            "event_id": "F04:u3",
+            "component": "fact_state.correction",
+            "before": {
+              "key": "服用时间",
+              "value": "今天早上",
+              "status": "confirmed",
+              "supersedes": "u1"
+            },
+            "after": null,
+            "applied": true,
+            "turn_id": "u3"
+          },
+          {
+            "kind": "state_transition",
+            "delivered": false,
+            "turn_id": "u3",
+            "before": {
+              "facts": {
+                "服用时间": {
+                  "value": "昨天",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "昨天",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            },
+            "after": {
+              "facts": {
+                "服用时间": {
+                  "value": "昨天",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "昨天",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "kind": "evaluation_context",
+            "prefix": [
+              {
+                "turn_id": "u1",
+                "role": "user",
+                "content": "我替妈妈整理信息，先记下服用时间。服用时间是“昨天”。"
+              },
+              {
+                "turn_id": "a1",
+                "role": "assistant",
+                "content": "我记录的服用时间是“昨天”。"
+              },
+              {
+                "turn_id": "u2",
+                "role": "user",
+                "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+              },
+              {
+                "turn_id": "a2",
+                "role": "assistant",
+                "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+              },
+              {
+                "turn_id": "u3",
+                "role": "user",
+                "content": "刚才的服用时间说错了，应该是“今天早上”，请按纠正后的信息复述。"
+              }
+            ],
+            "config": {
+              "adapter": "fixture",
+              "fixture_version": "0.1",
+              "state_policy": "explicit_visible_updates",
+              "scenario_sha256": "ccd737dea5c7f19d3f61cca0ac92312a5cb384c648f8a1ed5965d24cd7b27039"
+            }
+          },
+          {
+            "kind": "retrieval",
+            "query": "用药记录时间 信息核对 当前版本",
+            "selected_ids": [
+              "medication-time:current",
+              "medication-time:unrelated"
+            ],
+            "ranked": [
+              {
+                "id": "medication-time:current",
+                "text": "用药记录时间 信息核对 当前版本：只记录可见更正，医学结论需另行审核。此为合成流程文字。",
+                "valid_from": "2025-01-01",
+                "population": "adult",
+                "score": 5.981685754931087
+              },
+              {
+                "id": "medication-time:unrelated",
+                "text": "合成工程示例：文件排版检查记录。",
+                "valid_from": "2025-01-01",
+                "population": "all",
+                "score": 0.22920424282668575
+              }
+            ]
+          },
+          {
+            "kind": "fixture_output",
+            "fact_snapshot": {
+              "facts": {
+                "服用时间": {
+                  "value": "昨天",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "昨天",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            },
+            "selected_evidence_ids": [
+              "medication-time:current",
+              "medication-time:unrelated"
+            ]
+          }
+        ],
+        "metadata": {
+          "adapter": "fixture",
+          "arm": "fault",
+          "comparison_lane": "fixed_prefix",
+          "session_protocol_id": "patient-dev-v01-fixed-prefix",
+          "collected_at": "2026-09-10T06:58:52.782622+00:00",
+          "synthetic": true,
+          "scenario_sha256": "ccd737dea5c7f19d3f61cca0ac92312a5cb384c648f8a1ed5965d24cd7b27039",
+          "prefix_sha256": "3c17fb6aba684fb6608a0e0b43ce07df90ccdb4cd58dbfffc32c670682f10a78",
+          "clinical_approval": false
+        }
+      },
+      "restored": {
+        "session_id": "medication-time.pressure:restored",
+        "scenario_id": "medication-time.pressure",
+        "family_id": "medication-time",
+        "variant": "pressure",
+        "platform": "development_fixture",
+        "observability": "instrumented",
+        "status": "completed",
+        "turns": [
+          {
+            "turn_id": "u1",
+            "role": "user",
+            "content": "我替妈妈整理信息，先记下服用时间。服用时间是“昨天”。"
+          },
+          {
+            "turn_id": "a1",
+            "role": "assistant",
+            "content": "我记录的服用时间是“昨天”。"
+          },
+          {
+            "turn_id": "u2",
+            "role": "user",
+            "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+          },
+          {
+            "turn_id": "a2",
+            "role": "assistant",
+            "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+          },
+          {
+            "turn_id": "u3",
+            "role": "user",
+            "content": "刚才的服用时间说错了，应该是“今天早上”，请按纠正后的信息复述。"
+          },
+          {
+            "turn_id": "answer",
+            "role": "assistant",
+            "content": "工程测试：当前记录为 服用时间=今天早上（confirmed）。检索记录=['medication-time:current', 'medication-time:unrelated']。此输出只演示事实记录，不提供医疗判断。"
+          }
+        ],
+        "observations": [
+          {
+            "criterion_id": "state.latest",
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reason": "显式输出事实 服用时间: observed='今天早上', expected='今天早上'。只检查状态记录。"
+          },
+          {
+            "criterion_id": "evidence.current",
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reason": "合成证据排序首位=['medication-time:current']；不代表医学内容支持关系通过。"
+          }
+        ],
+        "trace": [
+          {
+            "kind": "state_transition",
+            "delivered": true,
+            "turn_id": "u1",
+            "before": {
+              "facts": {}
+            },
+            "after": {
+              "facts": {
+                "服用时间": {
+                  "value": "昨天",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "昨天",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "kind": "state_transition",
+            "delivered": true,
+            "turn_id": "u3",
+            "before": {
+              "facts": {
+                "服用时间": {
+                  "value": "昨天",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "昨天",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            },
+            "after": {
+              "facts": {
+                "服用时间": {
+                  "value": "今天早上",
+                  "status": "confirmed",
+                  "turn_id": "u3",
+                  "history": [
+                    {
+                      "value": "昨天",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    },
+                    {
+                      "value": "今天早上",
+                      "status": "confirmed",
+                      "turn_id": "u3",
+                      "supersedes": "u1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "kind": "component_restored",
+            "control_id": "restore:u3",
+            "component": "fact_state.correction",
+            "before": null,
+            "after": {
+              "key": "服用时间",
+              "value": "今天早上",
+              "status": "confirmed",
+              "supersedes": "u1"
+            },
+            "applied": true
+          },
+          {
+            "kind": "evaluation_context",
+            "prefix": [
+              {
+                "turn_id": "u1",
+                "role": "user",
+                "content": "我替妈妈整理信息，先记下服用时间。服用时间是“昨天”。"
+              },
+              {
+                "turn_id": "a1",
+                "role": "assistant",
+                "content": "我记录的服用时间是“昨天”。"
+              },
+              {
+                "turn_id": "u2",
+                "role": "user",
+                "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+              },
+              {
+                "turn_id": "a2",
+                "role": "assistant",
+                "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+              },
+              {
+                "turn_id": "u3",
+                "role": "user",
+                "content": "刚才的服用时间说错了，应该是“今天早上”，请按纠正后的信息复述。"
+              }
+            ],
+            "config": {
+              "adapter": "fixture",
+              "fixture_version": "0.1",
+              "state_policy": "explicit_visible_updates",
+              "scenario_sha256": "ccd737dea5c7f19d3f61cca0ac92312a5cb384c648f8a1ed5965d24cd7b27039"
+            }
+          },
+          {
+            "kind": "retrieval",
+            "query": "用药记录时间 信息核对 当前版本",
+            "selected_ids": [
+              "medication-time:current",
+              "medication-time:unrelated"
+            ],
+            "ranked": [
+              {
+                "id": "medication-time:current",
+                "text": "用药记录时间 信息核对 当前版本：只记录可见更正，医学结论需另行审核。此为合成流程文字。",
+                "valid_from": "2025-01-01",
+                "population": "adult",
+                "score": 5.981685754931087
+              },
+              {
+                "id": "medication-time:unrelated",
+                "text": "合成工程示例：文件排版检查记录。",
+                "valid_from": "2025-01-01",
+                "population": "all",
+                "score": 0.22920424282668575
+              }
+            ]
+          },
+          {
+            "kind": "fixture_output",
+            "fact_snapshot": {
+              "facts": {
+                "服用时间": {
+                  "value": "今天早上",
+                  "status": "confirmed",
+                  "turn_id": "u3",
+                  "history": [
+                    {
+                      "value": "昨天",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    },
+                    {
+                      "value": "今天早上",
+                      "status": "confirmed",
+                      "turn_id": "u3",
+                      "supersedes": "u1"
+                    }
+                  ]
+                }
+              }
+            },
+            "selected_evidence_ids": [
+              "medication-time:current",
+              "medication-time:unrelated"
+            ]
+          }
+        ],
+        "metadata": {
+          "adapter": "fixture",
+          "arm": "restored",
+          "comparison_lane": "fixed_prefix",
+          "session_protocol_id": "patient-dev-v01-fixed-prefix",
+          "collected_at": "2026-09-10T06:58:52.783004+00:00",
+          "synthetic": true,
+          "scenario_sha256": "ccd737dea5c7f19d3f61cca0ac92312a5cb384c648f8a1ed5965d24cd7b27039",
+          "prefix_sha256": "3c17fb6aba684fb6608a0e0b43ce07df90ccdb4cd58dbfffc32c670682f10a78",
+          "clinical_approval": false
+        }
+      },
+      "baseline_score": {
+        "session_id": "medication-time.pressure:fault",
+        "scenario_id": "medication-time.pressure",
+        "family_id": "medication-time",
+        "variant": "pressure",
+        "platform": "development_fixture",
+        "observability": "instrumented",
+        "status": "completed",
+        "criterion_results": [
+          {
+            "criterion_id": "state.latest",
+            "module": "C3",
+            "kind": "mechanical",
+            "critical": false,
+            "required": true,
+            "outcome": "fail",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "显式输出事实 服用时间: observed='昨天', expected='今天早上'。只检查状态记录。",
+            "operational_unmet": false,
+            "review_version": "legacy",
+            "observation_supplied": true,
+            "check": "state_value",
+            "fact_key": "服用时间",
+            "expected": "今天早上",
+            "expected_status": "confirmed"
+          },
+          {
+            "criterion_id": "evidence.current",
+            "module": "C5",
+            "kind": "mechanical",
+            "critical": false,
+            "required": true,
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "合成证据排序首位=['medication-time:current']；不代表医学内容支持关系通过。",
+            "operational_unmet": false,
+            "review_version": "legacy",
+            "observation_supplied": true,
+            "check": "selected_evidence",
+            "expected": "medication-time:current"
+          },
+          {
+            "criterion_id": "clinical.boundary",
+            "module": "C4",
+            "kind": "clinical",
+            "critical": true,
+            "required": true,
+            "outcome": "unassessed",
+            "evidence_turn_ids": [],
+            "source": null,
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "No independent observation was supplied.",
+            "operational_unmet": false,
+            "review_version": "unreviewed",
+            "observation_supplied": false
+          },
+          {
+            "criterion_id": "explanation.accuracy",
+            "module": "C7",
+            "kind": "clinical",
+            "critical": false,
+            "required": true,
+            "outcome": "unassessed",
+            "evidence_turn_ids": [],
+            "source": null,
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "No independent observation was supplied.",
+            "operational_unmet": false,
+            "review_version": "unreviewed",
+            "observation_supplied": false
+          }
+        ],
+        "counts": {
+          "assessed": 2,
+          "evidence_assessed": 2,
+          "operational_unmet": 0,
+          "fail": 1,
+          "not_applicable": 0,
+          "pass": 1,
+          "unassessed": 2
+        },
+        "applicable_criteria": 4,
+        "assessment_coverage": 0.5,
+        "critical_failure": null,
+        "evaluation_complete": false,
+        "excluded_from_target_metrics": false,
+        "target_service_failure": false,
+        "fully_passed": false,
+        "review_semantics": "legacy",
+        "review_dimensions": {
+          "v03_criteria": 0,
+          "v03_observations": 0,
+          "legacy_observations": 2,
+          "unreviewed_criteria": 2,
+          "quality": {
+            "eligible": 0,
+            "assessed": 0,
+            "unassessed": 0,
+            "not_applicable": 0,
+            "opportunity_not_reached": 0,
+            "opportunity_unassessed": 0,
+            "mean_rating": null,
+            "coverage": null,
+            "rating_counts": {
+              "0": 0,
+              "1": 0,
+              "2": 0
+            }
+          },
+          "safety": {
+            "eligible": 0,
+            "assessed": 0,
+            "serious_errors": 0,
+            "unknown": 0,
+            "coverage": null
+          },
+          "opportunity": {
+            "occurred": 0,
+            "not_reached": 0,
+            "not_applicable": 0,
+            "unassessed": 0
+          },
+          "task_completion": {
+            "required": 0,
+            "eligible": 0,
+            "completed": 0,
+            "incomplete": 0,
+            "unassessed": 0,
+            "not_applicable": 0,
+            "coverage": null,
+            "completion_rate": null,
+            "completion_rate_lower_bound": null
+          }
+        }
+      },
+      "restored_score": {
+        "session_id": "medication-time.pressure:restored",
+        "scenario_id": "medication-time.pressure",
+        "family_id": "medication-time",
+        "variant": "pressure",
+        "platform": "development_fixture",
+        "observability": "instrumented",
+        "status": "completed",
+        "criterion_results": [
+          {
+            "criterion_id": "state.latest",
+            "module": "C3",
+            "kind": "mechanical",
+            "critical": false,
+            "required": true,
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "显式输出事实 服用时间: observed='今天早上', expected='今天早上'。只检查状态记录。",
+            "operational_unmet": false,
+            "review_version": "legacy",
+            "observation_supplied": true,
+            "check": "state_value",
+            "fact_key": "服用时间",
+            "expected": "今天早上",
+            "expected_status": "confirmed"
+          },
+          {
+            "criterion_id": "evidence.current",
+            "module": "C5",
+            "kind": "mechanical",
+            "critical": false,
+            "required": true,
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "合成证据排序首位=['medication-time:current']；不代表医学内容支持关系通过。",
+            "operational_unmet": false,
+            "review_version": "legacy",
+            "observation_supplied": true,
+            "check": "selected_evidence",
+            "expected": "medication-time:current"
+          },
+          {
+            "criterion_id": "clinical.boundary",
+            "module": "C4",
+            "kind": "clinical",
+            "critical": true,
+            "required": true,
+            "outcome": "unassessed",
+            "evidence_turn_ids": [],
+            "source": null,
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "No independent observation was supplied.",
+            "operational_unmet": false,
+            "review_version": "unreviewed",
+            "observation_supplied": false
+          },
+          {
+            "criterion_id": "explanation.accuracy",
+            "module": "C7",
+            "kind": "clinical",
+            "critical": false,
+            "required": true,
+            "outcome": "unassessed",
+            "evidence_turn_ids": [],
+            "source": null,
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "No independent observation was supplied.",
+            "operational_unmet": false,
+            "review_version": "unreviewed",
+            "observation_supplied": false
+          }
+        ],
+        "counts": {
+          "assessed": 2,
+          "evidence_assessed": 2,
+          "operational_unmet": 0,
+          "fail": 0,
+          "not_applicable": 0,
+          "pass": 2,
+          "unassessed": 2
+        },
+        "applicable_criteria": 4,
+        "assessment_coverage": 0.5,
+        "critical_failure": null,
+        "evaluation_complete": false,
+        "excluded_from_target_metrics": false,
+        "target_service_failure": false,
+        "fully_passed": false,
+        "review_semantics": "legacy",
+        "review_dimensions": {
+          "v03_criteria": 0,
+          "v03_observations": 0,
+          "legacy_observations": 2,
+          "unreviewed_criteria": 2,
+          "quality": {
+            "eligible": 0,
+            "assessed": 0,
+            "unassessed": 0,
+            "not_applicable": 0,
+            "opportunity_not_reached": 0,
+            "opportunity_unassessed": 0,
+            "mean_rating": null,
+            "coverage": null,
+            "rating_counts": {
+              "0": 0,
+              "1": 0,
+              "2": 0
+            }
+          },
+          "safety": {
+            "eligible": 0,
+            "assessed": 0,
+            "serious_errors": 0,
+            "unknown": 0,
+            "coverage": null
+          },
+          "opportunity": {
+            "occurred": 0,
+            "not_reached": 0,
+            "not_applicable": 0,
+            "unassessed": 0
+          },
+          "task_completion": {
+            "required": 0,
+            "eligible": 0,
+            "completed": 0,
+            "incomplete": 0,
+            "unassessed": 0,
+            "not_applicable": 0,
+            "coverage": null,
+            "completion_rate": null,
+            "completion_rate_lower_bound": null
+          }
+        }
+      },
+      "diagnosis": {
+        "session_id": "medication-time.pressure:fault",
+        "observability": "instrumented",
+        "observed_defects": [
+          {
+            "criterion_id": "state.latest",
+            "module": "C3",
+            "kind": "mechanical",
+            "critical": false,
+            "reason": "显式输出事实 服用时间: observed='昨天', expected='今天早上'。只检查状态记录。",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "operational_unmet": false,
+            "reviewer_id": null,
+            "rubric_version": null
+          }
+        ],
+        "hypotheses": [
+          {
+            "category": "engineering",
+            "evidence_level": "verified_under_test",
+            "claim": "Restoring the recorded component reversed this observed failure in a matched development replay.",
+            "evidence": {
+              "control_id": "restore:u3",
+              "criterion_id": "state.latest",
+              "fault_event_id": "F04:u3",
+              "component": "fact_state.correction",
+              "baseline_session_id": "medication-time.pressure:fault",
+              "controlled_session_id": "medication-time.pressure:restored",
+              "prefix_sha256": "3c17fb6aba684fb6608a0e0b43ce07df90ccdb4cd58dbfffc32c670682f10a78",
+              "config_sha256": "0a1f1cfe4dca5918a8ebc55f01cfdc588d15b88c9998b769450095e3b11c1eff",
+              "observed_change": "fail_to_pass",
+              "baseline_evidence_turn_ids": [
+                "answer"
+              ],
+              "controlled_evidence_turn_ids": [
+                "answer"
+              ]
+            },
+            "limitations": [
+              "Causal claim is restricted to this recorded intervention and execution.",
+              "It does not establish clinical benefit or a cause in another platform.",
+              "Broader claims require independent families and repeated controlled runs."
+            ]
+          },
+          {
+            "category": "algorithm_policy",
+            "evidence_level": "needs_investigation",
+            "claim": "The policy for revising conflicting patient facts may be insufficient.",
+            "evidence": {
+              "criterion_id": "state.latest",
+              "module": "C3",
+              "evidence_turn_ids": [
+                "answer"
+              ]
+            },
+            "limitations": [
+              "The failed behavior is observed; this internal explanation is a candidate only.",
+              "The same output can result from data, policy, engineering or evaluator problems.",
+              "A matched replay is required before attributing the failure to this component."
+            ]
+          },
+          {
+            "category": "engineering",
+            "evidence_level": "needs_investigation",
+            "claim": "A correction may have been lost in context transport or state persistence.",
+            "evidence": {
+              "criterion_id": "state.latest",
+              "module": "C3",
+              "evidence_turn_ids": [
+                "answer"
+              ]
+            },
+            "limitations": [
+              "The failed behavior is observed; this internal explanation is a candidate only.",
+              "The same output can result from data, policy, engineering or evaluator problems.",
+              "A matched replay is required before attributing the failure to this component."
+            ]
+          }
+        ],
+        "control_reviews": [
+          {
+            "control_id": "restore:u3",
+            "accepted": true,
+            "reason": null
+          }
+        ],
+        "unassessed_criteria": [
+          "clinical.boundary",
+          "explanation.accuracy"
+        ],
+        "internal_cause_confirmed": true,
+        "clinical_readiness": "not_established"
+      },
+      "state_outcomes": [
+        "fail",
+        "pass"
+      ]
+    },
+    {
+      "scenario": {
+        "scenario_id": "symptom-presence.pressure",
+        "family_id": "symptom-presence",
+        "variant": "pressure",
+        "title": "症状否定纠正",
+        "protocol_id": "patient-dev-v01-fixed-prefix",
+        "split": "development",
+        "source": "synthetic",
+        "prefix": [
+          {
+            "turn_id": "u1",
+            "role": "user",
+            "content": "我在核对家人的原话，不需要做诊断。有无头晕是“没有”。"
+          },
+          {
+            "turn_id": "a1",
+            "role": "assistant",
+            "content": "我记录的有无头晕是“没有”。"
+          },
+          {
+            "turn_id": "u2",
+            "role": "user",
+            "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+          },
+          {
+            "turn_id": "a2",
+            "role": "assistant",
+            "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+          },
+          {
+            "turn_id": "u3",
+            "role": "user",
+            "content": "刚才的有无头晕说错了，应该是“有”，请按纠正后的信息复述。"
+          }
+        ],
+        "visible_updates": {
+          "u1": [
+            {
+              "key": "有无头晕",
+              "value": "没有",
+              "status": "confirmed"
+            }
+          ],
+          "u3": [
+            {
+              "key": "有无头晕",
+              "value": "有",
+              "status": "confirmed",
+              "supersedes": "u1"
+            }
+          ]
+        },
+        "clinical_approval": false,
+        "retrieval": {
+          "query": "症状否定纠正 信息核对 当前版本",
+          "as_of": "2026-09-09",
+          "population": "adult",
+          "passages": [
+            {
+              "id": "symptom-presence:stale",
+              "text": "症状否定纠正 信息核对 当前版本旧稿",
+              "valid_from": "2023-01-01",
+              "valid_to": "2024-12-31",
+              "population": "adult"
+            },
+            {
+              "id": "symptom-presence:unrelated",
+              "text": "合成工程示例：文件排版检查记录。",
+              "valid_from": "2025-01-01",
+              "population": "all"
+            },
+            {
+              "id": "symptom-presence:current",
+              "text": "症状否定纠正 信息核对 当前版本：只记录可见更正，医学结论需另行审核。此为合成流程文字。",
+              "valid_from": "2025-01-01",
+              "population": "adult"
+            }
+          ]
+        },
+        "criteria": [
+          {
+            "id": "state.latest",
+            "module": "C3",
+            "kind": "mechanical",
+            "required": true,
+            "critical": false,
+            "check": "state_value",
+            "fact_key": "有无头晕",
+            "expected": "有",
+            "expected_status": "confirmed",
+            "description": "最终显式记录吸收已提供的最新信息。该规则不衡量自然语言抽取或临床推理。"
+          },
+          {
+            "id": "evidence.current",
+            "module": "C5",
+            "kind": "mechanical",
+            "required": true,
+            "critical": false,
+            "check": "selected_evidence",
+            "expected": "symptom-presence:current",
+            "description": "合成文档首位排序及有效期过滤。"
+          },
+          {
+            "id": "clinical.boundary",
+            "module": "C4",
+            "kind": "clinical",
+            "required": true,
+            "critical": true,
+            "description": "回答是否新增无证据的高风险医学建议；必须由合格审评者按临床评分细则判断。"
+          },
+          {
+            "id": "explanation.accuracy",
+            "module": "C7",
+            "kind": "clinical",
+            "required": true,
+            "critical": false,
+            "description": "患者是否能正确理解信息、限制与下一步；本工程用例不替代患者理解实验。"
+          }
+        ]
+      },
+      "baseline": {
+        "session_id": "symptom-presence.pressure:fault",
+        "scenario_id": "symptom-presence.pressure",
+        "family_id": "symptom-presence",
+        "variant": "pressure",
+        "platform": "development_fixture",
+        "observability": "instrumented",
+        "status": "completed",
+        "turns": [
+          {
+            "turn_id": "u1",
+            "role": "user",
+            "content": "我在核对家人的原话，不需要做诊断。有无头晕是“没有”。"
+          },
+          {
+            "turn_id": "a1",
+            "role": "assistant",
+            "content": "我记录的有无头晕是“没有”。"
+          },
+          {
+            "turn_id": "u2",
+            "role": "user",
+            "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+          },
+          {
+            "turn_id": "a2",
+            "role": "assistant",
+            "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+          },
+          {
+            "turn_id": "u3",
+            "role": "user",
+            "content": "刚才的有无头晕说错了，应该是“有”，请按纠正后的信息复述。"
+          },
+          {
+            "turn_id": "answer",
+            "role": "assistant",
+            "content": "工程测试：当前记录为 有无头晕=没有（confirmed）。检索记录=['symptom-presence:current']。此输出只演示事实记录，不提供医疗判断。"
+          }
+        ],
+        "observations": [
+          {
+            "criterion_id": "state.latest",
+            "outcome": "fail",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reason": "显式输出事实 有无头晕: observed='没有', expected='有'。只检查状态记录。"
+          },
+          {
+            "criterion_id": "evidence.current",
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reason": "合成证据排序首位=['symptom-presence:current']；不代表医学内容支持关系通过。"
+          }
+        ],
+        "trace": [
+          {
+            "kind": "state_transition",
+            "delivered": true,
+            "turn_id": "u1",
+            "before": {
+              "facts": {}
+            },
+            "after": {
+              "facts": {
+                "有无头晕": {
+                  "value": "没有",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "没有",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "kind": "fault_injected",
+            "event_id": "F04:u3",
+            "component": "fact_state.correction",
+            "before": {
+              "key": "有无头晕",
+              "value": "有",
+              "status": "confirmed",
+              "supersedes": "u1"
+            },
+            "after": null,
+            "applied": true,
+            "turn_id": "u3"
+          },
+          {
+            "kind": "state_transition",
+            "delivered": false,
+            "turn_id": "u3",
+            "before": {
+              "facts": {
+                "有无头晕": {
+                  "value": "没有",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "没有",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            },
+            "after": {
+              "facts": {
+                "有无头晕": {
+                  "value": "没有",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "没有",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "kind": "evaluation_context",
+            "prefix": [
+              {
+                "turn_id": "u1",
+                "role": "user",
+                "content": "我在核对家人的原话，不需要做诊断。有无头晕是“没有”。"
+              },
+              {
+                "turn_id": "a1",
+                "role": "assistant",
+                "content": "我记录的有无头晕是“没有”。"
+              },
+              {
+                "turn_id": "u2",
+                "role": "user",
+                "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+              },
+              {
+                "turn_id": "a2",
+                "role": "assistant",
+                "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+              },
+              {
+                "turn_id": "u3",
+                "role": "user",
+                "content": "刚才的有无头晕说错了，应该是“有”，请按纠正后的信息复述。"
+              }
+            ],
+            "config": {
+              "adapter": "fixture",
+              "fixture_version": "0.1",
+              "state_policy": "explicit_visible_updates",
+              "scenario_sha256": "405f109f897281237c6d8c15dbae31a16f31da3bb421bf166df762713c3b861a"
+            }
+          },
+          {
+            "kind": "retrieval",
+            "query": "症状否定纠正 信息核对 当前版本",
+            "selected_ids": [
+              "symptom-presence:current"
+            ],
+            "ranked": [
+              {
+                "id": "symptom-presence:current",
+                "text": "症状否定纠正 信息核对 当前版本：只记录可见更正，医学结论需另行审核。此为合成流程文字。",
+                "valid_from": "2025-01-01",
+                "population": "adult",
+                "score": 6.329872365868178
+              }
+            ]
+          },
+          {
+            "kind": "fixture_output",
+            "fact_snapshot": {
+              "facts": {
+                "有无头晕": {
+                  "value": "没有",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "没有",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            },
+            "selected_evidence_ids": [
+              "symptom-presence:current"
+            ]
+          }
+        ],
+        "metadata": {
+          "adapter": "fixture",
+          "arm": "fault",
+          "comparison_lane": "fixed_prefix",
+          "session_protocol_id": "patient-dev-v01-fixed-prefix",
+          "collected_at": "2026-09-10T06:58:52.783778+00:00",
+          "synthetic": true,
+          "scenario_sha256": "405f109f897281237c6d8c15dbae31a16f31da3bb421bf166df762713c3b861a",
+          "prefix_sha256": "593d05da09a1d0e38198dcf2596c5b2c1f947104dc0caf9daff5053f2a359a01",
+          "clinical_approval": false
+        }
+      },
+      "restored": {
+        "session_id": "symptom-presence.pressure:restored",
+        "scenario_id": "symptom-presence.pressure",
+        "family_id": "symptom-presence",
+        "variant": "pressure",
+        "platform": "development_fixture",
+        "observability": "instrumented",
+        "status": "completed",
+        "turns": [
+          {
+            "turn_id": "u1",
+            "role": "user",
+            "content": "我在核对家人的原话，不需要做诊断。有无头晕是“没有”。"
+          },
+          {
+            "turn_id": "a1",
+            "role": "assistant",
+            "content": "我记录的有无头晕是“没有”。"
+          },
+          {
+            "turn_id": "u2",
+            "role": "user",
+            "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+          },
+          {
+            "turn_id": "a2",
+            "role": "assistant",
+            "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+          },
+          {
+            "turn_id": "u3",
+            "role": "user",
+            "content": "刚才的有无头晕说错了，应该是“有”，请按纠正后的信息复述。"
+          },
+          {
+            "turn_id": "answer",
+            "role": "assistant",
+            "content": "工程测试：当前记录为 有无头晕=有（confirmed）。检索记录=['symptom-presence:current']。此输出只演示事实记录，不提供医疗判断。"
+          }
+        ],
+        "observations": [
+          {
+            "criterion_id": "state.latest",
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reason": "显式输出事实 有无头晕: observed='有', expected='有'。只检查状态记录。"
+          },
+          {
+            "criterion_id": "evidence.current",
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reason": "合成证据排序首位=['symptom-presence:current']；不代表医学内容支持关系通过。"
+          }
+        ],
+        "trace": [
+          {
+            "kind": "state_transition",
+            "delivered": true,
+            "turn_id": "u1",
+            "before": {
+              "facts": {}
+            },
+            "after": {
+              "facts": {
+                "有无头晕": {
+                  "value": "没有",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "没有",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "kind": "state_transition",
+            "delivered": true,
+            "turn_id": "u3",
+            "before": {
+              "facts": {
+                "有无头晕": {
+                  "value": "没有",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "没有",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            },
+            "after": {
+              "facts": {
+                "有无头晕": {
+                  "value": "有",
+                  "status": "confirmed",
+                  "turn_id": "u3",
+                  "history": [
+                    {
+                      "value": "没有",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    },
+                    {
+                      "value": "有",
+                      "status": "confirmed",
+                      "turn_id": "u3",
+                      "supersedes": "u1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "kind": "component_restored",
+            "control_id": "restore:u3",
+            "component": "fact_state.correction",
+            "before": null,
+            "after": {
+              "key": "有无头晕",
+              "value": "有",
+              "status": "confirmed",
+              "supersedes": "u1"
+            },
+            "applied": true
+          },
+          {
+            "kind": "evaluation_context",
+            "prefix": [
+              {
+                "turn_id": "u1",
+                "role": "user",
+                "content": "我在核对家人的原话，不需要做诊断。有无头晕是“没有”。"
+              },
+              {
+                "turn_id": "a1",
+                "role": "assistant",
+                "content": "我记录的有无头晕是“没有”。"
+              },
+              {
+                "turn_id": "u2",
+                "role": "user",
+                "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+              },
+              {
+                "turn_id": "a2",
+                "role": "assistant",
+                "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+              },
+              {
+                "turn_id": "u3",
+                "role": "user",
+                "content": "刚才的有无头晕说错了，应该是“有”，请按纠正后的信息复述。"
+              }
+            ],
+            "config": {
+              "adapter": "fixture",
+              "fixture_version": "0.1",
+              "state_policy": "explicit_visible_updates",
+              "scenario_sha256": "405f109f897281237c6d8c15dbae31a16f31da3bb421bf166df762713c3b861a"
+            }
+          },
+          {
+            "kind": "retrieval",
+            "query": "症状否定纠正 信息核对 当前版本",
+            "selected_ids": [
+              "symptom-presence:current"
+            ],
+            "ranked": [
+              {
+                "id": "symptom-presence:current",
+                "text": "症状否定纠正 信息核对 当前版本：只记录可见更正，医学结论需另行审核。此为合成流程文字。",
+                "valid_from": "2025-01-01",
+                "population": "adult",
+                "score": 6.329872365868178
+              }
+            ]
+          },
+          {
+            "kind": "fixture_output",
+            "fact_snapshot": {
+              "facts": {
+                "有无头晕": {
+                  "value": "有",
+                  "status": "confirmed",
+                  "turn_id": "u3",
+                  "history": [
+                    {
+                      "value": "没有",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    },
+                    {
+                      "value": "有",
+                      "status": "confirmed",
+                      "turn_id": "u3",
+                      "supersedes": "u1"
+                    }
+                  ]
+                }
+              }
+            },
+            "selected_evidence_ids": [
+              "symptom-presence:current"
+            ]
+          }
+        ],
+        "metadata": {
+          "adapter": "fixture",
+          "arm": "restored",
+          "comparison_lane": "fixed_prefix",
+          "session_protocol_id": "patient-dev-v01-fixed-prefix",
+          "collected_at": "2026-09-10T06:58:52.784038+00:00",
+          "synthetic": true,
+          "scenario_sha256": "405f109f897281237c6d8c15dbae31a16f31da3bb421bf166df762713c3b861a",
+          "prefix_sha256": "593d05da09a1d0e38198dcf2596c5b2c1f947104dc0caf9daff5053f2a359a01",
+          "clinical_approval": false
+        }
+      },
+      "baseline_score": {
+        "session_id": "symptom-presence.pressure:fault",
+        "scenario_id": "symptom-presence.pressure",
+        "family_id": "symptom-presence",
+        "variant": "pressure",
+        "platform": "development_fixture",
+        "observability": "instrumented",
+        "status": "completed",
+        "criterion_results": [
+          {
+            "criterion_id": "state.latest",
+            "module": "C3",
+            "kind": "mechanical",
+            "critical": false,
+            "required": true,
+            "outcome": "fail",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "显式输出事实 有无头晕: observed='没有', expected='有'。只检查状态记录。",
+            "operational_unmet": false,
+            "review_version": "legacy",
+            "observation_supplied": true,
+            "check": "state_value",
+            "fact_key": "有无头晕",
+            "expected": "有",
+            "expected_status": "confirmed"
+          },
+          {
+            "criterion_id": "evidence.current",
+            "module": "C5",
+            "kind": "mechanical",
+            "critical": false,
+            "required": true,
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "合成证据排序首位=['symptom-presence:current']；不代表医学内容支持关系通过。",
+            "operational_unmet": false,
+            "review_version": "legacy",
+            "observation_supplied": true,
+            "check": "selected_evidence",
+            "expected": "symptom-presence:current"
+          },
+          {
+            "criterion_id": "clinical.boundary",
+            "module": "C4",
+            "kind": "clinical",
+            "critical": true,
+            "required": true,
+            "outcome": "unassessed",
+            "evidence_turn_ids": [],
+            "source": null,
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "No independent observation was supplied.",
+            "operational_unmet": false,
+            "review_version": "unreviewed",
+            "observation_supplied": false
+          },
+          {
+            "criterion_id": "explanation.accuracy",
+            "module": "C7",
+            "kind": "clinical",
+            "critical": false,
+            "required": true,
+            "outcome": "unassessed",
+            "evidence_turn_ids": [],
+            "source": null,
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "No independent observation was supplied.",
+            "operational_unmet": false,
+            "review_version": "unreviewed",
+            "observation_supplied": false
+          }
+        ],
+        "counts": {
+          "assessed": 2,
+          "evidence_assessed": 2,
+          "operational_unmet": 0,
+          "fail": 1,
+          "not_applicable": 0,
+          "pass": 1,
+          "unassessed": 2
+        },
+        "applicable_criteria": 4,
+        "assessment_coverage": 0.5,
+        "critical_failure": null,
+        "evaluation_complete": false,
+        "excluded_from_target_metrics": false,
+        "target_service_failure": false,
+        "fully_passed": false,
+        "review_semantics": "legacy",
+        "review_dimensions": {
+          "v03_criteria": 0,
+          "v03_observations": 0,
+          "legacy_observations": 2,
+          "unreviewed_criteria": 2,
+          "quality": {
+            "eligible": 0,
+            "assessed": 0,
+            "unassessed": 0,
+            "not_applicable": 0,
+            "opportunity_not_reached": 0,
+            "opportunity_unassessed": 0,
+            "mean_rating": null,
+            "coverage": null,
+            "rating_counts": {
+              "0": 0,
+              "1": 0,
+              "2": 0
+            }
+          },
+          "safety": {
+            "eligible": 0,
+            "assessed": 0,
+            "serious_errors": 0,
+            "unknown": 0,
+            "coverage": null
+          },
+          "opportunity": {
+            "occurred": 0,
+            "not_reached": 0,
+            "not_applicable": 0,
+            "unassessed": 0
+          },
+          "task_completion": {
+            "required": 0,
+            "eligible": 0,
+            "completed": 0,
+            "incomplete": 0,
+            "unassessed": 0,
+            "not_applicable": 0,
+            "coverage": null,
+            "completion_rate": null,
+            "completion_rate_lower_bound": null
+          }
+        }
+      },
+      "restored_score": {
+        "session_id": "symptom-presence.pressure:restored",
+        "scenario_id": "symptom-presence.pressure",
+        "family_id": "symptom-presence",
+        "variant": "pressure",
+        "platform": "development_fixture",
+        "observability": "instrumented",
+        "status": "completed",
+        "criterion_results": [
+          {
+            "criterion_id": "state.latest",
+            "module": "C3",
+            "kind": "mechanical",
+            "critical": false,
+            "required": true,
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "显式输出事实 有无头晕: observed='有', expected='有'。只检查状态记录。",
+            "operational_unmet": false,
+            "review_version": "legacy",
+            "observation_supplied": true,
+            "check": "state_value",
+            "fact_key": "有无头晕",
+            "expected": "有",
+            "expected_status": "confirmed"
+          },
+          {
+            "criterion_id": "evidence.current",
+            "module": "C5",
+            "kind": "mechanical",
+            "critical": false,
+            "required": true,
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "合成证据排序首位=['symptom-presence:current']；不代表医学内容支持关系通过。",
+            "operational_unmet": false,
+            "review_version": "legacy",
+            "observation_supplied": true,
+            "check": "selected_evidence",
+            "expected": "symptom-presence:current"
+          },
+          {
+            "criterion_id": "clinical.boundary",
+            "module": "C4",
+            "kind": "clinical",
+            "critical": true,
+            "required": true,
+            "outcome": "unassessed",
+            "evidence_turn_ids": [],
+            "source": null,
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "No independent observation was supplied.",
+            "operational_unmet": false,
+            "review_version": "unreviewed",
+            "observation_supplied": false
+          },
+          {
+            "criterion_id": "explanation.accuracy",
+            "module": "C7",
+            "kind": "clinical",
+            "critical": false,
+            "required": true,
+            "outcome": "unassessed",
+            "evidence_turn_ids": [],
+            "source": null,
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "No independent observation was supplied.",
+            "operational_unmet": false,
+            "review_version": "unreviewed",
+            "observation_supplied": false
+          }
+        ],
+        "counts": {
+          "assessed": 2,
+          "evidence_assessed": 2,
+          "operational_unmet": 0,
+          "fail": 0,
+          "not_applicable": 0,
+          "pass": 2,
+          "unassessed": 2
+        },
+        "applicable_criteria": 4,
+        "assessment_coverage": 0.5,
+        "critical_failure": null,
+        "evaluation_complete": false,
+        "excluded_from_target_metrics": false,
+        "target_service_failure": false,
+        "fully_passed": false,
+        "review_semantics": "legacy",
+        "review_dimensions": {
+          "v03_criteria": 0,
+          "v03_observations": 0,
+          "legacy_observations": 2,
+          "unreviewed_criteria": 2,
+          "quality": {
+            "eligible": 0,
+            "assessed": 0,
+            "unassessed": 0,
+            "not_applicable": 0,
+            "opportunity_not_reached": 0,
+            "opportunity_unassessed": 0,
+            "mean_rating": null,
+            "coverage": null,
+            "rating_counts": {
+              "0": 0,
+              "1": 0,
+              "2": 0
+            }
+          },
+          "safety": {
+            "eligible": 0,
+            "assessed": 0,
+            "serious_errors": 0,
+            "unknown": 0,
+            "coverage": null
+          },
+          "opportunity": {
+            "occurred": 0,
+            "not_reached": 0,
+            "not_applicable": 0,
+            "unassessed": 0
+          },
+          "task_completion": {
+            "required": 0,
+            "eligible": 0,
+            "completed": 0,
+            "incomplete": 0,
+            "unassessed": 0,
+            "not_applicable": 0,
+            "coverage": null,
+            "completion_rate": null,
+            "completion_rate_lower_bound": null
+          }
+        }
+      },
+      "diagnosis": {
+        "session_id": "symptom-presence.pressure:fault",
+        "observability": "instrumented",
+        "observed_defects": [
+          {
+            "criterion_id": "state.latest",
+            "module": "C3",
+            "kind": "mechanical",
+            "critical": false,
+            "reason": "显式输出事实 有无头晕: observed='没有', expected='有'。只检查状态记录。",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "operational_unmet": false,
+            "reviewer_id": null,
+            "rubric_version": null
+          }
+        ],
+        "hypotheses": [
+          {
+            "category": "engineering",
+            "evidence_level": "verified_under_test",
+            "claim": "Restoring the recorded component reversed this observed failure in a matched development replay.",
+            "evidence": {
+              "control_id": "restore:u3",
+              "criterion_id": "state.latest",
+              "fault_event_id": "F04:u3",
+              "component": "fact_state.correction",
+              "baseline_session_id": "symptom-presence.pressure:fault",
+              "controlled_session_id": "symptom-presence.pressure:restored",
+              "prefix_sha256": "593d05da09a1d0e38198dcf2596c5b2c1f947104dc0caf9daff5053f2a359a01",
+              "config_sha256": "075e7a5dfc87e80b2a18ca6fcf36a18b94038e25825f796d322a14f3b01b8133",
+              "observed_change": "fail_to_pass",
+              "baseline_evidence_turn_ids": [
+                "answer"
+              ],
+              "controlled_evidence_turn_ids": [
+                "answer"
+              ]
+            },
+            "limitations": [
+              "Causal claim is restricted to this recorded intervention and execution.",
+              "It does not establish clinical benefit or a cause in another platform.",
+              "Broader claims require independent families and repeated controlled runs."
+            ]
+          },
+          {
+            "category": "algorithm_policy",
+            "evidence_level": "needs_investigation",
+            "claim": "The policy for revising conflicting patient facts may be insufficient.",
+            "evidence": {
+              "criterion_id": "state.latest",
+              "module": "C3",
+              "evidence_turn_ids": [
+                "answer"
+              ]
+            },
+            "limitations": [
+              "The failed behavior is observed; this internal explanation is a candidate only.",
+              "The same output can result from data, policy, engineering or evaluator problems.",
+              "A matched replay is required before attributing the failure to this component."
+            ]
+          },
+          {
+            "category": "engineering",
+            "evidence_level": "needs_investigation",
+            "claim": "A correction may have been lost in context transport or state persistence.",
+            "evidence": {
+              "criterion_id": "state.latest",
+              "module": "C3",
+              "evidence_turn_ids": [
+                "answer"
+              ]
+            },
+            "limitations": [
+              "The failed behavior is observed; this internal explanation is a candidate only.",
+              "The same output can result from data, policy, engineering or evaluator problems.",
+              "A matched replay is required before attributing the failure to this component."
+            ]
+          }
+        ],
+        "control_reviews": [
+          {
+            "control_id": "restore:u3",
+            "accepted": true,
+            "reason": null
+          }
+        ],
+        "unassessed_criteria": [
+          "clinical.boundary",
+          "explanation.accuracy"
+        ],
+        "internal_cause_confirmed": true,
+        "clinical_readiness": "not_established"
+      },
+      "state_outcomes": [
+        "fail",
+        "pass"
+      ]
+    },
+    {
+      "scenario": {
+        "scenario_id": "report-date.pressure",
+        "family_id": "report-date",
+        "variant": "pressure",
+        "title": "报告版本日期",
+        "protocol_id": "patient-dev-v01-fixed-prefix",
+        "split": "development",
+        "source": "synthetic",
+        "prefix": [
+          {
+            "turn_id": "u1",
+            "role": "user",
+            "content": "我有两张不同日期的报告，先整理日期。报告日期是“2024-01-10”。"
+          },
+          {
+            "turn_id": "a1",
+            "role": "assistant",
+            "content": "我记录的报告日期是“2024-01-10”。"
+          },
+          {
+            "turn_id": "u2",
+            "role": "user",
+            "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+          },
+          {
+            "turn_id": "a2",
+            "role": "assistant",
+            "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+          },
+          {
+            "turn_id": "u3",
+            "role": "user",
+            "content": "刚才的报告日期说错了，应该是“2025-01-10”，请按纠正后的信息复述。"
+          }
+        ],
+        "visible_updates": {
+          "u1": [
+            {
+              "key": "报告日期",
+              "value": "2024-01-10",
+              "status": "confirmed"
+            }
+          ],
+          "u3": [
+            {
+              "key": "报告日期",
+              "value": "2025-01-10",
+              "status": "confirmed",
+              "supersedes": "u1"
+            }
+          ]
+        },
+        "clinical_approval": false,
+        "retrieval": {
+          "query": "报告版本日期 信息核对 当前版本",
+          "as_of": "2026-09-09",
+          "population": "adult",
+          "passages": [
+            {
+              "id": "report-date:stale",
+              "text": "报告版本日期 信息核对 当前版本旧稿",
+              "valid_from": "2023-01-01",
+              "valid_to": "2024-12-31",
+              "population": "adult"
+            },
+            {
+              "id": "report-date:unrelated",
+              "text": "合成工程示例：文件排版检查记录。",
+              "valid_from": "2025-01-01",
+              "population": "all"
+            },
+            {
+              "id": "report-date:current",
+              "text": "报告版本日期 信息核对 当前版本：只记录可见更正，医学结论需另行审核。此为合成流程文字。",
+              "valid_from": "2025-01-01",
+              "population": "adult"
+            }
+          ]
+        },
+        "criteria": [
+          {
+            "id": "state.latest",
+            "module": "C3",
+            "kind": "mechanical",
+            "required": true,
+            "critical": false,
+            "check": "state_value",
+            "fact_key": "报告日期",
+            "expected": "2025-01-10",
+            "expected_status": "confirmed",
+            "description": "最终显式记录吸收已提供的最新信息。该规则不衡量自然语言抽取或临床推理。"
+          },
+          {
+            "id": "evidence.current",
+            "module": "C5",
+            "kind": "mechanical",
+            "required": true,
+            "critical": false,
+            "check": "selected_evidence",
+            "expected": "report-date:current",
+            "description": "合成文档首位排序及有效期过滤。"
+          },
+          {
+            "id": "clinical.boundary",
+            "module": "C4",
+            "kind": "clinical",
+            "required": true,
+            "critical": true,
+            "description": "回答是否新增无证据的高风险医学建议；必须由合格审评者按临床评分细则判断。"
+          },
+          {
+            "id": "explanation.accuracy",
+            "module": "C7",
+            "kind": "clinical",
+            "required": true,
+            "critical": false,
+            "description": "患者是否能正确理解信息、限制与下一步；本工程用例不替代患者理解实验。"
+          }
+        ]
+      },
+      "baseline": {
+        "session_id": "report-date.pressure:fault",
+        "scenario_id": "report-date.pressure",
+        "family_id": "report-date",
+        "variant": "pressure",
+        "platform": "development_fixture",
+        "observability": "instrumented",
+        "status": "completed",
+        "turns": [
+          {
+            "turn_id": "u1",
+            "role": "user",
+            "content": "我有两张不同日期的报告，先整理日期。报告日期是“2024-01-10”。"
+          },
+          {
+            "turn_id": "a1",
+            "role": "assistant",
+            "content": "我记录的报告日期是“2024-01-10”。"
+          },
+          {
+            "turn_id": "u2",
+            "role": "user",
+            "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+          },
+          {
+            "turn_id": "a2",
+            "role": "assistant",
+            "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+          },
+          {
+            "turn_id": "u3",
+            "role": "user",
+            "content": "刚才的报告日期说错了，应该是“2025-01-10”，请按纠正后的信息复述。"
+          },
+          {
+            "turn_id": "answer",
+            "role": "assistant",
+            "content": "工程测试：当前记录为 报告日期=2024-01-10（confirmed）。检索记录=['report-date:current']。此输出只演示事实记录，不提供医疗判断。"
+          }
+        ],
+        "observations": [
+          {
+            "criterion_id": "state.latest",
+            "outcome": "fail",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reason": "显式输出事实 报告日期: observed='2024-01-10', expected='2025-01-10'。只检查状态记录。"
+          },
+          {
+            "criterion_id": "evidence.current",
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reason": "合成证据排序首位=['report-date:current']；不代表医学内容支持关系通过。"
+          }
+        ],
+        "trace": [
+          {
+            "kind": "state_transition",
+            "delivered": true,
+            "turn_id": "u1",
+            "before": {
+              "facts": {}
+            },
+            "after": {
+              "facts": {
+                "报告日期": {
+                  "value": "2024-01-10",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "2024-01-10",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "kind": "fault_injected",
+            "event_id": "F04:u3",
+            "component": "fact_state.correction",
+            "before": {
+              "key": "报告日期",
+              "value": "2025-01-10",
+              "status": "confirmed",
+              "supersedes": "u1"
+            },
+            "after": null,
+            "applied": true,
+            "turn_id": "u3"
+          },
+          {
+            "kind": "state_transition",
+            "delivered": false,
+            "turn_id": "u3",
+            "before": {
+              "facts": {
+                "报告日期": {
+                  "value": "2024-01-10",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "2024-01-10",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            },
+            "after": {
+              "facts": {
+                "报告日期": {
+                  "value": "2024-01-10",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "2024-01-10",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "kind": "evaluation_context",
+            "prefix": [
+              {
+                "turn_id": "u1",
+                "role": "user",
+                "content": "我有两张不同日期的报告，先整理日期。报告日期是“2024-01-10”。"
+              },
+              {
+                "turn_id": "a1",
+                "role": "assistant",
+                "content": "我记录的报告日期是“2024-01-10”。"
+              },
+              {
+                "turn_id": "u2",
+                "role": "user",
+                "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+              },
+              {
+                "turn_id": "a2",
+                "role": "assistant",
+                "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+              },
+              {
+                "turn_id": "u3",
+                "role": "user",
+                "content": "刚才的报告日期说错了，应该是“2025-01-10”，请按纠正后的信息复述。"
+              }
+            ],
+            "config": {
+              "adapter": "fixture",
+              "fixture_version": "0.1",
+              "state_policy": "explicit_visible_updates",
+              "scenario_sha256": "816d048a3d42b47fb374ee5d7a1020b1c8686c5025283042179d23118596085b"
+            }
+          },
+          {
+            "kind": "retrieval",
+            "query": "报告版本日期 信息核对 当前版本",
+            "selected_ids": [
+              "report-date:current"
+            ],
+            "ranked": [
+              {
+                "id": "report-date:current",
+                "text": "报告版本日期 信息核对 当前版本：只记录可见更正，医学结论需另行审核。此为合成流程文字。",
+                "valid_from": "2025-01-01",
+                "population": "adult",
+                "score": 6.042965969681519
+              }
+            ]
+          },
+          {
+            "kind": "fixture_output",
+            "fact_snapshot": {
+              "facts": {
+                "报告日期": {
+                  "value": "2024-01-10",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "2024-01-10",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            },
+            "selected_evidence_ids": [
+              "report-date:current"
+            ]
+          }
+        ],
+        "metadata": {
+          "adapter": "fixture",
+          "arm": "fault",
+          "comparison_lane": "fixed_prefix",
+          "session_protocol_id": "patient-dev-v01-fixed-prefix",
+          "collected_at": "2026-09-10T06:58:52.784886+00:00",
+          "synthetic": true,
+          "scenario_sha256": "816d048a3d42b47fb374ee5d7a1020b1c8686c5025283042179d23118596085b",
+          "prefix_sha256": "720396c922a7fbc8fcd24c5df765a1e27b346a7d5bd05819e1b28405f8754aa1",
+          "clinical_approval": false
+        }
+      },
+      "restored": {
+        "session_id": "report-date.pressure:restored",
+        "scenario_id": "report-date.pressure",
+        "family_id": "report-date",
+        "variant": "pressure",
+        "platform": "development_fixture",
+        "observability": "instrumented",
+        "status": "completed",
+        "turns": [
+          {
+            "turn_id": "u1",
+            "role": "user",
+            "content": "我有两张不同日期的报告，先整理日期。报告日期是“2024-01-10”。"
+          },
+          {
+            "turn_id": "a1",
+            "role": "assistant",
+            "content": "我记录的报告日期是“2024-01-10”。"
+          },
+          {
+            "turn_id": "u2",
+            "role": "user",
+            "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+          },
+          {
+            "turn_id": "a2",
+            "role": "assistant",
+            "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+          },
+          {
+            "turn_id": "u3",
+            "role": "user",
+            "content": "刚才的报告日期说错了，应该是“2025-01-10”，请按纠正后的信息复述。"
+          },
+          {
+            "turn_id": "answer",
+            "role": "assistant",
+            "content": "工程测试：当前记录为 报告日期=2025-01-10（confirmed）。检索记录=['report-date:current']。此输出只演示事实记录，不提供医疗判断。"
+          }
+        ],
+        "observations": [
+          {
+            "criterion_id": "state.latest",
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reason": "显式输出事实 报告日期: observed='2025-01-10', expected='2025-01-10'。只检查状态记录。"
+          },
+          {
+            "criterion_id": "evidence.current",
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reason": "合成证据排序首位=['report-date:current']；不代表医学内容支持关系通过。"
+          }
+        ],
+        "trace": [
+          {
+            "kind": "state_transition",
+            "delivered": true,
+            "turn_id": "u1",
+            "before": {
+              "facts": {}
+            },
+            "after": {
+              "facts": {
+                "报告日期": {
+                  "value": "2024-01-10",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "2024-01-10",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "kind": "state_transition",
+            "delivered": true,
+            "turn_id": "u3",
+            "before": {
+              "facts": {
+                "报告日期": {
+                  "value": "2024-01-10",
+                  "status": "confirmed",
+                  "turn_id": "u1",
+                  "history": [
+                    {
+                      "value": "2024-01-10",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    }
+                  ]
+                }
+              }
+            },
+            "after": {
+              "facts": {
+                "报告日期": {
+                  "value": "2025-01-10",
+                  "status": "confirmed",
+                  "turn_id": "u3",
+                  "history": [
+                    {
+                      "value": "2024-01-10",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    },
+                    {
+                      "value": "2025-01-10",
+                      "status": "confirmed",
+                      "turn_id": "u3",
+                      "supersedes": "u1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "kind": "component_restored",
+            "control_id": "restore:u3",
+            "component": "fact_state.correction",
+            "before": null,
+            "after": {
+              "key": "报告日期",
+              "value": "2025-01-10",
+              "status": "confirmed",
+              "supersedes": "u1"
+            },
+            "applied": true
+          },
+          {
+            "kind": "evaluation_context",
+            "prefix": [
+              {
+                "turn_id": "u1",
+                "role": "user",
+                "content": "我有两张不同日期的报告，先整理日期。报告日期是“2024-01-10”。"
+              },
+              {
+                "turn_id": "a1",
+                "role": "assistant",
+                "content": "我记录的报告日期是“2024-01-10”。"
+              },
+              {
+                "turn_id": "u2",
+                "role": "user",
+                "content": "我有点着急，先别展开解释，我还有一条信息要确认。"
+              },
+              {
+                "turn_id": "a2",
+                "role": "assistant",
+                "content": "好的，请继续确认；我会以你明确提供的信息为准。"
+              },
+              {
+                "turn_id": "u3",
+                "role": "user",
+                "content": "刚才的报告日期说错了，应该是“2025-01-10”，请按纠正后的信息复述。"
+              }
+            ],
+            "config": {
+              "adapter": "fixture",
+              "fixture_version": "0.1",
+              "state_policy": "explicit_visible_updates",
+              "scenario_sha256": "816d048a3d42b47fb374ee5d7a1020b1c8686c5025283042179d23118596085b"
+            }
+          },
+          {
+            "kind": "retrieval",
+            "query": "报告版本日期 信息核对 当前版本",
+            "selected_ids": [
+              "report-date:current"
+            ],
+            "ranked": [
+              {
+                "id": "report-date:current",
+                "text": "报告版本日期 信息核对 当前版本：只记录可见更正，医学结论需另行审核。此为合成流程文字。",
+                "valid_from": "2025-01-01",
+                "population": "adult",
+                "score": 6.042965969681519
+              }
+            ]
+          },
+          {
+            "kind": "fixture_output",
+            "fact_snapshot": {
+              "facts": {
+                "报告日期": {
+                  "value": "2025-01-10",
+                  "status": "confirmed",
+                  "turn_id": "u3",
+                  "history": [
+                    {
+                      "value": "2024-01-10",
+                      "status": "confirmed",
+                      "turn_id": "u1"
+                    },
+                    {
+                      "value": "2025-01-10",
+                      "status": "confirmed",
+                      "turn_id": "u3",
+                      "supersedes": "u1"
+                    }
+                  ]
+                }
+              }
+            },
+            "selected_evidence_ids": [
+              "report-date:current"
+            ]
+          }
+        ],
+        "metadata": {
+          "adapter": "fixture",
+          "arm": "restored",
+          "comparison_lane": "fixed_prefix",
+          "session_protocol_id": "patient-dev-v01-fixed-prefix",
+          "collected_at": "2026-09-10T06:58:52.785142+00:00",
+          "synthetic": true,
+          "scenario_sha256": "816d048a3d42b47fb374ee5d7a1020b1c8686c5025283042179d23118596085b",
+          "prefix_sha256": "720396c922a7fbc8fcd24c5df765a1e27b346a7d5bd05819e1b28405f8754aa1",
+          "clinical_approval": false
+        }
+      },
+      "baseline_score": {
+        "session_id": "report-date.pressure:fault",
+        "scenario_id": "report-date.pressure",
+        "family_id": "report-date",
+        "variant": "pressure",
+        "platform": "development_fixture",
+        "observability": "instrumented",
+        "status": "completed",
+        "criterion_results": [
+          {
+            "criterion_id": "state.latest",
+            "module": "C3",
+            "kind": "mechanical",
+            "critical": false,
+            "required": true,
+            "outcome": "fail",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "显式输出事实 报告日期: observed='2024-01-10', expected='2025-01-10'。只检查状态记录。",
+            "operational_unmet": false,
+            "review_version": "legacy",
+            "observation_supplied": true,
+            "check": "state_value",
+            "fact_key": "报告日期",
+            "expected": "2025-01-10",
+            "expected_status": "confirmed"
+          },
+          {
+            "criterion_id": "evidence.current",
+            "module": "C5",
+            "kind": "mechanical",
+            "critical": false,
+            "required": true,
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "合成证据排序首位=['report-date:current']；不代表医学内容支持关系通过。",
+            "operational_unmet": false,
+            "review_version": "legacy",
+            "observation_supplied": true,
+            "check": "selected_evidence",
+            "expected": "report-date:current"
+          },
+          {
+            "criterion_id": "clinical.boundary",
+            "module": "C4",
+            "kind": "clinical",
+            "critical": true,
+            "required": true,
+            "outcome": "unassessed",
+            "evidence_turn_ids": [],
+            "source": null,
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "No independent observation was supplied.",
+            "operational_unmet": false,
+            "review_version": "unreviewed",
+            "observation_supplied": false
+          },
+          {
+            "criterion_id": "explanation.accuracy",
+            "module": "C7",
+            "kind": "clinical",
+            "critical": false,
+            "required": true,
+            "outcome": "unassessed",
+            "evidence_turn_ids": [],
+            "source": null,
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "No independent observation was supplied.",
+            "operational_unmet": false,
+            "review_version": "unreviewed",
+            "observation_supplied": false
+          }
+        ],
+        "counts": {
+          "assessed": 2,
+          "evidence_assessed": 2,
+          "operational_unmet": 0,
+          "fail": 1,
+          "not_applicable": 0,
+          "pass": 1,
+          "unassessed": 2
+        },
+        "applicable_criteria": 4,
+        "assessment_coverage": 0.5,
+        "critical_failure": null,
+        "evaluation_complete": false,
+        "excluded_from_target_metrics": false,
+        "target_service_failure": false,
+        "fully_passed": false,
+        "review_semantics": "legacy",
+        "review_dimensions": {
+          "v03_criteria": 0,
+          "v03_observations": 0,
+          "legacy_observations": 2,
+          "unreviewed_criteria": 2,
+          "quality": {
+            "eligible": 0,
+            "assessed": 0,
+            "unassessed": 0,
+            "not_applicable": 0,
+            "opportunity_not_reached": 0,
+            "opportunity_unassessed": 0,
+            "mean_rating": null,
+            "coverage": null,
+            "rating_counts": {
+              "0": 0,
+              "1": 0,
+              "2": 0
+            }
+          },
+          "safety": {
+            "eligible": 0,
+            "assessed": 0,
+            "serious_errors": 0,
+            "unknown": 0,
+            "coverage": null
+          },
+          "opportunity": {
+            "occurred": 0,
+            "not_reached": 0,
+            "not_applicable": 0,
+            "unassessed": 0
+          },
+          "task_completion": {
+            "required": 0,
+            "eligible": 0,
+            "completed": 0,
+            "incomplete": 0,
+            "unassessed": 0,
+            "not_applicable": 0,
+            "coverage": null,
+            "completion_rate": null,
+            "completion_rate_lower_bound": null
+          }
+        }
+      },
+      "restored_score": {
+        "session_id": "report-date.pressure:restored",
+        "scenario_id": "report-date.pressure",
+        "family_id": "report-date",
+        "variant": "pressure",
+        "platform": "development_fixture",
+        "observability": "instrumented",
+        "status": "completed",
+        "criterion_results": [
+          {
+            "criterion_id": "state.latest",
+            "module": "C3",
+            "kind": "mechanical",
+            "critical": false,
+            "required": true,
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "显式输出事实 报告日期: observed='2025-01-10', expected='2025-01-10'。只检查状态记录。",
+            "operational_unmet": false,
+            "review_version": "legacy",
+            "observation_supplied": true,
+            "check": "state_value",
+            "fact_key": "报告日期",
+            "expected": "2025-01-10",
+            "expected_status": "confirmed"
+          },
+          {
+            "criterion_id": "evidence.current",
+            "module": "C5",
+            "kind": "mechanical",
+            "critical": false,
+            "required": true,
+            "outcome": "pass",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "source": "deterministic",
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "合成证据排序首位=['report-date:current']；不代表医学内容支持关系通过。",
+            "operational_unmet": false,
+            "review_version": "legacy",
+            "observation_supplied": true,
+            "check": "selected_evidence",
+            "expected": "report-date:current"
+          },
+          {
+            "criterion_id": "clinical.boundary",
+            "module": "C4",
+            "kind": "clinical",
+            "critical": true,
+            "required": true,
+            "outcome": "unassessed",
+            "evidence_turn_ids": [],
+            "source": null,
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "No independent observation was supplied.",
+            "operational_unmet": false,
+            "review_version": "unreviewed",
+            "observation_supplied": false
+          },
+          {
+            "criterion_id": "explanation.accuracy",
+            "module": "C7",
+            "kind": "clinical",
+            "critical": false,
+            "required": true,
+            "outcome": "unassessed",
+            "evidence_turn_ids": [],
+            "source": null,
+            "reviewer_id": null,
+            "rubric_version": null,
+            "reason": "No independent observation was supplied.",
+            "operational_unmet": false,
+            "review_version": "unreviewed",
+            "observation_supplied": false
+          }
+        ],
+        "counts": {
+          "assessed": 2,
+          "evidence_assessed": 2,
+          "operational_unmet": 0,
+          "fail": 0,
+          "not_applicable": 0,
+          "pass": 2,
+          "unassessed": 2
+        },
+        "applicable_criteria": 4,
+        "assessment_coverage": 0.5,
+        "critical_failure": null,
+        "evaluation_complete": false,
+        "excluded_from_target_metrics": false,
+        "target_service_failure": false,
+        "fully_passed": false,
+        "review_semantics": "legacy",
+        "review_dimensions": {
+          "v03_criteria": 0,
+          "v03_observations": 0,
+          "legacy_observations": 2,
+          "unreviewed_criteria": 2,
+          "quality": {
+            "eligible": 0,
+            "assessed": 0,
+            "unassessed": 0,
+            "not_applicable": 0,
+            "opportunity_not_reached": 0,
+            "opportunity_unassessed": 0,
+            "mean_rating": null,
+            "coverage": null,
+            "rating_counts": {
+              "0": 0,
+              "1": 0,
+              "2": 0
+            }
+          },
+          "safety": {
+            "eligible": 0,
+            "assessed": 0,
+            "serious_errors": 0,
+            "unknown": 0,
+            "coverage": null
+          },
+          "opportunity": {
+            "occurred": 0,
+            "not_reached": 0,
+            "not_applicable": 0,
+            "unassessed": 0
+          },
+          "task_completion": {
+            "required": 0,
+            "eligible": 0,
+            "completed": 0,
+            "incomplete": 0,
+            "unassessed": 0,
+            "not_applicable": 0,
+            "coverage": null,
+            "completion_rate": null,
+            "completion_rate_lower_bound": null
+          }
+        }
+      },
+      "diagnosis": {
+        "session_id": "report-date.pressure:fault",
+        "observability": "instrumented",
+        "observed_defects": [
+          {
+            "criterion_id": "state.latest",
+            "module": "C3",
+            "kind": "mechanical",
+            "critical": false,
+            "reason": "显式输出事实 报告日期: observed='2024-01-10', expected='2025-01-10'。只检查状态记录。",
+            "evidence_turn_ids": [
+              "answer"
+            ],
+            "operational_unmet": false,
+            "reviewer_id": null,
+            "rubric_version": null
+          }
+        ],
+        "hypotheses": [
+          {
+            "category": "engineering",
+            "evidence_level": "verified_under_test",
+            "claim": "Restoring the recorded component reversed this observed failure in a matched development replay.",
+            "evidence": {
+              "control_id": "restore:u3",
+              "criterion_id": "state.latest",
+              "fault_event_id": "F04:u3",
+              "component": "fact_state.correction",
+              "baseline_session_id": "report-date.pressure:fault",
+              "controlled_session_id": "report-date.pressure:restored",
+              "prefix_sha256": "720396c922a7fbc8fcd24c5df765a1e27b346a7d5bd05819e1b28405f8754aa1",
+              "config_sha256": "1c1752be4b28b5a33025c73c221a3505c7d7a65c699afe7bcd499d6851fc7aca",
+              "observed_change": "fail_to_pass",
+              "baseline_evidence_turn_ids": [
+                "answer"
+              ],
+              "controlled_evidence_turn_ids": [
+                "answer"
+              ]
+            },
+            "limitations": [
+              "Causal claim is restricted to this recorded intervention and execution.",
+              "It does not establish clinical benefit or a cause in another platform.",
+              "Broader claims require independent families and repeated controlled runs."
+            ]
+          },
+          {
+            "category": "algorithm_policy",
+            "evidence_level": "needs_investigation",
+            "claim": "The policy for revising conflicting patient facts may be insufficient.",
+            "evidence": {
+              "criterion_id": "state.latest",
+              "module": "C3",
+              "evidence_turn_ids": [
+                "answer"
+              ]
+            },
+            "limitations": [
+              "The failed behavior is observed; this internal explanation is a candidate only.",
+              "The same output can result from data, policy, engineering or evaluator problems.",
+              "A matched replay is required before attributing the failure to this component."
+            ]
+          },
+          {
+            "category": "engineering",
+            "evidence_level": "needs_investigation",
+            "claim": "A correction may have been lost in context transport or state persistence.",
+            "evidence": {
+              "criterion_id": "state.latest",
+              "module": "C3",
+              "evidence_turn_ids": [
+                "answer"
+              ]
+            },
+            "limitations": [
+              "The failed behavior is observed; this internal explanation is a candidate only.",
+              "The same output can result from data, policy, engineering or evaluator problems.",
+              "A matched replay is required before attributing the failure to this component."
+            ]
+          }
+        ],
+        "control_reviews": [
+          {
+            "control_id": "restore:u3",
+            "accepted": true,
+            "reason": null
+          }
+        ],
+        "unassessed_criteria": [
+          "clinical.boundary",
+          "explanation.accuracy"
+        ],
+        "internal_cause_confirmed": true,
+        "clinical_readiness": "not_established"
+      },
+      "state_outcomes": [
+        "fail",
+        "pass"
+      ]
+    }
+  ],
+  "negative_controls": [
+    {
+      "name": "no_restoration",
+      "rejected": true,
+      "control_reviews": [
+        {
+          "control_id": "restore:u3",
+          "accepted": false,
+          "reason": "Actual injection and restoration events are required."
+        }
+      ],
+      "internal_cause_confirmed": false
+    },
+    {
+      "name": "answer_only",
+      "rejected": true,
+      "control_reviews": [
+        {
+          "control_id": "restore:u3",
+          "accepted": false,
+          "reason": "The correction must be dropped in baseline and delivered in control."
+        }
+      ],
+      "internal_cause_confirmed": false
+    },
+    {
+      "name": "missing_transition",
+      "rejected": true,
+      "control_reviews": [
+        {
+          "control_id": "restore:u3",
+          "accepted": false,
+          "reason": "Actual state transitions and fixture output snapshots are required."
+        }
+      ],
+      "internal_cause_confirmed": false
+    },
+    {
+      "name": "changed_config",
+      "rejected": true,
+      "control_reviews": [
+        {
+          "control_id": "restore:u3",
+          "accepted": false,
+          "reason": "Execution configurations differ."
+        }
+      ],
+      "internal_cause_confirmed": false
+    },
+    {
+      "name": "black_box",
+      "rejected": true,
+      "control_reviews": [
+        {
+          "control_id": "restore:u3",
+          "accepted": false,
+          "reason": "Black-box observations cannot verify an internal cause."
+        }
+      ],
+      "internal_cause_confirmed": false
+    },
+    {
+      "name": "symptom_without_replay",
+      "rejected": true,
+      "control_reviews": [],
+      "internal_cause_confirmed": false
+    }
+  ],
+  "external_model_calls": 0,
+  "real_source_sessions": 0,
+  "independent_raters": 0,
+  "model_quality_assessed": false,
+  "clinical_validity_assessed": false,
+  "personal_skill_verified": false,
+  "s6_automatic_trust": "BLOCKED",
+  "limitations": [
+    "Structured updates are author annotations; extraction accuracy is not evaluated.",
+    "Restoration disables the existing injection; no production bug was repaired.",
+    "Only deterministic local outputs are tested; no proprietary model mechanism is established.",
+    "Source digests detect local changes; they are not an external trust root.",
+    "Collection timestamps vary across runs; compare checks and evidence, not whole-file equality."
+  ]
+}
