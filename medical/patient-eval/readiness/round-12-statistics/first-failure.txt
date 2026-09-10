@@ -1,0 +1,25 @@
+test_empty_ratings_keep_planned_denominator_without_fabricating_reviews (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_empty_ratings_keep_planned_denominator_without_fabricating_reviews) ... ERROR
+
+======================================================================
+ERROR: test_empty_ratings_keep_planned_denominator_without_fabricating_reviews (tests.patient_eval.test_readiness_statistics.ReadinessStatisticsTests.test_empty_ratings_keep_planned_denominator_without_fabricating_reviews)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit/tests/patient_eval/test_readiness_statistics.py", line 147, in test_empty_ratings_keep_planned_denominator_without_fabricating_reviews
+    report = self.analyze()
+             ^^^^^^^^^^^^^^
+  File "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit/tests/patient_eval/test_readiness_statistics.py", line 21, in analyze
+    return run_statistics(bundle or self.bundle, self.root / f'{name}.sqlite')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit/scripts/patient_eval/readiness_statistics.py", line 249, in run_statistics
+    agreement = validate_statistics_bundle(bundle)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit/scripts/patient_eval/readiness_statistics.py", line 174, in validate_statistics_bundle
+    require(isinstance(ratings, list) and bool(ratings), 'ratings must be nonempty')
+  File "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit/scripts/patient_eval/contracts.py", line 22, in require
+    raise ValueError(message)
+ValueError: ratings must be nonempty
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (errors=1)

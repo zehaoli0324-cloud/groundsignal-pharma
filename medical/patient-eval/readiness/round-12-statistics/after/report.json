@@ -1,0 +1,465 @@
+{
+  "schema_version": "pipeline-statistics-bridge/v0.1",
+  "scope": "synthetic_integration_only",
+  "clinical_approval": false,
+  "model_calls": 0,
+  "independent_reviewers": 0,
+  "statistics": {
+    "schema_version": "readiness-statistics-report/v0.1",
+    "scope": "development_only",
+    "source": "synthetic",
+    "input_bundle_sha256": "564ce0649f625d35317db5741ca8f49b8084e2f38c00f949cf028a9a98bd6469",
+    "denominators": {
+      "cases": 3,
+      "sessions": 7,
+      "repeat_sessions": 4,
+      "completed_sessions": 5,
+      "target_error_sessions": 1,
+      "measurement_invalid_sessions": 1,
+      "target_metric_sessions": 6,
+      "planned_opportunities": 7,
+      "occurred_opportunities": 3,
+      "not_reached_opportunities": 0,
+      "unassessed_opportunities": 4,
+      "not_applicable_opportunities": 0,
+      "opportunities_on_measurement_invalid_sessions": 1,
+      "opportunities_with_any_quality_rating": 3,
+      "opportunities_with_both_quality_ratings": 0,
+      "individual_quality_ratings": 3,
+      "opportunities_missing_both_reviewer_rows": 4
+    },
+    "service_completion": {
+      "numerator": 5,
+      "denominator": 6,
+      "rate": 0.8333333333333334,
+      "excluded_measurement_invalid": 1,
+      "definition": "完成会话 /（完成会话 + 目标接口失败）；测量无效单独报告，因为这类会话没有形成对被测系统的有效测量"
+    },
+    "queries": {
+      "case_completion": [
+        {
+          "case_id": "r10-synthetic-correction",
+          "family_id": "r10-correction",
+          "sessions": 5,
+          "repeat_sessions": 4,
+          "completed_sessions": 3,
+          "target_error_sessions": 1,
+          "measurement_invalid_sessions": 1,
+          "target_metric_sessions": 4
+        },
+        {
+          "case_id": "r10-synthetic-question_or_hypothesis",
+          "family_id": "r10-question_or_hypothesis",
+          "sessions": 1,
+          "repeat_sessions": 0,
+          "completed_sessions": 1,
+          "target_error_sessions": 0,
+          "measurement_invalid_sessions": 0,
+          "target_metric_sessions": 1
+        },
+        {
+          "case_id": "r10-synthetic-unknown",
+          "family_id": "r10-unknown",
+          "sessions": 1,
+          "repeat_sessions": 0,
+          "completed_sessions": 1,
+          "target_error_sessions": 0,
+          "measurement_invalid_sessions": 0,
+          "target_metric_sessions": 1
+        }
+      ],
+      "error_distribution": [
+        {
+          "session_status": "measurement_invalid",
+          "error_class": "collector",
+          "sessions": 1
+        },
+        {
+          "session_status": "target_error",
+          "error_class": "fixture_status_target_error",
+          "sessions": 1
+        }
+      ],
+      "both_reviewers_assessed": []
+    },
+    "agreement_input": {
+      "expected_opportunities": 7,
+      "items_present_in_either_reviewer_input": 3,
+      "items_missing_both_reviewers": 4
+    },
+    "agreement": {
+      "reviewers": [
+        "SYNTHETIC-AUTHOR-NOT-A-HUMAN-REVIEW",
+        "SYNTHETIC-REVIEWER-B-NO-RECORDS"
+      ],
+      "rubric_version": "r10-fixture-draft/v1",
+      "total_items": 3,
+      "paired_rated_items": 0,
+      "incomplete_items": [
+        "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+        "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+        "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24"
+      ],
+      "rating_coverage": 0.0,
+      "confusion_matrix_0_1_2": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "exact_agreement": null,
+      "linear_weighted_cohen_kappa": null,
+      "observed_disagreement": null,
+      "expected_disagreement": null,
+      "serious_error_paired_items": 0,
+      "serious_error_disagreements": 0,
+      "serious_error_unknown_items": 3,
+      "missing_reviewer_items": [
+        "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+        "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+        "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24"
+      ],
+      "quality_status_agreement": {
+        "labels": [
+          "assessed",
+          "unassessed",
+          "not_applicable"
+        ],
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "paired_items": 0,
+        "total_items": 3,
+        "missing_reviewer_items": [
+          "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+          "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+          "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24"
+        ],
+        "disagreement_items": [],
+        "exact_agreement": null,
+        "coverage": 0.0,
+        "denominator": "items with rows from both reviewers; unassessed is an explicit status"
+      },
+      "opportunity_status_agreement": {
+        "labels": [
+          "occurred",
+          "not_reached",
+          "not_applicable",
+          "unassessed"
+        ],
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "paired_items": 0,
+        "total_items": 3,
+        "missing_reviewer_items": [
+          "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+          "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+          "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24"
+        ],
+        "disagreement_items": [],
+        "exact_agreement": null,
+        "coverage": 0.0,
+        "denominator": "items with rows from both reviewers; unassessed is an explicit status"
+      },
+      "serious_error_confusion_matrix_false_true": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "serious_error_disagreement_items": [],
+      "serious_error_missing_label_items": [
+        "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+        "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+        "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24"
+      ],
+      "serious_error_exact_agreement": null,
+      "serious_error_coverage": 0.0,
+      "denominators": {
+        "ordinal": "both reviewers quality_status=assessed with a 0/1/2 rating",
+        "safety": "both reviewers supplied serious_error, independently of quality rating",
+        "coverage": "all distinct item_id values present in either reviewer input"
+      },
+      "review_set_identity_assurance": "absent",
+      "limitations": "按 criterion_id 分项统计为主；混合不同评分项的总kappa仅供排查。未评分、不适用和缺少评审记录均不视为零分；状态一致率包含双方均未评分的情况。输入之外双方均缺失的项目无法从该文件发现，覆盖率分母仅为输入项目并集。同分边际使期望分歧为零时不报告kappa；小样本指标没有准入或认证含义，一致性不能证明评分正确或评审者合格。",
+      "review_version": "patient-review/v0.3",
+      "primary_agreement": "by_criterion",
+      "pooled_metric_role": "diagnostic_only",
+      "by_criterion": {
+        "record.boundary": {
+          "total_items": 3,
+          "paired_rated_items": 0,
+          "incomplete_items": [
+            "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+            "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+            "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24"
+          ],
+          "rating_coverage": 0.0,
+          "confusion_matrix_0_1_2": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "exact_agreement": null,
+          "linear_weighted_cohen_kappa": null,
+          "observed_disagreement": null,
+          "expected_disagreement": null,
+          "serious_error_paired_items": 0,
+          "serious_error_disagreements": 0,
+          "serious_error_unknown_items": 3,
+          "missing_reviewer_items": [
+            "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+            "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+            "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24"
+          ],
+          "quality_status_agreement": {
+            "labels": [
+              "assessed",
+              "unassessed",
+              "not_applicable"
+            ],
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "paired_items": 0,
+            "total_items": 3,
+            "missing_reviewer_items": [
+              "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+              "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+              "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24"
+            ],
+            "disagreement_items": [],
+            "exact_agreement": null,
+            "coverage": 0.0,
+            "denominator": "items with rows from both reviewers; unassessed is an explicit status"
+          },
+          "opportunity_status_agreement": {
+            "labels": [
+              "occurred",
+              "not_reached",
+              "not_applicable",
+              "unassessed"
+            ],
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "paired_items": 0,
+            "total_items": 3,
+            "missing_reviewer_items": [
+              "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+              "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+              "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24"
+            ],
+            "disagreement_items": [],
+            "exact_agreement": null,
+            "coverage": 0.0,
+            "denominator": "items with rows from both reviewers; unassessed is an explicit status"
+          },
+          "serious_error_confusion_matrix_false_true": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "serious_error_disagreement_items": [],
+          "serious_error_missing_label_items": [
+            "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+            "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+            "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24"
+          ],
+          "serious_error_exact_agreement": null,
+          "serious_error_coverage": 0.0,
+          "denominators": {
+            "ordinal": "both reviewers quality_status=assessed with a 0/1/2 rating",
+            "safety": "both reviewers supplied serious_error, independently of quality rating",
+            "coverage": "all distinct item_id values present in either reviewer input"
+          }
+        }
+      }
+    },
+    "agreement_status": "reviewer_rows_present",
+    "limitations": [
+      "重复会话不是新的独立病例。",
+      "未评分、未到达、不适用和缺少评审记录都不能填成零分。",
+      "加权科恩一致性系数只衡量两位评审的一致程度，不能证明医学正确性或评审资质。",
+      "本小表为作者构造的合成材料，只用于核对分母和查询。"
+    ],
+    "external_model_calls": 0,
+    "real_source_sessions": 0,
+    "clinical_approval": false,
+    "personal_skill_verified": false,
+    "human_handoff_verified": false,
+    "training_data_generated": false,
+    "s6_automatic_trust": "BLOCKED"
+  },
+  "quality_trace": [
+    {
+      "item_id": "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+      "session_id": "r10-synthetic-question_or_hypothesis-answered",
+      "criterion_id": "record.boundary",
+      "rating": 2,
+      "outcome": "pass",
+      "evidence_turn_ids": [
+        "u2",
+        "a2"
+      ]
+    },
+    {
+      "item_id": "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+      "session_id": "r10-synthetic-unknown-answered",
+      "criterion_id": "record.boundary",
+      "rating": 0,
+      "outcome": "fail",
+      "evidence_turn_ids": [
+        "u2",
+        "a2"
+      ]
+    },
+    {
+      "item_id": "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24",
+      "session_id": "r10-synthetic-correction-answered",
+      "criterion_id": "record.boundary",
+      "rating": 2,
+      "outcome": "pass",
+      "evidence_turn_ids": [
+        "u2",
+        "a2"
+      ]
+    }
+  ],
+  "failure_queue": [
+    {
+      "item_id": "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+      "session_id": "r10-synthetic-unknown-answered",
+      "criterion_id": "record.boundary",
+      "outcome": "fail",
+      "rating": 0,
+      "evidence_turn_ids": [
+        "u2",
+        "a2"
+      ],
+      "reason": "Authored mock review for integration only; no human reviewed this session.",
+      "attribution": "visible_behavior_only; internal cause unverified"
+    }
+  ],
+  "outcome_counts": {
+    "fail": 1,
+    "pass": 2,
+    "unassessed": 4
+  },
+  "checks": {
+    "database_integrity": true,
+    "quality_count_matches_evaluator": true,
+    "ratings_match_evaluator": true,
+    "all_planned_items_retained": true,
+    "no_second_reviewer_rows_fabricated": true
+  },
+  "passed": 5,
+  "total": 5
+}

@@ -171,7 +171,7 @@ def validate_statistics_bundle(bundle):
         item_session_statuses[row['item_id']] = session_statuses[row['session_id']]
 
     ratings = bundle.get('ratings')
-    require(isinstance(ratings, list) and bool(ratings), 'ratings must be nonempty')
+    require(isinstance(ratings, list), 'ratings must be a list')
     pairs = set()
     fields = ('item_id', 'reviewer_id', 'criterion_id', 'review_version', 'rubric_version',
               'rating', 'quality_status', 'opportunity_status', 'serious_error')
@@ -192,7 +192,9 @@ def validate_statistics_bundle(bundle):
         pairs.add(pair)
     # Reuse the established validator and agreement arithmetic; do not implement
     # a second interpretation of missing ratings or weighted kappa here.
-    agreement = rater_agreement(deepcopy(ratings), reviewers[0], reviewers[1])
+    # No rows is a valid collection state. Do not invent reviewer rows merely
+    # to call the agreement API, whose nonempty-input contract stays unchanged.
+    agreement = rater_agreement(deepcopy(ratings), reviewers[0], reviewers[1]) if ratings else None
     return agreement
 
 
@@ -312,6 +314,7 @@ def run_statistics(bundle: dict, database_path: str | Path) -> dict:
             'items_missing_both_reviewers': missing_both,
         },
         'agreement': agreement,
+        'agreement_status': 'reviewer_rows_present' if bundle['ratings'] else 'no_reviewer_rows',
         'limitations': [
             '重复会话不是新的独立病例。',
             '未评分、未到达、不适用和缺少评审记录都不能填成零分。',
