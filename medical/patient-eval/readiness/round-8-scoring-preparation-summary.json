@@ -1,0 +1,93 @@
+{
+  "schema_version": "patient-scoring-worklist-summary/v0.1",
+  "input_draft_sha256": "16e1ca463d39c79ee6aa5f5eefb9a8258c50ebd30bd96a8fc7d4b3975a8004bd",
+  "admission": {
+    "gold_approved": false,
+    "formal_approval": false,
+    "clinical_gold": false,
+    "dynamic_scenario_ready": false,
+    "s6_automatic_trust": "BLOCKED"
+  },
+  "cases": [
+    {
+      "candidate_id": "C0042",
+      "case_id": "DEV04-C0042",
+      "prepared_draft_rows": 6,
+      "mapped_opportunities": 0
+    },
+    {
+      "candidate_id": "C0039",
+      "case_id": "DEV04-C0039",
+      "prepared_draft_rows": 4,
+      "mapped_opportunities": 0
+    },
+    {
+      "candidate_id": "C0032",
+      "case_id": "DEV04-C0032",
+      "prepared_draft_rows": 5,
+      "mapped_opportunities": 0
+    },
+    {
+      "candidate_id": "C0047",
+      "case_id": "DEV04-C0047",
+      "prepared_draft_rows": 4,
+      "mapped_opportunities": 0
+    },
+    {
+      "candidate_id": "C0046",
+      "case_id": "DEV04-C0046",
+      "prepared_draft_rows": 5,
+      "mapped_opportunities": 0
+    },
+    {
+      "candidate_id": "C0017",
+      "case_id": "DEV04-C0017",
+      "prepared_draft_rows": 5,
+      "mapped_opportunities": 0
+    },
+    {
+      "candidate_id": "C0031",
+      "case_id": "DEV04-C0031",
+      "prepared_draft_rows": 5,
+      "mapped_opportunities": 0
+    },
+    {
+      "candidate_id": "C0040",
+      "case_id": "DEV04-C0040",
+      "prepared_draft_rows": 5,
+      "mapped_opportunities": 0
+    },
+    {
+      "candidate_id": "C0022",
+      "case_id": "DEV04-C0022",
+      "prepared_draft_rows": 4,
+      "mapped_opportunities": 0
+    },
+    {
+      "candidate_id": "C0015",
+      "case_id": "DEV04-C0015",
+      "prepared_draft_rows": 5,
+      "mapped_opportunities": 0
+    },
+    {
+      "candidate_id": "C0029",
+      "case_id": "DEV04-C0029",
+      "prepared_draft_rows": 4,
+      "mapped_opportunities": 0
+    },
+    {
+      "candidate_id": "C0038",
+      "case_id": "DEV04-C0038",
+      "prepared_draft_rows": 5,
+      "mapped_opportunities": 0
+    }
+  ],
+  "case_count": 12,
+  "prepared_draft_rows": 57,
+  "mapped_opportunities": 0,
+  "independently_reviewed": 0,
+  "runtime_evaluated": 0,
+  "clinical_adjudication_required": 12,
+  "patient_text_included": false,
+  "interpretation": "草稿整理完成数与映射完成数分开统计；所有临床和运行状态保持待验收。"
+}
