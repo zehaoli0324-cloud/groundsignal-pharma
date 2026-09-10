@@ -1,0 +1,832 @@
+{
+  "schema_version": "clinical-console-choice-bundle/v0.3",
+  "packet": {
+    "schema_version": "candidate-review/v0.1",
+    "local_only": true,
+    "source_binding": {
+      "synthetic": true
+    },
+    "reviewer_id": "",
+    "items": [
+      {
+        "candidate_id": "C0001",
+        "source_dialogue_id": "console-synthetic-1",
+        "turns": [
+          {
+            "turn_id": "r0001",
+            "source_turn_id": 1,
+            "source_turn_index": 0,
+            "role": "patient",
+            "content": "帮我整理记录，开始时间是昨天。"
+          },
+          {
+            "turn_id": "r0002",
+            "source_turn_id": 2,
+            "source_turn_index": 1,
+            "role": "doctor",
+            "content": "请核对记录的时间。"
+          },
+          {
+            "turn_id": "r0003",
+            "source_turn_id": 3,
+            "source_turn_index": 2,
+            "role": "patient",
+            "content": "更正，开始时间是前天。"
+          }
+        ],
+        "privacy_findings": [],
+        "fact_draft": {
+          "schema_version": "candidate-fact-draft/v0.1",
+          "local_only": true,
+          "source_dialogue_id": "console-synthetic-1",
+          "source_turn_order": [
+            {
+              "source_turn_id": 1,
+              "source_turn_index": 0,
+              "role": "patient"
+            },
+            {
+              "source_turn_id": 2,
+              "source_turn_index": 1,
+              "role": "doctor"
+            },
+            {
+              "source_turn_id": 3,
+              "source_turn_index": 2,
+              "role": "patient"
+            }
+          ],
+          "opening_boundary": {
+            "source_turn_ids": [
+              1
+            ],
+            "patient_prefix_end_index_exclusive": 1,
+            "policy": "initial_consecutive_patient_turns_only_no_future_fact_promotion"
+          },
+          "patient_turns": [
+            {
+              "source_turn_id": 1,
+              "source_turn_index": 0,
+              "original_text": "帮我整理记录，开始时间是昨天。",
+              "in_opening_prefix": true,
+              "review_cues": [
+                {
+                  "category": "person",
+                  "start": 1,
+                  "end_exclusive": 2,
+                  "text": "我",
+                  "decision": "review_cue_only",
+                  "scope_resolved": false
+                },
+                {
+                  "category": "time",
+                  "start": 12,
+                  "end_exclusive": 14,
+                  "text": "昨天",
+                  "decision": "review_cue_only",
+                  "scope_resolved": false
+                }
+              ]
+            },
+            {
+              "source_turn_id": 3,
+              "source_turn_index": 2,
+              "original_text": "更正，开始时间是前天。",
+              "in_opening_prefix": false,
+              "review_cues": [
+                {
+                  "category": "correction",
+                  "start": 0,
+                  "end_exclusive": 2,
+                  "text": "更正",
+                  "decision": "review_cue_only",
+                  "scope_resolved": false
+                },
+                {
+                  "category": "time",
+                  "start": 8,
+                  "end_exclusive": 10,
+                  "text": "前天",
+                  "decision": "review_cue_only",
+                  "scope_resolved": false
+                }
+              ]
+            }
+          ],
+          "fact_candidates": [
+            {
+              "candidate_id": "turn-0-action-0",
+              "source_turn_id": 1,
+              "source_turn_index": 0,
+              "upstream_annotation": {
+                "text": "昨天",
+                "range": [
+                  12,
+                  13
+                ],
+                "intent": "Inform",
+                "slot": "time",
+                "value1": "",
+                "value2": ""
+              },
+              "provenance": {
+                "source_dataset": "ReMeDi-base",
+                "source_role": "patient",
+                "source_action_index": 0,
+                "annotation_status": "upstream_human_annotation_proposal_not_groundsignal_gold"
+              },
+              "span_check": {
+                "offset_convention": "zero_based_unicode_codepoints_inclusive_end",
+                "status": "exact",
+                "evidence_span": {
+                  "start": 12,
+                  "end_exclusive": 14,
+                  "text": "昨天",
+                  "source_turn_id": 1,
+                  "source_turn_index": 0
+                },
+                "reason": "source_range_matches_patient_text"
+              },
+              "asserted_as_fact": false,
+              "upstream_question_intent": false,
+              "in_opening_prefix": true,
+              "later_fact_candidate": false,
+              "review": {
+                "decision": "unreviewed",
+                "is_patient_assertion": null,
+                "polarity": null,
+                "subject": null,
+                "time": null,
+                "correction_of_candidate_id": null,
+                "manual_groundsignal_slot": null,
+                "disclosure_policy": null,
+                "reviewer_id": null,
+                "evidence_spans": [],
+                "reason": null
+              }
+            },
+            {
+              "candidate_id": "turn-2-action-0",
+              "source_turn_id": 3,
+              "source_turn_index": 2,
+              "upstream_annotation": {
+                "text": "前天",
+                "range": [
+                  8,
+                  9
+                ],
+                "intent": "Inform",
+                "slot": "time",
+                "value1": "",
+                "value2": ""
+              },
+              "provenance": {
+                "source_dataset": "ReMeDi-base",
+                "source_role": "patient",
+                "source_action_index": 0,
+                "annotation_status": "upstream_human_annotation_proposal_not_groundsignal_gold"
+              },
+              "span_check": {
+                "offset_convention": "zero_based_unicode_codepoints_inclusive_end",
+                "status": "exact",
+                "evidence_span": {
+                  "start": 8,
+                  "end_exclusive": 10,
+                  "text": "前天",
+                  "source_turn_id": 3,
+                  "source_turn_index": 2
+                },
+                "reason": "source_range_matches_patient_text"
+              },
+              "asserted_as_fact": false,
+              "upstream_question_intent": false,
+              "in_opening_prefix": false,
+              "later_fact_candidate": true,
+              "review": {
+                "decision": "unreviewed",
+                "is_patient_assertion": null,
+                "polarity": null,
+                "subject": null,
+                "time": null,
+                "correction_of_candidate_id": null,
+                "manual_groundsignal_slot": null,
+                "disclosure_policy": null,
+                "reviewer_id": null,
+                "evidence_spans": [],
+                "reason": null
+              }
+            }
+          ],
+          "legacy_baseline": {
+            "extractor_version": "visible-chinese-rules/v0.2",
+            "opening_snapshot": {
+              "facts": {},
+              "unparsed": [
+                {
+                  "turn_id": "source-turn-index:0",
+                  "text": "帮我整理记录",
+                  "reason": "outside_supported_rules"
+                },
+                {
+                  "turn_id": "source-turn-index:0",
+                  "text": "开始时间是昨天",
+                  "reason": "outside_supported_rules"
+                }
+              ],
+              "extractor_version": "visible-chinese-rules/v0.2"
+            },
+            "turn_snapshots": [
+              {
+                "source_turn_id": 1,
+                "source_turn_index": 0,
+                "baseline_turn_id": "source-turn-index:0",
+                "snapshot": {
+                  "facts": {},
+                  "unparsed": [
+                    {
+                      "turn_id": "source-turn-index:0",
+                      "text": "帮我整理记录",
+                      "reason": "outside_supported_rules"
+                    },
+                    {
+                      "turn_id": "source-turn-index:0",
+                      "text": "开始时间是昨天",
+                      "reason": "outside_supported_rules"
+                    }
+                  ],
+                  "extractor_version": "visible-chinese-rules/v0.2"
+                }
+              },
+              {
+                "source_turn_id": 3,
+                "source_turn_index": 2,
+                "baseline_turn_id": "source-turn-index:2",
+                "snapshot": {
+                  "facts": {},
+                  "unparsed": [
+                    {
+                      "turn_id": "source-turn-index:0",
+                      "text": "帮我整理记录",
+                      "reason": "outside_supported_rules"
+                    },
+                    {
+                      "turn_id": "source-turn-index:0",
+                      "text": "开始时间是昨天",
+                      "reason": "outside_supported_rules"
+                    },
+                    {
+                      "turn_id": "source-turn-index:2",
+                      "text": "开始时间是前天",
+                      "reason": "outside_supported_rules"
+                    }
+                  ],
+                  "extractor_version": "visible-chinese-rules/v0.2"
+                }
+              }
+            ],
+            "final_snapshot": {
+              "facts": {},
+              "unparsed": [
+                {
+                  "turn_id": "source-turn-index:0",
+                  "text": "帮我整理记录",
+                  "reason": "outside_supported_rules"
+                },
+                {
+                  "turn_id": "source-turn-index:0",
+                  "text": "开始时间是昨天",
+                  "reason": "outside_supported_rules"
+                },
+                {
+                  "turn_id": "source-turn-index:2",
+                  "text": "开始时间是前天",
+                  "reason": "outside_supported_rules"
+                }
+              ],
+              "extractor_version": "visible-chinese-rules/v0.2"
+            },
+            "counters": {
+              "observed_patient_turns": 2,
+              "current_fact_keys": 0,
+              "observation_events": 0,
+              "unparsed_clauses": 3
+            },
+            "interpretation": "Narrow legacy rules on actual patient text only; outputs are development baseline predictions, not approved facts. Unparsed counts indicate unsupported coverage, not an independently measured error rate."
+          },
+          "counters": {
+            "patient_turns": 2,
+            "patient_action_annotations": 2,
+            "malformed_actions": 0,
+            "actions_missing_or_nonlist_turns": 0,
+            "exact_spans": 2,
+            "mismatch_spans": 0,
+            "missing_spans": 0,
+            "opening_candidates": 1,
+            "later_candidates": 1,
+            "upstream_inquire_candidates": 0,
+            "lexical_review_cues": 4,
+            "empty_patient_turns": 0
+          },
+          "review_status": "unreviewed",
+          "clinical_gold": false,
+          "dynamic_scenario_ready": false,
+          "runtime_export_allowed": false,
+          "interpretation": "All actions, including questions, remain proposals. Exact spans verify only alignment. Lexical cues do not resolve scope or assert medical facts. Missing information is not a negative finding. All disclosure policies require review."
+        },
+        "review": {
+          "privacy": {
+            "decision": "unreviewed",
+            "checked_turn_ids": [],
+            "reason": "",
+            "additional_spans": []
+          },
+          "completeness": {
+            "decision": "unreviewed",
+            "reason": "",
+            "evidence_turn_ids": []
+          },
+          "facts": [
+            {
+              "decision": "unreviewed",
+              "is_patient_assertion": null,
+              "polarity": null,
+              "subject": null,
+              "time": null,
+              "correction_of_candidate_id": null,
+              "manual_groundsignal_slot": null,
+              "disclosure_policy": null,
+              "evidence_spans": [],
+              "reason": null,
+              "fact_id": "turn-0-action-0",
+              "ask_patterns": [],
+              "disclosure_condition": ""
+            },
+            {
+              "decision": "unreviewed",
+              "is_patient_assertion": null,
+              "polarity": null,
+              "subject": null,
+              "time": null,
+              "correction_of_candidate_id": null,
+              "manual_groundsignal_slot": null,
+              "disclosure_policy": null,
+              "evidence_spans": [],
+              "reason": null,
+              "fact_id": "turn-2-action-0",
+              "ask_patterns": [],
+              "disclosure_condition": ""
+            }
+          ],
+          "rubrics": [
+            {
+              "criterion_id": "clarification.relevant",
+              "capability": "C1",
+              "kind": "behavioral",
+              "critical": false,
+              "required": true,
+              "decision": "unreviewed",
+              "applicability": "unreviewed",
+              "description": "",
+              "anchors": {
+                "0": "",
+                "1": "",
+                "2": ""
+              },
+              "serious_error_definition": "",
+              "opportunity": {
+                "trigger": "",
+                "deadline": ""
+              },
+              "reason": ""
+            },
+            {
+              "criterion_id": "questioning.unknown",
+              "capability": "C2",
+              "kind": "behavioral",
+              "critical": false,
+              "required": true,
+              "decision": "unreviewed",
+              "applicability": "unreviewed",
+              "description": "",
+              "anchors": {
+                "0": "",
+                "1": "",
+                "2": ""
+              },
+              "serious_error_definition": "",
+              "opportunity": {
+                "trigger": "",
+                "deadline": ""
+              },
+              "reason": ""
+            },
+            {
+              "criterion_id": "correction.absorbed",
+              "capability": "C3",
+              "kind": "behavioral",
+              "critical": false,
+              "required": true,
+              "decision": "unreviewed",
+              "applicability": "unreviewed",
+              "description": "",
+              "anchors": {
+                "0": "",
+                "1": "",
+                "2": ""
+              },
+              "serious_error_definition": "",
+              "opportunity": {
+                "trigger": "",
+                "deadline": ""
+              },
+              "reason": ""
+            },
+            {
+              "criterion_id": "risk.boundary",
+              "capability": "C4",
+              "kind": "clinical",
+              "critical": true,
+              "required": true,
+              "decision": "unreviewed",
+              "applicability": "unreviewed",
+              "description": "",
+              "anchors": {
+                "0": "",
+                "1": "",
+                "2": ""
+              },
+              "serious_error_definition": "",
+              "opportunity": {
+                "trigger": "",
+                "deadline": ""
+              },
+              "reason": ""
+            },
+            {
+              "criterion_id": "explanation.repair",
+              "capability": "C7",
+              "kind": "behavioral",
+              "critical": false,
+              "required": true,
+              "decision": "unreviewed",
+              "applicability": "unreviewed",
+              "description": "",
+              "anchors": {
+                "0": "",
+                "1": "",
+                "2": ""
+              },
+              "serious_error_definition": "",
+              "opportunity": {
+                "trigger": "",
+                "deadline": ""
+              },
+              "reason": ""
+            },
+            {
+              "criterion_id": "completion.summary",
+              "capability": "C8",
+              "kind": "behavioral",
+              "critical": false,
+              "required": true,
+              "decision": "unreviewed",
+              "applicability": "unreviewed",
+              "description": "",
+              "anchors": {
+                "0": "",
+                "1": "",
+                "2": ""
+              },
+              "serious_error_definition": "",
+              "opportunity": {
+                "trigger": "",
+                "deadline": ""
+              },
+              "reason": ""
+            }
+          ]
+        }
+      }
+    ],
+    "privacy_scanner_version": "candidate-privacy-cues/v0.1",
+    "similarity": {
+      "schema_version": "candidate-similarity/v0.1",
+      "scope": "provided_candidates_patient_speech_only",
+      "method": {
+        "normalisation": "Unicode NFKC; casefold; remove Unicode whitespace",
+        "features": "set union of within-patient-turn character trigrams; short-turn whole-text fallback",
+        "similarity": "Jaccard: intersection size divided by union size",
+        "order": "trigram character order retained; turn order and repeated features ignored for Jaccard",
+        "exact_match": "same ordered nonempty normalised patient turns; doctor text excluded",
+        "missing_data": "no nonempty normalised patient speech: omit from comparisons and flag"
+      },
+      "threshold": 0.85,
+      "threshold_status": "uncalibrated_review_cue",
+      "candidate_count": 1,
+      "eligible_candidate_count": 1,
+      "possible_pair_count": 0,
+      "compared_pair_count": 0,
+      "skipped_pair_count": 0,
+      "missing_patient_candidate_ids": [],
+      "near_duplicate_pairs": [],
+      "exact_pair_count": 0,
+      "near_pair_count": 0,
+      "source_group_suggestions": [],
+      "interpretation": [
+        "Lexical similarity is a human review cue, not semantic equivalence, patient identity, or clinical truth.",
+        "Transitive groups may include pairs below threshold; group membership is not a proven shared source.",
+        "Scope is only the supplied candidates, not the full source corpus or other datasets.",
+        "No detected match does not establish independent held-out data or absence from model training.",
+        "Threshold is uncalibrated; candidate text and feature text are not included in this audit."
+      ]
+    },
+    "formal_approval": false,
+    "clinical_gold": false,
+    "dynamic_scenario_ready": false,
+    "interpretation": "Source and lexical annotations are proposals; historical doctor replies are not gold. Human drafts do not establish clinical correctness, de-identification or case admission.",
+    "packet_sha256": "9ac370597e2b056bc85abac2bed3d5938be2f189a9820eacee3a4e531257091d"
+  },
+  "answers": {
+    "schema_version": "clinical-console-choices/v0.3",
+    "local_only": true,
+    "packet_sha256": "9ac370597e2b056bc85abac2bed3d5938be2f189a9820eacee3a4e531257091d",
+    "reviewer_id": "reviewer-B",
+    "authority": "self_declared_unsigned_not_approval",
+    "formal_approval": false,
+    "clinical_gold": false,
+    "dynamic_scenario_ready": false,
+    "s6_automatic_trust": "BLOCKED",
+    "profile": {
+      "background": "pending",
+      "independence": "pending",
+      "conflicts": "pending"
+    },
+    "items": [
+      {
+        "candidate_id": "C0001",
+        "facts": [
+          {
+            "fact_id": "turn-0-action-0",
+            "answer": "uncertain"
+          },
+          {
+            "fact_id": "turn-2-action-0",
+            "answer": "pending"
+          }
+        ],
+        "privacy": [
+          {
+            "turn_id": "r0001",
+            "answer": "clear"
+          },
+          {
+            "turn_id": "r0002",
+            "answer": "pending"
+          },
+          {
+            "turn_id": "r0003",
+            "answer": "pending"
+          }
+        ],
+        "rubrics": [
+          {
+            "criterion_id": "clarification.relevant",
+            "answer": "applicable"
+          },
+          {
+            "criterion_id": "questioning.unknown",
+            "answer": "pending"
+          },
+          {
+            "criterion_id": "correction.absorbed",
+            "answer": "pending"
+          },
+          {
+            "criterion_id": "risk.boundary",
+            "answer": "pending"
+          },
+          {
+            "criterion_id": "explanation.repair",
+            "answer": "pending"
+          },
+          {
+            "criterion_id": "completion.summary",
+            "answer": "pending"
+          }
+        ],
+        "completeness": "usable"
+      }
+    ],
+    "interaction": {
+      "schema_version": "clinical-console-interaction/v0.1",
+      "export_ui_version": "0.2.2",
+      "origin_answers_version": "clinical-console-choices/v0.3",
+      "records": [
+        {
+          "candidate_id": "C0001",
+          "section": "facts",
+          "item_id": "turn-0-action-0",
+          "origin": {
+            "answers_version": "clinical-console-choices/v0.3",
+            "answer": "pending",
+            "ui_version": "0.2.2"
+          },
+          "display": {
+            "ui_version": "0.2.2",
+            "preset_shown": true,
+            "answer": "supported"
+          },
+          "selection": "uncertain",
+          "confirmation": {
+            "ui_version": "0.2.2",
+            "method": "selection",
+            "answer": "uncertain",
+            "preset_shown": true
+          },
+          "last_action": "confirmed"
+        },
+        {
+          "candidate_id": "C0001",
+          "section": "facts",
+          "item_id": "turn-2-action-0",
+          "origin": {
+            "answers_version": "clinical-console-choices/v0.3",
+            "answer": "pending",
+            "ui_version": "0.2.2"
+          },
+          "display": null,
+          "selection": null,
+          "confirmation": null,
+          "last_action": "unseen"
+        },
+        {
+          "candidate_id": "C0001",
+          "section": "privacy",
+          "item_id": "r0001",
+          "origin": {
+            "answers_version": "clinical-console-choices/v0.3",
+            "answer": "pending",
+            "ui_version": "0.2.2"
+          },
+          "display": {
+            "ui_version": "0.2.2",
+            "preset_shown": true,
+            "answer": "clear"
+          },
+          "selection": null,
+          "confirmation": {
+            "ui_version": "0.2.2",
+            "method": "preset",
+            "answer": "clear",
+            "preset_shown": true
+          },
+          "last_action": "confirmed"
+        },
+        {
+          "candidate_id": "C0001",
+          "section": "privacy",
+          "item_id": "r0002",
+          "origin": {
+            "answers_version": "clinical-console-choices/v0.3",
+            "answer": "pending",
+            "ui_version": "0.2.2"
+          },
+          "display": null,
+          "selection": null,
+          "confirmation": null,
+          "last_action": "unseen"
+        },
+        {
+          "candidate_id": "C0001",
+          "section": "privacy",
+          "item_id": "r0003",
+          "origin": {
+            "answers_version": "clinical-console-choices/v0.3",
+            "answer": "pending",
+            "ui_version": "0.2.2"
+          },
+          "display": null,
+          "selection": null,
+          "confirmation": null,
+          "last_action": "unseen"
+        },
+        {
+          "candidate_id": "C0001",
+          "section": "rubrics",
+          "item_id": "clarification.relevant",
+          "origin": {
+            "answers_version": "clinical-console-choices/v0.3",
+            "answer": "pending",
+            "ui_version": "0.2.2"
+          },
+          "display": {
+            "ui_version": "0.2.2",
+            "preset_shown": true,
+            "answer": "applicable"
+          },
+          "selection": null,
+          "confirmation": {
+            "ui_version": "0.2.2",
+            "method": "preset",
+            "answer": "applicable",
+            "preset_shown": true
+          },
+          "last_action": "confirmed"
+        },
+        {
+          "candidate_id": "C0001",
+          "section": "rubrics",
+          "item_id": "questioning.unknown",
+          "origin": {
+            "answers_version": "clinical-console-choices/v0.3",
+            "answer": "pending",
+            "ui_version": "0.2.2"
+          },
+          "display": null,
+          "selection": null,
+          "confirmation": null,
+          "last_action": "unseen"
+        },
+        {
+          "candidate_id": "C0001",
+          "section": "rubrics",
+          "item_id": "correction.absorbed",
+          "origin": {
+            "answers_version": "clinical-console-choices/v0.3",
+            "answer": "pending",
+            "ui_version": "0.2.2"
+          },
+          "display": null,
+          "selection": null,
+          "confirmation": null,
+          "last_action": "unseen"
+        },
+        {
+          "candidate_id": "C0001",
+          "section": "rubrics",
+          "item_id": "risk.boundary",
+          "origin": {
+            "answers_version": "clinical-console-choices/v0.3",
+            "answer": "pending",
+            "ui_version": "0.2.2"
+          },
+          "display": null,
+          "selection": null,
+          "confirmation": null,
+          "last_action": "unseen"
+        },
+        {
+          "candidate_id": "C0001",
+          "section": "rubrics",
+          "item_id": "explanation.repair",
+          "origin": {
+            "answers_version": "clinical-console-choices/v0.3",
+            "answer": "pending",
+            "ui_version": "0.2.2"
+          },
+          "display": null,
+          "selection": null,
+          "confirmation": null,
+          "last_action": "unseen"
+        },
+        {
+          "candidate_id": "C0001",
+          "section": "rubrics",
+          "item_id": "completion.summary",
+          "origin": {
+            "answers_version": "clinical-console-choices/v0.3",
+            "answer": "pending",
+            "ui_version": "0.2.2"
+          },
+          "display": null,
+          "selection": null,
+          "confirmation": null,
+          "last_action": "unseen"
+        },
+        {
+          "candidate_id": "C0001",
+          "section": "completeness",
+          "item_id": "completeness",
+          "origin": {
+            "answers_version": "clinical-console-choices/v0.3",
+            "answer": "pending",
+            "ui_version": "0.2.2"
+          },
+          "display": {
+            "ui_version": "0.2.2",
+            "preset_shown": true,
+            "answer": "usable"
+          },
+          "selection": null,
+          "confirmation": {
+            "ui_version": "0.2.2",
+            "method": "preset",
+            "answer": "usable",
+            "preset_shown": true
+          },
+          "last_action": "confirmed"
+        }
+      ]
+    }
+  }
+}
