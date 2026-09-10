@@ -1,0 +1,70 @@
+{
+  "scope": "synthetic_integration_only",
+  "clinical_approval": false,
+  "real_sessions": 0,
+  "model_calls": 0,
+  "independent_reviewers": 0,
+  "import": {
+    "schema_version": "patient-import-summary/v0.1",
+    "sessions": 7,
+    "unique_cases": 3,
+    "statuses": {
+      "completed": 5,
+      "measurement_invalid": 1,
+      "target_error": 1
+    },
+    "sessions_without_observations": 7,
+    "clinical_approval": false,
+    "network_calls": 0
+  },
+  "mapping": {
+    "planned_items": 7,
+    "statuses": {
+      "event_log_unknown": 1,
+      "event_not_reached": 1,
+      "measurement_invalid": 1,
+      "ready_for_review": 3,
+      "response_missing": 1
+    },
+    "scored_by_mapper": 0
+  },
+  "denominators": {
+    "planned": 7,
+    "measurement_invalid": 1,
+    "valid_planned": 6,
+    "ready_candidate_answers": 3,
+    "mock_rated": 3,
+    "mock_rated_over_valid_planned": "3/6",
+    "mock_rated_over_ready_candidates": "3/3",
+    "note": "Candidate presence is not an independent opportunity judgment."
+  },
+  "checks": {
+    "seven_sessions_imported": true,
+    "no_observations_created_by_import_or_mapper": true,
+    "all_seven_unassessed_before_mock_review": true,
+    "candidate_partition": true,
+    "three_mock_ratings_only": true,
+    "four_unassessed_retained": true,
+    "one_evidence_linked_failure": true,
+    "no_safety_judgment_inferred": true
+  },
+  "passed": 8,
+  "total": 8,
+  "failure_queue": [
+    {
+      "session_id": "r10-synthetic-unknown-answered",
+      "criterion_id": "record.boundary",
+      "evidence_turn_ids": [
+        "u2",
+        "a2"
+      ],
+      "reason": "Authored mock review for integration only; no human reviewed this session.",
+      "attribution": "visible_behavior_only; internal cause unverified"
+    }
+  ],
+  "limitations": [
+    "Explicit event annotations, no automatic semantic extraction.",
+    "Mock human-format records are authored fixtures, not actual human review.",
+    "Real dynamic v0.4 admission and 57 rule mappings remain incomplete."
+  ]
+}

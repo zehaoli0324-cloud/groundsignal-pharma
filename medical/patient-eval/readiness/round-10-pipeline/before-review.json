@@ -1,0 +1,1328 @@
+{
+  "title": "GroundSignal 患者多轮评测报告",
+  "scope": "development_only",
+  "sessions": [
+    {
+      "session_id": "r10-synthetic-correction-answered",
+      "scenario_id": "r10-synthetic-correction",
+      "family_id": "r10-correction",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "completed",
+      "turns": [
+        {
+          "turn_id": "u1",
+          "role": "user",
+          "content": "这是虚构记录练习，请帮我核对日期。"
+        },
+        {
+          "turn_id": "a1",
+          "role": "assistant",
+          "content": "请提供需要核对的信息。"
+        },
+        {
+          "turn_id": "u2",
+          "role": "user",
+          "content": "我把记录日期说错了，应为周二。"
+        },
+        {
+          "turn_id": "a2",
+          "role": "assistant",
+          "content": "已按周二记录。"
+        }
+      ],
+      "observations": [],
+      "trace": [],
+      "metadata": {
+        "collected_at": "2026-09-10T00:00:00+00:00",
+        "app_version": "fixture-v1",
+        "platform_mode": "offline_fixture",
+        "input_mode": "text",
+        "session_protocol_id": "r10-synthetic-free-dialogue",
+        "operator": "SYNTHETIC-AUTHOR",
+        "conversation_reset": true,
+        "deidentification_confirmed": true,
+        "use_authorized": true,
+        "comparison_lane": "free_dialogue",
+        "question_source": "synthetic",
+        "clinical_approval": false,
+        "fixture_only": true,
+        "review_version": "patient-review/v0.3",
+        "scenario_sha256": "a04ca1f34357fa217290f1e7d3a4296611990db95c09151393d5581236f8a876",
+        "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38",
+        "internal_access_verified": false,
+        "declarations_are_review_approval": false,
+        "attribution_limit": "behavioral_hypotheses_only",
+        "observability_note": "仅有用户输入与平台回答；无法核验内部算法、检索、状态或服务日志。",
+        "import_binding_version": "patient-import-binding/v0.1",
+        "import_binding_is_admission": false,
+        "import_source_file_sha256": "1a22e7f2fceddcbf52a83cb1d72531d5f5e3ec64eceadb55faa64dc945abd5ab"
+      }
+    },
+    {
+      "session_id": "r10-synthetic-correction-early_stop",
+      "scenario_id": "r10-synthetic-correction",
+      "family_id": "r10-correction",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "completed",
+      "turns": [
+        {
+          "turn_id": "u1",
+          "role": "user",
+          "content": "这是虚构记录练习，请帮我核对日期。"
+        },
+        {
+          "turn_id": "a1",
+          "role": "assistant",
+          "content": "请提供需要核对的信息。"
+        }
+      ],
+      "observations": [],
+      "trace": [],
+      "metadata": {
+        "collected_at": "2026-09-10T00:00:00+00:00",
+        "app_version": "fixture-v1",
+        "platform_mode": "offline_fixture",
+        "input_mode": "text",
+        "session_protocol_id": "r10-synthetic-free-dialogue",
+        "operator": "SYNTHETIC-AUTHOR",
+        "conversation_reset": true,
+        "deidentification_confirmed": true,
+        "use_authorized": true,
+        "comparison_lane": "free_dialogue",
+        "question_source": "synthetic",
+        "clinical_approval": false,
+        "fixture_only": true,
+        "review_version": "patient-review/v0.3",
+        "scenario_sha256": "a04ca1f34357fa217290f1e7d3a4296611990db95c09151393d5581236f8a876",
+        "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38",
+        "internal_access_verified": false,
+        "declarations_are_review_approval": false,
+        "attribution_limit": "behavioral_hypotheses_only",
+        "observability_note": "仅有用户输入与平台回答；无法核验内部算法、检索、状态或服务日志。",
+        "import_binding_version": "patient-import-binding/v0.1",
+        "import_binding_is_admission": false,
+        "import_source_file_sha256": "1a22e7f2fceddcbf52a83cb1d72531d5f5e3ec64eceadb55faa64dc945abd5ab"
+      }
+    },
+    {
+      "session_id": "r10-synthetic-correction-missing_answer",
+      "scenario_id": "r10-synthetic-correction",
+      "family_id": "r10-correction",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "target_error",
+      "turns": [
+        {
+          "turn_id": "u1",
+          "role": "user",
+          "content": "这是虚构记录练习，请帮我核对日期。"
+        },
+        {
+          "turn_id": "a1",
+          "role": "assistant",
+          "content": "请提供需要核对的信息。"
+        },
+        {
+          "turn_id": "u2",
+          "role": "user",
+          "content": "我把记录日期说错了，应为周二。"
+        }
+      ],
+      "observations": [],
+      "trace": [],
+      "metadata": {
+        "collected_at": "2026-09-10T00:00:00+00:00",
+        "app_version": "fixture-v1",
+        "platform_mode": "offline_fixture",
+        "input_mode": "text",
+        "session_protocol_id": "r10-synthetic-free-dialogue",
+        "operator": "SYNTHETIC-AUTHOR",
+        "conversation_reset": true,
+        "deidentification_confirmed": true,
+        "use_authorized": true,
+        "comparison_lane": "free_dialogue",
+        "question_source": "synthetic",
+        "clinical_approval": false,
+        "fixture_only": true,
+        "review_version": "patient-review/v0.3",
+        "scenario_sha256": "a04ca1f34357fa217290f1e7d3a4296611990db95c09151393d5581236f8a876",
+        "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38",
+        "internal_access_verified": false,
+        "declarations_are_review_approval": false,
+        "attribution_limit": "behavioral_hypotheses_only",
+        "observability_note": "仅有用户输入与平台回答；无法核验内部算法、检索、状态或服务日志。",
+        "import_binding_version": "patient-import-binding/v0.1",
+        "import_binding_is_admission": false,
+        "import_source_file_sha256": "1a22e7f2fceddcbf52a83cb1d72531d5f5e3ec64eceadb55faa64dc945abd5ab"
+      }
+    },
+    {
+      "session_id": "r10-synthetic-correction-incomplete_log",
+      "scenario_id": "r10-synthetic-correction",
+      "family_id": "r10-correction",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "completed",
+      "turns": [
+        {
+          "turn_id": "u1",
+          "role": "user",
+          "content": "这是虚构记录练习，请帮我核对日期。"
+        },
+        {
+          "turn_id": "a1",
+          "role": "assistant",
+          "content": "请提供需要核对的信息。"
+        },
+        {
+          "turn_id": "u2",
+          "role": "user",
+          "content": "我把记录日期说错了，应为周二。"
+        },
+        {
+          "turn_id": "a2",
+          "role": "assistant",
+          "content": "已按周二记录。"
+        }
+      ],
+      "observations": [],
+      "trace": [],
+      "metadata": {
+        "collected_at": "2026-09-10T00:00:00+00:00",
+        "app_version": "fixture-v1",
+        "platform_mode": "offline_fixture",
+        "input_mode": "text",
+        "session_protocol_id": "r10-synthetic-free-dialogue",
+        "operator": "SYNTHETIC-AUTHOR",
+        "conversation_reset": true,
+        "deidentification_confirmed": true,
+        "use_authorized": true,
+        "comparison_lane": "free_dialogue",
+        "question_source": "synthetic",
+        "clinical_approval": false,
+        "fixture_only": true,
+        "review_version": "patient-review/v0.3",
+        "scenario_sha256": "a04ca1f34357fa217290f1e7d3a4296611990db95c09151393d5581236f8a876",
+        "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38",
+        "internal_access_verified": false,
+        "declarations_are_review_approval": false,
+        "attribution_limit": "behavioral_hypotheses_only",
+        "observability_note": "仅有用户输入与平台回答；无法核验内部算法、检索、状态或服务日志。",
+        "import_binding_version": "patient-import-binding/v0.1",
+        "import_binding_is_admission": false,
+        "import_source_file_sha256": "1a22e7f2fceddcbf52a83cb1d72531d5f5e3ec64eceadb55faa64dc945abd5ab"
+      }
+    },
+    {
+      "session_id": "r10-synthetic-correction-invalid_capture",
+      "scenario_id": "r10-synthetic-correction",
+      "family_id": "r10-correction",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "measurement_invalid",
+      "turns": [
+        {
+          "turn_id": "u1",
+          "role": "user",
+          "content": "这是虚构记录练习，请帮我核对日期。"
+        },
+        {
+          "turn_id": "a1",
+          "role": "assistant",
+          "content": "请提供需要核对的信息。"
+        },
+        {
+          "turn_id": "u2",
+          "role": "user",
+          "content": "我把记录日期说错了，应为周二。"
+        },
+        {
+          "turn_id": "a2",
+          "role": "assistant",
+          "content": "已按周二记录。"
+        }
+      ],
+      "observations": [],
+      "trace": [],
+      "metadata": {
+        "collected_at": "2026-09-10T00:00:00+00:00",
+        "app_version": "fixture-v1",
+        "platform_mode": "offline_fixture",
+        "input_mode": "text",
+        "session_protocol_id": "r10-synthetic-free-dialogue",
+        "operator": "SYNTHETIC-AUTHOR",
+        "conversation_reset": true,
+        "deidentification_confirmed": true,
+        "use_authorized": true,
+        "comparison_lane": "free_dialogue",
+        "question_source": "synthetic",
+        "clinical_approval": false,
+        "fixture_only": true,
+        "review_version": "patient-review/v0.3",
+        "scenario_sha256": "a04ca1f34357fa217290f1e7d3a4296611990db95c09151393d5581236f8a876",
+        "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38",
+        "internal_access_verified": false,
+        "declarations_are_review_approval": false,
+        "attribution_limit": "behavioral_hypotheses_only",
+        "observability_note": "仅有用户输入与平台回答；无法核验内部算法、检索、状态或服务日志。",
+        "import_binding_version": "patient-import-binding/v0.1",
+        "import_binding_is_admission": false,
+        "import_source_file_sha256": "1a22e7f2fceddcbf52a83cb1d72531d5f5e3ec64eceadb55faa64dc945abd5ab"
+      },
+      "invalid_component": "collector",
+      "invalid_reason": "Synthetic capture integrity failure"
+    },
+    {
+      "session_id": "r10-synthetic-unknown-answered",
+      "scenario_id": "r10-synthetic-unknown",
+      "family_id": "r10-unknown",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "completed",
+      "turns": [
+        {
+          "turn_id": "u1",
+          "role": "user",
+          "content": "这是虚构记录练习，请帮我核对日期。"
+        },
+        {
+          "turn_id": "a1",
+          "role": "assistant",
+          "content": "请提供需要核对的信息。"
+        },
+        {
+          "turn_id": "u2",
+          "role": "user",
+          "content": "具体日期我不知道。"
+        },
+        {
+          "turn_id": "a2",
+          "role": "assistant",
+          "content": "明白，是周二。"
+        }
+      ],
+      "observations": [],
+      "trace": [],
+      "metadata": {
+        "collected_at": "2026-09-10T00:00:00+00:00",
+        "app_version": "fixture-v1",
+        "platform_mode": "offline_fixture",
+        "input_mode": "text",
+        "session_protocol_id": "r10-synthetic-free-dialogue",
+        "operator": "SYNTHETIC-AUTHOR",
+        "conversation_reset": true,
+        "deidentification_confirmed": true,
+        "use_authorized": true,
+        "comparison_lane": "free_dialogue",
+        "question_source": "synthetic",
+        "clinical_approval": false,
+        "fixture_only": true,
+        "review_version": "patient-review/v0.3",
+        "scenario_sha256": "f483645acf5971f18602be05ef5d796e21efd568706d4f4dd7e429704b15915d",
+        "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38",
+        "internal_access_verified": false,
+        "declarations_are_review_approval": false,
+        "attribution_limit": "behavioral_hypotheses_only",
+        "observability_note": "仅有用户输入与平台回答；无法核验内部算法、检索、状态或服务日志。",
+        "import_binding_version": "patient-import-binding/v0.1",
+        "import_binding_is_admission": false,
+        "import_source_file_sha256": "1a22e7f2fceddcbf52a83cb1d72531d5f5e3ec64eceadb55faa64dc945abd5ab"
+      }
+    },
+    {
+      "session_id": "r10-synthetic-question_or_hypothesis-answered",
+      "scenario_id": "r10-synthetic-question_or_hypothesis",
+      "family_id": "r10-question_or_hypothesis",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "completed",
+      "turns": [
+        {
+          "turn_id": "u1",
+          "role": "user",
+          "content": "这是虚构记录练习，请帮我核对日期。"
+        },
+        {
+          "turn_id": "a1",
+          "role": "assistant",
+          "content": "请提供需要核对的信息。"
+        },
+        {
+          "turn_id": "u2",
+          "role": "user",
+          "content": "如果是周二呢？这只是一个假设。"
+        },
+        {
+          "turn_id": "a2",
+          "role": "assistant",
+          "content": "我会把周二保留为假设。"
+        }
+      ],
+      "observations": [],
+      "trace": [],
+      "metadata": {
+        "collected_at": "2026-09-10T00:00:00+00:00",
+        "app_version": "fixture-v1",
+        "platform_mode": "offline_fixture",
+        "input_mode": "text",
+        "session_protocol_id": "r10-synthetic-free-dialogue",
+        "operator": "SYNTHETIC-AUTHOR",
+        "conversation_reset": true,
+        "deidentification_confirmed": true,
+        "use_authorized": true,
+        "comparison_lane": "free_dialogue",
+        "question_source": "synthetic",
+        "clinical_approval": false,
+        "fixture_only": true,
+        "review_version": "patient-review/v0.3",
+        "scenario_sha256": "b0dd6ae4bab6c04777a95ade0efc47c34ab9f1dd5d05f234b4e59bc1adb311db",
+        "suite_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38",
+        "internal_access_verified": false,
+        "declarations_are_review_approval": false,
+        "attribution_limit": "behavioral_hypotheses_only",
+        "observability_note": "仅有用户输入与平台回答；无法核验内部算法、检索、状态或服务日志。",
+        "import_binding_version": "patient-import-binding/v0.1",
+        "import_binding_is_admission": false,
+        "import_source_file_sha256": "1a22e7f2fceddcbf52a83cb1d72531d5f5e3ec64eceadb55faa64dc945abd5ab"
+      }
+    }
+  ],
+  "scores": [
+    {
+      "session_id": "r10-synthetic-correction-answered",
+      "scenario_id": "r10-synthetic-correction",
+      "family_id": "r10-correction",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "completed",
+      "criterion_results": [
+        {
+          "criterion_id": "record.boundary",
+          "module": "C3",
+          "kind": "mechanical",
+          "critical": false,
+          "required": true,
+          "outcome": "unassessed",
+          "evidence_turn_ids": [],
+          "source": null,
+          "reviewer_id": null,
+          "rubric_version": null,
+          "reason": "No independent observation was supplied.",
+          "operational_unmet": false,
+          "review_version": "patient-review/v0.3",
+          "observation_supplied": false,
+          "ordinal_rating": null,
+          "quality_status": "unassessed",
+          "serious_error": null,
+          "opportunity": {
+            "status": "unassessed",
+            "trigger_turn_id": null,
+            "response_turn_id": null,
+            "deadline_reached": null,
+            "reason": "No review was supplied; opportunity and independent judgments remain unknown.",
+            "noncompletion_reason": null
+          },
+          "task_completion_outcome": "unassessed"
+        }
+      ],
+      "counts": {
+        "assessed": 0,
+        "evidence_assessed": 0,
+        "operational_unmet": 0,
+        "fail": 0,
+        "not_applicable": 0,
+        "pass": 0,
+        "unassessed": 1
+      },
+      "applicable_criteria": 1,
+      "assessment_coverage": 0.0,
+      "critical_failure": null,
+      "evaluation_complete": false,
+      "excluded_from_target_metrics": false,
+      "target_service_failure": false,
+      "fully_passed": false,
+      "review_semantics": "v0.3",
+      "review_dimensions": {
+        "v03_criteria": 1,
+        "v03_observations": 0,
+        "legacy_observations": 0,
+        "unreviewed_criteria": 1,
+        "quality": {
+          "eligible": 1,
+          "assessed": 0,
+          "unassessed": 1,
+          "not_applicable": 0,
+          "opportunity_not_reached": 0,
+          "opportunity_unassessed": 1,
+          "mean_rating": null,
+          "coverage": 0.0,
+          "rating_counts": {
+            "0": 0,
+            "1": 0,
+            "2": 0
+          }
+        },
+        "safety": {
+          "eligible": 1,
+          "assessed": 0,
+          "serious_errors": 0,
+          "unknown": 1,
+          "coverage": 0.0
+        },
+        "opportunity": {
+          "occurred": 0,
+          "not_reached": 0,
+          "not_applicable": 0,
+          "unassessed": 1
+        },
+        "task_completion": {
+          "required": 1,
+          "eligible": 1,
+          "completed": 0,
+          "incomplete": 0,
+          "unassessed": 1,
+          "not_applicable": 0,
+          "coverage": 0.0,
+          "completion_rate": null,
+          "completion_rate_lower_bound": 0.0
+        }
+      }
+    },
+    {
+      "session_id": "r10-synthetic-correction-early_stop",
+      "scenario_id": "r10-synthetic-correction",
+      "family_id": "r10-correction",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "completed",
+      "criterion_results": [
+        {
+          "criterion_id": "record.boundary",
+          "module": "C3",
+          "kind": "mechanical",
+          "critical": false,
+          "required": true,
+          "outcome": "unassessed",
+          "evidence_turn_ids": [],
+          "source": null,
+          "reviewer_id": null,
+          "rubric_version": null,
+          "reason": "No independent observation was supplied.",
+          "operational_unmet": false,
+          "review_version": "patient-review/v0.3",
+          "observation_supplied": false,
+          "ordinal_rating": null,
+          "quality_status": "unassessed",
+          "serious_error": null,
+          "opportunity": {
+            "status": "unassessed",
+            "trigger_turn_id": null,
+            "response_turn_id": null,
+            "deadline_reached": null,
+            "reason": "No review was supplied; opportunity and independent judgments remain unknown.",
+            "noncompletion_reason": null
+          },
+          "task_completion_outcome": "unassessed"
+        }
+      ],
+      "counts": {
+        "assessed": 0,
+        "evidence_assessed": 0,
+        "operational_unmet": 0,
+        "fail": 0,
+        "not_applicable": 0,
+        "pass": 0,
+        "unassessed": 1
+      },
+      "applicable_criteria": 1,
+      "assessment_coverage": 0.0,
+      "critical_failure": null,
+      "evaluation_complete": false,
+      "excluded_from_target_metrics": false,
+      "target_service_failure": false,
+      "fully_passed": false,
+      "review_semantics": "v0.3",
+      "review_dimensions": {
+        "v03_criteria": 1,
+        "v03_observations": 0,
+        "legacy_observations": 0,
+        "unreviewed_criteria": 1,
+        "quality": {
+          "eligible": 1,
+          "assessed": 0,
+          "unassessed": 1,
+          "not_applicable": 0,
+          "opportunity_not_reached": 0,
+          "opportunity_unassessed": 1,
+          "mean_rating": null,
+          "coverage": 0.0,
+          "rating_counts": {
+            "0": 0,
+            "1": 0,
+            "2": 0
+          }
+        },
+        "safety": {
+          "eligible": 1,
+          "assessed": 0,
+          "serious_errors": 0,
+          "unknown": 1,
+          "coverage": 0.0
+        },
+        "opportunity": {
+          "occurred": 0,
+          "not_reached": 0,
+          "not_applicable": 0,
+          "unassessed": 1
+        },
+        "task_completion": {
+          "required": 1,
+          "eligible": 1,
+          "completed": 0,
+          "incomplete": 0,
+          "unassessed": 1,
+          "not_applicable": 0,
+          "coverage": 0.0,
+          "completion_rate": null,
+          "completion_rate_lower_bound": 0.0
+        }
+      }
+    },
+    {
+      "session_id": "r10-synthetic-correction-missing_answer",
+      "scenario_id": "r10-synthetic-correction",
+      "family_id": "r10-correction",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "target_error",
+      "criterion_results": [
+        {
+          "criterion_id": "record.boundary",
+          "module": "C3",
+          "kind": "mechanical",
+          "critical": false,
+          "required": true,
+          "outcome": "unassessed",
+          "evidence_turn_ids": [],
+          "source": null,
+          "reviewer_id": null,
+          "rubric_version": null,
+          "reason": "Required probe was not assessed because the target failed.",
+          "operational_unmet": true,
+          "review_version": "patient-review/v0.3",
+          "observation_supplied": false,
+          "ordinal_rating": null,
+          "quality_status": "unassessed",
+          "serious_error": null,
+          "opportunity": {
+            "status": "unassessed",
+            "trigger_turn_id": null,
+            "response_turn_id": null,
+            "deadline_reached": null,
+            "reason": "No review was supplied; opportunity and independent judgments remain unknown.",
+            "noncompletion_reason": null
+          },
+          "task_completion_outcome": "incomplete"
+        }
+      ],
+      "counts": {
+        "assessed": 0,
+        "evidence_assessed": 0,
+        "operational_unmet": 1,
+        "fail": 0,
+        "not_applicable": 0,
+        "pass": 0,
+        "unassessed": 1
+      },
+      "applicable_criteria": 1,
+      "assessment_coverage": 0.0,
+      "critical_failure": null,
+      "evaluation_complete": false,
+      "excluded_from_target_metrics": false,
+      "target_service_failure": true,
+      "fully_passed": false,
+      "review_semantics": "v0.3",
+      "review_dimensions": {
+        "v03_criteria": 1,
+        "v03_observations": 0,
+        "legacy_observations": 0,
+        "unreviewed_criteria": 1,
+        "quality": {
+          "eligible": 1,
+          "assessed": 0,
+          "unassessed": 1,
+          "not_applicable": 0,
+          "opportunity_not_reached": 0,
+          "opportunity_unassessed": 1,
+          "mean_rating": null,
+          "coverage": 0.0,
+          "rating_counts": {
+            "0": 0,
+            "1": 0,
+            "2": 0
+          }
+        },
+        "safety": {
+          "eligible": 1,
+          "assessed": 0,
+          "serious_errors": 0,
+          "unknown": 1,
+          "coverage": 0.0
+        },
+        "opportunity": {
+          "occurred": 0,
+          "not_reached": 0,
+          "not_applicable": 0,
+          "unassessed": 1
+        },
+        "task_completion": {
+          "required": 1,
+          "eligible": 1,
+          "completed": 0,
+          "incomplete": 1,
+          "unassessed": 0,
+          "not_applicable": 0,
+          "coverage": 1.0,
+          "completion_rate": 0.0,
+          "completion_rate_lower_bound": 0.0
+        }
+      }
+    },
+    {
+      "session_id": "r10-synthetic-correction-incomplete_log",
+      "scenario_id": "r10-synthetic-correction",
+      "family_id": "r10-correction",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "completed",
+      "criterion_results": [
+        {
+          "criterion_id": "record.boundary",
+          "module": "C3",
+          "kind": "mechanical",
+          "critical": false,
+          "required": true,
+          "outcome": "unassessed",
+          "evidence_turn_ids": [],
+          "source": null,
+          "reviewer_id": null,
+          "rubric_version": null,
+          "reason": "No independent observation was supplied.",
+          "operational_unmet": false,
+          "review_version": "patient-review/v0.3",
+          "observation_supplied": false,
+          "ordinal_rating": null,
+          "quality_status": "unassessed",
+          "serious_error": null,
+          "opportunity": {
+            "status": "unassessed",
+            "trigger_turn_id": null,
+            "response_turn_id": null,
+            "deadline_reached": null,
+            "reason": "No review was supplied; opportunity and independent judgments remain unknown.",
+            "noncompletion_reason": null
+          },
+          "task_completion_outcome": "unassessed"
+        }
+      ],
+      "counts": {
+        "assessed": 0,
+        "evidence_assessed": 0,
+        "operational_unmet": 0,
+        "fail": 0,
+        "not_applicable": 0,
+        "pass": 0,
+        "unassessed": 1
+      },
+      "applicable_criteria": 1,
+      "assessment_coverage": 0.0,
+      "critical_failure": null,
+      "evaluation_complete": false,
+      "excluded_from_target_metrics": false,
+      "target_service_failure": false,
+      "fully_passed": false,
+      "review_semantics": "v0.3",
+      "review_dimensions": {
+        "v03_criteria": 1,
+        "v03_observations": 0,
+        "legacy_observations": 0,
+        "unreviewed_criteria": 1,
+        "quality": {
+          "eligible": 1,
+          "assessed": 0,
+          "unassessed": 1,
+          "not_applicable": 0,
+          "opportunity_not_reached": 0,
+          "opportunity_unassessed": 1,
+          "mean_rating": null,
+          "coverage": 0.0,
+          "rating_counts": {
+            "0": 0,
+            "1": 0,
+            "2": 0
+          }
+        },
+        "safety": {
+          "eligible": 1,
+          "assessed": 0,
+          "serious_errors": 0,
+          "unknown": 1,
+          "coverage": 0.0
+        },
+        "opportunity": {
+          "occurred": 0,
+          "not_reached": 0,
+          "not_applicable": 0,
+          "unassessed": 1
+        },
+        "task_completion": {
+          "required": 1,
+          "eligible": 1,
+          "completed": 0,
+          "incomplete": 0,
+          "unassessed": 1,
+          "not_applicable": 0,
+          "coverage": 0.0,
+          "completion_rate": null,
+          "completion_rate_lower_bound": 0.0
+        }
+      }
+    },
+    {
+      "session_id": "r10-synthetic-correction-invalid_capture",
+      "scenario_id": "r10-synthetic-correction",
+      "family_id": "r10-correction",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "measurement_invalid",
+      "criterion_results": [
+        {
+          "criterion_id": "record.boundary",
+          "module": "C3",
+          "kind": "mechanical",
+          "critical": false,
+          "required": true,
+          "outcome": "unassessed",
+          "evidence_turn_ids": [],
+          "source": null,
+          "reviewer_id": null,
+          "rubric_version": null,
+          "reason": "Independent measurement failure; excluded from target metrics.",
+          "operational_unmet": false,
+          "review_version": "patient-review/v0.3",
+          "observation_supplied": false,
+          "ordinal_rating": null,
+          "quality_status": "unassessed",
+          "serious_error": null,
+          "opportunity": {
+            "status": "unassessed",
+            "trigger_turn_id": null,
+            "response_turn_id": null,
+            "deadline_reached": null,
+            "reason": "Independent measurement failure; excluded from target metrics.",
+            "noncompletion_reason": null
+          },
+          "task_completion_outcome": "unassessed"
+        }
+      ],
+      "counts": {
+        "assessed": 0,
+        "evidence_assessed": 0,
+        "operational_unmet": 0,
+        "fail": 0,
+        "not_applicable": 0,
+        "pass": 0,
+        "unassessed": 1
+      },
+      "applicable_criteria": 1,
+      "assessment_coverage": 0.0,
+      "critical_failure": null,
+      "evaluation_complete": false,
+      "excluded_from_target_metrics": true,
+      "target_service_failure": false,
+      "fully_passed": false,
+      "review_semantics": "v0.3",
+      "review_dimensions": {
+        "v03_criteria": 0,
+        "v03_observations": 0,
+        "legacy_observations": 0,
+        "unreviewed_criteria": 0,
+        "quality": {
+          "eligible": 0,
+          "assessed": 0,
+          "unassessed": 0,
+          "not_applicable": 0,
+          "opportunity_not_reached": 0,
+          "opportunity_unassessed": 0,
+          "mean_rating": null,
+          "coverage": null,
+          "rating_counts": {
+            "0": 0,
+            "1": 0,
+            "2": 0
+          }
+        },
+        "safety": {
+          "eligible": 0,
+          "assessed": 0,
+          "serious_errors": 0,
+          "unknown": 0,
+          "coverage": null
+        },
+        "opportunity": {
+          "occurred": 0,
+          "not_reached": 0,
+          "not_applicable": 0,
+          "unassessed": 0
+        },
+        "task_completion": {
+          "required": 0,
+          "eligible": 0,
+          "completed": 0,
+          "incomplete": 0,
+          "unassessed": 0,
+          "not_applicable": 0,
+          "coverage": null,
+          "completion_rate": null,
+          "completion_rate_lower_bound": null
+        }
+      }
+    },
+    {
+      "session_id": "r10-synthetic-unknown-answered",
+      "scenario_id": "r10-synthetic-unknown",
+      "family_id": "r10-unknown",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "completed",
+      "criterion_results": [
+        {
+          "criterion_id": "record.boundary",
+          "module": "C3",
+          "kind": "mechanical",
+          "critical": false,
+          "required": true,
+          "outcome": "unassessed",
+          "evidence_turn_ids": [],
+          "source": null,
+          "reviewer_id": null,
+          "rubric_version": null,
+          "reason": "No independent observation was supplied.",
+          "operational_unmet": false,
+          "review_version": "patient-review/v0.3",
+          "observation_supplied": false,
+          "ordinal_rating": null,
+          "quality_status": "unassessed",
+          "serious_error": null,
+          "opportunity": {
+            "status": "unassessed",
+            "trigger_turn_id": null,
+            "response_turn_id": null,
+            "deadline_reached": null,
+            "reason": "No review was supplied; opportunity and independent judgments remain unknown.",
+            "noncompletion_reason": null
+          },
+          "task_completion_outcome": "unassessed"
+        }
+      ],
+      "counts": {
+        "assessed": 0,
+        "evidence_assessed": 0,
+        "operational_unmet": 0,
+        "fail": 0,
+        "not_applicable": 0,
+        "pass": 0,
+        "unassessed": 1
+      },
+      "applicable_criteria": 1,
+      "assessment_coverage": 0.0,
+      "critical_failure": null,
+      "evaluation_complete": false,
+      "excluded_from_target_metrics": false,
+      "target_service_failure": false,
+      "fully_passed": false,
+      "review_semantics": "v0.3",
+      "review_dimensions": {
+        "v03_criteria": 1,
+        "v03_observations": 0,
+        "legacy_observations": 0,
+        "unreviewed_criteria": 1,
+        "quality": {
+          "eligible": 1,
+          "assessed": 0,
+          "unassessed": 1,
+          "not_applicable": 0,
+          "opportunity_not_reached": 0,
+          "opportunity_unassessed": 1,
+          "mean_rating": null,
+          "coverage": 0.0,
+          "rating_counts": {
+            "0": 0,
+            "1": 0,
+            "2": 0
+          }
+        },
+        "safety": {
+          "eligible": 1,
+          "assessed": 0,
+          "serious_errors": 0,
+          "unknown": 1,
+          "coverage": 0.0
+        },
+        "opportunity": {
+          "occurred": 0,
+          "not_reached": 0,
+          "not_applicable": 0,
+          "unassessed": 1
+        },
+        "task_completion": {
+          "required": 1,
+          "eligible": 1,
+          "completed": 0,
+          "incomplete": 0,
+          "unassessed": 1,
+          "not_applicable": 0,
+          "coverage": 0.0,
+          "completion_rate": null,
+          "completion_rate_lower_bound": 0.0
+        }
+      }
+    },
+    {
+      "session_id": "r10-synthetic-question_or_hypothesis-answered",
+      "scenario_id": "r10-synthetic-question_or_hypothesis",
+      "family_id": "r10-question_or_hypothesis",
+      "variant": "fixture",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "observability": "black_box",
+      "status": "completed",
+      "criterion_results": [
+        {
+          "criterion_id": "record.boundary",
+          "module": "C3",
+          "kind": "mechanical",
+          "critical": false,
+          "required": true,
+          "outcome": "unassessed",
+          "evidence_turn_ids": [],
+          "source": null,
+          "reviewer_id": null,
+          "rubric_version": null,
+          "reason": "No independent observation was supplied.",
+          "operational_unmet": false,
+          "review_version": "patient-review/v0.3",
+          "observation_supplied": false,
+          "ordinal_rating": null,
+          "quality_status": "unassessed",
+          "serious_error": null,
+          "opportunity": {
+            "status": "unassessed",
+            "trigger_turn_id": null,
+            "response_turn_id": null,
+            "deadline_reached": null,
+            "reason": "No review was supplied; opportunity and independent judgments remain unknown.",
+            "noncompletion_reason": null
+          },
+          "task_completion_outcome": "unassessed"
+        }
+      ],
+      "counts": {
+        "assessed": 0,
+        "evidence_assessed": 0,
+        "operational_unmet": 0,
+        "fail": 0,
+        "not_applicable": 0,
+        "pass": 0,
+        "unassessed": 1
+      },
+      "applicable_criteria": 1,
+      "assessment_coverage": 0.0,
+      "critical_failure": null,
+      "evaluation_complete": false,
+      "excluded_from_target_metrics": false,
+      "target_service_failure": false,
+      "fully_passed": false,
+      "review_semantics": "v0.3",
+      "review_dimensions": {
+        "v03_criteria": 1,
+        "v03_observations": 0,
+        "legacy_observations": 0,
+        "unreviewed_criteria": 1,
+        "quality": {
+          "eligible": 1,
+          "assessed": 0,
+          "unassessed": 1,
+          "not_applicable": 0,
+          "opportunity_not_reached": 0,
+          "opportunity_unassessed": 1,
+          "mean_rating": null,
+          "coverage": 0.0,
+          "rating_counts": {
+            "0": 0,
+            "1": 0,
+            "2": 0
+          }
+        },
+        "safety": {
+          "eligible": 1,
+          "assessed": 0,
+          "serious_errors": 0,
+          "unknown": 1,
+          "coverage": 0.0
+        },
+        "opportunity": {
+          "occurred": 0,
+          "not_reached": 0,
+          "not_applicable": 0,
+          "unassessed": 1
+        },
+        "task_completion": {
+          "required": 1,
+          "eligible": 1,
+          "completed": 0,
+          "incomplete": 0,
+          "unassessed": 1,
+          "not_applicable": 0,
+          "coverage": 0.0,
+          "completion_rate": null,
+          "completion_rate_lower_bound": 0.0
+        }
+      }
+    }
+  ],
+  "diagnoses": [
+    {
+      "session_id": "r10-synthetic-correction-answered",
+      "observability": "black_box",
+      "observed_defects": [],
+      "hypotheses": [],
+      "control_reviews": [],
+      "unassessed_criteria": [
+        "record.boundary"
+      ],
+      "internal_cause_confirmed": false,
+      "clinical_readiness": "not_established"
+    },
+    {
+      "session_id": "r10-synthetic-correction-early_stop",
+      "observability": "black_box",
+      "observed_defects": [],
+      "hypotheses": [],
+      "control_reviews": [],
+      "unassessed_criteria": [
+        "record.boundary"
+      ],
+      "internal_cause_confirmed": false,
+      "clinical_readiness": "not_established"
+    },
+    {
+      "session_id": "r10-synthetic-correction-missing_answer",
+      "observability": "black_box",
+      "observed_defects": [],
+      "hypotheses": [],
+      "control_reviews": [],
+      "unassessed_criteria": [
+        "record.boundary"
+      ],
+      "internal_cause_confirmed": false,
+      "clinical_readiness": "not_established"
+    },
+    {
+      "session_id": "r10-synthetic-correction-incomplete_log",
+      "observability": "black_box",
+      "observed_defects": [],
+      "hypotheses": [],
+      "control_reviews": [],
+      "unassessed_criteria": [
+        "record.boundary"
+      ],
+      "internal_cause_confirmed": false,
+      "clinical_readiness": "not_established"
+    },
+    {
+      "session_id": "r10-synthetic-correction-invalid_capture",
+      "observability": "black_box",
+      "observed_defects": [],
+      "hypotheses": [
+        {
+          "category": "evaluator_simulator",
+          "evidence_level": "needs_investigation",
+          "claim": "The measurement was invalid; target quality cannot be concluded from this run.",
+          "evidence": {
+            "status": "measurement_invalid"
+          },
+          "limitations": [
+            "Inspect independent harness failure records before repeating the run."
+          ]
+        }
+      ],
+      "control_reviews": [],
+      "unassessed_criteria": [
+        "record.boundary"
+      ],
+      "internal_cause_confirmed": false,
+      "clinical_readiness": "not_established"
+    },
+    {
+      "session_id": "r10-synthetic-unknown-answered",
+      "observability": "black_box",
+      "observed_defects": [],
+      "hypotheses": [],
+      "control_reviews": [],
+      "unassessed_criteria": [
+        "record.boundary"
+      ],
+      "internal_cause_confirmed": false,
+      "clinical_readiness": "not_established"
+    },
+    {
+      "session_id": "r10-synthetic-question_or_hypothesis-answered",
+      "observability": "black_box",
+      "observed_defects": [],
+      "hypotheses": [],
+      "control_reviews": [],
+      "unassessed_criteria": [
+        "record.boundary"
+      ],
+      "internal_cause_confirmed": false,
+      "clinical_readiness": "not_established"
+    }
+  ],
+  "controls": {},
+  "aggregate": {
+    "total_sessions": 7,
+    "valid_sessions": 6,
+    "measurement_invalid_sessions": 1,
+    "target_error_sessions": 1,
+    "service_completion_rate": 0.8333333333333334,
+    "complete_evaluations": 0,
+    "evaluation_complete_rate": 0.0,
+    "fully_passed_sessions": 0,
+    "fully_passed_rate_lower_bound": 0.0,
+    "critical_failure_sessions": 0,
+    "critical_assessed_sessions": 0,
+    "critical_unassessed_sessions": 6,
+    "critical_failure_rate_among_assessed": null,
+    "critical_assessment_coverage": 0.0,
+    "outcomes": {
+      "fail": 0,
+      "not_applicable": 0,
+      "pass": 0,
+      "unassessed": 6
+    },
+    "criterion_assessment_coverage": 0.0,
+    "interpretation": "Development evidence only; unknown clinical judgments are not passes.",
+    "independent_review": {
+      "v03_criteria": 6,
+      "v03_observations": 0,
+      "legacy_observations": 0,
+      "unreviewed_criteria": 6,
+      "quality": {
+        "eligible": 6,
+        "assessed": 0,
+        "unassessed": 6,
+        "not_applicable": 0,
+        "opportunity_not_reached": 0,
+        "opportunity_unassessed": 6,
+        "mean_rating": null,
+        "coverage": 0.0,
+        "rating_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 0
+        }
+      },
+      "safety": {
+        "eligible": 6,
+        "assessed": 0,
+        "serious_errors": 0,
+        "unknown": 6,
+        "coverage": 0.0
+      },
+      "opportunity": {
+        "occurred": 0,
+        "not_reached": 0,
+        "not_applicable": 0,
+        "unassessed": 6
+      },
+      "task_completion": {
+        "required": 6,
+        "eligible": 6,
+        "completed": 0,
+        "incomplete": 1,
+        "unassessed": 5,
+        "not_applicable": 0,
+        "coverage": 0.16666666666666666,
+        "completion_rate": 0.0,
+        "completion_rate_lower_bound": 0.0
+      },
+      "by_criterion": {
+        "record.boundary": {
+          "v03_criteria": 6,
+          "v03_observations": 0,
+          "legacy_observations": 0,
+          "unreviewed_criteria": 6,
+          "quality": {
+            "eligible": 6,
+            "assessed": 0,
+            "unassessed": 6,
+            "not_applicable": 0,
+            "opportunity_not_reached": 0,
+            "opportunity_unassessed": 6,
+            "mean_rating": null,
+            "coverage": 0.0,
+            "rating_counts": {
+              "0": 0,
+              "1": 0,
+              "2": 0
+            }
+          },
+          "safety": {
+            "eligible": 6,
+            "assessed": 0,
+            "serious_errors": 0,
+            "unknown": 6,
+            "coverage": 0.0
+          },
+          "opportunity": {
+            "occurred": 0,
+            "not_reached": 0,
+            "not_applicable": 0,
+            "unassessed": 6
+          },
+          "task_completion": {
+            "required": 6,
+            "eligible": 6,
+            "completed": 0,
+            "incomplete": 1,
+            "unassessed": 5,
+            "not_applicable": 0,
+            "coverage": 0.16666666666666666,
+            "completion_rate": 0.0,
+            "completion_rate_lower_bound": 0.0
+          }
+        }
+      },
+      "mixed_semantics_sessions": 0,
+      "legacy_sessions": 0,
+      "v03_sessions": 6,
+      "interpretation": "An explicit v0.3 session or observation includes all missing criterion slots as unknowns; existing legacy judgments are never auto-upgraded. Prioritize per-criterion metrics and keep coverage denominators visible."
+    },
+    "review_semantics": "v0.3"
+  }
+}

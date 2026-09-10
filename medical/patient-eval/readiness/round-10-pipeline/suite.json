@@ -1,0 +1,84 @@
+{
+  "schema_version": "patient-eval/v0.1",
+  "scope": "development_only",
+  "scenarios": [
+    {
+      "scenario_id": "r10-synthetic-correction",
+      "family_id": "r10-correction",
+      "variant": "fixture",
+      "protocol_id": "r10-synthetic-free-dialogue",
+      "source": "synthetic",
+      "split": "development",
+      "prefix": [
+        {
+          "turn_id": "u1",
+          "role": "user",
+          "content": "这是虚构记录练习，请帮我核对日期。"
+        }
+      ],
+      "visible_updates": {},
+      "criteria": [
+        {
+          "id": "record.boundary",
+          "module": "C3",
+          "kind": "mechanical",
+          "required": true,
+          "critical": false,
+          "description": "仅检查合成日期记录，示例评分不是独立评审。"
+        }
+      ]
+    },
+    {
+      "scenario_id": "r10-synthetic-unknown",
+      "family_id": "r10-unknown",
+      "variant": "fixture",
+      "protocol_id": "r10-synthetic-free-dialogue",
+      "source": "synthetic",
+      "split": "development",
+      "prefix": [
+        {
+          "turn_id": "u1",
+          "role": "user",
+          "content": "这是虚构记录练习，请帮我核对日期。"
+        }
+      ],
+      "visible_updates": {},
+      "criteria": [
+        {
+          "id": "record.boundary",
+          "module": "C3",
+          "kind": "mechanical",
+          "required": true,
+          "critical": false,
+          "description": "仅检查合成日期记录，示例评分不是独立评审。"
+        }
+      ]
+    },
+    {
+      "scenario_id": "r10-synthetic-question_or_hypothesis",
+      "family_id": "r10-question_or_hypothesis",
+      "variant": "fixture",
+      "protocol_id": "r10-synthetic-free-dialogue",
+      "source": "synthetic",
+      "split": "development",
+      "prefix": [
+        {
+          "turn_id": "u1",
+          "role": "user",
+          "content": "这是虚构记录练习，请帮我核对日期。"
+        }
+      ],
+      "visible_updates": {},
+      "criteria": [
+        {
+          "id": "record.boundary",
+          "module": "C3",
+          "kind": "mechanical",
+          "required": true,
+          "critical": false,
+          "description": "仅检查合成日期记录，示例评分不是独立评审。"
+        }
+      ]
+    }
+  ]
+}
