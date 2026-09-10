@@ -51,3 +51,7 @@ python -m scripts.patient_eval.readiness_drill --out medical/patient-eval/local/
 ## R1：三条规则包
 
 现已补齐纠正、未知、提问三条合成规则。阅读 [规则审阅说明](SCORING_RULES_REVIEW.md)，运行 `python -m scripts.patient_eval.readiness_rules` 核验结构。结果记录在 `round-1-rule-validation.json`。三条均为待人工审阅草稿，不能称为真实57条机会已映射。
+
+## R2：只读恢复前检查
+
+阅读 [恢复合同](RECOVERY_CONTRACT.md)，运行 `python -m scripts.patient_eval.recovery --drill-out medical/patient-eval/local/recovery-first`。本轮能指出输入、配置、调度、检查点或目录残留的不一致，不修改原结果。即使内部一致性通过，仍明确禁止续跑：旧格式缺少可信会话摘要、排他锁和恢复执行器。不会改变上述R0演练的历史含义。

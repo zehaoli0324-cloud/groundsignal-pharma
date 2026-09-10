@@ -293,6 +293,17 @@ def _write_json(path: Path, value: object) -> None:
     os.replace(temporary, path)
 
 
+def study_config(client_config: dict, repeats: int = 1, seed: int = 7) -> dict:
+    """Shared configuration identity for execution and read-only recovery checks."""
+    from .patient_intent import DEFAULT_CLASSIFIER_VERSION
+
+    require(isinstance(client_config, dict), "client config must be an object")
+    return {"client": deepcopy(client_config), "seed": seed, "repeats": repeats,
+            "arms": list(ARMS), "system_policy_sha256": _digest(SYSTEM_POLICY),
+            "extractor_version": VisibleFactExtractor.version,
+            "patient_classifier_version": DEFAULT_CLASSIFIER_VERSION}
+
+
 def run_study(suite: dict, client, out: str | Path, repeats: int = 1, seed: int = 7) -> dict:
     """Run into a *new* directory, checkpoint each session; no implicit resume.
 
@@ -300,18 +311,13 @@ def run_study(suite: dict, client, out: str | Path, repeats: int = 1, seed: int 
     directory is rejected before any request, so no session is silently replaced
     or charged a second time. A future resume must explicitly verify both hashes.
     """
-    from .patient_intent import DEFAULT_CLASSIFIER_VERSION
-
     require(suite.get("scope") == "development_only", "formal admission is not implemented")
     require(callable(client), "client must be callable")
     scenarios = suite.get("scenarios")
     schedule = make_schedule(scenarios, repeats, seed)
     for scenario in scenarios:
         _validate_study_scenario(scenario)
-    config = {"client": _client_config(client), "seed": seed, "repeats": repeats,
-              "arms": list(ARMS), "system_policy_sha256": _digest(SYSTEM_POLICY),
-              "extractor_version": VisibleFactExtractor.version,
-              "patient_classifier_version": DEFAULT_CLASSIFIER_VERSION}
+    config = study_config(_client_config(client), repeats, seed)
     directory = Path(out)
     directory.mkdir(parents=True, exist_ok=False)
     manifest = {"schema_version": "patient-study/v0.2", "scope": "development_only",

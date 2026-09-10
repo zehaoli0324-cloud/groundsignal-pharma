@@ -1,0 +1,188 @@
+R2 输入提交：4ac7d8b9941fc21232ec9c17a0f9988ef68d0725
+
+首次测试（先写测试，未实现模块）：
+python -m unittest tests.patient_eval.test_recovery_preflight -v
+ModuleNotFoundError: No module named 'scripts.patient_eval.recovery'
+Ran 1 test in 0.000s
+FAILED (errors=1)
+exit_code=1
+
+实现后首次13/13通过；增加汇总与失败记录检查后，以下为最终验证原始输出。
+命令：python -m unittest tests.patient_eval.test_recovery_preflight tests.patient_eval.test_study tests.patient_eval.test_readiness_rules -v && python -m scripts.patient_eval.recovery --drill-out /workspace/scratch/52ba3ac24ecb/readiness-r2-first-drill && python -m scripts.patient_eval.readiness_drill --out /workspace/scratch/52ba3ac24ecb/readiness-r2-r0-regression
+
+test_changed_checkpoint_metadata (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_changed_checkpoint_metadata) ... ok
+test_changed_config_or_schedule_parameters (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_changed_config_or_schedule_parameters) ... ok
+test_changed_input (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_changed_input) ... ok
+test_changed_stored_schedule (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_changed_stored_schedule) ... ok
+test_completed_aggregate_mismatch (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_completed_aggregate_mismatch) ... ok
+test_completed_run_is_not_rerun (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_completed_run_is_not_rerun) ... ok
+test_error_records_are_retained_as_persisted_not_successful (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_error_records_are_retained_as_persisted_not_successful) ... ok
+test_intact_checkpoint_is_read_only_but_not_authorized_to_resume (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_intact_checkpoint_is_read_only_but_not_authorized_to_resume) ... ok
+test_invalid_json_and_count (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_invalid_json_and_count) ... ok
+test_missing_checkpoint (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_missing_checkpoint) ... ok
+test_orphan_and_temporary_files_are_never_adopted_or_deleted (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_orphan_and_temporary_files_are_never_adopted_or_deleted) ... ok
+test_path_escape_is_rejected_without_opening_it (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_path_escape_is_rejected_without_opening_it) ... ok
+test_real_source_rejected_before_directory_inspection (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_real_source_rejected_before_directory_inspection) ... ok
+test_symlink_is_not_followed (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_symlink_is_not_followed) ... ok
+test_valid_text_mutation_cannot_be_claimed_integrity_verified (tests.patient_eval.test_recovery_preflight.RecoveryPreflightTests.test_valid_text_mutation_cannot_be_claimed_integrity_verified) ... ok
+test_explicit_correction_supersedes_but_bare_disagreement_conflicts (tests.patient_eval.test_study.ExtractionTests.test_explicit_correction_supersedes_but_bare_disagreement_conflicts) ... ok
+test_proxy_identity_correction_and_subject_qualified_unknown (tests.patient_eval.test_study.ExtractionTests.test_proxy_identity_correction_and_subject_qualified_unknown) ... ok
+test_question_or_wrong_teach_back_does_not_become_confirmed_fact (tests.patient_eval.test_study.ExtractionTests.test_question_or_wrong_teach_back_does_not_become_confirmed_fact) ... ok
+test_question_particles_without_punctuation_preserve_sentence_scope (tests.patient_eval.test_study.ExtractionTests.test_question_particles_without_punctuation_preserve_sentence_scope) ... ok
+test_unknown_and_negative_are_separate_and_unknown_can_resolve (tests.patient_eval.test_study.ExtractionTests.test_unknown_and_negative_are_separate_and_unknown_can_resolve) ... ok
+test_unsupported_double_negation_question_and_hedge_do_not_create_facts (tests.patient_eval.test_study.ExtractionTests.test_unsupported_double_negation_question_and_hedge_do_not_create_facts) ... ok
+test_within_turn_conflict_is_not_silently_last_value_wins (tests.patient_eval.test_study.ExtractionTests.test_within_turn_conflict_is_not_silently_last_value_wins) ... ok
+test_all_scenarios_preflight_before_first_network_call (tests.patient_eval.test_study.StudyTests.test_all_scenarios_preflight_before_first_network_call) ... ok
+test_both_arms_preserve_complete_history_and_match_output_budget (tests.patient_eval.test_study.StudyTests.test_both_arms_preserve_complete_history_and_match_output_budget) ... ok
+test_candidate_extractor_and_assembly_failures_count_against_target (tests.patient_eval.test_study.StudyTests.test_candidate_extractor_and_assembly_failures_count_against_target) ... ok
+test_checkpoint_hashes_and_existing_directory_fail_before_calls (tests.patient_eval.test_study.StudyTests.test_checkpoint_hashes_and_existing_directory_fail_before_calls) ... ok
+test_dynamic_disclosure_and_correction_use_only_legal_user_text (tests.patient_eval.test_study.StudyTests.test_dynamic_disclosure_and_correction_use_only_legal_user_text) ... ok
+test_failed_questioning_leaves_required_events_unreached (tests.patient_eval.test_study.StudyTests.test_failed_questioning_leaves_required_events_unreached) ... ok
+test_one_missing_usage_record_is_not_reported_as_complete (tests.patient_eval.test_study.StudyTests.test_one_missing_usage_record_is_not_reported_as_complete) ... ok
+test_retry_success_usage_cannot_claim_complete_provider_cost (tests.patient_eval.test_study.StudyTests.test_retry_success_usage_cannot_claim_complete_provider_cost) ... ok
+test_schedule_is_reproducible_and_has_exact_paired_blocks (tests.patient_eval.test_study.StudyTests.test_schedule_is_reproducible_and_has_exact_paired_blocks) ... ok
+test_snapshot_failure_cannot_erase_an_observed_target_failure (tests.patient_eval.test_study.StudyTests.test_snapshot_failure_cannot_erase_an_observed_target_failure) ... ok
+test_target_error_and_simulator_error_have_different_denominators (tests.patient_eval.test_study.StudyTests.test_target_error_and_simulator_error_have_different_denominators) ... ok
+test_missing_key_plain_http_and_bad_budgets_fail_without_calls (tests.patient_eval.test_study.TransportTests.test_missing_key_plain_http_and_bad_budgets_fail_without_calls) ... ok
+test_timeout_is_bounded_schema_does_not_retry_and_redirect_cannot_forward_key (tests.patient_eval.test_study.TransportTests.test_timeout_is_bounded_schema_does_not_retry_and_redirect_cannot_forward_key) ... ok
+test_transport_parameters_and_visible_request_are_exact (tests.patient_eval.test_study.TransportTests.test_transport_parameters_and_visible_request_are_exact) ... ok
+test_flags_and_example_grade_types_cannot_promote_trust (tests.patient_eval.test_readiness_rules.ReadinessRulesTests.test_flags_and_example_grade_types_cannot_promote_trust) ... ok
+test_pack_rejects_path_escape_and_duplicate_criteria (tests.patient_eval.test_readiness_rules.ReadinessRulesTests.test_pack_rejects_path_escape_and_duplicate_criteria) ... ok
+test_status_definitions_and_grade_coverage_are_required (tests.patient_eval.test_readiness_rules.ReadinessRulesTests.test_status_definitions_and_grade_coverage_are_required) ... ok
+test_three_rules_preserve_unvalidated_status (tests.patient_eval.test_readiness_rules.ReadinessRulesTests.test_three_rules_preserve_unvalidated_status) ... ok
+test_trigger_and_response_cannot_reference_wrong_turns (tests.patient_eval.test_readiness_rules.ReadinessRulesTests.test_trigger_and_response_cannot_reference_wrong_turns) ... ok
+
+----------------------------------------------------------------------
+Ran 41 tests in 0.109s
+
+OK
+{
+  "schema_version": "patient-recovery-preflight/v0.1",
+  "source": "synthetic",
+  "read_only": true,
+  "resume_allowed": false,
+  "consistency_passed": true,
+  "issues": [],
+  "blockers": [
+    "resume_executor_not_implemented",
+    "legacy_checkpoint_has_no_trusted_file_digests",
+    "exclusive_writer_lock_not_implemented"
+  ],
+  "process_liveness": "unknown",
+  "checkpoint_integrity": "unanchored",
+  "persisted_sessions": 1,
+  "pending_sessions": 1,
+  "observed_file_sha256": {
+    "manifest.json": "36a13b636a7ed6009e3ee902886cdfc4cabe33562fde662adf07630e21212279",
+    "session-0001.json": "045d1eeb496bdd11b515b0c002f6f8893864393280be47b0f6b509ff1216aeb6"
+  },
+  "clinical_approval": false,
+  "real_source_sessions_executed": 0,
+  "manifest_status": "running",
+  "intentional_interruption_observed": true,
+  "preflight_client_calls": 0,
+  "external_model_calls": 0,
+  "personal_skill_verified": false,
+  "human_handoff_verified": false
+}
+{
+  "schema_version": "readiness-drill/v0.1",
+  "source": "synthetic",
+  "passed": true,
+  "checks_passed": 9,
+  "checks_total": 9,
+  "checks": [
+    {
+      "check": "normal_sessions_persisted",
+      "passed": true,
+      "observed": {
+        "persisted": 2,
+        "planned": 2
+      }
+    },
+    {
+      "check": "timeout_classified",
+      "passed": true,
+      "observed": {
+        "status": "target_error",
+        "termination": "transport_error"
+      }
+    },
+    {
+      "check": "empty_classified",
+      "passed": true,
+      "observed": {
+        "status": "target_error",
+        "termination": "invalid_response_schema"
+      }
+    },
+    {
+      "check": "invalid_adapter_classified",
+      "passed": true,
+      "observed": {
+        "status": "measurement_invalid",
+        "termination": "collector_contract_error"
+      }
+    },
+    {
+      "check": "interruption_preserves_checkpoint",
+      "passed": true,
+      "observed": {
+        "persisted": 1,
+        "planned": 2,
+        "manifest_status": "running"
+      }
+    },
+    {
+      "check": "same_config_directory_reuse_rejected",
+      "passed": true,
+      "observed": {
+        "rejected": true,
+        "new_client_calls": 0,
+        "old_checkpoint_unchanged": true
+      }
+    },
+    {
+      "check": "changed_config_directory_reuse_rejected",
+      "passed": true,
+      "observed": {
+        "rejected": true,
+        "new_client_calls": 0,
+        "old_checkpoint_unchanged": true
+      }
+    },
+    {
+      "check": "new_directory_replay",
+      "passed": true,
+      "observed": {
+        "persisted": 2,
+        "recovery_kind": "fresh_replay_not_resume"
+      }
+    },
+    {
+      "check": "resume_limitation_explicit",
+      "passed": true,
+      "observed": {
+        "resume_supported": false
+      }
+    }
+  ],
+  "external_model_calls": 0,
+  "real_source_sessions": 0,
+  "clinical_gold": false,
+  "clinical_approval": false,
+  "dynamic_scenario_ready": false,
+  "s6_automatic_trust": "BLOCKED",
+  "model_quality_assessed": false,
+  "human_handoff_verified": false,
+  "resume_supported": false,
+  "interrupted_checkpoint_sha256": "2e834064be363d2f3c2f5c675a5bbc13cfa79ade72332ec8e9e0a4839b83842c",
+  "failure_statuses": {
+    "timeout": "target_error",
+    "empty": "target_error",
+    "invalid_adapter": "measurement_invalid"
+  },
+  "interpretation": "Local scripted engineering evidence only. Fresh replay repeats completed work; it is not resume or a model improvement result."
+}
+
+exit_code=0
