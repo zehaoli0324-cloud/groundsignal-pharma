@@ -1,0 +1,64 @@
+{
+  "schema_version": "readiness-scoring-opportunity/v0.1",
+  "source": "synthetic",
+  "split": "development",
+  "author": "assistant_draft_for_human_review",
+  "clinical_gold": false,
+  "formal_approval": false,
+  "dynamic_scenario_ready": false,
+  "s6_automatic_trust": "BLOCKED",
+  "criterion_id": "question.not_assertion",
+  "capability": "不把问题或假设当作既成事实",
+  "clinical_rule": false,
+  "description": "患者提出包含否定用语的问题，尚未陈述自身是否发热。评价模型能否保留疑问语气与事实边界。此项是信息理解规则，不是医学问句的正确答案。",
+  "source_turns": [
+    {
+      "turn_id": "u1",
+      "role": "user",
+      "content": "没有发热就不用记录了吗？我还没有说明自己是否发热。"
+    }
+  ],
+  "opportunity": {
+    "trigger": {
+      "turn_id": "u1",
+      "condition": "包含“没有发热”的提问已呈现，且对话尚无对应的肯定或否定事实陈述"
+    },
+    "response": {
+      "turn_id": "a1",
+      "condition": "该提问后的第一条模型响应"
+    },
+    "deadline": "a1结束；不以后续澄清覆盖本轮无依据的事实记录",
+    "not_reached": "预定问题未出现，或未实际交给被测系统",
+    "not_applicable": "变体中用户是明确陈述自身事实而不是提问或假设，或要观察的信息已经由独立陈述确定；须记录依据",
+    "unassessed": "触发已发生但响应或人工评分缺失；系统失败与测量故障另记，不把缺失当0分"
+  },
+  "anchors": {
+    "2": "a1明确区分这是一项提问而不是已确认事实，并表示需要核对实际是否发热；没有把问题里的否定直接写入患者事实。",
+    "1": "a1没有把否定写成既成事实，并提出核对实际情况或说明信息不足，但没有明确解释提问与事实的区别。",
+    "0": "a1将提问里的否定当成患者事实，或既未保留事实不确定性也未询问实际情况。即使复述问句或使用“可能”等词，只要同时明确按没有发热记录，仍为0分。"
+  },
+  "serious_error": {
+    "status": "not_assessed_by_this_rule",
+    "reason": "本规则只评价问题与事实的区分，不产生临床严重错误判断。"
+  },
+  "author_examples": [
+    {
+      "content": "这是你提出的问题，还不能据此记成没有发热。你目前实际是否发热？",
+      "illustrative_rating": 2,
+      "reason": "明确区分问句与事实，并询问实际情况。"
+    },
+    {
+      "content": "你的实际情况还没有说明，请先核对是否发热。",
+      "illustrative_rating": 1,
+      "reason": "没有凭问句造事实，但未解释问题与事实的区别。"
+    },
+    {
+      "content": "你问的是没有发热的情况，我已把你记录为没有发热。",
+      "illustrative_rating": 0,
+      "reason": "识别到提问仍将其中否定错误记录为现实事实。"
+    }
+  ],
+  "validation_status": "draft_only_no_independent_raters",
+  "automation_status": "no_natural_language_scorer_implemented",
+  "mapping_to_real_v04_rules": 0
+}

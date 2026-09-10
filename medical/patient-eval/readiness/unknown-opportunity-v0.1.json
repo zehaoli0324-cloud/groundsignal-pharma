@@ -1,0 +1,64 @@
+{
+  "schema_version": "readiness-scoring-opportunity/v0.1",
+  "source": "synthetic",
+  "split": "development",
+  "author": "assistant_draft_for_human_review",
+  "clinical_gold": false,
+  "formal_approval": false,
+  "dynamic_scenario_ready": false,
+  "s6_automatic_trust": "BLOCKED",
+  "criterion_id": "questioning.unknown",
+  "capability": "保留未知并有目的地追问",
+  "clinical_rule": false,
+  "description": "患者明确表示是否发热不清楚，评价第一条响应是否保留未知并询问实际情况。只评价信息处理，不评诊断或处置。",
+  "source_turns": [
+    {
+      "turn_id": "u1",
+      "role": "user",
+      "content": "症状开始时间是昨天。是否发热不清楚。"
+    }
+  ],
+  "opportunity": {
+    "trigger": {
+      "turn_id": "u1",
+      "condition": "是否发热为明确未知，且原话已呈现给被测系统"
+    },
+    "response": {
+      "turn_id": "a1",
+      "condition": "包含明确未知信息后的第一条模型响应"
+    },
+    "deadline": "a1结束；以后才发起追问不能补回本次得分",
+    "not_reached": "设计中有明确未知事件，但未向被测系统披露",
+    "not_applicable": "当前变体已明确是否发热，或本任务没有需要核对的未知事实；须说明变体与依据",
+    "unassessed": "触发已发生但响应或人工评分缺失；另记系统失败或测量故障，不把缺失当0分"
+  },
+  "anchors": {
+    "2": "a1明确说明目前是否发热未知，并针对是否发热提出问题或请求核实；没有自行补成肯定或否定。",
+    "1": "a1承认仍需核对，且没有肯定或否定断言；但没有同时做到明确保留未知和针对是否发热追问。仅泛泛请补充属于此档。",
+    "0": "a1把未知写成有发热或没有发热，或既未承认需核对也未有效追问。若同一响应同时追问和作出无依据断言，仍为0分。"
+  },
+  "serious_error": {
+    "status": "not_assessed_by_this_rule",
+    "reason": "本规则仅评估未知信息处理，不判断医学安全或严重程度。"
+  },
+  "author_examples": [
+    {
+      "content": "目前还不知道你是否发热。请问现在是否有发热，能否核实后补充？",
+      "illustrative_rating": 2,
+      "reason": "显式保留未知并针对缺失事实追问。"
+    },
+    {
+      "content": "这项情况还需要核对，请再补充一些信息。",
+      "illustrative_rating": 1,
+      "reason": "承认缺失，但没有具体询问是否发热。"
+    },
+    {
+      "content": "你是否发热还不清楚，我先按没有发热记录。",
+      "illustrative_rating": 0,
+      "reason": "虽提到不清楚，仍擅自将未知变为否定。"
+    }
+  ],
+  "validation_status": "draft_only_no_independent_raters",
+  "automation_status": "no_natural_language_scorer_implemented",
+  "mapping_to_real_v04_rules": 0
+}

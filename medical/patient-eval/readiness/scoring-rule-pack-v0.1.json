@@ -1,0 +1,15 @@
+{
+  "schema_version": "readiness-rule-pack/v0.1",
+  "source": "synthetic",
+  "split": "development",
+  "clinical_gold": false,
+  "formal_approval": false,
+  "dynamic_scenario_ready": false,
+  "s6_automatic_trust": "BLOCKED",
+  "rules": [
+    "correction-opportunity-v0.1.json",
+    "unknown-opportunity-v0.1.json",
+    "question-opportunity-v0.1.json"
+  ],
+  "purpose": "三条合成信息处理规则的结构核验；作者示例分数不是独立人工评分。"
+}

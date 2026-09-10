@@ -46,3 +46,8 @@ python -m scripts.patient_eval.readiness_drill --out medical/patient-eval/local/
 ## 评分规则草稿
 
 `correction-opportunity-v0.1.json` 给出一条“明确纠正后使用新信息”的合成规则，包含触发、响应、截止、分档示例和未评状态。它尚未经过独立双人试评分，也没有接入自动自然语言评分器，更没有回填真实来源的57条机会。
+
+
+## R1：三条规则包
+
+现已补齐纠正、未知、提问三条合成规则。阅读 [规则审阅说明](SCORING_RULES_REVIEW.md)，运行 `python -m scripts.patient_eval.readiness_rules` 核验结构。结果记录在 `round-1-rule-validation.json`。三条均为待人工审阅草稿，不能称为真实57条机会已映射。
