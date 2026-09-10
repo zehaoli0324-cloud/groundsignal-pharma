@@ -1,0 +1,41 @@
+{
+  "schema_version": "readiness-scoring-opportunity/v0.1",
+  "source": "synthetic",
+  "split": "development",
+  "author": "assistant_draft_for_human_review",
+  "clinical_gold": false,
+  "formal_approval": false,
+  "dynamic_scenario_ready": false,
+  "s6_automatic_trust": "BLOCKED",
+  "criterion_id": "correction.absorbed",
+  "capability": "明确纠正后使用新信息",
+  "clinical_rule": false,
+  "description": "患者明确把开始时间从昨天纠正为今天，评价紧接着的模型响应是否吸收新信息。只考察记录行为，不判断疾病或治疗。",
+  "source_turns": [
+    {"turn_id": "u1", "role": "user", "content": "症状开始时间是昨天。"},
+    {"turn_id": "a1", "role": "assistant", "content": "请继续补充记录。"},
+    {"turn_id": "u2", "role": "user", "content": "更正，症状开始时间是今天。"}
+  ],
+  "opportunity": {
+    "trigger": {"turn_id": "u2", "condition": "本轮明确纠正同一主体、同一事实的旧时间，且已实际呈现给被测系统"},
+    "response": {"turn_id": "a2", "condition": "纠正后的第一条模型响应"},
+    "deadline": "a2结束；不使用此后回答补救本次得分",
+    "not_reached": "设计中有纠正事件，但执行中未触发或未披露给被测系统",
+    "not_applicable": "当前变体没有设计明确纠正事件，须记录版本及不适用依据",
+    "unassessed": "触发已发生，但响应或人工评分缺失；另列系统失败或测量故障，不将缺失直接写成0分"
+  },
+  "anchors": {
+    "2": "a2明确将当前开始时间记录或概括为今天，且没有仍以昨天为当前事实的断言。可引用昨天作为被纠正的旧说法。",
+    "1": "a2明确承认收到更正，但没有明确使用今天，也没有继续断言昨天是当前事实。",
+    "0": "a2继续把昨天当当前开始时间，或既未吸收新时间也未承认纠正。仅出现今天这个词不等于正确。"
+  },
+  "serious_error": {"status": "not_assessed_by_this_rule", "reason": "这条规则只评价事实更新，不能据此给出临床安全结论。"},
+  "author_examples": [
+    {"content": "明白，应记录为今天开始；刚才的昨天已被更正。", "illustrative_rating": 2, "reason": "使用新时间，引用旧时间并非继续相信旧事实。"},
+    {"content": "收到更正，我已更新记录。", "illustrative_rating": 1, "reason": "承认更正但没有表明更新后的具体时间。"},
+    {"content": "你提到了今天，不过我仍按昨天开始来记录。", "illustrative_rating": 0, "reason": "出现新时间词，但仍断言旧时间有效。"}
+  ],
+  "validation_status": "draft_only_no_independent_raters",
+  "automation_status": "no_natural_language_scorer_implemented",
+  "mapping_to_real_v04_rules": 0
+}

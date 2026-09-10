@@ -51,6 +51,7 @@ def render_console(original: dict | None = None) -> str:
             .replace("/* CONSOLE_CSS */", ASSETS.joinpath("console.css").read_text(encoding="utf-8"))
             .replace("/* CONSOLE_CORE */", ASSETS.joinpath("core.js").read_text(encoding="utf-8"))
             .replace("/* CONSOLE_APP */", ASSETS.joinpath("app.js").read_text(encoding="utf-8"))
+            .replace("/* CONSOLE_CHOICES */", ASSETS.joinpath("choices.js").read_text(encoding="utf-8"))
             .replace("__CONSOLE_DATA__", payload))
 
 
@@ -102,6 +103,13 @@ def main():
     check = sub.add_parser("validate-handoff")
     for field in ("original", "review", "handoff"):
         check.add_argument("--" + field, type=Path, required=True)
+    choices = sub.add_parser("validate-choices")
+    choices.add_argument("--original", type=Path, required=True)
+    choices.add_argument("--answers", type=Path, required=True)
+    choices.add_argument("--review-out", type=Path)
+    comparison = sub.add_parser("compare-choices")
+    for field in ("original", "answers-a", "answers-b"):
+        comparison.add_argument("--" + field, type=Path, required=True)
     args = parser.parse_args()
     if args.command == "render":
         original = json.loads(args.original.read_text(encoding="utf-8")) if args.original else None
@@ -114,6 +122,23 @@ def main():
         with args.out.open("x", encoding="utf-8") as stream:
             stream.write(html)
         print("Console written; no case executed or admitted.")
+    elif args.command == "validate-choices":
+        from .clinical_console_choices import validate_choices
+        result, review = validate_choices(json.loads(args.original.read_text(encoding="utf-8")),
+                                          json.loads(args.answers.read_text(encoding="utf-8")))
+        if args.review_out:
+            local_root = Path(__file__).resolve().parents[2] / "medical/patient-eval/local"
+            if not args.review_out.resolve().is_relative_to(local_root.resolve()):
+                raise ValueError("source-containing review must stay in ignored medical/patient-eval/local/")
+            args.review_out.parent.mkdir(parents=True, exist_ok=True)
+            with args.review_out.open("x", encoding="utf-8") as stream:
+                stream.write(_json(review))
+        print(_json(result), end="")
+    elif args.command == "compare-choices":
+        from .clinical_console_choices import compare_choices
+        result = compare_choices(*(json.loads(getattr(args, field).read_text(encoding="utf-8"))
+                                   for field in ("original", "answers_a", "answers_b")))
+        print(_json(result), end="")
     else:
         result = validate_handoff(*(json.loads(getattr(args, field).read_text(encoding="utf-8"))
                                     for field in ("original", "review", "handoff")))
