@@ -1,0 +1,16 @@
+const fs=require('node:fs'), assert=require('node:assert/strict');
+const C=require('../../scripts/patient_eval/clinical_console_assets/core.js');
+const original=JSON.parse(fs.readFileSync(0,'utf8'));
+let checks=0; const test=fn=>{fn();checks++;};
+const r=C.blank(original);r.reviewer_id='reviewer-A';
+test(()=>{assert.equal(r.items[0].review.facts[0].decision,'unreviewed');C.compatible(original,r);});
+test(()=>assert.deepEqual(C.preflight(r),[]));
+test(()=>{const bad=C.clone(r);bad.items[0].turns[0].content='tampered';assert.throws(()=>C.compatible(original,bad));});
+test(()=>{const bad=C.clone(r);bad.clinical_gold=true;assert.throws(()=>C.checkPacket(bad));});
+test(()=>{const bad=C.clone(r);bad.items[0].review.rubrics[0].critical=true;assert.throws(()=>C.compatible(original,bad));});
+test(()=>{const bad=C.clone(r);bad.items[0].review.facts[1].disclosure_policy='initial';assert(C.preflight(bad).some(x=>x.includes('未来事实')));});
+test(()=>{const b=C.clone(r);b.reviewer_id='reviewer-B';const diff=C.compare(original,r,b);assert.equal(diff.differences.length,0);assert(diff.missing.length>0);});
+test(()=>assert.throws(()=>C.compare(original,r,C.clone(r))));
+test(()=>{const b=C.clone(r);b.reviewer_id='reviewer-B';b.items[0].review.facts[0].decision='exclude';b.items[0].review.facts[0].reason='synthetic';const a=C.clone(r);a.items[0].review.facts[0].decision='uncertain';a.items[0].review.facts[0].reason='synthetic';const diff=C.compare(original,a,b);assert(diff.differences.some(x=>x.path.endsWith('.decision')));assert.equal(diff.clinical_gold,false);});
+test(()=>{const f=r.items[0].review.facts[0];f.decision='include';f.reason='synthetic reviewed';f.is_patient_assertion=true;f.polarity='present';f.subject='self';f.time='unknown';f.manual_groundsignal_slot='onset';f.disclosure_policy='initial';f.evidence_spans=[{turn_id:'r0001',start:12,end:14,text:'昨天'}];assert.deepEqual(C.preflight(r),[]);assert.equal(C.plans(r).length,6);});
+process.stdout.write(JSON.stringify({checks,review:r}));

@@ -10,6 +10,7 @@
 
 ## 已完成的工作
 
+- **独立审核工作台 v0.1（本分支新增）。** 下载[离线页面](medical/patient-eval/console-v0.1.html)，导入原有资料包，逐项审阅事实、证据、隐私、评分规则与机会计划；支持草稿续填和分歧交接。[使用与限制](medical/patient-eval/CLINICAL_CONSOLE_V0.1.md)。无登录或临床签名，不自动准入；只有合成示例，未嵌入患者原文。
 - **证据处理。** 根据问题选择医学来源，抽取带出处的主张，用知识图谱记录适用条件、版本和冲突。实现了[来源路由](scripts/s2_intent_router_v04.py)、[语义抽取](scripts/s3_semantic_extractor.py)和[图谱更新](scripts/s4_truth_ledger_v011.py)。
 - **受控案例。** 建立 12 个家族、60 个案例，改变关键条件来检查模型行为；另有来源追踪、分区污染检测和历史结果保留。[案例目录](medical/case-families/) · [阶段评测](medical/stage-evals/)
 - **患者对话评测。** 6 个家族、12 个合成变体，覆盖含糊表达、事实纠正、催促和误解修复。交互器按问询披露信息；质量、安全和评分机会分别记录，配套双人评分及同一模型的状态增强对照。[代码](scripts/patient_eval/) · [评分操作](medical/patient-eval/REVIEW_V0.3.md)
