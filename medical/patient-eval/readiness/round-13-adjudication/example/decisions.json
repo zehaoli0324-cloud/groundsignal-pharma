@@ -1,0 +1,17 @@
+{
+  "schema_version": "choice-adjudication-decisions/v0.1",
+  "queue_sha256": "cb5992adbbc32ede2ce92b72bf18b02bf0c1d66943890db99a1ed8db5cbb7fcb",
+  "adjudicator_id": "SYNTHETIC-COORDINATOR-NOT-CLINICAL-REVIEW",
+  "authority": "self_declared_unsigned_not_approval",
+  "decisions": [
+    {
+      "row_id": "2ac0f7aaadca8ceb925306ea017ab592ce6ea1602c2e9e6c8020c503c7f88e5a",
+      "answer": "supported",
+      "reason": "合成教学：本题只判断原文语义支持，不补造事实配置。"
+    }
+  ],
+  "formal_approval": false,
+  "clinical_gold": false,
+  "dynamic_scenario_ready": false,
+  "s6_automatic_trust": "BLOCKED"
+}

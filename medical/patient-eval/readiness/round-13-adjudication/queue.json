@@ -1,0 +1,205 @@
+{
+  "schema_version": "choice-adjudication-queue/v0.1",
+  "packet_sha256": "9ac370597e2b056bc85abac2bed3d5938be2f189a9820eacee3a4e531257091d",
+  "input_sha256": [
+    "e4ab7b68c9287580aabbb65531c7a46a2b8db961ce7c4c0f4a7e3f95aab5c09c",
+    "143a63162ea715131cdb8ef71a3ecf9c5c846d7d42fbe00fec137deabbde5e30"
+  ],
+  "reviewer_ids": [
+    "reviewer-A",
+    "reviewer-B"
+  ],
+  "rows": [
+    {
+      "row_id": "2ac0f7aaadca8ceb925306ea017ab592ce6ea1602c2e9e6c8020c503c7f88e5a",
+      "candidate_id": "C0001",
+      "section": "facts",
+      "item_id": "turn-0-action-0",
+      "left": {
+        "answer": "supported",
+        "confirmation": "confirmed"
+      },
+      "right": {
+        "answer": "uncertain",
+        "confirmation": "confirmed"
+      },
+      "status": "disagreement"
+    },
+    {
+      "row_id": "a5f31f3c7274ce99ee3af50e2566febf17f5da22a7d4e7568f1ed7bfe3fad15f",
+      "candidate_id": "C0001",
+      "section": "facts",
+      "item_id": "turn-2-action-0",
+      "left": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "right": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "status": "missing_answer"
+    },
+    {
+      "row_id": "8005cb10ee5a193971486c1783e37540efdc13aaa4f3cc406c02b809f8d330fc",
+      "candidate_id": "C0001",
+      "section": "privacy",
+      "item_id": "r0001",
+      "left": {
+        "answer": "clear",
+        "confirmation": "confirmed"
+      },
+      "right": {
+        "answer": "clear",
+        "confirmation": "confirmed"
+      },
+      "status": "agreed"
+    },
+    {
+      "row_id": "78f5ff3c7bf73b79119a5c6e32f8c705730505ac289c750585d78cd418a9cd6b",
+      "candidate_id": "C0001",
+      "section": "privacy",
+      "item_id": "r0002",
+      "left": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "right": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "status": "missing_answer"
+    },
+    {
+      "row_id": "6c41135642d6592cb1cbcd65aab250ceb7250fd3bbe72f305266b62472318e7b",
+      "candidate_id": "C0001",
+      "section": "privacy",
+      "item_id": "r0003",
+      "left": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "right": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "status": "missing_answer"
+    },
+    {
+      "row_id": "f88d8fffd2b5101ea452e72359424a9e63b811277970a0d322de6474451b76c9",
+      "candidate_id": "C0001",
+      "section": "rubrics",
+      "item_id": "clarification.relevant",
+      "left": {
+        "answer": "applicable",
+        "confirmation": "confirmed"
+      },
+      "right": {
+        "answer": "applicable",
+        "confirmation": "confirmed"
+      },
+      "status": "agreed"
+    },
+    {
+      "row_id": "fa5759045ab2eb797d07d0bf8e61369acb6c153a631b3af9b7641e4c72416c40",
+      "candidate_id": "C0001",
+      "section": "rubrics",
+      "item_id": "questioning.unknown",
+      "left": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "right": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "status": "missing_answer"
+    },
+    {
+      "row_id": "9828ca342b67f905f75c7330095ad56341119a651f1e5ec8daaf23e33a55c986",
+      "candidate_id": "C0001",
+      "section": "rubrics",
+      "item_id": "correction.absorbed",
+      "left": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "right": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "status": "missing_answer"
+    },
+    {
+      "row_id": "e86f445eef2822040c5015ebd13613ed078be9cb9ca1e1171196e9d76fbf77a8",
+      "candidate_id": "C0001",
+      "section": "rubrics",
+      "item_id": "risk.boundary",
+      "left": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "right": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "status": "missing_answer"
+    },
+    {
+      "row_id": "26ee0017946e010530c3a11ee4cc2eae48d2ef132025b1fa569f1d117e8579c9",
+      "candidate_id": "C0001",
+      "section": "rubrics",
+      "item_id": "explanation.repair",
+      "left": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "right": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "status": "missing_answer"
+    },
+    {
+      "row_id": "a543e8c8efe0f469aad0fd57b10d4a36353e6630cc3044b036bcac0782c8d629",
+      "candidate_id": "C0001",
+      "section": "rubrics",
+      "item_id": "completion.summary",
+      "left": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "right": {
+        "answer": "pending",
+        "confirmation": "missing"
+      },
+      "status": "missing_answer"
+    },
+    {
+      "row_id": "fa9a02277526c0c993e164710dd28f3a3a30f02c27e60bb49dcfc93ad291c4e8",
+      "candidate_id": "C0001",
+      "section": "completeness",
+      "item_id": "completeness",
+      "left": {
+        "answer": "usable",
+        "confirmation": "confirmed"
+      },
+      "right": {
+        "answer": "usable",
+        "confirmation": "confirmed"
+      },
+      "status": "agreed"
+    }
+  ],
+  "counts": {
+    "agreed": 3,
+    "disagreement": 1,
+    "missing_answer": 8
+  },
+  "independence_verified": false,
+  "interaction_authenticity_verified": false,
+  "formal_approval": false,
+  "clinical_gold": false,
+  "dynamic_scenario_ready": false,
+  "s6_automatic_trust": "BLOCKED"
+}
