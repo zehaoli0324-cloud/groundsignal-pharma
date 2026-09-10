@@ -1,0 +1,2570 @@
+{
+  "schema_version": "project-audit-inventory/v0.1",
+  "input_tree": "0e19210658a12cda1e12cc1f9aa00fb165e646ab",
+  "tracked_files": 1333,
+  "inspected_code_and_workflow_files": 284,
+  "python_syntax_errors": 0,
+  "python_test_definitions": 385,
+  "workflow_files": 64,
+  "rows": [
+    {
+      "path": ".github/workflows/medical-development-ci.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/patient-eval-development-ci.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s2-live-retrieval.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s2-s3-joint-heldout-v01.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3-eval-v041.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3-eval.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3-split-eval.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3-v04-shadow.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3-v05-diagnostics.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3-v05-shadow.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3-v051-diagnostics.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3-v052-diagnostics.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3-v053-diagnostics.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3-v054-diagnostics.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3-v06-shadow.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-semantic-extractor-ci.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v02-diagnostics.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v02-heldout.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v021-diagnostics.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v022-diagnostics.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v023-diagnostics.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v03-heldout.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v04-fresh-heldout.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v04-semantic-frame-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v05-compositional-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v051-compositional-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v051-fresh-heldout.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v052-fresh-heldout.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v052-scope-safety-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v053-preserve-fail.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v053-semantic-typing-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v054-event-graph-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v054-fresh-heldout.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v054-persist-dev-pass.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v055-scope-safety-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v056-reference-discourse-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v0561-fresh-heldout.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3a-v0561-registry-reconciliation.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3b-v02-heldout.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3b-v021-diagnostics.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3b-v022-diagnostics.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s3b-v03-heldout.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s4-v01-fresh-first-run-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s4-v01-truth-ledger-dev.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s4-v011-fresh-preservation.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v01-benchmark-factory-dev.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v011-structural-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v02-fresh-boundary.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v021-boundary-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v03-second-fresh-boundary.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v031-trust-root-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v04-third-fresh-policy-root.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v041-policy-root-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v05-fourth-fresh-authority-composition.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v051-authority-composition-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v06-fresh-identity-toctou.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v061-identity-lineage-toctou-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v07-fresh-lineage-generalization-capture.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v072-lineage-hybrid-regression.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v073-lineage-calibration.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v080-fresh-lineage.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v081-multilingual-mosaic-repair.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v090-fresh-lineage.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": ".github/workflows/s5-v091-script-role-repair.yml",
+      "area": "workflow",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/ask.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/build_medical_knowledge_graph.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/calibrate_s5_lineage_v073.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/calibrate_s5_lineage_v081.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/calibrate_s5_lineage_v081_matrix.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/check_s5_next_fresh_admission.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/check_s5_v10_fresh_admission.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/claim-audit.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/cross-entity-scan.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s2_dailymed_truth_retrieval.py",
+      "area": "S2",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s2_intent_routing.py",
+      "area": "S2",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s2_live_retrieval.py",
+      "area": "S2",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s2_negation_v04.py",
+      "area": "S2",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s2_s3_joint_pipeline.py",
+      "area": "S2",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s2_source_routing.py",
+      "area": "S2",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s3_claim_verification.py",
+      "area": "S3",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s3a_proposition_extraction.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s3a_proposition_extraction_v02.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s3a_safety_errors_v055.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s3b_structured_entailment.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s4_truth_ledger_v01.py",
+      "area": "S4",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s4_truth_ledger_v011_fresh.py",
+      "area": "S4",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s4_truth_ledger_v011_regression.py",
+      "area": "S4",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s4_truth_ledger_v01_fresh.py",
+      "area": "S4",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_benchmark_factory.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_benchmark_factory_v011.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_boundary_regression_v021.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_boundary_regression_v031.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_boundary_regression_v041.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_boundary_regression_v051.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_boundary_regression_v061.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_boundary_regression_v072.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_boundary_regression_v073.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_boundary_regression_v081.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_boundary_regression_v091.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_fresh_boundary_v02.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_fresh_boundary_v03.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_fresh_boundary_v04.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_fresh_boundary_v05.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_fresh_boundary_v06.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_fresh_boundary_v07.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_fresh_lineage_v08.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/eval_s5_fresh_lineage_v09.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/evidence-audit.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/export_training_data.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/export_training_data_v061.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/export_training_data_v072.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/export_training_data_v073.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/export_training_data_v091.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/fix_demo_links.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/fix_target_sources.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/gen_demo.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/gen_docs.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/gen_modality_patch.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/gen_pharma_core.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/gen_pharma_events.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/generate_s5_v091_control_plane_readiness.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/generate_s5_v091_freeze_readiness.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/import-helper.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/ingest.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/intervention_router.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/materialize_s5_cases.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/materialize_s5_v081_freeze_receipt.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/materialize_s5_v091_freeze_receipt.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/model_harness.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/panorama.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/__init__.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/__main__.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/adapters.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/agreement.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/calibrate_patient.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/candidate_blockers.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/candidate_facts.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/candidate_privacy.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/candidate_review.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/candidate_review_ui.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/candidate_selection.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/candidate_similarity.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/choice_adjudication.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/cli.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/clinical_console.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/clinical_console_assets/app.js",
+      "area": "patient-eval",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/clinical_console_assets/choices.js",
+      "area": "patient-eval",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/clinical_console_assets/core.js",
+      "area": "patient-eval",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/clinical_console_choices.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/clinical_console_interactions.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/contracts.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/diagnosis.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/dynamic_case_drafts.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/dynamic_case_offline.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/event_mapping.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/extraction.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/import_batch.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/importers.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/nightly_v04_closeout.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/patient.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/patient_intent.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/pilot.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/pilot_cli.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/pipeline_statistics.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/readiness_diagnosis.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/readiness_drill.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/readiness_pipeline.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/readiness_rules.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/readiness_statistics.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/recovery.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/relations.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/reporting.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/resumable_drill.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/retrieval.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/review_contract.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/runner.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/scoring.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/scoring_worklist.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/source_intake.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/state.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/study.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/patient_eval/transport.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/regression_gate.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s2_dailymed_truth_retrieval.py",
+      "area": "S2",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s2_intent_router.py",
+      "area": "S2",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s2_intent_router_v04.py",
+      "area": "S2",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s2_live_retrieval.py",
+      "area": "S2",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s2_source_router.py",
+      "area": "S2",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3_atomic_proposition_verifier.py",
+      "area": "S3",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3_atomic_proposition_verifier_v041.py",
+      "area": "S3",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3_claimframe_verifier.py",
+      "area": "S3",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3_compositional_verifier.py",
+      "area": "S3",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3_compositional_verifier_v051.py",
+      "area": "S3",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3_compositional_verifier_v052.py",
+      "area": "S3",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3_compositional_verifier_v053.py",
+      "area": "S3",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3_compositional_verifier_v054.py",
+      "area": "S3",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3_naive_claim_verifier.py",
+      "area": "S3",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3_semantic_extractor.py",
+      "area": "S3",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3_structured_claim_verifier.py",
+      "area": "S3",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_compositional_frame_parser_v05.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_compositional_frame_parser_v051.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_compositional_frame_parser_v052.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_compositional_frame_parser_v053.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_compositional_frame_parser_v054.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_compositional_frame_parser_v055.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_compositional_frame_parser_v056.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_compositional_frame_parser_v0561.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_extract_runner.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_ontology_extractor_v02.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_ontology_extractor_v021.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_ontology_extractor_v022.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_ontology_extractor_v023.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3a_semantic_frame_extractor_v04.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3b_entailment_engine_v021.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3b_entailment_engine_v022.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3b_structured_entailment_runner.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3b_structured_entailment_runner_v021.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s3b_structured_entailment_runner_v022.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s4_truth_ledger_v01.py",
+      "area": "S4",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s4_truth_ledger_v011.py",
+      "area": "S4",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s5_lineage_detector.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s5_lineage_detector_v073.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s5_lineage_detector_v081.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s5_lineage_detector_v091.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s5_release_gate.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s5_trust_policy.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s5_trust_policy_v061.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s5_trust_policy_v071.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s5_trust_policy_v072.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s5_trust_policy_v073.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s5_trust_policy_v091.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/s5_v091_freeze_control.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/test_s5_next_fresh_admission.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/test_s5_v081_freeze_receipt_materializer.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/test_s5_v091_freeze_control.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/test_s5_v091_freeze_readiness.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/test_s5_v091_historical_receipt.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 14,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/validate_medical_case_families.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/validate_medical_knowledge_sources.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/verify_s5_v081_control_plane_readiness.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/verify_s5_v081_freeze_readiness.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/verify_s5_v091_control_plane_readiness.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/verify_s5_v091_freeze_readiness.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/verify_s5_v091_historical_receipt.py",
+      "area": "S5",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "scripts/watchlist.py",
+      "area": "shared-or-unclassified",
+      "syntax": "parsed",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/clinical_console_choices.cjs",
+      "area": "patient-eval",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/clinical_console_core.cjs",
+      "area": "patient-eval",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/clinical_console_interactions.cjs",
+      "area": "patient-eval",
+      "syntax": "not_checked",
+      "test_definitions": 0,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_agreement_v03.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 9,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_algorithms.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 10,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_blackbox_reports.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 12,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_candidate_blockers.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 5,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_candidate_facts.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 9,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_candidate_privacy.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 8,
+      "review_network_usage": true,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_candidate_review.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 17,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_candidate_review_ui.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 4,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_candidate_selection.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 6,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_candidate_similarity.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 10,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_choice_adjudication.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 9,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_clinical_console.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 12,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_clinical_console_choices.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 7,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_clinical_console_interactions.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 7,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_dynamic_case_drafts.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 8,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_dynamic_case_offline.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 10,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_evaluation.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 22,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_event_mapping.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 13,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_import_batch.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 10,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_nightly_v04_closeout.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 7,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_patient.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 16,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_patient_intent_v03.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 12,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_pilot.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 13,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_pipeline.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 8,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_pipeline_statistics.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 8,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_readiness_diagnosis.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 5,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_readiness_rules.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 5,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_readiness_statistics.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 12,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_recovery_preflight.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 15,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_relations.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 12,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_resumable_study.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 9,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_review_pipeline_v03.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 8,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_review_scoring_v03.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 18,
+      "review_network_usage": false,
+      "review_writes": false,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_scoring_worklist.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 6,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_source_intake.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 8,
+      "review_network_usage": false,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    },
+    {
+      "path": "tests/patient_eval/test_study.py",
+      "area": "patient-eval",
+      "syntax": "parsed",
+      "test_definitions": 21,
+      "review_network_usage": true,
+      "review_writes": true,
+      "execution_status": "NOT_RUN"
+    }
+  ],
+  "project_audit_complete": false,
+  "project_tests_complete": false,
+  "note": "Keyword flags are triage hints, not proof of side effects or safety. Test definitions are not tests executed. No project module was imported or executed."
+}
