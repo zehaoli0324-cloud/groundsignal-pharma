@@ -155,7 +155,7 @@ def validate_statistics_bundle(bundle):
     opportunities = bundle.get('opportunities')
     require(isinstance(opportunities, list) and bool(opportunities),
             'opportunities must be nonempty')
-    item_ids, item_criteria = set(), {}
+    item_ids, item_criteria, item_session_statuses = set(), {}, {}
     for row in opportunities:
         _exact_keys(row, ('item_id', 'session_id', 'criterion_id', 'recorded_status'), 'opportunity')
         require(all(_nonempty(row[key]) for key in ('item_id', 'session_id', 'criterion_id')),
@@ -168,6 +168,7 @@ def validate_statistics_bundle(bundle):
                     'invalid measurements cannot claim an opportunity state')
         item_ids.add(row['item_id'])
         item_criteria[row['item_id']] = row['criterion_id']
+        item_session_statuses[row['item_id']] = session_statuses[row['session_id']]
 
     ratings = bundle.get('ratings')
     require(isinstance(ratings, list) and bool(ratings), 'ratings must be nonempty')
@@ -182,6 +183,10 @@ def validate_statistics_bundle(bundle):
                 'rating criterion mismatch')
         require(row['review_version'] == bundle['review_version']
                 and row['rubric_version'] == rubric, 'rating version mismatch')
+        if item_session_statuses[row['item_id']] == 'measurement_invalid':
+            require(row['quality_status'] == 'unassessed' and row['rating'] is None
+                    and row['opportunity_status'] == 'unassessed' and row['serious_error'] is None,
+                    'invalid measurement cannot contribute quality, opportunity or safety judgments')
         pair = row['item_id'], row['reviewer_id']
         require(pair not in pairs, 'duplicate reviewer/item rating')
         pairs.add(pair)

@@ -54,6 +54,34 @@ class ReadinessStatisticsTests(unittest.TestCase):
         self.assertAlmostEqual(report['service_completion']['rate'], 5 / 6)
         self.assertEqual(report['service_completion']['excluded_measurement_invalid'], 1)
 
+    def test_invalid_measurement_cannot_contribute_rating_or_safety_judgment(self):
+        invalid_sessions = {s['session_id'] for s in self.bundle['sessions']
+                            if s['status'] == 'measurement_invalid'}
+        item = next(o for o in self.bundle['opportunities'] if o['session_id'] in invalid_sessions)
+        for change in ({'quality_status': 'assessed', 'rating': 2, 'opportunity_status': 'occurred'},
+                       {'serious_error': False}, {'opportunity_status': 'not_applicable'}):
+            bundle = copy.deepcopy(self.bundle)
+            row = {'item_id': item['item_id'], 'criterion_id': item['criterion_id'],
+                   'reviewer_id': bundle['reviewers'][0], 'review_version': bundle['review_version'],
+                   'rubric_version': bundle['rubric_version'], 'rating': None,
+                   'quality_status': 'unassessed', 'opportunity_status': 'unassessed',
+                   'serious_error': None, **change}
+            bundle['ratings'].append(row)
+            path = self.root / ('invalid-' + str(len(change)) + str(change.get('serious_error')) + '.sqlite')
+            with self.subTest(change=change), self.assertRaisesRegex(ValueError, 'invalid measurement'):
+                run_statistics(bundle, path)
+            self.assertFalse(path.exists())
+
+    def test_invalid_measurement_may_retain_explicit_unknown_reviewer_row(self):
+        item = next(o for o in self.bundle['opportunities'] if o['session_id'] == 'case-b:state:r0')
+        self.bundle['ratings'].append({'item_id': item['item_id'], 'criterion_id': item['criterion_id'],
+            'reviewer_id': self.bundle['reviewers'][0], 'review_version': self.bundle['review_version'],
+            'rubric_version': self.bundle['rubric_version'], 'rating': None,
+            'quality_status': 'unassessed', 'opportunity_status': 'unassessed', 'serious_error': None})
+        report = self.analyze()
+        self.assertEqual(report['denominators']['individual_quality_ratings'], 4)
+        self.assertEqual(report['denominators']['opportunities_with_both_quality_ratings'], 1)
+
     def test_unassessed_not_reached_and_missing_rows_never_become_zero(self):
         report = self.analyze()
         self.assertEqual(report['queries']['both_reviewers_assessed'][0]['item_id'],
