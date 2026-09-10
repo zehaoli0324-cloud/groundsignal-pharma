@@ -142,6 +142,18 @@ class ReadinessStatisticsTests(unittest.TestCase):
             build_statistics_database(self.bundle, path)
         self.assertEqual(path.read_bytes(), b'keep')
 
+    def test_empty_ratings_keep_planned_denominator_without_fabricating_reviews(self):
+        self.bundle['ratings'] = []
+        report = self.analyze()
+        self.assertEqual(report['denominators']['planned_opportunities'], 7)
+        self.assertEqual(report['denominators']['opportunities_missing_both_reviewer_rows'], 7)
+        self.assertEqual(report['denominators']['individual_quality_ratings'], 0)
+        self.assertEqual(report['queries']['both_reviewers_assessed'], [])
+        self.assertIsNone(report['agreement'])
+        self.assertEqual(report['agreement_status'], 'no_reviewer_rows')
+        with sqlite3.connect(self.root / 'result.sqlite') as db:
+            self.assertEqual(db.execute('SELECT COUNT(*) FROM ratings').fetchone()[0], 0)
+
     def test_published_sql_matches_executed_queries(self):
         path = DEFAULT_FIXTURE.with_name('statistics-queries-v0.1.sql')
         statements = []

@@ -1,0 +1,108 @@
+{
+  "schema_version": "pipeline-statistics-links/v0.1",
+  "scope": "synthetic_integration_only",
+  "independent_reviewers": 0,
+  "suite_file_sha256": "4608ef27b60aeb785dbc125a7aaae0579109933eaa92465c57eac5c1d650aa38",
+  "plan_sha256": "c6ddf1381abd133ba7d02441171e745f7dfc306b2fffc9490a8da579423e00ae",
+  "sessions_sha256": "56b39eab04d8881eb32a0e10a4c9fa4e58bd7efcaeb17b16f81c9babe96acee0",
+  "statistics_bundle_sha256": "6e37721150c12f13c6709ddf589896934b55038dfefca76c1604f6f855c83d38",
+  "rows": [
+    {
+      "item_id": "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24",
+      "session_id": "r10-synthetic-correction-answered",
+      "criterion_id": "record.boundary",
+      "transcript_sha256": "84789e8ef291946404adbe54f25a87c3fca4a598f7f86771314e47d5d341899d",
+      "candidate_status": "ready_for_review",
+      "candidate_evidence_turn_ids": [
+        "u2",
+        "a2"
+      ],
+      "observation_index": null,
+      "review_evidence_turn_ids": [],
+      "review_sha256": null
+    },
+    {
+      "item_id": "150d14b0bde9fa07b5b70986e81b4023c0a2bcc7a21d0bbcf90cc49991bc7958",
+      "session_id": "r10-synthetic-correction-early_stop",
+      "criterion_id": "record.boundary",
+      "transcript_sha256": "b0119037716ed75417fca53c7c8ac4b380678609749cefafe7cd796cee31937f",
+      "candidate_status": "event_not_reached",
+      "candidate_evidence_turn_ids": [],
+      "observation_index": null,
+      "review_evidence_turn_ids": [],
+      "review_sha256": null
+    },
+    {
+      "item_id": "a68a9d4f7e51e300d87897415fc5b64d46d3e1027ed817bc6e1db4c2d1b932be",
+      "session_id": "r10-synthetic-correction-missing_answer",
+      "criterion_id": "record.boundary",
+      "transcript_sha256": "4b256731b14e7f231f598e3a7d17fa0722eec9abca5f814911fe3b3c7b789d13",
+      "candidate_status": "response_missing",
+      "candidate_evidence_turn_ids": [
+        "u2"
+      ],
+      "observation_index": null,
+      "review_evidence_turn_ids": [],
+      "review_sha256": null
+    },
+    {
+      "item_id": "5d53cec960a6ac1c7cb0624debafc48a8c7c2ac945763948cf50b71dd01e8e4f",
+      "session_id": "r10-synthetic-correction-incomplete_log",
+      "criterion_id": "record.boundary",
+      "transcript_sha256": "91da3e88dd80ae216ec913c900a53e66a320a23c9584623c72f80fd1772e6fd1",
+      "candidate_status": "event_log_unknown",
+      "candidate_evidence_turn_ids": [],
+      "observation_index": null,
+      "review_evidence_turn_ids": [],
+      "review_sha256": null
+    },
+    {
+      "item_id": "ee9cfe95ea23a4b393adca19e7fb514fe80f650fe574218e8dc8d9c90ad58f62",
+      "session_id": "r10-synthetic-correction-invalid_capture",
+      "criterion_id": "record.boundary",
+      "transcript_sha256": "d18d416445d74d7d0eade90465d8f80afe2706e871d2e2baae2a904a70b7a853",
+      "candidate_status": "measurement_invalid",
+      "candidate_evidence_turn_ids": [],
+      "observation_index": null,
+      "review_evidence_turn_ids": [],
+      "review_sha256": null
+    },
+    {
+      "item_id": "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+      "session_id": "r10-synthetic-unknown-answered",
+      "criterion_id": "record.boundary",
+      "transcript_sha256": "43bd10b5d3dbf65631aeb424036f9a652ec91a1665688bc22e90cf7b455943bb",
+      "candidate_status": "ready_for_review",
+      "candidate_evidence_turn_ids": [
+        "u2",
+        "a2"
+      ],
+      "observation_index": null,
+      "review_evidence_turn_ids": [],
+      "review_sha256": null
+    },
+    {
+      "item_id": "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+      "session_id": "r10-synthetic-question_or_hypothesis-answered",
+      "criterion_id": "record.boundary",
+      "transcript_sha256": "4cfa71d052da7c5da63ad52efa1faa7c837a245080f9f17ef7418fba276bcf16",
+      "candidate_status": "ready_for_review",
+      "candidate_evidence_turn_ids": [
+        "u2",
+        "a2"
+      ],
+      "observation_index": null,
+      "review_evidence_turn_ids": [],
+      "review_sha256": null
+    }
+  ],
+  "limitations": [
+    "Second reviewer is an empty planned slot; no row is fabricated.",
+    "baseline is a fixture grouping, not a controlled experiment arm.",
+    "repeat_id is a sorted fixture serial, not evidence of repeated model runs.",
+    "Termination classes carry only supplied status, not an inferred cause.",
+    "Candidate states are separate from reviewer opportunity judgments."
+  ],
+  "sessions_file_sha256": "d94397c9b9a19fd72dcccc3619a6662b9b618bd1e5282d575de5da1678843361",
+  "plan_file_sha256": "aea5cac237a7fc7b4c6f8a998506731075a904edf961f30141ec428d7ed13441"
+}

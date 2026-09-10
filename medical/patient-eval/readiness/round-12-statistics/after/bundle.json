@@ -1,0 +1,178 @@
+{
+  "schema_version": "readiness-statistics/v0.1",
+  "scope": "development_only",
+  "source": "synthetic",
+  "fixture_only": true,
+  "clinical_approval": false,
+  "review_version": "patient-review/v0.3",
+  "rubric_version": "r10-fixture-draft/v1",
+  "reviewers": [
+    "SYNTHETIC-AUTHOR-NOT-A-HUMAN-REVIEW",
+    "SYNTHETIC-REVIEWER-B-NO-RECORDS"
+  ],
+  "cases": [
+    {
+      "case_id": "r10-synthetic-correction",
+      "family_id": "r10-correction"
+    },
+    {
+      "case_id": "r10-synthetic-unknown",
+      "family_id": "r10-unknown"
+    },
+    {
+      "case_id": "r10-synthetic-question_or_hypothesis",
+      "family_id": "r10-question_or_hypothesis"
+    }
+  ],
+  "sessions": [
+    {
+      "session_id": "r10-synthetic-correction-answered",
+      "case_id": "r10-synthetic-correction",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "arm": "baseline",
+      "repeat_id": 0,
+      "status": "completed",
+      "termination_reason": "fixture_status_completed",
+      "invalid_component": null
+    },
+    {
+      "session_id": "r10-synthetic-correction-early_stop",
+      "case_id": "r10-synthetic-correction",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "arm": "baseline",
+      "repeat_id": 1,
+      "status": "completed",
+      "termination_reason": "fixture_status_completed",
+      "invalid_component": null
+    },
+    {
+      "session_id": "r10-synthetic-correction-incomplete_log",
+      "case_id": "r10-synthetic-correction",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "arm": "baseline",
+      "repeat_id": 2,
+      "status": "completed",
+      "termination_reason": "fixture_status_completed",
+      "invalid_component": null
+    },
+    {
+      "session_id": "r10-synthetic-correction-invalid_capture",
+      "case_id": "r10-synthetic-correction",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "arm": "baseline",
+      "repeat_id": 3,
+      "status": "measurement_invalid",
+      "termination_reason": "fixture_status_measurement_invalid",
+      "invalid_component": "collector"
+    },
+    {
+      "session_id": "r10-synthetic-correction-missing_answer",
+      "case_id": "r10-synthetic-correction",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "arm": "baseline",
+      "repeat_id": 4,
+      "status": "target_error",
+      "termination_reason": "fixture_status_target_error",
+      "invalid_component": null
+    },
+    {
+      "session_id": "r10-synthetic-question_or_hypothesis-answered",
+      "case_id": "r10-synthetic-question_or_hypothesis",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "arm": "baseline",
+      "repeat_id": 0,
+      "status": "completed",
+      "termination_reason": "fixture_status_completed",
+      "invalid_component": null
+    },
+    {
+      "session_id": "r10-synthetic-unknown-answered",
+      "case_id": "r10-synthetic-unknown",
+      "platform": "LOCAL-AUTHORED-FIXTURE-NO-MODEL",
+      "arm": "baseline",
+      "repeat_id": 0,
+      "status": "completed",
+      "termination_reason": "fixture_status_completed",
+      "invalid_component": null
+    }
+  ],
+  "opportunities": [
+    {
+      "item_id": "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24",
+      "session_id": "r10-synthetic-correction-answered",
+      "criterion_id": "record.boundary",
+      "recorded_status": "occurred"
+    },
+    {
+      "item_id": "150d14b0bde9fa07b5b70986e81b4023c0a2bcc7a21d0bbcf90cc49991bc7958",
+      "session_id": "r10-synthetic-correction-early_stop",
+      "criterion_id": "record.boundary",
+      "recorded_status": "unassessed"
+    },
+    {
+      "item_id": "a68a9d4f7e51e300d87897415fc5b64d46d3e1027ed817bc6e1db4c2d1b932be",
+      "session_id": "r10-synthetic-correction-missing_answer",
+      "criterion_id": "record.boundary",
+      "recorded_status": "unassessed"
+    },
+    {
+      "item_id": "5d53cec960a6ac1c7cb0624debafc48a8c7c2ac945763948cf50b71dd01e8e4f",
+      "session_id": "r10-synthetic-correction-incomplete_log",
+      "criterion_id": "record.boundary",
+      "recorded_status": "unassessed"
+    },
+    {
+      "item_id": "ee9cfe95ea23a4b393adca19e7fb514fe80f650fe574218e8dc8d9c90ad58f62",
+      "session_id": "r10-synthetic-correction-invalid_capture",
+      "criterion_id": "record.boundary",
+      "recorded_status": "unassessed"
+    },
+    {
+      "item_id": "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+      "session_id": "r10-synthetic-unknown-answered",
+      "criterion_id": "record.boundary",
+      "recorded_status": "occurred"
+    },
+    {
+      "item_id": "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+      "session_id": "r10-synthetic-question_or_hypothesis-answered",
+      "criterion_id": "record.boundary",
+      "recorded_status": "occurred"
+    }
+  ],
+  "ratings": [
+    {
+      "item_id": "61655ebdd1b144858f398380acea73d98d67e395ae5b1c2c1085aa4e058a8c24",
+      "reviewer_id": "SYNTHETIC-AUTHOR-NOT-A-HUMAN-REVIEW",
+      "criterion_id": "record.boundary",
+      "review_version": "patient-review/v0.3",
+      "rubric_version": "r10-fixture-draft/v1",
+      "rating": 2,
+      "quality_status": "assessed",
+      "opportunity_status": "occurred",
+      "serious_error": null
+    },
+    {
+      "item_id": "516ac3902fe5ca5dbcd6587ca59eb12bb9a6e5c307a386dc65c278a16b595ce4",
+      "reviewer_id": "SYNTHETIC-AUTHOR-NOT-A-HUMAN-REVIEW",
+      "criterion_id": "record.boundary",
+      "review_version": "patient-review/v0.3",
+      "rubric_version": "r10-fixture-draft/v1",
+      "rating": 0,
+      "quality_status": "assessed",
+      "opportunity_status": "occurred",
+      "serious_error": null
+    },
+    {
+      "item_id": "24513d4e055dee27d8df972fd6fd73991b174389f2a073fc033c78501d96a2df",
+      "reviewer_id": "SYNTHETIC-AUTHOR-NOT-A-HUMAN-REVIEW",
+      "criterion_id": "record.boundary",
+      "review_version": "patient-review/v0.3",
+      "rubric_version": "r10-fixture-draft/v1",
+      "rating": 2,
+      "quality_status": "assessed",
+      "opportunity_status": "occurred",
+      "serious_error": null
+    }
+  ]
+}
