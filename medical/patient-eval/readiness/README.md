@@ -59,3 +59,7 @@ python -m scripts.patient_eval.readiness_drill --out medical/patient-eval/local/
 ## R3：新格式最小显式续跑
 
 运行 `python -m scripts.patient_eval.resumable_drill --out medical/patient-eval/local/resume-first`。新v0.3格式绑定输入、配置、调度、相关代码摘要和每条会话文件摘要，并使用排他锁。固定合成演练8/8通过：中断保存1/2，恢复只调用剩余会话，旧会话字节不变。未落盘请求仍可能重放，不能声称绝对只调用一次；真实平台和真实病例均未验证。
+
+## R4：统计分母与三条查询
+
+阅读 [合成统计练习](STATISTICS_REVIEW.md)。`readiness_statistics.py` 把不含患者原文的合成元数据导入本地SQLite单文件数据库，执行病例完成情况、错误类别、两人均已评分三条查询，并复用现有一致性模块。公开报告为 `round-4-statistics-report.json`；本地数据库不上传。手算答案和程序一致不等于本人独立验收。

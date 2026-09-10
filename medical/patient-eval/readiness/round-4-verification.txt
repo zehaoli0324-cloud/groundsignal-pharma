@@ -1,0 +1,55 @@
+R4 input commit: 6563d593e879f8b80d93876ee4b868b25ce056ce
+
+First test before implementation:
+python -m unittest tests.patient_eval.test_readiness_statistics -v
+ModuleNotFoundError: No module named 'scripts.patient_eval.readiness_statistics'
+Ran 1 test in 0.000s
+FAILED (errors=1)
+exit_code=1
+
+First implementation test mistake:
+The helper was named run and shadowed unittest.TestCase.run.
+AttributeError: ReadinessStatisticsTests object has no attribute root
+exit_code=1
+
+Second test-fixture mistake:
+The invalid-null mutation changed a valid assessed rating to 0, which is legal.
+The assertion expecting ValueError failed and created that test database.
+The mutation was corrected to put 0 on an unassessed row.
+Ran 7 tests in 0.030s
+FAILED (failures=2)
+exit_code=1
+
+Initial targeted validation before published-SQL sync test:
+python -m unittest tests.patient_eval.test_readiness_statistics tests.patient_eval.test_agreement_v03 -v
+Ran 17 tests in 0.032s
+OK
+
+python -m scripts.patient_eval.readiness_statistics --input medical/patient-eval/readiness/statistics-fixture-v0.1.json --db /workspace/scratch/52ba3ac24ecb/readiness-r4-final.sqlite --report /workspace/scratch/52ba3ac24ecb/readiness-r4-final-report.json
+cases=3
+sessions=7
+repeat_sessions=1
+service_completion=5/6
+planned_opportunities=7
+both_reviewers_assessed=1
+items_missing_both_reviewers=1
+external_model_calls=0
+real_source_sessions=0
+exit_code=0
+
+Additional database CLI check:
+sqlite3 /workspace/scratch/52ba3ac24ecb/readiness-r4-final.sqlite ...
+/bin/bash: sqlite3: command not found
+exit_code=127
+This environment gap does not affect the Python sqlite3 standard-library implementation.
+
+Python standard-library database fallback:
+PRAGMA integrity_check = ok
+table rows (cases, sessions, opportunities, ratings) = (3, 7, 7, 11)
+exit_code=0
+
+Final targeted validation including published-SQL sync:
+python -m unittest tests.patient_eval.test_readiness_statistics tests.patient_eval.test_agreement_v03 -v
+Ran 18 tests in 0.036s
+OK
+exit_code=0
