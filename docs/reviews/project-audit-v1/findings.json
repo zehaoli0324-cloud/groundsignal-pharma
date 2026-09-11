@@ -4,7 +4,7 @@
     "a1-upstream",
     "a1-admission-export"
   ],
-  "open_findings": 10,
+  "open_findings": 12,
   "fixed_findings": 0,
   "project_audit_complete": false,
   "project_tests_complete": false,
@@ -247,6 +247,56 @@
       "probe_scope": "对子检查结果与回执验证使用明确的合成桩，只复现结果组合逻辑；现有CLI按guard_gate返回失败，未证明真实准入绕过",
       "historical_result_corruption_proven": false,
       "batch": "a1-admission-export"
+    },
+    {
+      "cause_confidence": "high: source review and offline synthetic reproduction",
+      "status": "OPEN",
+      "fix_applied": false,
+      "validation": "a1-evaluation/first-run/observations.json",
+      "affected_remote_commit": "62972d1ebd8ecf44ee74f8d5d7b7d4705c408c98",
+      "historical_result_corruption_proven": false,
+      "batch": "a1-evaluation",
+      "finding_id": "A1-011",
+      "module": "S7",
+      "severity": "P1",
+      "title": "通用评分入口未核对已有病例摘要，旧结果可用于新标准",
+      "path": "scripts/patient_eval/cli.py",
+      "symbol": "evaluate_sessions; scoring.score_session",
+      "probe_ids": [
+        "changed_rule_old_result",
+        "explicit_wrong_scenario_digest"
+      ],
+      "trigger": "保留病例编号、协议和开头，改变标准期望值；或明确提供不匹配的scenario_sha256",
+      "expected": "评分前核验已有版本绑定，拒绝错配，不能沿用旧结果发布通过",
+      "actual": "alpha规则改为beta后，旧alpha通过记录仍被评为fully_passed=true；全零错误摘要也被接受",
+      "cause": "evaluate_sessions核验编号/协议/可见开头，但不比较scenario_sha256；score_session按criterion_id消费旧outcome而不重算机械检查",
+      "repair_plan": "在通用评分边界统一核验版本摘要；旧无摘要记录另定兼容策略，不能伪造绑定；联动API/fixture/导入/报告入口并保留旧证据",
+      "probe_scope": "完整调用通用evaluate_sessions，输入为run_fixture生成的非医疗合成标记；严格批量导入、事件映射及恢复入口已有摘要检查，本反例不证明它们被绕过"
+    },
+    {
+      "cause_confidence": "high: source review and offline synthetic reproduction",
+      "status": "OPEN",
+      "fix_applied": false,
+      "validation": "a1-evaluation/first-run/observations.json",
+      "affected_remote_commit": "62972d1ebd8ecf44ee74f8d5d7b7d4705c408c98",
+      "historical_result_corruption_proven": false,
+      "batch": "a1-evaluation",
+      "finding_id": "A1-012",
+      "module": "S8",
+      "severity": "P2",
+      "title": "统计输入只按外部编号查重，同一评分机会可重复计数",
+      "path": "scripts/patient_eval/readiness_statistics.py",
+      "symbol": "validate_statistics_bundle; SCHEMA; run_statistics",
+      "probe_ids": [
+        "duplicate_opportunity_alias",
+        "duplicate_opportunity_with_ratings"
+      ],
+      "trigger": "复制同一会话、同一criterion的同一次机会，仅换item_id；可同时复制两名评审的原有记录",
+      "expected": "按明确的逻辑评分单位查重，或要求能区分不同发生次数的证据键；复制同一发生不能增加分母",
+      "actual": "计划数7变8、已发生3变4；连评分复制后双人均评分1变2、个人评分行4变6；病例和会话没有增加",
+      "cause": "机会表仅校验item_id唯一；无session/criterion逻辑唯一约束，也无发生次序或触发证据键；SQL直接按新item_id计数",
+      "repair_plan": "先固定机会粒度；现有单次合同校验(session_id,criterion_id)唯一并添加数据库约束；未来多次发生需显式occurrence及证据绑定，不能仅用自由编号",
+      "probe_scope": "直接统计bundle入口合成复制反例。当前pipeline_statistics以(session_id,criterion_id)派生编号，未复现正常桥接路径自行产生重复；不把真实不同发生次数判为重复"
     }
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "scope": "synthetic_contract_audit",
+  "total": 12,
+  "passed": 8,
+  "failed": 4,
+  "production_fixes": 0,
+  "external_model_calls": 0,
+  "private_patient_reads": 0,
+  "clinical_approval": false
+}
