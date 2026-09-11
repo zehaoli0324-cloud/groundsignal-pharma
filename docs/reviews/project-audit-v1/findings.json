@@ -4,7 +4,7 @@
     "a1-upstream",
     "a1-admission-export"
   ],
-  "open_findings": 15,
+  "open_findings": 16,
   "fixed_findings": 0,
   "project_audit_complete": false,
   "project_tests_complete": false,
@@ -374,6 +374,31 @@
       "cause": "any(d in u)检查完整URL，不核对hostname；历史规则还含宽泛关键词",
       "repair_plan": "用URL解析器处理主机名、用户信息和端口，配置完整受信域名及子域边界；来源类别与具体内容核验分开保留",
       "probe_scope": "执行来源分类helper，静态确认main会写evidence标签；没有联网访问网址，也未证明历史真实资料被误标或获得S5/S6批准"
+    },
+    {
+      "finding_id": "A1-016",
+      "module": "S6合成演练",
+      "severity": "P2",
+      "title": "合成披露器输出失败后仍记录已披露且阻止重试",
+      "path": "scripts/patient_eval/dynamic_case_offline.py",
+      "symbol": "SyntheticContractExecutor.__init__; open; confirm",
+      "probe_ids": [
+        "opening_missing_payload",
+        "event_missing_payload"
+      ],
+      "trigger": "合成fixture缺少opening或event.response的evidence_fragments",
+      "expected": "构造或操作前拒绝不完整输出；异常不能留下成功披露状态",
+      "actual": "open报KeyError后已进入ACTIVE且记录初始披露；confirm报错后事件已标fired；再次调用均以重复操作拒绝",
+      "cause": "构造时未验证输出结构；open/confirm先改变state/disclosed/fired/trace，之后才读取并复制返回内容",
+      "cause_confidence": "high: source review and synthetic state snapshots before/after exception",
+      "status": "OPEN",
+      "fix_applied": false,
+      "repair_plan": "先验证合成fixture完整性并准备返回内容，成功后一次性提交状态；检查opening、动态事件及深拷贝异常",
+      "validation": "a1-dynamic-pages/first-run/observations.json",
+      "affected_remote_commit": "331e12fccb0db7fec9cf74441d4b9e7e6762c23f",
+      "historical_result_corruption_proven": false,
+      "batch": "a1-dynamic-pages",
+      "probe_scope": "仅合成合同执行器。真实来源病例仍被拒绝；不证明真实接口状态或私有病例泄漏。与A1-001同为异常前写状态模式，但实现及影响范围不同"
     }
   ]
 }

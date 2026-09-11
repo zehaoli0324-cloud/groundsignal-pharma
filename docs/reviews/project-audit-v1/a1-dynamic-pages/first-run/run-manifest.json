@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "scripts/audit_dynamic_boundaries.py",
+    "--out",
+    "docs/reviews/project-audit-v1/a1-dynamic-pages/first-run"
+  ],
+  "cwd": "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit",
+  "python": "3.12.14",
+  "input_git_commit": "6843f9130025e1542f62dc8194eafbfaac2db713",
+  "input_git_tree": "243852b1e1555b991bd2ed4ac29f70976874258a",
+  "file_sha256": {
+    "scripts/audit_dynamic_boundaries.py": "d82f82b165135e9cca3c7b4d61f7009610a670109d6b37369d3d92db549c1335",
+    "scripts/patient_eval/dynamic_case_offline.py": "64a003513de86539667e3fc18cc4805b9eaca91a1a65652aa61a3d6bef208603",
+    "scripts/patient_eval/dynamic_case_drafts.py": "5a53c4ecc74dc779c25511477eee04e5332f5e7ae6bfc5b789d9a9f7e9c560c5",
+    "scripts/patient_eval/clinical_console.py": "3fb29ecbf001fbd8df60e13a974c88ffdd2492c57022ba270a991ab78a4ef664",
+    "scripts/patient_eval/candidate_review_ui.py": "42c697694e38b500a761e860dd1ee3d3555ae122b0d66114fb7b3373a39dcf6f"
+  },
+  "probe_script_uncommitted_at_first_execution": true,
+  "input_scope": "new markers and existing synthetic demo",
+  "path_test_scope": "isolated helper anchor only; no race or real private-path test",
+  "output": "docs/reviews/project-audit-v1/a1-dynamic-pages/first-run",
+  "expected_exit_code_at_audit_baseline": 2,
+  "actual_exit_code": 2
+}

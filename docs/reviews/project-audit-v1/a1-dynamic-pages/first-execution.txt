@@ -1,0 +1,9 @@
+{
+  "total": 8,
+  "passed": 6,
+  "failed": 2,
+  "production_fixes": 0,
+  "real_patient_reads": 0,
+  "external_model_calls": 0,
+  "browser_sessions": 0
+}

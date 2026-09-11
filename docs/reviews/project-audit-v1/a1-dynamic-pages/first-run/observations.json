@@ -1,0 +1,203 @@
+{
+  "total": 8,
+  "passed": 6,
+  "failed": 2,
+  "rows": [
+    {
+      "probe_id": "opening_missing_payload",
+      "finding_id": "A1-016",
+      "expected": "Missing output payload fails without recording successful state/disclosure",
+      "actual": {
+        "error": "KeyError: 'evidence_fragments'",
+        "before": {
+          "case_id": "SYNTHETIC-A",
+          "state": "NOT_OPENED",
+          "disclosed_fact_ids": [],
+          "fired_event_ids": [],
+          "unreached_event_ids": [
+            "E-QUESTION",
+            "E-SCHEDULED"
+          ],
+          "trace": []
+        },
+        "after": {
+          "case_id": "SYNTHETIC-A",
+          "state": "ACTIVE",
+          "disclosed_fact_ids": [
+            "F-INITIAL"
+          ],
+          "fired_event_ids": [],
+          "unreached_event_ids": [
+            "E-QUESTION",
+            "E-SCHEDULED"
+          ],
+          "trace": [
+            {
+              "event": "OPERATOR_OPEN",
+              "disclosed": [
+                "F-INITIAL"
+              ]
+            }
+          ]
+        },
+        "retry_error": "ValueError: opening can occur exactly once"
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "event_missing_payload",
+      "finding_id": "A1-016",
+      "expected": "Missing output payload fails without recording successful state/disclosure",
+      "actual": {
+        "error": "KeyError: 'evidence_fragments'",
+        "before": {
+          "case_id": "SYNTHETIC-A",
+          "state": "ACTIVE",
+          "disclosed_fact_ids": [
+            "F-INITIAL"
+          ],
+          "fired_event_ids": [],
+          "unreached_event_ids": [
+            "E-QUESTION",
+            "E-SCHEDULED"
+          ],
+          "trace": [
+            {
+              "event": "OPERATOR_OPEN",
+              "disclosed": [
+                "F-INITIAL"
+              ]
+            }
+          ]
+        },
+        "after": {
+          "case_id": "SYNTHETIC-A",
+          "state": "ACTIVE",
+          "disclosed_fact_ids": [
+            "F-INITIAL",
+            "F-QUESTION"
+          ],
+          "fired_event_ids": [
+            "E-QUESTION"
+          ],
+          "unreached_event_ids": [
+            "E-SCHEDULED"
+          ],
+          "trace": [
+            {
+              "event": "OPERATOR_OPEN",
+              "disclosed": [
+                "F-INITIAL"
+              ]
+            },
+            {
+              "event": "OPERATOR_CONFIRM:E-QUESTION",
+              "disclosed": [
+                "F-QUESTION"
+              ]
+            }
+          ]
+        },
+        "retry_error": "ValueError: disclosure event already fired"
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "normal_disclosure_and_stop",
+      "finding_id": null,
+      "expected": "Normal sequence discloses only selected slots and preserves unreached event",
+      "actual": {
+        "case_id": "SYNTHETIC-A",
+        "state": "CLOSED",
+        "disclosed_fact_ids": [
+          "F-INITIAL",
+          "F-QUESTION"
+        ],
+        "fired_event_ids": [
+          "E-QUESTION"
+        ],
+        "unreached_event_ids": [
+          "E-SCHEDULED"
+        ],
+        "trace": [
+          {
+            "event": "OPERATOR_OPEN",
+            "disclosed": [
+              "F-INITIAL"
+            ]
+          },
+          {
+            "event": "OPERATOR_CONFIRM:E-QUESTION",
+            "disclosed": [
+              "F-QUESTION"
+            ]
+          },
+          {
+            "event": "OPERATOR_STOP",
+            "disclosed": []
+          }
+        ]
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "source_derived_mode_rejected",
+      "finding_id": null,
+      "expected": "Declared source-derived mode cannot enter synthetic executor",
+      "actual": {
+        "error": "offline executor accepts explicit synthetic fixtures only"
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "outside_private_root",
+      "finding_id": null,
+      "expected": "Stable outside-root or linked path rejected before writing",
+      "actual": {
+        "error": "private output must be under ignored medical/patient-eval/local/",
+        "target_created": false,
+        "scope": "isolated temporary root"
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "symlink_parent_escape",
+      "finding_id": null,
+      "expected": "Stable outside-root or linked path rejected before writing",
+      "actual": {
+        "error": "private output must be under ignored medical/patient-eval/local/",
+        "target_created": false,
+        "scope": "isolated temporary root"
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "console_data_escape",
+      "finding_id": null,
+      "expected": "Source marker roundtrips as escaped JSON without becoming an HTML script tag",
+      "actual": {
+        "raw_marker_in_html": false,
+        "raw_less_than_in_payload": false,
+        "marker_roundtrip": true,
+        "scope": "generated HTML and JSON parser only; not a browser test"
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "review_workspace_data_escape",
+      "finding_id": null,
+      "expected": "Source marker roundtrips as escaped JSON without becoming an HTML script tag",
+      "actual": {
+        "raw_marker_in_html": false,
+        "raw_less_than_in_payload": false,
+        "marker_roundtrip": true,
+        "scope": "generated HTML and JSON parser only; not a browser test"
+      },
+      "invariant_pass": true
+    }
+  ],
+  "production_fixes": 0,
+  "real_patient_reads": 0,
+  "external_model_calls": 0,
+  "browser_sessions": 0
+}
