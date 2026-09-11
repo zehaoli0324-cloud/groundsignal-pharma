@@ -1,0 +1,18 @@
+test_clinical_numbers_and_dates_are_preserved (tests.patient_eval.test_candidate_privacy.CandidatePrivacyTests.test_clinical_numbers_and_dates_are_preserved) ... ok
+test_contextual_and_url_cues_do_not_include_labels (tests.patient_eval.test_candidate_privacy.CandidatePrivacyTests.test_contextual_and_url_cues_do_not_include_labels) ... ok
+test_invalid_and_overlapping_spans_fail_before_mutating_mapping (tests.patient_eval.test_candidate_privacy.CandidatePrivacyTests.test_invalid_and_overlapping_spans_fail_before_mutating_mapping) ... ok
+test_malformed_inputs_do_not_coerce_offsets_or_return_raw_mapping_values (tests.patient_eval.test_candidate_privacy.CandidatePrivacyTests.test_malformed_inputs_do_not_coerce_offsets_or_return_raw_mapping_values) ... ok
+test_national_id_requires_plausible_date_and_exact_boundaries (tests.patient_eval.test_candidate_privacy.CandidatePrivacyTests.test_national_id_requires_plausible_date_and_exact_boundaries) ... ok
+test_offsets_are_original_unicode_and_metadata_has_no_captured_value (tests.patient_eval.test_candidate_privacy.CandidatePrivacyTests.test_offsets_are_original_unicode_and_metadata_has_no_captured_value) ... ok
+test_redaction_requires_explicit_spans_and_leaves_other_cues (tests.patient_eval.test_candidate_privacy.CandidatePrivacyTests.test_redaction_requires_explicit_spans_and_leaves_other_cues) ... ok
+test_repeated_values_have_stable_placeholders_across_messages (tests.patient_eval.test_candidate_privacy.CandidatePrivacyTests.test_repeated_values_have_stable_placeholders_across_messages) ... ok
+test_all_expected_human_blockers_are_separated_without_auto_fix (tests.patient_eval.test_candidate_blockers.CandidateBlockerTests.test_all_expected_human_blockers_are_separated_without_auto_fix) ... ok
+test_cli_rejects_wrong_source_hash_without_creating_output (tests.patient_eval.test_candidate_blockers.CandidateBlockerTests.test_cli_rejects_wrong_source_hash_without_creating_output) ... ok
+test_duplicate_or_path_like_public_ids_fail_closed (tests.patient_eval.test_candidate_blockers.CandidateBlockerTests.test_duplicate_or_path_like_public_ids_fail_closed) ... ok
+test_private_text_identity_and_paths_never_enter_public_projection (tests.patient_eval.test_candidate_blockers.CandidateBlockerTests.test_private_text_identity_and_paths_never_enter_public_projection) ... ok
+test_ready_is_development_only_and_never_clinical_admission (tests.patient_eval.test_candidate_blockers.CandidateBlockerTests.test_ready_is_development_only_and_never_clinical_admission) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.073s
+
+OK

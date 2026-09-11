@@ -4,7 +4,7 @@
     "a1-upstream",
     "a1-admission-export"
   ],
-  "open_findings": 12,
+  "open_findings": 15,
   "fixed_findings": 0,
   "project_audit_complete": false,
   "project_tests_complete": false,
@@ -297,6 +297,83 @@
       "cause": "机会表仅校验item_id唯一；无session/criterion逻辑唯一约束，也无发生次序或触发证据键；SQL直接按新item_id计数",
       "repair_plan": "先固定机会粒度；现有单次合同校验(session_id,criterion_id)唯一并添加数据库约束；未来多次发生需显式occurrence及证据绑定，不能仅用自由编号",
       "probe_scope": "直接统计bundle入口合成复制反例。当前pipeline_statistics以(session_id,criterion_id)派生编号，未复现正常桥接路径自行产生重复；不把真实不同发生次数判为重复"
+    },
+    {
+      "cause_confidence": "high: code review and local synthetic reproduction",
+      "status": "OPEN",
+      "fix_applied": false,
+      "validation": "a1-shared-boundaries/first-run/observations.json",
+      "affected_remote_commit": "77f939ce22f53dece8c01787b2428627600597b8",
+      "historical_result_corruption_proven": false,
+      "batch": "a1-shared-boundaries",
+      "finding_id": "A1-013",
+      "module": "S10",
+      "severity": "P1",
+      "title": "共享回归发布检查接纳缺失评审与重复病例",
+      "path": "scripts/regression_gate.py",
+      "symbol": "case_ids; count_critical_errors; metric_average; main",
+      "probe_ids": [
+        "partly_missing_required_score",
+        "missing_safety_review",
+        "duplicate_weighting"
+      ],
+      "trigger": "同一病例集合中部分必需指标缺失、critical_errors字段缺失，或重复高分病例",
+      "expected": "先验证逐病例评审完整性和唯一性，再比较可配对结果；未知不能视为零安全错误",
+      "actual": "评分分母2对1仍PASS；缺少安全字段被统计为0且PASS；重复高分病例使均值从0.45变0.6而PASS",
+      "cause": "病例集合抹去重复；指标跳过None后分别求均值；critical_errors缺失用空列表替代",
+      "repair_plan": "建立逐病例唯一身份和评审状态合同；缺失安全状态保持未知，必需指标核对覆盖与配对；合法重复运行须显式编号及聚合策略",
+      "probe_scope": "完整CLI执行，使用声明require_same_case_ids和required指标的最小合成政策；未执行真实医疗回归。患者v0.3评分路径已另有未知处理，不能把共享脚本缺陷扩大到所有评分器"
+    },
+    {
+      "cause_confidence": "high: code review and local synthetic reproduction",
+      "status": "OPEN",
+      "fix_applied": false,
+      "validation": "a1-shared-boundaries/first-run/observations.json",
+      "affected_remote_commit": "77f939ce22f53dece8c01787b2428627600597b8",
+      "historical_result_corruption_proven": false,
+      "batch": "a1-shared-boundaries",
+      "finding_id": "A1-014",
+      "module": "公共代码",
+      "severity": "P1",
+      "title": "知识库合并的冲突重命名和附件复制可覆盖旧文件",
+      "path": "scripts/import-helper.py",
+      "symbol": "check; merge",
+      "probe_ids": [
+        "renamed_markdown_collision",
+        "non_markdown_collision"
+      ],
+      "trigger": "原文件冲突且企业情报前缀文件已存在；或目标已有不同内容的JSON/脚本等附件",
+      "expected": "合并保留目标旧文件；新目标名也检查冲突，附件应用明确一致的保留策略",
+      "actual": "企业情报-note.md旧内容被替换；settings.json被无提示覆盖",
+      "cause": "check只检查原始Markdown路径；固定前缀目标不复查，附件直接copy2覆盖",
+      "repair_plan": "先构建涵盖全部类型的复制计划并查最终目标冲突；默认排他创建/新名称；补原子发布及路径/链接边界验证",
+      "probe_scope": "直接调用真实merge函数，只读写新建临时合成目录；真实个人知识库写入0。链接/路径逃逸与整批原子性本轮未测试"
+    },
+    {
+      "cause_confidence": "high: code review and local synthetic reproduction",
+      "status": "OPEN",
+      "fix_applied": false,
+      "validation": "a1-shared-boundaries/first-run/observations.json",
+      "affected_remote_commit": "77f939ce22f53dece8c01787b2428627600597b8",
+      "historical_result_corruption_proven": false,
+      "batch": "a1-shared-boundaries",
+      "finding_id": "A1-015",
+      "module": "S1/公共代码",
+      "severity": "P2",
+      "title": "来源分级用整段网址子串匹配，非官方地址可标成官方",
+      "path": "scripts/evidence-audit.py",
+      "symbol": "classify; main writes evidence label",
+      "probe_ids": [
+        "domain_in_path",
+        "domain_in_query",
+        "domain_suffix_spoof"
+      ],
+      "trigger": "example.invalid的路径/查询包含fda.gov，或主机名fda.gov.example.invalid",
+      "expected": "解析并归一化主机名，按精确域名及合法子域边界匹配；不匹配时UNKNOWN",
+      "actual": "三个非官方合成网址均返回VERIFIED",
+      "cause": "any(d in u)检查完整URL，不核对hostname；历史规则还含宽泛关键词",
+      "repair_plan": "用URL解析器处理主机名、用户信息和端口，配置完整受信域名及子域边界；来源类别与具体内容核验分开保留",
+      "probe_scope": "执行来源分类helper，静态确认main会写evidence标签；没有联网访问网址，也未证明历史真实资料被误标或获得S5/S6批准"
     }
   ]
 }

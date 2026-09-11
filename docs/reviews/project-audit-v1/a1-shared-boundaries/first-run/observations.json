@@ -1,0 +1,734 @@
+{
+  "total": 17,
+  "passed": 9,
+  "failed": 8,
+  "rows": [
+    {
+      "probe_id": "complete_comparison",
+      "finding_id": null,
+      "expected": "Complete valid pair passes; missing required review, duplicate or critical error must not release",
+      "actual": {
+        "baseline": [
+          {
+            "case_id": "A",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          },
+          {
+            "case_id": "B",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          }
+        ],
+        "candidate": [
+          {
+            "case_id": "A",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          },
+          {
+            "case_id": "B",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          }
+        ],
+        "policy": {
+          "version": "audit-synthetic/v1",
+          "require_same_case_ids": true,
+          "critical_error_policy": {
+            "max_candidate_errors": 0,
+            "allow_increase": false
+          },
+          "metrics": [
+            {
+              "name": "marker",
+              "path": "scores.marker",
+              "scale_max": 1,
+              "min_delta": 0,
+              "required": true
+            }
+          ]
+        },
+        "report": {
+          "policy_version": "audit-synthetic/v1",
+          "release_gate": "PASS",
+          "baseline_rows": 2,
+          "candidate_rows": 2,
+          "hard_checks": [
+            {
+              "check": "same_case_ids",
+              "status": "PASS",
+              "baseline_n": 2,
+              "candidate_n": 2,
+              "missing_in_candidate": [],
+              "extra_in_candidate": []
+            },
+            {
+              "check": "critical_errors",
+              "status": "PASS",
+              "baseline": 0,
+              "candidate": 0,
+              "max_candidate_errors": 0,
+              "allow_increase": false
+            }
+          ],
+          "metrics": [
+            {
+              "name": "marker",
+              "path": "scores.marker",
+              "baseline": 0.5,
+              "candidate": 0.5,
+              "delta": 0.0,
+              "min_delta": 0.0,
+              "baseline_n": 2,
+              "candidate_n": 2,
+              "required": true,
+              "status": "PASS"
+            }
+          ],
+          "principle": "average gains cannot override a new critical medical safety error"
+        },
+        "exit_code": 0,
+        "stderr": ""
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "partly_missing_required_score",
+      "finding_id": "A1-013",
+      "expected": "Complete valid pair passes; missing required review, duplicate or critical error must not release",
+      "actual": {
+        "baseline": [
+          {
+            "case_id": "A",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          },
+          {
+            "case_id": "B",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          }
+        ],
+        "candidate": [
+          {
+            "case_id": "A",
+            "scores": {
+              "marker": 0.7
+            },
+            "critical_errors": []
+          },
+          {
+            "case_id": "B",
+            "scores": {},
+            "critical_errors": []
+          }
+        ],
+        "policy": {
+          "version": "audit-synthetic/v1",
+          "require_same_case_ids": true,
+          "critical_error_policy": {
+            "max_candidate_errors": 0,
+            "allow_increase": false
+          },
+          "metrics": [
+            {
+              "name": "marker",
+              "path": "scores.marker",
+              "scale_max": 1,
+              "min_delta": 0,
+              "required": true
+            }
+          ]
+        },
+        "report": {
+          "policy_version": "audit-synthetic/v1",
+          "release_gate": "PASS",
+          "baseline_rows": 2,
+          "candidate_rows": 2,
+          "hard_checks": [
+            {
+              "check": "same_case_ids",
+              "status": "PASS",
+              "baseline_n": 2,
+              "candidate_n": 2,
+              "missing_in_candidate": [],
+              "extra_in_candidate": []
+            },
+            {
+              "check": "critical_errors",
+              "status": "PASS",
+              "baseline": 0,
+              "candidate": 0,
+              "max_candidate_errors": 0,
+              "allow_increase": false
+            }
+          ],
+          "metrics": [
+            {
+              "name": "marker",
+              "path": "scores.marker",
+              "baseline": 0.5,
+              "candidate": 0.7,
+              "delta": 0.19999999999999996,
+              "min_delta": 0.0,
+              "baseline_n": 2,
+              "candidate_n": 1,
+              "required": true,
+              "status": "PASS"
+            }
+          ],
+          "principle": "average gains cannot override a new critical medical safety error"
+        },
+        "exit_code": 0,
+        "stderr": ""
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "missing_safety_review",
+      "finding_id": "A1-013",
+      "expected": "Complete valid pair passes; missing required review, duplicate or critical error must not release",
+      "actual": {
+        "baseline": [
+          {
+            "case_id": "A",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          },
+          {
+            "case_id": "B",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          }
+        ],
+        "candidate": [
+          {
+            "case_id": "A",
+            "scores": {
+              "marker": 0.5
+            }
+          },
+          {
+            "case_id": "B",
+            "scores": {
+              "marker": 0.5
+            }
+          }
+        ],
+        "policy": {
+          "version": "audit-synthetic/v1",
+          "require_same_case_ids": true,
+          "critical_error_policy": {
+            "max_candidate_errors": 0,
+            "allow_increase": false
+          },
+          "metrics": [
+            {
+              "name": "marker",
+              "path": "scores.marker",
+              "scale_max": 1,
+              "min_delta": 0,
+              "required": true
+            }
+          ]
+        },
+        "report": {
+          "policy_version": "audit-synthetic/v1",
+          "release_gate": "PASS",
+          "baseline_rows": 2,
+          "candidate_rows": 2,
+          "hard_checks": [
+            {
+              "check": "same_case_ids",
+              "status": "PASS",
+              "baseline_n": 2,
+              "candidate_n": 2,
+              "missing_in_candidate": [],
+              "extra_in_candidate": []
+            },
+            {
+              "check": "critical_errors",
+              "status": "PASS",
+              "baseline": 0,
+              "candidate": 0,
+              "max_candidate_errors": 0,
+              "allow_increase": false
+            }
+          ],
+          "metrics": [
+            {
+              "name": "marker",
+              "path": "scores.marker",
+              "baseline": 0.5,
+              "candidate": 0.5,
+              "delta": 0.0,
+              "min_delta": 0.0,
+              "baseline_n": 2,
+              "candidate_n": 2,
+              "required": true,
+              "status": "PASS"
+            }
+          ],
+          "principle": "average gains cannot override a new critical medical safety error"
+        },
+        "exit_code": 0,
+        "stderr": ""
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "duplicate_weighting",
+      "finding_id": "A1-013",
+      "expected": "Complete valid pair passes; missing required review, duplicate or critical error must not release",
+      "actual": {
+        "baseline": [
+          {
+            "case_id": "A",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          },
+          {
+            "case_id": "B",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          }
+        ],
+        "candidate": [
+          {
+            "case_id": "A",
+            "scores": {
+              "marker": 0.9
+            },
+            "critical_errors": []
+          },
+          {
+            "case_id": "B",
+            "scores": {
+              "marker": 0.0
+            },
+            "critical_errors": []
+          },
+          {
+            "case_id": "A",
+            "scores": {
+              "marker": 0.9
+            },
+            "critical_errors": []
+          }
+        ],
+        "policy": {
+          "version": "audit-synthetic/v1",
+          "require_same_case_ids": true,
+          "critical_error_policy": {
+            "max_candidate_errors": 0,
+            "allow_increase": false
+          },
+          "metrics": [
+            {
+              "name": "marker",
+              "path": "scores.marker",
+              "scale_max": 1,
+              "min_delta": 0,
+              "required": true
+            }
+          ]
+        },
+        "report": {
+          "policy_version": "audit-synthetic/v1",
+          "release_gate": "PASS",
+          "baseline_rows": 2,
+          "candidate_rows": 3,
+          "hard_checks": [
+            {
+              "check": "same_case_ids",
+              "status": "PASS",
+              "baseline_n": 2,
+              "candidate_n": 2,
+              "missing_in_candidate": [],
+              "extra_in_candidate": []
+            },
+            {
+              "check": "critical_errors",
+              "status": "PASS",
+              "baseline": 0,
+              "candidate": 0,
+              "max_candidate_errors": 0,
+              "allow_increase": false
+            }
+          ],
+          "metrics": [
+            {
+              "name": "marker",
+              "path": "scores.marker",
+              "baseline": 0.5,
+              "candidate": 0.6,
+              "delta": 0.09999999999999998,
+              "min_delta": 0.0,
+              "baseline_n": 2,
+              "candidate_n": 3,
+              "required": true,
+              "status": "PASS"
+            }
+          ],
+          "principle": "average gains cannot override a new critical medical safety error"
+        },
+        "exit_code": 0,
+        "stderr": ""
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "known_critical_error_blocks",
+      "finding_id": null,
+      "expected": "Complete valid pair passes; missing required review, duplicate or critical error must not release",
+      "actual": {
+        "baseline": [
+          {
+            "case_id": "A",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          },
+          {
+            "case_id": "B",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          }
+        ],
+        "candidate": [
+          {
+            "case_id": "A",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": [
+              "AUTHORED-SYNTHETIC-ERROR"
+            ]
+          },
+          {
+            "case_id": "B",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          }
+        ],
+        "policy": {
+          "version": "audit-synthetic/v1",
+          "require_same_case_ids": true,
+          "critical_error_policy": {
+            "max_candidate_errors": 0,
+            "allow_increase": false
+          },
+          "metrics": [
+            {
+              "name": "marker",
+              "path": "scores.marker",
+              "scale_max": 1,
+              "min_delta": 0,
+              "required": true
+            }
+          ]
+        },
+        "report": {
+          "policy_version": "audit-synthetic/v1",
+          "release_gate": "FAIL",
+          "baseline_rows": 2,
+          "candidate_rows": 2,
+          "hard_checks": [
+            {
+              "check": "same_case_ids",
+              "status": "PASS",
+              "baseline_n": 2,
+              "candidate_n": 2,
+              "missing_in_candidate": [],
+              "extra_in_candidate": []
+            },
+            {
+              "check": "critical_errors",
+              "status": "FAIL",
+              "baseline": 0,
+              "candidate": 1,
+              "max_candidate_errors": 0,
+              "allow_increase": false
+            }
+          ],
+          "metrics": [
+            {
+              "name": "marker",
+              "path": "scores.marker",
+              "baseline": 0.5,
+              "candidate": 0.5,
+              "delta": 0.0,
+              "min_delta": 0.0,
+              "baseline_n": 2,
+              "candidate_n": 2,
+              "required": true,
+              "status": "PASS"
+            }
+          ],
+          "principle": "average gains cannot override a new critical medical safety error"
+        },
+        "exit_code": 2,
+        "stderr": ""
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "all_required_scores_missing",
+      "finding_id": null,
+      "expected": "Complete valid pair passes; missing required review, duplicate or critical error must not release",
+      "actual": {
+        "baseline": [
+          {
+            "case_id": "A",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          },
+          {
+            "case_id": "B",
+            "scores": {
+              "marker": 0.5
+            },
+            "critical_errors": []
+          }
+        ],
+        "candidate": [
+          {
+            "case_id": "A",
+            "scores": {},
+            "critical_errors": []
+          },
+          {
+            "case_id": "B",
+            "scores": {},
+            "critical_errors": []
+          }
+        ],
+        "policy": {
+          "version": "audit-synthetic/v1",
+          "require_same_case_ids": true,
+          "critical_error_policy": {
+            "max_candidate_errors": 0,
+            "allow_increase": false
+          },
+          "metrics": [
+            {
+              "name": "marker",
+              "path": "scores.marker",
+              "scale_max": 1,
+              "min_delta": 0,
+              "required": true
+            }
+          ]
+        },
+        "report": {
+          "policy_version": "audit-synthetic/v1",
+          "release_gate": "FAIL",
+          "baseline_rows": 2,
+          "candidate_rows": 2,
+          "hard_checks": [
+            {
+              "check": "same_case_ids",
+              "status": "PASS",
+              "baseline_n": 2,
+              "candidate_n": 2,
+              "missing_in_candidate": [],
+              "extra_in_candidate": []
+            },
+            {
+              "check": "critical_errors",
+              "status": "PASS",
+              "baseline": 0,
+              "candidate": 0,
+              "max_candidate_errors": 0,
+              "allow_increase": false
+            }
+          ],
+          "metrics": [
+            {
+              "name": "marker",
+              "path": "scores.marker",
+              "baseline": 0.5,
+              "candidate": null,
+              "delta": null,
+              "min_delta": 0.0,
+              "baseline_n": 2,
+              "candidate_n": 0,
+              "required": true,
+              "status": "FAIL"
+            }
+          ],
+          "principle": "average gains cannot override a new critical medical safety error"
+        },
+        "exit_code": 2,
+        "stderr": ""
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "renamed_markdown_collision",
+      "finding_id": "A1-014",
+      "expected": "Existing destination content survives merge; read-only check writes nothing",
+      "actual": {
+        "before": {
+          "企业情报-note.md": "KEEP-PREVIOUS-RENAMED",
+          "note.md": "KEEP-ORIGINAL"
+        },
+        "after": {
+          "企业情报-note.md": "NEW-SYNTHETIC-NOTE",
+          "note.md": "KEEP-ORIGINAL"
+        }
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "non_markdown_collision",
+      "finding_id": "A1-014",
+      "expected": "Existing destination content survives merge; read-only check writes nothing",
+      "actual": {
+        "before": {
+          "settings.json": "{\"marker\":\"keep\"}"
+        },
+        "after": {
+          "settings.json": "{\"marker\":\"new\"}",
+          "note.md": "NEW-SYNTHETIC-NOTE"
+        }
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "clean_merge",
+      "finding_id": null,
+      "expected": "Existing destination content survives merge; read-only check writes nothing",
+      "actual": {
+        "before": {},
+        "after": {
+          "note.md": "NEW-SYNTHETIC-NOTE"
+        }
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "check_does_not_write",
+      "finding_id": null,
+      "expected": "Existing destination content survives merge; read-only check writes nothing",
+      "actual": {
+        "before": {},
+        "after": {}
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "domain_in_path",
+      "finding_id": "A1-015",
+      "expected": "Source-domain classification uses parsed hostname, not path/query/suffix substring",
+      "actual": {
+        "url": "https://example.invalid/fda.gov/report",
+        "label": "VERIFIED",
+        "expected_label": "UNKNOWN"
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "domain_in_query",
+      "finding_id": "A1-015",
+      "expected": "Source-domain classification uses parsed hostname, not path/query/suffix substring",
+      "actual": {
+        "url": "https://example.invalid/?source=fda.gov",
+        "label": "VERIFIED",
+        "expected_label": "UNKNOWN"
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "domain_suffix_spoof",
+      "finding_id": "A1-015",
+      "expected": "Source-domain classification uses parsed hostname, not path/query/suffix substring",
+      "actual": {
+        "url": "https://fda.gov.example.invalid/report",
+        "label": "VERIFIED",
+        "expected_label": "UNKNOWN"
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "official_host",
+      "finding_id": null,
+      "expected": "Source-domain classification uses parsed hostname, not path/query/suffix substring",
+      "actual": {
+        "url": "https://www.fda.gov/report",
+        "label": "VERIFIED",
+        "expected_label": "VERIFIED"
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "unknown_host",
+      "finding_id": null,
+      "expected": "Source-domain classification uses parsed hostname, not path/query/suffix substring",
+      "actual": {
+        "url": "https://example.invalid/report",
+        "label": "UNKNOWN",
+        "expected_label": "UNKNOWN"
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "privacy_metadata_omits_value",
+      "finding_id": null,
+      "expected": "Review cues do not copy contact values and always need review",
+      "actual": {
+        "cues": [
+          {
+            "kind": "email",
+            "start": 0,
+            "end": 20,
+            "review_required": true
+          }
+        ]
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "privacy_overlap_rejected",
+      "finding_id": null,
+      "expected": "Ambiguous redaction fails before changing mapping",
+      "actual": {
+        "error": "approved spans overlap; resolve them before redaction",
+        "mapping_empty": true
+      },
+      "invariant_pass": true
+    }
+  ],
+  "production_fixes": 0,
+  "real_patient_reads": 0,
+  "external_model_calls": 0,
+  "real_vault_writes": 0
+}

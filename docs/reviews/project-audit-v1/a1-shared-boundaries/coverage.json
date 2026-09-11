@@ -1,0 +1,102 @@
+{
+  "baseline_remote_commit": "77f939ce22f53dece8c01787b2428627600597b8",
+  "baseline_local_commit": "87c66d434ff74adb7be646fbb0a8ed431c9fd116",
+  "baseline_tree": "048935a67bdf3bb56951699cdbbdf2105af8814f",
+  "rows": [
+    {
+      "path": "scripts/regression_gate.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与调用边界；不自动涵盖所有依赖",
+      "sha256": "f5575165e7311f363b7db536704a7c71c2dace2ee4900730802a81daf193dadf"
+    },
+    {
+      "path": "scripts/import-helper.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与调用边界；不自动涵盖所有依赖",
+      "sha256": "3c7650c4974c2ae5d36d107d3237ea3091f5b4b56d62aacc1bf2338226e7810a"
+    },
+    {
+      "path": "scripts/evidence-audit.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与调用边界；不自动涵盖所有依赖",
+      "sha256": "105d66ca1e1ac0d6cbeb70bb75809fe3d3ba1bbe7b60788f17a6902d6a88c928"
+    },
+    {
+      "path": "scripts/patient_eval/candidate_privacy.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与调用边界；不自动涵盖所有依赖",
+      "sha256": "4cc48e7d7bef72d52999afd482bdf387fcd696ac54db01fd4e816dfeb37eeab8"
+    },
+    {
+      "path": "scripts/patient_eval/candidate_blockers.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与调用边界；不自动涵盖所有依赖",
+      "sha256": "af4583a8c1f95e2a84648eae1a8b2b16f2751dab034aa0891a534f946daa4496"
+    },
+    {
+      "path": "scripts/patient_eval/candidate_review.py",
+      "status": "PARTIAL_READ",
+      "scope": "准备、不可变原文绑定、隐私和评分草稿验证；比较与页面/CLI未完整覆盖",
+      "sha256": "281bffb55cb5599c1ad54c5ea8f040cf509e592e4a96bd1af5c541024980e608"
+    },
+    {
+      "path": "scripts/patient_eval/candidate_selection.py",
+      "status": "PARTIAL_READ",
+      "scope": "结构筛选、公开投影及CLI保存；只记录部分覆盖",
+      "sha256": "64f17a3081b9dab789a3a71eda973a9c361e2a8ed77e5925dbfc0a4fd674f6df"
+    },
+    {
+      "path": "tests/patient_eval/test_candidate_review.py",
+      "status": "PARTIAL_READ",
+      "scope": "仅阅读source_fixture/packet_fixture/include_first合成辅助；本轮未执行其测试类",
+      "sha256": "f87d091ab622920f739db05b4a3b7503bd0bbd5db6d62c8c4d6b27cbce4424f0"
+    },
+    {
+      "path": "tests/patient_eval/test_candidate_privacy.py",
+      "status": "READ_AND_EXECUTED",
+      "scope": "共13项合成测试；没有原始私有来源",
+      "sha256": "a37556cdf0c21a68286a588c27dacde4879b938ab4fd8f447fc536aa8a9d06b3"
+    },
+    {
+      "path": "tests/patient_eval/test_candidate_blockers.py",
+      "status": "READ_AND_EXECUTED",
+      "scope": "共13项合成测试；没有原始私有来源",
+      "sha256": "df0ad7f3c86b2214d1fbb49e84abdbcca2e4f9c57492a0d841604d71c5c3790b"
+    },
+    {
+      "path": ".github/workflows/s3a-v054-persist-dev-pass.yml",
+      "status": "REVIEWED_WORKFLOW",
+      "scope": "触发/写权限/失败结果保存/最终门槛；没有执行工作流；semantic-extractor为此前审查文件再次核对",
+      "sha256": "e52f3fcf9eef0e29e294f0d6f5374f72c4741070cbab30719938927363589300"
+    },
+    {
+      "path": ".github/workflows/s3a-v0561-registry-reconciliation.yml",
+      "status": "REVIEWED_WORKFLOW",
+      "scope": "触发/写权限/失败结果保存/最终门槛；没有执行工作流；semantic-extractor为此前审查文件再次核对",
+      "sha256": "2d12609b32847b7ec19fb1bf69b79626ed18d0cce3b0b2f492da512cae9ef4f7"
+    },
+    {
+      "path": ".github/workflows/s3a-semantic-extractor-ci.yml",
+      "status": "REVIEWED_WORKFLOW",
+      "scope": "触发/写权限/失败结果保存/最终门槛；没有执行工作流；semantic-extractor为此前审查文件再次核对",
+      "sha256": "5f6a7f38968dd5c3b80ab69f4593a16dc6d8ad21f07ddb6291a7473e949598e5"
+    },
+    {
+      "path": "requirements-s5-lineage-calibration.txt",
+      "status": "DECLARATION_READ",
+      "scope": "直接依赖固定版本；未做在线漏洞查询或安装验证",
+      "sha256": "b7875d52522a3b14aa586ad3636757f622b39a6d5fc032eaaaf48b716d887eac"
+    }
+  ],
+  "workflow_metadata_inventory_count": 64,
+  "new_workflows_semantically_reviewed": 2,
+  "project_audit_complete": false,
+  "project_tests_complete": false,
+  "remaining": [
+    "动态候选转换/页面、私有输出路径和符号链接",
+    "来源分组底层算法与其他来源分类/检索入口",
+    "其余共享工具、依赖安装来源及凭据扫描",
+    "剩余工作流语义、实际有效权限和main前置审查",
+    "真实浏览器、完整恢复/接口矩阵、固定版本集中复测"
+  ]
+}

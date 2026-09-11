@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "unittest",
+    "tests.patient_eval.test_candidate_privacy",
+    "tests.patient_eval.test_candidate_blockers",
+    "-v"
+  ],
+  "cwd": "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit",
+  "python": "3.12.14",
+  "input_git_commit": "87c66d434ff74adb7be646fbb0a8ed431c9fd116",
+  "input_git_tree": "048935a67bdf3bb56951699cdbbdf2105af8814f",
+  "input_scope": "existing authored synthetic privacy/blocker fixtures; no private source preparation",
+  "expected_exit_code": 0,
+  "actual_exit_code": 0,
+  "external_model_calls": 0,
+  "log": "existing-tests.txt",
+  "file_sha256": {
+    "tests/patient_eval/test_candidate_privacy.py": "a37556cdf0c21a68286a588c27dacde4879b938ab4fd8f447fc536aa8a9d06b3",
+    "tests/patient_eval/test_candidate_blockers.py": "df0ad7f3c86b2214d1fbb49e84abdbcca2e4f9c57492a0d841604d71c5c3790b",
+    "tests/patient_eval/test_candidate_review.py": "f87d091ab622920f739db05b4a3b7503bd0bbd5db6d62c8c4d6b27cbce4424f0"
+  }
+}
