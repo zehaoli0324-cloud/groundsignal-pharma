@@ -1,0 +1,173 @@
+{
+  "baseline_remote_commit": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+  "baseline_tree": "5d2d8dd4edc82f4065540a3692fceec157b2c450",
+  "rows": [
+    {
+      "path": "scripts/s2_source_router.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与错误/数据合同；不代表全部语义或临床正确性",
+      "sha256": "48b043a808ce6c2b2d86fd63453745f202e0ef0efd7c5487eb00d7de90f7b46b"
+    },
+    {
+      "path": "scripts/s2_intent_router_v04.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与错误/数据合同；不代表全部语义或临床正确性",
+      "sha256": "c98842022045206292e051118e933cbb803bb079f94f1afadd357a0f55255be2"
+    },
+    {
+      "path": "scripts/s2_live_retrieval.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与错误/数据合同；不代表全部语义或临床正确性",
+      "sha256": "e5990a74d131ee77a401b18feddc4e1dd293307cacf15726d7b778dab694d4c2"
+    },
+    {
+      "path": "scripts/eval_s2_live_retrieval.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与错误/数据合同；不代表全部语义或临床正确性",
+      "sha256": "66c0e5166e20041e08fb470e552d9594e8e875e3a58b90631064f75ae7642df9"
+    },
+    {
+      "path": "scripts/s3_semantic_extractor.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与错误/数据合同；不代表全部语义或临床正确性",
+      "sha256": "a5da3acdaa1b38890fba399aa31170b8a986fd76b80dd233517c7f904d0822aa"
+    },
+    {
+      "path": "scripts/s4_truth_ledger_v01.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与错误/数据合同；不代表全部语义或临床正确性",
+      "sha256": "c0e6bc4c9b8ba372f1dd89504ff4b5c3bfc323ffcdbe6987d353bb84fefd2a91"
+    },
+    {
+      "path": "scripts/s4_truth_ledger_v011.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与错误/数据合同；不代表全部语义或临床正确性",
+      "sha256": "69f99e7ca7f35b5b58aec000f842b64a0b05178c1eaed44a033782692ecd26e4"
+    },
+    {
+      "path": "scripts/build_medical_knowledge_graph.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与错误/数据合同；不代表全部语义或临床正确性",
+      "sha256": "f1c85f08ed9f2e8fbea18ef41f8d7caf7b2da1835174109c0945d489c0f7d0fe"
+    },
+    {
+      "path": "scripts/validate_medical_knowledge_sources.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与错误/数据合同；不代表全部语义或临床正确性",
+      "sha256": "12eaf1c37db4ab5958ece170f1570f1a58483df4b6b1a51c72fa28f500fc3660"
+    },
+    {
+      "path": ".github/workflows/medical-development-ci.yml",
+      "status": "REVIEWED_WORKFLOW",
+      "scope": "触发条件、退出码传播、执行与写入范围；本轮未运行工作流",
+      "sha256": "0a7c3feafdfc621841c0db2662a1c58bb5be53791109709824ab818f92c332cc"
+    },
+    {
+      "path": ".github/workflows/patient-eval-development-ci.yml",
+      "status": "REVIEWED_WORKFLOW",
+      "scope": "触发条件、退出码传播、执行与写入范围；本轮未运行工作流",
+      "sha256": "f216b3e6e6196a4cd0850ba2e97679357ebf4321877c2f88b4669b3cb2891c52"
+    },
+    {
+      "path": ".github/workflows/s3a-semantic-extractor-ci.yml",
+      "status": "REVIEWED_WORKFLOW",
+      "scope": "触发条件、退出码传播、执行与写入范围；本轮未运行工作流",
+      "sha256": "5f6a7f38968dd5c3b80ab69f4593a16dc6d8ad21f07ddb6291a7473e949598e5"
+    },
+    {
+      "path": ".github/workflows/s2-live-retrieval.yml",
+      "status": "REVIEWED_WORKFLOW",
+      "scope": "触发条件、退出码传播、执行与写入范围；本轮未运行工作流",
+      "sha256": "59e659265c3ba358b37e46166774e67d80d6ef8ea1b0aba3698d3bf18f0ee95b"
+    },
+    {
+      "path": "medical/case-families/AGENT-001/graph.json",
+      "status": "METADATA_ONLY",
+      "scope": "仅节点/边编号、引用与重复属性差异；未审查临床主张",
+      "sha256": "dee870c6d800ee04001fa3fe53954111c51f34b9af099931bc54b348973c999e"
+    },
+    {
+      "path": "medical/case-families/CLINREASON-001/graph.json",
+      "status": "METADATA_ONLY",
+      "scope": "仅节点/边编号、引用与重复属性差异；未审查临床主张",
+      "sha256": "be9f2f5b76e09b43bf6c9bf79a608e1d427bd8f9aee6821bb37016d60ef63a53"
+    },
+    {
+      "path": "medical/case-families/CLINREASON-005/graph.json",
+      "status": "METADATA_ONLY",
+      "scope": "仅节点/边编号、引用与重复属性差异；未审查临床主张",
+      "sha256": "d9bb48214ebf9d2f6c4da15704e0cc8e22986255f078afe74ccd116d240df4c1"
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-002/graph.json",
+      "status": "METADATA_ONLY",
+      "scope": "仅节点/边编号、引用与重复属性差异；未审查临床主张",
+      "sha256": "b5ef066ab2e306e20c5e288e6839378ca680c79d72e816e3cce0a3f5130e5381"
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-003/graph.json",
+      "status": "METADATA_ONLY",
+      "scope": "仅节点/边编号、引用与重复属性差异；未审查临床主张",
+      "sha256": "6778a99920affdfad1adaac0b07f38867043608683327cd2ab86d0eb7fc5fa28"
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-001/graph.json",
+      "status": "METADATA_ONLY",
+      "scope": "仅节点/边编号、引用与重复属性差异；未审查临床主张",
+      "sha256": "da21daacdb85443574fa20c0a5a374f03f0edd14285dabd0a77faf3013a39908"
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-002/graph.json",
+      "status": "METADATA_ONLY",
+      "scope": "仅节点/边编号、引用与重复属性差异；未审查临床主张",
+      "sha256": "ae066e86ab3c8566f47f319cf5b7534b18cb6c2757495fc45a6cbdc2282b0359"
+    },
+    {
+      "path": "medical/case-families/MULTITURN-001/graph.json",
+      "status": "METADATA_ONLY",
+      "scope": "仅节点/边编号、引用与重复属性差异；未审查临床主张",
+      "sha256": "5313e594d2ca65bfe29e6befa14419a8a461cef21acdc5a093ded1a33d6f4ded"
+    },
+    {
+      "path": "medical/case-families/REPORT-001/graph.json",
+      "status": "METADATA_ONLY",
+      "scope": "仅节点/边编号、引用与重复属性差异；未审查临床主张",
+      "sha256": "01f573e46ddea1567e2cabf6aa8998ab71de74bcaf3072feb222cf27acfd56d6"
+    },
+    {
+      "path": "medical/case-families/REPORT-004/graph.json",
+      "status": "METADATA_ONLY",
+      "scope": "仅节点/边编号、引用与重复属性差异；未审查临床主张",
+      "sha256": "ad1594c1643633da4a47589d0a04a48c08bc4e3df7d4899c4b4ea140fe4f7f07"
+    },
+    {
+      "path": "medical/case-families/TRIAGE-001/graph.json",
+      "status": "METADATA_ONLY",
+      "scope": "仅节点/边编号、引用与重复属性差异；未审查临床主张",
+      "sha256": "14d0da20ddd095765f33ae167bda7b1637e56386aedb5f246ad18670fb1a8e1a"
+    },
+    {
+      "path": "medical/case-families/TRIAGE-003/graph.json",
+      "status": "METADATA_ONLY",
+      "scope": "仅节点/边编号、引用与重复属性差异；未审查临床主张",
+      "sha256": "18a86b12ba606bab1846b33677b195bc01a5e6f0c106538c7886234cb2b4b19f"
+    }
+  ],
+  "not_fully_reviewed": [
+    "S1来源准入",
+    "S2 DailyMed真实版本/段落检索及其他版本",
+    "S3所有s3a/s3b语义实现及评测器",
+    "S4主张出处到图谱的完整转换与权限",
+    "S5冻结和准入",
+    "S6调用/恢复",
+    "S7评分/裁决",
+    "S8统计/归因",
+    "S9导出/训练隔离",
+    "S10主分支依赖、其余工作流",
+    "pharma/demo/共享脚本",
+    "全库依赖、凭据、路径及页面安全审计"
+  ],
+  "dependency_inspection": "S3本地依赖只做顶层导入/执行结构检查，不计完整语义覆盖",
+  "project_audit_complete": false,
+  "project_tests_complete": false
+}

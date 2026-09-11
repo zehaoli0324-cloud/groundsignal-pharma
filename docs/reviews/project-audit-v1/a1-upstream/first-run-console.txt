@@ -1,0 +1,10 @@
+{
+  "scope": "A1 upstream authored synthetic counterexamples",
+  "checks": 12,
+  "invariants_passed": 4,
+  "invariants_failed": 8,
+  "project_audit_complete": false,
+  "project_tests_complete": false,
+  "external_model_calls": 0,
+  "real_case_runs": 0
+}

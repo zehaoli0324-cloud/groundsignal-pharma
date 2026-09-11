@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "scripts/audit_upstream_contracts.py",
+    "--out",
+    "docs/reviews/project-audit-v1/a1-upstream/first-run"
+  ],
+  "cwd": "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit",
+  "python": "3.12.14",
+  "input_git_commit": "080dc67fb560e7e237bc64ae991ba0cb1781be4d",
+  "input_git_tree": "5d2d8dd4edc82f4065540a3692fceec157b2c450",
+  "probe_script_uncommitted_at_first_execution": true,
+  "file_sha256": {
+    "scripts/audit_upstream_contracts.py": "2524a1596cb7527f7a8a9366a061c388417b9ce80b947962ca55cd3d41e9c037",
+    "scripts/build_medical_knowledge_graph.py": "f1c85f08ed9f2e8fbea18ef41f8d7caf7b2da1835174109c0945d489c0f7d0fe",
+    "scripts/eval_s2_live_retrieval.py": "66c0e5166e20041e08fb470e552d9594e8e875e3a58b90631064f75ae7642df9",
+    "scripts/s2_live_retrieval.py": "e5990a74d131ee77a401b18feddc4e1dd293307cacf15726d7b778dab694d4c2",
+    "scripts/s3_semantic_extractor.py": "a5da3acdaa1b38890fba399aa31170b8a986fd76b80dd233517c7f904d0822aa",
+    "scripts/s4_truth_ledger_v01.py": "c0e6bc4c9b8ba372f1dd89504ff4b5c3bfc323ffcdbe6987d353bb84fefd2a91",
+    "scripts/s4_truth_ledger_v011.py": "69f99e7ca7f35b5b58aec000f842b64a0b05178c1eaed44a033782692ecd26e4",
+    "scripts/validate_medical_knowledge_sources.py": "12eaf1c37db4ab5958ece170f1570f1a58483df4b6b1a51c72fa28f500fc3660",
+    "medical/stage-evals/S3/proposition-registry-v0.1.json": "df1cb4d1f59b1be355cc7028c1d8b1dabbf5c16a0bf186d6e961fba5cab8452e"
+  },
+  "input_scope": "new authored synthetic objects; public proposition registry only",
+  "network": "blocked in process",
+  "output": "docs/reviews/project-audit-v1/a1-upstream/first-run",
+  "expected_exit_code": 2,
+  "actual_exit_code": 2,
+  "result": "FAIL",
+  "interpretation": "Exit 2 records observed engineering invariant failures, not a passing product test."
+}

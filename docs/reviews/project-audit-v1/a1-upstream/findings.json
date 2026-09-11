@@ -1,0 +1,167 @@
+{
+  "schema": "project-audit-findings/v0.1",
+  "stage": "A1 first upstream batch",
+  "project_audit_complete": false,
+  "project_tests_complete": false,
+  "severity_definition": {
+    "P1": "优先修复：可能破坏状态/证据或错误授予通过",
+    "P2": "进入相应输入/运行路径前修复"
+  },
+  "findings": [
+    {
+      "finding_id": "A1-001",
+      "module": "S4",
+      "severity": "P1",
+      "title": "缺少事件编号时先写状态再抛错",
+      "path": "scripts/s4_truth_ledger_v011.py",
+      "symbol": "ingest; inherited _validate in s4_truth_ledger_v01.py",
+      "probe_ids": [
+        "ledger_missing_event_id"
+      ],
+      "trigger": "缺失event_id；其他字段有效",
+      "expected": "拒绝输入且账本和事务记录不变",
+      "actual": "KeyError后仍新增1条边，事务列表为空，rollback_last为NOOP",
+      "cause": "验证未检查event_id；写self.edges后才读取event_id",
+      "cause_confidence": "high: source review and offline reproduction",
+      "status": "OPEN",
+      "fix_applied": false,
+      "repair_plan": "在所有写入前验证完整事件；事务提交原子化；覆盖新增、合并出处、替代旧状态三条路径",
+      "validation": "first-run/observations.json",
+      "affected_remote_commit": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+      "historical_result_corruption_proven": false
+    },
+    {
+      "finding_id": "A1-002",
+      "module": "S4",
+      "severity": "P1",
+      "title": "同编号边合并丢失证据属性差异",
+      "path": "scripts/build_medical_knowledge_graph.py",
+      "symbol": "merge_edge; merge_node has analogous unchecked fields",
+      "probe_ids": [
+        "graph_conflicting_evidence"
+      ],
+      "trigger": "相同edge_id和三元组，不同review_status、locator、evidence_scope等属性",
+      "expected": "不兼容时拒绝，或逐证据保留差异，不能提升第二条证据的审阅状态",
+      "actual": "合并了两个passage_id，但只保留第一条的source_verified、locator和scope",
+      "cause": "合并仅比较三元组，其他标量属性先到者保留",
+      "cause_confidence": "high: source review and offline reproduction",
+      "status": "OPEN",
+      "fix_applied": false,
+      "repair_plan": "明确图谱合并合同；语义差异拒绝，允许多来源时逐条保留出处及审阅状态",
+      "validation": "first-run/observations.json",
+      "affected_remote_commit": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+      "historical_result_corruption_proven": false
+    },
+    {
+      "finding_id": "A1-003",
+      "module": "S4",
+      "severity": "P2",
+      "title": "图谱输出未检查悬空端点",
+      "path": "scripts/build_medical_knowledge_graph.py",
+      "symbol": "add_case_graphs; main",
+      "probe_ids": [
+        "graph_dangling_endpoint"
+      ],
+      "trigger": "边的object_id不存在于节点集合",
+      "expected": "写输出前拒绝悬空引用",
+      "actual": "退出码0，成功写出含悬空边的图谱",
+      "cause": "构建只合并并计数；未做全图引用校验",
+      "cause_confidence": "high: source review and offline reproduction",
+      "status": "OPEN",
+      "fix_applied": false,
+      "repair_plan": "补端点、证据引用和必要输入校验；CI不能仅断言节点与边数量大于0",
+      "validation": "first-run/observations.json",
+      "affected_remote_commit": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+      "historical_result_corruption_proven": false
+    },
+    {
+      "finding_id": "A1-004",
+      "module": "S3",
+      "severity": "P2",
+      "title": "运行时校验未落实已声明的类型合同",
+      "path": "scripts/s3_semantic_extractor.py",
+      "symbol": "normalize_proposition; validate_semantic_output",
+      "probe_ids": [
+        "semantic_null_subject",
+        "semantic_string_threshold"
+      ],
+      "trigger": "subject为null或条件阈值为非数字字符串",
+      "expected": "非法主张不能进入accepted；按风险记录未解决项",
+      "actual": "null被转换为字符串none；非数字阈值保留；两者abstain均为false",
+      "cause": "先强制转字符串；条件只检查是否为None；未执行完整schema",
+      "cause_confidence": "high: source review and offline reproduction",
+      "status": "OPEN",
+      "fix_applied": false,
+      "repair_plan": "先验证类型再归一化；覆盖顶层类型、条件数值、布尔值与空字段；确保未知不变成有效主张",
+      "validation": "first-run/observations.json",
+      "affected_remote_commit": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+      "historical_result_corruption_proven": false
+    },
+    {
+      "finding_id": "A1-005",
+      "module": "S2",
+      "severity": "P1",
+      "title": "检索评分未绑定运行身份且重复行静默覆盖",
+      "path": "scripts/eval_s2_live_retrieval.py",
+      "symbol": "main; runs dictionary comprehension",
+      "probe_ids": [
+        "retrieval_mismatched_duplicate_runs"
+      ],
+      "trigger": "同一test_id先失败后成功，后者benchmark_id/source_id/adapter与任务不同",
+      "expected": "拒绝重复与错配记录，不给当前任务发布通过",
+      "actual": "旧任务错来源记录覆盖失败行，当前报告release_gate=PASS且各成功率为1",
+      "cause": "按test_id建字典静默覆盖；不核对benchmark_id/source_id/adapter",
+      "cause_confidence": "high: source review and offline reproduction",
+      "status": "OPEN",
+      "fix_applied": false,
+      "repair_plan": "建索引前查重，核验套件与查询/来源/适配器绑定；独立覆盖每一种错配",
+      "validation": "first-run/observations.json",
+      "affected_remote_commit": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+      "historical_result_corruption_proven": false
+    },
+    {
+      "finding_id": "A1-006",
+      "module": "S4",
+      "severity": "P2",
+      "title": "空输入与缺失目录可被成功验证",
+      "path": "scripts/validate_medical_knowledge_sources.py",
+      "symbol": "validate_backbone; main",
+      "probe_ids": [
+        "source_validation_empty_input"
+      ],
+      "trigger": "空注册表、不存在的病例根目录和明确指定的backbone",
+      "expected": "必需输入缺失应失败，不能算验证完成",
+      "actual": "退出码0；0份证据和0条主张，只有backbone警告",
+      "cause": "glob无匹配未报错；backbone不存在只warning；无最低输入合同",
+      "cause_confidence": "high: source review and offline reproduction",
+      "status": "OPEN",
+      "fix_applied": false,
+      "repair_plan": "显式区分必需/可选输入，检查目录存在、空集合及调用方预期数量",
+      "validation": "first-run/observations.json",
+      "affected_remote_commit": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+      "historical_result_corruption_proven": false
+    },
+    {
+      "finding_id": "A1-007",
+      "module": "S2",
+      "severity": "P2",
+      "title": "错误适配器绕过逐项异常记录",
+      "path": "scripts/s2_live_retrieval.py",
+      "symbol": "run_one",
+      "probe_ids": [
+        "retrieval_bad_adapter_isolated"
+      ],
+      "trigger": "test.adapter是不支持的名称",
+      "expected": "预检报结构错误或逐条返回错误，保留其他条目的可追溯记录",
+      "actual": "ADAPTERS查找抛出未捕获KeyError；main无法写出本批结果",
+      "cause": "字典查找在try之前；总输出到循环完成后才落盘",
+      "cause_confidence": "high: source review and offline reproduction",
+      "status": "OPEN",
+      "fix_applied": false,
+      "repair_plan": "先预检整套配置或纳入逐项错误边界；覆盖错误项位于批次中段的情况",
+      "validation": "first-run/observations.json",
+      "affected_remote_commit": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+      "historical_result_corruption_proven": false
+    }
+  ]
+}

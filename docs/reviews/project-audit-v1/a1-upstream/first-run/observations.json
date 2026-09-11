@@ -1,0 +1,268 @@
+{
+  "scope": "A1 upstream authored synthetic counterexamples",
+  "checks": 12,
+  "invariants_passed": 4,
+  "invariants_failed": 8,
+  "project_audit_complete": false,
+  "project_tests_complete": false,
+  "external_model_calls": 0,
+  "real_case_runs": 0,
+  "rows": [
+    {
+      "probe_id": "ledger_missing_event_id",
+      "finding_id": "A1-001",
+      "expected": "Invalid event leaves state unchanged",
+      "actual": {
+        "exception": "KeyError: 'event_id'",
+        "state_changed": true,
+        "edge_count": 1,
+        "rollback": {
+          "action": "NOOP",
+          "rolled_back_event_id": null
+        }
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "ledger_valid_rollback",
+      "finding_id": null,
+      "expected": "Valid event rollback restores prior state",
+      "actual": {
+        "state_restored": true
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "ledger_explicit_synthetic_rejected",
+      "finding_id": null,
+      "expected": "Explicit synthetic event cannot enter external partition",
+      "actual": {
+        "event_id": "audit-event",
+        "action": "REJECTED",
+        "reason": "SYNTHETIC_PARTITION_VIOLATION",
+        "changed_edge_ids": [],
+        "active_truth_changed": false
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "graph_conflicting_evidence",
+      "finding_id": "A1-002",
+      "expected": "Reject incompatible semantic/evidence attributes, or retain both explicitly",
+      "actual": {
+        "error": null,
+        "merged": {
+          "e1": {
+            "edge_id": "e1",
+            "subject_id": "n1",
+            "predicate": "HAS_STATUS",
+            "object_id": "n2",
+            "status": "OBSERVED",
+            "polarity": "POSITIVE",
+            "source_passage_ids": [
+              "p1",
+              "p2"
+            ],
+            "locator": "line 1",
+            "review_status": "source_verified",
+            "evidence_scope": "scope A",
+            "contexts": [
+              "fixture:a",
+              "fixture:b"
+            ],
+            "source_ids": []
+          }
+        }
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "graph_endpoint_collision_rejected",
+      "finding_id": null,
+      "expected": "Existing triple collision check rejects different endpoints",
+      "actual": {
+        "error": "edge collision for e1: incompatible object_id"
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "semantic_null_subject",
+      "finding_id": "A1-004",
+      "expected": "Schema-invalid proposition cannot be accepted",
+      "actual": {
+        "propositions": [
+          {
+            "subject": "none",
+            "predicate": "HAS_STATUS",
+            "object": "synthetic status",
+            "polarity": "POSITIVE",
+            "conditions": [],
+            "population": null,
+            "confidence": 1.0,
+            "source_span": "synthetic item has synthetic status"
+          }
+        ],
+        "abstain": false,
+        "unresolved_spans": []
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "semantic_string_threshold",
+      "finding_id": "A1-004",
+      "expected": "Schema-invalid proposition cannot be accepted",
+      "actual": {
+        "propositions": [
+          {
+            "subject": "synthetic item",
+            "predicate": "HAS_STATUS",
+            "object": "synthetic status",
+            "polarity": "POSITIVE",
+            "conditions": [
+              {
+                "variable": "egfr",
+                "operator": "LT",
+                "value": "not-a-number"
+              }
+            ],
+            "population": null,
+            "confidence": 1.0,
+            "source_span": "synthetic item has synthetic status"
+          }
+        ],
+        "abstain": false,
+        "unresolved_spans": []
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "semantic_unknown_predicate_rejected",
+      "finding_id": null,
+      "expected": "Unregistered predicate triggers abstention",
+      "actual": {
+        "propositions": [],
+        "abstain": true,
+        "unresolved_spans": [
+          {
+            "text": "synthetic item has synthetic status",
+            "reason": "predicate not in registry",
+            "potentially_critical": true
+          }
+        ]
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "graph_dangling_endpoint",
+      "finding_id": "A1-003",
+      "expected": "Graph build rejects dangling endpoints",
+      "actual": {
+        "exit_code": 0,
+        "dangling_edges": [
+          "e1"
+        ]
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "source_validation_empty_input",
+      "finding_id": "A1-006",
+      "expected": "Required missing inputs cannot yield successful validation",
+      "actual": {
+        "exit_code": 0,
+        "stdout": "{\n  \"registry_sources\": 0,\n  \"evidence_manifests\": 0,\n  \"local_sources\": 0,\n  \"case_claims\": 0,\n  \"backbone_modules\": 0,\n  \"backbone_claims\": 0,\n  \"backbone_breakdown\": {\n    \"/tmp/groundsignal-a1-synthetic-l0w1xiuu/absent-backbone\": {\n      \"modules\": 0,\n      \"claims\": 0\n    }\n  },\n  \"warnings\": 1,\n  \"errors\": 0\n}\nWARN backbone not found: /tmp/groundsignal-a1-synthetic-l0w1xiuu/absent-backbone\n",
+        "stderr": ""
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "retrieval_mismatched_duplicate_runs",
+      "finding_id": "A1-005",
+      "expected": "Reject duplicate test IDs and wrong suite/source/adapter binding",
+      "actual": {
+        "suite": {
+          "benchmark_id": "synthetic-audit-current",
+          "tests": [
+            {
+              "test_id": "test-1",
+              "source_id": "RXNORM",
+              "adapter": "rxnorm_rxcui",
+              "expect": {
+                "min_ids": 1
+              }
+            }
+          ]
+        },
+        "runs": {
+          "benchmark_id": "synthetic-audit-stale",
+          "results": [
+            {
+              "test_id": "test-1",
+              "source_id": "RXNORM",
+              "adapter": "rxnorm_rxcui",
+              "execution_status": "NETWORK_ERROR"
+            },
+            {
+              "test_id": "test-1",
+              "source_id": "WRONG_SOURCE",
+              "adapter": "wrong-adapter",
+              "execution_status": "OK",
+              "result": {
+                "rxnorm_ids": [
+                  "synthetic-id"
+                ]
+              }
+            }
+          ]
+        },
+        "exit_code": 0,
+        "report": {
+          "benchmark_id": "synthetic-audit-current",
+          "metrics": {
+            "n_tests": 1,
+            "source_availability_rate": 1.0,
+            "semantic_success_rate_given_available": 1.0,
+            "critical_live_miss_rate_given_available": 0,
+            "available_tests": 1,
+            "high_risk_available_tests": 0,
+            "infrastructure_failure_counts": {},
+            "semantic_failure_counts": {}
+          },
+          "gate_checks": {
+            "source_availability": true,
+            "semantic_success": true,
+            "no_critical_live_miss": true
+          },
+          "release_gate": "PASS",
+          "details": [
+            {
+              "test_id": "test-1",
+              "source_id": "RXNORM",
+              "execution_status": "OK",
+              "semantic_ok": true,
+              "labels": [],
+              "latency_ms": null,
+              "result": {
+                "rxnorm_ids": [
+                  "synthetic-id"
+                ]
+              },
+              "error": null
+            }
+          ],
+          "interpretation_rule": "NETWORK/HTTP/PARSE failures are infrastructure availability failures; EMPTY/IDENTIFIER/CONTENT/STATUS failures are semantic retrieval failures."
+        }
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "retrieval_bad_adapter_isolated",
+      "finding_id": "A1-007",
+      "expected": "Malformed adapter gets a structured error without aborting the batch",
+      "actual": {
+        "uncaught_key_error": "'unknown-adapter'"
+      },
+      "invariant_pass": false
+    }
+  ]
+}

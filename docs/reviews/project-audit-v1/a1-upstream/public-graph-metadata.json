@@ -1,0 +1,9 @@
+{
+  "input_files": "coverage.json METADATA_ONLY rows and SHA256",
+  "scope": "12 public case-family graphs only, excludes backbone, clinical correctness and source text",
+  "node_ids": 74,
+  "edges_before_merge": 55,
+  "duplicate_edges_with_other_field_differences": [],
+  "dangling_edge_count": 0,
+  "clinical_correctness_verified": false
+}
