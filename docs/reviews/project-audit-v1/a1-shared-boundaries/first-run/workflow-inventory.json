@@ -1,0 +1,1379 @@
+{
+  "scope": "static tracked workflow/dependency metadata only; no workflow execution or online vulnerability check",
+  "parser": "PyYAML 6.0.3 BaseLoader",
+  "workflows": [
+    {
+      "path": ".github/workflows/medical-development-ci.yml",
+      "sha256": "0a7c3feafdfc621841c0db2662a1c58bb5be53791109709824ab818f92c332cc",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "medical-platform-integrity": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/patient-eval-development-ci.yml",
+      "sha256": "f216b3e6e6196a4cd0850ba2e97679357ebf4321877c2f88b4669b3cb2891c52",
+      "events": [
+        "pull_request",
+        "push"
+      ],
+      "top_permissions": {
+        "contents": "read"
+      },
+      "job_permissions": {
+        "development-mechanics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s2-live-retrieval.yml",
+      "sha256": "59e659265c3ba358b37e46166774e67d80d6ef8ea1b0aba3698d3bf18f0ee95b",
+      "events": [
+        "workflow_dispatch",
+        "push"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "live-retrieval": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s2-s3-joint-heldout-v01.yml",
+      "sha256": "2e286e2e0be454968f2b2ef600189f65928f93c4eb7bd5a03626047e892a51a6",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": {
+        "contents": "write"
+      },
+      "job_permissions": {
+        "joint-first-run": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [
+        "Preserve first-run raw outputs before enforcement"
+      ],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3-eval-v041.yml",
+      "sha256": "77807455bd3b68e6cdebf2151d287864dad901a4f8da07a582b7a224a76bd50b",
+      "events": [
+        "workflow_dispatch",
+        "push"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "diagnostics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3-eval.yml",
+      "sha256": "59c9d93deef52443dfc7199827894d36740c179007ea772135a6a43b55b62201",
+      "events": [
+        "workflow_dispatch",
+        "push"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "s3-eval": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3-split-eval.yml",
+      "sha256": "bc3ccf762b07703c86210f2f58ea5f33c42c39d2969b1bbabe3497f18ef23a9f",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "split-eval": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3-v04-shadow.yml",
+      "sha256": "bdbba9dd8b15522d9ddca4e49610b5990e154b8411e646e4e132225035734556",
+      "events": [
+        "workflow_dispatch",
+        "push"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "first-shadow-run": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3-v05-diagnostics.yml",
+      "sha256": "4f51245da950f329b333144d49de9378f774abe08d7eec3fb80feacebe3bbef5",
+      "events": [
+        "workflow_dispatch",
+        "push"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "diagnostics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3-v05-shadow.yml",
+      "sha256": "65b4eceea5004021a2b40e3f83353d947b496dada780b67758cf88899fc8a604",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "first-shadow-run": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3-v051-diagnostics.yml",
+      "sha256": "cd934438a09f6e28b6d27f2a7fbcdb59f2af21ffd75b7d1976d6c6fc27d45d0b",
+      "events": [
+        "workflow_dispatch",
+        "push"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "diagnostics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3-v052-diagnostics.yml",
+      "sha256": "e82c7e2bc4a0fbbe750d88b1a2423c893351bf25a6c0bcbf6a15ead509d3a684",
+      "events": [
+        "workflow_dispatch",
+        "push"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "diagnostics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3-v053-diagnostics.yml",
+      "sha256": "6b1fc933cb741c1e2741cc82e25bf22fa9a33c03b70be838e015fcf565f66dfb",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "diagnostics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3-v054-diagnostics.yml",
+      "sha256": "6b480cf5314c60cea9f26e75727c5ca3b4559f9d7cb4731a955c3f94cf68fd42",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "diagnostics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3-v06-shadow.yml",
+      "sha256": "37fdb93aae66177d2e8fa3a653e8d0634c62c35bd9b5cca01dcd359a8bd97bd6",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "first-shadow-run": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-semantic-extractor-ci.yml",
+      "sha256": "5f6a7f38968dd5c3b80ab69f4593a16dc6d8ad21f07ddb6291a7473e949598e5",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "baseline-and-contract": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v02-diagnostics.yml",
+      "sha256": "23ab72f5a1642da5c4b1febd208c52c5b4d847714a809fa4b08ac40e87c2550b",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "diagnostics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v02-heldout.yml",
+      "sha256": "69f683c219bdf99cb011c7fc31d4f913808390f897fdcd582d8f840ab5ca4182",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "first-heldout-run": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v021-diagnostics.yml",
+      "sha256": "b95fecf84b4343e33680f6b5e2e56d61bd0f7834bef0297db2e88b99abea270b",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "diagnostics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v022-diagnostics.yml",
+      "sha256": "0d7e6257256e5fb35a7eb391a015f61f8cef53f2c3b43b1dba5c6db9b4389922",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "diagnostics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v023-diagnostics.yml",
+      "sha256": "063f95d498100cff5990d5f10b6362cb25e67017b4b3e5ceb9283941f2f8603f",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "diagnostics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v03-heldout.yml",
+      "sha256": "5780d0cc4288859d53cbd4781991bf8c70ee2704db19d462eeb7f8dddb28ef45",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "first-heldout-run": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v04-fresh-heldout.yml",
+      "sha256": "4410878b2c0cdbc2c1806962993efc4cd4bd77c20d414c14e66b96ee49e71a8b",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "first-fresh-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v04-semantic-frame-regression.yml",
+      "sha256": "4eca606b2541474080c7af6068e62a890abd2497bbd3db2447d5b4c335e3971d",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v05-compositional-regression.yml",
+      "sha256": "93321bae6cd17c67cc534d4f66c037e9634765a2be912a82b99e90da67540589",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v051-compositional-regression.yml",
+      "sha256": "5cdd559196670d05ce5501c397c14b0d9368816a94172b6ab7b64e7bf86084a7",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v051-fresh-heldout.yml",
+      "sha256": "2f341214b52c24fdda3f27be394ecedd16076ee49b81d156764ffe56a6f82e5e",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "first-fresh-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v052-fresh-heldout.yml",
+      "sha256": "8b1e9b5bf89e0bccccecba15e6151713b0b23d378c0723653827596b2b8e33cd",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": {
+        "contents": "write"
+      },
+      "job_permissions": {
+        "first-fresh-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [
+        "Persist immutable first-run raw outputs to repository"
+      ],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v052-scope-safety-regression.yml",
+      "sha256": "2bedefc6b9db0637c303a0022d1728a2ff3707a220206723d2f9c0de93474f61",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v053-preserve-fail.yml",
+      "sha256": "5e8df556783cbcb93f247d2e126ad2b67bce276b7bc8ce989e9834429df026fd",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": {
+        "contents": "write"
+      },
+      "job_permissions": {
+        "preserve-v053-fail": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [
+        "Persist raw diagnostic replay"
+      ],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v053-semantic-typing-regression.yml",
+      "sha256": "3fc3d9341b6fd9cbc83bdea82d9c5123f096e36a4b95abb7e1d874df1e80f1b1",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v054-event-graph-regression.yml",
+      "sha256": "d45a5b5f35298ccbc19e948385bddbf492a1346f5c21233fb40fb5593a80f584",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v054-fresh-heldout.yml",
+      "sha256": "5d00690eae292d45843e6b2f535ac8c2cf1a44793ea438062010b17c172866f4",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": {
+        "contents": "write"
+      },
+      "job_permissions": {
+        "first-fresh-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [
+        "Persist immutable first-run raw outputs to repository"
+      ],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v054-persist-dev-pass.yml",
+      "sha256": "e52f3fcf9eef0e29e294f0d6f5374f72c4741070cbab30719938927363589300",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": {
+        "contents": "write"
+      },
+      "job_permissions": {
+        "persist-development-pass": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [
+        "Commit immutable development-pass outputs"
+      ],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v055-scope-safety-regression.yml",
+      "sha256": "18f7f43f63edc1a18c5976073361cc7672b4d9270307847f76bad11b0da2d598",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": {
+        "contents": "write"
+      },
+      "job_permissions": {
+        "exposed-development": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [
+        "Persist development raw outputs to repository"
+      ],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v056-reference-discourse-regression.yml",
+      "sha256": "1195f0fa26988b5b87c5f04db362e0baeee8e6aae853b2e7677c4bd6aa5b3ac6",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": {
+        "contents": "write"
+      },
+      "job_permissions": {
+        "exposed-development": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [
+        "Persist development raw outputs to repository"
+      ],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v0561-fresh-heldout.yml",
+      "sha256": "af2b67f71b9c0fd96787ef82ac25ad2b6e1762686cd50eaa7bc3de245f289e20",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": {
+        "contents": "write"
+      },
+      "job_permissions": {
+        "fresh-first-run": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [
+        "Preserve first-run raw outputs before enforcement"
+      ],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3a-v0561-registry-reconciliation.yml",
+      "sha256": "2d12609b32847b7ec19fb1bf69b79626ed18d0cce3b0b2f492da512cae9ef4f7",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": {
+        "contents": "write"
+      },
+      "job_permissions": {
+        "exposed-development": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [
+        "Persist development raw outputs to repository"
+      ],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3b-v02-heldout.yml",
+      "sha256": "51dde8ef0ff2501a7317805ed3f4c1b29d99f5dab3ce732e0ed9a5232147b19c",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "first-heldout-run": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3b-v021-diagnostics.yml",
+      "sha256": "666a7938548722576fc91cc9cca1b84e7820fa114cb8645368ebf5fcdfdeef77",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "diagnostics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3b-v022-diagnostics.yml",
+      "sha256": "c800139a5c546c6139fb9730514dda4b1ebd30aea2ba97d2032c49840e674ee2",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "diagnostics": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s3b-v03-heldout.yml",
+      "sha256": "52244bf143c380ba29faabe930dbbdbadf120c56a18761cfb13f676df725b423",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "first-heldout-run": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5",
+        "actions/upload-artifact@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s4-v01-fresh-first-run-regression.yml",
+      "sha256": "343d698ed1f4216a13dea7d7afbde85c167ad91225d931e77e7ef7b9fce3f943",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": {
+        "contents": "read"
+      },
+      "job_permissions": {
+        "preserve-s4-v01-first-fresh-result": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s4-v01-truth-ledger-dev.yml",
+      "sha256": "cf000df51e2a908407be4db909a2614d6ed95b69383e01a0e910ed98a6fc8461",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": {
+        "contents": "read"
+      },
+      "job_permissions": {
+        "s4-v01-development-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s4-v011-fresh-preservation.yml",
+      "sha256": "aef087c1153583a5c4e77dd845a2f49c0628d189d37f320fb9fb881c7ac47a0c",
+      "events": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "top_permissions": {
+        "contents": "read"
+      },
+      "job_permissions": {
+        "preserve-s4-v011-fresh": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v01-benchmark-factory-dev.yml",
+      "sha256": "20daec3565e614c48b7fd3268ff6756673b835bb5f1d09680442c91156c4534d",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "preserve-v01-first-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v011-structural-regression.yml",
+      "sha256": "cbadee146355d54617a90ca1b4bc89202a8aa19f4458113f4e5df5893ff5bca7",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "preserve-v011-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v02-fresh-boundary.yml",
+      "sha256": "5a1f45e2bf1afe3110f6aff91b1649055907a59b416df4d1b1ebd65302199c45",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "preserve-first-fresh-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v021-boundary-regression.yml",
+      "sha256": "11d8bda566ecfd3004a5036ed931b4d2b03007426f76338cbc33f97b13ecfc99",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-boundary-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v03-second-fresh-boundary.yml",
+      "sha256": "25122fa31772e4b271f76cf5a0a77b958ea1e14c6d09a76ecc576e5c950178b8",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "preserve-first-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v031-trust-root-regression.yml",
+      "sha256": "177a3159c61589b6ceee8bfd8f04ba99fa144fb46742f76924f5bd77243279f1",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-trust-root-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v04-third-fresh-policy-root.yml",
+      "sha256": "2dbfb926b41df58548a8d824d72703b0014831bf67865912360ff871bef9270f",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "first-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v041-policy-root-regression.yml",
+      "sha256": "26c7e9502bc9d8d142dbcde742485a9a7e36de362f4d5867210d1cbff269d891",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-policy-root-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v05-fourth-fresh-authority-composition.yml",
+      "sha256": "8924319de007ae5bc71a09e2714e8b63f7a454803c99b4192ad52b56fd553e2e",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "preserve-first-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v051-authority-composition-regression.yml",
+      "sha256": "fd813732437a181508ed8c8c1e72140bf2e9caf54a4a18bbccb1b49acb5b1a2b",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-authority-composition-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v06-fresh-identity-toctou.yml",
+      "sha256": "7a6a5fcec4f75414e7b47b997226dfa13f53f9db0a8cf7a43e123ac1d8204e97",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "preserve-first-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v061-identity-lineage-toctou-regression.yml",
+      "sha256": "d35ef9157a896ad817cccaa8942d6fb3c4e9f5355cce853671a8901ff38047b7",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-repair-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v07-fresh-lineage-generalization-capture.yml",
+      "sha256": "c4894dba4f8348833a7509f8a848c6233cc7ba48b3b30ad5b2ea35d6da16a4be",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "preserve-first-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v072-lineage-hybrid-regression.yml",
+      "sha256": "fca1ba21b0a80cc5634c83aa1602423ba2611b058fbb0afb87a9fb23b198875c",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v073-lineage-calibration.yml",
+      "sha256": "de760c2e5fd8e67749f83eea1f66cf9ea1e4598a77218d5e97ef30f210f29b8c",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "calibrate-and-regress": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v080-fresh-lineage.yml",
+      "sha256": "bc0275d7a03c66a8171537f591d7827adc636d6eff7d8f8f0edb148d12f02197",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "preserve-first-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v081-multilingual-mosaic-repair.yml",
+      "sha256": "949ee8720f8110f06c1c42ca1a7565ba4b5b4833c41b3969780594baf22614f9",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "calibrate-and-regress": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v090-fresh-lineage.yml",
+      "sha256": "daefa06c1b60b25fc8ff2b6395ac47f75a7a25783336e78e7ac3dcd5920c8d31",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "preserve-first-observation": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    },
+    {
+      "path": ".github/workflows/s5-v091-script-role-repair.yml",
+      "sha256": "ed5ace427c283ccc97553792e5ebb2c4424ca03502b0b2c97f53b217e322f82a",
+      "events": [
+        "push",
+        "pull_request"
+      ],
+      "top_permissions": null,
+      "job_permissions": {
+        "exposed-repair-regression": null
+      },
+      "actions": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ],
+      "repository_write_steps": [],
+      "secret_reference_names": [],
+      "direct_expression_run_steps": [],
+      "semantic_review": "PENDING_EXCEPT_EXPLICIT_COVERAGE_ROWS"
+    }
+  ],
+  "workflow_count": 64,
+  "workflows_with_repository_write_steps": 9,
+  "workflows_without_explicit_top_permissions": 51,
+  "dependency_files": [
+    {
+      "path": "requirements-s5-lineage-calibration.txt",
+      "sha256": "b7875d52522a3b14aa586ad3636757f622b39a6d5fc032eaaaf48b716d887eac"
+    }
+  ],
+  "missing_permissions_means": "inherits repository/organization defaults; effective permission not verified",
+  "vulnerabilities_confirmed_by_inventory": 0
+}

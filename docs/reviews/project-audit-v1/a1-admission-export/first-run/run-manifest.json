@@ -1,0 +1,32 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "scripts/audit_admission_export_contracts.py",
+    "--out",
+    "docs/reviews/project-audit-v1/a1-admission-export/first-run"
+  ],
+  "cwd": "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit",
+  "python": "3.12.14",
+  "input_git_commit": "4a49e41e5c1ac5079f084a32f6ad198679ca0ced",
+  "input_git_tree": "20f1cc5594e6f796fdd5162ddf4c9438947ad07f",
+  "file_sha256": {
+    "scripts/audit_admission_export_contracts.py": "84ca69f405b9f3b8a52efdff6abc12bd5bd95e76716fbd8b7976cc837320cba2",
+    "scripts/export_training_data.py": "141baf354e72ac3a7d0d3d823c5d053a272b3fa76e875e51c6d2d842163460ac",
+    "scripts/export_training_data_v091.py": "2d35c06bd22a5b755d299138b1bd0e8ad741c067ead32c710c6b3f10f33f8de2",
+    "scripts/export_training_data_v061.py": "f3c906170fb075606b6d929d0a3fb642a7517cab085134d0ea799f0e562b1005",
+    "scripts/s5_lineage_detector_v091.py": "d8cdf4c2f1055662e29b50221dfab650c58e00d626fcef9da536ebc3cf256bfe",
+    "scripts/s5_lineage_detector_v081.py": "6c92b2193db9100fad218634e88033be90941d860a520b33d2e2346630517a58",
+    "scripts/s5_lineage_detector_v073.py": "534512fb9e86483c7f486a3a791ccbaff902203527b1cda17404afdbf951dd30",
+    "scripts/s5_v091_freeze_control.py": "ebdd857a4a2c5140942375d4d26d542b91b1c99877770c16ac0ba3c0caa4e96c"
+  },
+  "probe_script_uncommitted_at_first_execution": true,
+  "input_scope": "new authored synthetic markers only",
+  "network": "blocked in process",
+  "freeze_subchecks": "explicit stubs; real receipt validation not executed",
+  "auth_scope": "helper digest/path checks only; production policy registry not replaced or used for export",
+  "output": "docs/reviews/project-audit-v1/a1-admission-export/first-run",
+  "expected_exit_code_at_audit_baseline": 2,
+  "actual_exit_code": 2,
+  "result": "FAIL",
+  "training_candidate_rows_created": 0
+}

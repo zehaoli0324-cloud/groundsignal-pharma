@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "unittest",
+    "tests.patient_eval.test_evaluation.ScoringTests",
+    "tests.patient_eval.test_review_scoring_v03",
+    "tests.patient_eval.test_readiness_statistics",
+    "tests.patient_eval.test_pipeline_statistics",
+    "-v"
+  ],
+  "cwd": "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit",
+  "python": "3.12.14",
+  "input_git_commit": "6dbd31de3bf9224e759cf7baf52e329f485e9b7f",
+  "input_git_tree": "cf4722f77c5779804d0c583e13e018c395ca07cd",
+  "input_scope": "reviewed synthetic fixture tests only; no live client invoked",
+  "expected_exit_code": 0,
+  "actual_exit_code": 0,
+  "result": "PASS",
+  "log": "existing-tests.txt",
+  "file_sha256": {
+    "tests/patient_eval/test_evaluation.py": "59072b2392b8ee80ba74b8471143fe9101591e583a909db788b87c3ddda1f2ab",
+    "tests/patient_eval/test_review_scoring_v03.py": "fcbdb613903ff98815c44c96329836a71a0d70a4b50e34d37cd6061b2302ad94",
+    "tests/patient_eval/test_readiness_statistics.py": "f3b07759421137f8b5ce12b15bd62e302896bf73aceb8cdb9d32a20c6160b489",
+    "tests/patient_eval/test_pipeline_statistics.py": "a035e9cfcae80cd0abc3f5228fe91f2d5e343e2a3c1b8f2c12c12c01d7ae62ac"
+  },
+  "external_model_calls": 0
+}

@@ -1,0 +1,131 @@
+{
+  "baseline_remote_commit": "62972d1ebd8ecf44ee74f8d5d7b7d4705c408c98",
+  "baseline_local_commit": "6dbd31de3bf9224e759cf7baf52e329f485e9b7f",
+  "baseline_tree": "cf4722f77c5779804d0c583e13e018c395ca07cd",
+  "rows": [
+    {
+      "path": "scripts/patient_eval/contracts.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与连接语义阅读；不等于所有依赖或全部运行路径已执行",
+      "sha256": "1614ee86a24c43ce0164b4bc4957ea23531aa31ab67e94101a8f183f3c852269"
+    },
+    {
+      "path": "scripts/patient_eval/review_contract.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与连接语义阅读；不等于所有依赖或全部运行路径已执行",
+      "sha256": "fbb45cc835e924608ab64d61dd2d98f2eb23f8c917f7605970fbeec23bf6650b"
+    },
+    {
+      "path": "scripts/patient_eval/scoring.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与连接语义阅读；不等于所有依赖或全部运行路径已执行",
+      "sha256": "352f6a5300f458e18cdb4628b5377a8c88fe25cfaac56d6fbe55024cb7d22918"
+    },
+    {
+      "path": "scripts/patient_eval/agreement.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与连接语义阅读；不等于所有依赖或全部运行路径已执行",
+      "sha256": "20fd74fde8217d84c689679b14127deae34343cc3fb2455eea05a715bc53044b"
+    },
+    {
+      "path": "scripts/patient_eval/readiness_statistics.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与连接语义阅读；不等于所有依赖或全部运行路径已执行",
+      "sha256": "cf88d21aa3bced2e9e1f58c794dae25773824827ff32e2f84fc587ed7e9a1291"
+    },
+    {
+      "path": "scripts/patient_eval/pipeline_statistics.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与连接语义阅读；不等于所有依赖或全部运行路径已执行",
+      "sha256": "6bc318c9ec24e5c2d462e939ef5d9dc518bc0f25390f8883741b208c6fdd5c64"
+    },
+    {
+      "path": "scripts/patient_eval/study.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与连接语义阅读；不等于所有依赖或全部运行路径已执行",
+      "sha256": "1701acf7d275b1eac4737395d35a19323831bf496fec0e06d5c0ed6efa7f450a"
+    },
+    {
+      "path": "scripts/patient_eval/recovery.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与连接语义阅读；不等于所有依赖或全部运行路径已执行",
+      "sha256": "4ee0641d5fa4931ec55fd5243bf0081cb4270a1a1f3ec47b756eaa09d5e54221"
+    },
+    {
+      "path": "scripts/patient_eval/choice_adjudication.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与连接语义阅读；不等于所有依赖或全部运行路径已执行",
+      "sha256": "536ab4b3cfcd8f7c1a1c6eb523b7fcb0c1b2c4000eb3bf6ebd68747f949ca550"
+    },
+    {
+      "path": "scripts/patient_eval/runner.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与连接语义阅读；不等于所有依赖或全部运行路径已执行",
+      "sha256": "c23e8949a7f68790134808306150ac3cab7c781a18abece2984654776900a7d0"
+    },
+    {
+      "path": "scripts/patient_eval/event_mapping.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与连接语义阅读；不等于所有依赖或全部运行路径已执行",
+      "sha256": "3379360ca0e921bb2c51a9652202bdc22ab601eac631397b8dc9312deed70290"
+    },
+    {
+      "path": "scripts/patient_eval/import_batch.py",
+      "status": "REVIEWED_CORE",
+      "scope": "本文件实现与连接语义阅读；不等于所有依赖或全部运行路径已执行",
+      "sha256": "5f22c5b96b071cd655cd8a6c29bd90ae1e10010bc6f6b1468e9f3c4592feba94"
+    },
+    {
+      "path": "scripts/patient_eval/cli.py",
+      "status": "PARTIAL_READ",
+      "scope": "evaluate_sessions与save_bundle；其余命令入口未全读",
+      "sha256": "44a85758a9df59f5e0f1cfd256444ec2b7e7e1dc8d68ef0ffce80dd769a5525c"
+    },
+    {
+      "path": "scripts/patient_eval/readiness_pipeline.py",
+      "status": "PARTIAL_READ",
+      "scope": "fixtures、mock_review_sessions与run_drill连接；命令包装未全读",
+      "sha256": "23b88da14658dc7584e7bd14a4103481fedfe49275fe5c5a2fa322c9f2a7d6d7"
+    },
+    {
+      "path": "scripts/patient_eval/importers.py",
+      "status": "PARTIAL_READ",
+      "scope": "import_blackbox字段合同及调用关系；本批不宣布导入模块全覆盖",
+      "sha256": "85e0f19fe05d2c945a4a3ed09285658d3ef1920856b29c7d645c9d95ffa71c69"
+    },
+    {
+      "path": "tests/patient_eval/test_review_scoring_v03.py",
+      "status": "READ_AND_EXECUTED",
+      "scope": "合成数据与写入范围核对；本轮执行全部测试",
+      "sha256": "fcbdb613903ff98815c44c96329836a71a0d70a4b50e34d37cd6061b2302ad94"
+    },
+    {
+      "path": "tests/patient_eval/test_readiness_statistics.py",
+      "status": "READ_AND_EXECUTED",
+      "scope": "合成数据与写入范围核对；本轮执行全部测试",
+      "sha256": "f3b07759421137f8b5ce12b15bd62e302896bf73aceb8cdb9d32a20c6160b489"
+    },
+    {
+      "path": "tests/patient_eval/test_pipeline_statistics.py",
+      "status": "READ_AND_EXECUTED",
+      "scope": "合成数据与写入范围核对；本轮执行全部测试",
+      "sha256": "a035e9cfcae80cd0abc3f5228fe91f2d5e343e2a3c1b8f2c12c12c01d7ae62ac"
+    },
+    {
+      "path": "tests/patient_eval/test_evaluation.py",
+      "status": "PARTIAL_READ_AND_EXECUTED",
+      "scope": "本轮只执行ScoringTests；DiagnosisTests不计本批测试覆盖",
+      "sha256": "59072b2392b8ee80ba74b8471143fe9101591e583a909db788b87c3ddda1f2ab"
+    }
+  ],
+  "new_workflows_reviewed": 0,
+  "project_audit_complete": false,
+  "project_tests_complete": false,
+  "not_fully_reviewed": [
+    "执行端API、动态患者隐私和完整恢复故障矩阵",
+    "评分/报告各CLI入口、裁决页面与确认事件连接",
+    "其他统计/诊断/干预版本、混合评分标准的汇总策略",
+    "来源转换、谱系依赖、共享代码、依赖/凭据/权限、剩余工作流",
+    "实际浏览器及人工验收、main前置审查"
+  ]
+}

@@ -1,0 +1,13 @@
+test_anomalies_are_counted_without_patient_content (tests.patient_eval.test_source_intake.SourceIntakeTests.test_anomalies_are_counted_without_patient_content) ... ok
+test_intake_keeps_original_bytes_and_candidates_local (tests.patient_eval.test_source_intake.SourceIntakeTests.test_intake_keeps_original_bytes_and_candidates_local) ... ok
+test_intake_refuses_public_destination_before_read (tests.patient_eval.test_source_intake.SourceIntakeTests.test_intake_refuses_public_destination_before_read) ... ok
+test_normalized_duplicate_selection_is_unique_and_repeatable (tests.patient_eval.test_source_intake.SourceIntakeTests.test_normalized_duplicate_selection_is_unique_and_repeatable) ... ok
+test_pin_rejects_modified_bytes_even_with_same_length (tests.patient_eval.test_source_intake.SourceIntakeTests.test_pin_rejects_modified_bytes_even_with_same_length) ... ok
+test_read_is_bounded (tests.patient_eval.test_source_intake.SourceIntakeTests.test_read_is_bounded) ... ok
+test_reject_invalid_root_and_selection_size (tests.patient_eval.test_source_intake.SourceIntakeTests.test_reject_invalid_root_and_selection_size) ... ok
+test_structure_audit_preserves_sequence_and_never_exports_text (tests.patient_eval.test_source_intake.SourceIntakeTests.test_structure_audit_preserves_sequence_and_never_exports_text) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.054s
+
+OK

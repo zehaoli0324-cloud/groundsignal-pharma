@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "unittest",
+    "tests.patient_eval.test_dynamic_case_offline",
+    "tests.patient_eval.test_adjudication_page",
+    "-v"
+  ],
+  "cwd": "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit",
+  "python": "3.12.14",
+  "node": "v24.19.0",
+  "input_git_commit": "6843f9130025e1542f62dc8194eafbfaac2db713",
+  "input_git_tree": "243852b1e1555b991bd2ed4ac29f70976874258a",
+  "input_scope": "authored synthetic draft fixtures and Node validation only",
+  "expected_exit_code": 0,
+  "actual_exit_code": 0,
+  "browser_sessions": 0,
+  "external_model_calls": 0,
+  "file_sha256": {
+    "tests/patient_eval/test_dynamic_case_offline.py": "59d9c3eb92c9fe69136a8350a9afb2a4218e4053039d018667a87072017cb241",
+    "tests/patient_eval/test_adjudication_page.py": "a71cabccef1e00773b5ca3e6763d3889880d203e40edde8923647a92299069a6",
+    "tests/patient_eval/test_dynamic_case_drafts.py": "222292d168dd8223bf0b0bd3a5215dc29580f73780a0bcacb642b5d14ed511d8",
+    "tests/patient_eval/test_candidate_selection.py": "a429ff962be59030db56a876a1a54f2ed4cd046d6a38bab9a5566f1c207cc9fa",
+    "tests/patient_eval/test_choice_adjudication.py": "806b79e8268245cef17526b87121983fed2c4be97de40c4b3037b0b2dd5fc86e",
+    "tests/patient_eval/clinical_console_interactions.cjs": "5f397931f7439cde3107714180defe6c8f48156252cb911145019647bcf8b130"
+  }
+}

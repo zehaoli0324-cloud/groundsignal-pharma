@@ -1,0 +1,105 @@
+{
+  "baseline_remote_commit": "331e12fccb0db7fec9cf74441d4b9e7e6762c23f",
+  "baseline_local_commit": "6843f91",
+  "baseline_tree": "243852b1e1555b991bd2ed4ac29f70976874258a",
+  "rows": [
+    {
+      "path": "scripts/patient_eval/dynamic_case_drafts.py",
+      "status": "REVIEWED_CORE",
+      "scope": "草稿/静态审计/合成执行、页面生成和裁决JavaScript语义；不等于实际浏览器验证",
+      "sha256": "5a53c4ecc74dc779c25511477eee04e5332f5e7ae6bfc5b789d9a9f7e9c560c5"
+    },
+    {
+      "path": "scripts/patient_eval/dynamic_case_offline.py",
+      "status": "REVIEWED_CORE",
+      "scope": "草稿/静态审计/合成执行、页面生成和裁决JavaScript语义；不等于实际浏览器验证",
+      "sha256": "64a003513de86539667e3fc18cc4805b9eaca91a1a65652aa61a3d6bef208603"
+    },
+    {
+      "path": "scripts/patient_eval/adjudication_page.py",
+      "status": "REVIEWED_CORE",
+      "scope": "草稿/静态审计/合成执行、页面生成和裁决JavaScript语义；不等于实际浏览器验证",
+      "sha256": "de0112d882e1b56419317e64b13ad46a7d5d92efecb35a09c0a1159df213c524"
+    },
+    {
+      "path": "scripts/patient_eval/adjudication_assets/app.js",
+      "status": "REVIEWED_CORE",
+      "scope": "草稿/静态审计/合成执行、页面生成和裁决JavaScript语义；不等于实际浏览器验证",
+      "sha256": "c7efc07c8b321190118b7d07b138a9cf210d63693516e9e75f2fbc76c6ced975"
+    },
+    {
+      "path": "scripts/patient_eval/adjudication_assets/index.html",
+      "status": "REVIEWED_CORE",
+      "scope": "草稿/静态审计/合成执行、页面生成和裁决JavaScript语义；不等于实际浏览器验证",
+      "sha256": "8bfa0ca378f8c236edef27c584e84683c876ec52a23b08c1e8848f9659aa0b43"
+    },
+    {
+      "path": "scripts/patient_eval/clinical_console.py",
+      "status": "PARTIAL_READ",
+      "scope": "demo_packet、independent_packet、render_console；其余交接逻辑未全读",
+      "sha256": "3fb29ecbf001fbd8df60e13a974c88ffdd2492c57022ba270a991ab78a4ef664"
+    },
+    {
+      "path": "scripts/patient_eval/candidate_review_ui.py",
+      "status": "PARTIAL_READ",
+      "scope": "嵌入数据转义、textContent显示与安全策略；不宣称全部浏览器事件已验收",
+      "sha256": "42c697694e38b500a761e860dd1ee3d3555ae122b0d66114fb7b3373a39dcf6f"
+    },
+    {
+      "path": "scripts/patient_eval/clinical_console_assets/app.js",
+      "status": "PARTIAL_READ",
+      "scope": "文本显示/下载/输入风险点检索；不是整文件审查",
+      "sha256": "8e92a1ab8002b9a20ac23ec8e6805da20f7eda1b64f2f2278c34d60197794b7f"
+    },
+    {
+      "path": "scripts/patient_eval/clinical_console_assets/choices.js",
+      "status": "PARTIAL_READ",
+      "scope": "文本显示与事件检索；不是整文件审查",
+      "sha256": "e5cf06a3d57878352f92aed5c9a232d30065ded74362035e608b1a5e1dca0fd2"
+    },
+    {
+      "path": "tests/patient_eval/test_dynamic_case_offline.py",
+      "status": "READ_AND_EXECUTED",
+      "scope": "共14项既有测试，全部为合成材料；Node互通不等于浏览器点击",
+      "sha256": "59d9c3eb92c9fe69136a8350a9afb2a4218e4053039d018667a87072017cb241"
+    },
+    {
+      "path": "tests/patient_eval/test_adjudication_page.py",
+      "status": "READ_AND_EXECUTED",
+      "scope": "共14项既有测试，全部为合成材料；Node互通不等于浏览器点击",
+      "sha256": "a71cabccef1e00773b5ca3e6763d3889880d203e40edde8923647a92299069a6"
+    },
+    {
+      "path": "tests/patient_eval/test_dynamic_case_drafts.py",
+      "status": "FIXTURE_HELPERS_READ",
+      "scope": "核对测试fixture生成及调用范围；未执行该文件全部测试类",
+      "sha256": "222292d168dd8223bf0b0bd3a5215dc29580f73780a0bcacb642b5d14ed511d8"
+    },
+    {
+      "path": "tests/patient_eval/test_candidate_selection.py",
+      "status": "FIXTURE_HELPERS_READ",
+      "scope": "核对测试fixture生成及调用范围；未执行该文件全部测试类",
+      "sha256": "a429ff962be59030db56a876a1a54f2ed4cd046d6a38bab9a5566f1c207cc9fa"
+    },
+    {
+      "path": "tests/patient_eval/test_choice_adjudication.py",
+      "status": "FIXTURE_HELPERS_READ",
+      "scope": "核对测试fixture生成及调用范围；未执行该文件全部测试类",
+      "sha256": "806b79e8268245cef17526b87121983fed2c4be97de40c4b3037b0b2dd5fc86e"
+    },
+    {
+      "path": "tests/patient_eval/test_clinical_console_interactions.py",
+      "status": "FIXTURE_HELPERS_READ",
+      "scope": "核对测试fixture生成及调用范围；未执行该文件全部测试类",
+      "sha256": "a2492e5a90e057714aa85f4ece9657e8eadc573b36a14e849abca7a2066da4ba"
+    }
+  ],
+  "project_audit_complete": false,
+  "project_tests_complete": false,
+  "remaining": [
+    "并发路径替换、输出原子性和完整CLI私有路径要求",
+    "页面其余事件与实际浏览器导出/关闭/恢复",
+    "底层谱系、其他共享脚本、凭据和剩余工作流",
+    "真实接口/恢复矩阵、main前置审查及A3集中复测"
+  ]
+}

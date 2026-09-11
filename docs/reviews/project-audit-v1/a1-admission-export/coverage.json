@@ -1,0 +1,131 @@
+{
+  "baseline_remote_commit": "9acc90af1f6b402c1b7efd7adb2d502c7821c4e5",
+  "baseline_tree": "20f1cc5594e6f796fdd5162ddf4c9438947ad07f",
+  "rows": [
+    {
+      "path": "scripts/patient_eval/source_intake.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "adc711302c0aca8f822d467332d4dda1cbf67d8dcba672759776c699c3e60d97"
+    },
+    {
+      "path": "scripts/export_training_data.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "141baf354e72ac3a7d0d3d823c5d053a272b3fa76e875e51c6d2d842163460ac"
+    },
+    {
+      "path": "scripts/export_training_data_v091.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "2d35c06bd22a5b755d299138b1bd0e8ad741c067ead32c710c6b3f10f33f8de2"
+    },
+    {
+      "path": "scripts/export_training_data_v061.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "f3c906170fb075606b6d929d0a3fb642a7517cab085134d0ea799f0e562b1005"
+    },
+    {
+      "path": "scripts/s5_trust_policy_v091.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "d39f9e87efcc6ab86c39d176121bc9a2f21dddcbbf8b1ee6e5cf89fc5da2b642"
+    },
+    {
+      "path": "scripts/s5_trust_policy_v071.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "ed6d1effa0d18659f2823fbf219c1db4bbb78983280feb08308c3adbd19c540d"
+    },
+    {
+      "path": "scripts/s5_lineage_detector_v091.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "d8cdf4c2f1055662e29b50221dfab650c58e00d626fcef9da536ebc3cf256bfe"
+    },
+    {
+      "path": "scripts/s5_v091_freeze_control.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "ebdd857a4a2c5140942375d4d26d542b91b1c99877770c16ac0ba3c0caa4e96c"
+    },
+    {
+      "path": "scripts/verify_s5_v091_freeze_readiness.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "f1dab6d439a6faac73c4ba6fcaa69a8960f6ca66fba7c399d829c0e0f33fb49c"
+    },
+    {
+      "path": "scripts/verify_s5_v091_historical_receipt.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "c2bcdda5b99b7ba60d5156b099dd88afb23749dcf7e7eb20e7fed271d0023adc"
+    },
+    {
+      "path": "scripts/check_s5_v10_fresh_admission.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "cf9171e4aa7edbd8c216417ba2a6302a3e77fcb69d9148273b5d9372311d3b91"
+    },
+    {
+      "path": "scripts/materialize_s5_v091_freeze_receipt.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "3113908ce2ad97e2c2234a7d387938e6f6eb84c4039c65c4f3fedc61969c1c2d"
+    },
+    {
+      "path": "scripts/test_s5_v091_freeze_control.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "3dd4d9d86fa66085ddfe4d6466f9f56762d5c7fbfee0ce359d3a06ce2ea047f0"
+    },
+    {
+      "path": "tests/patient_eval/test_source_intake.py",
+      "status": "REVIEWED_ENTRYPOINT",
+      "scope": "实现与调用合同；不代表全依赖算法或真实授权已验证",
+      "sha256": "51a8f024c6a8e29a6338072f5692779c1552534e8273770846839573e601e76e"
+    },
+    {
+      "path": ".github/workflows/s5-v091-script-role-repair.yml",
+      "status": "REVIEWED_WORKFLOW",
+      "scope": "触发范围、严格比对、冻结与历史回放；未执行",
+      "sha256": "ed5ace427c283ccc97553792e5ebb2c4424ca03502b0b2c97f53b217e322f82a"
+    },
+    {
+      "path": "medical/schemas/evaluation-record.schema.json",
+      "status": "SCHEMA_READ",
+      "scope": "字段类型与可选值；未据此推定运行时完整校验",
+      "sha256": "08ae6673e68b5c2228da4fb4e6fd8c9479752c42732dfc9557046df8a0f7e33a"
+    },
+    {
+      "path": "medical/schemas/model-run.schema.json",
+      "status": "SCHEMA_READ",
+      "scope": "字段类型与可选值；未据此推定运行时完整校验",
+      "sha256": "c55059ae45dab4e4267e766f325fa598281a295cb56c8f26c1d726b269ae4d47"
+    },
+    {
+      "path": "scripts/s5_lineage_detector_v081.py",
+      "status": "IMPORT_STRUCTURE_ONLY",
+      "scope": "动态导入与helper继承关系；底层相似度算法未完成审查",
+      "sha256": "6c92b2193db9100fad218634e88033be90941d860a520b33d2e2346630517a58"
+    },
+    {
+      "path": "scripts/s5_lineage_detector_v073.py",
+      "status": "IMPORT_STRUCTURE_ONLY",
+      "scope": "动态导入与helper继承关系；底层相似度算法未完成审查",
+      "sha256": "534512fb9e86483c7f486a3a791ccbaff902203527b1cda17404afdbf951dd30"
+    }
+  ],
+  "project_audit_complete": false,
+  "project_tests_complete": false,
+  "not_fully_reviewed": [
+    "S1其他来源、候选去标识和准入转换",
+    "S5底层谱系算法、多版本入口、真正的冻结历史对象验证",
+    "S9实际授权后的整批导出、跨文件原子写入、人工批准身份与来源绑定",
+    "S6运行/S7评分/S8统计",
+    "pharma、demo与共享脚本",
+    "依赖安全、凭据、全部工作流权限",
+    "真实浏览器与main前置审查"
+  ]
+}

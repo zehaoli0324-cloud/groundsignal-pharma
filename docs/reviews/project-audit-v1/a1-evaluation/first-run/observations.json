@@ -1,0 +1,332 @@
+{
+  "scope": "synthetic_contract_audit",
+  "total": 12,
+  "passed": 8,
+  "failed": 4,
+  "rows": [
+    {
+      "probe_id": "matching_scenario_passes",
+      "finding_id": null,
+      "expected": "Unchanged synthetic marker satisfies original rule",
+      "actual": {
+        "assessed": 1,
+        "evidence_assessed": 1,
+        "operational_unmet": 0,
+        "fail": 0,
+        "not_applicable": 0,
+        "pass": 1,
+        "unassessed": 0
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "changed_rule_old_result",
+      "finding_id": "A1-011",
+      "expected": "Reject an explicitly mismatched scenario binding before scoring",
+      "actual": {
+        "error": null,
+        "stored_digest": "bca3803e0dc27cd2705ec113415f64b89070c9c05d8e9c8c22b615e4b7f3c31e",
+        "expected_digest": "c0025b2c8fa67ff903b87cfb5c9d6dbe6493b07fd7e6890828a39f37c201de49",
+        "current_expected": "beta",
+        "retained_observation": {
+          "criterion_id": "marker",
+          "outcome": "pass",
+          "evidence_turn_ids": [
+            "answer"
+          ],
+          "source": "deterministic",
+          "reason": "显式输出事实 marker: observed='alpha', expected='alpha'。只检查状态记录。"
+        },
+        "fully_passed": true
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "explicit_wrong_scenario_digest",
+      "finding_id": "A1-011",
+      "expected": "Reject an explicitly mismatched scenario binding before scoring",
+      "actual": {
+        "error": null,
+        "stored_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+        "expected_digest": "bca3803e0dc27cd2705ec113415f64b89070c9c05d8e9c8c22b615e4b7f3c31e",
+        "current_expected": "alpha",
+        "retained_observation": {
+          "criterion_id": "marker",
+          "outcome": "pass",
+          "evidence_turn_ids": [
+            "answer"
+          ],
+          "source": "deterministic",
+          "reason": "显式输出事实 marker: observed='alpha', expected='alpha'。只检查状态记录。"
+        },
+        "fully_passed": true
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "duplicate_session_rejected",
+      "finding_id": null,
+      "expected": "Invalid identity rejected",
+      "actual": {
+        "error": "duplicate session_id"
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "wrong_protocol_rejected",
+      "finding_id": null,
+      "expected": "Invalid identity rejected",
+      "actual": {
+        "error": "session protocol mismatch"
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "missing_observation_not_pass",
+      "finding_id": null,
+      "expected": "Missing review stays unassessed and cannot pass",
+      "actual": {
+        "counts": {
+          "assessed": 0,
+          "evidence_assessed": 0,
+          "operational_unmet": 0,
+          "fail": 0,
+          "not_applicable": 0,
+          "pass": 0,
+          "unassessed": 1
+        },
+        "fully_passed": false
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "invalid_measurement_excluded",
+      "finding_id": null,
+      "expected": "Previously passing observation cannot certify invalid capture",
+      "actual": {
+        "counts": {
+          "assessed": 0,
+          "evidence_assessed": 0,
+          "operational_unmet": 0,
+          "fail": 0,
+          "not_applicable": 0,
+          "pass": 0,
+          "unassessed": 1
+        },
+        "aggregate": {
+          "total_sessions": 1,
+          "valid_sessions": 0,
+          "measurement_invalid_sessions": 1,
+          "target_error_sessions": 0,
+          "service_completion_rate": null,
+          "complete_evaluations": 0,
+          "evaluation_complete_rate": null,
+          "fully_passed_sessions": 0,
+          "fully_passed_rate_lower_bound": null,
+          "critical_failure_sessions": 0,
+          "critical_assessed_sessions": 0,
+          "critical_unassessed_sessions": 0,
+          "critical_failure_rate_among_assessed": null,
+          "critical_assessment_coverage": null,
+          "outcomes": {
+            "fail": 0,
+            "not_applicable": 0,
+            "pass": 0,
+            "unassessed": 0
+          },
+          "criterion_assessment_coverage": null,
+          "interpretation": "Development evidence only; unknown clinical judgments are not passes.",
+          "independent_review": {
+            "v03_criteria": 0,
+            "v03_observations": 0,
+            "legacy_observations": 0,
+            "unreviewed_criteria": 0,
+            "quality": {
+              "eligible": 0,
+              "assessed": 0,
+              "unassessed": 0,
+              "not_applicable": 0,
+              "opportunity_not_reached": 0,
+              "opportunity_unassessed": 0,
+              "mean_rating": null,
+              "coverage": null,
+              "rating_counts": {
+                "0": 0,
+                "1": 0,
+                "2": 0
+              }
+            },
+            "safety": {
+              "eligible": 0,
+              "assessed": 0,
+              "serious_errors": 0,
+              "unknown": 0,
+              "coverage": null
+            },
+            "opportunity": {
+              "occurred": 0,
+              "not_reached": 0,
+              "not_applicable": 0,
+              "unassessed": 0
+            },
+            "task_completion": {
+              "required": 0,
+              "eligible": 0,
+              "completed": 0,
+              "incomplete": 0,
+              "unassessed": 0,
+              "not_applicable": 0,
+              "coverage": null,
+              "completion_rate": null,
+              "completion_rate_lower_bound": null
+            },
+            "by_criterion": {},
+            "mixed_semantics_sessions": 0,
+            "legacy_sessions": 0,
+            "v03_sessions": 0,
+            "interpretation": "An explicit v0.3 session or observation includes all missing criterion slots as unknowns; existing legacy judgments are never auto-upgraded. Prioritize per-criterion metrics and keep coverage denominators visible."
+          },
+          "review_semantics": "unassessed"
+        }
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "statistics_baseline",
+      "finding_id": null,
+      "expected": "Known fixture retains hand-checked units and denominators",
+      "actual": {
+        "cases": 3,
+        "sessions": 7,
+        "repeat_sessions": 1,
+        "completed_sessions": 5,
+        "target_error_sessions": 1,
+        "measurement_invalid_sessions": 1,
+        "target_metric_sessions": 6,
+        "planned_opportunities": 7,
+        "occurred_opportunities": 3,
+        "not_reached_opportunities": 1,
+        "unassessed_opportunities": 2,
+        "not_applicable_opportunities": 1,
+        "opportunities_on_measurement_invalid_sessions": 1,
+        "opportunities_with_any_quality_rating": 3,
+        "opportunities_with_both_quality_ratings": 1,
+        "individual_quality_ratings": 4,
+        "opportunities_missing_both_reviewer_rows": 1
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "duplicate_opportunity_alias",
+      "finding_id": "A1-012",
+      "expected": "Same occurrence copied under another item ID cannot increase sample counts",
+      "actual": {
+        "error": null,
+        "original_item": {
+          "item_id": "case-a:baseline:r0:correction",
+          "session_id": "case-a:baseline:r0",
+          "criterion_id": "correction",
+          "recorded_status": "occurred"
+        },
+        "duplicate_id": "case-a:baseline:r0:correction:copied-same-occurrence",
+        "denominators": {
+          "cases": 3,
+          "sessions": 7,
+          "repeat_sessions": 1,
+          "completed_sessions": 5,
+          "target_error_sessions": 1,
+          "measurement_invalid_sessions": 1,
+          "target_metric_sessions": 6,
+          "planned_opportunities": 8,
+          "occurred_opportunities": 4,
+          "not_reached_opportunities": 1,
+          "unassessed_opportunities": 2,
+          "not_applicable_opportunities": 1,
+          "opportunities_on_measurement_invalid_sessions": 1,
+          "opportunities_with_any_quality_rating": 3,
+          "opportunities_with_both_quality_ratings": 1,
+          "individual_quality_ratings": 4,
+          "opportunities_missing_both_reviewer_rows": 2
+        }
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "duplicate_opportunity_with_ratings",
+      "finding_id": "A1-012",
+      "expected": "Same occurrence copied under another item ID cannot increase sample counts",
+      "actual": {
+        "error": null,
+        "original_item": {
+          "item_id": "case-a:baseline:r0:correction",
+          "session_id": "case-a:baseline:r0",
+          "criterion_id": "correction",
+          "recorded_status": "occurred"
+        },
+        "duplicate_id": "case-a:baseline:r0:correction:copied-same-occurrence",
+        "denominators": {
+          "cases": 3,
+          "sessions": 7,
+          "repeat_sessions": 1,
+          "completed_sessions": 5,
+          "target_error_sessions": 1,
+          "measurement_invalid_sessions": 1,
+          "target_metric_sessions": 6,
+          "planned_opportunities": 8,
+          "occurred_opportunities": 4,
+          "not_reached_opportunities": 1,
+          "unassessed_opportunities": 2,
+          "not_applicable_opportunities": 1,
+          "opportunities_on_measurement_invalid_sessions": 1,
+          "opportunities_with_any_quality_rating": 4,
+          "opportunities_with_both_quality_ratings": 2,
+          "individual_quality_ratings": 6,
+          "opportunities_missing_both_reviewer_rows": 1
+        }
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "empty_ratings_stay_missing",
+      "finding_id": null,
+      "expected": "No reviewer rows create no paired rating or agreement",
+      "actual": {
+        "denominators": {
+          "cases": 3,
+          "sessions": 7,
+          "repeat_sessions": 1,
+          "completed_sessions": 5,
+          "target_error_sessions": 1,
+          "measurement_invalid_sessions": 1,
+          "target_metric_sessions": 6,
+          "planned_opportunities": 7,
+          "occurred_opportunities": 3,
+          "not_reached_opportunities": 1,
+          "unassessed_opportunities": 2,
+          "not_applicable_opportunities": 1,
+          "opportunities_on_measurement_invalid_sessions": 1,
+          "opportunities_with_any_quality_rating": 0,
+          "opportunities_with_both_quality_ratings": 0,
+          "individual_quality_ratings": 0,
+          "opportunities_missing_both_reviewer_rows": 7
+        },
+        "agreement": null
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "duplicate_item_id_rejected",
+      "finding_id": null,
+      "expected": "Exact item-ID duplicate rejected before creating database",
+      "actual": {
+        "error": "duplicate item or unknown session",
+        "database_exists": false
+      },
+      "invariant_pass": true
+    }
+  ],
+  "production_fixes": 0,
+  "external_model_calls": 0,
+  "private_patient_reads": 0,
+  "clinical_approval": false
+}

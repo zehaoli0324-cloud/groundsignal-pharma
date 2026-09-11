@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "scripts/audit_shared_boundaries.py",
+    "--out",
+    "docs/reviews/project-audit-v1/a1-shared-boundaries/first-run"
+  ],
+  "cwd": "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit",
+  "python": "3.12.14",
+  "input_git_commit": "87c66d434ff74adb7be646fbb0a8ed431c9fd116",
+  "input_git_tree": "048935a67bdf3bb56951699cdbbdf2105af8814f",
+  "file_sha256": {
+    "scripts/audit_shared_boundaries.py": "cf098cda920f150656a97c00645d725b987d8711eef61a4edffc32c9d46fbf45",
+    "scripts/regression_gate.py": "f5575165e7311f363b7db536704a7c71c2dace2ee4900730802a81daf193dadf",
+    "scripts/import-helper.py": "3c7650c4974c2ae5d36d107d3237ea3091f5b4b56d62aacc1bf2338226e7810a",
+    "scripts/evidence-audit.py": "105d66ca1e1ac0d6cbeb70bb75809fe3d3ba1bbe7b60788f17a6902d6a88c928",
+    "scripts/patient_eval/candidate_privacy.py": "4cc48e7d7bef72d52999afd482bdf387fcd696ac54db01fd4e816dfeb37eeab8"
+  },
+  "probe_script_uncommitted_at_first_execution": true,
+  "input_scope": "new authored markers; tracked workflow metadata",
+  "network": "no network-capable command invoked; network not sandbox-isolated",
+  "output": "docs/reviews/project-audit-v1/a1-shared-boundaries/first-run",
+  "expected_exit_code_at_audit_baseline": 2,
+  "actual_exit_code": 2
+}

@@ -1,0 +1,19 @@
+test_cli_rejects_wrong_source_hash_without_writing_output (tests.patient_eval.test_dynamic_case_offline.DynamicCaseOfflineTests.test_cli_rejects_wrong_source_hash_without_writing_output) ... ok
+test_cross_case_state_isolation_and_unreached_events_are_preserved (tests.patient_eval.test_dynamic_case_offline.DynamicCaseOfflineTests.test_cross_case_state_isolation_and_unreached_events_are_preserved) ... ok
+test_duplicate_disclosure_and_post_stop_activity_are_rejected (tests.patient_eval.test_dynamic_case_offline.DynamicCaseOfflineTests.test_duplicate_disclosure_and_post_stop_activity_are_rejected) ... ok
+test_opening_does_not_disclose_future_or_never_facts (tests.patient_eval.test_dynamic_case_offline.DynamicCaseOfflineTests.test_opening_does_not_disclose_future_or_never_facts) ... ok
+test_partial_scoring_is_not_upgraded_to_pass (tests.patient_eval.test_dynamic_case_offline.DynamicCaseOfflineTests.test_partial_scoring_is_not_upgraded_to_pass) ... ok
+test_real_readiness_is_text_free_and_keeps_all_outcomes_unassessed (tests.patient_eval.test_dynamic_case_offline.DynamicCaseOfflineTests.test_real_readiness_is_text_free_and_keeps_all_outcomes_unassessed) ... ok
+test_source_derived_case_is_categorically_rejected_by_executor (tests.patient_eval.test_dynamic_case_offline.DynamicCaseOfflineTests.test_source_derived_case_is_categorically_rejected_by_executor) ... ok
+test_static_audit_rejects_future_leak_and_duplicate_event (tests.patient_eval.test_dynamic_case_offline.DynamicCaseOfflineTests.test_static_audit_rejects_future_leak_and_duplicate_event) ... ok
+test_synthetic_probe_covers_all_expected_fail_closed_behaviors (tests.patient_eval.test_dynamic_case_offline.DynamicCaseOfflineTests.test_synthetic_probe_covers_all_expected_fail_closed_behaviors) ... ok
+test_tampered_private_or_public_n4_artifact_fails_exact_recomputation (tests.patient_eval.test_dynamic_case_offline.DynamicCaseOfflineTests.test_tampered_private_or_public_n4_artifact_fails_exact_recomputation) ... ok
+test_exported_decisions_are_accepted_by_backend (tests.patient_eval.test_adjudication_page.AdjudicationPageTests.test_exported_decisions_are_accepted_by_backend) ... ok
+test_page_includes_source_subject_and_no_network_or_auto_decision (tests.patient_eval.test_adjudication_page.AdjudicationPageTests.test_page_includes_source_subject_and_no_network_or_auto_decision) ... ok
+test_partial_export_never_fills_pending_rows (tests.patient_eval.test_adjudication_page.AdjudicationPageTests.test_partial_export_never_fills_pending_rows) ... ok
+test_restore_rejects_stale_flags_missing_reason_and_unreviewed_rows (tests.patient_eval.test_adjudication_page.AdjudicationPageTests.test_restore_rejects_stale_flags_missing_reason_and_unreviewed_rows) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 1.010s
+
+OK

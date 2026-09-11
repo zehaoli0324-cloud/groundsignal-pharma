@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "scripts/audit_evaluation_contracts.py",
+    "--out",
+    "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit/docs/reviews/project-audit-v1/a1-evaluation/first-run"
+  ],
+  "cwd": "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit",
+  "python": "3.12.14",
+  "input_git_commit": "6dbd31de3bf9224e759cf7baf52e329f485e9b7f",
+  "input_git_tree": "cf4722f77c5779804d0c583e13e018c395ca07cd",
+  "file_sha256": {
+    "scripts/audit_evaluation_contracts.py": "70575e84c1fb581f801c45ba16f7ac6547d8675ee9358f1ab214256d1605be5d",
+    "scripts/patient_eval/cli.py": "44a85758a9df59f5e0f1cfd256444ec2b7e7e1dc8d68ef0ffce80dd769a5525c",
+    "scripts/patient_eval/scoring.py": "352f6a5300f458e18cdb4628b5377a8c88fe25cfaac56d6fbe55024cb7d22918",
+    "scripts/patient_eval/runner.py": "c23e8949a7f68790134808306150ac3cab7c781a18abece2984654776900a7d0",
+    "scripts/patient_eval/contracts.py": "1614ee86a24c43ce0164b4bc4957ea23531aa31ab67e94101a8f183f3c852269",
+    "scripts/patient_eval/readiness_statistics.py": "cf88d21aa3bced2e9e1f58c794dae25773824827ff32e2f84fc587ed7e9a1291",
+    "medical/patient-eval/readiness/statistics-fixture-v0.1.json": "68ae185717e4b92285f6c28bb3203102272fa29b8e24286a81081ca23b303d18"
+  },
+  "probe_script_uncommitted_at_first_execution": true,
+  "network": "blocked in process",
+  "input_scope": "authored synthetic marker plus existing synthetic statistics fixture",
+  "output": "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit/docs/reviews/project-audit-v1/a1-evaluation/first-run",
+  "expected_exit_code_at_audit_baseline": 2,
+  "actual_exit_code": 2,
+  "result": "FAIL"
+}

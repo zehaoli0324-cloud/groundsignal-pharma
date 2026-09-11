@@ -1,0 +1,9 @@
+{
+  "total": 17,
+  "passed": 9,
+  "failed": 8,
+  "production_fixes": 0,
+  "real_patient_reads": 0,
+  "external_model_calls": 0,
+  "real_vault_writes": 0
+}
