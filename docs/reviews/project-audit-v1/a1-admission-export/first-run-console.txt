@@ -1,0 +1,12 @@
+{
+  "scope": "A1 S1/S5/S9 interface helpers; synthetic only",
+  "checks": 16,
+  "invariants_passed": 8,
+  "invariants_failed": 8,
+  "project_audit_complete": false,
+  "project_tests_complete": false,
+  "training_candidate_rows_created": 0,
+  "real_case_runs": 0,
+  "model_calls": 0,
+  "real_receipts_created": 0
+}

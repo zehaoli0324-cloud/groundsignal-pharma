@@ -1,0 +1,254 @@
+{
+  "scope": "A1 S1/S5/S9 interface helpers; synthetic only",
+  "checks": 16,
+  "invariants_passed": 8,
+  "invariants_failed": 8,
+  "project_audit_complete": false,
+  "project_tests_complete": false,
+  "training_candidate_rows_created": 0,
+  "real_case_runs": 0,
+  "model_calls": 0,
+  "real_receipts_created": 0,
+  "inheritance": {
+    "default_v081": {
+      "run_index": "scripts/export_training_data_v061.py",
+      "find_run": "scripts/export_training_data_v061.py",
+      "write_jsonl": "scripts/export_training_data_v061.py",
+      "export_row": "scripts/export_training_data_v061.py"
+    },
+    "candidate_v091": {
+      "run_index": "scripts/export_training_data_v061.py",
+      "find_run": "scripts/export_training_data_v061.py",
+      "write_jsonl": "scripts/export_training_data_v061.py",
+      "export_row": "scripts/export_training_data_v061.py"
+    }
+  },
+  "rows": [
+    {
+      "probe_id": "duplicate_run_id",
+      "finding_id": "A1-008",
+      "expected": "Reject duplicate run IDs before indexing",
+      "actual": {
+        "error": null,
+        "selected": {
+          "run_id": "synthetic-run-A",
+          "case_id": "synthetic-case-A",
+          "model_id": "synthetic-model-A",
+          "response": "synthetic marker overwritten"
+        }
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "missing_explicit_run",
+      "finding_id": "A1-008",
+      "expected": "Explicit identity mismatch must not select another response",
+      "actual": {
+        "requested": {
+          "run_id": "synthetic-missing-run",
+          "case_id": "synthetic-case-A",
+          "model_id": "synthetic-model-A"
+        },
+        "selected": {
+          "run_id": "synthetic-run-A",
+          "case_id": "synthetic-case-A",
+          "model_id": "synthetic-model-A",
+          "response": "synthetic marker A"
+        },
+        "error": null
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "wrong_case_same_run",
+      "finding_id": "A1-008",
+      "expected": "Explicit identity mismatch must not select another response",
+      "actual": {
+        "requested": {
+          "run_id": "synthetic-run-A",
+          "case_id": "synthetic-case-B",
+          "model_id": "synthetic-model-A"
+        },
+        "selected": {
+          "run_id": "synthetic-run-A",
+          "case_id": "synthetic-case-A",
+          "model_id": "synthetic-model-A",
+          "response": "synthetic marker A"
+        },
+        "error": null
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "wrong_model_same_run",
+      "finding_id": "A1-008",
+      "expected": "Explicit identity mismatch must not select another response",
+      "actual": {
+        "requested": {
+          "run_id": "synthetic-run-A",
+          "case_id": "synthetic-case-A",
+          "model_id": "synthetic-model-B"
+        },
+        "selected": {
+          "run_id": "synthetic-run-A",
+          "case_id": "synthetic-case-A",
+          "model_id": "synthetic-model-A",
+          "response": "synthetic marker A"
+        },
+        "error": null
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "correct_run_binding",
+      "finding_id": null,
+      "expected": "Matching identity selects original response",
+      "actual": {
+        "selected": {
+          "run_id": "synthetic-run-A",
+          "case_id": "synthetic-case-A",
+          "model_id": "synthetic-model-A",
+          "response": "synthetic marker A"
+        }
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "existing_output_overwrite",
+      "finding_id": "A1-009",
+      "expected": "Existing output is preserved without explicit overwrite authorization",
+      "actual": {
+        "error": null,
+        "old_size": 38,
+        "new_size": 0,
+        "old_bytes_preserved": false
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "serialization_failure_preserves_output",
+      "finding_id": "A1-009",
+      "expected": "Serialization failure cannot destroy the previous file or publish a partial replacement",
+      "actual": {
+        "error": "TypeError",
+        "content_after_failure": "{\"audit_marker\": \"new generic record\"}\n",
+        "old_bytes_preserved": false
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "new_output_roundtrip",
+      "finding_id": null,
+      "expected": "Generic marker roundtrips in a new output file",
+      "actual": {
+        "content": {
+          "audit_marker": "roundtrip"
+        }
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "unapproved_candidate_skipped",
+      "finding_id": null,
+      "expected": "Draft candidate returns no training row",
+      "actual": {
+        "returned": null
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "exact_snapshot_authenticated",
+      "finding_id": null,
+      "expected": "Explicit expected bytes are hashed and parsed consistently",
+      "actual": {
+        "parsed": {
+          "audit_marker": "synthetic pinned bytes"
+        },
+        "sha256": "6989c5a67f65da408c99eeff122036ab0ebd6754a7c5d860456e4caba3ed01ed"
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "modified_snapshot_rejected",
+      "finding_id": null,
+      "expected": "Different bytes fail the original expected digest",
+      "actual": {
+        "rejected": true
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "off_repository_authority_rejected",
+      "finding_id": null,
+      "expected": "Off-repository authority path is rejected",
+      "actual": {
+        "rejected": true
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "failed_attestation_disallows",
+      "finding_id": "A1-010",
+      "expected": "Any failed current check makes authoring_allowed false",
+      "actual": {
+        "fresh_authoring_allowed": true,
+        "admission_decision": "FAIL_CLOSED",
+        "guard_gate": "FAIL",
+        "failures": [
+          "CURRENT_ATTESTATION_NOT_READY"
+        ],
+        "gold_approved": false,
+        "s6_automatic_trust": "BLOCKED",
+        "mock_scope": "subcheck statuses and receipt acceptance only; not end-to-end authority validation"
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "failed_control_plane_disallows",
+      "finding_id": "A1-010",
+      "expected": "Any failed current check makes authoring_allowed false",
+      "actual": {
+        "fresh_authoring_allowed": true,
+        "admission_decision": "FAIL_CLOSED",
+        "guard_gate": "FAIL",
+        "failures": [
+          "CURRENT_CONTROL_PLANE_NOT_READY"
+        ],
+        "gold_approved": false,
+        "s6_automatic_trust": "BLOCKED",
+        "mock_scope": "subcheck statuses and receipt acceptance only; not end-to-end authority validation"
+      },
+      "invariant_pass": false
+    },
+    {
+      "probe_id": "ready_composition_authoring_only",
+      "finding_id": null,
+      "expected": "Ready composition permits authoring but never clinical gold or S6",
+      "actual": {
+        "fresh_authoring_allowed": true,
+        "admission_decision": "ALLOW_AFTER_VERIFIED_FREEZE",
+        "guard_gate": "PASS",
+        "failures": [],
+        "gold_approved": false,
+        "s6_automatic_trust": "BLOCKED",
+        "mock_scope": "subcheck statuses and receipt acceptance only; not end-to-end authority validation"
+      },
+      "invariant_pass": true
+    },
+    {
+      "probe_id": "missing_receipt_blocks",
+      "finding_id": null,
+      "expected": "Missing receipt keeps authoring blocked",
+      "actual": {
+        "fresh_authoring_allowed": false,
+        "admission_decision": "BLOCKED_NOT_FROZEN",
+        "guard_gate": "PASS",
+        "failures": [],
+        "gold_approved": false,
+        "s6_automatic_trust": "BLOCKED",
+        "mock_scope": "subcheck statuses and receipt acceptance only; not end-to-end authority validation"
+      },
+      "invariant_pass": true
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "project-audit-findings/v0.1",
+  "stage": "A1 second admission/export batch",
+  "project_audit_complete": false,
+  "project_tests_complete": false,
+  "findings": [
+    {
+      "finding_id": "A1-008",
+      "module": "S9",
+      "severity": "P1",
+      "title": "导出前关联运行记录时可串接错误回答",
+      "path": "scripts/export_training_data_v061.py",
+      "symbol": "run_index:405; find_run:416; main:667",
+      "probe_ids": [
+        "duplicate_run_id",
+        "missing_explicit_run",
+        "wrong_case_same_run",
+        "wrong_model_same_run"
+      ],
+      "trigger": "重复run_id，显式run_id缺失，或评分的病例/模型与对应运行不符",
+      "expected": "先查重；显式编号不存在应拒绝；同时核对病例、模型和运行身份",
+      "actual": "重复后行覆盖前行；显式编号找不到时改按病例/模型选择；已找到编号时不核对病例与模型",
+      "cause": "共享索引和关联函数不校验唯一性与关联键一致性；默认v0.8.1和候选v0.9.1均继承同一实现",
+      "cause_confidence": "high for demonstrated helper/result composition behavior",
+      "status": "OPEN",
+      "fix_applied": false,
+      "repair_plan": "先修关联函数和版本绑定；只在未提供运行编号且仅有唯一合法候选时允许兼容查询",
+      "validation": "first-run/observations.json",
+      "affected_remote_commit": "9acc90af1f6b402c1b7efd7adb2d502c7821c4e5",
+      "probe_scope": "直接执行默认入口继承的helper；未调用批准导出、未替换认证、未生成训练行",
+      "historical_result_corruption_proven": false
+    },
+    {
+      "finding_id": "A1-009",
+      "module": "S9",
+      "severity": "P1",
+      "title": "输出可被覆盖，失败可能留下部分新内容",
+      "path": "scripts/export_training_data_v061.py",
+      "symbol": "write_jsonl:639; main:674-676",
+      "probe_ids": [
+        "existing_output_overwrite",
+        "serialization_failure_preserves_output"
+      ],
+      "trigger": "指定已存在的输出文件，或写入时发生异常",
+      "expected": "显式选择覆盖策略；失败应保留旧结果且不发布不完整批次",
+      "actual": "空列表把38字节旧文件清空；helper序列化报错后只剩第一条新记录",
+      "cause": "直接以w模式打开；没有临时文件提交或新目录要求；main依次写两个文件后才生成清单",
+      "cause_confidence": "high for demonstrated helper/result composition behavior",
+      "status": "OPEN",
+      "fix_applied": false,
+      "repair_plan": "默认拒绝已有目录；新目录先完成验证和临时写入，再发布带摘要清单；补I/O故障及批次原子性回归",
+      "validation": "first-run/observations.json",
+      "affected_remote_commit": "9acc90af1f6b402c1b7efd7adb2d502c7821c4e5",
+      "probe_scope": "临时目录中的通用标记文件；序列化反例是helper级，不声称完整CLI的JSON输入可产生Python object；磁盘/跨文件故障尚待A2验证",
+      "historical_result_corruption_proven": false
+    },
+    {
+      "finding_id": "A1-010",
+      "module": "S5",
+      "severity": "P2",
+      "title": "冻结检查失败与允许编写标志可同时出现",
+      "path": "scripts/s5_v091_freeze_control.py",
+      "symbol": "evaluate_admission:315-342",
+      "probe_ids": [
+        "failed_attestation_disallows",
+        "failed_control_plane_disallows"
+      ],
+      "trigger": "冻结回执子检查成功，但当前证明或控制面检查失败",
+      "expected": "所有授权字段均应拒绝，不能依赖调用者在冲突字段间选择",
+      "actual": "admission_decision=FAIL_CLOSED、guard_gate=FAIL，同时fresh_authoring_allowed=true",
+      "cause": "allowed计算未包含前面累积的failures；分支只修正decision/gate而未修正allowed",
+      "cause_confidence": "high for demonstrated helper/result composition behavior",
+      "status": "OPEN",
+      "fix_applied": false,
+      "repair_plan": "由同一最终判定派生所有字段，覆盖当前证明失败、控制面失败、回执缺失及协议错误",
+      "validation": "first-run/observations.json",
+      "affected_remote_commit": "9acc90af1f6b402c1b7efd7adb2d502c7821c4e5",
+      "probe_scope": "对子检查结果与回执验证使用明确的合成桩，只复现结果组合逻辑；现有CLI按guard_gate返回失败，未证明真实准入绕过",
+      "historical_result_corruption_proven": false
+    }
+  ]
+}

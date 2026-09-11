@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "unittest",
+    "tests.patient_eval.test_source_intake",
+    "-v"
+  ],
+  "cwd": "/workspace/scratch/52ba3ac24ecb/groundsignal-pr19-audit",
+  "python": "3.12.14",
+  "input_git_commit": "4a49e41e5c1ac5079f084a32f6ad198679ca0ced",
+  "input_git_tree": "20f1cc5594e6f796fdd5162ddf4c9438947ad07f",
+  "file_sha256": {
+    "scripts/patient_eval/source_intake.py": "adc711302c0aca8f822d467332d4dda1cbf67d8dcba672759776c699c3e60d97",
+    "tests/patient_eval/test_source_intake.py": "51a8f024c6a8e29a6338072f5692779c1552534e8273770846839573e601e76e"
+  },
+  "input_scope": "existing authored synthetic fixtures; intake payload stubbed, no download",
+  "network_required": false,
+  "output": "docs/reviews/project-audit-v1/a1-admission-export/source-intake-tests",
+  "expected_exit_code": 0,
+  "actual_exit_code": 0,
+  "result": "PASS"
+}
