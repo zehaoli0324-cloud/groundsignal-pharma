@@ -1,17 +1,87 @@
-name: Medical dialogue benchmark
+name: Benchmark Quality
 on:
   pull_request:
-    paths:
-      - 'scripts/medical_dialogue_bench/**'
-      - 'scripts/patient_eval/**'
-      - 'benchmark/medical-dialogue-v1/**'
-      - 'tests/medical_dialogue_bench/**'
-      - '.github/workflows/medical-dialogue-benchmark-ci.yml'
   workflow_dispatch:
+    inputs:
+      model_review:
+        description: '运行收费的模型辅助题目评审（每家族一次，非临床批准）'
+        type: boolean
+        default: false
+      model:
+        description: '账户可用的确切模型 ID；启用辅助评审时必填'
+        type: string
+        default: ''
 permissions:
   contents: read
+concurrency:
+  group: benchmark-quality-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+env:
+  PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
 jobs:
-  offline:
+  static:
+    name: Static checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m scripts.benchmark_checks static --out "$RUNNER_TEMP/quality-static"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quality-static
+          path: ${{ runner.temp }}/quality-static
+          if-no-files-found: error
+  autoreview:
+    name: Autoreview (rules)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m scripts.benchmark_checks autoreview --out "$RUNNER_TEMP/quality-autoreview"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quality-autoreview
+          path: ${{ runner.temp }}/quality-autoreview
+          if-no-files-found: error
+  validation:
+    name: Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Boundary tests, planted defects, oracle and no-op replay
+        run: python -m scripts.benchmark_checks validation --out "$RUNNER_TEMP/quality-validation"
+      - name: Docker build
+        run: docker build -f benchmark/medical-dialogue-v1/Dockerfile -t medical-dialogue-bench:test .
+      - name: Container oracle and no-op integrity
+        run: |
+          mkdir -p "$RUNNER_TEMP/quality-docker"
+          for backend in oracle noop; do
+            docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$RUNNER_TEMP/quality-docker:/output" medical-dialogue-bench:test run --backend "$backend" --out "/output/$backend"
+            docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$RUNNER_TEMP/quality-docker:/output" medical-dialogue-bench:test verify --run "/output/$backend" --out "/output/$backend-report.json"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quality-validation
+          path: |
+            ${{ runner.temp }}/quality-validation
+            ${{ runner.temp }}/quality-docker
+          if-no-files-found: error
+  model-review:
+    name: Model-assisted review (advisory)
+    if: github.event_name == 'workflow_dispatch' && inputs.model_review
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -19,19 +89,47 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Regression and boundary checks
-        run: |
-          python -m unittest discover -s tests/medical_dialogue_bench -v
-          python -m unittest discover -s tests/patient_eval -q
-      - name: Build container
-        run: docker build -f benchmark/medical-dialogue-v1/Dockerfile -t medical-dialogue-bench:test .
-      - name: Oracle and no-op in offline containers
-        run: |
-          mkdir -p "$RUNNER_TEMP/medical-dialogue"
-          docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$RUNNER_TEMP/medical-dialogue:/output" medical-dialogue-bench:test run --backend oracle --out /output/oracle
-          docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$RUNNER_TEMP/medical-dialogue:/output" medical-dialogue-bench:test run --backend noop --out /output/noop
-          docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$RUNNER_TEMP/medical-dialogue:/output" medical-dialogue-bench:test verify --run /output/oracle --out /output/oracle-report.json
+      - name: Review base cards with explicit model
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          REVIEW_MODEL: ${{ inputs.model }}
+        run: python -m scripts.benchmark_checks model-review --model "$REVIEW_MODEL" --out "$RUNNER_TEMP/quality-model-review"
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: medical-dialogue-offline-runs
-          path: ${{ runner.temp }}/medical-dialogue
+          name: quality-model-review
+          path: ${{ runner.temp }}/quality-model-review
+          if-no-files-found: error
+  automated-checks:
+    name: Automated Checks
+    if: always()
+    needs: [static, autoreview, validation, model-review]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Publish aggregate summary and enforce mechanical results
+        env:
+          STATIC_RESULT: ${{ needs.static.result }}
+          AUTOREVIEW_RESULT: ${{ needs.autoreview.result }}
+          VALIDATION_RESULT: ${{ needs.validation.result }}
+          MODEL_RESULT: ${{ needs.model-review.result }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python3 - <<'PY'
+          import os
+          items=[('Static checks','STATIC_RESULT'),('Autoreview (rules)','AUTOREVIEW_RESULT'),('Validation (tests + Docker)','VALIDATION_RESULT')]
+          ok=all(os.environ[key]=='success' for _,key in items)
+          icons={'success':'✅','failure':'❌','cancelled':'⏹️','skipped':'⚪'}
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+              f.write('## Automated Checks '+('✅' if ok else '❌')+'\n\n')
+              f.write('Mechanical checks passed.\n\n' if ok else 'Mechanical checks did not all pass.\n\n')
+              for name,key in items:
+                  state=os.environ[key]
+                  f.write(f'- {icons.get(state,"❓")} {name}: **{state}**\n')
+              state=os.environ['MODEL_RESULT']
+              label='未运行（默认关闭）' if state=='skipped' else state+'（辅助意见，不计入机械通过）'
+              f.write(f'- {icons.get(state,"❓")} Model-assisted review: {label}\n\n')
+              f.write('临床复核：待完成。参考对话能运行、空白评分保持未知，不等于参考解法已获临床满分或空操作已被临床评分器判错。\n\n')
+              f.write(f'提交 `{os.environ["PR_HEAD_SHA"]}` · [逐项日志与可下载报告]({os.environ["RUN_URL"]})\n')
+          raise SystemExit(0 if ok else 1)
+          PY
