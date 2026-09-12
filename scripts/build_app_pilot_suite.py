@@ -141,6 +141,10 @@ def main():
     payload=dict(suite=loaded,plan=plan,plan_sha256=app_pilot.scenario_digest(plan),
                  case_hashes={c['scenario_id']:app_pilot.scenario_digest(c) for c in loaded['scenarios']})
     (OUT/'START_HERE.html').write_text(app_pilot.render_page('collector.html',payload),encoding='utf-8')
+    # Keep the previously published secondary entry point byte-identical.
+    (OUT/'start-here').mkdir(exist_ok=True)
+    (OUT/'start-here/collector.html').write_bytes((OUT/'START_HERE.html').read_bytes())
+    (OUT/'start-here/plan.json').write_bytes((OUT/'smoke-plan.json').read_bytes())
 
 
 if __name__=='__main__': main()

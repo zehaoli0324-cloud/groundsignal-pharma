@@ -117,3 +117,6 @@ python -m scripts.patient_eval compare --rows /path/to/paired-rows.json --baseli
 人工采集到同条件的一项输入干预后，可以用 `evaluate --controls /path/to/controls.json` 提交对照。该文件以基线 `session_id` 为键、控制记录数组为值；黑盒记录使用 `kind="blackbox_behavior_probe"`，并提供 `control_id`、`criterion_id`、`factor`、`changed_turn_id` 和完整 `controlled_session`。本版接受 `correction_restated`、`ambiguity_clarified`、`evidence_supplied`、`pressure_removed` 四种探针。除一个指定用户消息外，历史必须相同；平台、版本、模式、协议也必须匹配且新建会话。符合条件的失败转通过只支持行为敏感性假设，仍不能确认内部根因，也不证明干预已提前注册或具有总体有效性。
 
 现有案例准入、独立测试污染检查、临床审核和训练导出机制保持独立；本子系统只接受开发分区，持续集成成功不能放行真实患者服务。
+# 小荷健康与蚂蚁健康实际应用试评入口
+
+新增 [首轮对话评测包](app-pilot-v1/README.md)：6个合成家族、12张题卡、离线采集页面、逐轮评审及双人分歧汇总。先采6段实际应用对话；目前应用结果和临床批准均为0。与下方既有开发材料分别统计。
