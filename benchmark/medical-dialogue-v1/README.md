@@ -1,6 +1,6 @@
-# GroundSignal：GPT多轮医学对话评测 v1
+# GroundSignal：GPT多轮医学对话评测 v1.1
 
-一次启动，逐题建立独立会话；每题最多6次自然回答，按GPT实际追问披露事实，结束后切换下一题。可另加1次解释探查。当前12张公开合成题卡来自6个基础情境及各自的无关文本干扰版，不是12个独立真实病例，也不是未暴露测试集。
+一次启动，逐题建立独立会话；每题最多6次自然回答，按GPT实际追问披露事实，结束后切换下一题。可另加1次解释探查。当前14张公开合成题卡来自7个基础情境及各自的无关文本干扰版，不是14个独立真实病例，也不是未暴露测试集。
 
 ## 交付内容
 
@@ -16,7 +16,7 @@
 | scripts/medical_dialogue_bench/judge.py | 可选模型辅助评分，逐行只提供截至当轮的信息 |
 | Dockerfile / benchmark.toml | 容器入口及任务配置说明 |
 
-六类能力情境：代问对象与否定、复方药成分未知、跨机构报告、相互不一致的检测证据、时间更正与因果判断、摘要支持范围与个人疗效。实际覆盖见题卡；不宣称覆盖全部医学能力。
+原有六类能力情境：代问对象与否定、复方药成分未知、跨机构报告、相互不一致的检测证据、时间更正与因果判断、摘要支持范围与个人疗效。实际覆盖见题卡；不宣称覆盖全部医学能力。
 
 ## 先跑离线参考解法
 
@@ -43,10 +43,10 @@ python -m scripts.medical_dialogue_bench run --backend stale --out medical/patie
 将密钥在运行机器的环境变量`OPENAI_API_KEY`中配置好，不写进题目、脚本、仓库或聊天。先核对账户中实际可用的模型标识，明确传给`--model`。不硬编码或自动替换用户所选GPT型号。
 
 ```bash
-python -m scripts.medical_dialogue_bench run --backend openai --model YOUR_ACTUAL_MODEL_ID --max-calls 72 --max-output-tokens 2048 --out medical/patient-eval/local/gpt-run1
+python -m scripts.medical_dialogue_bench run --backend openai --model YOUR_ACTUAL_MODEL_ID --max-calls 84 --max-output-tokens 2048 --out medical/patient-eval/local/gpt-run1
 ```
 
-上面的`YOUR_ACTUAL_MODEL_ID`必须替换为真实型号。首批12题自然阶段最多72次被测调用；若开启`--probe`，将`--max-calls`至少设为84。`--repeats 3`的自然阶段上限为216次。启动时校验最坏情况预算，不够则不发送请求。追加评分调用另算。
+上面的`YOUR_ACTUAL_MODEL_ID`必须替换为真实型号。首批14题自然阶段最多84次被测调用；若开启`--probe`，将`--max-calls`至少设为98。`--repeats 3`的自然阶段上限为252次。启动时校验最坏情况预算，不够则不发送请求。追加评分调用另算。
 
 每次请求只包含固定的简短助手角色说明与本题截至当轮的用户/助手文本。题名、事实编号、答案、判据和其他题不发给GPT。不同题不复用会话标识。固定角色说明不提示具体待测错误。
 
@@ -72,9 +72,9 @@ python -m scripts.medical_dialogue_bench verify --run medical/patient-eval/local
 python -m scripts.medical_dialogue_bench judge --run medical/patient-eval/local/gpt-run1 --model YOUR_JUDGE_MODEL_ID --reviewer model-draft-A --max-calls 200 --out medical/patient-eval/local/model-review.json
 ```
 
-judge按实际已触发的“回答×判据”逐条调用；超过预算时不调用。最多完整自然6轮的12题约300行，含探查可更多，实际数量在`review`输出中查看，再自行设置预算。每条judge只见该回答及此前历史、当前判据和参考来源简介，不见未来信息、隐藏事实表或oracle。judge没有浏览工具，不能自行核实引用来源；医学存疑必须保留insufficient并人工核对。格式错误、假引文等无法通过校验的结果保持未评。模型辅助标签始终暂定，不提供临床认证；应记录与被测模型是否同源。
+judge按实际已触发的“回答×判据”逐条调用；超过预算时不调用。最多完整自然6轮的14题约300行，含探查可更多，实际数量在`review`输出中查看，再自行设置预算。每条judge只见该回答及此前历史、当前判据和参考来源简介，不见未来信息、隐藏事实表或oracle。judge没有浏览工具，不能自行核实引用来源；医学存疑必须保留insufficient并人工核对。格式错误、假引文等无法通过校验的结果保持未评。模型辅助标签始终暂定，不提供临床认证；应记录与被测模型是否同源。
 
-所有报告和评审文件放在run目录外。run目录只保存plan.json、12个会话JSON及逐请求日志；额外或缺失会话会被verifier拒绝。
+所有报告和评审文件放在run目录外。run目录只保存plan.json、14个会话JSON及逐请求日志；额外或缺失会话会被verifier拒绝。
 
 ## 信息披露与停止规则
 
@@ -116,6 +116,8 @@ python -m unittest discover -s tests/medical_dialogue_bench -v
 python -m unittest discover -s tests/patient_eval -q
 ```
 
-测试涵盖12题独立会话、更正、未评分不通过、假引文、未来信息、缺题与日志篡改、调用预算、超时、无密钥、API响应解析及judge输入边界。详见VALIDATION.md。
+测试涵盖14题独立会话、更正、未评分不通过、假引文、未来信息、缺题与日志篡改、调用预算、超时、无密钥、API响应解析及judge输入边界。详见VALIDATION.md。
 
-下一阶段：真实GPT试跑→复核患者映射和停止行为→独立医学评分→从错误出发补充独立病例→受控修复与冻结回归。当前只有6个独立情境，不能对全部医学能力作普遍结论。
+下一阶段：真实GPT试跑→复核患者映射和停止行为→独立医学评分→从错误出发补充独立病例→受控修复与冻结回归。当前只有7个独立情境，不能对全部医学能力作普遍结论。
+
+新增AP07：腹痛分诊与就医障碍，E1在严重疼痛F3披露且至少两次回答后触发；参考解法包含就医障碍后的追问与行动建议。具体医学标准待临床审核，不能据此证明模型能避免过度分诊。

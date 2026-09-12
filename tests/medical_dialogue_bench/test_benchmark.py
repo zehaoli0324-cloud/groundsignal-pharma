@@ -23,7 +23,7 @@ class BenchmarkTests(unittest.TestCase):
         batch(self.suite,self.sha,self.patients,self.asset,Oracle(mode),self.out,backend=mode,model='authored-'+mode,**kwargs)
         return verify(self.out,self.suite,self.sha,self.patients,self.asset)
     def test_oracle_runs_twelve_independent_cases(self):
-        sessions,r=self.run_batch();self.assertEqual(r['sessions'],12);self.assertEqual(r['statuses'],{'completed':12})
+        sessions,r=self.run_batch();self.assertEqual(r['sessions'],14);self.assertEqual(r['statuses'],{'completed':14})
         for s in sessions:
             self.assertEqual(len(s['requests'][0]['messages']),2)
             self.assertEqual(s['requests'][0]['messages'][0]['content'],POLICY)
@@ -64,7 +64,7 @@ class BenchmarkTests(unittest.TestCase):
         with self.assertRaises(ValueError):batch(self.suite,self.sha,self.patients,self.asset,lambda x:calls.append(x),self.out,backend='oracle',model='fixture',max_calls=1)
         self.assertFalse(calls)
     def test_probe_has_separate_phase(self):
-        sessions,_=self.run_batch(probe=True,max_calls=84)
+        sessions,_=self.run_batch(probe=True,max_calls=98)
         self.assertTrue(all(s['disclosure_log'][-1]['phase']=='probe' for s in sessions))
     def test_target_timeout_preserved(self):
         cfg=dict(model='fixture',suite_sha256=self.sha,asset_sha256=self.asset,backend='oracle',probe=False)

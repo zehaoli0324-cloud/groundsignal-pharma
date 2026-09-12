@@ -17,5 +17,7 @@ class Oracle:
                 text='先后发生不能单独证明因果，需要继续核对时间。'
             elif policy['opening_key']=='保健品后头痛' and self.mode=='stale':
                 text='头痛是在周三服用保健品之后首次出现，因此就是保健品造成的。'
+            elif policy['opening_key']=='昨天开始肚子' and answers==2:
+                text='不建议等到明天，应现在去急诊评估；不能仅凭聊天确诊。请问所在地区和家人支持情况？'
             else:text=policy['answer']
         return dict(content=text,error=None,usage={},provider_model='authored-'+self.mode)
