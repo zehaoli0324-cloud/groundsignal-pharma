@@ -1,0 +1,15 @@
+name = "GroundSignal Medical Dialogue"
+version = "1.0.0-development"
+protocol = "medical-dialogue/v1"
+language = "zh"
+case_cards = 12
+independent_families = 6
+source = "synthetic"
+exposure = "public_development"
+clinical_approval = false
+max_natural_answers = 6
+max_probe_answers = 1
+candidate_access = "visible role/content messages via remote API only"
+semantic_grading = "bound provisional review; optional model-assisted draft"
+oracle_role = "authored execution witness; not a medical gold or string matcher"
+verifier = "python -m scripts.medical_dialogue_bench verify --run RUN_DIRECTORY"

@@ -1,0 +1,11 @@
+**
+!scripts/
+!scripts/**
+!tests/
+!tests/medical_dialogue_bench/
+!tests/medical_dialogue_bench/**
+!benchmark/
+!benchmark/medical-dialogue-v1/
+!benchmark/medical-dialogue-v1/**
+**/__pycache__/**
+**/*.pyc

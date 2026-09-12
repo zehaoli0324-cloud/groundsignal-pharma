@@ -1,0 +1,37 @@
+name: Medical dialogue benchmark
+on:
+  pull_request:
+    paths:
+      - 'scripts/medical_dialogue_bench/**'
+      - 'scripts/patient_eval/**'
+      - 'benchmark/medical-dialogue-v1/**'
+      - 'tests/medical_dialogue_bench/**'
+      - '.github/workflows/medical-dialogue-benchmark-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Regression and boundary checks
+        run: |
+          python -m unittest discover -s tests/medical_dialogue_bench -v
+          python -m unittest discover -s tests/patient_eval -q
+      - name: Build container
+        run: docker build -f benchmark/medical-dialogue-v1/Dockerfile -t medical-dialogue-bench:test .
+      - name: Oracle and no-op in offline containers
+        run: |
+          mkdir -p "$RUNNER_TEMP/medical-dialogue"
+          docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$RUNNER_TEMP/medical-dialogue:/output" medical-dialogue-bench:test run --backend oracle --out /output/oracle
+          docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$RUNNER_TEMP/medical-dialogue:/output" medical-dialogue-bench:test run --backend noop --out /output/noop
+          docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$RUNNER_TEMP/medical-dialogue:/output" medical-dialogue-bench:test verify --run /output/oracle --out /output/oracle-report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: medical-dialogue-offline-runs
+          path: ${{ runner.temp }}/medical-dialogue

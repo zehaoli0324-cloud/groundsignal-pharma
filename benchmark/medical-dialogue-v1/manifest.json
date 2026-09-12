@@ -1,0 +1,10 @@
+{
+  "version": "medical-dialogue/v1",
+  "clinical_approval": false,
+  "files": {
+    "suite.json": "4a57d3cd846672fa8a9131f91d89b89fabdfb668e507cc0e257d660dd2284354",
+    "patient-patterns.json": "71045c86741c195d31e7fb608c55ed39db4f0584da95674c6bd3dff50bac1501",
+    "oracle-policy.json": "ba24c331636ae7bfacd4651a2d2c9c1fd053cf6f9d666a0780e61303378c86c3",
+    "RUBRIC.md": "a2896bf2aa83e39971e6599b3480886fbb2c7b0e574a2df3a1121ded4b94c19d"
+  }
+}
