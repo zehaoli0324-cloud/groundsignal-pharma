@@ -1,0 +1,16 @@
+[
+  {"name":"missing_title","path":"/scenarios/0/title","remove":true,"expected":"field_type"},
+  {"name":"unknown_field","path":"/scenarios/0/invented_score","value":100,"expected":"unknown_field"},
+  {"name":"duplicate_case","path":"/scenarios/1/scenario_id","value":"AP01-base","expected":"duplicate_case"},
+  {"name":"duplicate_fact","path":"/scenarios/0/facts/1/id","value":"F1","expected":"duplicate_fact"},
+  {"name":"unknown_future_fact","path":"/scenarios/0/criteria/0/requires","value":["F999"],"expected":"criterion_requires"},
+  {"name":"unknown_source","path":"/scenarios/0/criteria/0/source_ids","value":["missing-source"],"expected":"criterion_source"},
+  {"name":"wrong_time_boundary","path":"/scenarios/0/criteria/0/boundary","value":"all_future_facts","expected":"temporal_boundary"},
+  {"name":"string_boolean","path":"/scenarios/0/criteria/0/critical","value":"false","expected":"field_type"},
+  {"name":"changed_pair_fact","path":"/scenarios/1/facts/0/answer","value":"修改后的另一位患者。","expected":"single_factor_pair"},
+  {"name":"unreachable_event","path":"/scenarios/12/events/0/min_assistant_turns","value":6,"expected":"event_reachable"},
+  {"name":"missing_pressure_prerequisite","path":"/scenarios/12/events/0/requires","value":[],"expected":"event_prerequisite"},
+  {"name":"empty_scoring","path":"/scenarios/0/criteria","value":[],"expected":"empty_case"},
+  {"name":"false_clinical_approval","path":"/clinical_approval","value":true,"expected":"development_scope"},
+  {"name":"invalid_date","path":"/sources/0/accessed","value":"2026-99-99","expected":"source_date"}
+]
