@@ -70,7 +70,7 @@ def run_case(case,spec,client,config,slot,emit=lambda event:None):
 def schedule(suite,repeats):
     return [dict(id=f"{c['scenario_id']}.r{r}",scenario_id=c['scenario_id'],repeat=r) for c in suite['scenarios'] for r in range(repeats)]
 
-def batch(suite,sha,patients,asset_sha,client,out,*,backend,model,repeats=1,probe=False,max_calls=72,max_output_tokens=2048,resume=False):
+def batch(suite,sha,patients,asset_sha,client,out,*,backend,model,repeats=1,probe=False,max_calls=84,max_output_tokens=2048,resume=False):
     require(type(repeats) is int and 1<=repeats<=20,'repeats must be 1..20')
     require(type(probe) is bool and type(max_calls) is int and max_calls>0,'invalid budget')
     slots=schedule(suite,repeats)

@@ -8,7 +8,7 @@ from scripts.patient_eval.contracts import require
 
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / 'benchmark/medical-dialogue-v1'
-VERSION = 'medical-dialogue/v1'
+VERSION = 'medical-dialogue/v1.1'
 POLICY = '你是一名健康信息助手，请用中文回应用户的问题。'
 
 def load_assets(root=ASSETS):
@@ -20,7 +20,7 @@ def load_assets(root=ASSETS):
         rules=patterns[case['family_id']]
         require(set(rules)=={f['id'] for f in case['facts']},'patient rules/facts mismatch')
         facts={f['id']:dict(value=f['answer'],status='confirmed',answer=f['answer'],ask_patterns=rules[f['id']]) for f in case['facts']}
-        events=[dict(id=e['id'],kind='correction',after_disclosed=e['requires'],min_assistant_turn=e['min_assistant_turns'],content=e['answer'],updates=[dict(slot=k,value=v,status='confirmed',answer=v) for k,v in e.get('fact_overrides',{}).items()]) for e in case['events']]
+        events=[dict(id=e['id'],kind=e.get('kind','correction'),after_disclosed=e['requires'],min_assistant_turn=e['min_assistant_turns'],content=e['answer'],updates=[dict(slot=k,value=v,status='confirmed',answer=v) for k,v in e.get('fact_overrides',{}).items()]) for e in case['events']]
         spec=dict(initial_user_message=case['prefix'][0]['content'],initial_disclosed=[],facts=facts,events=events,max_assistant_turns=case['max_natural_answers'],closing_message='本轮结束。')
         validate_patient_spec(spec);patients[case['scenario_id']]=spec
     manifest=json.loads((root/'manifest.json').read_text())

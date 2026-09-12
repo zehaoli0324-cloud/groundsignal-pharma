@@ -9,12 +9,12 @@ from .verifier import verify
 
 
 def main(argv=None):
-    parser=argparse.ArgumentParser(description='12-card synthetic medical dialogue benchmark')
+    parser=argparse.ArgumentParser(description='14-card synthetic medical dialogue benchmark')
     sub=parser.add_subparsers(dest='command',required=True)
     sub.add_parser('validate')
     run=sub.add_parser('run');run.add_argument('--backend',choices=['oracle','noop','naive','stale','openai'],default='oracle')
     run.add_argument('--model');run.add_argument('--out',required=True);run.add_argument('--repeats',type=int,default=1)
-    run.add_argument('--probe',action='store_true');run.add_argument('--max-calls',type=int,default=72)
+    run.add_argument('--probe',action='store_true');run.add_argument('--max-calls',type=int,default=84)
     run.add_argument('--max-output-tokens',type=int,default=2048);run.add_argument('--resume',action='store_true')
     run.add_argument('--key-env',default='OPENAI_API_KEY')
     check=sub.add_parser('verify');check.add_argument('--reviews',nargs='*');check.add_argument('--out')
@@ -25,7 +25,7 @@ def main(argv=None):
     args=parser.parse_args(argv)
     try:
         suite,sha,patients,asset_sha=load_assets()
-        if args.command=='validate':result=dict(cases=len(suite['scenarios']),families=6,asset_sha256=asset_sha,clinical_approval=False)
+        if args.command=='validate':result=dict(cases=len(suite['scenarios']),families=len({c["family_id"] for c in suite["scenarios"]}),asset_sha256=asset_sha,clinical_approval=False)
         elif args.command=='run':
             if args.backend=='openai':
                 from .client import ResponsesClient
