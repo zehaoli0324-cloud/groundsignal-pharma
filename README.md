@@ -4,6 +4,8 @@
 
 [运行示例](#快速运行) · [进度与交接](docs/handoffs/2026-09-09-candidate-review-handoff.md) · [任务书](docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)
 
+**新增：**[小荷健康与蚂蚁健康首轮对话评测](medical/patient-eval/app-pilot-v1/README.md)——12张合成题卡、可直接打开的采集页面、逐轮评审和分歧汇总。先采6段实际应用对话；当前尚无应用实测结果。
+
 项目围绕三个问题开发：模型用了什么证据？错误发生在哪一步？修改后是否解决了问题？目前已实现证据处理、受控案例检查和患者多轮评测原型。
 
 我负责问题定义、医学约束、实验设计与迭代验收；代码实现和测试使用智能体辅助开发。

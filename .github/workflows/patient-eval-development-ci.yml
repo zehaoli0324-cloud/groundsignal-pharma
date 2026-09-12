@@ -28,6 +28,11 @@ jobs:
           python-version: '3.11'
       - name: Validate contracts, algorithms and attribution boundaries
         run: python -m unittest discover -s tests/patient_eval -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate app collector export and review page handlers
+        run: node tests/patient_eval/app_pilot_pages.cjs
       - name: Run offline synthetic intervention replay
         run: python -m scripts.patient_eval demo --out /tmp/patient-eval-demo
       - name: Validate synthetic manual import
