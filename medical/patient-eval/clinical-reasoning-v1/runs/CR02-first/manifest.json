@@ -1,0 +1,41 @@
+{
+  "batch": "CR02-first",
+  "recorded_at": "2026-09-12T03:33:00.235142+00:00",
+  "python": "3.12.14",
+  "base_commit": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+  "verification_scope": "isolated new module only; not full-repository regression",
+  "tests_command": [
+    "python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/clinical_reasoning",
+    "-v"
+  ],
+  "tests_exit": 0,
+  "tests_run": 12,
+  "demo_exit": 0,
+  "scripted_sessions": 4,
+  "clinical_scored_sessions": 0,
+  "model_calls": 0,
+  "expert_reviews": 0,
+  "hashes": {
+    "docs/taskbooks/clinical-reasoning-attribution-v1.0.md": "709e50781430eb90fbf65532dbe84548adecceae7b6a6b5b23432c3430c3d1fb",
+    "medical/patient-eval/STAGE_DECOMPOSITION.md": "b5f981ff192e1df74adbde0366236d17280303bba1f0006ae53f6816a2b3bc62",
+    "medical/patient-eval/clinical-reasoning-v1/CLINICAL_REVIEW.md": "57cf57cab209587da0eeee875352134438d0aa82874c404caaac4cb2f0dd5686",
+    "medical/patient-eval/clinical-reasoning-v1/ITERATION_LOG.md": "293fb0d89e3e9d3eca88f9c694b9037d07b81d189ef8258bbbd9cded9a6c3c38",
+    "medical/patient-eval/clinical-reasoning-v1/PROGRESS.json": "75892f3aeda788f297ff4eb56e1aa4f980399d358ad9553fdc5b0580105b6d72",
+    "medical/patient-eval/clinical-reasoning-v1/README.md": "b965fc27ad22d43eb7f0e388b727b2184c56b2d6dd167612c6faad02f8433175",
+    "medical/patient-eval/clinical-reasoning-v1/cases/anemia.json": "cd94bec98ca1b23d9e6cc2404dd18205b398789cf3bce554e102effcbf9b19c2",
+    "medical/patient-eval/clinical-reasoning-v1/cases/renal-distractor.json": "aabb5962f165bd89cea6080031e147f326f9527350947de60e26c3d53cef28b8",
+    "medical/patient-eval/clinical-reasoning-v1/cases/renal.json": "b31545c2f461e43e7b90333c98c9baed097cbcbf251bc0c8acf6a5ef439a3cce",
+    "medical/patient-eval/clinical-reasoning-v1/runs/CR02-first/demo-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "medical/patient-eval/clinical-reasoning-v1/runs/CR02-first/demo.json": "17c4a25f9f476f5029c8c2d8555603819582492ee88402b5b1cb8d5bc78956f6",
+    "medical/patient-eval/clinical-reasoning-v1/runs/CR02-first/tests.txt": "b0842b14facf18b5f9acc25fd4a51dd077aadedcdbd4ee9ee121acc703aced66",
+    "scripts/clinical_reasoning/__init__.py": "2696ac83c55b5fadacf7f442d7b38f993c955d21ebf7a877d584e0bc5c32a98e",
+    "scripts/clinical_reasoning/demo.py": "0cc3cf431cf29c588df5e1813d5a9d3d55e5040b48cf593fa9beb7567f40d446",
+    "scripts/clinical_reasoning/development.py": "8ebeca39a621cfe02aa50b623d42815bbe3c0dbabf42c66e59bfb0c0c75c9bbd",
+    "tests/clinical_reasoning/test_development.py": "7806880d14eb9b3efa6e444f4dbd4c189fc487977debd48d1c870f333cc5413b"
+  }
+}
