@@ -1,0 +1,59 @@
+{
+  "schema_version": "clinical-reasoning-development/v0.1",
+  "case_id": "CR-RENAL-DEV-001-D",
+  "family_id": "CR-RENAL-DEV",
+  "scope": "synthetic_development",
+  "clinical_review": "pending",
+  "opening": {
+    "task": "你正在协助整理一位71岁男性的临床评估。当前肌酐2.1 mg/dL，两个月前1.0 mg/dL。请说明当前判断与下一步；如需病史或资料，可以先提出请求。",
+    "context_extra": "补充记录：患者平时喜欢听广播。"
+  },
+  "world": {
+    "history": [
+      {
+        "query": "近期进食与胃肠症状",
+        "content": "近三天多次呕吐、进食和饮水减少。"
+      },
+      {
+        "query": "近期用药",
+        "content": "近期因背痛多次服用布洛芬，具体剂量尚无法核对。"
+      },
+      {
+        "query": "排尿情况",
+        "content": "近期自觉尿量减少，但没有可靠的定量尿量记录。"
+      },
+      {
+        "query": "其他病史",
+        "content": "其余病史暂无法提供，不能据此判断没有相关疾病。"
+      }
+    ],
+    "records": [
+      {
+        "query": "近期肾功能记录",
+        "content": "同一患者检验记录：24小时前肌酐1.2 mg/dL；本次2.1 mg/dL。两次标本时间已核对。"
+      },
+      {
+        "query": "泌尿系统超声报告",
+        "content": "同一患者本次超声报告：膀胱明显充盈扩张，双侧肾积水。"
+      },
+      {
+        "query": "尿液检查",
+        "content": "当前未取得尿液检查结果。"
+      }
+    ]
+  },
+  "evaluation": {
+    "status": "draft_requires_expert_review",
+    "intended_targets": [
+      "病程证据评估",
+      "主动取证",
+      "多病因假设整合",
+      "新证据后的判断更新",
+      "工程投递与恢复"
+    ],
+    "initial_uncertainty": "仅两个月前与当前肌酐不足以直接确定升高时间；允许有依据的急性发生推测。",
+    "clinical_gold": null,
+    "serious_error_rules": null,
+    "author_note": "所有新增病史和检验报告均为合成开发事实。隐藏世界不指定唯一病因，不向模型传递本评测字段。"
+  }
+}

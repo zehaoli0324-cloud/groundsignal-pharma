@@ -1,0 +1,259 @@
+{
+  "mode": "scripted_engineering_demonstration",
+  "model_calls": 0,
+  "pair_check": {
+    "mechanical_pair_valid": true,
+    "clinical_equivalence": "unassessed",
+    "changed_paths": [
+      "/opening/context_extra"
+    ],
+    "base_sha256": "0d9c9b91995a0f7d5aa9729d0cdaee4a7c37ad4e3f2ffe92cceed19a42c2ab3d",
+    "variant_sha256": "e50e8bee7654cd9568421397984993186bc9cf903c377c100e56542c898bc4a2"
+  },
+  "sessions": [
+    {
+      "family": "renal",
+      "fault": "none",
+      "report": {
+        "scope": "synthetic_development",
+        "case_sha256": "0d9c9b91995a0f7d5aa9729d0cdaee4a7c37ad4e3f2ffe92cceed19a42c2ab3d",
+        "actions": 3,
+        "closed": true,
+        "termination": "finished",
+        "model_calls": 0,
+        "clinical_review": "pending",
+        "quality": null,
+        "outcome": "unassessed",
+        "serious_error": null,
+        "causal_status": "not_evaluated"
+      },
+      "operator_trace": [
+        {
+          "index": 1,
+          "action": {
+            "action_id": "a1",
+            "kind": "ask",
+            "query": "近期进食与胃肠症状"
+          },
+          "case_sha256": "0d9c9b91995a0f7d5aa9729d0cdaee4a7c37ad4e3f2ffe92cceed19a42c2ab3d",
+          "before_view_sha256": "577356bff8aeea390c8932643d68ee5012e9ccf6e65611d1e2f4d84718f13713",
+          "returned_content": "近三天多次呕吐、进食和饮水减少。",
+          "delivered_content": "近三天多次呕吐、进食和饮水减少。",
+          "delivery_status": "delivered",
+          "fault_applied": false
+        },
+        {
+          "index": 2,
+          "action": {
+            "action_id": "a2",
+            "kind": "record",
+            "query": "近期肾功能记录"
+          },
+          "case_sha256": "0d9c9b91995a0f7d5aa9729d0cdaee4a7c37ad4e3f2ffe92cceed19a42c2ab3d",
+          "before_view_sha256": "cc9b9526e24b646dc6cab6b5d08f5528d5ea501a23d6364ef28e620087b77714",
+          "returned_content": "同一患者检验记录：24小时前肌酐1.2 mg/dL；本次2.1 mg/dL。两次标本时间已核对。",
+          "delivered_content": "同一患者检验记录：24小时前肌酐1.2 mg/dL；本次2.1 mg/dL。两次标本时间已核对。",
+          "delivery_status": "delivered",
+          "fault_applied": false
+        },
+        {
+          "index": 3,
+          "action": {
+            "action_id": "a3",
+            "kind": "finish",
+            "answer": "脚本取证演练结束，未生成临床判断。"
+          },
+          "case_sha256": "0d9c9b91995a0f7d5aa9729d0cdaee4a7c37ad4e3f2ffe92cceed19a42c2ab3d",
+          "before_view_sha256": "9d5a580e33b2c11fa6e700fe4261f1d426c6a7f90911ca47841955033a600d5d",
+          "returned_content": null,
+          "delivered_content": null,
+          "delivery_status": "finished",
+          "fault_applied": false
+        }
+      ]
+    },
+    {
+      "family": "renal",
+      "fault": "drop_record_delivery",
+      "report": {
+        "scope": "synthetic_development",
+        "case_sha256": "0d9c9b91995a0f7d5aa9729d0cdaee4a7c37ad4e3f2ffe92cceed19a42c2ab3d",
+        "actions": 3,
+        "closed": true,
+        "termination": "finished",
+        "model_calls": 0,
+        "clinical_review": "pending",
+        "quality": null,
+        "outcome": "unassessed",
+        "serious_error": null,
+        "causal_status": "not_evaluated"
+      },
+      "operator_trace": [
+        {
+          "index": 1,
+          "action": {
+            "action_id": "a1",
+            "kind": "ask",
+            "query": "近期进食与胃肠症状"
+          },
+          "case_sha256": "0d9c9b91995a0f7d5aa9729d0cdaee4a7c37ad4e3f2ffe92cceed19a42c2ab3d",
+          "before_view_sha256": "577356bff8aeea390c8932643d68ee5012e9ccf6e65611d1e2f4d84718f13713",
+          "returned_content": "近三天多次呕吐、进食和饮水减少。",
+          "delivered_content": "近三天多次呕吐、进食和饮水减少。",
+          "delivery_status": "delivered",
+          "fault_applied": false
+        },
+        {
+          "index": 2,
+          "action": {
+            "action_id": "a2",
+            "kind": "record",
+            "query": "近期肾功能记录"
+          },
+          "case_sha256": "0d9c9b91995a0f7d5aa9729d0cdaee4a7c37ad4e3f2ffe92cceed19a42c2ab3d",
+          "before_view_sha256": "cc9b9526e24b646dc6cab6b5d08f5528d5ea501a23d6364ef28e620087b77714",
+          "returned_content": "同一患者检验记录：24小时前肌酐1.2 mg/dL；本次2.1 mg/dL。两次标本时间已核对。",
+          "delivered_content": null,
+          "delivery_status": "delivery_failed",
+          "fault_applied": true
+        },
+        {
+          "index": 3,
+          "action": {
+            "action_id": "a3",
+            "kind": "finish",
+            "answer": "脚本取证演练结束，未生成临床判断。"
+          },
+          "case_sha256": "0d9c9b91995a0f7d5aa9729d0cdaee4a7c37ad4e3f2ffe92cceed19a42c2ab3d",
+          "before_view_sha256": "67322b24a2040ec0ea3807f981808addaef2114d68eda9a961bc726a4cc1b4d7",
+          "returned_content": null,
+          "delivered_content": null,
+          "delivery_status": "finished",
+          "fault_applied": false
+        }
+      ]
+    },
+    {
+      "family": "anemia",
+      "fault": "none",
+      "report": {
+        "scope": "synthetic_development",
+        "case_sha256": "b8a9f6336943562cc2e7f7164a4a886d3af645cd29f2b506618e6c75c0d56f04",
+        "actions": 3,
+        "closed": true,
+        "termination": "finished",
+        "model_calls": 0,
+        "clinical_review": "pending",
+        "quality": null,
+        "outcome": "unassessed",
+        "serious_error": null,
+        "causal_status": "not_evaluated"
+      },
+      "operator_trace": [
+        {
+          "index": 1,
+          "action": {
+            "action_id": "a1",
+            "kind": "ask",
+            "query": "慢性疾病与近期活动"
+          },
+          "case_sha256": "b8a9f6336943562cc2e7f7164a4a886d3af645cd29f2b506618e6c75c0d56f04",
+          "before_view_sha256": "619fa0c7ad4689ab79b39700f6b436f08719db71aa36b5784130d300e559c823",
+          "returned_content": "记录提示存在活动性慢性炎症，具体疾病和治疗方案待进一步核对。",
+          "delivered_content": "记录提示存在活动性慢性炎症，具体疾病和治疗方案待进一步核对。",
+          "delivery_status": "delivered",
+          "fault_applied": false
+        },
+        {
+          "index": 2,
+          "action": {
+            "action_id": "a2",
+            "kind": "record",
+            "query": "铁代谢检查"
+          },
+          "case_sha256": "b8a9f6336943562cc2e7f7164a4a886d3af645cd29f2b506618e6c75c0d56f04",
+          "before_view_sha256": "52450f4b730c6fc4b7132bbaed2308044c4ed51d8253886f06e684a4edad23bc",
+          "returned_content": "同一患者本次检验：血清铁25 mcg/dL，铁蛋白70 ng/mL，总铁结合力250 mcg/dL，转铁蛋白饱和度10%。",
+          "delivered_content": "同一患者本次检验：血清铁25 mcg/dL，铁蛋白70 ng/mL，总铁结合力250 mcg/dL，转铁蛋白饱和度10%。",
+          "delivery_status": "delivered",
+          "fault_applied": false
+        },
+        {
+          "index": 3,
+          "action": {
+            "action_id": "a3",
+            "kind": "finish",
+            "answer": "脚本取证演练结束，未生成临床判断。"
+          },
+          "case_sha256": "b8a9f6336943562cc2e7f7164a4a886d3af645cd29f2b506618e6c75c0d56f04",
+          "before_view_sha256": "9c68c971896d65b987c27dd31c4ee5bd93918a858e1ed598ea222fc4555c91c7",
+          "returned_content": null,
+          "delivered_content": null,
+          "delivery_status": "finished",
+          "fault_applied": false
+        }
+      ]
+    },
+    {
+      "family": "anemia",
+      "fault": "drop_record_delivery",
+      "report": {
+        "scope": "synthetic_development",
+        "case_sha256": "b8a9f6336943562cc2e7f7164a4a886d3af645cd29f2b506618e6c75c0d56f04",
+        "actions": 3,
+        "closed": true,
+        "termination": "finished",
+        "model_calls": 0,
+        "clinical_review": "pending",
+        "quality": null,
+        "outcome": "unassessed",
+        "serious_error": null,
+        "causal_status": "not_evaluated"
+      },
+      "operator_trace": [
+        {
+          "index": 1,
+          "action": {
+            "action_id": "a1",
+            "kind": "ask",
+            "query": "慢性疾病与近期活动"
+          },
+          "case_sha256": "b8a9f6336943562cc2e7f7164a4a886d3af645cd29f2b506618e6c75c0d56f04",
+          "before_view_sha256": "619fa0c7ad4689ab79b39700f6b436f08719db71aa36b5784130d300e559c823",
+          "returned_content": "记录提示存在活动性慢性炎症，具体疾病和治疗方案待进一步核对。",
+          "delivered_content": "记录提示存在活动性慢性炎症，具体疾病和治疗方案待进一步核对。",
+          "delivery_status": "delivered",
+          "fault_applied": false
+        },
+        {
+          "index": 2,
+          "action": {
+            "action_id": "a2",
+            "kind": "record",
+            "query": "铁代谢检查"
+          },
+          "case_sha256": "b8a9f6336943562cc2e7f7164a4a886d3af645cd29f2b506618e6c75c0d56f04",
+          "before_view_sha256": "52450f4b730c6fc4b7132bbaed2308044c4ed51d8253886f06e684a4edad23bc",
+          "returned_content": "同一患者本次检验：血清铁25 mcg/dL，铁蛋白70 ng/mL，总铁结合力250 mcg/dL，转铁蛋白饱和度10%。",
+          "delivered_content": null,
+          "delivery_status": "delivery_failed",
+          "fault_applied": true
+        },
+        {
+          "index": 3,
+          "action": {
+            "action_id": "a3",
+            "kind": "finish",
+            "answer": "脚本取证演练结束，未生成临床判断。"
+          },
+          "case_sha256": "b8a9f6336943562cc2e7f7164a4a886d3af645cd29f2b506618e6c75c0d56f04",
+          "before_view_sha256": "1680f5374573497195dd377fb6510eb7f95981005d5434f5e64fb3d299c4120b",
+          "returned_content": null,
+          "delivered_content": null,
+          "delivery_status": "finished",
+          "fault_applied": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "clinical-reasoning-development/v0.1",
+  "case_id": "CR-ANEMIA-DEV-001",
+  "family_id": "CR-ANEMIA-DEV",
+  "scope": "synthetic_development",
+  "clinical_review": "pending",
+  "opening": {
+    "task": "你正在协助整理一位57岁女性的临床评估。她近期乏力，血红蛋白9.9 g/dL，平均红细胞体积78 fL。请说明当前判断与下一步；如需病史或资料，可以先提出请求。",
+    "context_extra": ""
+  },
+  "world": {
+    "history": [
+      {"query": "慢性疾病与近期活动", "content": "记录提示存在活动性慢性炎症，具体疾病和治疗方案待进一步核对。"},
+      {"query": "出血与营养情况", "content": "当前病历没有可靠的出血和营养评估资料，不能据此排除相关因素。"},
+      {"query": "肾功能病史", "content": "尚未取得既往肾功能资料。"}
+    ],
+    "records": [
+      {"query": "铁代谢检查", "content": "同一患者本次检验：血清铁25 mcg/dL，铁蛋白70 ng/mL，总铁结合力250 mcg/dL，转铁蛋白饱和度10%。"},
+      {"query": "炎症指标", "content": "同一患者本次C反应蛋白42 mg/L。"},
+      {"query": "既往血常规", "content": "当前未取得可比较的既往血常规。"}
+    ]
+  },
+  "evaluation": {
+    "status": "draft_requires_expert_review",
+    "intended_targets": ["主动取证", "混杂因素识别", "多指标整合", "证据不足下的鉴别范围", "工程投递与恢复"],
+    "initial_uncertainty": "初始信息不预设贫血唯一机制；后续资料的诊断含义与鉴别优先级须临床核准。",
+    "clinical_gold": null,
+    "serious_error_rules": null,
+    "author_note": "公开合成开发世界。与肾功能家族共用执行接口，但两个家族不足以证明跨病种泛化。"
+  }
+}

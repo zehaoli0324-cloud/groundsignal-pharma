@@ -1,0 +1,56 @@
+{
+  "schema_version": "clinical-reasoning-progress/v0.1",
+  "updated_at": "2026-09-12",
+  "work_branch": "work/clinical-reasoning-attribution-20260912",
+  "integration_branch": "feat/clinical-review-console-v01-20260910",
+  "base_commit": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+  "plan": "docs/taskbooks/clinical-reasoning-attribution-v1.0.md",
+  "stage_owner": "S8",
+  "status": "DEVELOPMENT_IN_PROGRESS",
+  "current_batch": "CR02-first",
+  "next_executable_task": "CR03",
+  "tasks": [
+    {"id": "CR00", "offline_status": "completed", "acceptance": "baseline and six gaps documented"},
+    {"id": "CR01", "offline_status": "draft_ready", "clinical_status": "pending_independent_expert", "acceptance": "two family drafts and source/criteria review note; no clinical gold"},
+    {"id": "CR02", "offline_status": "completed_bounded", "acceptance": "strict visible projection, one distractor pair, shared structured action environment; not natural language adaptation"},
+    {"id": "CR03", "offline_status": "pending", "next": "design and test question-intent adapter against frozen disclosed world; unsupported queries and partial/multiple requests remain explicit; add multi-path scripted collection and full visible transcript persistence"},
+    {"id": "CR04", "offline_status": "pending", "dependencies": ["CR03", "A1 scoring/statistics boundary disposition"]},
+    {"id": "CR05", "offline_status": "pending", "dependencies": ["CR02", "CR03"]},
+    {"id": "CR06", "offline_status": "pending", "dependencies": ["CR05"]},
+    {"id": "CR07", "offline_status": "pending", "dependencies": ["CR04", "CR06"]},
+    {"id": "CR08", "offline_status": "blocked_external_inputs", "needs": ["model configuration and budget", "clinical standards approval", "authorized data/use admission"]},
+    {"id": "CR09", "offline_status": "pending", "dependencies": ["CR07"], "research_claims_require": ["CR08"]}
+  ],
+  "evidence": {
+    "tests": "runs/CR02-first/tests.txt",
+    "demo": "runs/CR02-first/demo.json",
+    "manifest": "runs/CR02-first/manifest.json",
+    "tests_run": 12,
+    "tests_passed": 12,
+    "scope": "new isolated module, not full repository",
+    "scripted_sessions": 4,
+    "case_files": 3,
+    "families": 2,
+    "mechanically_valid_distractor_pairs": 1,
+    "clinical_scored_sessions": 0,
+    "real_model_calls": 0,
+    "expert_approvals": 0,
+    "root_causes_proven": 0
+  },
+  "known_limits": [
+    "structured query names require exact match; no free-language question understanding",
+    "synthetic records are author-created and not real patient data",
+    "tool fault is implemented but causal checker and clinical behavior scoring are not",
+    "operator trace includes hidden world returns; only model_view may be sent to target",
+    "no remote model adapter; tool-role transcript is an internal representation, not a provider-ready request",
+    "clinical review of distractor irrelevance and both case standards remains pending",
+    "A1 audit 16 open findings are not repaired by this batch"
+  ],
+  "iteration_policy": {
+    "enabled_by_user": true,
+    "cadence": "hourly",
+    "automation_id": "6a9c3b22fec88191bd23cc2e4f48284e",
+    "automation_enablement": "verify_scheduler_result_separately",
+    "stop_when": "all authorized executable work complete; pause and report if only external prerequisites remain"
+  }
+}
