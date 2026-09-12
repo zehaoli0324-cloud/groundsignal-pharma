@@ -1,0 +1,81 @@
+{
+  "asset_sha256": "6a61a65c3c5aec8b80e273b8411516df356e198dc0a23ec02f8843b62d56672d",
+  "suite_sha256": "4a57d3cd846672fa8a9131f91d89b89fabdfb668e507cc0e257d660dd2284354",
+  "new_unit_tests": 24,
+  "existing_regression_tests": 397,
+  "paid_model_calls": 0,
+  "real_gpt_run": false,
+  "docker_runtime_validated": false,
+  "clinical_approval": false,
+  "runs": {
+    "oracle": {
+      "version": "medical-dialogue/v1",
+      "engineering_integrity": "PASS",
+      "sessions": 12,
+      "families": 6,
+      "statuses": {
+        "completed": 12
+      },
+      "target_calls": 36,
+      "clinical_result": null,
+      "clinical_approval": false,
+      "clinical_score": null,
+      "readiness": "NEEDS_SEMANTIC_REVIEW",
+      "run_kind": "oracle",
+      "authenticity_verified": false,
+      "internal_model_trajectory_available": false
+    },
+    "noop": {
+      "version": "medical-dialogue/v1",
+      "engineering_integrity": "PASS",
+      "sessions": 12,
+      "families": 6,
+      "statuses": {
+        "completed": 12
+      },
+      "target_calls": 12,
+      "clinical_result": null,
+      "clinical_approval": false,
+      "clinical_score": null,
+      "readiness": "NEEDS_SEMANTIC_REVIEW",
+      "run_kind": "noop",
+      "authenticity_verified": false,
+      "internal_model_trajectory_available": false
+    },
+    "naive": {
+      "version": "medical-dialogue/v1",
+      "engineering_integrity": "PASS",
+      "sessions": 12,
+      "families": 6,
+      "statuses": {
+        "completed": 12
+      },
+      "target_calls": 12,
+      "clinical_result": null,
+      "clinical_approval": false,
+      "clinical_score": null,
+      "readiness": "NEEDS_SEMANTIC_REVIEW",
+      "run_kind": "naive",
+      "authenticity_verified": false,
+      "internal_model_trajectory_available": false
+    },
+    "stale": {
+      "version": "medical-dialogue/v1",
+      "engineering_integrity": "PASS",
+      "sessions": 12,
+      "families": 6,
+      "statuses": {
+        "completed": 12
+      },
+      "target_calls": 36,
+      "clinical_result": null,
+      "clinical_approval": false,
+      "clinical_score": null,
+      "readiness": "NEEDS_SEMANTIC_REVIEW",
+      "run_kind": "stale",
+      "authenticity_verified": false,
+      "internal_model_trajectory_available": false
+    }
+  },
+  "blank_review_rows": 106
+}

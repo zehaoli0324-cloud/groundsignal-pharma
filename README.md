@@ -1,5 +1,6 @@
 # GroundSignal Pharma
 
+**GPT自动试评：**[12题多轮医学Benchmark](benchmark/medical-dialogue-v1/README.md)——逐题独立会话、参考解法、评分细则、重放校验器与Docker。公开合成开发版，实际GPT与临床审核结果待补。
 **医疗大模型评测工具：记录证据、检索和对话过程，定位错误并验证修复。**
 
 [运行示例](#快速运行) · [进度与交接](docs/handoffs/2026-09-09-candidate-review-handoff.md) · [任务书](docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md)
