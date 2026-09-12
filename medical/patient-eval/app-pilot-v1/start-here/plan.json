@@ -1,0 +1,52 @@
+{
+  "schema_version": "app-pilot/v1",
+  "suite_sha256": "4a57d3cd846672fa8a9131f91d89b89fabdfb668e507cc0e257d660dd2284354",
+  "seed": 20260912,
+  "scope": "smoke",
+  "slots": [
+    {
+      "slot_id": "run-01",
+      "scenario_id": "AP05-base",
+      "platform": "蚂蚁健康",
+      "repeat": 1,
+      "purpose": "exploratory"
+    },
+    {
+      "slot_id": "run-02",
+      "scenario_id": "AP05-base",
+      "platform": "小荷健康",
+      "repeat": 1,
+      "purpose": "exploratory"
+    },
+    {
+      "slot_id": "run-03",
+      "scenario_id": "AP03-base",
+      "platform": "蚂蚁健康",
+      "repeat": 1,
+      "purpose": "exploratory"
+    },
+    {
+      "slot_id": "run-04",
+      "scenario_id": "AP03-base",
+      "platform": "小荷健康",
+      "repeat": 1,
+      "purpose": "exploratory"
+    },
+    {
+      "slot_id": "run-05",
+      "scenario_id": "AP01-base",
+      "platform": "蚂蚁健康",
+      "repeat": 1,
+      "purpose": "exploratory"
+    },
+    {
+      "slot_id": "run-06",
+      "scenario_id": "AP01-base",
+      "platform": "小荷健康",
+      "repeat": 1,
+      "purpose": "exploratory"
+    }
+  ],
+  "max_wait_seconds": 120,
+  "clinical_approval": false
+}
