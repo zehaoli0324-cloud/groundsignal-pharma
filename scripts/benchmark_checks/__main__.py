@@ -15,7 +15,7 @@ import unittest
 from scripts.medical_dialogue_bench.assets import ASSETS, ROOT, load_assets
 from scripts.patient_eval.app_pilot import DISTRACTOR
 
-VERSION = 'benchmark-checks/v1'
+VERSION = 'benchmark-checks/v1.1'
 
 
 def finding(rule, status, message, pointer='', case='', file='suite.json'):
@@ -290,11 +290,14 @@ def write_report(out,command,rows,assets):
     status='FAIL' if blocking else 'PASS'
     if command=='model-review': status='ERROR' if any(r['status']=='ERROR' for r in rows) else 'ADVISORY'
     def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else None
-    commit=subprocess.run(['git','rev-parse','HEAD'],cwd=ROOT,capture_output=True,text=True).stdout.strip() or 'unknown'
+    try: commit=subprocess.run(['git','rev-parse','HEAD'],cwd=ROOT,capture_output=True,text=True).stdout.strip() or 'unknown'
+    except OSError: commit='unknown'  # Minimal offline container intentionally has no git binary.
     report=dict(check_version=VERSION,command=command,status=status,commit=commit,
         workflow_sha=os.environ.get('GITHUB_SHA'),pr_head_sha=os.environ.get('PR_HEAD_SHA'),
         created_at=datetime.now(timezone.utc).isoformat(),suite_sha256=sha(assets/'suite.json'),
         manifest_sha256=sha(assets/'manifest.json'),checker_sha256=sha(Path(__file__)),
+        adapter_sha256=sha(Path(__file__).with_name('multiturn.py')),
+        patient_engine_sha256=sha(ROOT/'scripts/patient_eval/patient.py'),
         clinical_approval=False,findings=rows)
     (out/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     def md(value): return str(value).replace('|','\\|').replace('\n','<br>').replace('<','&lt;').replace('>','&gt;')
@@ -325,15 +328,24 @@ def write_report(out,command,rows,assets):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command',choices=['static','autoreview','validation','model-review'])
+    parser.add_argument('command',choices=['static','autoreview','validation','model-review','track-static','track-validation'])
     parser.add_argument('--assets',type=Path,default=ASSETS)
     parser.add_argument('--out',type=Path,required=True)
     parser.add_argument('--model')
     parser.add_argument('--max-review-calls',type=int,default=10)
+    parser.add_argument('--track-assets',type=Path,default=ROOT/'benchmark/multiturn-factors-v1')
     args=parser.parse_args()
     args.out.mkdir(parents=True,exist_ok=False)  # Never mix old and new results.
     try:
-        if args.command=='validation':
+        if args.command.startswith('track-'):
+            from .multiturn import ContractError,load,acceptance
+            args.assets=args.track_assets
+            try:
+                suite=load(args.assets/'suite.json')
+                rows=acceptance(args.out,args.assets) if args.command=='track-validation' else [finding('multiturn_contract','PASS',f"独立契约通过，{len(suite['cases'])} 个验收变体；未应用旧后缀配对规则")]
+            except ContractError as exc:
+                rows=[finding(exc.rule,'FAIL',str(exc),exc.pointer)]
+        elif args.command=='validation':
             if args.assets.resolve()!=ASSETS.resolve(): raise ValueError('动态验证必须使用当前仓库默认资产')
             rows=validation(args.out)
         elif args.command=='model-review':

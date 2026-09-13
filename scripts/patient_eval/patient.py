@@ -263,18 +263,30 @@ class PatientSimulator:
                 "intent_decision": deepcopy(decision),
             })
             return self._response(_UNMATCHED, "unmatched")
-        for slot in slots:
+        content, disclosed = self._answer_slots(slots)
+        _slot_list(disclosed, self._facts, 'answer disclosure')
+        _require(set(disclosed) <= set(slots), 'answer disclosed an unrequested fact')
+        _require(_nonempty(content), 'patient answer must be nonempty')
+        for slot in disclosed:
             if slot not in self._disclosed:
                 self._disclosed.append(slot)
         self._event_log.append({
             "assistant_turn": self._assistant_turn_count,
             "kind": "question",
-            "disclosed": list(slots),
+            "disclosed": list(disclosed),
             "mapping": "explicit" if requested_slots is not None else self.classifier_version,
             "classifier_version": self.classifier_version,
             "intent_decision": deepcopy(decision),
         })
-        return self._response("\n".join(self._facts[slot]["answer"] for slot in slots), "question", slots)
+        return self._response(content, "question", disclosed)
+
+    def _answer_slots(self, slots: list[str]) -> tuple[str, list[str]]:
+        """Presentation adapters may withhold facts until speech explicitly discloses them.
+
+        Default behavior is unchanged. Event scheduling consumes the returned
+        disclosure, not the slots the assistant merely asked about.
+        """
+        return "\n".join(self._facts[slot]["answer"] for slot in slots), list(slots)
 
     def snapshot(self) -> dict:
         """Detached operator-only state; NEVER include this in target messages."""

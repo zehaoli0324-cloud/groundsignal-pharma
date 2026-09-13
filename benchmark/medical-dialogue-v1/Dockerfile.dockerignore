@@ -7,5 +7,7 @@
 !benchmark/
 !benchmark/medical-dialogue-v1/
 !benchmark/medical-dialogue-v1/**
+!benchmark/multiturn-factors-v1/
+!benchmark/multiturn-factors-v1/**
 **/__pycache__/**
 **/*.pyc
