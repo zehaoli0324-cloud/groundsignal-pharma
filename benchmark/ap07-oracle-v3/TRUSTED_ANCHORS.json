@@ -1,0 +1,12 @@
+{
+  "version": "ap07-oracle-v3",
+  "anchor_origin": "controlled_repository_file_not_submission",
+  "rubric_content_sha256": "3b8489088a2ff30834b4d4c01235c6482ef0649d05eb8247c3466412a3f86e6f",
+  "rubric_file_sha256": "1b67e34beaa5af0d1068bb04bc275e35f79df8b9b1cbb904366b29caafc3006c",
+  "note": "Trusted rubric content anchor. verify_submission recomputes the canonical SHA of the supplied rules and rejects any mismatch. This file is a controlled repository artifact and must not be sourced from the submission under review.",
+  "allowed_judgments": ["pass", "fail", "insufficient", "not_applicable", "unassessed"],
+  "allowed_adjudications": ["confirmed", "pending_confirmation", "unassessed"],
+  "stage1_forbidden_keys": ["author_labels", "future_window", "expected"],
+  "model_calls": 0,
+  "AB_actual_ratings": 0
+}
