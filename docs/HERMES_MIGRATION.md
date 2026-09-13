@@ -1,8 +1,8 @@
-# Hermes 迁移与下一阶段执行清单
+# Hermes 历史模块迁移清单
 
 从 `work/patient-consultation-core-v1` 开始。建议每个 M 任务开子分支并交一个小 PR 到本分支；按文件及依赖闭包迁移，不整分支 cherry-pick 或用旧目录覆盖核心。
 
-**现在先执行 M00 → M01。下一道门仍是：先审核节点与医学适用条件，再由 A/B 独立填写。**
+**当前执行顺序以 [完整任务清单 H00–H46](taskbooks/clinical-benchmark-hermes-tasks-v0.1.md) 为准：主试点已改为脑卒中。** 本页保留来源与模块复用方法；M00 对应新 H00，原 M01–M03 是 AP07 方法参考，不再作为脑卒中试点的前置任务。临床审核先于 A/B 独立评分的原则继续适用。
 
 ## 所有任务共用规则
 
@@ -17,9 +17,9 @@
 | ID | 内容 | 状态 |
 |---|---|---|
 | M00 | 对齐 Hermes 尚未推送的最新材料 | 待执行 |
-| M01 | 完成 AP07 下一阶段包与节点审核准备 | 待执行 |
-| M02 | 真实节点审核、A/B 独立填写与裁定 | 待执行 |
-| M03 | 接入获审 Oracle 与受控分支，再做小批量联合试测 | 待执行 |
+| M01 | 完成 AP07 下一阶段包与节点审核准备 | 方法参考，按需执行 |
+| M02 | 真实节点审核、A/B 独立填写与裁定 | AP07 参考任务；脑卒中按 H15/H21 |
+| M03 | 接入获审 Oracle 与受控分支，再做小批量联合试测 | 复用方法；当前主线按 H16–H29 |
 | M04 | 逐步迁移旧工作台与统计/裁定能力 | 待执行 |
 | M05 | 迁移临床推理归因实验 | 待执行 |
 | M06 | 接入可用的真实咨询病例来源 | 待执行 |
@@ -41,7 +41,7 @@
 
 ## M01：完成 AP07 下一阶段包与节点审核准备
 
-**前提**：依赖 M00 的版本对齐；当前最高优先级。
+**前提**：依赖 M00 的版本对齐；仅在继续 AP07 时执行，当前最高优先级见新的脑卒中任务清单。
 
 **来源**：[AP07 下一阶段任务说明](AP07_NEXT_TASK.md)；[benchmark/ap07-oracle-draft-v1/NODES.md](https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/e494fa34e6271061c4de8c87864adf1e66fcfc9e/benchmark/ap07-oracle-draft-v1/NODES.md)；[benchmark/ap07-oracle-draft-v1/author_only/calibration.json](https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/e494fa34e6271061c4de8c87864adf1e66fcfc9e/benchmark/ap07-oracle-draft-v1/author_only/calibration.json)。
 
@@ -89,7 +89,7 @@
 
 ## M05：迁移临床推理归因实验
 
-**前提**：按试测暴露的真实需求选择，不阻塞 AP07。
+**前提**：按试测暴露的真实需求选择，不阻塞当前脑卒中主试点。
 
 **来源**：[docs/taskbooks/clinical-reasoning-attribution-v1.0.md](https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/665b8edea3cde907ea03de9bbce174552268f0a3/docs/taskbooks/clinical-reasoning-attribution-v1.0.md)；[scripts/clinical_reasoning/](https://github.com/zehaoli0324-cloud/groundsignal-pharma/tree/665b8edea3cde907ea03de9bbce174552268f0a3/scripts/clinical_reasoning/)；[tests/clinical_reasoning/](https://github.com/zehaoli0324-cloud/groundsignal-pharma/tree/665b8edea3cde907ea03de9bbce174552268f0a3/tests/clinical_reasoning/)；[medical/patient-eval/clinical-reasoning-v1/](https://github.com/zehaoli0324-cloud/groundsignal-pharma/tree/665b8edea3cde907ea03de9bbce174552268f0a3/medical/patient-eval/clinical-reasoning-v1/)。
 

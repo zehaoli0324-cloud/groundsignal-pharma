@@ -2,12 +2,13 @@
 
 本分支聚焦一个问题：面对模糊、信息杂糅和高风险决策压力，模型能否帮助患者做出安全、可执行的下一步决定？
 
-当前是可运行的开发框架。患者交互、调用记录、逐轮评审和回放已接入；临床 Oracle 和题目暴露危险错误的有效性仍需独立审核与真实模型试测。
+当前是可运行的开发框架。患者交互、调用记录、逐轮评审和回放已接入；临床 Oracle 和题目暴露危险错误的有效性仍需独立审核与真实模型试测。最新提案将首个完整参考家族改为急性脑卒中相关患者咨询，AP07 保留为方法参考；脑卒中实现尚待执行。
 
 ## 从这里开始
 
-- **Hermes 接续开发**：[迁移顺序与任务卡](docs/HERMES_MIGRATION.md)。先做 M00、M01。
-- **下一道审核门**：[AP07 下一阶段任务说明](docs/AP07_NEXT_TASK.md)。先审核节点与医学适用条件，再由 A/B 独立填写。
+- **Hermes 当前执行入口**：[完整任务清单 H00–H46](docs/taskbooks/clinical-benchmark-hermes-tasks-v0.1.md)。覆盖脑卒中试点、临床 Oracle、受控实验、压力梯度和测量验证；按依赖先做首轮设计与审核材料。
+- **最新设计依据**：[完整临床 Benchmark 提案](docs/proposals/clinical-benchmark-design-v0.1.md)。先审核节点与医学适用条件，再由 A/B 独立填写；原 [AP07 任务说明](docs/AP07_NEXT_TASK.md)作为方法参考。
+- **历史模块复用**：[迁移来源与任务卡](docs/HERMES_MIGRATION.md)。与新任务清单配合使用，不再默认要求 AP07 先完成。
 - **运行核心**：[快速开始](docs/QUICKSTART.md)；[架构与边界](docs/ARCHITECTURE.md)。
 - **了解整理结果**：[项目审查](docs/AUDIT_REPORT.md)、[未关闭问题](docs/KNOWN_ISSUES.md)、[本次验证](docs/VALIDATION.md)。
 - **找原来的内容**：[全部分支、PR 与文件来源目录](docs/migration/README.md)。每个来源固定到提交，包含不同分支上的内容版本。
@@ -23,7 +24,7 @@
 | `benchmark/multiturn-factors-v1/` | AP07 的 4 个模糊/干扰验收变体 | 单独轨道；尚未接入完整模型批跑 |
 | `medical/patient-eval/app-pilot-v1/` | 12 张题卡的人工采集入口 | 兼容已有采集流程，不等于上述 14 题版本 |
 | `research/ap07-oracle-draft-v1/` | 最新节点、回答样本、空白 A/B 表与作者材料 | 原样归档的候选草稿；现有 ZIP 不可直接发起正式盲评 |
-| `docs/taskbooks/` | 最新临床 Oracle 与压力试测 proposal | 规划；已实现范围以本分支状态说明为准 |
+| `docs/proposals/`、`docs/taskbooks/` | 完整提案与 47 项 Hermes 任务；另存早期方案 | 规划；所有新任务初始为待执行，不冒充现有实现 |
 | `docs/migration/` | 固定版本来源、复制清单、完整路径版本索引 | 供 Hermes 按模块迁移 |
 
 ## 最小运行

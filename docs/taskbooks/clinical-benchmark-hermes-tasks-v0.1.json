@@ -1,0 +1,1249 @@
+{
+  "schema": "hermes-clinical-benchmark-tasklist/v0.1",
+  "created": "2026-09-13",
+  "source_proposal": "docs/proposals/clinical-benchmark-design-v0.1.md",
+  "source_sha256": "e022148e91a4a4b2a63e581a57185cff4dd835c0f88d4d04147c3e0cf9f71b2c",
+  "baseline_commit": "9c3d4dc1352da2137fecc22c4afa81026c3cc3f6",
+  "target_branch": "work/patient-consultation-core-v1",
+  "purpose": "planning_only_no_task_execution_claimed",
+  "tasks": [
+    {
+      "id": "H00",
+      "milestone": "M0",
+      "title": "核对基线与本地未推送材料",
+      "depends_on": [],
+      "planned_outputs": [
+        "docs/migration/LOCAL_RECONCILIATION.md",
+        "docs/clinical-benchmark/implementation-inventory.md"
+      ],
+      "action": "读取当前分支、已有导入清单和旧 M00；核对 Hermes 本地 builder、题库与未提交差异。列已实现、可复用、需修改、待新建四类，并将旧 M01–M03 的 AP07 主线改为方法参考。",
+      "acceptance": "来源提交和文件摘要可追溯；未把本地“16 题”当成已核实远端状态；保留现有可运行核心与历史失败。此任务不要求先迁完旧仓库。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H01",
+      "milestone": "M0",
+      "title": "确定脑卒中参考家族与患者旅程",
+      "depends_on": [
+        "H00"
+      ],
+      "planned_outputs": [
+        "benchmark/stroke-reference-v0.1/scope.md"
+      ],
+      "action": "以急性脑卒中相关患者咨询为主试点，定义患者服务对象、地区、首个临床问题和场景边界。第一轮优先首次症状咨询/分诊；绘出二次核验、治疗后变化的后续接口，避免第一轮同时实现所有旅程。",
+      "acceptance": "目标是安全决策与证据更新，不是猜中病名。明确纳入/排除范围、合理替代解释及较低风险对照的需求；后两类旅程明确归 M3。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H02",
+      "milestone": "M0",
+      "title": "画决策链并定义可观察节点",
+      "depends_on": [
+        "H01"
+      ],
+      "planned_outputs": [
+        "benchmark/stroke-reference-v0.1/decision-chain.md",
+        "benchmark/stroke-reference-v0.1/nodes-draft.json"
+      ],
+      "action": "覆盖识别问题、提取事实、肯定/否定/不确定/猜测、来源可靠性、信息缺失、追问、竞争解释、更新、风险分层、处置、升级与持续修正。为每环定义输入、公开行为、允许转换与证据记录。",
+      "acceptance": "节点由事实与行动条件触发，不强制固定轮次或必经顺序；允许跳过、重叠和合理结束。只评价可观察行为，不把模型自述推理当作内部机制真相。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H03",
+      "milestone": "M0",
+      "title": "核验临床来源与研究方法出处",
+      "depends_on": [
+        "H01"
+      ],
+      "planned_outputs": [
+        "clinical_oracle/stroke-v0.1/sources.json",
+        "docs/clinical-benchmark/research-source-notes.md"
+      ],
+      "action": "检索并阅读适用地区的权威临床资料，记录版本、访问日期、段落定位、人群与场景、可支持/不可支持的规则。另核对提案中的 HealthBench 与顾昱/顾禹相关研究：先确认具体论文与作者，再写支持哪些方法。",
+      "acceptance": "来源存在不等于规则获审；临床规则、作者推导和研究启发分开。无法确认的论文或归因标未核验，不补造引用；临床适用性由 H15 决定。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H04",
+      "milestone": "M0",
+      "title": "建立可复核的失败分类 v0.1",
+      "depends_on": [
+        "H02"
+      ],
+      "planned_outputs": [
+        "evaluation/taxonomy-v0.1.json",
+        "evaluation/taxonomy-examples.md"
+      ],
+      "action": "将失败类型挂到决策环节，分别记录观察到的行为、潜在临床后果和策略/算法/工程归因假设。每类给定义、正例、反例、边界、证据要求和可能重叠类别。",
+      "acceptance": "允许多标签和 UNRESOLVED；不能仅凭一个错误处置就认定风险阈值算法出错。独立评分一致性与分类改版进入 H36。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H05",
+      "milestone": "M0",
+      "title": "登记研究主张、失败假设与竞争解释",
+      "depends_on": [
+        "H01",
+        "H02",
+        "H04"
+      ],
+      "planned_outputs": [
+        "benchmark/stroke-reference-v0.1/hypotheses.json",
+        "docs/clinical-benchmark/claims-register.md"
+      ],
+      "action": "从决策链选少量可检验假设，建议第一轮优先 2–3 个，不机械穷举。每个主张写目标行为、观测量、预期方向、至少三个竞争解释、可推翻条件、对照和结论允许范围。",
+      "acceptance": "登记发生在看真实模型结果之前；“错误随压力增加”只是假设。长度、语言复杂度、证据充分性、模拟器漏匹配和裁判偏差均有排查位置；阴性结果同样可报告。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H06",
+      "milestone": "M0",
+      "title": "制定最小测量与统计计划",
+      "depends_on": [
+        "H04",
+        "H05"
+      ],
+      "planned_outputs": [
+        "evaluation/measurement-plan-v0.1.md",
+        "evaluation/metric-definitions-v0.1.json"
+      ],
+      "action": "定义病例家族、实验、实例、节点和独立运行的统计单位；列临床行动、问询价值、证据处理、稳定性、严重事件、未评/无效分母。登记主要比较、探索性比较、不确定性和最低可解释证据要求。",
+      "acceptance": "变体与重复运行不算独立病例；同会话多个节点不当独立样本。预写天花板/地板、重测、评分者一致性和区分度检查；小样本只作描述性或探索性结论，不强行给显著阈值。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H07",
+      "milestone": "M0",
+      "title": "建立实验网络与标识体系",
+      "depends_on": [
+        "H02",
+        "H05",
+        "H06"
+      ],
+      "planned_outputs": [
+        "benchmark/stroke-reference-v0.1/experiment-network.json"
+      ],
+      "action": "实现“决策链→错误类型→假设→实验族→对照实验→实例→节点→重复运行”的关联。给完整版、信息不足版、反事实分叉、无关信息、表述扰动与共享早期表现的不同结局各自明确角色。",
+      "acceptance": "ID、父关系和版本可检验；分叉前患者可见信息完全一致；独立实例不能共享模型上下文。报告能分开病例族数、实例数、运行数，避免虚增规模。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H08",
+      "milestone": "M0",
+      "title": "设计能排除混杂的配对对照",
+      "depends_on": [
+        "H07"
+      ],
+      "planned_outputs": [
+        "benchmark/stroke-reference-v0.1/control-matrix.json"
+      ],
+      "action": "为无关信息设计原病例、医学无关追加、等长度相关追加、等长度中性追加四组；为既往意见设计无意见/正确/错误/不确定对照。补事实不变表述扰动和只改关键临床条件的配对。",
+      "acceptance": "写明每个对比实际估计什么。相关信息追加可能改变证据量，不能自动成为纯长度对照；中性信息也需验证。匹配长度、可读性、有效事实和披露机会，残余混杂进入报告。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H09",
+      "milestone": "M0",
+      "title": "操作化 L0–L3 压力梯度",
+      "depends_on": [
+        "H07",
+        "H08"
+      ],
+      "planned_outputs": [
+        "benchmark/stroke-reference-v0.1/pressure-axes.json",
+        "benchmark/stroke-reference-v0.1/answerability-review.md"
+      ],
+      "action": "登记信息缺失、噪声、无关信息、冲突证据、时序长度、更正、表述、多任务、工具/工程九类压力轴。第一轮只实现优先假设需要的 1–2 条轴，其余明确待扩展；每级定义变化量、事实可得性、期望行为和判错条件。",
+      "acceptance": "一次改变一个主要变量；L0 清楚、L1 有限扰动、L2 需整合、L3 高压但仍有可接受决策路径。压力顺序依据操作量与独立审阅，不按模型错误率事后排序；不可回答另列，不能当 L3。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H10",
+      "milestone": "M0",
+      "title": "建设病例事实与证据数据库",
+      "depends_on": [
+        "H02",
+        "H03",
+        "H07",
+        "H09"
+      ],
+      "planned_outputs": [
+        "benchmark/stroke-reference-v0.1/cases.json",
+        "benchmark/stroke-reference-v0.1/evidence.json"
+      ],
+      "action": "结构化症状、时间、检查、否定事实、既往史、用药、患者知道/不知道、来源、时间戳、冲突与更正。明确病例世界事实、患者可说信息、助手已见事实、裁判可见材料四层。",
+      "acceptance": "合成病例如实标记；未知不同于阴性；患者猜测不同于确认事实；更正保留旧值与事件。来源、许可及脱敏状态可追溯，隐藏事实不进入模型提示。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H11",
+      "milestone": "M0",
+      "title": "实现脚本、状态机和确定性患者模板",
+      "depends_on": [
+        "H10"
+      ],
+      "planned_outputs": [
+        "scripts/patient_eval/ 的受控增量",
+        "benchmark/stroke-reference-v0.1/patient-fsm.json",
+        "tests/clinical_benchmark/test_patient_fsm.py"
+      ],
+      "action": "复用现有患者模块，按真实追问、建议、执行障碍、纠正和结束选择合法分支；维护披露日志与模板。支持不同问法、顺序和一次多问，保证同条件状态转移可复现。",
+      "acceptance": "第一版不用自由生成患者。不能补造病史、泄露未来或把模型带回标准路线；合理问法漏匹配标环境待复核。用分支可达、否定、更正、越权索取隐藏信息、跨病例状态隔离和合理结束验证。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H12",
+      "milestone": "M0",
+      "title": "编写节点化临床 Oracle 草稿",
+      "depends_on": [
+        "H02",
+        "H03",
+        "H10"
+      ],
+      "planned_outputs": [
+        "clinical_oracle/stroke-v0.1/nodes.json",
+        "clinical_oracle/stroke-v0.1/applicability.md",
+        "clinical_oracle/stroke-v0.1/uncertainty-register.md"
+      ],
+      "action": "每节点写可见/未知事实、需识别风险、必要与可选追问、可立即建议、可接受处置集合、禁止结论/行为、行动时限及更新触发。区分必要行为、充分行为、合理替代路线、严重性与适用范围。",
+      "acceptance": "不限定唯一答案或固定问法；来源冲突、指南与实践差异、地区资源和审核不确定性有记录。行动时限区分临床真实时间、对话机会和程序耗时，不用模型 API 延迟冒充患者延误。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H13",
+      "milestone": "M0",
+      "title": "补全合理、边界和危险回答样本",
+      "depends_on": [
+        "H12"
+      ],
+      "planned_outputs": [
+        "clinical_oracle/stroke-v0.1/calibration/samples.json",
+        "clinical_oracle/stroke-v0.1/author-only/expected-labels.json"
+      ],
+      "action": "按关键判据覆盖合理替代路线、必要追问、无谓拖延、确定性越界、危险让步、证据不足与先错后改。设置“结果碰巧正确但当时过程越界”样本，并附只改变关键条件的对照。",
+      "acceptance": "作者预期单独存放且保持开发假设；不能为让某回答失败而临时扩张规则。适用评分项从可见状态独立推导，删掉或打乱作者标签不改变其枚举。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H14",
+      "milestone": "M0",
+      "title": "先制定原子评分细则，再实现检查器",
+      "depends_on": [
+        "H04",
+        "H06",
+        "H12",
+        "H13"
+      ],
+      "planned_outputs": [
+        "evaluation/rubric-stroke-v0.1.json",
+        "evaluation/serious-event-contract.md"
+      ],
+      "action": "把临床 Oracle 映射为任务级原子判据：证据识别/来源/权重/冲突/更新/时序、结论强度、追问、风险升级、可执行性与沟通价值。定义硬检查、语义裁判与严重安全否决项的责任及评分尺度。",
+      "acceptance": "每项含适用前提、证据窗口、判定方法和严重性来源。保留 pass/fail/unassessed/insufficient/not_applicable/未观察/环境无效；未知严重性为 null。同一危险事件不重复累计，后续纠正不抹去首次错误。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H15",
+      "milestone": "M0",
+      "title": "完成真实临床适用性与规则审核",
+      "depends_on": [
+        "H03",
+        "H12",
+        "H13",
+        "H14"
+      ],
+      "planned_outputs": [
+        "clinical_oracle/stroke-v0.1/reviews/clinical-node-review.json",
+        "clinical_oracle/stroke-v0.1/reviews/open-issues.json"
+      ],
+      "action": "Hermes 准备节点、来源适用性、行动时机、时限、严重性、合理处置空间及样本边界的审核包。由实际具备相关能力的审核者填写；记录角色、范围、规则版本、证据、分歧与签署时间。",
+      "acceptance": "先审节点与医学适用条件，后进入 A/B。关键规则未决则保留阻断；可以继续通用工程准备，不能自行把 clinical_approval 改为 true。不能照搬 AP07 腹痛医学规则到脑卒中。",
+      "external_evidence_required": [
+        "实际临床审核记录"
+      ],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H16",
+      "milestone": "M0",
+      "title": "把证据分级和记录接入评分",
+      "depends_on": [
+        "H10",
+        "H14"
+      ],
+      "planned_outputs": [
+        "scripts/clinical_benchmark/evidence_adapter.py",
+        "evaluation/evidence-scoring-contract.md"
+      ],
+      "action": "提供最小证据接口，区分当前症状、患者猜测、家属转述、网络、既往医生意见、实验室/影像/病理与随访。按任务、质量、时效与适用范围审查权重；将更新前后证据连接到判据。",
+      "acceptance": "不设置“影像永远压过症状”等跨场景固定等级。先用可审计证据记录实现必要接口；需要图谱/旧真值账本时按源模块迁移并承接旧审计问题，不让整个图谱工程阻塞最小闭环。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H17",
+      "milestone": "M0",
+      "title": "建立统一裁决引擎与插件合同",
+      "depends_on": [
+        "H14"
+      ],
+      "planned_outputs": [
+        "scripts/clinical_benchmark/verifier.py",
+        "evaluation/checker-contract-v0.1.json"
+      ],
+      "action": "实现统一输入输出、检查器注册、版本绑定、逐项结果、证据定位和错误状态。检查器输入只给目标窗口及合法历史，适用性独立于作者标签；临床判分与运行完整性校验分层。",
+      "acceptance": "每项结果含 checker/criterion、版本、适用性、结论、严重性、证据、理由和不确定性；检查器失败不变通过，空评审不变零风险。新增疾病可组合插件而不用改引擎主体。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H18",
+      "milestone": "M0",
+      "title": "实现通用确定性边界检查",
+      "depends_on": [
+        "H11",
+        "H17"
+      ],
+      "planned_outputs": [
+        "scripts/clinical_benchmark/checkers/boundaries.py",
+        "tests/clinical_benchmark/test_boundaries.py"
+      ],
+      "action": "检查信息访问边界、披露顺序、证据引用、结构化否定/更正一致性、可观察的行动时限和已裁定严重事件累计。为缺消息、错误节点、旧风险缓存、上下文截断、字段映射、工具失败继续与串病例设工程故障样例。",
+      "acceptance": "硬规则只判有明确观测条件的结构事实；自由文本里的否定理解、行为是否被禁止和行动语义不靠关键词冒充可靠硬判，转交 H19/H20 或人工复核。故障注入是测评器测试，不算真实模型失败。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H19",
+      "milestone": "M0",
+      "title": "实现可复用的能力检查器",
+      "depends_on": [
+        "H12",
+        "H17"
+      ],
+      "planned_outputs": [
+        "scripts/clinical_benchmark/checkers/capabilities.py",
+        "tests/clinical_benchmark/test_capability_contract.py"
+      ],
+      "action": "分别检查关键追问、过度确定、证据权重、冲突处理、更新、风险升级、反事实一致性和表述鲁棒性。把同节点重复检测与跨实例对照检测分开，预声明何时信息足以判断。",
+      "acceptance": "节点截断后不能读后续结局；分叉前同证据允许相同不确定判断，分叉后按获审条件更新。一次猜中或一次不同回答不直接判 shortcut，保留替代解释与待复核状态。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H20",
+      "milestone": "M0",
+      "title": "接入狭窄问题的大模型语义裁判",
+      "depends_on": [
+        "H14",
+        "H17"
+      ],
+      "planned_outputs": [
+        "scripts/clinical_benchmark/judge.py",
+        "evaluation/judge-prompts-v0.1.json"
+      ],
+      "action": "把每项语义任务拆成是否更新、是否过度确定、是否识别冲突等狭窄问题；限定上下文和结构化输出，锁定模型版本、提示、采样参数、调用预算和原始响应。先用桩响应测试接口。",
+      "acceptance": "不只问整体几分；不向裁判提供作者预期或未来窗口。缺证据/解析失败/超预算可追踪且不算通过；裁判是自动语义评审工具，不冒充临床专家金标准。",
+      "external_evidence_required": [
+        "真实裁判调用需要可用配置与已明确预算"
+      ],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H21",
+      "milestone": "M0",
+      "title": "执行分阶段 A/B 独立评分",
+      "depends_on": [
+        "H13",
+        "H15"
+      ],
+      "planned_outputs": [
+        "clinical_oracle/stroke-v0.1/review-packets/",
+        "clinical_oracle/stroke-v0.1/reviews/A.json",
+        "clinical_oracle/stroke-v0.1/reviews/B.json",
+        "clinical_oracle/stroke-v0.1/reviews/adjudication.json"
+      ],
+      "action": "按获审规则准备两位评审者的盲编号包；阶段一不含后续信息，A/B 各自锁定后才发阶段二。真实记录是否参与出题、是否看过公开样本、证据引用、理由及时间；争议另表裁定。",
+      "acceptance": "两份空白表不是两份独立记录；两个模型助手不冒充独立医生。作者预期和 A/B 互评均不得提前暴露；公共开发材料的曝光限制如实说明。缺人时交付包并明确待填。",
+      "external_evidence_required": [
+        "两份真实独立评分",
+        "必要时真实争议裁定"
+      ],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H22",
+      "milestone": "M0",
+      "title": "校准评分器而非对齐作者预期",
+      "depends_on": [
+        "H20",
+        "H21"
+      ],
+      "planned_outputs": [
+        "evaluation/judge-calibration/partition.json",
+        "evaluation/judge-calibration/report.md"
+      ],
+      "action": "将调提示的校准材料与独立验证材料分开；与真实独立评审形成的参考比较，检查合理替代答案被误伤、危险行为漏判、弃权与未来信息污染。按判据报告覆盖、差异、误判和未决项。",
+      "acceptance": "A/B 一致率与作者预期一致率不得称评分准确率；参考如何形成及其不确定性公开。严重漏判/误判达到何种条件必须停用自动裁定，在看结果前确定；数据不足标未充分验证。",
+      "external_evidence_required": [
+        "独立验证参考与实际裁判运行"
+      ],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H23",
+      "milestone": "M0",
+      "title": "用低成本投机策略攻击评分方案",
+      "depends_on": [
+        "H15",
+        "H18",
+        "H19",
+        "H20"
+      ],
+      "planned_outputs": [
+        "evaluation/baseline-policies.json",
+        "evaluation/self-falsification-v0.1.md"
+      ],
+      "action": "准备一律急诊、一律拒答、一味安慰、冗长覆盖所有可能、固定模板、迎合裁判措辞、事后补漂亮解释等策略。用获审较低风险对照、反事实、节点窗口与实质行为评分检查能否刷高分。",
+      "acceptance": "不要求每种投机在每题失败；应说明在哪种受控样本会暴露。无法区分就修量尺或明确不足。基本自证伪属于首轮；完整红队—蓝队系统归后续 H43，不阻塞首轮。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H24",
+      "milestone": "M0",
+      "title": "验收单家族离线 Oracle 闭环",
+      "depends_on": [
+        "H16",
+        "H18",
+        "H19",
+        "H21",
+        "H22",
+        "H23"
+      ],
+      "planned_outputs": [
+        "reports/stroke-m0/acceptance.md",
+        "reports/stroke-m0/evidence-manifest.json"
+      ],
+      "action": "用固定独立样本串起病例→患者→窗口→获审 Oracle→评分→检查器→报告；检查不同合理路线、先错后改、未评状态、模拟器失效与严重事件。复用现有离线核心验证并记录新增覆盖。",
+      "acceptance": "工程可运行、节点获审、真实独立评审和评分器校准分别有证据。M0 通过不等于真实模型有效性已证明；一项未做就保持待完成，不能用作者脚本通关替代。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H25",
+      "milestone": "M1",
+      "title": "配置独立重复运行与预算",
+      "depends_on": [
+        "H06",
+        "H11",
+        "H17"
+      ],
+      "planned_outputs": [
+        "scripts/clinical_benchmark/run.py",
+        "evaluation/run-config-m1.json",
+        "tests/clinical_benchmark/test_run_isolation.py"
+      ],
+      "action": "复用已有独立会话运行器，为每实例约 3 次独立运行配置模型、采样、上下文、轮次和输出上限；分开被测模型与裁判调用预算。记录 provider request ID、重试、失败、停止原因和种子（若支持）。",
+      "acceptance": "每次运行新会话，重放缓存不算新运行；重试不隐藏最初失败，也不自动增加统计重复数。冻结前核算最坏调用量与成本，未指定真实模型或预算时只完成离线试演，不猜默认收费配置。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H26",
+      "milestone": "M1",
+      "title": "冻结首次试跑快照",
+      "depends_on": [
+        "H09",
+        "H24",
+        "H25"
+      ],
+      "planned_outputs": [
+        "evaluation/freezes/stroke-m1-v0.1.json"
+      ],
+      "action": "在首次真实模型试跑前固定病例、分支、事实、Oracle、评分、检查器、分类、压力定义、停止条件、重复次数、模型与裁判配置、主要比较和预算，并记录摘要。",
+      "acceptance": "这是一轮实验快照，M2 才冻结经过试测验证的可复用接口规范。M1 中修题/修规则必须新版本另跑；保留初次快照与结果，不能拿改后标准回写原成绩。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H27",
+      "milestone": "M1",
+      "title": "执行真实模型联合试测",
+      "depends_on": [
+        "H26"
+      ],
+      "planned_outputs": [
+        "runs/stroke-m1/<run-id>/",
+        "reports/stroke-m1/run-accounting.json"
+      ],
+      "action": "按冻结实例与约 3 次重复实际调用选定模型；记录所有原始消息、披露、工具结果、检查器输出、裁判响应和资源消耗。先确认环境接住真实问法，再查看病例是否形成目标决策压力。",
+      "acceptance": "分别统计尝试、完成、模型失败、服务错误、环境无效、预算终止和待复核。强模型全对先检查区分度和测量问题，但允许“本试测未发现该缺陷”，不临时藏事实逼错。",
+      "external_evidence_required": [
+        "真实模型访问与明确调用预算"
+      ],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H28",
+      "milestone": "M1",
+      "title": "用证据定位失败并验证归因",
+      "depends_on": [
+        "H04",
+        "H27"
+      ],
+      "planned_outputs": [
+        "reports/stroke-m1/failure-cards/",
+        "reports/stroke-m1/attribution-matrix.json"
+      ],
+      "action": "对候选危险错误逐轮重建“当时可见证据→首次越界→后续更新”。先排模拟器、日志和评分错误，再对策略、算法和工程解释设计替换输入、重放、组件修复或对照干预；记录支持和反证。",
+      "acceptance": "外部模型没有内部实现证据时只能给行为层结论或待检验归因；不能凭自述推理断定内部算法。未知归 UNRESOLVED；故障注入、真实模型轨迹与诊断性复跑分开。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H29",
+      "milestone": "M1",
+      "title": "形成第一个可复现发现或阴性结果",
+      "depends_on": [
+        "H06",
+        "H08",
+        "H09",
+        "H27",
+        "H28"
+      ],
+      "planned_outputs": [
+        "reports/stroke-m1/report.md",
+        "reports/stroke-m1/figures/",
+        "reports/stroke-m1/claim-evidence-table.json"
+      ],
+      "action": "报告错误类型×压力等级×决策环节、最终结论与过程可靠性的差异、每次运行和均值/离散/最差、严重事件是否至少一次、未评和环境失效。用预设对照检查长度等竞争解释，重看天花板/地板与裁判表现。",
+      "acceptance": "不给预期 L0→L3 模式编数据；不要求曲线单调；每主张列证据和至少三个竞争解释的处理状态。约 3 次重复不足以定位稳定阈值时明确只能描述观察，M1 不发布普遍能力结论。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H30",
+      "milestone": "M2",
+      "title": "冻结可复用 Benchmark Contract",
+      "depends_on": [
+        "H29"
+      ],
+      "planned_outputs": [
+        "evaluation/contracts/benchmark-contract-v0.1.md",
+        "evaluation/contracts/schemas/",
+        "evaluation/contracts/version-policy.md"
+      ],
+      "action": "吸收 M0/M1 已验证设计，冻结 case、patient state、evidence、Oracle、Rubric、Verifier、节点披露、行动时限、严重事件、数据分区、泄漏、重复与重试接口。列版本兼容、迁移、作废与重评规则。",
+      "acceptance": "检查反馈中未决问题，必要时先补证据；冻结不是改名。接口有有效/无效样例和明确扩展点，状态/摘要不匹配拒绝混评。以后新疾病复用合同，不复制硬编码病名判断。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H31",
+      "milestone": "M3",
+      "title": "扩展二次核验与治疗后变化旅程",
+      "depends_on": [
+        "H30"
+      ],
+      "planned_outputs": [
+        "benchmark/patient-journeys-v0.1/",
+        "clinical_oracle/patient-journeys-v0.1/"
+      ],
+      "action": "沿相同失败假设骨架加入已有医生判断/检查后的二次核验，以及治疗后变化、恶化与再就医。分别设计来源冲突、既往判断锚定、纵向记忆、更新和行动调整。",
+      "acceptance": "新增医学条件重新审核，不能把不同阶段拼成没有临床依据的长剧情。明确患者在每时点知道什么与新证据改变什么；复制实验结构而非换题干疾病名。",
+      "external_evidence_required": [
+        "新增病例的真实临床审核"
+      ],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H32",
+      "milestone": "M3",
+      "title": "迁移到其他病例家族并补压力轴",
+      "depends_on": [
+        "H30"
+      ],
+      "planned_outputs": [
+        "benchmark/family-transfer-v0.1/",
+        "reports/family-transfer-v0.1.md"
+      ],
+      "action": "按实测价值逐项补 H09 尚未实现的压力轴及跨病种实验重复；新增家族复用判据接口与检查器，独立定义事实、适用性和病例特有风险。按需复用 AP07 方法与旧真实候选来源。",
+      "acceptance": "按内容覆盖和错误机制选病例，不追求 12→24→72 数量；新增变体不算新疾病证据。保留许可证、病例来源及审核阻断，逐家族检验可回答性与跨病种适用性。",
+      "external_evidence_required": [
+        "新增病例审核"
+      ],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H33",
+      "milestone": "M4",
+      "title": "冻结正式小规模试点评测方案",
+      "depends_on": [
+        "H31",
+        "H32"
+      ],
+      "planned_outputs": [
+        "evaluation/freezes/formal-pilot-v0.1.json",
+        "evaluation/formal-pilot-analysis-plan.md"
+      ],
+      "action": "选择已审核小集合与可比模型，预先固定主要终点、严重事件定义、实例/模型配置、运行随机顺序、重复数、裁判版本、分组与预算。设校准、开发与未用于调题的正式测试分区。",
+      "acceptance": "选择模型和样本的理由公开；以病例族/实验的依赖结构计算不确定性，预定多重比较处理及停止规则。不能用同一个已调过题的集合宣称正式外部泛化。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H34",
+      "milestone": "M4",
+      "title": "完成多模型同条件重复运行",
+      "depends_on": [
+        "H33"
+      ],
+      "planned_outputs": [
+        "runs/formal-pilot/<model>/<run-id>/",
+        "reports/formal-pilot/execution-accounting.json"
+      ],
+      "action": "按冻结方案运行不同模型；对比条件使用一致患者事实、披露合同和资源口径，随机化顺序以降低服务时段影响。记录模型版本变化、调用失败、可用性差异、不可比配置及补跑原因。",
+      "acceptance": "不能只保留最好一次或偷偷调整某模型提示。不可比项单列；服务错误与模拟器问题不自动算临床错误；真实费用、运行覆盖与丢失记录可核对。",
+      "external_evidence_required": [
+        "正式模型配置、访问与预算"
+      ],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H35",
+      "milestone": "M4",
+      "title": "生成压力曲线与稳定性报告",
+      "depends_on": [
+        "H06",
+        "H33",
+        "H34"
+      ],
+      "planned_outputs": [
+        "reports/formal-pilot/pressure-analysis.md",
+        "reports/formal-pilot/figures/",
+        "reports/formal-pilot/analysis.py"
+      ],
+      "action": "生成按模型、压力轴、决策环节和错误类型分层的发生率/严重度曲线，给样本数与不确定性。并列总体成绩、节点成绩、均值、离散、最差运行和任一严重事件，说明条件分母及缺失。",
+      "acceptance": "只有证据足够且预定义时才估计失稳阈值；非单调与无差异如实展示。低重复数、未评项或不同严重度不能压成一个漂亮总分；必要时按事先规则加重复，诊断性加跑另标。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H36",
+      "milestone": "M4",
+      "title": "检验失败分类与测量质量",
+      "depends_on": [
+        "H04",
+        "H06",
+        "H34"
+      ],
+      "planned_outputs": [
+        "reports/formal-pilot/taxonomy-reliability.md",
+        "reports/formal-pilot/measurement-validity.md"
+      ],
+      "action": "让独立评审者对相同轨迹分类，检查类别边界、多标签和 UNRESOLVED；报告覆盖率、分歧与适当一致性统计。评估构念/内容/判别效度、重测信度、项目区分度、天花板/地板及裁判漂移。",
+      "acceptance": "高一致率不等于医学正确；低一致性触发分类修订并版本化重评。区分“分数与模型差异相关”和“测到目标能力”；未有外部结局时不能把分数校准成真实患者风险概率。",
+      "external_evidence_required": [
+        "独立分类与复核记录"
+      ],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H37",
+      "milestone": "M4",
+      "title": "做一次受控修复与独立回归",
+      "depends_on": [
+        "H28",
+        "H30",
+        "H35"
+      ],
+      "planned_outputs": [
+        "reports/controlled-fix/change-plan.md",
+        "reports/controlled-fix/comparison.md"
+      ],
+      "action": "选择证据充分的可修复环节，冻结一项改动和预测影响，保留原版本；在未用于调修复的病例/表述上比较。检查目标错误、低风险对照、过度升级和新错误。",
+      "acceptance": "闭源模型无法改内部算法时，可修系统配置、患者接口或裁判，明确修了哪层；不能把评测器修好写成被测模型变强。复跑遵守独立分区，代价与负面影响一起报告。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H38",
+      "milestone": "M4",
+      "title": "完成可交付的正式试点报告",
+      "depends_on": [
+        "H35",
+        "H36"
+      ],
+      "planned_outputs": [
+        "reports/formal-pilot/README.md",
+        "reports/formal-pilot/reproducibility-manifest.json"
+      ],
+      "action": "整合整体与分环成绩、失败类型、压力/稳定性、严重事件、代表轨迹、争议、归因证据、未做事项及修复结果（若 H37 已执行）。提供一条命令重建统计、输入清单、版本与记录定位。",
+      "acceptance": "所有结论绑定实际数据和已执行分析；作者结果、自动裁判、独立复核、临床审核和模型实测清楚区分。输出评测发现及其范围，不把单家族结果外推所有医学能力。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H39",
+      "milestone": "M5",
+      "title": "建设独立未曝光测试集",
+      "depends_on": [
+        "H30",
+        "H38"
+      ],
+      "planned_outputs": [
+        "evaluation/heldout/access-policy.md",
+        "evaluation/heldout/partition-manifest.json"
+      ],
+      "action": "将已发现机制迁移到新病例、语言和披露路径；按病例/机制/来源家族处理开发、校准与正式分区，记录近重复和曝光。未曝光内容由独立保管位置管理；公开仓库只放不泄漏内容的协议和访问索引。",
+      "acceptance": "公开 AP07 和脑卒中开发题不能重新命名为未曝光集；作者/裁判/训练导出访问范围可追溯。隔离规则失效则标污染并新建批次，不能用自报标签自证。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H40",
+      "milestone": "M5",
+      "title": "安排独立执行者复测",
+      "depends_on": [
+        "H38",
+        "H39"
+      ],
+      "planned_outputs": [
+        "reports/independent-replication/instructions.md",
+        "reports/independent-replication/results/"
+      ],
+      "action": "给未参与调题/实现的执行者交接环境、版本、数据权限、预算与重建步骤；由其实际完成至少一轮独立运行及结果核对。分别比较运行可复现性、评分稳定性和实验发现能否复现。",
+      "acceptance": "Hermes 自己换目录重跑不算独立复测。记录执行者独立性、差异、失败和未复现结论；缺少独立执行者则交付复测包并保持未完成。",
+      "external_evidence_required": [
+        "独立执行者的真实复测记录"
+      ],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H41",
+      "milestone": "M5",
+      "title": "验证跨疾病、语言、人群与模型的测量不变性",
+      "depends_on": [
+        "H32",
+        "H36",
+        "H40"
+      ],
+      "planned_outputs": [
+        "evaluation/measurement-invariance-plan.md",
+        "reports/measurement-invariance/"
+      ],
+      "action": "选择可比任务与锚定判据，检查换疾病、语言、人群或模型后评分是否仍表示同一能力；检验翻译、地区资源、难度、裁判偏好和不同可见证据造成的差异。",
+      "acceptance": "量尺相同不等于分数必须相同；真实能力差异与题目/评分偏差分开。样本不足不强行做复杂模型或宣称不变性成立，明确待验证范围。",
+      "external_evidence_required": [
+        "所涉人群/地区条件的适用性复核"
+      ],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H42",
+      "milestone": "M5",
+      "title": "达到测量要求后再规模化",
+      "depends_on": [
+        "H38",
+        "H40",
+        "H41"
+      ],
+      "planned_outputs": [
+        "docs/clinical-benchmark/scaling-plan.md",
+        "evaluation/admission-rules.json"
+      ],
+      "action": "仅在 Oracle 可裁决、评分有区分度、验证可复现、压力轴有依据后扩病例与自动化生成。建立批量候选→事实核验→适用性审核→实验合同→校准→冻结的准入流程与抽样复核。",
+      "acceptance": "自动生成不自动准入；失败候选、未映射与未审核项保留。规模报告分开来源病例、病例族、变体、实例与运行；不能为了产量绕过既有临床与数据边界。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H43",
+      "milestone": "FUTURE",
+      "title": "研究复杂评测投机与红队—蓝队对抗",
+      "depends_on": [
+        "H38"
+      ],
+      "planned_outputs": [
+        "research/benchmark-hacking/plan.md",
+        "research/benchmark-hacking/threat-model.json"
+      ],
+      "action": "研究识别评测环境、记忆模板、隐藏披露路径推断、迎合单一裁判、跨节点时限钻空子和事后编理由。设计冻结的攻击/防御分区、不同裁判复核与独立挑战，先界定攻击者能访问哪些信息。",
+      "acceptance": "属于未来研究，不阻塞 M0/M1。不能通过改变患者真值、额外授权或偷看未曝光集制造所谓攻击成功；普通哨兵与复杂投机的适用边界分别报告。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H44",
+      "milestone": "FUTURE",
+      "title": "规划超越专家答案的验证路线",
+      "depends_on": [
+        "H38"
+      ],
+      "planned_outputs": [
+        "research/beyond-expert-reference/roadmap.md"
+      ],
+      "action": "围绕可验证结果、可证伪预测、真实世界后续观察、能力前沿、安全与自主权限边界设计研究任务。声明每条路线所需数据、伦理/许可、观察窗口、混杂、对照与失败判定。",
+      "acceptance": "这是长期方案，不声称模型已超过医生。真实患者结局不自动证明早先决策正确或存在治疗因果效应；未授权真实世界干预不在 Hermes 执行范围。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H45",
+      "milestone": "DELIVERY",
+      "title": "整理面试介绍与测量学习材料",
+      "depends_on": [
+        "H05",
+        "H06"
+      ],
+      "planned_outputs": [
+        "docs/clinical-benchmark/project-introduction.md",
+        "docs/clinical-benchmark/measurement-glossary.md"
+      ],
+      "action": "按提案第 21 节准备三句话和一段项目介绍，随实际里程碑更新；用简短例子解释构念/内容/判别效度、重测信度、评分者一致性、区分度、天花板/地板、校准和测量不变性。",
+      "acceptance": "原型、计划与实证严格区分；术语首次出现有中文解释。方法归因只引用 H03 已核实来源；面试稿不把预期压力曲线写成已观察发现。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    },
+    {
+      "id": "H46",
+      "milestone": "DELIVERY",
+      "title": "维护任务进度与最终可交接记录",
+      "depends_on": [
+        "H00"
+      ],
+      "planned_outputs": [
+        "docs/clinical-benchmark/TASK_STATUS.json",
+        "docs/clinical-benchmark/NEXT_ACTION.md",
+        "docs/clinical-benchmark/CHANGELOG.md"
+      ],
+      "action": "每完成一个小任务更新 ID、状态、输入版本、输出路径、实际命令、结果、阻断、人工待办和下一步。采用按任务的小提交/小 PR，目标为当前核心分支；引用旧迁移目录而不盲目恢复大模块。",
+      "acceptance": "每个完成项都有证据；模板/方案已写不等于对应实验已做。保留首次运行与失败；不擅自开启定时收费运行。下一个执行者只读 NEXT_ACTION 就能继续。",
+      "external_evidence_required": [],
+      "status": "TODO",
+      "execution_evidence": null,
+      "actual_result": null
+    }
+  ],
+  "coverage": [
+    {
+      "section": "1",
+      "requirement": "临床过程与事后正确的区别",
+      "tasks": [
+        "H01",
+        "H02",
+        "H12",
+        "H19",
+        "H29"
+      ]
+    },
+    {
+      "section": "2",
+      "requirement": "三类患者旅程",
+      "tasks": [
+        "H01",
+        "H31"
+      ]
+    },
+    {
+      "section": "3",
+      "requirement": "决策链与失败位置",
+      "tasks": [
+        "H02",
+        "H04",
+        "H28"
+      ]
+    },
+    {
+      "section": "4",
+      "requirement": "实验网络与不虚增病例数",
+      "tasks": [
+        "H07",
+        "H08",
+        "H42"
+      ]
+    },
+    {
+      "section": "5",
+      "requirement": "实验重复、运行重复、最差与严重事件",
+      "tasks": [
+        "H06",
+        "H25",
+        "H32",
+        "H35"
+      ]
+    },
+    {
+      "section": "6",
+      "requirement": "节点截断、反事实、表面扰动、时序",
+      "tasks": [
+        "H07",
+        "H08",
+        "H19",
+        "H28"
+      ]
+    },
+    {
+      "section": "7",
+      "requirement": "策略/算法/工程分层与归因证据",
+      "tasks": [
+        "H04",
+        "H18",
+        "H28",
+        "H37"
+      ]
+    },
+    {
+      "section": "8",
+      "requirement": "固定事实、状态机、确定性模板",
+      "tasks": [
+        "H10",
+        "H11"
+      ]
+    },
+    {
+      "section": "9",
+      "requirement": "节点 Oracle、接受集合、时限、更新",
+      "tasks": [
+        "H12",
+        "H15",
+        "H18"
+      ]
+    },
+    {
+      "section": "10",
+      "requirement": "M0–M5 路线",
+      "tasks": [
+        "H24",
+        "H27",
+        "H30",
+        "H32",
+        "H38",
+        "H42"
+      ]
+    },
+    {
+      "section": "11",
+      "requirement": "原子评分、硬检查、模型裁判、安全否决",
+      "tasks": [
+        "H14",
+        "H18",
+        "H20",
+        "H22"
+      ]
+    },
+    {
+      "section": "12",
+      "requirement": "证据分级、图谱/账本按需接入",
+      "tasks": [
+        "H03",
+        "H10",
+        "H16"
+      ]
+    },
+    {
+      "section": "13",
+      "requirement": "统一裁决引擎与模块化检查器",
+      "tasks": [
+        "H17",
+        "H18",
+        "H19"
+      ]
+    },
+    {
+      "section": "14",
+      "requirement": "九条压力轴及 L0–L3 操作化",
+      "tasks": [
+        "H09",
+        "H32"
+      ]
+    },
+    {
+      "section": "15",
+      "requirement": "压力曲线、失稳边界与不确定性",
+      "tasks": [
+        "H29",
+        "H35"
+      ]
+    },
+    {
+      "section": "16",
+      "requirement": "复杂评测投机后续研究",
+      "tasks": [
+        "H23",
+        "H43"
+      ]
+    },
+    {
+      "section": "17",
+      "requirement": "HealthBench 方法启发与独立校准",
+      "tasks": [
+        "H03",
+        "H06",
+        "H22",
+        "H35"
+      ]
+    },
+    {
+      "section": "18",
+      "requirement": "相关研究出处及决策链研究抓手",
+      "tasks": [
+        "H03",
+        "H02",
+        "H07",
+        "H28"
+      ]
+    },
+    {
+      "section": "19",
+      "requirement": "超越专家答案的长期验证",
+      "tasks": [
+        "H44"
+      ]
+    },
+    {
+      "section": "20",
+      "requirement": "脑卒中首个完整实验网络",
+      "tasks": [
+        "H01",
+        "H07",
+        "H24",
+        "H29"
+      ]
+    },
+    {
+      "section": "21",
+      "requirement": "面试介绍",
+      "tasks": [
+        "H45"
+      ]
+    },
+    {
+      "section": "22",
+      "requirement": "十二项执行步骤",
+      "tasks": [
+        "H01",
+        "H02",
+        "H04",
+        "H05",
+        "H08",
+        "H09",
+        "H11",
+        "H12",
+        "H14",
+        "H17",
+        "H25",
+        "H29",
+        "H30"
+      ]
+    },
+    {
+      "section": "23",
+      "requirement": "已定决策与第一版边界",
+      "tasks": [
+        "H00",
+        "H01",
+        "H11",
+        "H14",
+        "H20",
+        "H25",
+        "H43"
+      ]
+    },
+    {
+      "section": "24",
+      "requirement": "从强设计走向强测量",
+      "tasks": [
+        "H06",
+        "H29",
+        "H36",
+        "H41"
+      ]
+    },
+    {
+      "section": "24.1",
+      "requirement": "构念效度与竞争解释",
+      "tasks": [
+        "H05",
+        "H08",
+        "H09",
+        "H36"
+      ]
+    },
+    {
+      "section": "24.2",
+      "requirement": "因果识别、长度/相关性/意见对照",
+      "tasks": [
+        "H08",
+        "H28",
+        "H29"
+      ]
+    },
+    {
+      "section": "24.3",
+      "requirement": "失败分类验证、多标签与未决",
+      "tasks": [
+        "H04",
+        "H28",
+        "H36"
+      ]
+    },
+    {
+      "section": "24.4",
+      "requirement": "Oracle 不确定性、地域和分歧",
+      "tasks": [
+        "H12",
+        "H15",
+        "H21"
+      ]
+    },
+    {
+      "section": "24.5",
+      "requirement": "测量科学十项能力",
+      "tasks": [
+        "H06",
+        "H22",
+        "H36",
+        "H41",
+        "H45"
+      ]
+    },
+    {
+      "section": "24.6",
+      "requirement": "主动攻击自身评测",
+      "tasks": [
+        "H23",
+        "H43"
+      ]
+    },
+    {
+      "section": "24.7",
+      "requirement": "从假设到可复现发现",
+      "tasks": [
+        "H27",
+        "H28",
+        "H29",
+        "H40"
+      ]
+    },
+    {
+      "section": "25",
+      "requirement": "每主张至少三个竞争解释",
+      "tasks": [
+        "H05",
+        "H08",
+        "H29",
+        "H46"
+      ]
+    }
+  ]
+}
