@@ -225,7 +225,15 @@ def run_ap07_offline(client, *, stop_after=None, max_turns=MAX_NATURAL_ANSWERS):
         try:
             cleaned = _clean_offline_result(client([]))
         except Exception:
-            return _environment_failure(session)
+            # The caller-supplied client (the collector side) failed. This is a
+            # collector problem, NOT a simulator/asset problem: mislabelling it
+            # as "simulator" would send M1 triage down the wrong path.
+            session["status"] = "measurement_invalid"
+            session["environment_issue"] = ENVIRONMENT_ISSUE
+            session["invalid_reason"] = "offline client raised"
+            session["invalid_component"] = "collector"
+            session["metadata"]["stop_reason"] = ENVIRONMENT_ISSUE
+            return session
         if cleaned["error"]:
             session["status"] = "measurement_invalid"
             session["environment_issue"] = ENVIRONMENT_ISSUE

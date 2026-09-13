@@ -28,10 +28,40 @@ def run_ap07_offline(client, *, stop_after=None, max_turns=MAX_NATURAL_ANSWERS):
 **这是 M1 的唯一接入点**：把 `client` 从 scripted 函数换成真实模型调用函数即可。
 
 **当前状态**：
-- `client` 契约已定义（接受消息列表，返回回答）
+- `client` 契约已定义（接受消息列表，返回 dict，含 `content` 键）
 - 当前传的是 scripted client，明确标注 `SYNTHETIC_TRAJECTORY_LABEL`
-- `model_calls=0` 被硬编码并要求保持（`_clean_offline_result` 校验）
-- 无 client 时 fail-closed：`status=measurement_invalid`、`ENVIRONMENT_ISSUE`
+- `model_calls=0` 被硬编码并要求保持
+- 无 client / client 抛异常时 fail-closed：`status=measurement_invalid`
+
+**⚠️ 返回值结构（实测，勿凭直觉取顶层键）**：
+
+`run_ap07_offline` 返回的 session dict 中，模型元数据在 **`session["metadata"]`** 下，不在顶层：
+
+```python
+r = run_ap07_offline(client)
+r["status"]                          # 'completed' | 'measurement_invalid'
+r["metadata"]["trajectory_label"]    # 'synthetic_script_test'
+r["metadata"]["model_calls"]         # 0
+r["metadata"]["clinical_approval"]   # False
+r["metadata"]["stop_reason"]         # 'target_stop' | 'turn_budget' | ENVIRONMENT_ISSUE
+r["turns"]                           # 逐轮会话（含 user/assistant 交替）
+r["disclosure_log"]                  # 每轮披露了哪些 fact_id / event_id
+r["invalid_component"]               # 仅失败时：'collector' | 'simulator'
+```
+
+**实测 dry-run 证据（2026-09-13，scripted client，`model_calls=0`）**：
+
+| 场景 | 输入 client | status | invalid_component | 说明 |
+|---|---|---|---|---|
+| 正常脚本客户端 | 返回 `{"content": "..."}` | `completed` | `None` | 链路通，4 turn，disclosure_log 正确记录 F2/F3 |
+| client 为 None | `None` | `measurement_invalid` | `collector` | collector 侧失败 |
+| client 返回坏 schema | 返回非 dict | `measurement_invalid` | `collector` | schema 违规归 collector |
+
+**🟡 本次核查发现并修复的缺陷**：原实现中 `client` 抛异常被误标为
+`invalid_component="simulator"`（第 228 行复用 `_environment_failure` 默认标签）。
+真实原因是 collector（模型客户端）失败，误标会把 M1 排查方向引向"模拟器资产损坏"。
+已修复为 `collector`，并加注 `invalid_reason="offline client raised"`。修复后
+`tests/ap07_v3` 仍 121 passed。
 
 **docstring 原文**：
 > *"The client never contacts a network: in this window it is always a scripted ... labelled SYNTHETIC_TRAJECTORY_LABEL with model_calls == 0"*
