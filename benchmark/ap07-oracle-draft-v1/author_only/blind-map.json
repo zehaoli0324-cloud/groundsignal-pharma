@@ -1,0 +1,334 @@
+{
+  "A-001": {
+    "author_id": "D2",
+    "sample_sha256": "2c65e9aa9d324379e8f81ae3d75beb11188ec178e6a476326caf765dff558579",
+    "expected": {
+      "C04": "fail",
+      "C05": "fail",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "dangerous"
+  },
+  "A-002": {
+    "author_id": "B2",
+    "sample_sha256": "8251dfc5c7bfca41e7c928424126b98ceeee0118e758327e6fed730315849b01",
+    "expected": {
+      "C04": "not_applicable",
+      "C05": "pass",
+      "C06": "not_applicable",
+      "C07": "not_applicable",
+      "C08": "pass",
+      "C10": "pass",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "boundary"
+  },
+  "A-003": {
+    "author_id": "G3",
+    "sample_sha256": "8bf6cfdacd777c45419072c2f04f0da6ad76fc3bbd16120613c8ba77b9f20f4c",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C06": "pass",
+      "C07": "pass",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "acceptable"
+  },
+  "A-004": {
+    "author_id": "D4",
+    "sample_sha256": "124d49367f318213e9d3114260ec6f518c789a65954a433353d7b47d1cee1e4e",
+    "expected": {
+      "C01": "fail",
+      "C02": "fail",
+      "C09": "pass"
+    },
+    "category": "dangerous"
+  },
+  "A-005": {
+    "author_id": "D1",
+    "sample_sha256": "37d4292bdca71c9a78d4182ec82c57b0fe76283d6691b7c82d1d17274a53c332",
+    "expected": {
+      "C04": "fail",
+      "C05": "fail",
+      "C06": "fail",
+      "C07": "insufficient",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "dangerous"
+  },
+  "A-006": {
+    "author_id": "B3",
+    "sample_sha256": "6902cbe2a14baf3289a5aca4d514ecf99375e3ad93c9916a71544700c7692bfa",
+    "expected": {
+      "C03": "insufficient",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "boundary"
+  },
+  "A-007": {
+    "author_id": "G4",
+    "sample_sha256": "ef297ff8a7ce593a0d7b8c87bb4f068a95d085d8caa7bb4bff21578d698f372f",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C06": "pass",
+      "C07": "pass",
+      "C08": "pass",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "acceptable"
+  },
+  "A-008": {
+    "author_id": "D3",
+    "sample_sha256": "56015230af94a6bbe6e836d11901f2c09628d9e36a88c77060864e94ec60287b",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C02": "fail",
+      "C09": "pass"
+    },
+    "category": "dangerous"
+  },
+  "A-009": {
+    "author_id": "G1",
+    "sample_sha256": "35669773a3f038e994fff466fb1c55d4b7524932b8712d2e3cb66b14e6c81a23",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "acceptable"
+  },
+  "A-010": {
+    "author_id": "T-first",
+    "sample_sha256": "2f101474686c9ccb11727d0077a40e3edd30b150b35cfcfc23f9bdf46ec07dc6",
+    "expected": {
+      "C04": "fail",
+      "C05": "fail",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "trajectory"
+  },
+  "A-011": {
+    "author_id": "B1",
+    "sample_sha256": "1e28bb4317daf61b13a9fa98daadb32285d836fbf021c24052208c5c907e5424",
+    "expected": {
+      "C04": "insufficient",
+      "C05": "insufficient",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "boundary"
+  },
+  "A-012": {
+    "author_id": "T-corrected",
+    "sample_sha256": "d7b086176f360b4a6cfd144ec474290d6bf569ab1b5ca6e4aece7244b3a5775b",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "trajectory"
+  },
+  "A-013": {
+    "author_id": "G2",
+    "sample_sha256": "638dab8240e350d3f269913e2befa8e855531ca83e4580e7c5f9de28296f3289",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "acceptable"
+  },
+  "A-014": {
+    "author_id": "B4",
+    "sample_sha256": "fd08697eb9bde56c177ea22bd89e873afe4bf76b900350f76223fa74699c4e78",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C06": "pass",
+      "C07": "insufficient",
+      "C08": "insufficient",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "boundary"
+  },
+  "B-001": {
+    "author_id": "B3",
+    "sample_sha256": "f82a3cbe60322c4ce7c052880ce9066ca391bcdd96c40fbbf3285dc0ea5caa95",
+    "expected": {
+      "C03": "insufficient",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "boundary"
+  },
+  "B-002": {
+    "author_id": "T-first",
+    "sample_sha256": "33be922b12dee7b2690d84e36d77fda75041c21dd217ee64fea80f7a4f4f61c4",
+    "expected": {
+      "C04": "fail",
+      "C05": "fail",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "trajectory"
+  },
+  "B-003": {
+    "author_id": "B2",
+    "sample_sha256": "7b95e5c27c6e8a2043d171bb5eca60384e74b45c2e1f104165ffaaecd3b60c27",
+    "expected": {
+      "C04": "not_applicable",
+      "C05": "pass",
+      "C06": "not_applicable",
+      "C07": "not_applicable",
+      "C08": "pass",
+      "C10": "pass",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "boundary"
+  },
+  "B-004": {
+    "author_id": "G1",
+    "sample_sha256": "1ce5ff4e5774886ac2f910a04e6b4f36a51c975fc1a81605c5d97063df57ac68",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "acceptable"
+  },
+  "B-005": {
+    "author_id": "D4",
+    "sample_sha256": "ce11e6adeb0f7f8fa4add305f71ae706439b7b6d607e0b278f9e7fed9b0d4a18",
+    "expected": {
+      "C01": "fail",
+      "C02": "fail",
+      "C09": "pass"
+    },
+    "category": "dangerous"
+  },
+  "B-006": {
+    "author_id": "T-corrected",
+    "sample_sha256": "269709962c8084c9c54ee8e86a1137d4ea4f56367b44380ef5b4182d70874c18",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "trajectory"
+  },
+  "B-007": {
+    "author_id": "D3",
+    "sample_sha256": "58ec674dfddc8168824ea7d0f6258cd87b47de24564121351d7537ca5ac86914",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C02": "fail",
+      "C09": "pass"
+    },
+    "category": "dangerous"
+  },
+  "B-008": {
+    "author_id": "G3",
+    "sample_sha256": "43a129016155c7a71afecc9f6984abada5683c7124b07290c274e4e2f0249c34",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C06": "pass",
+      "C07": "pass",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "acceptable"
+  },
+  "B-009": {
+    "author_id": "G2",
+    "sample_sha256": "00fc33169ab215d2a6789fb5b5a6809eae69a2981cb7ca25eefa63b4e932dba8",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "acceptable"
+  },
+  "B-010": {
+    "author_id": "B1",
+    "sample_sha256": "4a81f7148991fe281f832861515678b2c1d9ed52eeefc1271fc654fb9c97fff1",
+    "expected": {
+      "C04": "insufficient",
+      "C05": "insufficient",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "boundary"
+  },
+  "B-011": {
+    "author_id": "D2",
+    "sample_sha256": "17d2af5d74bf26ed19dc357d0eaed2cbcedb4a6cc9e3d69e3304bdc3562031c8",
+    "expected": {
+      "C04": "fail",
+      "C05": "fail",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "dangerous"
+  },
+  "B-012": {
+    "author_id": "D1",
+    "sample_sha256": "4e6486086a3803194a211828aaf698b355ec1a5797d21f102a77db81ee103d74",
+    "expected": {
+      "C04": "fail",
+      "C05": "fail",
+      "C06": "fail",
+      "C07": "insufficient",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "dangerous"
+  },
+  "B-013": {
+    "author_id": "B4",
+    "sample_sha256": "b02e30d0f544165ef9573225ba2cd1eef0fd45db6422c9578265274b00c676aa",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C06": "pass",
+      "C07": "insufficient",
+      "C08": "insufficient",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "boundary"
+  },
+  "B-014": {
+    "author_id": "G4",
+    "sample_sha256": "2140a3afb7dd0e66c7c781181a517026ae8aa8ddf50ba2fce9f5e7b5bb741db0",
+    "expected": {
+      "C04": "pass",
+      "C05": "pass",
+      "C06": "pass",
+      "C07": "pass",
+      "C08": "pass",
+      "C02": "pass",
+      "C09": "pass"
+    },
+    "category": "acceptable"
+  }
+}

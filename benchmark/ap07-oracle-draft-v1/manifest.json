@@ -1,0 +1,27 @@
+{
+  "version": "ap07-oracle-draft-v1",
+  "publication": "public_development",
+  "clinical_approval": false,
+  "files": {
+    "NODES.md": "6b3617660e9a29cf1e1036aeb7f8071322203b1b63ece451d2b268abd7a334a5",
+    "README.md": "462f251e275201999b085d5fb42e50d1cef6e9941c67a15f75bd2e16a610c433",
+    "SOURCES.json": "ec8c7900fa429b9fa4a13ed225737b64570b452b6e18a72ff0eece2e4673e8da",
+    "author_only/blind-map.json": "edc2ad2c2438b1433fcf8b15a3340ea0879dd137a1379204d605967b6397ddcc",
+    "author_only/calibration.json": "464800c50a83e8c6de141f2aca41ecdac3d7e326f244e472b46ee59f5ba416bd",
+    "author_only/original-case.json": "b22fc4597f2ac3b58c5f8e361031353a1c1e932f0c12b0f59dbd3ba48f050af1",
+    "reviewer-A.zip": "ab110d6ce2d1590a7f27eb96cf30a4de4c2635bd8c379011c6812f9258345c77",
+    "reviewer-B.zip": "3e1cc50ba0a2082281351f996a4fc928523b4bb2dfc873a134f264f46f734bc4",
+    "reviewer_A/INSTRUCTIONS.md": "73dce84994368d6773a66018b1b754cd89e09b1c8c5c6fa42ae4d0adf7d8e697",
+    "reviewer_A/NODES.md": "6b3617660e9a29cf1e1036aeb7f8071322203b1b63ece451d2b268abd7a334a5",
+    "reviewer_A/SOURCES.json": "ec8c7900fa429b9fa4a13ed225737b64570b452b6e18a72ff0eece2e4673e8da",
+    "reviewer_A/criteria.json": "ce1b31bdb504a71a5dcdc8a1e167b951e7351fe30cf20a62138780a49b377fa3",
+    "reviewer_A/review.json": "c822eaec3334039809b9835425ae38362894e239c3e90d9445622211d8494832",
+    "reviewer_A/samples.json": "0dd65407974b3235fa600f2779183ecd4e98ccf196dc5763aabe8f28465c9b94",
+    "reviewer_B/INSTRUCTIONS.md": "73dce84994368d6773a66018b1b754cd89e09b1c8c5c6fa42ae4d0adf7d8e697",
+    "reviewer_B/NODES.md": "6b3617660e9a29cf1e1036aeb7f8071322203b1b63ece451d2b268abd7a334a5",
+    "reviewer_B/SOURCES.json": "ec8c7900fa429b9fa4a13ed225737b64570b452b6e18a72ff0eece2e4673e8da",
+    "reviewer_B/criteria.json": "ce1b31bdb504a71a5dcdc8a1e167b951e7351fe30cf20a62138780a49b377fa3",
+    "reviewer_B/review.json": "78cab9c0f970ca1caab905bf2369027ad688b80d2d4944552c4b07817fe464df",
+    "reviewer_B/samples.json": "97187ab055233cbdfeec7c8dad4da2d924bac1701a422d0afc62a5d4d52cdeb8"
+  }
+}
