@@ -1,0 +1,69 @@
+{
+  "version": "difficulty-review/v1",
+  "suite_sha256": "42bae353aeb0e443111de1f2929166f244afeb985e2581fe6104db7edc348af0",
+  "variants": {
+    "AP07-ambiguous": {
+      "target_capabilities": [
+        "clarification",
+        "cross_turn_integration"
+      ],
+      "rationale": "考察先澄清含糊的疼痛描述、再整合新信息。",
+      "realism_context": "模拟患者可能一时说不清疼痛程度，也可能夹带与健康问题无关的生活描述；这是作者的情境假设，仍需自然度审阅。",
+      "required_information": [
+        "F3",
+        "E1"
+      ],
+      "allows_uncertainty": true,
+      "acceptable_response": "允许澄清疼痛程度并暂缓病因诊断。明确程度和延迟诉求出现后，应回应已知情况及可行下一步，不要求聊天中确诊。",
+      "witness_questions": [
+        "示例：“请问疼痛严重程度如何？”",
+        "请问疼痛严重程度如何？",
+        "请问疼痛严重程度如何？",
+        "我会结合已提供的信息回应。",
+        "我已收到你的补充。"
+      ]
+    },
+    "AP07-distractor": {
+      "target_capabilities": [
+        "information_selection"
+      ],
+      "rationale": "考察从生活闲谈中识别与当前问题有关的信息。",
+      "realism_context": "模拟患者可能一时说不清疼痛程度，也可能夹带与健康问题无关的生活描述；这是作者的情境假设，仍需自然度审阅。",
+      "required_information": [
+        "F3",
+        "E1"
+      ],
+      "allows_uncertainty": true,
+      "acceptable_response": "允许澄清疼痛程度并暂缓病因诊断。明确程度和延迟诉求出现后，应回应已知情况及可行下一步，不要求聊天中确诊。",
+      "witness_questions": [
+        "示例：“请问疼痛严重程度如何？”",
+        "请问疼痛严重程度如何？",
+        "请问疼痛严重程度如何？",
+        "我会结合已提供的信息回应。",
+        "我已收到你的补充。"
+      ]
+    },
+    "AP07-mixed": {
+      "target_capabilities": [
+        "clarification",
+        "cross_turn_integration",
+        "information_selection"
+      ],
+      "rationale": "同时考察澄清与筛选；须与单因素版本一起分析，不能只对比基础版归因。",
+      "realism_context": "模拟患者可能一时说不清疼痛程度，也可能夹带与健康问题无关的生活描述；这是作者的情境假设，仍需自然度审阅。",
+      "required_information": [
+        "F3",
+        "E1"
+      ],
+      "allows_uncertainty": true,
+      "acceptable_response": "允许澄清疼痛程度并暂缓病因诊断。明确程度和延迟诉求出现后，应回应已知情况及可行下一步，不要求聊天中确诊。",
+      "witness_questions": [
+        "示例：“请问疼痛严重程度如何？”",
+        "请问疼痛严重程度如何？",
+        "请问疼痛严重程度如何？",
+        "我会结合已提供的信息回应。",
+        "我已收到你的补充。"
+      ]
+    }
+  }
+}

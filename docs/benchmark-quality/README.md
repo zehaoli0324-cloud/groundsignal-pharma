@@ -1,5 +1,7 @@
 # 每次改题后，自动检查哪里出了问题
 
+新增：[难度合理性专项审阅](../../benchmark/multiturn-factors-v1/DIFFICULTY_REVIEW.md)。每次自动审阅现在会生成基础版与变体的变化对照、目标能力说明、信息可得性和负担提示；可选评审模型进一步检查自然度和评分公平性。未做语义审阅时保留“待审阅”，不以机械检查通过代表难度合理。
+
 更新：PR #28 已作为多轮模糊／干扰／混合实验的开发期验收基础。[新轨道契约与四类缺陷验收](../../benchmark/multiturn-factors-v1/README.md)已接入同一 Actions 的静态检查、执行验证和 Docker 步骤。旧的首问后缀配对检查保留，新轨道独立路由；下面原有 14 张题卡的配对限制继续有效。
 
 这套检查用于 GroundSignal 的 14 张公开合成医学对话题卡。提交拉取请求（Pull Request，简称 PR）后，GitHub Actions 自动检查结构、评分规则和执行环境，结果显示在 PR 的 Checks 页与 Actions 的运行摘要中。可下载完整 JSON 报告，每条缺陷含规则编号、题号、文件、JSON 路径和说明。
@@ -89,4 +91,4 @@ python -m scripts.benchmark_checks model-review --model YOUR_AVAILABLE_MODEL_ID 
 - [GitHub 必需状态检查与规则配置](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)
 - [GitHub 手动运行工作流](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)
 
-当前版本规范号：`benchmark-checks/v1.1`。报告绑定规范号、检查代码摘要、题库摘要、清单摘要和提交号；新轨道同时记录适配器和患者引擎摘要。规则变化需要更新规范号并说明兼容性。容器基础镜像仍使用现有 Python 标签，尚非固定镜像摘要，因此不宣称未来任意时间环境字节级可复现。
+当前版本规范号：`benchmark-checks/v1.2`。报告绑定规范号、检查代码摘要、题库摘要、清单摘要和提交号；新轨道同时记录适配器、患者引擎、难度审阅代码和说明摘要。规则变化需要更新规范号并说明兼容性。容器基础镜像仍使用现有 Python 标签，尚非固定镜像摘要，因此不宣称未来任意时间环境字节级可复现。
