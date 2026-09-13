@@ -15,7 +15,7 @@ import unittest
 from scripts.medical_dialogue_bench.assets import ASSETS, ROOT, load_assets
 from scripts.patient_eval.app_pilot import DISTRACTOR
 
-VERSION = 'benchmark-checks/v1.1'
+VERSION = 'benchmark-checks/v1.2'
 
 
 def finding(rule, status, message, pointer='', case='', file='suite.json'):
@@ -289,6 +289,7 @@ def write_report(out,command,rows,assets):
     blocking=any(r['status'] in {'FAIL','ERROR'} for r in rows)
     status='FAIL' if blocking else 'PASS'
     if command=='model-review': status='ERROR' if any(r['status']=='ERROR' for r in rows) else 'ADVISORY'
+    if command=='difficulty-review' and not blocking: status='NEEDS_REVIEW' if any(r['status'] in {'NOT_RUN','REVIEW_REQUIRED'} for r in rows) else 'ADVISORY'
     def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else None
     try: commit=subprocess.run(['git','rev-parse','HEAD'],cwd=ROOT,capture_output=True,text=True).stdout.strip() or 'unknown'
     except OSError: commit='unknown'  # Minimal offline container intentionally has no git binary.
@@ -297,6 +298,8 @@ def write_report(out,command,rows,assets):
         created_at=datetime.now(timezone.utc).isoformat(),suite_sha256=sha(assets/'suite.json'),
         manifest_sha256=sha(assets/'manifest.json'),checker_sha256=sha(Path(__file__)),
         adapter_sha256=sha(Path(__file__).with_name('multiturn.py')),
+        difficulty_reviewer_sha256=sha(Path(__file__).with_name('difficulty.py')),
+        difficulty_plans_sha256=sha(assets/'difficulty-plans.json'),
         patient_engine_sha256=sha(ROOT/'scripts/patient_eval/patient.py'),
         clinical_approval=False,findings=rows)
     (out/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
@@ -328,7 +331,7 @@ def write_report(out,command,rows,assets):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command',choices=['static','autoreview','validation','model-review','track-static','track-validation'])
+    parser.add_argument('command',choices=['static','autoreview','validation','model-review','track-static','track-validation','difficulty-review'])
     parser.add_argument('--assets',type=Path,default=ASSETS)
     parser.add_argument('--out',type=Path,required=True)
     parser.add_argument('--model')
@@ -337,7 +340,15 @@ def main():
     args=parser.parse_args()
     args.out.mkdir(parents=True,exist_ok=False)  # Never mix old and new results.
     try:
-        if args.command.startswith('track-'):
+        if args.command=='difficulty-review':
+            from .difficulty import run
+            args.assets=args.track_assets
+            client=None
+            if args.model:
+                from scripts.medical_dialogue_bench.client import ResponsesClient
+                client=ResponsesClient(args.model,max_output_tokens=4096)
+            rows=run(args.assets,args.out,client,args.max_review_calls)
+        elif args.command.startswith('track-'):
             from .multiturn import ContractError,load,acceptance
             args.assets=args.track_assets
             try:
