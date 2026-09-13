@@ -21,6 +21,10 @@ class MultiTurnAcceptanceTests(unittest.TestCase):
     def test_complete_factorial_contract_passes(self):
         self.assertEqual(len(validate_suite(self.suite)['cases']),4)
 
+    def test_case_id_cannot_escape_report_directory(self):
+        bad=deepcopy(self.suite);bad['cases'][0]['id']='../../outside'
+        self.assertRule('track_id',lambda:validate_suite(bad))
+
     def test_ambiguous_hidden_fact_marked_disclosed_is_rejected(self):
         bad=deepcopy(self.suite)
         bad['cases'][1]['presentations']['F3'][0]['discloses']=['F3']

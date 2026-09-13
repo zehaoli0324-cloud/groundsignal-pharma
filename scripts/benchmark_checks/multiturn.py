@@ -3,6 +3,7 @@ from collections import Counter, defaultdict
 from copy import deepcopy
 import hashlib
 import json
+import re
 from pathlib import Path
 
 from scripts.patient_eval.patient import PatientSimulator, validate_patient_spec
@@ -48,7 +49,8 @@ def validate_suite(suite):
     for i,c in enumerate(suite['cases']):
         p=f'/cases/{i}'
         fields(c,['id','family_id','variant','factors','patient','presentations','distractor_suffix','safety'],p)
-        need(nonempty(c['id']) and c['id'] not in ids,'track_id',p+'/id','题号须唯一非空')
+        need(nonempty(c['id']) and re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,79}',c['id']) is not None
+             and c['id'] not in ids,'track_id',p+'/id','题号须唯一，且仅含字母数字、下划线或连字符，不能作为任意路径')
         ids.add(c['id'])
         need(nonempty(c['family_id']),'track_id',p+'/family_id','家族不能为空')
         need(type(c['variant']) is str and c['variant'] in VARIANTS,'track_variant',p+'/variant','须为四种声明变体之一')
