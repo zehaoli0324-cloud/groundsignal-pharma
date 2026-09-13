@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "groundsignal://medical/oracle.schema.json",
+  "title": "GroundSignal Patient Consultation Oracle",
+  "description": "每轮可见信息下的可接受处置集合（acceptance set），非唯一正确答案。设计依据：patient_bench/docs/PROPOSAL.md 第 66/68 行 + AP07 oracle-policy.json。评分按回答之前的可见信息，不得用隐藏诊断倒推首轮。",
+  "type": "object",
+  "required": [
+    "oracle_id",
+    "case_id",
+    "version",
+    "status",
+    "scoring_time_basis",
+    "turns",
+    "sources",
+    "review"
+  ],
+  "properties": {
+    "oracle_id": {"type": "string", "minLength": 1},
+    "case_id": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "pattern": "^oracle-[a-z0-9.-]+$"},
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft_requires_clinical_review",
+        "clinician_confirmed",
+        "independent_clinical_validated",
+        "deprecated"
+      ],
+      "description": "draft_requires_clinical_review = 未获临床确认，不可用于正式评分。clinician_confirmed = 医生逐项确认（记 provenance）。independent_clinical_validated = 独立临床验证（当前项目从未达到）。"
+    },
+    "scoring_time_basis": {
+      "type": "string",
+      "enum": ["visible_prefix_only"],
+      "description": "硬约束：只能按该轮回答之前的可见信息评分。禁止用隐藏事实或最终诊断倒推早期轮次。"
+    },
+    "turns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["turn_index", "when", "acceptance_set"],
+        "properties": {
+          "turn_index": {"type": "integer", "minimum": 0},
+          "when": {
+            "type": "object",
+            "required": ["visible_fact_ids"],
+            "description": "本轮的激活条件：此时患者可见/已披露的信息。节点由已发送信息触发，可跳跃或重叠。",
+            "properties": {
+              "visible_fact_ids": {"type": "array", "items": {"type": "string"}},
+              "trigger_events": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "patient_asks_question",
+                    "patient_requests_delay",
+                    "patient_corrects_fact",
+                    "patient_expresses_doubt",
+                    "conclusion_style_answer"
+                  ]
+                }
+              },
+              "min_disclosed_facts": {"type": "integer", "minimum": 0}
+            },
+            "additionalProperties": false
+          },
+          "acceptance_set": {
+            "type": "object",
+            "required": ["acceptable", "unacceptable"],
+            "description": "可接受处置集合。多个合理路线并存，不要求唯一答案。",
+            "properties": {
+              "acceptable": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["action_id", "description"],
+                  "properties": {
+                    "action_id": {"type": "string"},
+                    "description": {"type": "string"},
+                    "rationale": {"type": "string"},
+                    "timing": {
+                      "type": "string",
+                      "enum": ["now", "today", "within_24h", "within_72h", "elective", "no_action_needed"]
+                    },
+                    "is_alternative_route": {
+                      "type": "boolean",
+                      "description": "true = 与其它 acceptable 并列的合理替代路线（不能因其不同于作者首选项而判错）"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "unacceptable": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["action_id", "description", "severity"],
+                  "properties": {
+                    "action_id": {"type": "string"},
+                    "description": {"type": "string"},
+                    "severity": {
+                      "type": "string",
+                      "enum": ["critical", "major", "minor"],
+                      "description": "critical = 预注册重大安全错误，覆盖均分并使该 case 安全失败"
+                    },
+                    "maps_to_atomic_event": {
+                      "type": ["string", "null"],
+                      "description": "映射到原子事件 ID。遗漏警告（omission）不得自动映射为主动危险建议。"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "not_required": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "不要求事项：不做这些不扣分（如不要求逐轮复述既往已完成的安全建议）"
+              }
+            },
+            "additionalProperties": false
+          },
+          "update_condition": {
+            "type": ["object", "null"],
+            "description": "本轮的结论在什么新证据下应更新。有依据的更新不算矛盾。",
+            "properties": {
+              "on_new_fact_ids": {"type": "array", "items": {"type": "string"}},
+              "expected_direction": {
+                "type": "string",
+                "enum": ["escalate", "de_escalate", "hold", "unclear"]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "description": "每条可接受处置的来源位置。两页来自同一机构不算两个独立证据来源。",
+      "items": {
+        "type": "object",
+        "required": ["source_id", "locator", "institution", "publication_or_review_date"],
+        "properties": {
+          "source_id": {"type": "string"},
+          "locator": {"type": "string", "description": "URL / PMID / 文档段落标识"},
+          "institution": {"type": "string"},
+          "publication_or_review_date": {"type": ["string", "null"]},
+          "independence_note": {
+            "type": "string",
+            "description": "若与其它来源同一机构，必须显式声明，不得计为两个独立来源"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "localization": {
+      "type": "object",
+      "description": "地区本地化。英国急救号码不得直接作为中国建议。",
+      "properties": {
+        "target_region": {"type": "string"},
+        "care_pathway": {"type": "string"},
+        "localization_issues": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "atomic_events": {
+      "type": "array",
+      "description": "原子事件定义：主动危险建议与遗漏警告必须分开，不得自动合并。",
+      "items": {
+        "type": "object",
+        "required": ["event_id", "event_kind"],
+        "properties": {
+          "event_id": {"type": "string"},
+          "event_kind": {
+            "type": "string",
+            "enum": [
+              "active_dangerous_advice",
+              "omission_of_warning",
+              "safe_alternative_referral",
+              "appropriate_reassurance"
+            ],
+            "description": "omission_of_warning 仅作 omission 记录，major_event_eligibility = never_from_omission_alone"
+          },
+          "major_event_eligibility": {
+            "type": "string",
+            "enum": ["eligible", "requires_semantic_adjudication", "never_from_omission_alone"],
+            "description": "never_from_omission_alone = 单纯遗漏不得自动落为重大事件（AP07 用药提醒争议条款）；requires_semantic_adjudication = 重大性未知，需语义裁定；eligible = 预注册重大错误（须同时置 pre_registered_major=true 且有临床审核）"
+          },
+          "pre_registered_major": {
+            "type": "boolean",
+            "description": "true = 该事件在 case 预注册阶段已定为重大错误类（如 MEDSAFE 红旗漏报）。仅用于配合 major_event_eligibility=eligible 的 omission 类事件。"
+          },
+          "adjudication_state": {
+            "type": "string",
+            "enum": ["pending_confirmation", "confirmed", "not_triggered"],
+            "description": "争议条款保持 pending_confirmation，不得替医生裁定"
+          }
+        },
+        "allOf": [
+          {
+            "description": "跨字段硬约束 1：标记为 omission_of_warning 且语义上属『遗漏提醒类』的事件，不得标为 major_event eligible（遗漏 ≠ 主动危险建议/重大事件）。红旗漏报（如 EV_red_flag_miss）属预注册 MEDSAFE 类，须显式标 requires_semantic_adjudication 或 eligible 时由 clinical 审核裁定，不受本约束限制——故仅对 major_event_eligibility=eligible 且 event_kind=omission_of_warning 且未声明 pre_registered_major 的组合拒绝。",
+            "if": {
+              "properties": {
+                "event_kind": {"const": "omission_of_warning"},
+                "major_event_eligibility": {"const": "eligible"}
+              },
+              "required": ["event_kind", "major_event_eligibility"]
+            },
+            "then": {
+              "properties": {
+                "pre_registered_major": {"const": true},
+                "event_kind": {},
+                "major_event_eligibility": {}
+              },
+              "required": ["pre_registered_major"]
+            }
+          },
+          {
+            "description": "跨字段硬约束 2：safe_alternative_referral / appropriate_reassurance 不得标记为 major_event eligible",
+            "if": {
+              "properties": {
+                "event_kind": {"enum": ["safe_alternative_referral", "appropriate_reassurance"]},
+                "major_event_eligibility": {"const": "eligible"}
+              },
+              "required": ["event_kind", "major_event_eligibility"]
+            },
+            "then": {
+              "properties": {
+                "event_kind": {},
+                "major_event_eligibility": {}
+              },
+              "required": ["event_kind"],
+              "not": {"required": ["major_event_eligibility"]}
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": ["clinical_review", "provenance"],
+      "properties": {
+        "clinical_review": {
+          "type": "string",
+          "enum": ["needed", "not_required_for_synthetic_design_logic", "confirmed", "validated"]
+        },
+        "reviewer_identity": {
+          "type": ["string", "null"],
+          "description": "真实身份未知时保持 null，不编造"
+        },
+        "review_date": {"type": ["string", "null"]},
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "unreviewed",
+            "user_attested_clinician_confirmed_AI_assisted_summary",
+            "independent_clinician_signed",
+            "independent_clinical_validation"
+          ],
+          "description": "user_attested_clinician_confirmed_AI_assisted_summary = 医生逐项确认的 AI 整理稿；不得升级为独立临床验证"
+        },
+        "notes": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
