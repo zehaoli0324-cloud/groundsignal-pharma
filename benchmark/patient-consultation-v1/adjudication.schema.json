@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "groundsignal://benchmark/adjudication.schema.json",
+  "title": "GroundSignal A/B Disagreement Adjudication Record",
+  "description": "当两名评审者（A/B）对同一 (sample_id, criterion_id) 判断不一致时的第三方裁决记录。依据 MILESTONES_M0-M5.md §2 与 AP07 INSTRUCTIONS.md。裁决不得由 AI 代理裁定临床内容。",
+  "type": "object",
+  "required": ["version", "case_version", "rubric_sha256", "adjudicator", "disagreements", "summary"],
+  "properties": {
+    "version": {"type": "string"},
+    "case_version": {"type": "string"},
+    "rubric_sha256": {
+      "type": "string",
+      "description": "裁决绑定到具体 rubric 摘要；rubric 变更后旧裁决不得复用"
+    },
+    "adjudicator": {
+      "type": "object",
+      "required": ["identity", "qualification", "role", "declared_at"],
+      "properties": {
+        "identity": {"type": ["string", "null"], "description": "未知保持 null，不编造"},
+        "qualification": {"type": ["string", "null"]},
+        "role": {
+          "type": "string",
+          "enum": ["independent_clinician", "coordinator_for_procedural_only", "unassigned"]
+        },
+        "independent_of_reviewers": {
+          "type": ["boolean", "null"],
+          "description": "裁决人是否独立于 A/B 两名评审者"
+        },
+        "declared_at": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "disagreements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sample_id", "criterion_id", "judgment_a", "judgment_b", "disagreement_kind"],
+        "properties": {
+          "sample_id": {"type": "string"},
+          "sample_sha256": {"type": "string"},
+          "criterion_id": {"type": "string"},
+          "target_turn": {"type": "string"},
+          "judgment_a": {
+            "type": "string",
+            "enum": ["pass", "fail", "insufficient", "not_applicable", "unassessed", "not_observed"]
+          },
+          "judgment_b": {
+            "type": "string",
+            "enum": ["pass", "fail", "insufficient", "not_applicable", "unassessed", "not_observed"]
+          },
+          "disagreement_kind": {
+            "type": "string",
+            "enum": [
+              "rule_ambiguity",
+              "text_evidence_insufficient",
+              "medical_dispute",
+              "applicability_dispute",
+              "severity_dispute"
+            ],
+            "description": "规则歧义应修规则或另开版本；不得用 insufficient 代替规则修订"
+          },
+          "adjudicated_judgment": {
+            "type": ["string", "null"],
+            "enum": ["pass", "fail", "insufficient", "not_applicable", "not_observed", "left_pending", null],
+            "description": "无法消解的核心争议标 left_pending，不静默改 gold"
+          },
+          "reason": {"type": ["string", "null"]},
+          "requires_rule_revision": {"type": "boolean"},
+          "major_error": {"type": ["boolean", "null"], "description": "重大性未知保持 null"},
+          "major_event_id": {"type": ["string", "null"]},
+          "adjudicated_at": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["total_rows_compared", "agreements", "disagreements_count", "left_pending_count"],
+      "properties": {
+        "total_rows_compared": {"type": "integer", "minimum": 0},
+        "agreements": {"type": "integer", "minimum": 0},
+        "disagreements_count": {"type": "integer", "minimum": 0},
+        "left_pending_count": {"type": "integer", "minimum": 0},
+        "weighted_cohen_kappa": {
+          "type": ["number", "null"],
+          "description": "线性加权 Cohen's kappa；样本不足以定义时保持 null（不填 0）"
+        },
+        "kappa_undefined_reason": {"type": ["string", "null"]},
+        "rule_revisions_required": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "clinical_approval": {
+      "type": "boolean",
+      "const": false,
+      "description": "本记录是分歧裁决，不是临床审批。clinical_approval 只能由医生在 CLINICAL_REVIEW.json 置 true，不得在此处代置。"
+    }
+  },
+  "additionalProperties": false
+}
