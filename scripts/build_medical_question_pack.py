@@ -29,13 +29,15 @@ def build(out):
     out=Path(out);out.mkdir(parents=True,exist_ok=False)
     data=ROOT/'benchmark/medical-dialogue-v1';suite=json.loads((data/'suite.json').read_text());policies=json.loads((data/'oracle-policy.json').read_text());cards=suite['scenarios']
     engine=out/'工程';engine.mkdir()
-    for name in ['medical_dialogue_bench','patient_eval']:
+    for name in ['medical_dialogue_bench','patient_eval','benchmark_checks']:
         for f in (ROOT/'scripts'/name).glob('*.py'):write(engine/'scripts'/name/f.name,f.read_text())
     for f in (ROOT/'scripts/patient_eval/app_pilot_assets').glob('*.html'):write(engine/'scripts/patient_eval/app_pilot_assets'/f.name,f.read_text())
     write(engine/'scripts/__init__.py','');write(engine/'tests/__init__.py','')
     for f in (ROOT/'tests/medical_dialogue_bench').glob('*.py'):write(engine/'tests/medical_dialogue_bench'/f.name,f.read_text())
     for f in data.iterdir():
         if f.is_file():write(engine/'benchmark/medical-dialogue-v1'/f.name,f.read_text())
+    for f in (ROOT/'benchmark/multiturn-factors-v1').iterdir():
+        if f.is_file():write(engine/'benchmark/multiturn-factors-v1'/f.name,f.read_text())
     write(engine/'start_offline.py','''from pathlib import Path
 import datetime, subprocess, sys
 root=Path(__file__).resolve().parent

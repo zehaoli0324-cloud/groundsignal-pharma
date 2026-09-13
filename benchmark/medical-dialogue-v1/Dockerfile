@@ -6,6 +6,7 @@ WORKDIR /app
 COPY scripts/ /app/scripts/
 COPY tests/medical_dialogue_bench/ /app/tests/medical_dialogue_bench/
 COPY benchmark/medical-dialogue-v1/ /app/benchmark/medical-dialogue-v1/
+COPY benchmark/multiturn-factors-v1/ /app/benchmark/multiturn-factors-v1/
 RUN mkdir -p /output && chown 10001:10001 /output
 USER 10001:10001
 ENTRYPOINT ["python", "-m", "scripts.medical_dialogue_bench"]
