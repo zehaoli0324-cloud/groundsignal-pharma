@@ -1,0 +1,152 @@
+{
+  "unique_paths": 1546,
+  "unique_path_versions": 1674,
+  "paths_with_multiple_versions": 69,
+  "parts": [
+    {
+      "file": "catalog/benchmark-01.json",
+      "count": 80,
+      "conflicting_paths": 7
+    },
+    {
+      "file": "catalog/benchmark-02.json",
+      "count": 80,
+      "conflicting_paths": 6
+    },
+    {
+      "file": "catalog/benchmark-03.json",
+      "count": 27,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/demo-01.json",
+      "count": 44,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/docs-01.json",
+      "count": 80,
+      "conflicting_paths": 7
+    },
+    {
+      "file": "catalog/docs-02.json",
+      "count": 12,
+      "conflicting_paths": 4
+    },
+    {
+      "file": "catalog/examples-01.json",
+      "count": 1,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/github-01.json",
+      "count": 67,
+      "conflicting_paths": 7
+    },
+    {
+      "file": "catalog/medical-01.json",
+      "count": 80,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/medical-02.json",
+      "count": 80,
+      "conflicting_paths": 3
+    },
+    {
+      "file": "catalog/medical-03.json",
+      "count": 80,
+      "conflicting_paths": 2
+    },
+    {
+      "file": "catalog/medical-04.json",
+      "count": 80,
+      "conflicting_paths": 2
+    },
+    {
+      "file": "catalog/medical-05.json",
+      "count": 80,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/medical-06.json",
+      "count": 80,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/medical-07.json",
+      "count": 80,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/medical-08.json",
+      "count": 80,
+      "conflicting_paths": 3
+    },
+    {
+      "file": "catalog/medical-09.json",
+      "count": 80,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/medical-10.json",
+      "count": 80,
+      "conflicting_paths": 3
+    },
+    {
+      "file": "catalog/medical-11.json",
+      "count": 5,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/pharma-01.json",
+      "count": 66,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/posttrain-01.json",
+      "count": 6,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/reference-01.json",
+      "count": 2,
+      "conflicting_paths": 2
+    },
+    {
+      "file": "catalog/root-01.json",
+      "count": 3,
+      "conflicting_paths": 2
+    },
+    {
+      "file": "catalog/samples-01.json",
+      "count": 3,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/scripts-01.json",
+      "count": 80,
+      "conflicting_paths": 4
+    },
+    {
+      "file": "catalog/scripts-02.json",
+      "count": 80,
+      "conflicting_paths": 14
+    },
+    {
+      "file": "catalog/scripts-03.json",
+      "count": 58,
+      "conflicting_paths": 1
+    },
+    {
+      "file": "catalog/templates-01.json",
+      "count": 1,
+      "conflicting_paths": 0
+    },
+    {
+      "file": "catalog/tests-01.json",
+      "count": 51,
+      "conflicting_paths": 2
+    }
+  ]
+}

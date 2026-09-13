@@ -1,0 +1,18 @@
+.......................................
+----------------------------------------------------------------------
+Ran 39 tests in 0.172s
+
+OK
+............................
+----------------------------------------------------------------------
+Ran 28 tests in 0.970s
+
+OK
+................................................
+----------------------------------------------------------------------
+Ran 48 tests in 0.036s
+
+OK
+{"status": "ADVISORY", "counts": {}, "report": "/tmp/tmpnngjwcyd/report.json"}
+{"status": "PASS", "counts": {}, "report": "/tmp/tmpreix0xre/report.json"}
+{"status": "PASS", "counts": {"PASS": 149}, "report": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/runs/reorg-20260913-fixed/validation/report.json"}

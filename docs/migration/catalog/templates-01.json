@@ -1,0 +1,20 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": "templates/board.html",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3fed47cf9a35596048e1435d674162ec66fb907b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/templates/board.html",
+          "branch_set": "bs001"
+        }
+      ]
+    }
+  ]
+}

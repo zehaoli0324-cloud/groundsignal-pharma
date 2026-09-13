@@ -1,0 +1,76 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": "medical/user-tasks/candidate-corpora/interview-material-v0.1/unsafe-answer-risk-seeds.jsonl",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f8069715e485623b9cc28e0cf3e4aade271de172",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/user-tasks/candidate-corpora/interview-material-v0.1/unsafe-answer-risk-seeds.jsonl",
+          "branch_set": "bs041"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/candidate-corpora/interview-material-v0.1/user-question-candidates.jsonl",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3c9b748289628e194b112958f0ee6896d08cab35",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/user-tasks/candidate-corpora/interview-material-v0.1/user-question-candidates.jsonl",
+          "branch_set": "bs041"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/promotion-pilots/interview-pilot-v0.1/README.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1a51f7c330875f758e15d257affa4e9c02a8c809",
+          "commit": "cced27134f228e04da625cdc328690ca5c619c26",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/cced27134f228e04da625cdc328690ca5c619c26/medical/user-tasks/promotion-pilots/interview-pilot-v0.1/README.md",
+          "branch_set": "bs040"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/promotion-pilots/interview-pilot-v0.1/promotion-records.jsonl",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1c264e259ab61933bd46702c6b3c55505974a9f0",
+          "commit": "cced27134f228e04da625cdc328690ca5c619c26",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/cced27134f228e04da625cdc328690ca5c619c26/medical/user-tasks/promotion-pilots/interview-pilot-v0.1/promotion-records.jsonl",
+          "branch_set": "bs040"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/promotion-pilots/interview-pilot-v0.1/validation-result.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "37561eb9ae46447636c15f1cee93dcbc5d74b950",
+          "commit": "cced27134f228e04da625cdc328690ca5c619c26",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/cced27134f228e04da625cdc328690ca5c619c26/medical/user-tasks/promotion-pilots/interview-pilot-v0.1/validation-result.json",
+          "branch_set": "bs040"
+        }
+      ]
+    }
+  ]
+}

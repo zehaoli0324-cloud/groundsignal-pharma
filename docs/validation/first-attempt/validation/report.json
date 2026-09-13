@@ -1,0 +1,1211 @@
+{
+  "check_version": "benchmark-checks/v1.2",
+  "command": "validation",
+  "status": "FAIL",
+  "commit": "e494fa34e6271061c4de8c87864adf1e66fcfc9e",
+  "workflow_sha": null,
+  "pr_head_sha": null,
+  "created_at": "2026-09-13T05:38:26.290329+00:00",
+  "suite_sha256": "91bb2d69d4ea0740268794a0c11e286b91f00749db2b31ba7a2d0d403458ea0e",
+  "manifest_sha256": "0c1af18f48d71d2df328f0a6bd67ed1b2508452ca853495b967a6ef6eb78cb20",
+  "checker_sha256": "7466920d20348600d7e2d4c8c6a1a866cc51bac7d0f7cdbee402dacc69efb943",
+  "adapter_sha256": "f0d9ace4790358871363bb8cef69b1e19147113fa586eb03276c75de4f60a0d2",
+  "difficulty_reviewer_sha256": "ab3fcf0f884cc1b53dd8944e539feacc14880bc3bf1bfc251b0ab6a17dadd5bb",
+  "difficulty_plans_sha256": null,
+  "patient_engine_sha256": "5a74e08ef8bdf216ce4680eadc95b208d953271ca2febd03754683fa18f516a3",
+  "clinical_approval": false,
+  "findings": [
+    {
+      "rule": "test_checks.QualityTests.test_advisory_never_claims_clinical_approval",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_checks.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_checks.QualityTests.test_budget_failure_makes_zero_requests",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_checks.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_checks.QualityTests.test_good_suite_has_no_failures",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_checks.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_checks.QualityTests.test_labeled_defects_are_detected_by_the_expected_rule",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_checks.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_checks.QualityTests.test_malformed_containers_fail_without_crashing",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_checks.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_checks.QualityTests.test_provider_failure_does_not_become_pass",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_checks.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_checks.QualityTests.test_review_preserves_insufficient_and_records_model",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_checks.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_checks.QualityTests.test_review_rejects_invented_quotes_and_missing_rules",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_checks.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_checks.QualityTests.test_subtest_failure_is_in_report",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_checks.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_checks.QualityTests.test_workflow_aggregate_rejects_missing_or_failed_required_jobs",
+      "status": "ERROR",
+      "message": "Traceback (most recent call last):\n  File \"/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/tests/benchmark_checks/test_checks.py\", line 88, in test_workflow_aggregate_rejects_missing_or_failed_required_jobs\n    text=workflow.read_text()\n         ^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1027, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1013, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/.github/workflows/medical-dialogue-benchmark-ci.yml'\n",
+      "file": "tests/benchmark_checks/test_checks.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_budget_preflight_makes_no_calls",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_changed_patient_is_not_accepted_as_increased_difficulty",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_current_variants_have_witness_and_no_mechanical_contradictions",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_excessive_text_is_a_review_signal_not_a_difficulty_verdict",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_invented_quote_invalidates_review",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_missing_information_can_allow_uncertainty_but_needs_rubric_review",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_missing_information_with_forced_conclusion_is_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_model_failure_is_recorded_and_not_a_successful_review",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_one_failed_witness_does_not_prove_impossibility",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_pair_review_returns_specific_revisions_and_quotes",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_positive_judge_cannot_override_unresolved_mechanical_flag",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_stale_plan_or_omitted_variant_is_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_difficulty.DifficultyTests.test_without_model_remains_unreviewed_and_has_no_empirical_score",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_difficulty.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_acceptance_catches_shared_runtime_and_replay_classifier_bug",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_actual_clarification_discloses_then_event_fires_later",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_ambiguous_hidden_fact_marked_disclosed_is_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_case_id_cannot_escape_report_directory",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_complete_factorial_contract_passes",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_distractor_cannot_add_clinical_information_in_suffix",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_distractor_cannot_change_clinical_truth",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_later_patient_event_cannot_score_previous_answer",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_legacy_suite_is_explicitly_incompatible",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_missing_opportunities_cannot_hide_denominator",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_quoted_questions_do_not_disclose_or_trigger_events",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_report_works_in_container_without_git",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_runtime_ambiguous_disclosure_bug_is_detectable",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_runtime_quoted_question_bug_triggers_false_event_and_fails_replay",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_unassessed_and_partial_safety_remain_unknown",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_multiturn.MultiTurnAcceptanceTests.test_untriggered_safety_cannot_report_zero_errors",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/benchmark_checks/test_multiturn.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_ap07.AP07Tests.test_advice_without_severity_does_not_trigger_pressure",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_ap07.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_ap07.AP07Tests.test_pressure_needs_severity_and_two_answers",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_ap07.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_ap07.AP07Tests.test_reference_completes_and_support_is_actually_disclosed",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_ap07.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_ap07.AP07Tests.test_untriggered_pressure_stays_untriggered",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_ap07.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_blank_review_never_passes",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_budget_preflight_makes_zero_calls",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_changed_disclosure_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_changed_journal_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_changed_trace_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_correction_is_actually_delivered",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_declarative_whether_does_not_count_as_question",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_extra_case_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_future_evidence_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_interrupted_journal_blocks_resume",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_judge_no_later_turns_or_oracle",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_missing_case_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_negated_and_quoted_questions_do_not_disclose",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_no_credential_requires_no_network",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_no_hidden_information_in_payload",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_noop_integrity_is_not_clinical_pass",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_oracle_runs_twelve_independent_cases",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_partial_answer_not_scored_as_complete",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_probe_has_separate_phase",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_responses_payload_and_parse",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_resume_skips_completed_calls",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_target_timeout_preserved",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_unsupported_patient_request_invalidates_measurement",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_benchmark.BenchmarkTests.test_wrong_answer_not_confused_with_engineering_failure",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/medical_dialogue_bench/test_benchmark.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_algorithms.FactStateTests.test_conflict_keeps_alternatives_until_explicit_resolution",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_algorithms.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_algorithms.FactStateTests.test_correction_preserves_history_and_original_turn",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_algorithms.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_algorithms.FactStateTests.test_external_mutations_and_repeated_observations",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_algorithms.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_algorithms.FactStateTests.test_supersedes_cannot_reference_other_key_or_missing_turn",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_algorithms.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_algorithms.FactStateTests.test_unknown_is_not_negative_and_requires_explicit_resolution",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_algorithms.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_algorithms.RetrievalTests.test_chinese_bigrams_and_latin_tokens_change_input_order_ranking",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_algorithms.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_algorithms.RetrievalTests.test_invalid_metadata_fails_instead_of_silent_exclusion",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_algorithms.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_algorithms.RetrievalTests.test_population_is_explicit_hard_filter_not_a_guess",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_algorithms.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_algorithms.RetrievalTests.test_temporal_filter_excludes_high_scoring_stale_and_future",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_algorithms.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_algorithms.RetrievalTests.test_ties_empty_queries_and_determinism",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_algorithms.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_blank_reviews_stay_unknown_and_untriggered",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_corrected_fact_cannot_revert_to_old_value",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_deleted_or_rebound_review_rows_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_dual_review_disagreement_stays_disputed",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_due_correction_priority_and_no_early_event",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_duplicate_reviewer_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_duplicate_run_rejected_even_new_session_id",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_fabricated_and_future_quotes_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_html_embedded_json_cannot_execute_answer",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_import_roundtrip_is_stable",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_invalid_measurement_is_counted_but_not_scored",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_natural_cannot_follow_probe",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_pair_other_field_mutation_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_plan_mutation_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_raw_capture_cannot_self_score",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_stale_review_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_target_outage_has_no_invented_response",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_twelve_cases_six_single_factor_pairs",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_unknown_safety_not_zero_and_serious_cannot_pass",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_untriggered_cannot_pass",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_wrong_content_and_fabricated_question_quote_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_app_pilot.AppPilotTests.test_wrong_suite_and_case_versions_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_app_pilot.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientDisclosureTests.test_a_question_does_not_license_an_unrelated_statement",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientDisclosureTests.test_budget_and_target_stop_do_not_disclose_remaining_events",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientDisclosureTests.test_correction_cannot_disclose_a_previously_unmentioned_fact",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientDisclosureTests.test_correction_is_active_once_and_changes_later_answers",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientDisclosureTests.test_correction_without_short_answer_never_reuses_old_answer",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientDisclosureTests.test_event_path_depends_on_actual_question_and_is_ordered",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientDisclosureTests.test_manual_mapping_is_explicit_and_invalid_mapping_is_atomic",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientDisclosureTests.test_multiple_questions_answer_only_requested_facts",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientDisclosureTests.test_mutation_isolation_opening_and_reproducibility",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientDisclosureTests.test_opening_and_question_do_not_disclose_hidden_slots",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientDisclosureTests.test_unknown_and_explicit_negative_are_distinct",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientDisclosureTests.test_unrecognized_question_asks_for_rewording_without_guessing",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientValidationTests.test_invalid_references_counts_and_events_are_rejected",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientValidationTests.test_patient_boundary_rejects_hidden_grading_fields_at_every_level",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientValidationTests.test_respond_requires_opening_and_valid_argument_types",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "test_patient.PatientValidationTests.test_unknown_requires_null_and_values_are_finite_json",
+      "status": "PASS",
+      "message": "测试通过",
+      "file": "tests/patient_eval/test_patient.py",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP01-base"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP01-distractor"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP02-base"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP02-distractor"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP03-base"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP03-distractor"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP04-base"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP04-distractor"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP05-base"
+    },
+    {
+      "rule": "oracle_event",
+      "status": "PASS",
+      "message": "参考对话必须覆盖事件 E1",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP05-base"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP05-distractor"
+    },
+    {
+      "rule": "oracle_event",
+      "status": "PASS",
+      "message": "参考对话必须覆盖事件 E1",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP05-distractor"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP06-base"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP06-distractor"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-base"
+    },
+    {
+      "rule": "oracle_event",
+      "status": "PASS",
+      "message": "参考对话必须覆盖事件 E1",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-base"
+    },
+    {
+      "rule": "oracle_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-distractor"
+    },
+    {
+      "rule": "oracle_event",
+      "status": "PASS",
+      "message": "参考对话必须覆盖事件 E1",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-distractor"
+    },
+    {
+      "rule": "oracle_unscored",
+      "status": "PASS",
+      "message": "空白评分必须保持未知；空操作没有被授予临床通过",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": ""
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP01-base"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP01-distractor"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP02-base"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP02-distractor"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP03-base"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP03-distractor"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP04-base"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP04-distractor"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP05-base"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP05-distractor"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP06-base"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP06-distractor"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-base"
+    },
+    {
+      "rule": "noop_replay",
+      "status": "PASS",
+      "message": "回放完整性：completed；不代表医学答对",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-distractor"
+    },
+    {
+      "rule": "noop_unscored",
+      "status": "PASS",
+      "message": "空白评分必须保持未知；空操作没有被授予临床通过",
+      "file": "suite.json",
+      "pointer": "",
+      "scenario_id": ""
+    }
+  ]
+}

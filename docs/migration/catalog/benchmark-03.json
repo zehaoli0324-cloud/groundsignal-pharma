@@ -1,0 +1,384 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-006-temporal-watchlist__C06-B.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7c64b231ad380a9e9886ed74da5ef80e6a80bdb1",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-006-temporal-watchlist__C06-B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-006-temporal-watchlist__C06-C.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3279d743fd46d29124ec244a295e9f28cf2c8c99",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-006-temporal-watchlist__C06-C.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scoring-protocol.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f593c5c5f7f22cd71a6410c58fde6e262b5535a4",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scoring-protocol.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/eval_cases_v02.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1898a0d3a9ff76574160f01f5cd83dc7f8b6b015",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/eval_cases_v02.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/eval_cases_v04.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dbe90b0611cd3385e94278f630e990a334217c27",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/eval_cases_v04.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/eval_models.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fd1573198c8c848af1ed70823a4dbc7420f32c84",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/eval_models.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/eval_twins_v04.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0c7adc377e79d87312c6595bedd45b416ee4fb76",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/eval_twins_v04.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/extract_codex_trajectory.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8bdff1bd56d5dc8233aab9557d7a45a3b3275e48",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/extract_codex_trajectory.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/extract_codex_twins.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "adb5437983121fa71270796b6b32444b8c79962f",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/extract_codex_twins.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/extract_codex_v02.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "118c2f291e514885085e84b125505a7b44d6e33f",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/extract_codex_v02.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/extract_codex_v02_trajectory.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "877c9c35a0a7f193232bb344534b4edf66cfa381",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/extract_codex_v02_trajectory.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/extract_codex_v04.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "75daf1bae9534ae86af2e186933523448b00fc5d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/extract_codex_v04.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/extract_hermes_session.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "94c6f4fcd26a205f10c82e125fd13c871777155c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/extract_hermes_session.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/extract_twins_summary.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bf4e481911ff61a98348b741517344da15b4ecbc",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/extract_twins_summary.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/extract_v02_summary.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a33caefe3d4c5b8322adbff29ca08b07570a2737",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/extract_v02_summary.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/gen_cases_v02.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8bcd0c2d2086a04b7b5dfbf2490c5b630d8fde03",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/gen_cases_v02.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/gen_cases_v04.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9c26499aea1336469f78d0d12b01e235e3231027",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/gen_cases_v04.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/gen_codex_scores.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "80781eb606713413c9d92e1e53ce803acf8942a9",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/gen_codex_scores.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/scripts/gen_deepseek_scores.py",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1019d6a83de3647b91997a263109a34ddbd43e43",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/scripts/gen_deepseek_scores.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/tracks.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a1ac998c026c96bac877ec2a6befe14b1c4d076d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/tracks.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/trajectories/codex-v1.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "69e0ff2b0881bdd188a119c50edd4e17dcfafb72",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/trajectories/codex-v1.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/trajectories/codex-v2.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1410bf860017c4ba61c2fad8e64876cfe7eca8fb",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/trajectories/codex-v2.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/trajectories/deepseek-v1.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "07dc63b9e973b606da24a9d694982812e7a598db",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/trajectories/deepseek-v1.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/trajectories/deepseek-v2.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "321ed86ed2b5510445f87bfdcdd61abb35d88c5d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/trajectories/deepseek-v2.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/trajectories/trajectory-comparison.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7a6e23c4b472ed83bea813483ad67f8f8a03088e",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/trajectories/trajectory-comparison.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/trajectories/v02-codex-rollout-summary.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "80c4effe3c8358ababc7795a47311e5d5f6a5f30",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/trajectories/v02-codex-rollout-summary.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/user-interviews/interview-protocol.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ddb1ce09ab2b7a5b710720e7542b511fc5d8f4c2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/user-interviews/interview-protocol.md",
+          "branch_set": "bs001"
+        }
+      ]
+    }
+  ]
+}

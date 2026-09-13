@@ -1,0 +1,58 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": "reference/METHODS_TO_DESIGN.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3dea50264117e295b120444a4d981df04908c479",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/reference/METHODS_TO_DESIGN.md",
+          "branch_set": "bs053"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7ab0c9b6a978db0c4b65ac0c707e35777203c126",
+          "commit": "12986257729b65016341a2303d2f36b2a64ebeb2",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/12986257729b65016341a2303d2f36b2a64ebeb2/reference/METHODS_TO_DESIGN.md",
+          "branch_set": "bs064"
+        }
+      ]
+    },
+    {
+      "path": "reference/README.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9159a0911e4e405393f6c401e82eaeb95c4f082a",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/reference/README.md",
+          "branch_set": "bs053"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ee14a109f85a8538214ff2f4e6b3545a026245a4",
+          "commit": "12986257729b65016341a2303d2f36b2a64ebeb2",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/12986257729b65016341a2303d2f36b2a64ebeb2/reference/README.md",
+          "branch_set": "bs064"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "69fc8795f98a3bb98f4017d887e607802f2311c0",
+          "commit": "d772b17444522625c53c07570a9a2fe2690a8b33",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/d772b17444522625c53c07570a9a2fe2690a8b33/reference/README.md",
+          "branch_set": "bs027"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,550 @@
+{
+  "repository": "zehaoli0324-cloud/groundsignal-pharma",
+  "branches": [
+    {
+      "name": "data/interview-corpus-v01",
+      "sha": "ef204204667a6c662ac03763c9d6747716179524"
+    },
+    {
+      "name": "data/interview-promotion-pilot-v01",
+      "sha": "cced27134f228e04da625cdc328690ca5c619c26"
+    },
+    {
+      "name": "docs/clinical-oracle-pressure-pilot",
+      "sha": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047"
+    },
+    {
+      "name": "docs/literature-design-v13",
+      "sha": "12986257729b65016341a2303d2f36b2a64ebeb2"
+    },
+    {
+      "name": "docs/readme-handoff-20260909",
+      "sha": "d772b17444522625c53c07570a9a2fe2690a8b33"
+    },
+    {
+      "name": "feat/ap07-oracle-calibration-draft",
+      "sha": "e494fa34e6271061c4de8c87864adf1e66fcfc9e"
+    },
+    {
+      "name": "feat/clinical-review-console-v01-20260910",
+      "sha": "82e0384c555ac6f3b7bc5413e7e3726be975ab85"
+    },
+    {
+      "name": "feat/external-medical-data-intake",
+      "sha": "86dc2900e8ac6ee613de1513b8646b9cea8f8019"
+    },
+    {
+      "name": "feat/patient-candidate-review-v01",
+      "sha": "d91db8dfaecf0e591261a56ba808909f7eaad975"
+    },
+    {
+      "name": "feat/patient-dialogue-eval-v01",
+      "sha": "5bff9264c2b1680e86034aa451fc05dcb98b7ad6"
+    },
+    {
+      "name": "feat/patient-eval-v03-measurement",
+      "sha": "9a930733ee38fd80d5da51813b2af3edbb8dd647"
+    },
+    {
+      "name": "feat/public-patient-pilot-v01",
+      "sha": "566c769c4ab2db45b60df64ee2d527fc2b0c7c10"
+    },
+    {
+      "name": "main",
+      "sha": "863db9b3048a2007ff32d6bb78a9c1719b92e080"
+    },
+    {
+      "name": "nightly/patient-cases-v04-20260909",
+      "sha": "15410abe9f6ffd9afecef15ed4ed7210a5e82e1c"
+    },
+    {
+      "name": "s2-v04-audit-staging",
+      "sha": "2cd20928e26fff834f39124bf616dada3ea58f61"
+    },
+    {
+      "name": "s5-v09-independent-fresh",
+      "sha": "ebd036f5c2d683b29c8f306f76f5b2de920eaf87"
+    },
+    {
+      "name": "s5-v010-independent-fresh",
+      "sha": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda"
+    },
+    {
+      "name": "s5-v073-lineage-calibration",
+      "sha": "e95072efa3ec11b574831868cd5612339d5e81de"
+    },
+    {
+      "name": "s5-v080-fresh-lineage-eval",
+      "sha": "2e3ca9db0702346b439c3388a985bdb2aaf7aa4f"
+    },
+    {
+      "name": "s5-v081-canonical-freeze",
+      "sha": "ffe040b0295e666f96e7dac7099fdb6e5fe8d720"
+    },
+    {
+      "name": "s5-v081-multilingual-mosaic-repair",
+      "sha": "d8c953443076ffc4fd8f5b1788da402e7a13ac47"
+    },
+    {
+      "name": "s5-v091-canonical-freeze",
+      "sha": "31c94deded224d54a7e2f0e977ebe458e9b6c16e"
+    },
+    {
+      "name": "s5-v091-exposed-repair",
+      "sha": "1c6af98774e5ab3c4bbd0667370011368224d5be"
+    },
+    {
+      "name": "work/adjudication-page-audit-20260910",
+      "sha": "2f809c523af365b7fa593779966b71f0b3efee2c"
+    },
+    {
+      "name": "work/app-dialogue-pilot-20260912",
+      "sha": "f4fd50a0507d2127c76d4b32f994f54cee045ba9"
+    },
+    {
+      "name": "work/audit-a1-upstream-20260911",
+      "sha": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c"
+    },
+    {
+      "name": "work/benchmark-quality-checks",
+      "sha": "f54c66b79e10990d51cd2de59a7d6f2ca0050373"
+    },
+    {
+      "name": "work/choice-adjudication-20260910",
+      "sha": "2bf3c0798aa010624e3a25b8d1e652932a82fa0c"
+    },
+    {
+      "name": "work/clinical-reasoning-attribution-20260912",
+      "sha": "665b8edea3cde907ea03de9bbce174552268f0a3"
+    },
+    {
+      "name": "work/difficulty-review",
+      "sha": "b7d92bb4d1ff75058dc603580454515f67900598"
+    },
+    {
+      "name": "work/gpt-medical-benchmark-v1",
+      "sha": "5745794e02c1f93cd207aca5af1f167338dfda89"
+    },
+    {
+      "name": "work/medical-question-pack-v11",
+      "sha": "f04a4d4bacd4cd80cef6cdb75ea132a05097469a"
+    },
+    {
+      "name": "work/multiturn-acceptance",
+      "sha": "f703066b2aec9c539f3d46917d775b009e8ba4b4"
+    },
+    {
+      "name": "work/pipeline-statistics-20260910",
+      "sha": "43379ceb8572306e2cc1d49673f66386b6fe9ee0"
+    },
+    {
+      "name": "work/social-hire-readiness-20260910",
+      "sha": "d033eca31c7606db79c98265175caf91a03ca8f9"
+    }
+  ],
+  "pull_requests": [
+    {
+      "number": 32,
+      "title": "feat: AP07 临床 Oracle 开发材料与独立评分包",
+      "state": "open",
+      "draft": false,
+      "merged_at": null,
+      "head": "feat/ap07-oracle-calibration-draft",
+      "head_sha": "e494fa34e6271061c4de8c87864adf1e66fcfc9e",
+      "base": "work/difficulty-review",
+      "base_sha": "b7d92bb4d1ff75058dc603580454515f67900598",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/32",
+      "body": "## 范围\n新增 AP07 节点与原子判据草稿、来源摘录、作者校准片段、两份匿名空白评分包及验收说明。原题、已有引擎、用户自动审查和 PR #31 不修改。\n\n## 边界\n所有医学规则和作者预期标签均待临床复核。A/B 两个空表不是两次独立审核。来源全文不上传，保留摘录和快照摘要。公开后属于开发暴露材料，author_only 并非访问控制；评审只接收各自 ZIP。\n\n## 验证\n本地摘要、空白状态、标签隔离、纠正前不见未来回答及 ZIP 完整性已实际检查。远端21个文件已按固定提交逐一回读校验，并确认与基分支相比仅新增AP07材料。未调用真实模型，未宣称临床校准通过。\n\n后续在本功能分支继续确定性节点接入，方案仍见 #31。此次不合并。"
+    },
+    {
+      "number": 31,
+      "title": "docs: 临床参考判据、高风险压力题与首次模型试测方案",
+      "state": "open",
+      "draft": false,
+      "merged_at": null,
+      "head": "docs/clinical-oracle-pressure-pilot",
+      "head_sha": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+      "base": "work/difficulty-review",
+      "base_sha": "b7d92bb4d1ff75058dc603580454515f67900598",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/31",
+      "body": "## 提交范围\n仅新增 docs/taskbooks/clinical-oracle-pressure-pilot-v1.md，不包含工程代码、检查器或工作流修改。\n\n## 方案内容\n- 常规咨询：患者问题回应、可理解性与行动可执行性。\n- 高风险决策压力题：随可见信息变化的临床判据、合理替代路线与对照。\n- 固定事实、动态多轮：分支触发、未触发原因、紧急行动节点与模拟器独立复核。\n- 首次试测：完整咨询与固定节点实验、重大错误证据包及分层验收。\n\n## 依赖与边界\n基于 work/difficulty-review，衔接 #29 与 #30。后续实现另开功能分支，上游合并后再调整目标。本次不合并。\n提案不代表临床审核、真实模型试跑或新增工程验收已完成。"
+    },
+    {
+      "number": 30,
+      "title": "feat: 新增难度合理性审阅，区分能力挑战与失真的题目设计",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "head": "work/difficulty-review",
+      "head_sha": "b7d92bb4d1ff75058dc603580454515f67900598",
+      "base": "work/multiturn-acceptance",
+      "base_sha": "f703066b2aec9c539f3d46917d775b009e8ba4b4",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/30",
+      "body": "## 为什么改\n已有验收主要确认模拟器和评分记录正确，但不能回答“加入的模糊与无关信息是否自然、是否考察目标能力、是否让评分不公平”。本 PR 增加题目设计的专项审阅。\n\n## 行为\n- 每次 Autoreview 自动生成基础版—变体的实际差异、作者声明能力、参考取证路径和文字负担提示。\n- 必要信息未提供且作者不允许不确定回答，报告契约矛盾；文字量膨胀仅提示复核；单条参考路径失败不证明题目无解。\n- 可选评审模型同时读取基础版、变体、实际评分及难度说明，按能力对应、自然度、信息可得性、评分公平性和受控变化五维逐项审阅，输出合理/需修改/难度失当/证据不足、具体原因、修改建议和可定位原句。\n- 缺失、伪造引用、模型错误都不算通过；未调用模型保持 NEEDS_REVIEW，实际模型难度保持 null。作者说明不是独立证据，模型“合理”不能覆盖机械问题。\n- 规范升级 benchmark-checks/v1.2，报告绑定题库和难度说明；修改题库后旧说明不自动续期。\n\n## 验证\n本地 464 项测试通过（39 + 28 + 397），新增 13 项含公平性缺陷、长度负担、正负意见、引用验证、预算与未运行语义。三个变体的参考信息获取路径可运行，真实语义评审尚未运行（无接口密钥）。本次 GitHub Static checks、Autoreview（包含新增难度检查）、Validation（含 Docker）、Automated Checks 均已通过。模型辅助审阅按配置 skipped，未将其计为难度合理。\n\n运行证据：https://github.com/zehaoli0324-cloud/groundsignal-pharma/actions/runs/34733137723\n\n## 范围与依赖\n依赖 PR #29，尚未合并。当前专项审阅覆盖 AP07 的模糊、无关信息、混合三个变体与基础版；旧轨道其他家族未声称已覆盖。\n模型审阅尚未独立校准，作为复核意见；自动工作流成功不等于难度合理或临床批准。默认不付费，启用已有 model_review 开关时原审阅 7 次＋专项审阅 3 次。详细说明见 benchmark/multiturn-factors-v1/DIFFICULTY_REVIEW.md。"
+    },
+    {
+      "number": 29,
+      "title": "feat: 将多轮模糊与混合轨道接入 PR28 开发期验收",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "head": "work/multiturn-acceptance",
+      "head_sha": "f703066b2aec9c539f3d46917d775b009e8ba4b4",
+      "base": "work/benchmark-quality-checks",
+      "base_sha": "f54c66b79e10990d51cd2de59a7d6f2ca0050373",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/29",
+      "body": "## 问题\nPR #28 的旧配对检查只适用于基础版＋首问无关后缀，不能用于多轮模糊、干扰和混合实验。本 PR 在开发阶段增加独立契约并接入同一自动验收，保留旧规则。\n\n## 实现\n- `multiturn-factors/v1`：AP07 一家族的基础、模糊、干扰、混合四条件夹具，冻结病情事实、映射、事件、预算和安全规则。混合不是单因素对照。\n- 复用 PatientSimulator 的问句识别与事件状态机，增加回复披露扩展点；模糊阶段不标记隐藏事实，真实追问后才能明确披露。\n- 四类必须拒绝的缺陷：模糊却披露；无关版本改变病情；引述问句错误披露并触发事件；未触发安全机会却汇总零安全错误。\n- 安全报告根据回答前已知事实重算触发、已评分、未评和未触发分母；不完整评分的安全错误数和错误率保持 null。\n- Static checks、Validation、容器验收立即运行新轨道；不兼容显式报告，不放宽旧规则。参考正确行为也必须通过，避免全部不披露造成假通过。\n- 规范提升为 benchmark-checks/v1.1；报告绑定适配器、患者引擎摘要和提交。\n\n## 验证\n本地回归通过，最新 GitHub 提交共 451 项测试通过（26 + 28 + 397），其中新轨道 16 项。覆盖运行时缺陷注入，以及运行/回放共享错误识别器时仍由独立行为断言检出。\n4 种条件回放、14 项动态验收断言通过；重新打包后的独立工程也能运行新轨道验收。最新提交 f703066b2aec9c539f3d46917d775b009e8ba4b4 的 GitHub 检查已通过，包含旧轨道和新轨道的 Docker 实际执行；独立 patient-eval-development-ci 也通过。\n\n运行证据：https://github.com/zehaoli0324-cloud/groundsignal-pharma/actions/runs/34732276511\n\n模型辅助审阅按配置 skipped，不计作临床批准。\n\n## 范围\n依赖 PR #28，尚未合并。当前动态正负轨迹覆盖 AP07；其他家族须追加验收轨迹，不兼容不等于临床错误。旧 GPT 批处理仍运行原 14 张卡，尚未自动切换至新轨道；真实模型调用 0，临床批准 0。共享引擎摘要变化后，旧批次用原提交回放。\n\n详见 benchmark/multiturn-factors-v1/README.md。"
+    },
+    {
+      "number": 28,
+      "title": "feat: benchmark quality checks with per-card diagnostics and Actions summary",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "head": "work/benchmark-quality-checks",
+      "head_sha": "f54c66b79e10990d51cd2de59a7d6f2ca0050373",
+      "base": "work/medical-question-pack-v11",
+      "base_sha": "f04a4d4bacd4cd80cef6cdb75ea132a05097469a",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/28",
+      "body": "## 为什么需要\n新增题卡和修改评分规则后，需要快速定位结构、披露条件和执行环境的问题，并让每次提交的检查结果可追溯。\n\n## 改动与行为\n- Static checks：字段、编号、来源引用、事件轮次、评分时间边界、单因素配对及清单摘要；缺陷定位到题号、文件和 JSON 路径。\n- Autoreview (rules)：增加事件前提、更正更新和失败示例规则；明确区别于模型辅助评审。\n- Validation：已有对话/评分回归测试、14 个预设缺陷、oracle/no-op 完整性回放、Docker 构建与隔离容器运行。\n- Automated Checks：只有三项机械检查全部 success 才通过；失败、跳过、取消不能替代通过。生成运行摘要和可下载 JSON，不自动发表评论或分配审稿人。\n- 可选模型辅助评审：仅 workflow_dispatch 显式启用，每基础题一次，预算预检、逐字引用验证和逐次日志；默认不调用收费模型，临床正确性仍需复核。\n- 中文学习与操作说明、复制题库后植入 F999 缺陷的可运行练习。\n\n## 验证\n本地已有 28 + 397 项回归测试通过，新增 10 项检查器测试通过；其中 14 个缺陷变体均被对应规则检出，完整题库无机械误报。已跑参考/空操作各 14 段会话和失败演示。\nGitHub 本次运行也已通过 Static checks、Autoreview (rules)、Validation 和 Automated Checks，包含 Docker 构建及容器内 oracle/no-op 回放。共 435 项 Python 测试通过（10 + 28 + 397），14 个预设缺陷位于其中的带标签子测试中，不重复计入 435。\n\n运行证据：https://github.com/zehaoli0324-cloud/groundsignal-pharma/actions/runs/34704894572\n\n模型辅助审阅显示 skipped，真实调用为 0；未将其计入机械通过。\n\n## 边界与依赖\n依赖 PR #27，尚未合并主分支。通过不代表临床正确，也不代表 oracle 已临床满分或 no-op 已被临床评分器判错。没有相似题检测或已校准的临床模型审稿器。\n仓库 required status check 需由管理员配置；提交工作流不等于已经启用强制合并限制。规范检查仅适配本题库结构，迁移新 benchmark 时要改字段和运行适配器。"
+    },
+    {
+      "number": 27,
+      "title": "题包v1.1：腹痛分诊AP07与可下载14题完整包",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "head": "work/medical-question-pack-v11",
+      "head_sha": "f04a4d4bacd4cd80cef6cdb75ea132a05097469a",
+      "base": "work/gpt-medical-benchmark-v1",
+      "base_sha": "5745794e02c1f93cd207aca5af1f167338dfda89",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/27",
+      "body": "新增AP07腹痛分诊与就医障碍的基础/无关文本干扰配对。保留原12题，共14题、7个独立合成家族。压力事件只在严重疼痛已披露且至少两次自然回答后触发；患者/模型评分仍按实际可见信息。\n\n工程支持pressure事件，更新预算为自然84次、含探查98次。新增可重复打包脚本，生成中文START_HERE总览、逐题MD/JSON、oracle/rubric、人工记录模板和独立运行所需的Python/Docker代码。\n\n验证：28项benchmark测试、397项patient_eval回归通过；14题参考解法全部完成，共44次本地脚本调用；144条空白评分保持未评。压缩包114文件摘要和内部链接校验通过；从解压后的独立目录再次完成14题运行和28项测试。真实GPT调用0、临床批准0。AP07医学处置依据NHS患者教育网页并保留本地化临床复核要求。\n\n依赖PR #26，不直接合并main。压缩包交付给用户；仓库保存可复现的打包脚本，输出ZIP不入git。"
+    },
+    {
+      "number": 26,
+      "title": "GPT多轮医学Benchmark：12题自动运行、oracle、rubric、verifier与Docker",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "head": "work/gpt-medical-benchmark-v1",
+      "head_sha": "5745794e02c1f93cd207aca5af1f167338dfda89",
+      "base": "work/app-dialogue-pilot-20260912",
+      "base_sha": "f4fd50a0507d2127c76d4b32f994f54cee045ba9",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/26",
+      "body": "把人工采集的题包工程化为GPT独立会话、多轮互动、逐题保存的自动开发评测。依赖PR #25的题卡及逐轮评分契约，目标分支保持该依赖关系。\n\n交付：\n- 冻结12张合成题卡（6个独立家族×基础/干扰），患者披露和更正规则。\n- 作者参考策略oracle，以及noop、naive、stale对照；oracle不作唯一医学金标准。\n- 逐轮rubric、响应引文绑定、可选模型辅助评分、双人分歧保留。\n- verifier重放全部请求、患者披露与日志；未评分不通过，缺题/越界/篡改拒绝。\n- OpenAI Responses接口、预算预检、逐题上下文重置和中断日志；无静默重试。\n- 非root Docker入口及离线容器CI；修复既有分类器把“再决定是否…”误判为追问的问题。\n\n验证：新增24项测试＋既有397项回归通过。oracle与三种失败对照共48段离线会话完成；oracle的12题均完成，共36次脚本调用。空白评审106条全部保持未评。\n\n限制：未配置OpenAI密钥，真实GPT及在线judge调用0；本地无Docker/Podman，容器构建等待此PR的CI实际结果；未获独立临床审核，工程完整性PASS不能当作临床成绩。自然语言患者匹配仍有限，首次真实试跑需人工审计。\n\n入口：benchmark/medical-dialogue-v1/README.md\n验证：benchmark/medical-dialogue-v1/VALIDATION.md"
+    },
+    {
+      "number": 25,
+      "title": "小荷与蚂蚁健康：12张对话题卡、离线采集与逐轮评审",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "head": "work/app-dialogue-pilot-20260912",
+      "head_sha": "f4fd50a0507d2127c76d4b32f994f54cee045ba9",
+      "base": "feat/clinical-review-console-v01-20260910",
+      "base_sha": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/25",
+      "body": "首轮实际产品试评需要可直接使用的题目、固定披露规则和能核对每一轮的评分工程。本请求交付6个合成家族、12张题卡；先做3个基础场景×2应用共6会话，再展开24项完整开发计划。\n\n本批交付：\n- 首问、被追问时的固定回答、更正事件、独立评分参考和医学来源链接。\n- 严格单因素干扰版，只增加首问无关文字；自然轨道与解释探查分别记录。\n- 可直接下载打开的START_HERE.html，区分待发送、已发送和实际回答，支持本地导出及进行中备份。\n- 复用现有严格导入；绑定题目、计划和会话摘要，拒绝版本错配、重复运行及错误披露。\n- 逐轮评审表、严重错误未知状态、双人分歧汇总、缺陷卡及算法/工程/产品交接说明。未评、未触发、未采到回答与证据不足不计通过。\n\n验证：\n- 患者评测目录397项测试通过，其中新增后端22项，既有严格导入回归10项。\n- 1条合成会话完整CLI演练，11条判据全部保持未评。\n- 最小文档对象模型模拟通过：更正/探查/导出→Python导入、空白评审导出、已提交与未提交超时区分。\n- 实际浏览器渲染未完成：环境无浏览器，下载超时；不将模拟检查当作浏览器验收。\n\n真实患者病例0、实际应用回答0、临床批准0。题目全部为公开合成开发材料，尚未形成临床金标准；程序核对结构和引用，不自动作医学语义裁决，不能从对话证明内部根因。\n\n基于审阅界面集成分支82e0384，保持本PR目标分支。PR #23的16项审计发现仍未关闭；不修改S5准入或共享回归发布脚本，不依赖PR #24的动态取证环境。\n\n入口：medical/patient-eval/app-pilot-v1/README.md\n题卡：medical/patient-eval/app-pilot-v1/QUESTION_CARDS.md\n设计：medical/patient-eval/app-pilot-v1/DESIGN.md\n验证范围：medical/patient-eval/app-pilot-v1/VALIDATION.md"
+    },
+    {
+      "number": 24,
+      "title": "复杂临床推理与主动取证归因：工程计划及两家族首批实现",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "head": "work/clinical-reasoning-attribution-20260912",
+      "head_sha": "665b8edea3cde907ea03de9bbce174552268f0a3",
+      "base": "feat/clinical-review-console-v01-20260910",
+      "base_sha": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/24",
+      "body": "现有复杂临床题卡尚未接通动态取证，题干含方向提示，部分变体同时改变多个临床因素；归因程序只有更正更新丢失的实际组件检查器。本请求按用户要求建立以S8为主、连接S5/S6/S7/S9/S10的新工作线。\n\n本轮交付：\n- 工程计划与逐批验收、审计依赖和每小时迭代规则；阶段文档新增入口。\n- 肾功能恶化与贫血的病例标准初审；明确旧肌酐时间证据不足及专家待审状态。\n- 两家族3份合成草稿，其中1对仅改变初始干扰内容；模型初始任务不提示病因排序。\n- 独立标准库动作环境：病史/资料取证、可见输入投影、工具返回与实际投递分开、投递失败演练。\n- 12项新增测试通过；两家族各正常/故障共4条脚本会话，原始日志和摘要已保存。\n\n所有临床评分仍未评，真实模型调用0、专家批准0、根因证明0。当前仅结构化主题匹配；自然问询、过程评分、复杂归因检查器与真实模型闭环待后续批次。本轮测试只覆盖新模块，不是全项目复测。\n\n基线82e0384，目标为审阅界面集成分支；main不变。PR #23的16项审计发现未修复、不转为通过；接共享评分前需处置版本绑定/逻辑重复/未评误通过等问题。旧病例、S5冻结及正式准入不改。\n\n计划：docs/taskbooks/clinical-reasoning-attribution-v1.0.md\n进度：medical/patient-eval/clinical-reasoning-v1/PROGRESS.json\n证据：medical/patient-eval/clinical-reasoning-v1/runs/CR02-first/\n下一批：CR03问询适配与多路径动态循环。用户已要求恢复每小时迭代；调度启用以自动任务实际返回为准。"
+    },
+    {
+      "number": 23,
+      "title": "A1审计前五批：累计16项未修复问题与离线证据",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "head": "work/audit-a1-upstream-20260911",
+      "head_sha": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+      "base": "feat/clinical-review-console-v01-20260910",
+      "base_sha": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/23",
+      "body": "全项目A1审计进行中，本请求只增加审计工具、覆盖记录和失败证据，未修改生产实现。累计16项OPEN、0项修复；不授予全项目通过或真实病例准入。\n\n第一批：来源路由/检索、语义提取、图谱。12项新反例/对照检查中4项符合预期、8项失败，归并7个问题。主要风险是账本先写后报错、图谱证据属性丢失、重复或错配检索结果误判PASS。\n\n第二批：来源导入、S5冻结与S9训练导出。16项新检查中8项符合预期、8项失败，归并3个问题：导出前关联错误回答、已有输出覆盖与部分写入、冻结结果同时拒绝与允许编写。另有既有来源导入测试8/8通过。冻结反例是子检查结果/回执接纳桩，只复现结果组合；现有CLI仍按guard_gate失败，未证明真实准入绕过。输出探针仅写临时通用标记，无训练行。\n\n第三批：运行/恢复、通用评分、统计桥接和裁决连接。12项新检查中8项符合预期、4项失败，归并2个问题：\n- A1-011：通用evaluate_sessions忽略已有scenario_sha256；保持编号/协议/开头但改alpha标准为beta，旧结果仍完全通过。严格导入、事件映射、恢复已有摘要校验，本结论不扩大为它们失效。\n- A1-012：同一次评分机会仅换item_id复制，计划7变8；连评分复制后双人均评分1变2。通用统计缺逻辑身份校验；正常桥接按会话/criterion派生编号，本轮未发现桥接自身制造重复。\n另执行49项既有相关测试，49/49通过，覆盖未评保留、独立评分维度、无效测量排除、合成统计与失败证据连接。恢复与裁决的本批阅读不等于重新执行恢复或浏览器验收。\n\n第四批：隐私/公开摘要、共享回归、知识库合并、来源分级与工作流配置。17项新检查9符合预期、8失败，归并3项：\n\n- A1-013：共享回归脚本对部分缺失评分、缺失安全字段或重复高分病例仍可能给出PASS。\n- A1-014：固定前缀重命名发生二次冲突时覆盖旧文件，JSON等附件也可能被覆盖。\n- A1-015：非官方网址的路径/查询或伪装子域包含官方域名字符串，就会被来源分类helper误标VERIFIED。\n\n另有13项既有隐私/公开阻断清单测试通过。临时合成标记之外无实际知识库写入；来源分类未联网访问。64份工作流做静态权限/依赖元数据盘点，9份有写回步骤，51份无顶层显式权限；实际继承权限未核验，不能将它们直接计为漏洞。本轮新增深读2份保存工作流，失败证据保存与最终发布判定分开。\n\n第五批：动态草稿、合成状态机、页面数据转义和静态路径边界。8项新检查6符合预期、2失败，归并A1-016：合成执行器缺少输出片段时先记录成功状态再抛错，重试被当作重复。仅合成合同执行器受此反例影响，不声称真实患者执行失败。另有14项既有动态草稿/裁决文件互通测试通过；页面原文转义和静态目录外/父级链接拒绝得到支持，但Node不是浏览器验收，检查后的路径竞态仍未验证。\n\n五批新探针共65项：35符合预期、30失败；四组既有测试分别8/8、49/49、13/13、14/14通过。不同目的不计算项目通过率，既有通过不能抵消反例失败。五批探针原始退出2均保留。每批记录输入提交/树、文件摘要、原始输出和具体覆盖范围。当前仍处A1；全部覆盖后执行A2受控修复，再固定版本进行A3集中复测。\n\n入口：docs/reviews/project-audit-v1/PROGRESS.md、findings.json，以及a1-upstream、a1-admission-export、a1-evaluation、a1-shared-boundaries、a1-dynamic-pages下的REVIEW.md。各批记录已核对JSON、证据链接、源文件摘要和测试数量。\n\n数据与发布边界：真实患者运行0、外部模型调用0、训练行/真实冻结回执创建0；不改S5冻结证据、S6准入或四项默认勾选。目标仍为审阅界面集成分支，main不变，PR保持草稿未合并，定时任务保持暂停。\n\n下一批优先底层谱系/重复判定算法、其余共享脚本与凭据/工作流检查，再按覆盖矩阵补接口、页面和路径竞态。57条实际映射0/57、12条临床裁决、个人能力、他人复现和实际浏览器验收仍待完成。"
+    },
+    {
+      "number": 22,
+      "title": "补齐裁决离线点选页，启动全项目审计与集中复测计划",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-10T16:18:47Z",
+      "head": "work/adjudication-page-audit-20260910",
+      "head_sha": "2f809c523af365b7fa593779966b71f0b3efee2c",
+      "base": "feat/clinical-review-console-v01-20260910",
+      "base_sha": "17468b2bc2872689aabc72c9b445773f1876659c",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/22",
+      "body": "R13已有裁决处理程序，但研究人员仍要手写选项值和理由。本轮新增离线点选页，并按用户要求制定全项目审计与集中复测方案。\n\n## 实际功能\n- Python先核验原资料和两份答卷，再生成绑定页面；页面展示原文、待核对内容和两份意见。\n- 明确选择答案、点选常见理由或补充文字，确认后导出；改选清除确认，支持恢复与部分保存。\n- 不在浏览器内直接导入任意原答卷；导出文件仍须由现有后端核验回写。原审阅四项默认勾选不变。\n- 公开adjudication-v0.1.html只含既有虚构日期记录，没有网站部署或私有材料读取。\n\n## 验证与限制\n新增4项测试，相关27/27通过；脚本语法检查、离线资源与生成器一致性检查通过。前后端文件互通、部分决策、旧摘要/非法标志/缺理由/缺答拒绝均有覆盖。实际浏览器点击、下载、关闭重开与恢复仍未验收；此前本地页面被浏览器安全策略拒绝，本轮没有绕过。\n\n## 全项目审计\n任务书docs/taskbooks/project-audit-and-retest-v1.0.md分A0范围、A1只读全审、A2修复、A3集中复测、A4实际使用与人工复核、A5发布判断，覆盖S1—S10与公共代码/工作流/数据边界。先审查每个命令的输入、联网与写入，再执行清单，不盲目重跑所有历史脚本。\n\n已完成A0初步盘点，基线为第21号合并结果的文件树：1333个受版本控制文件，读取284个代码/工作流文件，64份工作流，Python语法错误0。385个测试函数仅为静态计数，未冒充执行结果。全项目审计与复测状态均false。下一轮先审查来源路由、证据提取、图谱及其连接。\n\n仍为合成工程验证与真实准入前准备；实际映射0/57，12条临床裁决待完成，真实病例执行和模型调用0，定时任务暂停，S5冻结/S6阻断不变。\n\n基于第21号合并结果，只纳入审阅界面集成分支；不更新main，不合并其他前置分支。代码合并不等于全项目审计、临床准入或个人能力验收。"
+    },
+    {
+      "number": 21,
+      "title": "区分点选确认与缺答，接通分歧裁决和保守审阅回写",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-10T15:31:20Z",
+      "head": "work/choice-adjudication-20260910",
+      "head_sha": "2bf3c0798aa010624e3a25b8d1e652932a82fa0c",
+      "base": "feat/clinical-review-console-v01-20260910",
+      "base_sha": "cc83d443218651a81e41c0453ec61ac52314c068",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/21",
+      "body": "原点选比较只比较选项值，未确认的改选可能与已确认意见混在一起。本轮新增裁决处理程序，复用现有来源、版本和确认记录校验，形成可追溯的保守审阅结果。\n\n- 分开列出缺答、待确认、已确认一致、已确认分歧；只有最后一类允许裁决。\n- 初评意见不变，保留两份原始答卷、裁决理由与协调者自报身份；完整输入摘要防止旧裁决套用新答卷。\n- 输出result.json和review.json；后者复用现有候选审阅校验，不冒充第三份独立点选答卷，不伪造确认记录。\n- 未解决项保持未完成，原文语义支持不升级为已纳入事实，评分标准仍待补充。未产生模型评分或准入。\n- 新增9项测试，相关23/23通过；合成演练3项一致、1项分歧、8项缺答，处理后仍有8项未解决。\n- 首次命令输出显示通过，但保存检查发现原日志只有部分行，已保留；捕获完整输出后复跑同一组测试23/23通过并另存，不扩大测试范围。\n\n裁决点选页面尚未搭建，本轮为处理程序及文件回写，暂由研究人员填写决策文件。原四项默认勾选及现有比较输出未改。\n\n剩余搭建与验收清单已写入CHOICE_ADJUDICATION.md和R13台账。57条实际映射仍0/57、12条临床裁决和浏览器真实操作未完成。公开材料只含既有虚构日期记录；私有材料读取、真实病例执行、模型调用、独立评审均0。定时任务仍暂停，S5/S6不变。\n\n基于第20号合并结果，目标为审阅界面集成分支；按既有工程集成授权在检查通过后合并，不进入main、不合并其他前置分支。"
+    },
+    {
+      "number": 20,
+      "title": "接通合成流程与数据库统计，保留零评分和失败证据",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-10T14:41:35Z",
+      "head": "work/pipeline-statistics-20260910",
+      "head_sha": "43379ceb8572306e2cc1d49673f66386b6fe9ee0",
+      "base": "feat/clinical-review-console-v01-20260910",
+      "base_sha": "21bbae07240417db73a74e261f5e0ba3cd89decd",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/20",
+      "body": "已有合成流程能定位候选并输出模拟评分，但数据库仍依赖另一套手写输入，零评分也无法建库。本轮把两者接通，避免候选、缺失评分和真实评审被混为一谈。\n\n## 改动与结果\n- 新增R10作者合成记录到统计格式的转换；重新核验病例、对话摘要、评分版本和目标回答边界。\n- 每个计划项保留会话、评分项、原评分记录索引与证据回合，报告及失败清单可追溯。\n- 空评分列表可以建库，保留7项计划，返回一致性无法计算；不制造第二位评审行。\n- 行为失败与质量分独立：质量未评的已记录行为失败仍保留。\n- 更新任务书与R12台账，明确当前为合成工程贯通验证、真实评测准入前准备。\n\n## 验证\n- 新增9项测试，相关33/33通过，全患者评测362/362通过。\n- 使用已提交R10输入实跑评分前/后两次，各5/5检查，数据库完整性ok。\n- 评分前7未评；评分后2通过、1失败、4未评。3例7会话，有效6、测量无效1，双人质量评分覆盖0。\n- 首次零评分失败、首轮与最终验证记录保留在round-12-statistics。\n\n## 范围和限制\n只支持明确的R10合成作者及指定评分版本，拒绝真实/独立评审声明。数据库baseline为合成归组、repeat_id为合成序号，不表示实际对照或重复模型实验。公开产物均复用合成输入；数据库文件由命令生成，没有提交患者材料或二进制数据库。\n\n57条真实规则映射仍0/57，12条临床裁决、真实动态适配、点选裁决回写、浏览器实际操作、真实对照与费用核算仍待完成。真实模型调用、真实病例执行和独立评审均0；定时任务维持暂停，S5冻结与S6阻断不变。\n\n目标保持feat/clinical-review-console-v01-20260910，父提交是第19号合并结果21bbae0。本请求不进入main，也不合并其他前置分支。检查通过后按用户已授权的工程集成范围推进；代码纳入维护不等于临床或个人能力验收。\n\n操作说明：[PIPELINE_STATISTICS.md](medical/patient-eval/readiness/PIPELINE_STATISTICS.md)\n\n发布准备首次批量读文本超出输出上限，改用定长分段读取；首次更新新分支返回“Reference does not exist”，随后使用创建分支接口成功。均非产品测试失败，无覆盖或强推。"
+    },
+    {
+      "number": 19,
+      "title": "集成审阅与合成评测工程：恢复、事件映射、统计与失败追溯",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-10T14:14:39Z",
+      "head": "work/social-hire-readiness-20260910",
+      "head_sha": "d033eca31c7606db79c98265175caf91a03ca8f9",
+      "base": "feat/clinical-review-console-v01-20260910",
+      "base_sha": "4fb087c9524da24ad60d8346b3fdca49f776138d",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/19",
+      "body": "本请求把多轮审阅与合成评测工程纳入同一工作分支，解决“能运行，但难以恢复、追溯评分和解释失败”的问题。\n\n## 实际改动\n- 点选审阅界面：四项指定默认选项、逐题确认、界面版本与确认来源记录；旧答卷缺失历史保持未知。\n- 三条合成评分规则；私有57条既有草稿的整理工具，实际映射仍0/57。\n- 合成运行故障演练与显式断点恢复：绑定配置、调度和检查点，排他锁、防覆盖，保留失败记录。\n- 版本绑定批量会话导入；显式事件候选定位到触发后的第一个回答，不自动生成评分。\n- 本地统计查询、合成失败归因、导入—候选—模拟评分—汇总—失败清单的连接及交接说明。\n\n## 本轮审查与修复\n原差异81个文件，范围与逐项状态见 [审查报告](docs/reviews/pr19/REVIEW.md)。\n发现采集已失效会话仍可能通过独立评分表计入质量覆盖，已补跨表校验：建库前拒绝质量分数、机会结论和安全判断，保留合法未评记录。修复前失败与修复后结果均已留档。\n- 原有患者评测测试351/351通过；加入反例并修复后353/353通过。\n- 统计模块11/11通过。既有R10完整合成演练8/8是历史结果，不重复计数。\n- 四份离线成品未嵌入真实来源包，最新0.2.2与生成器一致；未改第五阶段冻结证据。\n- 本次为助手审查和程序验证，不登记为独立人类代码审阅。\n\n## 合并目标与顺序\n保留目标 `feat/clinical-review-console-v01-20260910`。它还包含主分支未接纳的病例准备基础，相对主分支有13个独有提交，主分支有1个独有提交。直接改指main会扩大范围。\n本次先将本请求集成到原目标；第17号及界面基础进入main需单独审查。本请求合并不表示主分支已更新，不顺带合并其他请求。\n\n## 尚未完成\n真实动态v0.4病例适配、57条实际规则映射、12条临床裁决、真实模型对照与独立评分均未完成。R4数据库与R10结果尚无统一自动转换；点选分歧裁决回写、空评分列表统计入口、实际成本核算仍待补齐。\n当前浏览器安全策略拒绝本地页面，实际点击、下载、关闭重开与恢复未验收。个人独立维护、他人复现和默认预选对判断的影响也未验收。\n真实病例执行0、真实模型调用0；临床准入、第六阶段阻断和定时任务暂停不变。\n\n用户已授权在审查及检查通过后合并这批工程，替代此前“始终保持草稿”的约定。合并前核对最新远端检查并绑定预期提交号；不把代码合并视为临床或个人能力认证。"
+    },
+    {
+      "number": 17,
+      "title": "WIP: 真实语言动态病例 v0.4 夜间迭代",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "head": "nightly/patient-cases-v04-20260909",
+      "head_sha": "15410abe9f6ffd9afecef15ed4ed7210a5e82e1c",
+      "base": "main",
+      "base_sha": "f28696aa93410e34068edd7203280b40926033eb",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/17",
+      "body": "## 结论\n\nN1–N6 工程证据链已闭合，但 12 个真实来源开发病例仍全部临床阻断。真实来源执行 0/12、离线会话 0、盲评包 0、57/57 评分机会未映射且未评。本 PR 继续保持草稿，不应合并或用于临床/模型排名结论。\n\n## 固定边界\n\n- 私有患者原文与完整审阅文件不进入公开仓库\n- 不调用付费模型，不采集真实平台，不导出训练数据\n- 不自动授予 Clinical Gold，不解除 S5/S6 阻断\n- 已暴露派生材料仅作为开发集\n- 保留失败、未知、未评和测量无效\n- 不修改 S5 冻结证据，不启用自动合并\n\n## 完成情况\n\n- N0：任务书、固定分支、ledger 和草稿 PR。\n- N1：官方 `validate-review` 合同通过；候选 50/50、事实 765/765、评分规则 300/300。\n- N2：64 条机器可读人工/临床阻断；自动修复 0/64；临床可运行 0/50。\n- N3：合格池 30/50，冻结 12/12 个开发编号，唯一来源 12/12；家族设计为 `UNSUPPORTED_DO_NOT_INVENT`。\n- N4：私有草稿 12/12；事实 138；评分草稿 57；结构化机会映射 0/57；临床可运行 0/12。\n- N5：静态合同 12/12、合成状态探针 8/8；真实来源执行尝试 0/12；质量、任务完成与安全均未评。\n- N6：新增只读取五份去敏公开产物的失效关闭证据检查器和索引；产物 5/5、跨阶段哈希绑定 PASS。准入升级、断链、候选漂移或“未运行”被升级时均拒绝闭环。\n\n## 验证\n\n- N2–N6 与候选审阅针对性测试：53/53\n- 患者模块：253/253\n- S5（Stage 5，第五阶段）历史冻结收据只读测试：14/14\n- N6 功能提交 GitHub CI（Continuous Integration，持续集成）：2/2\n- 证据索引确定性重放逐字节一致；JSON 解析、Python 编译、`git diff --check` 和定向去敏扫描通过\n- N6 功能提交：`690c7992acab43b1f4e174d0135a36072336f4d2`\n- 当前交接提交：`15410abe9f6ffd9afecef15ed4ed7210a5e82e1c`\n\n## 当前边界\n\n`gold_approved=false`、`formal_approval=false`、`clinical_gold=false`、`dynamic_scenario_ready=false`、`s6_automatic_trust=BLOCKED`。\n\n静态与合成通过不是模型分数或临床安全证据。任务书所述 3 条 `conflict` 未复现；规范化输入实际为 0 条 conflict、3 条纠正关系，未自动裁决。\n\n## 下一步\n\n唯一开放入口是双人独立人工复核、合适临床人员裁决和授权准入负责人决策。完成前不执行真实来源病例。完成后从 N1/N2 重新验证；内容变化时重跑 N3–N5，不能沿用当前冻结结果猜测通过。\n\n总交接：`docs/handoffs/2026-09-10-patient-cases-v04-nightly-handoff.md`\n公开索引：`medical/patient-eval/data-sources/v0.2/nightly-v04-evidence-index-public-v0.1.json`"
+    },
+    {
+      "number": 18,
+      "title": "Publish deidentified patient-evaluation pilot v0.1",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-09T16:24:24Z",
+      "head": "feat/public-patient-pilot-v01",
+      "head_sha": "566c769c4ab2db45b60df64ee2d527fc2b0c7c10",
+      "base": "main",
+      "base_sha": "f28696aa93410e34068edd7203280b40926033eb",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/18",
+      "body": "## Summary\n\nPublishes a public, deidentified synthetic derivative of the GroundSignal patient-evaluation pilot.\n\nIncluded:\n- 12 public case cards;\n- 3 runnable dynamic-interview scripts;\n- 6 synthetic fixed-replay cases with 10 independent checkpoints;\n- local runner, collection workbook, protocol, PDF operation guide, and fail-closed release validator;\n- aggregate smoke, workbook, and privacy-gate records.\n\nPrivacy boundary:\n- no original patient dialogue text or source identifiers;\n- no completed review JSON/HTML, reviewer metadata, evidence spans, original turn IDs, or redaction maps;\n- no exact-source replay contexts, real model transcripts, local run logs, screenshots, or clinical adjudication records.\n\nTrust boundary:\n- `formal_approval=false`;\n- `clinical_gold=false`;\n- the privacy gate reduces release risk but does not prove zero re-identification risk or clinical validity.\n\nAll files are confined to `medical/patient-eval/pilot/real-dialogue-derived-v0.1/`."
+    },
+    {
+      "number": 16,
+      "title": "Prepare 50 ReMeDi candidates for review and add learning guide",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-09T06:43:04Z",
+      "head": "feat/patient-candidate-review-v01",
+      "head_sha": "d91db8dfaecf0e591261a56ba808909f7eaad975",
+      "base": "main",
+      "base_sha": "8c73ef445a5acd1c6cdf47f9f73031a4f1605ce9",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/16",
+      "body": "已接入的 ReMeDi 对话还不能直接作为测试病例：患者提问可能被误当事实，后续信息可能提前披露，来源标注也存在文字错位。本 PR 增加可复现的候选审阅准备流程，让这些问题先被记录和人工复核。\n\n- 核对固定源文件、许可和候选选择；生成原文定位、隐私线索、患者文字近重复筛查及事实/披露草稿。\n- 提供两份独立空白审阅包和离线 HTML，校验不可变原文、证据、纠正顺序与披露边界。\n- 分开报告已决定字段的一致性和评分锚点、机会、事实证据等内容差异；未审阅不计为一致或通过。\n- 增加面向初学者的中文算法与工程学习 HTML，并更新进度交接。\n\n实际运行：50 段候选、1,286 条消息，765 条患者标注提案中 745 条范围匹配、20 条错位。旧规则只产生 1 条观察，842 个句段未解析；这些是覆盖线索，尚不能计算抽取错误率。原始对话、候选身份和审阅包只在本地忽略目录，仓库只含聚合审计。\n\n验证：患者模块 217 项测试通过（含本轮 48 项）；真实 50 段的准备和两份空白包校验通过；无实际评审者的双人比较被拒绝。独立代码检查发现的评分内容遗漏与字典键顺序误配均有反例测试。S5 历史收据只读核验通过，正式准入与自动信任继续阻断。\n\n本轮没有真实模型调用、人工医学评分、动态病例自动导出或模型训练。"
+    },
+    {
+      "number": 15,
+      "title": "专业数据接入 v0.1：真实中文对话、来源许可与质量审计",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-09T05:14:05Z",
+      "head": "feat/external-medical-data-intake",
+      "head_sha": "86dc2900e8ac6ee613de1513b8646b9cea8f8019",
+      "base": "main",
+      "base_sha": "fd91e2e9a2c4f72fc7b35975338e1028264391c8",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/15",
+      "body": "当前患者试评以合成开发材料为主，缺少真实中文问询表达；专业来源登记也不能直接当作已审核测试题。本次补充来源分层、许可核验和首个实际中文对话接入样例。\n\n- 登记 8 个专业来源，区分真实咨询、构建评测、文献病例、医院文书与参考知识；逐项说明许可、版本、获取状态和用途。\n- 固定 ReMeDi-base 作者提交，校验数据与 MIT 许可证的长度、Git 文件摘要及 SHA-256；只向忽略目录写原文，保留原顺序与本地候选编号。\n- 实际下载并审计 1,557 段对话、36,291 条消息：3 条空白消息、20 段规范化重复对话，结构可用且去重后 1,535 段；1,518 段含连续同角色发言，因此不能直接强制导入交替轮次规范。\n- 公开审计仅有聚合计数和固定文件身份，不含患者原文或对话编号。50 个候选尚待隐私、临床和场景可用性复核。\n- 更新 reference 中过期的暂停状态，链接数据方案和交接；现有冻结病例与临床评分语义不变。\n\n验证：新增 8 项结构与完整性测试，患者模块共 169 项测试通过；独立复核源文件、许可证、聚合审计和候选选择一致。\n\n其他 7 个来源没有在本轮下载。HealthBench 按作者请求不在线披露样例；IMCS-21/CBLUE 待核具体数据许可；MIMIC-IV-Note 仍需凭证与数据使用协议。来源登记、下载完成、语言标注和医学标准答案分别记录；没有真实模型调用、临床放行或新的独立留出成绩。"
+    },
+    {
+      "number": 14,
+      "title": "患者评测 v0.3：独立评分、披露校准与可复现对照",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-09T04:53:30Z",
+      "head": "feat/patient-eval-v03-measurement",
+      "head_sha": "9a930733ee38fd80d5da51813b2af3edbb8dd647",
+      "base": "main",
+      "base_sha": "36f4ea57fa94ab3d347a41d4d03de48a57e58d18",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/14",
+      "body": "旧患者试评存在三个测量缺口：部分质量评分导入时丢失、关键判据失败与严重错误耦合、问询规则会漏掉时长表达并把转述指令误作追问。本次补齐评分与披露的开发校准链，便于后续用实际结果区分模型问题和测量工具问题。\n\n- 新增显式 patient-review/v0.3：质量 0–2 分、任务完成、严重错误和评分机会独立保存；机会绑定实际回合，未评保持未知，目标服务失败保留在任务分母。\n- 接通部分审评导入、报告、质量对照与逐判据双人一致性；原文与盲评包摘要绑定，拒绝新旧语义、配置及分类器版本混用。\n- 问询分类器保留 literal-v0.2 重放，新增 conservative-zh-v0.3 与逐句决策记录。48 条公开开发样本：原规则匹配 23/48，新规则 48/48；两组标签均已暴露、未独立人工审核。\n- 新增 8 条压力关系声明的结构校验；6 个原家族之外的纠正/信息不足示例不会混入冻结 v0.2 配对。\n- 更新简短 README、操作指南、验证页与交接；持续集成增加空白 v0.3 审评链、披露校准和关系声明检查。\n\n验证：161 项患者模块测试、14 项历史收据测试通过；原 S5 历史收据只读核验通过，作者准入输出与既有结果逐字节相同。实际跑通 24 条离线会话与 152 个空白审评项；质量均分和一致性系数保持为空，安全结论仍未知。\n\n没有真实模型调用、真实患者采集或临床评分；开发样本表现不代表真实患者语言准确率。旧场景、冻结收据和历史首次结果未改写；gold_approved=false、s6_automatic_trust=BLOCKED 保持有效。"
+    },
+    {
+      "number": 13,
+      "title": "docs: 将医疗评测文献转为算法与工程设计补充",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-09T04:02:13Z",
+      "head": "docs/literature-design-v13",
+      "head_sha": "12986257729b65016341a2303d2f36b2a64ebeb2",
+      "base": "main",
+      "base_sha": "508339e1ca6490d39a6682380e24d5c0143db2ad",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/13",
+      "body": "现有患者评测原型已经具备运行入口，但文献方法还没有映射到可验收的算法与工程任务。本次基于上传论文的关键方法章节，补充原文证据与项目迁移边界，保持代码开发暂停。\n\n新增：\n- reference/METHODS_TO_DESIGN.md：四篇核心论文、纵向管理研究与支持文献的方法依据、页码、版本及不能照搬的部分。\n- docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md：六个待实施工作包——压力关系、中文交互与状态、独立评分、评分校准、证据/工具诊断、真实文本与可重复研究。\n\n关键设计：\n- 压力区分结论不变、应随事实更新、信息不足三类。\n- 固定历史下一回答评分与动态整段评分分开；质量、完成、安全、机会和测量有效性分别记录。\n- 未获得必要信息的任务失败与尚未触发的后续探针分开，报告机会覆盖及完整分母。\n- 英文医学文本工具不直接视为中文对话组件；复杂检索、模型评分器及训练按实际缺陷触发。\n- 不由公开论文反推某次小荷应用会话的内部配置。\n\n验证：全部8个改动文件均为 Markdown；相对链接和 git diff --check 通过；原文核验及独立方法审查完成。未新增软件依赖、未修改代码/测试/冻结案例、未执行真实模型或临床实验。v1.3 是任务书补充版本，软件仍为患者评测 v0.2。\n\n此前的 README 精简与进度交接已通过第12号合并请求完成，本次仅增加简短入口及交接补记。"
+    },
+    {
+      "number": 12,
+      "title": "docs: 精简项目首页并整理暂停开发交接",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-09T03:48:41Z",
+      "head": "docs/readme-handoff-20260909",
+      "head_sha": "d772b17444522625c53c07570a9a2fe2690a8b33",
+      "base": "main",
+      "base_sha": "428311fbca621fd233880efc7e14072fd075dabc",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/12",
+      "body": "当前首页有 495 行，把方法介绍、阶段台账和未来规划放在一起，读者难以看出已完成的工作。本次将首页收敛到 56 行：一句项目定义、三项具体实现、三条有证据的结果、离线运行入口与当前边界。\n\n新增 docs/handoffs/2026-09-09-project-handoff.md，记录 S1–S10 进度、v0.2 交付和历史验证、S5 冻结修复及仍保留的阻断、评分与模拟器的已知问题，以及恢复工作的入口。v0.3 明确为暂停的待办。\n\n结构参考顾禹参与的 X-Reasoner 和 BiomedParse 公开 README；不推定其本人执笔。明确李泽豪负责问题定义、医学约束、实验设计与验收，代码与测试使用智能体辅助开发。\n\n验证：\n- 两份文档的相对链接与 git diff --check 通过。\n- README 的场景校验和离线演示命令实际运行成功，生成 24 条脚本会话及指定报告文件。\n- 152 个语义／临床判据仍未评；没有调用真实模型。\n- 102 项患者测试与 14 项历史收据测试仅引用上轮记录，本次未重跑这些套件。\n\n范围仅 README 和交接文档，不修改算法、评分规则、案例或冻结记录，不推进后续实验。"
+    },
+    {
+      "number": 11,
+      "title": "feat: 统一任务书、十阶段拆分与动态患者试评 v0.2",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-09T03:22:16Z",
+      "head": "feat/patient-dialogue-eval-v01",
+      "head_sha": "5bff9264c2b1680e86034aa451fc05dcb98b7ad6",
+      "base": "main",
+      "base_sha": "e1843c310530472e635d96d054d9bb0baad2d0b2",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/11",
+      "body": "患者评测现在需要从固定历史回放走向实际问询，并把可见缺陷、算法干预和工程证据连成闭环。本请求整合首版与本轮动态试评，合并新旧任务书，并按现有 S1–S10 阶段明确职责、输入输出和验收。\n\n本次交付：\n- 完整统一任务书 v1.2；旧 v1.0 Word / Markdown 和 v1.1 作为历史归档。\n- S1–S10 子步骤：算法任务、工程任务、可测缺陷、指标分母、依赖及黑盒边界。\n- 动态患者交互器：按实际提问披露、保留未知、主动纠正、压力与错误复述事件、预算停止及人工识别纠正。\n- 6 个合成家族、12 个单因素清晰／压力变体，采集模板及评分细则。\n- 真实模型双流程脚本：完整历史、仅由可见用户原话提取状态、随机配对、固定配置、逐会话落盘和成本未知记录。\n- 人工采集、盲评包、裁决写回、评分者一致性、判据配对比较及评测系统自身质量报告。\n- 修复原 S5 工作流对历史收据的错误重造；改用只读验证已有不可变提交、收据字节、祖先与24+8冻结文件。原 materializer、信任来源和准入约束保持不变。\n\n验证：\n- 102 项患者模块测试通过。\n- 14 项新增 S5 历史收据测试通过。\n- 实际历史收据校验通过；原准入结果及7个既有检查输出与固定记录逐字节相同。\n- 24 条离线动态会话、152 条待人工审评项生成成功；采集到评分的命令链通过。\n- 独立审查修复了问句被当作事实、严重错误标签绕过、重试用量未知、未提交草稿误当实际输入和审计异常覆盖目标失败等问题。\n\n范围：\n没有调用真实模型、采集小荷回答或完成临床评分。问询夹具和有限抽取规则用于开发机制验证，不支持临床能力排名；未匹配问句、未触发事件和未解析内容在报告中保留。临床准入和 S6 自动信任仍然阻断。\n\n入口：\n- docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md\n- medical/patient-eval/STAGE_DECOMPOSITION.md\n- medical/patient-eval/pilot/v0.2/README.md\n- medical/patient-eval/VALIDATION_V0.2.md\n- medical/patient-eval/S5_INTEGRATION_STATUS.md\n\n本次待核验提交：5bff9264c2b1680e86034aa451fc05dcb98b7ad6。远端检查通过后按既有流程合并。"
+    },
+    {
+      "number": 10,
+      "title": "test(s5): preserve v0.10 independent fresh FAIL",
+      "state": "open",
+      "draft": false,
+      "merged_at": null,
+      "head": "s5-v010-independent-fresh",
+      "head_sha": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+      "base": "main",
+      "base_sha": "fda5d0b281eddfbf9d200941ffadc8628e9ed19c",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/10",
+      "body": "## Summary\n\n- freeze the independent S5 v0.10 fresh-lineage suite and evaluator before execution\n- preserve the immutable first-observation output and report byte-for-byte\n- add CI coverage and update the S5 status/optimization documentation\n\n## Evidence identity\n\n- base: `fda5d0b281eddfbf9d200941ffadc8628e9ed19c`\n- suite freeze: `ae92eba2e3cb5570fd6ae345a211a90572cf85bb`\n- first observation: `3a51947672e77eea947eb640150f4dc2a663e18a`\n- result: **FAIL — immutable first observation**\n- evidence class: `independent_fresh_structural`\n- `gold_approved=false`\n\n## First-observation result\n\n- contamination attacks: 3/5 passed\n- clean controls: 4/5 passed\n- F37 Cyrillic unseen-script translation: expected `BLOCK`, observed `ALLOW`\n- F41 dialogue-distributed multi-record braid: expected `BLOCK`, observed `ALLOW`\n- cardiac MRI clean control: expected `ALLOW`, observed `REVIEW`\n- all eight evidence-chain preconditions passed\n- v0.9.1 exposed-repair regression remains passing\n\n## Containment\n\nS5 bounded release and S6 automatic trust remain blocked. This PR preserves a valid fresh failure; it does not claim a fresh pass, medical truth, training eligibility, or clinical capability. Any later repair/calibration round must retain this observation and be labelled separately.\n\n## Verification\n\n- bundle verified as complete history\n- recovered commit chain verified exactly as `fda5d0b → ae92eba → 3a51947`\n- report SHA-256: `9893eb4d7174730e9e3c02ff69e83aa0d7a58df7f552519a9394fcfb94bae94c`\n- remote branch hash independently verified after the original push\n- CI-only follow-up: `3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda` fixes nested heredoc indentation without rewriting either evidence commit\n- current-head CI: 14/14 checks passed\n"
+    },
+    {
+      "number": 9,
+      "title": "S5: materialize v0.9.1 canonical freeze receipt",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-07T05:47:00Z",
+      "head": "s5-v091-canonical-freeze",
+      "head_sha": "31c94deded224d54a7e2f0e977ebe458e9b6c16e",
+      "base": "main",
+      "base_sha": "cdc89298693aa9c5222f15ed9bd62a57e140fbc6",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/9",
+      "body": "## Summary\n\n- materializes the explicitly approved S5 v0.9.1 canonical freeze at `cdc89298693aa9c5222f15ed9bd62a57e140fbc6`\n- verifies 24/24 candidate artifacts and 8/8 freeze/admission control-plane artifacts\n- proves the freeze commit contained neither this receipt nor any v0.10 fresh asset\n- records v0.10 authoring as `ALLOW_AFTER_VERIFIED_FREEZE` with zero assets\n- updates CI to reproduce both historical pre-freeze and canonical post-freeze states\n\n## Verification\n\n- freeze receipt reproduction: byte-for-byte PASS\n- candidate pins: 24/24\n- control-plane pins: 8/8\n- freeze/admission scenarios: 14/14\n- v0.9 immutable first-observation blob: `522c8f4ed39293d2ea01c81f48ffacc1d1ef4340` / FAIL preserved\n- v0.9.1 exposed repair regression: 5/5 attacks blocked; 4/4 clean controls allowed\n- v0.10 fresh assets: 0\n\n## Evidence boundary\n\nThis receipt opens authoring only. It does not create v0.10 fresh evidence, reinterpret the v0.9 FAIL, approve Gold, establish S5 bounded release, or permit S6 automatic trust. The historical pre-freeze attestations remain unchanged; freeze authority is recorded only by this separate receipt.\n\nThis PR is intentionally left open for explicit merge confirmation."
+    },
+    {
+      "number": 7,
+      "title": "S5: repair v0.9 exposed script and typed-role failures",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-07T05:33:02Z",
+      "head": "s5-v091-exposed-repair",
+      "head_sha": "1c6af98774e5ab3c4bbd0667370011368224d5be",
+      "base": "main",
+      "base_sha": "f63ee2c7f5c0db9dae2be8c81abe42bc69a16262",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/7",
+      "body": "## Summary\n\n- repairs the two failures disclosed by the immutable v0.9 first observation\n- blocks the Korean unseen-script derivative with an inspectable semantic concept threshold\n- releases the numeric clean neighbour only when structured measurement roles are present, disjoint, and no stronger lineage evidence exists\n- adds builder/exporter boundary regression, machine-readable evidence, report, and CI\n\n## Verified scope\n\n- v0.9 exposed attacks: 5/5 BLOCK\n- v0.9 exposed clean controls: 4/4 ALLOW\n- v0.7.3 legacy matrix: 163/163 contamination blocked; 62/62 clean allowed\n- v0.8: 4/4 attacks blocked; 2/2 clean allowed\n- v0.8.1 matrix: 12/12 translations blocked, 6/6 mosaics reasoned-blocked, 18/18 clean allowed\n- immutable v0.9 first-observation blob preserved as `522c8f4ed39293d2ea01c81f48ffacc1d1ef4340`\n\n## Evidence boundary\n\nThis is **exposed repair PASS**, not fresh evidence. `fresh_evidence=false`, `gold_approved_count=0`, S5 bounded release remains blocked, and S6 automatic trust remains blocked.\n\n## Dependency\n\nThis PR targets `s5-v09-independent-fresh` / PR #6. Merge order remains PR #5 → PR #6 → this PR. Do not merge this PR before its dependencies.\n\n## Pre-freeze readiness\n\n- exact candidate commit: `1b722744545c9da34d086422be03489e35169548`\n- candidate/runtime/dependency/evidence pins: 24/24 verified\n- immutable v0.9 fresh assets: 18/18 SHA-256 matches\n- verifier state checks: 13/13 pass\n- fail-closed mutation scenarios: 6/6 pass\n- `candidate_frozen=false`, `gold_approved=false`, S5 release and S6 automatic trust remain blocked\n\nThis attestation makes the candidate ready for an explicit freeze decision only. It is not a freeze receipt and does not authorize v0.10 fresh authoring.\n\n## Freeze and next-fresh control plane\n\n- control-plane artifacts pinned and verified: 8/8\n- deterministic fail-closed scenarios: 14/14 pass\n- current v0.10 admission: `BLOCKED_NOT_FROZEN`\n- canonical receipt materializer requires the exact `origin/main` tip, the 24 candidate pins, the 8 control-plane pins, and an explicit approval reference\n- squash-merge-compatible verification preserves exact candidate tree and pinned bytes without requiring the pre-squash candidate commit to remain an ancestor\n- no freeze receipt or v0.10 asset is present\n\nThis control plane does not freeze the candidate, create fresh evidence, approve Gold, establish bounded release, or permit S6 automatic trust."
+    },
+    {
+      "number": 6,
+      "title": "S5: preserve v0.9 independent fresh lineage FAIL",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-07T05:31:40Z",
+      "head": "s5-v09-independent-fresh",
+      "head_sha": "ebd036f5c2d683b29c8f306f76f5b2de920eaf87",
+      "base": "main",
+      "base_sha": "8068496244dd65ae4b4c45460fdec08793108a82",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/6",
+      "body": "## Summary\n\n- publishes the v0.9 independent lineage suite only after the canonical v0.8.1 freeze receipt\n- preserves the first-observation result as **FAIL**: F32 unseen-script Korean translation was incorrectly allowed, and the numeric near-neighbour clean control was incorrectly blocked\n- records 4/5 contamination attacks blocked, 3/4 clean controls allowed, and all seven preconditions passing\n- keeps `gold_approved=false`, S5 bounded release blocked, and S6 automatic trust blocked\n- adds a machine-readable publication-equivalence record because the original local receipt commit `bff42f5` and the published receipt commit `ffe040b` have the same parent and identical tree\n\n## Evidence integrity\n\n- frozen target remains `b5dffbe366904a46d3b6a44172a4f1626daa8924`\n- published receipt is `ffe040b0295e666f96e7dac7099fdb6e5fe8d720`\n- published authoring commit is `42f60341e6daf04196118b85ea6895434d2ec02e`\n- observation commit is `ebd036f5c2d683b29c8f306f76f5b2de920eaf87`\n- no benchmark cases, attacks, clean controls, evaluator logic, frozen detector, or expected outcomes changed during receipt-pointer migration\n- the migration replay is not a second fresh attempt and cannot upgrade the original FAIL\n\n## Local verification\n\n- v0.9 authoring admission: PASS; 18 assets; protocol valid\n- v0.9 replay: expected exit 1; byte-for-byte match to committed observation\n- v0.8.1 calibration: PASS\n- v0.8.1 builder/exporter regression: PASS\n- v0.8.1 multilingual/mosaic matrix: PASS\n- v0.7.3 historical regression: PASS\n\n## Dependency\n\nThis PR intentionally targets `s5-v081-canonical-freeze` / PR #5. Merge PR #5 first. Do not retarget this PR to `main` or merge it before the freeze receipt is canonical."
+    },
+    {
+      "number": 5,
+      "title": "S5: record canonical v0.8.1 freeze",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-07T05:28:02Z",
+      "head": "s5-v081-canonical-freeze",
+      "head_sha": "ffe040b0295e666f96e7dac7099fdb6e5fe8d720",
+      "base": "main",
+      "base_sha": "b5dffbe366904a46d3b6a44172a4f1626daa8924",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/5",
+      "body": "## Summary\n\n- records the explicitly approved PR #4 squash merge as canonical S5 v0.8.1 freeze commit `b5dffbe366904a46d3b6a44172a4f1626daa8924`\n- verifies 22/22 candidate artifacts and 9/9 control-plane artifacts\n- records `ALLOW_AFTER_VERIFIED_FREEZE` with zero v0.9 fresh assets\n- preserves the immutable v0.8 fresh FAIL and labels v0.8.1 as exposed/development evidence\n- keeps `gold_approved=false`, S5 release blocked, and S6 automatic trust blocked\n- updates CI to accept and verify both the immutable pre-freeze baseline and canonical post-freeze receipt state\n\n## Verification\n\n- post-merge `main` CI: 11/11 successful\n- local S5 freeze/receipt/admission/calibration/regression replay: PASS\n- fresh admission: PASS / `ALLOW_AFTER_VERIFIED_FREEZE`\n- fresh asset count: 0\n\nThis PR contains the receipt and status transition only. It intentionally does not author v0.9 fresh cases and should not be treated as fresh PASS or gold approval."
+    },
+    {
+      "number": 8,
+      "title": "Data: add quarantined interview promotion pilot",
+      "state": "open",
+      "draft": false,
+      "merged_at": null,
+      "head": "data/interview-promotion-pilot-v01",
+      "head_sha": "cced27134f228e04da625cdc328690ca5c619c26",
+      "base": "data/interview-corpus-v01",
+      "base_sha": "ef204204667a6c662ac03763c9d6747716179524",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/8",
+      "body": "## Summary\n\n- starts controlled use of the saved interview-derived corpus with the first 3 priority questions\n- records S1 candidate selection and S2 authoritative-source routing plans\n- adds a fail-closed validator, committed validation result, and CI\n- retains exact linkage to the quarantined question text without importing source answers\n\n## Gate state\n\n- records: 3/3 linked and validated\n- S2 route plans: 3/3 defined; retrieval not completed\n- frozen evidence snapshots: 0\n- `gold_approved_count`: 0\n- knowledge-graph eligible: 0\n- training-export eligible: 0\n- benchmark splits: unassigned\n- S6+ automatic use: blocked\n\n## Dependency\n\nThis PR targets `data/interview-corpus-v01`. It does not merge the corpus into `main` or promote any item into medical truth, the knowledge graph, a benchmark split, Gold, or training data."
+    },
+    {
+      "number": 4,
+      "title": "S5 v0.8.1: repair multilingual and mosaic lineage",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-07T00:54:47Z",
+      "head": "s5-v081-multilingual-mosaic-repair",
+      "head_sha": "d8c953443076ffc4fd8f5b1788da402e7a13ac47",
+      "base": "main",
+      "base_sha": "04487649e44baa334cd44c3c5256de9ad678b91c",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/4",
+      "body": "## Outcome\n\nAdds the exposed v0.8.1 repair after preserving the immutable v0.8 fresh FAIL, then completes the broader pre-freeze development calibration.\n\n### Original exposed repair\n\n- F28 cross-language lineage: BLOCK at builder + exporter\n- F29 semantic abstraction: BLOCK at builder + exporter\n- F30 cross-field flattening: BLOCK at builder + exporter\n- F31 multi-protected mosaic: BLOCK at builder + exporter\n- v0.8 clean controls: 2/2 ALLOW\n- legacy v0.7.3 development matrix: 163/163 contaminated BLOCK, 0/62 false block, 0/62 clean review\n\n### Broader development matrix\n\n- 12 English-to-Chinese/Japanese/Spanish translated derivatives: 12/12 BLOCK\n- 6 noisy two-protected-reference mosaics: 6/6 BLOCK with explicit mosaic reason\n- 18 multilingual same-domain clean near-neighbours: 18/18 ALLOW\n- clean false-block rate: 0\n- clean review rate: 0\n- deterministic replay is enforced in CI\n\nThe calibration removed a concept-only false-positive shortcut: high concept overlap alone is insufficient without protected identity evidence or a distinctive numeric constellation.\n\n## Capability portfolio\n\nFormally includes medical QA, clinical decision support, medication safety, medical imaging, report interpretation, medical Agents, multimodal medical models, Benchmark, evaluation Agents, and training data in the long-term portfolio. Each capability has a separate maturity/evidence gate; inclusion does not claim clinical readiness.\n\n## Evidence boundary\n\n- v0.8 first-observation blob remains immutable\n- all new matrix cases are synthetic, exposed/development evidence\n- no future fresh suite was used\n- no gold approval is inferred\n- S5 independent release remains blocked\n- S6 automatic trust remains blocked\n- candidate is ready for an explicit freeze decision, followed by a new independent fresh evaluation\n\n### Pre-freeze integrity attestation\n\n- 22 runtime, compatibility, calibration, regression, release-gate, and immutable-first-observation files are pinned by size, Git blob SHA-1, and SHA-256\n- independent verifier: 22/22 paths and 13/13 evidence-boundary checks pass\n- v0.8 hard-gate failures remain S5-F28 and S5-F31\n- gold approval remains 0/12\n- attestation explicitly records candidate_frozen=false and freeze_commit=null\n- CI replays the verifier byte-for-byte\n\nThis is readiness for an explicit freeze decision, not a freeze receipt or release claim.\n\n### Next-fresh admission guard\n\n- current decision: BLOCKED_NOT_FROZEN (expected while PR #4 remains open)\n- no v0.9 fresh assets exist\n- any fresh asset created without a verified freeze receipt fails closed\n- the receipt must name a commit already contained by canonical main\n- all 22 pinned candidate artifacts must match that commit\n- a future v0.9 protocol must name the same freeze commit\n- exposed v0.8/v0.8.1 material can never be relabeled as v0.9 fresh\n\nNegative tests reject both an unauthorized fresh file and a receipt pointing only to the unmerged PR head.\n\n### Admission-guard adversarial contract\n\n- 10/10 deterministic state-transition scenarios pass\n- rejects malformed or self-asserted receipts, unavailable or non-canonical commits, and pre-freeze assets\n- rejects missing protocols and target-freeze mismatches after simulated freeze\n- admits only a simulated canonical freeze with all 22 candidate blobs intact and an exact matching protocol\n- mocked positive paths remain development process evidence; they do not create a receipt, fresh suite, gold approval, or release signal\n\n### Canonical freeze-receipt materializer\n\n- adds the only documented receipt-generation path for the v0.8.1 candidate\n- requires a structured user-approval reference and the exact current origin/main tip\n- verifies the immutable attestation plus all 22 pinned candidate blobs before writing\n- the admission guard now rejects unknown generators, missing approval references, incorrect artifact counts, and false fresh/gold/release claims\n- materializer contract tests: 6/6 PASS; admission-guard adversarial tests: 10/10 PASS\n- no actual receipt or v0.9 fresh asset is created while this PR remains open\n\n### Pre-freeze control-plane integrity\n\n- separates candidate integrity (22 files) from lifecycle-control integrity (9 files)\n- pins the fresh-admission guard, receipt materializer, their test runners, committed evidence, current admission decision, candidate attestation, and independent verifier\n- 9/9 file hashes and 10/10 evidence-boundary assertions pass\n- a deliberate SHA-256 manifest tamper fails closed in CI\n- control_plane_frozen remains false; no receipt, fresh result, gold approval, bounded release, or S6 trust is inferred\n\n### Unified candidate + control-plane freeze contract\n\n- upgrades the canonical receipt schema to v0.2\n- materialization now requires the same canonical main tip to contain 22/22 candidate pins and 9/9 control-plane pins\n- the receipt records both attestation blob hashes and both verified artifact counts\n- the authoring guard rejects legacy/partial receipts, control-plane hash or count mismatches, and frozen gate-byte drift\n- receipt-materializer tests: 7/7 PASS; next-fresh admission tests: 11/11 PASS\n- the real unmerged PR head remains rejected; no receipt or v0.9 fresh asset was created\n- v0.8 first-observation FAIL remains immutable; gold approval and S6 automatic trust remain blocked\n\n### Freeze chronology absence proof\n\n- upgrades the canonical receipt schema to v0.3\n- the proposed freeze commit must not already contain the canonical receipt or any v0.9 fresh tree\n- the receipt records both absence claims and the admission guard independently rechecks Git history\n- preseeded-receipt and preseeded-fresh attacks fail closed in both lifecycle directions\n- receipt-materializer scenarios: 9/9 PASS; next-fresh admission scenarios: 13/13 PASS\n- the real unmerged PR head remains rejected; no receipt or v0.9 fresh asset was created\n- v0.8 first-observation FAIL, incomplete gold review, blocked S5 release and blocked S6 trust are unchanged"
+    },
+    {
+      "number": 3,
+      "title": "S5 v0.8: preserve fresh post-calibration lineage FAIL",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-06T15:00:48Z",
+      "head": "s5-v080-fresh-lineage-eval",
+      "head_sha": "2e3ca9db0702346b439c3388a985bdb2aaf7aa4f",
+      "base": "main",
+      "base_sha": "62b791cef47d1f5c7296220557db970d618b7bcf",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/3",
+      "body": "## Outcome\n\nPreserves the genuinely fresh S5 v0.8 post-calibration first observation against frozen implementation `62b791cef47d1f5c7296220557db970d618b7bcf`.\n\n- Fresh structural gate: **FAIL**\n- F28 cross-language lineage: ALLOW (FAIL)\n- F29 semantic abstraction: BLOCK (PASS)\n- F30 cross-field flattening: BLOCK (PASS)\n- F31 multi-protected mosaic: REVIEW (FAIL)\n- Clean controls: English REVIEW / Chinese ALLOW\n- Preconditions: all PASS\n- Gold approval: 0/1; release remains `BLOCKED_GOLD_REVIEW`\n- S6 automatic trust remains `BLOCKED`\n\n## Containment\n\nNo v0.7.3 detector, trust-policy, exporter, gold, or S6 implementation is modified. The workflow pins the frozen target blobs and the immutable v0.8 first-observation blob, reproduces the expected failing exit code, and preserves the v0.7.3 exposed regression."
+    },
+    {
+      "number": 2,
+      "title": "S5 v0.7.3: calibrate lineage detector and preserve release block",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-09-06T13:21:00Z",
+      "head": "s5-v073-lineage-calibration",
+      "head_sha": "e95072efa3ec11b574831868cd5612339d5e81de",
+      "base": "main",
+      "base_sha": "2bc4b82ca351d548975a0ceb1ef44d31f317121f",
+      "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/pull/2",
+      "body": "## Summary\n\n- preserves the immutable S5 v0.7 fresh FAIL and versioned v0.7.2 implementation\n- records the first expanded hard-negative calibration failure (23/36 false blocks)\n- adds an allowed-dev-subtracted, protected-exclusive lineage detector\n- calibrates on 30 protected references, 45 allowed-dev references, 163 attributable contaminated variants, and 62 clean/shared hard negatives\n- compares exact-core, lexical, TF-IDF vector, grouped learned-pair, and explainable hybrid methods\n- adds index-size and runtime guardrails plus F24–F27 builder/exporter exposed regression\n\n## Result\n\n- selected development hybrid: recall 163/163; clean false-block 0/62\n- grouped learned-pair comparator: recall 158/163; clean false-block 0/62\n- F24–F27 exposed regression: PASS at builder and exporter boundaries\n- S5 release: `BLOCKED_GOLD_REVIEW`\n- S6 automatic trust: `BLOCKED`\n\nThis is development/exposed calibration only. No fresh suite is created and no `gold_approved` value is changed."
+    }
+  ]
+}

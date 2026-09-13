@@ -1,0 +1,1382 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": "docs/01-obsidian-hermes-collaboration.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7f93b03ca425406e30186c76004769f113c67f89",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/01-obsidian-hermes-collaboration.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/02-企业情报数据库-架构与Proposal.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "33b207d7156fb958bd43b5bfc3d142ab297d7c94",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/02-%E4%BC%81%E4%B8%9A%E6%83%85%E6%8A%A5%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%9E%B6%E6%9E%84%E4%B8%8EProposal.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/03-obsidian-usage-guide.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "677136c4f86b8d6dfc93d2c5cb6ce7a9206845bf",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/03-obsidian-usage-guide.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/04-search-methods.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "abba1335d66f962e7a237b832fa75afd29a4f502",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/04-search-methods.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/05-import-guide.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1678d70e510dc691199206c8d6922e3d6d435a4f",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/05-import-guide.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/06-eval-report.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "232b05ca375853a866c690b4af9cfb439d191b24",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/06-eval-report.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/07-schema-v2.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ecf8cffbd683c8eb4a278426e34bdbd63177e800",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/07-schema-v2.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/08-eval-v2.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2b7d919c7457e518ec9ffba63049b6c6fc1fd26a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/08-eval-v2.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/09-user-validation.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2f228ce3ac2c25b381bbcbb1357e6dc54185637a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/09-user-validation.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/10-commercial-validation.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "405bbc293c082983dd6f301ac6ad1c2e8a66ca60",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/10-commercial-validation.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/11-clinical-safety-boundaries.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6d033f71b30a0b3f8c3bb916189f9d3712a47448",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/11-clinical-safety-boundaries.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/12-medical-model-development-architecture.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1207feafe202517fd7d1a4f44064c54b12280f28",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/12-medical-model-development-architecture.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/13-medical-data-literature-reference-guide.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "51288adea73dbad8f08fb48c6a22b6eacbbe64db",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/13-medical-data-literature-reference-guide.md",
+          "branch_set": "bs009"
+        }
+      ]
+    },
+    {
+      "path": "docs/13-medical-model-development-roadmap.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ee6168a72b96a507a4f70ca2471857356c374d6a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/13-medical-model-development-roadmap.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/14-kg-grounded-medical-eval-platform.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "602e7c24b9951689a80598feb5565d219e2c89bd",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/14-kg-grounded-medical-eval-platform.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/15-system-stages.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5e70af9911272014496d8caf0ac3e1d5b6a2ebce",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/15-system-stages.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/16-stage-status.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9c785f345affea7767178638ab57c77a7a11c0ac",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/16-stage-status.md",
+          "branch_set": "bs010"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "27ae0b6deb971aa3797981c86158408182490387",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/16-stage-status.md",
+          "branch_set": "bs011"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2b201bbcc8da02528c3d8a0cb60fb8362d31a66b",
+          "commit": "2cd20928e26fff834f39124bf616dada3ea58f61",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/2cd20928e26fff834f39124bf616dada3ea58f61/docs/16-stage-status.md",
+          "branch_set": "bs012"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "35e75904497b26225398c35a064aeb5c763e4c97",
+          "commit": "ebd036f5c2d683b29c8f306f76f5b2de920eaf87",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ebd036f5c2d683b29c8f306f76f5b2de920eaf87/docs/16-stage-status.md",
+          "branch_set": "bs013"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c2ef8f273cea6d461c1d55dafdda9533f0981d57",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/docs/16-stage-status.md",
+          "branch_set": "bs014"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d6e27ed001300903828571916112ef1e70fc604a",
+          "commit": "e95072efa3ec11b574831868cd5612339d5e81de",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/e95072efa3ec11b574831868cd5612339d5e81de/docs/16-stage-status.md",
+          "branch_set": "bs015"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b82d6ca9d514c1ce93dc2f7d210d74912547c4ee",
+          "commit": "2e3ca9db0702346b439c3388a985bdb2aaf7aa4f",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/2e3ca9db0702346b439c3388a985bdb2aaf7aa4f/docs/16-stage-status.md",
+          "branch_set": "bs016"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "de6aee067db242f9a53dd22582b9c05543092468",
+          "commit": "ffe040b0295e666f96e7dac7099fdb6e5fe8d720",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ffe040b0295e666f96e7dac7099fdb6e5fe8d720/docs/16-stage-status.md",
+          "branch_set": "bs017"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "21c7b38415e24b409724c41212ee9b848c4e8b49",
+          "commit": "1c6af98774e5ab3c4bbd0667370011368224d5be",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/1c6af98774e5ab3c4bbd0667370011368224d5be/docs/16-stage-status.md",
+          "branch_set": "bs018"
+        }
+      ]
+    },
+    {
+      "path": "docs/17-evaluation-methods-and-optimization-ledger.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5dabc67658e9af0179595d7aeceaaf4d97de8a5b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/17-evaluation-methods-and-optimization-ledger.md",
+          "branch_set": "bs010"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a1fd6dc70ee0521c6715f694e4d6b3805546e60c",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/17-evaluation-methods-and-optimization-ledger.md",
+          "branch_set": "bs011"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3054399cd3ae8af10a9438b61d8b6250a38a7611",
+          "commit": "ebd036f5c2d683b29c8f306f76f5b2de920eaf87",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ebd036f5c2d683b29c8f306f76f5b2de920eaf87/docs/17-evaluation-methods-and-optimization-ledger.md",
+          "branch_set": "bs013"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d95e6e88e0442925c74e1a8aee5504ed9f294840",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/docs/17-evaluation-methods-and-optimization-ledger.md",
+          "branch_set": "bs014"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f4c11221b58e0f49782e19df6fde3a3ef798f110",
+          "commit": "e95072efa3ec11b574831868cd5612339d5e81de",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/e95072efa3ec11b574831868cd5612339d5e81de/docs/17-evaluation-methods-and-optimization-ledger.md",
+          "branch_set": "bs015"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "489c87a9d9ab746eb7b6f12a303fbf494a8f8a35",
+          "commit": "2e3ca9db0702346b439c3388a985bdb2aaf7aa4f",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/2e3ca9db0702346b439c3388a985bdb2aaf7aa4f/docs/17-evaluation-methods-and-optimization-ledger.md",
+          "branch_set": "bs016"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2a1375494beec771a320ec8e794a989ab697ccdf",
+          "commit": "ffe040b0295e666f96e7dac7099fdb6e5fe8d720",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ffe040b0295e666f96e7dac7099fdb6e5fe8d720/docs/17-evaluation-methods-and-optimization-ledger.md",
+          "branch_set": "bs017"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "976a926c5f0a0c874130e611b8427c2431700505",
+          "commit": "1c6af98774e5ab3c4bbd0667370011368224d5be",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/1c6af98774e5ab3c4bbd0667370011368224d5be/docs/17-evaluation-methods-and-optimization-ledger.md",
+          "branch_set": "bs018"
+        }
+      ]
+    },
+    {
+      "path": "docs/17-stage-eval-taskbook.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "95e15b4a663c3ae66f55e92c9b1874e37a4d484d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/17-stage-eval-taskbook.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/18-reusable-stage-eval-optimization-playbook.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e3867a20e041e972e6c1391a523a72ec46eb5e61",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/18-reusable-stage-eval-optimization-playbook.md",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "docs/19-algorithm-collaboration-handoff-guide.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "132984a7f3075335d97f8639bb077dbcb4b9dd58",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/19-algorithm-collaboration-handoff-guide.md",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "docs/20-s5-v07-algorithm-handoff.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ce24c71bf4262b1036a3788d628b0a7112092b20",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/20-s5-v07-algorithm-handoff.md",
+          "branch_set": "bs010"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0546ba686b03d22c91e47470827122d82655912c",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/20-s5-v07-algorithm-handoff.md",
+          "branch_set": "bs011"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "10da9e3b714020c14eb87b62b8793793ec1d8207",
+          "commit": "ebd036f5c2d683b29c8f306f76f5b2de920eaf87",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ebd036f5c2d683b29c8f306f76f5b2de920eaf87/docs/20-s5-v07-algorithm-handoff.md",
+          "branch_set": "bs013"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "54c4b5fa2bea6cbc1a863165af270aef00ab4a94",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/docs/20-s5-v07-algorithm-handoff.md",
+          "branch_set": "bs014"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f9426d20c229b99e3bb332e8bd8ea5218e216c63",
+          "commit": "e95072efa3ec11b574831868cd5612339d5e81de",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/e95072efa3ec11b574831868cd5612339d5e81de/docs/20-s5-v07-algorithm-handoff.md",
+          "branch_set": "bs015"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1712173857144c10e9c01bbe0dc1bf04ce6f83d0",
+          "commit": "2e3ca9db0702346b439c3388a985bdb2aaf7aa4f",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/2e3ca9db0702346b439c3388a985bdb2aaf7aa4f/docs/20-s5-v07-algorithm-handoff.md",
+          "branch_set": "bs016"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "eb08c0f200aa3ed1de43f528d64122fe58abd528",
+          "commit": "ffe040b0295e666f96e7dac7099fdb6e5fe8d720",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ffe040b0295e666f96e7dac7099fdb6e5fe8d720/docs/20-s5-v07-algorithm-handoff.md",
+          "branch_set": "bs017"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e1bebdfd751b72250ecc24372cca093a6e341e95",
+          "commit": "1c6af98774e5ab3c4bbd0667370011368224d5be",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/1c6af98774e5ab3c4bbd0667370011368224d5be/docs/20-s5-v07-algorithm-handoff.md",
+          "branch_set": "bs018"
+        }
+      ]
+    },
+    {
+      "path": "docs/21-medical-ai-capability-portfolio.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a2fdd07751bdb99e151e348a2b77b96375adb169",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/21-medical-ai-capability-portfolio.md",
+          "branch_set": "bs020"
+        }
+      ]
+    },
+    {
+      "path": "docs/GroundSignal-Medical-项目介绍.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8f1e251868dfa8aabe2e6b716ca78f5d8ecd6353",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/GroundSignal-Medical-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D.md",
+          "branch_set": "bs009"
+        }
+      ]
+    },
+    {
+      "path": "docs/benchmark-quality/README.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4c80cfcc2cf5ce0d8717c6f88aeb8c02b0727d06",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/benchmark-quality/README.md",
+          "branch_set": "bs007"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d8f07551b624cdc5fa195b078ddaee0c7dfb9c43",
+          "commit": "f54c66b79e10990d51cd2de59a7d6f2ca0050373",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/f54c66b79e10990d51cd2de59a7d6f2ca0050373/docs/benchmark-quality/README.md",
+          "branch_set": "bs021"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bc8e6f63cfd8e215fa291573b4656dcc0ae46776",
+          "commit": "f703066b2aec9c539f3d46917d775b009e8ba4b4",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/f703066b2aec9c539f3d46917d775b009e8ba4b4/docs/benchmark-quality/README.md",
+          "branch_set": "bs008"
+        }
+      ]
+    },
+    {
+      "path": "docs/development-trajectory/README.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0caec8700b69e92a707c4c176adc73d0922149ce",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/development-trajectory/README.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/development-trajectory/session_20260827_121356_467dc9.jsonl",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "407e6a6f7d3521105430134920e99ce85d479068",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/docs/development-trajectory/session_20260827_121356_467dc9.jsonl",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "docs/handoffs/2026-09-09-candidate-review-handoff.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "225a3a7e5e58927338a909671cde62ec70e18400",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/handoffs/2026-09-09-candidate-review-handoff.md",
+          "branch_set": "bs022"
+        }
+      ]
+    },
+    {
+      "path": "docs/handoffs/2026-09-09-patient-eval-v03-handoff.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a05b91588aab7d8e97e804980681401f290d08ac",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/handoffs/2026-09-09-patient-eval-v03-handoff.md",
+          "branch_set": "bs022"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "913376cdc29b3689af25e99b218679df30b23695",
+          "commit": "86dc2900e8ac6ee613de1513b8646b9cea8f8019",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/86dc2900e8ac6ee613de1513b8646b9cea8f8019/docs/handoffs/2026-09-09-patient-eval-v03-handoff.md",
+          "branch_set": "bs023"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c852aff1382eb2c950782ac74af70d64189b48fd",
+          "commit": "9a930733ee38fd80d5da51813b2af3edbb8dd647",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/9a930733ee38fd80d5da51813b2af3edbb8dd647/docs/handoffs/2026-09-09-patient-eval-v03-handoff.md",
+          "branch_set": "bs024"
+        }
+      ]
+    },
+    {
+      "path": "docs/handoffs/2026-09-09-project-handoff.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "62aaa4e9ffe9fd4fb5fcd05a0ca559f837c02524",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/handoffs/2026-09-09-project-handoff.md",
+          "branch_set": "bs025"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "805dca5650a27b70e2a1dc09d17ee9de8c839a76",
+          "commit": "12986257729b65016341a2303d2f36b2a64ebeb2",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/12986257729b65016341a2303d2f36b2a64ebeb2/docs/handoffs/2026-09-09-project-handoff.md",
+          "branch_set": "bs026"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c14150b29992f3e6aeb6f1f25d2ce3718d9e9660",
+          "commit": "d772b17444522625c53c07570a9a2fe2690a8b33",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/d772b17444522625c53c07570a9a2fe2690a8b33/docs/handoffs/2026-09-09-project-handoff.md",
+          "branch_set": "bs027"
+        }
+      ]
+    },
+    {
+      "path": "docs/handoffs/2026-09-10-clinical-console-v01-handoff.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ddde9aad44f008d2be1fd49e7af1b539340d61c6",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/handoffs/2026-09-10-clinical-console-v01-handoff.md",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "docs/handoffs/2026-09-10-patient-cases-v04-nightly-handoff.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bdaca46f2cac07386eb58e6a6cdc2ae161916aa8",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/handoffs/2026-09-10-patient-cases-v04-nightly-handoff.md",
+          "branch_set": "bs029"
+        }
+      ]
+    },
+    {
+      "path": "docs/handoffs/nightly-patient-cases-v04-ledger.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c200b499bc19ae990ea324c1a43177c2393a67d9",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/handoffs/nightly-patient-cases-v04-ledger.md",
+          "branch_set": "bs029"
+        }
+      ]
+    },
+    {
+      "path": "docs/handoffs/social-hire-readiness-ledger.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7f94d1f8e44478ae0161e2079f56fb1036828871",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/handoffs/social-hire-readiness-ledger.md",
+          "branch_set": "bs030"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dda5c68739d3dc4c85b21d67746920c4fc1f81aa",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/handoffs/social-hire-readiness-ledger.md",
+          "branch_set": "bs031"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "01b45398b563049d8d7821ae09605e579a4ecadd",
+          "commit": "2bf3c0798aa010624e3a25b8d1e652932a82fa0c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/2bf3c0798aa010624e3a25b8d1e652932a82fa0c/docs/handoffs/social-hire-readiness-ledger.md",
+          "branch_set": "bs032"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "00050601df08b48bc65bab06d759f68d0147bd68",
+          "commit": "43379ceb8572306e2cc1d49673f66386b6fe9ee0",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/43379ceb8572306e2cc1d49673f66386b6fe9ee0/docs/handoffs/social-hire-readiness-ledger.md",
+          "branch_set": "bs033"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c0c7d5a62ad7092ab4047948e094f04909b126e1",
+          "commit": "d033eca31c7606db79c98265175caf91a03ca8f9",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/d033eca31c7606db79c98265175caf91a03ca8f9/docs/handoffs/social-hire-readiness-ledger.md",
+          "branch_set": "bs034"
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/groundsignal-learning-guide.html",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d876e8aa07f5ca4682dd98e8893152da38c759d1",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/learning/groundsignal-learning-guide.html",
+          "branch_set": "bs022"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/pr19/REVIEW.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0ec2a70dd26716bcf13d51a3969646d6b88e98b3",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/reviews/pr19/REVIEW.md",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/pr19/audit.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "157ef0c7c59de30ae83c7ff53b1cf9efb00cacd8",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/reviews/pr19/audit.json",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/pr19/final-tests.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "688722563de41426da2270f4fd88178f7e65dd0f",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/reviews/pr19/final-tests.txt",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/pr19/first-tests.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8f2fba00bde1d07081419f4f6d7b1f42cb124752",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/reviews/pr19/first-tests.txt",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/pr19/regression-after.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "aa26a5b7801dbd4ee29aaf49704e2365848e7c31",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/reviews/pr19/regression-after.txt",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/pr19/regression-before.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9be66521e68dee91253a3aaa327df641c2175351",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/reviews/pr19/regression-before.txt",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/PROGRESS.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c3e4b7c0a122ef5162a31b63422d6b16092a7754",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/PROGRESS.md",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-admission-export/REVIEW.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6715dd67604e798b0c4215ea4c12163aee707359",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-admission-export/REVIEW.md",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-admission-export/coverage.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e6640643135142f659ec6707e067ca18b2f09d41",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-admission-export/coverage.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-admission-export/findings.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3fdc84517d992aab0f8f5e79d748bb44649f5190",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-admission-export/findings.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-admission-export/first-run-console.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f6942c9a1cf87137a0c5d0b7df68276ec80cc14b",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-admission-export/first-run-console.txt",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-admission-export/first-run/observations.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f3123814e643fe58fcf84424a2c5fc3ba8e2a4d3",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-admission-export/first-run/observations.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-admission-export/first-run/run-manifest.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7917296ea21c4694d766fc7a0e5505a4d85d2c4d",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-admission-export/first-run/run-manifest.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-admission-export/source-intake-tests/console.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b29feaf303cd025c9648634aab988dd8befbd18d",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-admission-export/source-intake-tests/console.txt",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-admission-export/source-intake-tests/run-manifest.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "43fe5f684354889fa61d964d11d1c516ba91069e",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-admission-export/source-intake-tests/run-manifest.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-dynamic-pages/REVIEW.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bab5ad3b7716c2b72efceca34a93009c75168eed",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-dynamic-pages/REVIEW.md",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-dynamic-pages/coverage.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6a9debef8cb038124b2f357b566639bb19b7d3dd",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-dynamic-pages/coverage.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-dynamic-pages/existing-tests-manifest.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "993a815924c7bb1302fd95b50a27db8e4b5ee5da",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-dynamic-pages/existing-tests-manifest.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-dynamic-pages/existing-tests.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "570bf3259baf64e7b6c2e35e4296a859254e27cf",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-dynamic-pages/existing-tests.txt",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-dynamic-pages/first-execution.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c644d69b7a214416fc1fcaa8b46fb885126766b3",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-dynamic-pages/first-execution.txt",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-dynamic-pages/first-run/observations.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3a36df303c590c0b2a907d74a341727f61aa2d38",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-dynamic-pages/first-run/observations.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-dynamic-pages/first-run/run-manifest.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "487888df5d06dcf125a2f077b646acec162cb5eb",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-dynamic-pages/first-run/run-manifest.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-evaluation/REVIEW.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "565400dc91482f918e069aaebf73cd4e1d2bd145",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-evaluation/REVIEW.md",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-evaluation/coverage.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "01c875d2f38af26e57bd5d2c49d6d257b8fa992c",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-evaluation/coverage.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-evaluation/existing-tests-manifest.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "619d572db824cfaac1d50c3acab0bfc76c703b44",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-evaluation/existing-tests-manifest.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-evaluation/existing-tests.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "81319a872c61be767043f345ca6d5ad5986097fa",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-evaluation/existing-tests.txt",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-evaluation/first-execution.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "54513bbae27b6aea83b12410f3c05af963605dd7",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-evaluation/first-execution.txt",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-evaluation/first-run/observations.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a206471ec1a6b859232858ee3ba87ec027f1cac8",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-evaluation/first-run/observations.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-evaluation/first-run/run-manifest.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e41ca6f492645deeec3f4899cf7c83b14c42aa04",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-evaluation/first-run/run-manifest.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-shared-boundaries/REVIEW.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a7d9a9e3ec4fc84a234f1535c24cb4ed5a3e8cc4",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-shared-boundaries/REVIEW.md",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-shared-boundaries/coverage.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5b3aa758d486afc9860d10a64d8788d319e009c7",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-shared-boundaries/coverage.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-shared-boundaries/existing-tests-manifest.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "cf5445cabdebf413d7738f39aacef6e1da3cf574",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-shared-boundaries/existing-tests-manifest.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-shared-boundaries/existing-tests.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "982662457d66d3d8a8b36cb463965f14a7bfd553",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-shared-boundaries/existing-tests.txt",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-shared-boundaries/first-execution.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fbd3e5c6335f67106e13ad596ece7be121b13839",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-shared-boundaries/first-execution.txt",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-shared-boundaries/first-run/observations.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "88d53e2c283932fbe0875df5cbc820f752f220a9",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-shared-boundaries/first-run/observations.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-shared-boundaries/first-run/run-manifest.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a512234c7ca4ff7d8db02aa601f56fa9f182a83f",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-shared-boundaries/first-run/run-manifest.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-shared-boundaries/first-run/workflow-inventory.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0710eac9f4c35945254fba5e9e2449ab315272ed",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-shared-boundaries/first-run/workflow-inventory.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-upstream/REVIEW.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b936014be1fe4220bb5456b9bd49edfa778e2252",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-upstream/REVIEW.md",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-upstream/coverage.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "05ea0168190805c7985914af0451d4410d9ebf70",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-upstream/coverage.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-upstream/findings.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "adef037d1d71c400af1cea5397aa21b4433f15bc",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-upstream/findings.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-upstream/first-run-console.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "62a5dcd6675b2a80049d1da639b6535b8f5c08f7",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-upstream/first-run-console.txt",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-upstream/first-run/observations.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "603443d64d9e1d71d19403e28638e2fc0ff2b51e",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-upstream/first-run/observations.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-upstream/first-run/run-manifest.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "77b169225b99497d22bf93c4e1b6415e31862f2a",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-upstream/first-run/run-manifest.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/a1-upstream/public-graph-metadata.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c26c0a4879a9fbe5c37d6b895295e71fe85c4ccf",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/a1-upstream/public-graph-metadata.json",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/findings.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3ccb0bd232565fb184028509f672ffde62904cb0",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/reviews/project-audit-v1/findings.json",
+          "branch_set": "bs031"
+        }
+      ]
+    }
+  ]
+}

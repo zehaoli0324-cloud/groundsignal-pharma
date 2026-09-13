@@ -1,0 +1,48 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": "samples/board-信达生物.html",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9a4909a1e8de98f3969c1814b9ccad112d84968f",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/samples/board-%E4%BF%A1%E8%BE%BE%E7%94%9F%E7%89%A9.html",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "samples/panorama-GLP1双雄.html",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "17327edce378a4bc4f46d7a237e2d89ac07c282d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/samples/panorama-GLP1%E5%8F%8C%E9%9B%84.html",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "samples/watchlist-pharma.html",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4a8902d7f1095dd417827bcee927ae8810f5721d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/samples/watchlist-pharma.html",
+          "branch_set": "bs001"
+        }
+      ]
+    }
+  ]
+}

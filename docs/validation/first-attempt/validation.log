@@ -1,0 +1,34 @@
+.........E.............................
+======================================================================
+ERROR: test_workflow_aggregate_rejects_missing_or_failed_required_jobs (test_checks.QualityTests.test_workflow_aggregate_rejects_missing_or_failed_required_jobs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/tests/benchmark_checks/test_checks.py", line 88, in test_workflow_aggregate_rejects_missing_or_failed_required_jobs
+    text=workflow.read_text()
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/.github/workflows/medical-dialogue-benchmark-ci.yml'
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.119s
+
+FAILED (errors=1)
+............................
+----------------------------------------------------------------------
+Ran 28 tests in 1.041s
+
+OK
+................................................
+----------------------------------------------------------------------
+Ran 48 tests in 0.040s
+
+OK
+{"status": "ADVISORY", "counts": {}, "report": "/tmp/tmpb2m0kk5x/report.json"}
+{"status": "PASS", "counts": {}, "report": "/tmp/tmpck2ohfcb/report.json"}
+::error file=tests/benchmark_checks/test_checks.py,title=test_checks.QualityTests.test_workflow_aggregate_rejects_missing_or_failed_required_jobs::  Traceback (most recent call last)%3A%0A  File "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/tests/benchmark_checks/test_checks.py"%2C line 88%2C in test_workflow_aggregate_rejects_missing_or_failed_required_jobs%0A    text=workflow.read_text()%0A         ^^^^^^^^^^^^^^^^^^^^%0A  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py"%2C line 1027%2C in read_text%0A    with self.open(mode='r'%2C encoding=encoding%2C errors=errors) as f%3A%0A         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%0A  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py"%2C line 1013%2C in open%0A    return io.open(self%2C mode%2C buffering%2C encoding%2C errors%2C newline)%0A           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%0AFileNotFoundError%3A [Errno 2] No such file or directory%3A '/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/.github/workflows/medical-dialogue-benchmark-ci.yml'%0A
+{"status": "FAIL", "counts": {"ERROR": 1, "PASS": 148}, "report": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/runs/reorg-20260913/validation/report.json"}

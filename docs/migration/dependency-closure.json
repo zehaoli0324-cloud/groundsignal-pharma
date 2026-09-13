@@ -1,0 +1,151 @@
+{
+  "modules": [
+    "scripts.benchmark_checks",
+    "scripts.benchmark_checks.__main__",
+    "scripts.benchmark_checks.demo",
+    "scripts.benchmark_checks.difficulty",
+    "scripts.benchmark_checks.multiturn",
+    "scripts.medical_dialogue_bench",
+    "scripts.medical_dialogue_bench.__main__",
+    "scripts.medical_dialogue_bench.assets",
+    "scripts.medical_dialogue_bench.client",
+    "scripts.medical_dialogue_bench.judge",
+    "scripts.medical_dialogue_bench.oracle",
+    "scripts.medical_dialogue_bench.runtime",
+    "scripts.medical_dialogue_bench.verifier",
+    "scripts.patient_eval",
+    "scripts.patient_eval.adapters",
+    "scripts.patient_eval.app_pilot",
+    "scripts.patient_eval.contracts",
+    "scripts.patient_eval.import_batch",
+    "scripts.patient_eval.importers",
+    "scripts.patient_eval.patient",
+    "scripts.patient_eval.patient_intent",
+    "scripts.patient_eval.retrieval",
+    "scripts.patient_eval.review_contract",
+    "scripts.patient_eval.runner",
+    "scripts.patient_eval.state"
+  ],
+  "paths": [
+    "scripts/benchmark_checks/__init__.py",
+    "scripts/benchmark_checks/__main__.py",
+    "scripts/benchmark_checks/demo.py",
+    "scripts/benchmark_checks/difficulty.py",
+    "scripts/benchmark_checks/multiturn.py",
+    "scripts/medical_dialogue_bench/__init__.py",
+    "scripts/medical_dialogue_bench/__main__.py",
+    "scripts/medical_dialogue_bench/assets.py",
+    "scripts/medical_dialogue_bench/client.py",
+    "scripts/medical_dialogue_bench/judge.py",
+    "scripts/medical_dialogue_bench/oracle.py",
+    "scripts/medical_dialogue_bench/runtime.py",
+    "scripts/medical_dialogue_bench/verifier.py",
+    "scripts/patient_eval/__init__.py",
+    "scripts/patient_eval/adapters.py",
+    "scripts/patient_eval/app_pilot.py",
+    "scripts/patient_eval/contracts.py",
+    "scripts/patient_eval/import_batch.py",
+    "scripts/patient_eval/importers.py",
+    "scripts/patient_eval/patient.py",
+    "scripts/patient_eval/patient_intent.py",
+    "scripts/patient_eval/retrieval.py",
+    "scripts/patient_eval/review_contract.py",
+    "scripts/patient_eval/runner.py",
+    "scripts/patient_eval/state.py"
+  ],
+  "edges": {
+    "scripts.patient_eval.patient_intent": [],
+    "scripts.benchmark_checks.difficulty": [
+      "scripts.benchmark_checks.multiturn"
+    ],
+    "scripts.patient_eval.app_pilot": [
+      "scripts.patient_eval.contracts",
+      "scripts.patient_eval.import_batch"
+    ],
+    "scripts.medical_dialogue_bench.oracle": [
+      "scripts.medical_dialogue_bench.assets"
+    ],
+    "scripts.patient_eval.import_batch": [
+      "scripts.patient_eval.contracts",
+      "scripts.patient_eval.importers"
+    ],
+    "scripts.patient_eval": [],
+    "scripts.patient_eval.contracts": [
+      "scripts.patient_eval.review_contract"
+    ],
+    "scripts.patient_eval.runner": [
+      "scripts.patient_eval.contracts",
+      "scripts.patient_eval.retrieval",
+      "scripts.patient_eval.state"
+    ],
+    "scripts.medical_dialogue_bench.verifier": [
+      "scripts.medical_dialogue_bench.assets",
+      "scripts.medical_dialogue_bench.runtime",
+      "scripts.patient_eval",
+      "scripts.patient_eval.app_pilot",
+      "scripts.patient_eval.contracts",
+      "scripts.patient_eval.import_batch"
+    ],
+    "scripts.medical_dialogue_bench": [],
+    "scripts.patient_eval.importers": [],
+    "scripts.medical_dialogue_bench.__main__": [
+      "scripts.medical_dialogue_bench.assets",
+      "scripts.medical_dialogue_bench.client",
+      "scripts.medical_dialogue_bench.judge",
+      "scripts.medical_dialogue_bench.oracle",
+      "scripts.medical_dialogue_bench.runtime",
+      "scripts.medical_dialogue_bench.verifier",
+      "scripts.patient_eval",
+      "scripts.patient_eval.app_pilot",
+      "scripts.patient_eval.import_batch"
+    ],
+    "scripts.medical_dialogue_bench.runtime": [
+      "scripts.medical_dialogue_bench.assets",
+      "scripts.patient_eval.contracts",
+      "scripts.patient_eval.import_batch",
+      "scripts.patient_eval.patient"
+    ],
+    "scripts.benchmark_checks.multiturn": [
+      "scripts.patient_eval.patient",
+      "scripts.patient_eval.patient_intent"
+    ],
+    "scripts.medical_dialogue_bench.assets": [
+      "scripts.patient_eval.app_pilot",
+      "scripts.patient_eval.contracts",
+      "scripts.patient_eval.import_batch",
+      "scripts.patient_eval.patient"
+    ],
+    "scripts.patient_eval.retrieval": [],
+    "scripts.patient_eval.review_contract": [],
+    "scripts.patient_eval.patient": [
+      "scripts.patient_eval.patient_intent"
+    ],
+    "scripts.medical_dialogue_bench.judge": [
+      "scripts.patient_eval.app_pilot",
+      "scripts.patient_eval.contracts"
+    ],
+    "scripts.medical_dialogue_bench.client": [
+      "scripts.patient_eval.adapters",
+      "scripts.patient_eval.contracts"
+    ],
+    "scripts.benchmark_checks.demo": [
+      "scripts.benchmark_checks.__main__"
+    ],
+    "scripts.patient_eval.state": [],
+    "scripts.benchmark_checks": [],
+    "scripts.benchmark_checks.__main__": [
+      "scripts.benchmark_checks.difficulty",
+      "scripts.benchmark_checks.multiturn",
+      "scripts.medical_dialogue_bench.assets",
+      "scripts.medical_dialogue_bench.client",
+      "scripts.medical_dialogue_bench.oracle",
+      "scripts.medical_dialogue_bench.runtime",
+      "scripts.medical_dialogue_bench.verifier",
+      "scripts.patient_eval.app_pilot"
+    ],
+    "scripts.patient_eval.adapters": [
+      "scripts.patient_eval.contracts",
+      "scripts.patient_eval.runner"
+    ]
+  }
+}

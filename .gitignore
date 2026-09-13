@@ -1,7 +1,6 @@
 __pycache__/
-*.pyc
-.DS_Store
-.obsidian/
-release/*.png
-medical/patient-eval/local/
-medical/patient-eval/runs/
+*.py[cod]
+.venv/
+runs/
+.env
+.env.*

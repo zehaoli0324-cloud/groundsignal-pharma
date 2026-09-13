@@ -1,0 +1,43 @@
+{
+  "check_version": "benchmark-checks/v1.2",
+  "command": "difficulty-review",
+  "status": "NEEDS_REVIEW",
+  "commit": "e494fa34e6271061c4de8c87864adf1e66fcfc9e",
+  "workflow_sha": null,
+  "pr_head_sha": null,
+  "created_at": "2026-09-13T05:42:08.351110+00:00",
+  "suite_sha256": "b4b01a2fcc7a1e8fc81ba26ce386f8cceecdb5dd00bddb2d4065440219f45fc3",
+  "manifest_sha256": null,
+  "checker_sha256": "7466920d20348600d7e2d4c8c6a1a866cc51bac7d0f7cdbee402dacc69efb943",
+  "adapter_sha256": "f0d9ace4790358871363bb8cef69b1e19147113fa586eb03276c75de4f60a0d2",
+  "difficulty_reviewer_sha256": "ab3fcf0f884cc1b53dd8944e539feacc14880bc3bf1bfc251b0ab6a17dadd5bb",
+  "difficulty_plans_sha256": "c8f7e2d51559002707e2e04a090f03ba24523d9db83e4b0b3b40cdfdab74c2c6",
+  "patient_engine_sha256": "5a74e08ef8bdf216ce4680eadc95b208d953271ca2febd03754683fa18f516a3",
+  "clinical_approval": false,
+  "findings": [
+    {
+      "rule": "difficulty_semantics",
+      "status": "NOT_RUN",
+      "scenario_id": "AP07-ambiguous",
+      "file": "difficulty-plans.json",
+      "pointer": "/variants/AP07-ambiguous",
+      "message": "待审阅自然度、能力对应与评分公平性 建议：启用成对模型审阅或人工审阅，不能据机械通过认定难度合理。"
+    },
+    {
+      "rule": "difficulty_semantics",
+      "status": "NOT_RUN",
+      "scenario_id": "AP07-distractor",
+      "file": "difficulty-plans.json",
+      "pointer": "/variants/AP07-distractor",
+      "message": "待审阅自然度、能力对应与评分公平性 建议：启用成对模型审阅或人工审阅，不能据机械通过认定难度合理。"
+    },
+    {
+      "rule": "difficulty_semantics",
+      "status": "NOT_RUN",
+      "scenario_id": "AP07-mixed",
+      "file": "difficulty-plans.json",
+      "pointer": "/variants/AP07-mixed",
+      "message": "待审阅自然度、能力对应与评分公平性 建议：启用成对模型审阅或人工审阅，不能据机械通过认定难度合理。"
+    }
+  ]
+}

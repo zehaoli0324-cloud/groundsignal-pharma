@@ -1,0 +1,1183 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": "benchmark/medical-dialogue-v1/manifest.json",
+      "decision": "core",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f19f35c73a4358000f146a6f07890d61b25473db",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/benchmark/medical-dialogue-v1/manifest.json",
+          "branch_set": "bs005"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a00f887ae35f3628d246d7a1a444e31a6474a098",
+          "commit": "5745794e02c1f93cd207aca5af1f167338dfda89",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/5745794e02c1f93cd207aca5af1f167338dfda89/benchmark/medical-dialogue-v1/manifest.json",
+          "branch_set": "bs006"
+        }
+      ],
+      "imported_to": "benchmark/medical-dialogue-v1/manifest.json"
+    },
+    {
+      "path": "benchmark/medical-dialogue-v1/oracle-policy.json",
+      "decision": "core",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2b335fb5457044a761e21631c2c4b27036fbb468",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/benchmark/medical-dialogue-v1/oracle-policy.json",
+          "branch_set": "bs005"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "41f61c1efbc1e531b57684adbd4a464333a41e06",
+          "commit": "5745794e02c1f93cd207aca5af1f167338dfda89",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/5745794e02c1f93cd207aca5af1f167338dfda89/benchmark/medical-dialogue-v1/oracle-policy.json",
+          "branch_set": "bs006"
+        }
+      ],
+      "imported_to": "benchmark/medical-dialogue-v1/oracle-policy.json"
+    },
+    {
+      "path": "benchmark/medical-dialogue-v1/patient-patterns.json",
+      "decision": "core",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "86e5102e50ce319d8ad0f29911f4090d78ee7b95",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/benchmark/medical-dialogue-v1/patient-patterns.json",
+          "branch_set": "bs005"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "34e252c1e8adb3c718b0ec40a0e452315ed4fa8c",
+          "commit": "5745794e02c1f93cd207aca5af1f167338dfda89",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/5745794e02c1f93cd207aca5af1f167338dfda89/benchmark/medical-dialogue-v1/patient-patterns.json",
+          "branch_set": "bs006"
+        }
+      ],
+      "imported_to": "benchmark/medical-dialogue-v1/patient-patterns.json"
+    },
+    {
+      "path": "benchmark/medical-dialogue-v1/suite.json",
+      "decision": "core",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d1d365a4df84e8afa42a7fd78dd8f07eb5cf3bec",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/benchmark/medical-dialogue-v1/suite.json",
+          "branch_set": "bs005"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "74f583a2d9c3bda38c87e1e0bb6e0bfb46f3b407",
+          "commit": "5745794e02c1f93cd207aca5af1f167338dfda89",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/5745794e02c1f93cd207aca5af1f167338dfda89/benchmark/medical-dialogue-v1/suite.json",
+          "branch_set": "bs006"
+        }
+      ],
+      "imported_to": "benchmark/medical-dialogue-v1/suite.json"
+    },
+    {
+      "path": "benchmark/medical-dialogue-v1/validation-summary.json",
+      "decision": "core",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6b20f737fc0e107d4c50ecef37f6df1ad9181283",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/benchmark/medical-dialogue-v1/validation-summary.json",
+          "branch_set": "bs005"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fb1a8b24148fca14523e91fb81e271b2cae1d9f1",
+          "commit": "5745794e02c1f93cd207aca5af1f167338dfda89",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/5745794e02c1f93cd207aca5af1f167338dfda89/benchmark/medical-dialogue-v1/validation-summary.json",
+          "branch_set": "bs006"
+        }
+      ],
+      "imported_to": "benchmark/medical-dialogue-v1/validation-summary.json"
+    },
+    {
+      "path": "benchmark/multiturn-factors-v1/DIFFICULTY_REVIEW.md",
+      "decision": "core",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0a0eaad87542a5eea783663a9f4909782ab2ef98",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/benchmark/multiturn-factors-v1/DIFFICULTY_REVIEW.md",
+          "branch_set": "bs007"
+        }
+      ],
+      "imported_to": "benchmark/multiturn-factors-v1/DIFFICULTY_REVIEW.md"
+    },
+    {
+      "path": "benchmark/multiturn-factors-v1/README.md",
+      "decision": "core",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "371cd1dd3b0226d7b9405e1a1cc3163600b34fb5",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/benchmark/multiturn-factors-v1/README.md",
+          "branch_set": "bs007"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "086f7b873aa77fa1691b6294eac82caf2228d8d0",
+          "commit": "f703066b2aec9c539f3d46917d775b009e8ba4b4",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/f703066b2aec9c539f3d46917d775b009e8ba4b4/benchmark/multiturn-factors-v1/README.md",
+          "branch_set": "bs008"
+        }
+      ],
+      "imported_to": "benchmark/multiturn-factors-v1/README.md"
+    },
+    {
+      "path": "benchmark/multiturn-factors-v1/difficulty-plans.json",
+      "decision": "core",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f8e1f936a5029e3d06f2e6aa40a9bb49251dd3be",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/benchmark/multiturn-factors-v1/difficulty-plans.json",
+          "branch_set": "bs007"
+        }
+      ],
+      "imported_to": "benchmark/multiturn-factors-v1/difficulty-plans.json"
+    },
+    {
+      "path": "benchmark/multiturn-factors-v1/suite.json",
+      "decision": "core",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "cc80655702d4c12f5f57ce3a78e376760a350a86",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/benchmark/multiturn-factors-v1/suite.json",
+          "branch_set": "bs003"
+        }
+      ],
+      "imported_to": "benchmark/multiturn-factors-v1/suite.json"
+    },
+    {
+      "path": "benchmark/postmortems/2026-08-27-mazdutide-gold-audit.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "71a7ec72b34c4f48337474132a145410991ce21d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/postmortems/2026-08-27-mazdutide-gold-audit.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/rubrics/bd-answer-rubric.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "84b7f05e8cfdf1b4a324d06088bffb99d3395d28",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/rubrics/bd-answer-rubric.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/rubrics/judgment-value-rubric.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "14ce373d857c75c7cb31b541587be92329f5276f",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/rubrics/judgment-value-rubric.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/rubrics/user-utility-rubric.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ecd87faf38ef6f2defb8eeca42bf77270e6e1f49",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/rubrics/user-utility-rubric.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-deepseek-v2.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "70c2ee9a4880d61dc3a99f2ef55c57a72c181b98",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-deepseek-v2.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-deepseek.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d2a7d46baa72bf9d5016a41db66f79539403d9fb",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-deepseek.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-eval-report-v2.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "43e7e3f9bb616c7c361ffd6caf10b279447b3cb0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-eval-report-v2.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-eval-report.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7c69772c19983de9d4f2db6bd1714f4d59611c69",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-eval-report.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-openai-codex-v2.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1b3442d2e734ce54eb013e6105b32f7728fe76fc",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-openai-codex-v2.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-openai-codex.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6742440f1048ae9ff483b941320faa74898698ef",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-openai-codex.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-codex-case-001-competitive-impact.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "de7db390e38b1bd0f0f9a30765b5bc4594430d08",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-codex-case-001-competitive-impact.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-codex-case-002-regulatory-conflict.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e185dfb4042a5124094ba269f012a48723b97461",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-codex-case-002-regulatory-conflict.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-codex-case-003-licensing-bd.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "47124e2b1da7c96d5c002cc8a2595c29b16c38fe",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-codex-case-003-licensing-bd.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-codex-case-004-due-diligence.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4a48842920ae8164431aaad1d3664f1edf779956",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-codex-case-004-due-diligence.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-codex-case-005-safety-signal.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "156830082b7a12d69f56c7cb6aaba0105dc752f0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-codex-case-005-safety-signal.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-codex-case-006-temporal-watchlist.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "887354bff40378ee4475422761c51a1352ae2b50",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-codex-case-006-temporal-watchlist.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-deepseek-case-001-competitive-impact.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3a5fbd6019fb5f21ee8c52b7d68d54584c703812",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-deepseek-case-001-competitive-impact.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-deepseek-case-002-regulatory-conflict.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "60b3ef9e0cfd18aae29310c8705e4aa1770daea9",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-deepseek-case-002-regulatory-conflict.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-deepseek-case-003-licensing-bd.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b8a6cefb9d604ed4d09edfe634db7cc27ed89a62",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-deepseek-case-003-licensing-bd.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-deepseek-case-004-due-diligence.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "59cc9b7415d16e8820c2e34466260ead46576e84",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-deepseek-case-004-due-diligence.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-deepseek-case-005-safety-signal.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6117e7d6e11f8a09cdd6a62d0ee6802a75540f93",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-deepseek-case-005-safety-signal.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-deepseek-case-006-temporal-watchlist.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "efb86063eb6ec37551063c4df0d83efa22214789",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-deepseek-case-006-temporal-watchlist.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v02-eval-report.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "38af27b8cb3d75db953342ee7373e5cb0b8b8fe2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v02-eval-report.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-codex-case-001-competitive-impact.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c0305c5faac5988fffe1e4b7de5609d4b2645562",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-codex-case-001-competitive-impact.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-codex-case-002-regulatory-conflict.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "087bd3146af4d14ecfb634f094732d28e1d0a217",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-codex-case-002-regulatory-conflict.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-codex-case-003-licensing-bd.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "08f3094b79c1e4abaeaf8c80f5009a89f941bd3a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-codex-case-003-licensing-bd.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-codex-case-004-due-diligence.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4dbb4155cf8363ad002784c21db65cc789057931",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-codex-case-004-due-diligence.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-codex-case-005-safety-signal.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b8d3d0b4557d154b9e1dc6f08d08b5dc684491e1",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-codex-case-005-safety-signal.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-codex-case-006-temporal-watchlist.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "420c5f737be0d118303a93d9432bb61ec3198c0c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-codex-case-006-temporal-watchlist.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-deepseek-case-001-competitive-impact.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3c4b9c32188cf3c1f2c3a5b3be16d3f68ad1095e",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-deepseek-case-001-competitive-impact.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-deepseek-case-002-regulatory-conflict.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0bf3989fad958957497e8a1e518e5decc4de7655",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-deepseek-case-002-regulatory-conflict.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-deepseek-case-003-licensing-bd.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "60ecfdc4fcc4084055b3385e3db1aa5d0fd4124f",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-deepseek-case-003-licensing-bd.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-deepseek-case-004-due-diligence.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "82b9abea5fad7ee0fbf9c3d897b27f3b9996d79b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-deepseek-case-004-due-diligence.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-deepseek-case-005-safety-signal.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "13497dfb965e378509c9f489f1cfd4d6274c990c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-deepseek-case-005-safety-signal.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-deepseek-case-006-temporal-watchlist.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4956375c7bc77e5ac68243a1e9f924dd0bc316b4",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-deepseek-case-006-temporal-watchlist.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-eval-report.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2d8a371d0c6ca71a1cb408fde1e6ca9a0eaebc32",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-eval-report.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/2026-08-27-v04-twins-report.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7968547f7cf13f60a73d003beb63b34f65aa6a47",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/2026-08-27-v04-twins-report.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-001-competitive-impact__BASE.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "35cb4793aa836ad0a4dd1d8b836bbd6da3fa2c7d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-001-competitive-impact__BASE.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-001-competitive-impact__C01-B.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "89aad3cb3f6d3f7925d0776fe92f55a6bf421316",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-001-competitive-impact__C01-B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-001-competitive-impact__C01-C.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5ac34998a2f98d2414f3a81a0ac04fe35dc9076a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-001-competitive-impact__C01-C.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-002-regulatory-conflict__BASE.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ecbb7d6412bb24e9cef73dbed413f8bf1ea88e15",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-002-regulatory-conflict__BASE.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-002-regulatory-conflict__C02-B.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3a5fe686914edd759c0b8d746c44953642798668",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-002-regulatory-conflict__C02-B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-002-regulatory-conflict__C02-C.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ae8f9628a46230f7cf8f89f7d0ea4cdba4e3401a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-002-regulatory-conflict__C02-C.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-003-licensing-bd__BASE.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2801cadb60d22e84c038e3295d6af5b0c2b2f25b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-003-licensing-bd__BASE.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-003-licensing-bd__C03-B.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0d5149ae30833bcde12d543cc141f0081cb8e842",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-003-licensing-bd__C03-B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-003-licensing-bd__C03-C.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fcccc96c9a3ad76c0aa8ce2a14885764fd2458bb",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-003-licensing-bd__C03-C.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-004-due-diligence__BASE.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9209bd2c2e156c902ebf5960c855dcb51494c131",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-004-due-diligence__BASE.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-004-due-diligence__C04-B.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "380d5e07baf680e7cd29087a22fa9ea56bcedfa0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-004-due-diligence__C04-B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-004-due-diligence__C04-C.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a026c1c65d3dc6812edb3ec0368d7de7f9b0fbb0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-004-due-diligence__C04-C.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-005-safety-signal__BASE.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e1e3723666b5a2462a85800dd8f2339fc191fbef",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-005-safety-signal__BASE.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-005-safety-signal__C05-B.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e6e7ca7f67446d97db9a1d4f47aefb428b0cae3a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-005-safety-signal__C05-B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-005-safety-signal__C05-C.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ce919cdb547dc695f750ce216bed1842345226cb",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-005-safety-signal__C05-C.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-006-temporal-watchlist__BASE.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "304d90e1d5cdc05416db51ca35e162c6abc63a67",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-006-temporal-watchlist__BASE.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-006-temporal-watchlist__C06-B.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "80b0285c76aad752b9e7f0a19d51de6be7e87910",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-006-temporal-watchlist__C06-B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-codex-case-006-temporal-watchlist__C06-C.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1289c5d8dab76d82f1dba0582705cb31eb7a15cb",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-codex-case-006-temporal-watchlist__C06-C.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-001-competitive-impact__BASE.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ee1cc72b7f5c2cf5bf2dd3d6471440d8eb39ccfa",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-001-competitive-impact__BASE.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-001-competitive-impact__C01-B.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "da1be8cfddbffe34ae07adc96573d3446dee50a3",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-001-competitive-impact__C01-B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-001-competitive-impact__C01-C.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "feb22469ca8cbc058c5a451998b94c8a64d6007b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-001-competitive-impact__C01-C.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-002-regulatory-conflict__BASE.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2413ce05bf884e3f05f17947276bec54b553d6ab",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-002-regulatory-conflict__BASE.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-002-regulatory-conflict__C02-B.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c0a484d81fc0beefceaa1cd5996e4c1976a43f0a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-002-regulatory-conflict__C02-B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-002-regulatory-conflict__C02-C.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bc62f210fddb720dd6b92387c9869ab724a4fb13",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-002-regulatory-conflict__C02-C.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-003-licensing-bd__BASE.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d7032086ae3838605de52e1a115236a06abcd3bd",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-003-licensing-bd__BASE.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-003-licensing-bd__C03-B.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4cc5e23d287d8fa6e006b932c20f922f31eada0b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-003-licensing-bd__C03-B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-003-licensing-bd__C03-C.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3e947e0bb2cf0beb350e2d5ea3f3d131688055bb",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-003-licensing-bd__C03-C.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-004-due-diligence__BASE.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "feff120d6ad8da81117825e8d98bf6609a23d175",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-004-due-diligence__BASE.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-004-due-diligence__C04-B.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "19998bd8e834c15c73dd48b4ac6d6e53438431b9",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-004-due-diligence__C04-B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-004-due-diligence__C04-C.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a0d86fc91d1e552fa1e062383d57b3521a9c5e17",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-004-due-diligence__C04-C.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-005-safety-signal__BASE.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c4e3456bb321862bc4117e098f99262cec8ab242",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-005-safety-signal__BASE.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-005-safety-signal__C05-B.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dbcaccfa852f1bbc5ef6489ae97d3754778beecd",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-005-safety-signal__C05-B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-005-safety-signal__C05-C.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9df81276159b57036ec9dcb840ea67b0f4acb077",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-005-safety-signal__C05-C.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/runs/twins/2026-08-27-v04-deepseek-case-006-temporal-watchlist__BASE.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5840763ca3275df9974c39801f4261de966276f6",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/benchmark/runs/twins/2026-08-27-v04-deepseek-case-006-temporal-watchlist__BASE.md",
+          "branch_set": "bs001"
+        }
+      ]
+    }
+  ]
+}

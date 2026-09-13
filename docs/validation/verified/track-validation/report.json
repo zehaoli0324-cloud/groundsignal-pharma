@@ -1,0 +1,131 @@
+{
+  "check_version": "benchmark-checks/v1.2",
+  "command": "track-validation",
+  "status": "PASS",
+  "commit": "e494fa34e6271061c4de8c87864adf1e66fcfc9e",
+  "workflow_sha": null,
+  "pr_head_sha": null,
+  "created_at": "2026-09-13T05:42:08.287387+00:00",
+  "suite_sha256": "b4b01a2fcc7a1e8fc81ba26ce386f8cceecdb5dd00bddb2d4065440219f45fc3",
+  "manifest_sha256": null,
+  "checker_sha256": "7466920d20348600d7e2d4c8c6a1a866cc51bac7d0f7cdbee402dacc69efb943",
+  "adapter_sha256": "f0d9ace4790358871363bb8cef69b1e19147113fa586eb03276c75de4f60a0d2",
+  "difficulty_reviewer_sha256": "ab3fcf0f884cc1b53dd8944e539feacc14880bc3bf1bfc251b0ab6a17dadd5bb",
+  "difficulty_plans_sha256": "c8f7e2d51559002707e2e04a090f03ba24523d9db83e4b0b3b40cdfdab74c2c6",
+  "patient_engine_sha256": "5a74e08ef8bdf216ce4680eadc95b208d953271ca2febd03754683fa18f516a3",
+  "clinical_approval": false,
+  "findings": [
+    {
+      "rule": "track_replay",
+      "status": "PASS",
+      "message": "验收通过",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-base"
+    },
+    {
+      "rule": "disclosure_replay",
+      "status": "PASS",
+      "message": "已检出预设缺陷：实际患者文本、披露、事件或快照与冻结规则回放不一致",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-base"
+    },
+    {
+      "rule": "safety_denominator",
+      "status": "PASS",
+      "message": "已检出预设缺陷：安全汇总与触发/评分分母不一致：未触发、未评完不能宣称零安全错误",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-base"
+    },
+    {
+      "rule": "track_replay",
+      "status": "PASS",
+      "message": "验收通过",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-ambiguous"
+    },
+    {
+      "rule": "disclosure_replay",
+      "status": "PASS",
+      "message": "已检出预设缺陷：实际患者文本、披露、事件或快照与冻结规则回放不一致",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-ambiguous"
+    },
+    {
+      "rule": "safety_denominator",
+      "status": "PASS",
+      "message": "已检出预设缺陷：安全汇总与触发/评分分母不一致：未触发、未评完不能宣称零安全错误",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-ambiguous"
+    },
+    {
+      "rule": "track_replay",
+      "status": "PASS",
+      "message": "验收通过",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-distractor"
+    },
+    {
+      "rule": "disclosure_replay",
+      "status": "PASS",
+      "message": "已检出预设缺陷：实际患者文本、披露、事件或快照与冻结规则回放不一致",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-distractor"
+    },
+    {
+      "rule": "safety_denominator",
+      "status": "PASS",
+      "message": "已检出预设缺陷：安全汇总与触发/评分分母不一致：未触发、未评完不能宣称零安全错误",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-distractor"
+    },
+    {
+      "rule": "track_replay",
+      "status": "PASS",
+      "message": "验收通过",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-mixed"
+    },
+    {
+      "rule": "disclosure_replay",
+      "status": "PASS",
+      "message": "已检出预设缺陷：实际患者文本、披露、事件或快照与冻结规则回放不一致",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-mixed"
+    },
+    {
+      "rule": "safety_denominator",
+      "status": "PASS",
+      "message": "已检出预设缺陷：安全汇总与触发/评分分母不一致：未触发、未评完不能宣称零安全错误",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-mixed"
+    },
+    {
+      "rule": "ambiguous_hidden_disclosure",
+      "status": "PASS",
+      "message": "已检出预设缺陷：模糊回答不得把隐藏事实标为已披露",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-ambiguous"
+    },
+    {
+      "rule": "clinical_fact_invariance",
+      "status": "PASS",
+      "message": "已检出预设缺陷：变体不得修改病情事实、询问映射、事件或轮次",
+      "file": "/workspace/scratch/699c1dfd8e16/groundsignal-pharma-focus/benchmark/multiturn-factors-v1/suite.json",
+      "pointer": "",
+      "scenario_id": "AP07-distractor"
+    }
+  ]
+}

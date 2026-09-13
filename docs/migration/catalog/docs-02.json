@@ -1,0 +1,223 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": "docs/reviews/project-audit-v1/inventory.json",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0c04694d386e209a8dba289852320b905917d053",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/reviews/project-audit-v1/inventory.json",
+          "branch_set": "bs035"
+        }
+      ]
+    },
+    {
+      "path": "docs/reviews/project-audit-v1/page-tests.txt",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "10af5b01eb979c6d15e5690cf1c31b301aa03ac4",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/reviews/project-audit-v1/page-tests.txt",
+          "branch_set": "bs035"
+        }
+      ]
+    },
+    {
+      "path": "docs/taskbooks/clinical-oracle-pressure-pilot-v1.md",
+      "decision": "proposal",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "289544f2870212ce75916e5ee26c3138e983be6f",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/taskbooks/clinical-oracle-pressure-pilot-v1.md",
+          "branch_set": "bs036"
+        }
+      ],
+      "imported_to": "docs/taskbooks/clinical-oracle-pressure-pilot-v1.md"
+    },
+    {
+      "path": "docs/taskbooks/clinical-reasoning-attribution-v1.0.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a769c0f64dadd91968ca39009f9d71fe9a136b86",
+          "commit": "665b8edea3cde907ea03de9bbce174552268f0a3",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/665b8edea3cde907ea03de9bbce174552268f0a3/docs/taskbooks/clinical-reasoning-attribution-v1.0.md",
+          "branch_set": "bs037"
+        }
+      ]
+    },
+    {
+      "path": "docs/taskbooks/night-work-patient-cases-v04-2026-09-09.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d746ae3ec3958db522bb5036c8bcbc576deabe50",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/taskbooks/night-work-patient-cases-v04-2026-09-09.md",
+          "branch_set": "bs029"
+        }
+      ]
+    },
+    {
+      "path": "docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d092f32ce406693b6e3e02cc6e813e69673ac493",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md",
+          "branch_set": "bs025"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4337aeb0bec13a995c5810c52f85e7a00ba69906",
+          "commit": "12986257729b65016341a2303d2f36b2a64ebeb2",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/12986257729b65016341a2303d2f36b2a64ebeb2/docs/taskbooks/patient-evaluation-literature-addendum-v1.3.md",
+          "branch_set": "bs026"
+        }
+      ]
+    },
+    {
+      "path": "docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2e62d20c8b77c5f1f6cde685e014f29375db8d4c",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md",
+          "branch_set": "bs038"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f92cf04b0e06d9c81ef6176ee4f1dce7d1b79c74",
+          "commit": "d772b17444522625c53c07570a9a2fe2690a8b33",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/d772b17444522625c53c07570a9a2fe2690a8b33/docs/taskbooks/patient-evaluation-master-taskbook-v1.2.md",
+          "branch_set": "bs039"
+        }
+      ]
+    },
+    {
+      "path": "docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.0.docx",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0c957271bad1736f3e80ee1c31727cd52629a7d1",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.0.docx",
+          "branch_set": "bs009"
+        }
+      ]
+    },
+    {
+      "path": "docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.0.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "324c37f62fd034a9cbdb4b3bc6b6a61d162ba174",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.0.md",
+          "branch_set": "bs009"
+        }
+      ]
+    },
+    {
+      "path": "docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.1.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "febe80337a4a142119ed87d5fc842c5dd103932c",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/taskbooks/patient-multiturn-evaluation-taskbook-v1.1.md",
+          "branch_set": "bs009"
+        }
+      ]
+    },
+    {
+      "path": "docs/taskbooks/project-audit-and-retest-v1.0.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ab1d5bcca7d3cfc7917ba71a1e1bc7f5efa93d6e",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/taskbooks/project-audit-and-retest-v1.0.md",
+          "branch_set": "bs030"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9f960519038a1308fb2cd772fb69c550ef3b9ad2",
+          "commit": "88ca2ac136d87c02f82f52c7defe9c8007d90f5c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/88ca2ac136d87c02f82f52c7defe9c8007d90f5c/docs/taskbooks/project-audit-and-retest-v1.0.md",
+          "branch_set": "bs031"
+        }
+      ]
+    },
+    {
+      "path": "docs/taskbooks/social-hire-readiness-and-system-improvement-v1.0.md",
+      "decision": "reference_or_queued_design",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "257eea9dcfda18943f471d3fdf5eecf8d141663a",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/docs/taskbooks/social-hire-readiness-and-system-improvement-v1.0.md",
+          "branch_set": "bs035"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "142b8ee81b6dd3e121c67c8e25c423d6ebb32430",
+          "commit": "2bf3c0798aa010624e3a25b8d1e652932a82fa0c",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/2bf3c0798aa010624e3a25b8d1e652932a82fa0c/docs/taskbooks/social-hire-readiness-and-system-improvement-v1.0.md",
+          "branch_set": "bs032"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "37ef752dd7b54e7a89eca36febb5a562716ab739",
+          "commit": "43379ceb8572306e2cc1d49673f66386b6fe9ee0",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/43379ceb8572306e2cc1d49673f66386b6fe9ee0/docs/taskbooks/social-hire-readiness-and-system-improvement-v1.0.md",
+          "branch_set": "bs033"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "67bb6a5d1cc8bc02c05b7cefc8952c85bc5de65d",
+          "commit": "d033eca31c7606db79c98265175caf91a03ca8f9",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/d033eca31c7606db79c98265175caf91a03ca8f9/docs/taskbooks/social-hire-readiness-and-system-improvement-v1.0.md",
+          "branch_set": "bs034"
+        }
+      ]
+    }
+  ]
+}

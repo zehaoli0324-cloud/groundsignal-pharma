@@ -1,0 +1,79 @@
+{
+  "schema": "focused-core-verification/v1",
+  "checked_at": "2026-09-13T05:38:26.305810+00:00",
+  "python": "3.12.14",
+  "engineering_checks_completed": false,
+  "clinical_approval": false,
+  "clinical_score": null,
+  "real_model_test_executed": false,
+  "results": [
+    {
+      "command": "static",
+      "exit_code": 0,
+      "status": "PASS",
+      "engineering_step_ok": true,
+      "counts": {
+        "PASS": 1961
+      },
+      "test_result_rows": 0,
+      "report": "static/report.json"
+    },
+    {
+      "command": "autoreview",
+      "exit_code": 0,
+      "status": "PASS",
+      "engineering_step_ok": true,
+      "counts": {
+        "PASS": 2033,
+        "NOT_RUN": 2
+      },
+      "test_result_rows": 0,
+      "report": "autoreview/report.json"
+    },
+    {
+      "command": "track-static",
+      "exit_code": 0,
+      "status": "PASS",
+      "engineering_step_ok": true,
+      "counts": {
+        "PASS": 1
+      },
+      "test_result_rows": 0,
+      "report": "track-static/report.json"
+    },
+    {
+      "command": "track-validation",
+      "exit_code": 0,
+      "status": "PASS",
+      "engineering_step_ok": true,
+      "counts": {
+        "PASS": 14
+      },
+      "test_result_rows": 0,
+      "report": "track-validation/report.json"
+    },
+    {
+      "command": "difficulty-review",
+      "exit_code": 0,
+      "status": "NEEDS_REVIEW",
+      "engineering_step_ok": true,
+      "counts": {
+        "NOT_RUN": 3
+      },
+      "test_result_rows": 0,
+      "report": "difficulty-review/report.json"
+    },
+    {
+      "command": "validation",
+      "exit_code": 1,
+      "status": "FAIL",
+      "engineering_step_ok": false,
+      "counts": {
+        "PASS": 148,
+        "ERROR": 1
+      },
+      "test_result_rows": 115,
+      "report": "validation/report.json"
+    }
+  ]
+}

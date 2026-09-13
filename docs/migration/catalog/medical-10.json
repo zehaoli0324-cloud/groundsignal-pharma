@@ -1,0 +1,1150 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": "medical/stage-evals/S5/fresh-first-observation-v0.6.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f855e853ea2af9705cd3db478a3a40848459e0ea",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-first-observation-v0.6.json",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-first-observation-v0.7.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b14f9e8f348976ee4823e26a5d3923b7417efa0b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-first-observation-v0.7.json",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-first-observation-v0.8.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8d2d96890915aa981652f78e3ff52242c7c0f51c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-first-observation-v0.8.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-first-observation-v0.9.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "522c8f4ed39293d2ea01c81f48ffacc1d1ef4340",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-first-observation-v0.9.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f37-cyrillic-unseen-script.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e4f504070dcf33400a89bebdcc3b73c7822e34dc",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f37-cyrillic-unseen-script.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f38-cross-turn-negation-scope.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bfe7b191c03808bd9108b1fd520bead58c768c88",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f38-cross-turn-negation-scope.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f39-coordinate-codebook-modality.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e018a35ad18ba13d4fc89a172b38bd635c847abc",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f39-coordinate-codebook-modality.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f40-unseen-lab-ontology-ratio.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dd37deac602666a8c03004584293097b6e3f36f9",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f40-unseen-lab-ontology-ratio.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f41-dialogue-distributed-braid.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7c0517f9b06686e4a173a8e442684b14dcd7c520",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/attack-sources/f41-dialogue-distributed-braid.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-cardiac-mri.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1e8bd304cbf363edb1111c404d4cee0fed1d6a90",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-cardiac-mri.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-dialogue-multi-record.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e94f6ab9de6813370c89aaa818ae8102b804b590",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-dialogue-multi-record.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-negation-scope.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "05276bcde9e3048c7cb3a8bbbb542f3182411c06",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-negation-scope.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-numeric-ontology-neighbour.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9a63017404ec5eaf228b5a878ed9c1715cb6c5b1",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-numeric-ontology-neighbour.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-russian-same-domain.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "34ecf43c317dc4281f2c282ec9be51cd9ee91c3e",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/clean-sources/clean-russian-same-domain.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-DEV-001.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6be9cc9d0e7330624fc033aee66ece92e948054a",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-DEV-001.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-DEV-002.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "64712f6e8a54d38da00ad8341227bc90b40a6ace",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-DEV-002.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-DEV-003.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "96cd143278e0cc360e03b6cf9b026a38a30c91bd",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-DEV-003.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-HO-001.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "73a7e45b6d7f14256a308e10a87835a5758286b6",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-HO-001.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-HO-002.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fe2b55164970e8fdefdd8650fe1fc89e40db6743",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-HO-002.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-REG-001.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3f13018d3c13a10a84dfb0885b1da596641bc7e9",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/cases/S5FRESH-LIN10-REG-001.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dcc5877aeebbcc9029675e33b6e79f3c093fc8f9",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/families/S5FRESH-LINEAGE-010/manifest.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/protocol-v0.10.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4eaa53bad1b641f0524e991674f56ad2caf9b930",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/protocol-v0.10.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.10/suite-fresh-lineage-v0.10.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d14694775b3808932dde8efe3a3d0d6c62c9543b",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/medical/stage-evals/S5/fresh-lineage-v0.10/suite-fresh-lineage-v0.10.json",
+          "branch_set": "bs014"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f28-cross-language.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5f3fd010e196079f67ea4f69c3132e3494786d49",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f28-cross-language.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f29-semantic-abstraction.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5e5101906d223a78f43313cce01d8c87a6bdb807",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f29-semantic-abstraction.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f30-cross-field-flattening.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5eeec3a0e9cfc3bf05883351fb8a765b965c9e17",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f30-cross-field-flattening.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f31-multi-protected-mosaic.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "98fb43d4c3b79a16c4d0d50f7dd6a69ec59d28f9",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/attack-sources/f31-multi-protected-mosaic.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/clean-sources/clean-chinese-same-domain.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e17d86807eeea37cdfafac783f8085255ce4c3c2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/clean-sources/clean-chinese-same-domain.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/clean-sources/clean-english-same-domain.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "07a5a4faa3245d77f5ce754758e9ecb19c184f0b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/clean-sources/clean-english-same-domain.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/families/S5FRESH-LINEAGE-008/cases/S5FRESH-LIN8-DEV-001.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "101c3233281b34b56dff3084704c241da26b0f31",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/families/S5FRESH-LINEAGE-008/cases/S5FRESH-LIN8-DEV-001.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/families/S5FRESH-LINEAGE-008/cases/S5FRESH-LIN8-DEV-002.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "55f6cb631a94001500d200ef5f91a887c84ead52",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/families/S5FRESH-LINEAGE-008/cases/S5FRESH-LIN8-DEV-002.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/families/S5FRESH-LINEAGE-008/cases/S5FRESH-LIN8-DEV-003.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5cbb810543862024f3f039bf82cef1e7ed4630e6",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/families/S5FRESH-LINEAGE-008/cases/S5FRESH-LIN8-DEV-003.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/families/S5FRESH-LINEAGE-008/cases/S5FRESH-LIN8-HO-001.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0c1295c11f7d9c490db151397ba9b5ef16e19ff1",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/families/S5FRESH-LINEAGE-008/cases/S5FRESH-LIN8-HO-001.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/families/S5FRESH-LINEAGE-008/cases/S5FRESH-LIN8-REG-001.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ce2c92b23f7219a45885949ae2f12d9b5737ef26",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/families/S5FRESH-LINEAGE-008/cases/S5FRESH-LIN8-REG-001.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/families/S5FRESH-LINEAGE-008/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a3cfd044f43fe6bce956e092b7abe74a5db87dd2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/families/S5FRESH-LINEAGE-008/manifest.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/protocol-v0.8.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e537aac922a3aa5c3da5e6994f5a22d3772f4568",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/protocol-v0.8.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.8/suite-fresh-lineage-v0.8.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "07987a35829772e47542eb4b61bb5127cbc52865",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/fresh-lineage-v0.8/suite-fresh-lineage-v0.8.json",
+          "branch_set": "bs060"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f32-unseen-script-korean.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4e15084bf705c3636053e68417d7422675fdc14a",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f32-unseen-script-korean.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f33-unit-time-alias.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f7a2372e0ce5eda1d26d16f195087d83a1057a3f",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f33-unit-time-alias.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f34-graph-role-compression.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f135871c2bb535942cfbb13f3e677020a9b2f7ca",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f34-graph-role-compression.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f35-subthreshold-three-source-mosaic.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b168e2373b00db393358e0a3018a5eb0f062746f",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f35-subthreshold-three-source-mosaic.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f36-code-switched-identifier-wording.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a5f6ce6062c1afede0fa5164e269f84fa88da1ee",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/attack-sources/f36-code-switched-identifier-wording.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/clean-sources/clean-japanese-imaging.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a3f0138fc1ad4c45c45b33cc8ba34c1495949764",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/clean-sources/clean-japanese-imaging.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/clean-sources/clean-korean-same-domain.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e501485381b990db66ff7cd8473ab78407bed241",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/clean-sources/clean-korean-same-domain.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/clean-sources/clean-multi-case-summary.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a64621698854fee37d68531af96c9c366162d9c4",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/clean-sources/clean-multi-case-summary.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/clean-sources/clean-numeric-near-neighbour.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e1a777efd4d67312c5d16b635ac894ea5107767b",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/clean-sources/clean-numeric-near-neighbour.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/cases/S5FRESH-LIN9-DEV-001.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2167fd5a748aec8d8364125f84e341c5ffd49cbc",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/cases/S5FRESH-LIN9-DEV-001.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/cases/S5FRESH-LIN9-DEV-002.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "104fc8c7d7c347ce6e71741a545c34b35cf21461",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/cases/S5FRESH-LIN9-DEV-002.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/cases/S5FRESH-LIN9-DEV-003.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e349d9cd5f8ef163f96c542c32140bf5670280d1",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/cases/S5FRESH-LIN9-DEV-003.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/cases/S5FRESH-LIN9-HO-001.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f3aa2fcf5065328328671879f691fb756a9cd2d4",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/cases/S5FRESH-LIN9-HO-001.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/cases/S5FRESH-LIN9-HO-002.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "85908d1acd89ddc67ee08e81eee57e98be6e0de3",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/cases/S5FRESH-LIN9-HO-002.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/cases/S5FRESH-LIN9-REG-001.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f9f9c96865e24a7ab3da32afcbc98f82009a87bb",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/cases/S5FRESH-LIN9-REG-001.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e0b8ace6927f913c0cbcc0688f93865d6f33ff2b",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/families/S5FRESH-LINEAGE-009/manifest.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/protocol-v0.9.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "743d99ae0aa89032e0b7e2d12e958d01cef53c6d",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/protocol-v0.9.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/fresh-lineage-v0.9/suite-fresh-lineage-v0.9.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c2f431c535dae948b7a6ec6d847518550940b18a",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/fresh-lineage-v0.9/suite-fresh-lineage-v0.9.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/latency-v0.7.3.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bb3c8ee8f4d808de9bc334739b55b6beda5a6ca2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/latency-v0.7.3.json",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/lineage-index-manifest-v0.7.3.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fccca1340474a80d30ff1e9c1f86e6f045ceb7ba",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/lineage-index-manifest-v0.7.3.json",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b080609599063736dcc1de76c9aa1d328c80e3ed",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/next-fresh-admission-adversarial-tests-v0.9.json",
+          "branch_set": "bs020"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.10.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c1476bd2f7218d7dce0d8b24ad6678c599c3deb7",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.10.json",
+          "branch_set": "bs061"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.9.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9f92c46fac7001e9c0adedb1a5a45b0f66fc88aa",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.9.json",
+          "branch_set": "bs048"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7be5591b310af3c09944bc6a6d03b5caf2f1ff00",
+          "commit": "ffe040b0295e666f96e7dac7099fdb6e5fe8d720",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ffe040b0295e666f96e7dac7099fdb6e5fe8d720/medical/stage-evals/S5/next-fresh-admission-after-freeze-v0.9.json",
+          "branch_set": "bs017"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/next-fresh-admission-v0.10.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bd7f6d15f7cba48f972ed73db02c86ea0f16c74c",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/next-fresh-admission-v0.10.json",
+          "branch_set": "bs062"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/next-fresh-admission-v0.9.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b73126c77f5601e6381d085c037251c60d0012a7",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/next-fresh-admission-v0.9.json",
+          "branch_set": "bs020"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/receipt-publication-equivalence-v0.9.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "60e39eaa52b7f8fb326f537eee35d84e6a9924bf",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/receipt-publication-equivalence-v0.9.json",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/regression-v0.7.2.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f892c8924660672d65f4c492bc2b14275bb3641e",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/regression-v0.7.2.json",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/regression-v0.7.3.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6d19dc3180e795dff373e715470c0bdf20fdfabe",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/regression-v0.7.3.json",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/regression-v0.8.1.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "391373426d9ce707a384021006237a1a999543f3",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/regression-v0.8.1.json",
+          "branch_set": "bs020"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/regression-v0.9.1.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b5110b99c0fffe0a1aec2737dd18e35b7bdb1c53",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/stage-evals/S5/regression-v0.9.1.json",
+          "branch_set": "bs062"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/release-gate-v0.1.1.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0d267fe829c1aade48a00f5655e394cb60d1275d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/release-gate-v0.1.1.json",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/structural-regression-v0.1.1.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "25007a5952dadc269d1ec7e0db498a3254d313bf",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/structural-regression-v0.1.1.json",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S5/suite-p0-exposed-v0.1.1.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b0b719ac216ff52914717a02c04296563ee5b409",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S5/suite-p0-exposed-v0.1.1.json",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/truth-layer/README.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "acf9e9c198fb9f81151782af86aed5883a624ea0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/truth-layer/README.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/HIGH_RISK_USER_QUESTION_MATRIX.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2744542e05d5489ae16df420a2d6b10b463f8a22",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/user-tasks/HIGH_RISK_USER_QUESTION_MATRIX.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/README.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "77bfeb4fbcf3ba336c2743b16bf61bee2b6c2141",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/user-tasks/README.md",
+          "branch_set": "bs041"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f74289f294014902e3cd0600b8083fc073c3165c",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/user-tasks/README.md",
+          "branch_set": "bs042"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/SEED_TASK_BANK.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b4dd5880938ea69426359810c36215c34759421e",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/user-tasks/SEED_TASK_BANK.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/USER_RESEARCH_PLAN.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "28662ec2971135dec082730df3e78f0d7cfa87e5",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/user-tasks/USER_RESEARCH_PLAN.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/candidate-corpora/interview-material-v0.1/README.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "736b4b2df6ec9177b2a24b21bf4b446b69fe7299",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/user-tasks/candidate-corpora/interview-material-v0.1/README.md",
+          "branch_set": "bs063"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d399639f50a03251e5b132bcd14153efbdec5b0e",
+          "commit": "cced27134f228e04da625cdc328690ca5c619c26",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/cced27134f228e04da625cdc328690ca5c619c26/medical/user-tasks/candidate-corpora/interview-material-v0.1/README.md",
+          "branch_set": "bs040"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/candidate-corpora/interview-material-v0.1/all-question-inventory.jsonl",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "976dc7add2ef9b54611f9db83bac6bb35ac12e02",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/user-tasks/candidate-corpora/interview-material-v0.1/all-question-inventory.jsonl",
+          "branch_set": "bs041"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/candidate-corpora/interview-material-v0.1/evaluation-seeds.jsonl",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "54b6c09dbf51089c8388c31ae6c430835c001d99",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/user-tasks/candidate-corpora/interview-material-v0.1/evaluation-seeds.jsonl",
+          "branch_set": "bs041"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/candidate-corpora/interview-material-v0.1/priority-review-queue.jsonl",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "75d3dda9038c0739155a964a439d1581d1b53743",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/user-tasks/candidate-corpora/interview-material-v0.1/priority-review-queue.jsonl",
+          "branch_set": "bs041"
+        }
+      ]
+    },
+    {
+      "path": "medical/user-tasks/candidate-corpora/interview-material-v0.1/source-manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bf07ebc1147023fa9e4db91cacf7e1b958b8074a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/user-tasks/candidate-corpora/interview-material-v0.1/source-manifest.json",
+          "branch_set": "bs041"
+        }
+      ]
+    }
+  ]
+}

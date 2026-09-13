@@ -1,0 +1,1142 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": "medical/patient-eval/readiness/round-10-pipeline/suite.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3dfa70f65de513ccdeb9be758b8b967eebdfafac",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-10-pipeline/suite.json",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-10-related-tests.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8878c24e65f4b1babb108bee028871e5882cf757",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-10-related-tests.txt",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-12-statistics/after/bundle.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1ceed1c91966e9868068869e004608c5d96f6779",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-12-statistics/after/bundle.json",
+          "branch_set": "bs057"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-12-statistics/after/evidence-links.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e7ed2accc5d4d42bdfe04890346ceb700d5006c5",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-12-statistics/after/evidence-links.json",
+          "branch_set": "bs057"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-12-statistics/after/report.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e13635aa4f5ad35d339388ff9794285aa767f493",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-12-statistics/after/report.json",
+          "branch_set": "bs057"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-12-statistics/before/bundle.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d8b235d95e5b9457c571d7c874caed3d74488d7d",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-12-statistics/before/bundle.json",
+          "branch_set": "bs057"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-12-statistics/before/evidence-links.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c5991e0a7fdaf5a6856f55d4df0853791b9989ab",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-12-statistics/before/evidence-links.json",
+          "branch_set": "bs057"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-12-statistics/before/report.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "360caff7f4146d1eb961146761506457548ce31a",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-12-statistics/before/report.json",
+          "branch_set": "bs057"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-12-statistics/first-failure.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2777912328585089df55a23a81ab914e37bd27c5",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-12-statistics/first-failure.txt",
+          "branch_set": "bs057"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-12-statistics/full-tests.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7ac6fa1721ade9925e75861b6f36303525a0fcfa",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-12-statistics/full-tests.txt",
+          "branch_set": "bs057"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-12-statistics/targeted-tests-final.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6cc3d505602fb959a4b43a02b98d16357c360b96",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-12-statistics/targeted-tests-final.txt",
+          "branch_set": "bs057"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-12-statistics/targeted-tests.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dea3dbf609f55a0f2dcab1e667cb1743f3ce6f4f",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-12-statistics/targeted-tests.txt",
+          "branch_set": "bs057"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-13-adjudication/example/decisions.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8d30e1b7ed27c669deba3c4965da00086b31d9b5",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-13-adjudication/example/decisions.json",
+          "branch_set": "bs056"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-13-adjudication/example/left.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "526666972f7a679bc274475710f5587e0e169da3",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-13-adjudication/example/left.json",
+          "branch_set": "bs056"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-13-adjudication/example/original.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fa09d89299f2603aa7b035d5517a29602d2d0a57",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-13-adjudication/example/original.json",
+          "branch_set": "bs056"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-13-adjudication/example/right.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e5eefb627fdfe67812490a7ea49fbf90e0b94071",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-13-adjudication/example/right.json",
+          "branch_set": "bs056"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-13-adjudication/queue.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "96c2ff3c117bca07a411c2d515f6fa6f4057158d",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-13-adjudication/queue.json",
+          "branch_set": "bs056"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-13-adjudication/result.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b8063381a7a764856cd814942f512bf7426c102c",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-13-adjudication/result.json",
+          "branch_set": "bs056"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-13-adjudication/review.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "13270c31f0c134a802ba24bcbbd423c40d63109b",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-13-adjudication/review.json",
+          "branch_set": "bs056"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-13-adjudication/tests-final.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3d437d3f2ae7de7acb61d51bcbfabe6cdcc168e7",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-13-adjudication/tests-final.txt",
+          "branch_set": "bs056"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-13-adjudication/tests.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6545ecbb1fdf575c4a1dc90f5675e3d02c51ea01",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-13-adjudication/tests.txt",
+          "branch_set": "bs056"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-2-verification.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4248cef2fd6d935878bf5a7f14e9e20308d39568",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-2-verification.txt",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-3-resume-report.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2a62a77889ab5a3c092c922b381bc77b853f5b41",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-3-resume-report.json",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-3-verification.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "12b71278bfffd087b282dd56db3216874998daf5",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-3-verification.txt",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-4-statistics-report.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "98067f099406efdd5483697b20745224276fbfff",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-4-statistics-report.json",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-4-verification.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a3d223665a2079194bc3ccc7eca0a6bfc4f80f7a",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-4-verification.txt",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-5-diagnosis-report.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "389f01bbaaea47e239b1b51fff767f4a1b8795ee",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-5-diagnosis-report.json",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-5-verification.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2a3dc675214c25f46f1ce1094eb4ab1441d2b94b",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-5-verification.txt",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-6-interaction-report.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7be3c5386113bf91a72499e2de0dc2415d0d7b26",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-6-interaction-report.json",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-6-verification.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e03046028c8b00ba08323b8ae2ccb75206810bac",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-6-verification.txt",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-7-handoff-verification.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "45d1608c1d199d26f4f622bd0b4715c3877ecf69",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-7-handoff-verification.txt",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-8-import-drill-summary.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7444f67aac184faefd30ba23a6e24a02a0c4cb3c",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-8-import-drill-summary.json",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-8-scoring-preparation-summary.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6814d1f783665ddb25d20c9eccc79fb366a0f84d",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-8-scoring-preparation-summary.json",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/round-8-verification.txt",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2e1b8f583f46c1e1043cf5f2603aaa5e22710d2f",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/round-8-verification.txt",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/scoring-rule-pack-v0.1.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4815c6d24c9d73dfbbe2d80b966358feaf118b17",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/scoring-rule-pack-v0.1.json",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/statistics-fixture-v0.1.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6949f66ea227ad1be3235e601aa82b18396e7e02",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/statistics-fixture-v0.1.json",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/statistics-queries-v0.1.sql",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dc16a6876732ac6cda118053eea6c556f5b0693f",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/statistics-queries-v0.1.sql",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/readiness/unknown-opportunity-v0.1.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f8f682694463cecaea3d814c1dde26299502c270",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/readiness/unknown-opportunity-v0.1.json",
+          "branch_set": "bs028"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/schemas/README.md",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0e80b84a03aa3bd2c0d63325ddcb0eb0d00ba3e4",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/schemas/README.md",
+          "branch_set": "bs029"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2a72e294ccc5a160a3ae68ed1f4efce70f933677",
+          "commit": "12986257729b65016341a2303d2f36b2a64ebeb2",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/12986257729b65016341a2303d2f36b2a64ebeb2/medical/patient-eval/schemas/README.md",
+          "branch_set": "bs058"
+        }
+      ]
+    },
+    {
+      "path": "medical/patient-eval/schemas/dynamic-case-state-machine-v0.4.json",
+      "decision": "queued_patient_extension",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ec49122562306446e1ea7f93499dfeb971fb6e4e",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/medical/patient-eval/schemas/dynamic-case-state-machine-v0.4.json",
+          "branch_set": "bs029"
+        }
+      ]
+    },
+    {
+      "path": "medical/schemas/case-family.schema.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "93bf0087d89bad725254d99f577c0738be0ce0d1",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/schemas/case-family.schema.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/schemas/clinical-case.schema.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "473edfd800b717513582a1100f9b8f4fe0814e0a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/schemas/clinical-case.schema.json",
+          "branch_set": "bs019"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ba0f006b29670ee78b4c030f2132e3390cc6ad6f",
+          "commit": "2cd20928e26fff834f39124bf616dada3ea58f61",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/2cd20928e26fff834f39124bf616dada3ea58f61/medical/schemas/clinical-case.schema.json",
+          "branch_set": "bs012"
+        }
+      ]
+    },
+    {
+      "path": "medical/schemas/evaluation-record.schema.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9df7a9ecff12b37a3b6effd93c43abe34f217dfb",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/schemas/evaluation-record.schema.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/schemas/evidence-manifest.schema.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0890795d686be0d68c5c75db0b42f504bb194a1d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/schemas/evidence-manifest.schema.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/schemas/evidence-passage.schema.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e24e79ff8a3ccff613e4d7e454125ae82482873e",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/schemas/evidence-passage.schema.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/schemas/graph-snapshot.schema.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4d2a1a3aed9159f6d07be2c850271c16242ad88c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/schemas/graph-snapshot.schema.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/schemas/model-run.schema.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6b0d729123b67e3d30042d7cf7c8d1d37a2a5fc0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/schemas/model-run.schema.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/BASELINE_REPORT_V0.1.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "636a2afda6aca8bd79035168831320bc005aeb61",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/BASELINE_REPORT_V0.1.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/README.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "32a934e3bdea79b740ecd7d794c24ccdc8b8b047",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/README.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/S2_V0.4_DEV_FAIL_REPORT.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5522efc2d318c48f7f122f1618bed5bfc63f40a9",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/S2_V0.4_DEV_FAIL_REPORT.md",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/V0.2_REPORT.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "82a17153dd6512692c511fd563f5aefb9f62de1d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/V0.2_REPORT.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/V0.3_REPORT.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e74846660773e3cda25c8bbbd71ff868fa0822d3",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/V0.3_REPORT.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/dailymed-truth-retrieval-v0.3.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c867961663902dcbae8bd0e32cd89edb5acfc14c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/dailymed-truth-retrieval-v0.3.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/intent-features-v0.3.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "11fb170efd7deb40817947210fe0487473119738",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/intent-features-v0.3.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/intent-routing-heldout-v0.3.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "747c0212cb26a63ba8861c06098c91f37b4bc117",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/intent-routing-heldout-v0.3.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/live-retrieval-v0.2.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "add82ee2de984d493844e9992fa479d3ffec66c7",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/live-retrieval-v0.2.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/routing-gold-v0.1.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d9bf6914b59fbca19b22df5164a5ccc7f46d32a3",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/routing-gold-v0.1.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/routing-heldout-v0.2.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9910f8ba13c810e113460b6786fa152f63a2e529",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/routing-heldout-v0.2.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/routing-shadow-heldout-v0.2b.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "280941efb9a5fb48418bdc7b4b26741a089a2588",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/routing-shadow-heldout-v0.2b.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/runs/s2-v04-development-first-fail/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fb97fec9f2140f747fb26bc1ec9d712486462008",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/runs/s2-v04-development-first-fail/manifest.json",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/runs/s2-v04-development-first-fail/report.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "33832ab7049ebab933b4e43b0157d56c8b0372e0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/runs/s2-v04-development-first-fail/report.json",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/s2-negation-development-v0.4.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fe9768b62870a87fa30441c3b0b0d46d6b2e7ea4",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/s2-negation-development-v0.4.json",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2/source-policy-v0.3.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ce173324aa463dcd2a65c44ddc84750b0df17fec",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2/source-policy-v0.3.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/S2_S3_JOINT_V0.1_REPORT.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ffe031a763c42a021e49e01af0662b1a0fa8f4ec",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/S2_S3_JOINT_V0.1_REPORT.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/combined-release.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "147396da1b7047a51928aa8d262ef052e168525b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/combined-release.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/component-preconditions.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e5a0037e357ba79e22d237be57bcb3093ffa2778",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/component-preconditions.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/dailymed-live-eval-exit.txt",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/dailymed-live-eval-exit.txt",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/dailymed-live-report.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2e5d5537e96dd7d33aea4582f68defea3c80dbd2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/dailymed-live-report.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/dailymed-live-run-exit.txt",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/dailymed-live-run-exit.txt",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/dailymed-live-runs.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3ae3257a9b506fb75f48e3d79f3053bfd9a60ec8",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/dailymed-live-runs.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/dataset-sha256.txt",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d898cef89e3712139afbb428ab31bd69a7017264",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/dataset-sha256.txt",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/gold.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "55d191267eb754f61348c6a3f54488173a2ea50d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/gold.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/joint-exit.txt",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/joint-exit.txt",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/joint-predictions.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "740ade468620b1ea0fbadb20807aa0362e96c663",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/joint-predictions.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/joint-report.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f8b86f19543c89bda8e783b1bd16fb1927c72344",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/joint-report.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "033767f8f07cb70175614abdfd084cab625a121a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/runs/s2-s3-joint-v01-first-run/manifest.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S2S3/s2-s3-joint-heldout-v0.1.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "55d191267eb754f61348c6a3f54488173a2ea50d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S2S3/s2-s3-joint-heldout-v0.1.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S3/README.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "08a193a839086c824c7086644ff6e83cdd1c9475",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S3/README.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S3/S3A_SEMANTIC_EXTRACTOR_PROMPT.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5056accecc38ac48f5e47661d51bb215f80db4b2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S3/S3A_SEMANTIC_EXTRACTOR_PROMPT.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/stage-evals/S3/S3A_V0.2_REPORT.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "33d5032cbd3bd367d8c1e77aeaec94d088475f7b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/stage-evals/S3/S3A_V0.2_REPORT.md",
+          "branch_set": "bs001"
+        }
+      ]
+    }
+  ]
+}

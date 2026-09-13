@@ -1,0 +1,1126 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": "medical/README.md",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c7fb495259f3710b878f2d2aa870968a40234b62",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/README.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/AGENT-001/cases/A-current-label-required.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8f2398f144c113bfb618b92bdc6fbb437dd20269",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/AGENT-001/cases/A-current-label-required.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/AGENT-001/cases/B-stale-label-first.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2b184a4bb2c3b7990baa4f2db05af498a6e3cce1",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/AGENT-001/cases/B-stale-label-first.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/AGENT-001/cases/C-irrelevant-result-first.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d084ba1884a0aaeda16c137afb7b61f07ca45eb2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/AGENT-001/cases/C-irrelevant-result-first.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/AGENT-001/cases/D-sufficient-evidence-stop.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f9eeffe842f46a1bdc20c6b041d6fe9d29795e7b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/AGENT-001/cases/D-sufficient-evidence-stop.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/AGENT-001/cases/E-apixaban-nsaid-heldout.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "34cbb2d93e3c669207340a315bc271d969bec50d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/AGENT-001/cases/E-apixaban-nsaid-heldout.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/AGENT-001/evidence.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "81e0a1fa248130c4615440b9544f961deecf825b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/AGENT-001/evidence.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/AGENT-001/graph.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4ad18f46c4e7a704ce80ba0eb7f6f98466f81bf9",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/AGENT-001/graph.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/AGENT-001/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "58836c12821f4f40da61190c0ca6f3155d107e9d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/AGENT-001/manifest.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-001/cases/A-low-ferritin-high-tibc.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ccce794a2d9f3dd23c70c067eb541290a23f2878",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-001/cases/A-low-ferritin-high-tibc.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-001/cases/B-inflammation-pattern.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c47d5ebc81e35ddbcc3ad095153fb250b3404d31",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-001/cases/B-inflammation-pattern.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-001/cases/C-ambiguous-ferritin-inflammation.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f5b475b204778abbbdfcf5a8df78f3a56ddd1053",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-001/cases/C-ambiguous-ferritin-inflammation.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-001/cases/D-low-iron-salience-trap.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "326b27acbb939b0652cb73b323f11ffd7a4638df",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-001/cases/D-low-iron-salience-trap.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-001/cases/E-normocytic-inflammation-heldout.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6e99b21824129f90f3790143956fb36aed23b9fc",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-001/cases/E-normocytic-inflammation-heldout.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-001/evidence.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f4b9b8c0bf482b6351e2795c2ef2d11e6c729e9c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-001/evidence.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-001/graph.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "613ca6dd10fd05c2e294abba6bb48da5059ee0b1",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-001/graph.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-001/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "45d3bde1c5ee2309ba3f0ea5bd9812fd77b3a929",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-001/manifest.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-005/cases/A-volume-medication-competing.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3f47f0b4eb8c02ec455b6e9b391c3dfadb1102b5",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-005/cases/A-volume-medication-competing.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-005/cases/B-obstruction-evidence.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1aac82460e2e465b4fabfeddf404698ac9ac8b36",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-005/cases/B-obstruction-evidence.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-005/cases/C-volume-only-signal.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bf80d5321264904553d915c77dd703e272e7e3c3",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-005/cases/C-volume-only-signal.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-005/cases/D-multifactor-distractors.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b8f54d179e44a085f6017c9d19a3bc05c438e078",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-005/cases/D-multifactor-distractors.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-005/cases/E-contrast-volume-heldout.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "deeb85a473d0e6f4008ffb0ace38ff59aa965748",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-005/cases/E-contrast-volume-heldout.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-005/evidence.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c10d53a469106ada4b241793639366a7469f3739",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-005/evidence.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-005/graph.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c616d3e1fb5644ed2855f83ded432a2df8db8a6d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-005/graph.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/CLINREASON-005/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "11a8612ac3f66161e88817bef483eed02aba4df0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/CLINREASON-005/manifest.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-002/cases/A-unmatched-trials-62-vs-48.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0ee21d865649fd2bf3ee714f7532dfc48abec810",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-002/cases/A-unmatched-trials-62-vs-48.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-002/cases/B-matched-pop-different-endpoint.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "271a5b5251da37d5e9362911718b2a10387b0ac5",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-002/cases/B-matched-pop-different-endpoint.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-002/cases/C-aligned-separate-trials.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "575dfaea1349f4d2631f9e299b9271834bdfdd19",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-002/cases/C-aligned-separate-trials.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-002/cases/D-headline-salience-trap.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "42861d672423b7a652c162235127815789373cee",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-002/cases/D-headline-salience-trap.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-002/cases/E-head-to-head-heldout.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e34e60db57c75d4354ecf1af5b2826bb5974a20d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-002/cases/E-head-to-head-heldout.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-002/evidence.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fd90f9d6c07b2dd0495c20b74a4dba6e3d3433df",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-002/evidence.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-002/graph.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b187f36c86f06f7c9988a137e8b602e311260411",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-002/graph.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-002/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ad7a43c9cc2fa2fb2726daeb0fc2ea82450638cc",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-002/manifest.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-003/cases/A-current-guideline-new-rct.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "831959ad2f2a1d2c435e242a07434753d5d41ee9",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-003/cases/A-current-guideline-new-rct.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-003/cases/B-topline-only.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "451cd0958070576586fee894adce75c060df4294",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-003/cases/B-topline-only.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-003/cases/C-guideline-only.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "71b96711edfabf601032e63b0a951968e37259aa",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-003/cases/C-guideline-only.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-003/cases/D-obsolete-headline-trap.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b080c3393d893cd749f4ec5f68ec9f8addd8a66e",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-003/cases/D-obsolete-headline-trap.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-003/cases/E-updated-guideline-heldout.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0cdd1dd654a4c1faa5cd2d4bb3d47d5f183762fc",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-003/cases/E-updated-guideline-heldout.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-003/evidence.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ea13c3ea7830fe34e108786c7bf441812d17e711",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-003/evidence.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-003/graph.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "cb507593bc1463fea034ff70c15e33c191ff2529",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-003/graph.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/EVIDENCE-003/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "58d5b91a25953266d4921acc79403590d5ce0571",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/EVIDENCE-003/manifest.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-001/cases/A-egfr27.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "44212f27a6b4abc561f426b06f1f24e079c845b8",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-001/cases/A-egfr27.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-001/cases/B-egfr31.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9ec8ddbbdc80879be3fd70ad2fccc7fcfe5c5cfc",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-001/cases/B-egfr31.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-001/cases/C-egfr-missing.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8aa6fb88d8cba7223901ae644ca17a8b3a8bb7c6",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-001/cases/C-egfr-missing.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-001/cases/D-egfr27-distractors.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "03f5bbb53c7dcc946d9427d1745ff22d5f9e567b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-001/cases/D-egfr27-distractors.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-001/cases/E-egfr29-heldout.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1e5fbf085735737f335385c7cc4c760637304380",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-001/cases/E-egfr29-heldout.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-001/evidence.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5d39f9fe83d096a667114b5df402abc791b72830",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-001/evidence.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-001/graph.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3a21dc7120b810ef994dbea0da19c4af9c7dc365",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-001/graph.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-001/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "40a86af0fabfc026cf7f4223feff417784a1636e",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-001/manifest.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-002/cases/A-ibuprofen.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d339e49198af7713e56beb1e9226132f5d91c02d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-002/cases/A-ibuprofen.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-002/cases/B-product-unknown.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "392034acbdff70b0ef7400e12a18ed8ff04dd65d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-002/cases/B-product-unknown.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-002/cases/C-ibuprofen-bleeding.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "766972ac2135a484405722ba9044b73881c88d77",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-002/cases/C-ibuprofen-bleeding.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-002/cases/D-ibuprofen-distractors.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b53a50d03dfd24a7d0878ca83a87a523ad0b57f6",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-002/cases/D-ibuprofen-distractors.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-002/cases/E-naproxen-heldout.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "42a6c71c68174adececf83a1b30d0aa08cd63b00",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-002/cases/E-naproxen-heldout.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-002/evidence.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c75c21d090608228b9d4ab8bbd56a5bb3488ae41",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-002/evidence.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-002/graph.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2769851876e855b59b3ae149c1baa7d53a54e095",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-002/graph.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MEDSAFE-002/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9a710737919e4be378fabfb3eedfea505fe37fb4",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MEDSAFE-002/manifest.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MULTITURN-001/cases/A-clarify-to-egfr31-continuation.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c436ebaa095be462a8a5fb293d2773d370f90e84",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MULTITURN-001/cases/A-clarify-to-egfr31-continuation.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MULTITURN-001/cases/B-late-update-31-to-27.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "760def512c807d5505dbc4568734e613bd9afa93",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MULTITURN-001/cases/B-late-update-31-to-27.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MULTITURN-001/cases/C-initiation-egfr31.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5d60b6bad8dbcfc332f5599411954f0e6676179f",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MULTITURN-001/cases/C-initiation-egfr31.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MULTITURN-001/cases/D-user-pressure-missing-egfr.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5482ba79b1dacf75ffc75b45853a00a605a98aeb",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MULTITURN-001/cases/D-user-pressure-missing-egfr.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MULTITURN-001/cases/E-heldout-late-egfr29.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "76f300ced4a70409e461236c66df94b8287f4fbd",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MULTITURN-001/cases/E-heldout-late-egfr29.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MULTITURN-001/evidence.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "afd9b414f00f279ffe99f71897c377df01ee0875",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MULTITURN-001/evidence.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MULTITURN-001/graph.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ed96c6f7a3c209357ca6db8bd269076102118834",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MULTITURN-001/graph.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/MULTITURN-001/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "30477de71ee75f4307db3aacd7dc2cb25d3d5060",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/MULTITURN-001/manifest.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-001/cases/A-mild-multi-abnormalities.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6ddf155bebdf21da4eae910257d0325ebb9007a7",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-001/cases/A-mild-multi-abnormalities.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-001/cases/B-low-wbc.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e6032ba26d31df3ad3dd85c4a347ddf4ececb2ba",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-001/cases/B-low-wbc.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-001/cases/C-high-wbc.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "db8dfc7871a37d2cc233e228282c11b48b547e21",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-001/cases/C-high-wbc.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-001/cases/D-mild-abnormalities-distractors.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2cdd4d7fde46a8908a9e214a485d421f06cada97",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-001/cases/D-mild-abnormalities-distractors.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-001/cases/E-heldout-combination.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "400f49f237a8e1ab92cdba4496d107102f7ced3e",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-001/cases/E-heldout-combination.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-001/evidence.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "57ca4f9bd167eeab6a1ec3d1e4379ee7d5079ee4",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-001/evidence.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-001/graph.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "86d2841c59e1f81768d128194fc7c3ee820ce4ef",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-001/graph.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-001/manifest.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a9a7b0e5aec9fb89e5121db134bb9b91667b66de",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-001/manifest.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-004/cases/A-indeterminate-mri-recommended.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "82daa178f59bcb90d78c8aa67d0ea1033638e6d4",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-004/cases/A-indeterminate-mri-recommended.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-004/cases/B-benign-wording-no-followup.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0252ecbc86bf9357da00b1fd7880ab3631b0dfff",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-004/cases/B-benign-wording-no-followup.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-004/cases/C-stable-prior-comparison.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "39551c45aca39e1421d1e89528aaca2f7a732741",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-004/cases/C-stable-prior-comparison.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-004/cases/D-user-cancer-leading-question.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "cc905d2eba9d81f05d2bc395237ec076745fb1e9",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-004/cases/D-user-cancer-leading-question.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-004/cases/E-cannot-exclude-heldout.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "66a337d630021fb4cbb78df0ea9e0c61bc85e71b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-004/cases/E-cannot-exclude-heldout.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-004/evidence.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "765ccb6b44faf666c59a0a8d321c3c2fb3f7ec26",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-004/evidence.json",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "medical/case-families/REPORT-004/graph.json",
+      "decision": "queued_or_historical_pipeline",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a80b9c940278bd6626597d8b3b45947a94b046bc",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/medical/case-families/REPORT-004/graph.json",
+          "branch_set": "bs001"
+        }
+      ]
+    }
+  ]
+}

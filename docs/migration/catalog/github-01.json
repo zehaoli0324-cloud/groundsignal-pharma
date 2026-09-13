@@ -1,0 +1,1049 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": ".github/workflows/interview-promotion-pilot-v01.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "443295bf172631fb8e254d10b63632c57d5cff5f",
+          "commit": "cced27134f228e04da625cdc328690ca5c619c26",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/cced27134f228e04da625cdc328690ca5c619c26/.github/workflows/interview-promotion-pilot-v01.yml",
+          "branch_set": "bs040"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/medical-development-ci.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2342fe2d3b79e6ffd0bb73a9e4a8f556195efd84",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/medical-development-ci.yml",
+          "branch_set": "bs041"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "71f6820f16fe8ab4a3a986bf1110d1c62ef9579f",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/.github/workflows/medical-development-ci.yml",
+          "branch_set": "bs042"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/medical-dialogue-benchmark-ci.yml",
+      "decision": "core_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a309822afdffdba1d23ab5a624f3cee6a0bd3ca3",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/.github/workflows/medical-dialogue-benchmark-ci.yml",
+          "branch_set": "bs007"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "76669c7413f65aa001159e67bb5f4da679af1bfe",
+          "commit": "f54c66b79e10990d51cd2de59a7d6f2ca0050373",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/f54c66b79e10990d51cd2de59a7d6f2ca0050373/.github/workflows/medical-dialogue-benchmark-ci.yml",
+          "branch_set": "bs021"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1730ddf7180a9f668a652bbaf99dd9993a0abc33",
+          "commit": "5745794e02c1f93cd207aca5af1f167338dfda89",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/5745794e02c1f93cd207aca5af1f167338dfda89/.github/workflows/medical-dialogue-benchmark-ci.yml",
+          "branch_set": "bs043"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ae507bd4c0c246c79805e2ecd6ae3fba6bd0e02f",
+          "commit": "f703066b2aec9c539f3d46917d775b009e8ba4b4",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/f703066b2aec9c539f3d46917d775b009e8ba4b4/.github/workflows/medical-dialogue-benchmark-ci.yml",
+          "branch_set": "bs008"
+        }
+      ],
+      "imported_to": ".github/workflows/medical-dialogue-benchmark-ci.yml"
+    },
+    {
+      "path": ".github/workflows/patient-eval-development-ci.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2df568eed88ceb312637c04857e51d0924a5ae98",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/.github/workflows/patient-eval-development-ci.yml",
+          "branch_set": "bs044"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d4cc8a3776b07170f747c322dc71fde198c35c14",
+          "commit": "12986257729b65016341a2303d2f36b2a64ebeb2",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/12986257729b65016341a2303d2f36b2a64ebeb2/.github/workflows/patient-eval-development-ci.yml",
+          "branch_set": "bs045"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2d3b80e561c7f31e5e77f3f4a6d937b721d7ddb7",
+          "commit": "82e0384c555ac6f3b7bc5413e7e3726be975ab85",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/82e0384c555ac6f3b7bc5413e7e3726be975ab85/.github/workflows/patient-eval-development-ci.yml",
+          "branch_set": "bs046"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s2-live-retrieval.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0852feddcd11b6f5982678142770fb174f144e14",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s2-live-retrieval.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s2-s3-joint-heldout-v01.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "725cf961b4219c633dfaafa8d32e012e5b3baf6e",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s2-s3-joint-heldout-v01.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3-eval-v041.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "675710f833fc10d5321d14f00feb11eda097b1ea",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3-eval-v041.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3-eval.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c064f64252174fd6f9c0f25d30bf38346201802e",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3-eval.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3-split-eval.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "79082a5c384b3a302f3a68874d567a4a8b8d96f5",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3-split-eval.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3-v04-shadow.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2c85998883ae22ad62d88c7f3ee37ccca0281990",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3-v04-shadow.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3-v05-diagnostics.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "380cde97ca2877317890d2ff142eced87a1df3b3",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3-v05-diagnostics.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3-v05-shadow.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "96740788becae11889d945f68b6e81cf43dd0713",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3-v05-shadow.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3-v051-diagnostics.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "487dec21879114a00a547d7e0db482e6ada74e58",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3-v051-diagnostics.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3-v052-diagnostics.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "09d48149c7fa72c687ddb24f62901129c65db0e2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3-v052-diagnostics.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3-v053-diagnostics.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1088d1747f28a22ad34c6cab8ec290ff0fc8daa6",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3-v053-diagnostics.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3-v054-diagnostics.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "70af97309ca1efe775f95ea200978f819da9cf50",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3-v054-diagnostics.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3-v06-shadow.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f041a1615adff4477949160f9fa2392afec61d35",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3-v06-shadow.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-semantic-extractor-ci.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f69b194a145a0e1517b8a100e0eefc4e1e91837c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-semantic-extractor-ci.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v02-diagnostics.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "da15d30c7dd13b343b32df10f566d2c25b83eb14",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v02-diagnostics.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v02-heldout.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "39ce6b8c0bd2748e22cb28fd25ac56035aa9b89f",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v02-heldout.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v021-diagnostics.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bd02969ada754502200bdccdf2c2a390992db121",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v021-diagnostics.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v022-diagnostics.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c064ef3b1dc42a8c62fd5f92c83e411198676028",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v022-diagnostics.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v023-diagnostics.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ccc876470ecdabfe5aad86210c4cd183217cbcb5",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v023-diagnostics.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v03-heldout.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6b3e37fa00f065a46e4965cff3dfdcf4cd3b7b44",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v03-heldout.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v04-fresh-heldout.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "73aed5b2e56d27a934df4c83fb20e0c04ae96146",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v04-fresh-heldout.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v04-semantic-frame-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fe6a904b56162a1761c40078fac209f905c63f68",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v04-semantic-frame-regression.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v05-compositional-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "31e3ee58b447361fe70df0c04548c72ff2211816",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v05-compositional-regression.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v051-compositional-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a8ac193114dad04cebcda2732cfee9ab38c0d988",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v051-compositional-regression.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v051-fresh-heldout.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8e2ca98643429f8a381ccc6ffdefe59a447aae8d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v051-fresh-heldout.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v052-fresh-heldout.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "120c186c0b51efce5c60e0633a0dd25e51ae9ad2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v052-fresh-heldout.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v052-scope-safety-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c962e51d2eec55e348ca75f5080a3c6c34ef66f3",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v052-scope-safety-regression.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v053-preserve-fail.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "65a8d435f215b926ee114ff8827df5b9a02f8fb7",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v053-preserve-fail.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v053-semantic-typing-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "585ff59e16d39d13d10b4aa1dba22e349e842d47",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v053-semantic-typing-regression.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v054-event-graph-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "77423f8e7f1b6ff096879d5055a24f98fae9e04e",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v054-event-graph-regression.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v054-fresh-heldout.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9f8a0c3381b91f36eeaac48b61242f59f3eae71a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v054-fresh-heldout.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v054-persist-dev-pass.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fe80abcf5ecb90068b4cb4d5c0b2d3a6640e30d9",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v054-persist-dev-pass.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v055-scope-safety-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1cbac36aad366ac12ff72cfae948a6eb6566da8c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v055-scope-safety-regression.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v056-reference-discourse-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9e9ab274107cba2e232a5b577730a1738b9d9fdf",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v056-reference-discourse-regression.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v0561-fresh-heldout.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1110b40d03f5fb3634e4c08787b008601c291a62",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v0561-fresh-heldout.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3a-v0561-registry-reconciliation.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "452c6fe7b5083f98dfc09b564bb8a635e98b78ff",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3a-v0561-registry-reconciliation.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3b-v02-heldout.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "89c56e097db0c5811876d7022f50374a737e4df6",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3b-v02-heldout.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3b-v021-diagnostics.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "cf59dbbd189cc9ca3101d3c0e570cfd4793e4ebf",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3b-v021-diagnostics.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3b-v022-diagnostics.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ddff8454b61a3789391dd1ce1af99587a0ff7d22",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3b-v022-diagnostics.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s3b-v03-heldout.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2ed1d8309adc26868660486cb8b357f58518d7e7",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s3b-v03-heldout.yml",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s4-v01-fresh-first-run-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4cec645913e12cd1650282b0d8dd9b3902deb055",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s4-v01-fresh-first-run-regression.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s4-v01-truth-ledger-dev.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0764fecac867cc216260b1066c12bb6a037b3e3a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s4-v01-truth-ledger-dev.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s4-v011-fresh-preservation.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a6a29d51bd40082f6074a1a468065658acbefdb5",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s4-v011-fresh-preservation.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v01-benchmark-factory-dev.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "023b102eed419514a6b1726c8c61d0b2278b0bdd",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v01-benchmark-factory-dev.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v011-structural-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5a453ead6c6a821d077a39b5eb072fe28f8db943",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v011-structural-regression.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v02-fresh-boundary.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "61f68e29501149c6bdea91f038aae159bde54906",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v02-fresh-boundary.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v021-boundary-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "14844c6980e28165d3b0c64b6899905682fc903c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v021-boundary-regression.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v03-second-fresh-boundary.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "469d5fdd45019288d7ea44d2888c39a77fc0e4e2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v03-second-fresh-boundary.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v031-trust-root-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0cbec95f3d104418d447317fb13546795f361a15",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v031-trust-root-regression.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v04-third-fresh-policy-root.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "376eaf490f0ff69034b3117d59d0bfba3757b18c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v04-third-fresh-policy-root.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v041-policy-root-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4b833537ad8c968e690f475a0ed97d2f3ed68e61",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v041-policy-root-regression.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v05-fourth-fresh-authority-composition.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9efa194dbe257aae54a972285ebee9bffeb256fe",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v05-fourth-fresh-authority-composition.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v051-authority-composition-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "59c8e54883edeaa8db105c89dcba34d5a41129d8",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v051-authority-composition-regression.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v06-fresh-identity-toctou.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "212b1277d69cf4e56161728db2d32c66c9002df4",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v06-fresh-identity-toctou.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v061-identity-lineage-toctou-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "10454cc8ca706f03e76a593d56d440d3c1ce8db7",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v061-identity-lineage-toctou-regression.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v07-fresh-lineage-generalization-capture.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "96671ea88d98965c8de3edddbf8365cbb15050a8",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v07-fresh-lineage-generalization-capture.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v072-lineage-hybrid-regression.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "842d9abf40ca7403c056986840f55618e6a3adf3",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v072-lineage-hybrid-regression.yml",
+          "branch_set": "bs019"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v073-lineage-calibration.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a38cab0d963398b302035ea9b8973dd8e50e222a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v073-lineage-calibration.yml",
+          "branch_set": "bs020"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "53f1b9ae98ef82fe50ce48631f7c8cc8f9543d97",
+          "commit": "e95072efa3ec11b574831868cd5612339d5e81de",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/e95072efa3ec11b574831868cd5612339d5e81de/.github/workflows/s5-v073-lineage-calibration.yml",
+          "branch_set": "bs047"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v080-fresh-lineage.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "30d219952325b3c69b70fab65a2233c8eebaccd5",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v080-fresh-lineage.yml",
+          "branch_set": "bs020"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a2180cc0cd3829d561b507277e7a8cedce9ad6d4",
+          "commit": "2e3ca9db0702346b439c3388a985bdb2aaf7aa4f",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/2e3ca9db0702346b439c3388a985bdb2aaf7aa4f/.github/workflows/s5-v080-fresh-lineage.yml",
+          "branch_set": "bs016"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v081-multilingual-mosaic-repair.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "567e82af4db83755d860a6ee15db3babdeca84d7",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/.github/workflows/s5-v081-multilingual-mosaic-repair.yml",
+          "branch_set": "bs010"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d82d609b45010f618f0df126cc4ebf82c5853d21",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/.github/workflows/s5-v081-multilingual-mosaic-repair.yml",
+          "branch_set": "bs048"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ad5a512c7056d881081c87f04e56744c541de975",
+          "commit": "ffe040b0295e666f96e7dac7099fdb6e5fe8d720",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ffe040b0295e666f96e7dac7099fdb6e5fe8d720/.github/workflows/s5-v081-multilingual-mosaic-repair.yml",
+          "branch_set": "bs017"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v090-fresh-lineage.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "607c5178826d78d91e567b47c241031ce4e67d34",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/.github/workflows/s5-v090-fresh-lineage.yml",
+          "branch_set": "bs048"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v091-script-role-repair.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "86e67c2809331c7e62d432f44cc6594bf1b72e03",
+          "commit": "ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ded7de6f51b9d54cd4fb9a5f41bb4fd3bb7ce047/.github/workflows/s5-v091-script-role-repair.yml",
+          "branch_set": "bs009"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "326f5e7bf32b8cd182e4e35cac72eb0db32faaf2",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/.github/workflows/s5-v091-script-role-repair.yml",
+          "branch_set": "bs014"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "17734ef0ecefeb1170aab1a7c358ea5a35dc7351",
+          "commit": "31c94deded224d54a7e2f0e977ebe458e9b6c16e",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/31c94deded224d54a7e2f0e977ebe458e9b6c16e/.github/workflows/s5-v091-script-role-repair.yml",
+          "branch_set": "bs049"
+        },
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bbefbc5c3c2093955bdb2ba13cf1060f684afb9f",
+          "commit": "1c6af98774e5ab3c4bbd0667370011368224d5be",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/1c6af98774e5ab3c4bbd0667370011368224d5be/.github/workflows/s5-v091-script-role-repair.yml",
+          "branch_set": "bs018"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/s5-v100-fresh-lineage.yml",
+      "decision": "historical_ci",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f3c7e528e2ea6757f8921a35b6702ae40d954d20",
+          "commit": "3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/3dd4fe0eb367e4bb7c0d912d8ae6a891b68ebbda/.github/workflows/s5-v100-fresh-lineage.yml",
+          "branch_set": "bs014"
+        }
+      ]
+    }
+  ]
+}

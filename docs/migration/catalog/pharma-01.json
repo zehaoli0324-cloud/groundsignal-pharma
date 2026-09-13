@@ -1,0 +1,930 @@
+{
+  "schema": "source-catalog/v1",
+  "branch_sets": "../branch-sets.json",
+  "files": [
+    {
+      "path": "pharma/00-总目录.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8077f3e351cec7fc0bc9b6be7bb845eb388c6ef0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/00-%E6%80%BB%E7%9B%AE%E5%BD%95.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/传奇生物.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ede9c32e1ebda9c735ab6996d85b5af7b02ef187",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E4%BC%A0%E5%A5%87%E7%94%9F%E7%89%A9.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/信达生物.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4cd5450f640aa44e0d0aab6fddfedbb2fc78b658",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E4%BF%A1%E8%BE%BE%E7%94%9F%E7%89%A9.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/君实生物.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c24bc981b8fce16046a486f45a113f54c6b5b416",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E5%90%9B%E5%AE%9E%E7%94%9F%E7%89%A9.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/复星医药.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c92f8c00e487d3b7147528bffa9f150e08f87c5d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E5%A4%8D%E6%98%9F%E5%8C%BB%E8%8D%AF.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/强生.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fbd090c806f01e9ed10872785b14430784d7bc25",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E5%BC%BA%E7%94%9F.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/恒瑞医药.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e3b1d75c3bc900e16d74771a140ebfee7fc1d09a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E6%81%92%E7%91%9E%E5%8C%BB%E8%8D%AF.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/泰格医药.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "584d491979006cf816018e666118d08e814b8a2f",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E6%B3%B0%E6%A0%BC%E5%8C%BB%E8%8D%AF.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/百济神州.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "180ba2bfb4f50aa60487ee4d9fe4300f65263fcc",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E7%99%BE%E6%B5%8E%E7%A5%9E%E5%B7%9E.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/礼来.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "af42c5747b8eff3ed8ed0e8e57f9f937fa6e6d58",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E7%A4%BC%E6%9D%A5.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/药明康德.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7a01502e383ca43e934228122d7a39521d07ce27",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E8%8D%AF%E6%98%8E%E5%BA%B7%E5%BE%B7.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/药明生物.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "063390dfadead74e2261fd92f2969074502a3dda",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E8%8D%AF%E6%98%8E%E7%94%9F%E7%89%A9.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/诺和诺德.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2e0e72a004401e5403f7f39af2ff96ce64f375f1",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E8%AF%BA%E5%92%8C%E8%AF%BA%E5%BE%B7.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/01-实体/辉瑞.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "f39b9cc3df823efbd55dab99e0450af1f14c940f",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/01-%E5%AE%9E%E4%BD%93/%E8%BE%89%E7%91%9E.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/CDMO服务.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "85d676c18bd96513301d4032fbdbeed058847da0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/CDMO%E6%9C%8D%E5%8A%A1.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/CRO服务.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1f865210d328982735e203c485c7801b92abfccc",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/CRO%E6%9C%8D%E5%8A%A1.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/mRNA疫苗.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "48cdfbf60ade1282b41383610814b334cc7a231b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/mRNA%E7%96%AB%E8%8B%97.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/信迪利单抗.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c3198ce637bb787c4b14c776faf188f1e8b2d4fb",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/%E4%BF%A1%E8%BF%AA%E5%88%A9%E5%8D%95%E6%8A%97.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/卡瑞利珠单抗.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "29c793c605bad49e5dbc66bab0de25c4712d3059",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/%E5%8D%A1%E7%91%9E%E5%88%A9%E7%8F%A0%E5%8D%95%E6%8A%97.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/司美格鲁肽.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "014b3a9c9d1051470716fc2f23e39ea2b6191026",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/%E5%8F%B8%E7%BE%8E%E6%A0%BC%E9%B2%81%E8%82%BD.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/德曲妥珠单抗.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c80dc829d4151d3f01ff266f75dbc93fedd85606",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/%E5%BE%B7%E6%9B%B2%E5%A6%A5%E7%8F%A0%E5%8D%95%E6%8A%97.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/替尔泊肽.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "271f005fa4c1301b0fbe13fdfc48390192a8b7d1",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/%E6%9B%BF%E5%B0%94%E6%B3%8A%E8%82%BD.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/替雷利珠单抗.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e8a7ea1f43e427f9b2b8b371b242c6261572932a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/%E6%9B%BF%E9%9B%B7%E5%88%A9%E7%8F%A0%E5%8D%95%E6%8A%97.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/泽布替尼.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ffb43ded2280244357c5e3680f49b7b7bb581a4f",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/%E6%B3%BD%E5%B8%83%E6%9B%BF%E5%B0%BC.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/特瑞普利单抗.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e0e30dc3ae1392811f0ac4d972ff2c83b5ac02b7",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/%E7%89%B9%E7%91%9E%E6%99%AE%E5%88%A9%E5%8D%95%E6%8A%97.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/玛仕度肽.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "30a85fb7c6c1aae0934c68de337e7d078807a66a",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/%E7%8E%9B%E4%BB%95%E5%BA%A6%E8%82%BD.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/西达基奥仑赛.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b2814d68d49dc7ae70ef13d1f5717e38bcc80304",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/%E8%A5%BF%E8%BE%BE%E5%9F%BA%E5%A5%A5%E4%BB%91%E8%B5%9B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/02-产品/阿基仑赛.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4c43a9f6ba2e57d38a4e5f2cdf3873d2ec3c4223",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/02-%E4%BA%A7%E5%93%81/%E9%98%BF%E5%9F%BA%E4%BB%91%E8%B5%9B.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/03-靶点/BCMA.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "62a563e40ecfce60bd84f245f2316a4be2749bf4",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/03-%E9%9D%B6%E7%82%B9/BCMA.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/03-靶点/BTK.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3f75a2caae0f9f62b411da4818746be8d6e23c18",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/03-%E9%9D%B6%E7%82%B9/BTK.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/03-靶点/CD19.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2b5c3e2bed84739b78238730a1341427c8341b3f",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/03-%E9%9D%B6%E7%82%B9/CD19.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/03-靶点/GCGR.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1e3254dc464d5809f8e886630152e1e59221ff40",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/03-%E9%9D%B6%E7%82%B9/GCGR.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/03-靶点/GIPR.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7c98e97e7ea9be76162821b0231e81202f216ba0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/03-%E9%9D%B6%E7%82%B9/GIPR.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/03-靶点/GLP-1R.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1ff7fed69c7be639b6d5b9b85439caf18dd89764",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/03-%E9%9D%B6%E7%82%B9/GLP-1R.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/03-靶点/HER2.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a2f3d22405bdfb54722927b5124df94f214835da",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/03-%E9%9D%B6%E7%82%B9/HER2.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/03-靶点/PD-1.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "13852b866208d6d1bc0c08a70e35ad8e9e9c3490",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/03-%E9%9D%B6%E7%82%B9/PD-1.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/04-事件/2019-08-22-信达礼来玛仕度肽授权.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "09eae873b4883d9ee98fe4b337f3d69b15eab1e7",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/04-%E4%BA%8B%E4%BB%B6/2019-08-22-%E4%BF%A1%E8%BE%BE%E7%A4%BC%E6%9D%A5%E7%8E%9B%E4%BB%95%E5%BA%A6%E8%82%BD%E6%8E%88%E6%9D%83.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/04-事件/2019-11-14-泽布替尼FDA获批.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8ea2e3cd907d7280d68742632f35e2234796b8d0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/04-%E4%BA%8B%E4%BB%B6/2019-11-14-%E6%B3%BD%E5%B8%83%E6%9B%BF%E5%B0%BCFDA%E8%8E%B7%E6%89%B9.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/04-事件/2021-06-22-奕凯达中国获批.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "156bd31d1dccfd695579f1a20c1b78012d856a7b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/04-%E4%BA%8B%E4%BB%B6/2021-06-22-%E5%A5%95%E5%87%AF%E8%BE%BE%E4%B8%AD%E5%9B%BD%E8%8E%B7%E6%89%B9.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/04-事件/2022-02-28-Carvykti获批末线骨髓瘤.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fb76cd213507800e6168878e8b4cf1ae19839c16",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/04-%E4%BA%8B%E4%BB%B6/2022-02-28-Carvykti%E8%8E%B7%E6%89%B9%E6%9C%AB%E7%BA%BF%E9%AA%A8%E9%AB%93%E7%98%A4.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/04-事件/2022-05-13-礼来Mounjaro获批糖尿病.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3e7655315b024622b7fd118dbce8a624c52c98c5",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/04-%E4%BA%8B%E4%BB%B6/2022-05-13-%E7%A4%BC%E6%9D%A5Mounjaro%E8%8E%B7%E6%89%B9%E7%B3%96%E5%B0%BF%E7%97%85.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/04-事件/2023-10-27-特瑞普利单抗FDA获批.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b998dac1d78487abcc8221a4c6953d2d4e8fe925",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/04-%E4%BA%8B%E4%BB%B6/2023-10-27-%E7%89%B9%E7%91%9E%E6%99%AE%E5%88%A9%E5%8D%95%E6%8A%97FDA%E8%8E%B7%E6%89%B9.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/04-事件/2023-11-08-礼来Zepbound获批减重.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1514829eaa530c674d38b03f98bb2d8d9b527ce2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/04-%E4%BA%8B%E4%BB%B6/2023-11-08-%E7%A4%BC%E6%9D%A5Zepbound%E8%8E%B7%E6%89%B9%E5%87%8F%E9%87%8D.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/04-事件/2024-03-13-替雷利珠单抗FDA获批.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7f017bea7a9b3a91b486898c462304e3c210164c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/04-%E4%BA%8B%E4%BB%B6/2024-03-13-%E6%9B%BF%E9%9B%B7%E5%88%A9%E7%8F%A0%E5%8D%95%E6%8A%97FDA%E8%8E%B7%E6%89%B9.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/04-事件/2024-04-05-Carvykti获批二线骨髓瘤.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e292dc5943f17fbf5b002122c2ce4a7dd3a54086",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/04-%E4%BA%8B%E4%BB%B6/2024-04-05-Carvykti%E8%8E%B7%E6%89%B9%E4%BA%8C%E7%BA%BF%E9%AA%A8%E9%AB%93%E7%98%A4.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/04-事件/2024-06-司美格鲁肽减重中国获批.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "570aa61131890269a8c0c04f845745acdda73389",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/04-%E4%BA%8B%E4%BB%B6/2024-06-%E5%8F%B8%E7%BE%8E%E6%A0%BC%E9%B2%81%E8%82%BD%E5%87%8F%E9%87%8D%E4%B8%AD%E5%9B%BD%E8%8E%B7%E6%89%B9.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/04-事件/2025-06-27-玛仕度肽获批减重.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "eccf8ca0d803b4073a8781bd4ad670bbf8dcf769",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/04-%E4%BA%8B%E4%BB%B6/2025-06-27-%E7%8E%9B%E4%BB%95%E5%BA%A6%E8%82%BD%E8%8E%B7%E6%89%B9%E5%87%8F%E9%87%8D.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/04-事件/2025-09-19-玛仕度肽获批糖尿病.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "18b98736ecb54d2b99e387553e9fc522a943e7b0",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/04-%E4%BA%8B%E4%BB%B6/2025-09-19-%E7%8E%9B%E4%BB%95%E5%BA%A6%E8%82%BD%E8%8E%B7%E6%89%B9%E7%B3%96%E5%B0%BF%E7%97%85.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/05-证据审计/claim-audit.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "60d4e7e6d2ed56bf900fe7b5a67931595ca210a5",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/05-%E8%AF%81%E6%8D%AE%E5%AE%A1%E8%AE%A1/claim-audit.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/05-证据审计/evidence-audit.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0d52d3fe2981332f451562df6471212ea0e8efa3",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/05-%E8%AF%81%E6%8D%AE%E5%AE%A1%E8%AE%A1/evidence-audit.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/06-产能追踪/CAR-T-产能.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d4e90bef464d048e4cfebf731f7ac464603345f5",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/06-%E4%BA%A7%E8%83%BD%E8%BF%BD%E8%B8%AA/CAR-T-%E4%BA%A7%E8%83%BD.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/06-产能追踪/GLP-1-API-产能.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "976b0d40894a5ecd289574f96cd1e40ddb23142c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/06-%E4%BA%A7%E8%83%BD%E8%BF%BD%E8%B8%AA/GLP-1-API-%E4%BA%A7%E8%83%BD.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/08-智能发现/2026-08-27-玛仕度肽-交叉关系发现.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0ec8ce35930b58f6662c49632ccf06f2d8754ad8",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/08-%E6%99%BA%E8%83%BD%E5%8F%91%E7%8E%B0/2026-08-27-%E7%8E%9B%E4%BB%95%E5%BA%A6%E8%82%BD-%E4%BA%A4%E5%8F%89%E5%85%B3%E7%B3%BB%E5%8F%91%E7%8E%B0.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/_模板/entity.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "40a28f23ba85b0c7444af4f8a97ecd8dcb170da3",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/_%E6%A8%A1%E6%9D%BF/entity.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/_模板/event.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7b53eec4b007e2aa19125291a7daac792f954703",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/_%E6%A8%A1%E6%9D%BF/event.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/_模板/product.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "91128d67e69ebe90f784cd0c3d96acb766da97e2",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/_%E6%A8%A1%E6%9D%BF/product.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/_模板/target.md",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5c863581f0938371643f4d783918f69ae23f0b3c",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/_%E6%A8%A1%E6%9D%BF/target.md",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/scripts/ask.py",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a982e1b605c0aa814da6e7dbf82077228f17769d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/scripts/ask.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/scripts/claim-audit.py",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fbf60efdcd4d309400f9f4b680bf39719fb83345",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/scripts/claim-audit.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/scripts/cross-entity-scan.py",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "39e58235c259e26a658f4b4bbe819ca7bf3d107b",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/scripts/cross-entity-scan.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/scripts/evidence-audit.py",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d98d68343f323bf61c4aa10039bd20dd81115cf1",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/scripts/evidence-audit.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/scripts/fix_target_sources.py",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "83109e228abefd2ee90d2e8d0c6fe9522eaa8197",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/scripts/fix_target_sources.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/scripts/import-helper.py",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0e8d8a91b71fb803669f2120910048254c49b148",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/scripts/import-helper.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/scripts/ingest.py",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "6d3d9e978e30f267a7597c63628d8237a3dcc75d",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/scripts/ingest.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/scripts/panorama.py",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4529018187de0e019d98582f174d8b130340c614",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/scripts/panorama.py",
+          "branch_set": "bs001"
+        }
+      ]
+    },
+    {
+      "path": "pharma/scripts/watchlist.py",
+      "decision": "historical_reference",
+      "versions": [
+        {
+          "mode": "100644",
+          "type": "blob",
+          "blob": "901335d7d853bb832adb204ef69475ebc4823ebb",
+          "commit": "ef204204667a6c662ac03763c9d6747716179524",
+          "url": "https://github.com/zehaoli0324-cloud/groundsignal-pharma/blob/ef204204667a6c662ac03763c9d6747716179524/pharma/scripts/watchlist.py",
+          "branch_set": "bs001"
+        }
+      ]
+    }
+  ]
+}
