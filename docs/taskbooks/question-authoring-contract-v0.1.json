@@ -1,0 +1,652 @@
+{
+  "schema": "hermes-question-authoring-contract/v0.1",
+  "document": "docs/taskbooks/question-authoring-hermes-v0.1.md",
+  "purpose": "planning_and_seed_catalog_only",
+  "clinical_approval": false,
+  "complete_question_set_claimed": false,
+  "task_order": [
+    "H00",
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H10",
+    "H12",
+    "H07",
+    "H08",
+    "H09",
+    "H11",
+    "H13",
+    "H14",
+    "H15",
+    "H21"
+  ],
+  "decision_steps": [
+    {
+      "decision_step_id": "D01",
+      "title": "对象、意图与当前阶段",
+      "observable_failure_seed": "把代问者当患者；没有确认当前是在求解释还是执行建议",
+      "hypothesis_seeds": [
+        {
+          "candidate_id": "D01-STRATEGY",
+          "layer": "STRATEGY",
+          "hypothesis": "未确认对象就套用默认流程",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D01-ALGORITHM",
+          "layer": "ALGORITHM",
+          "hypothesis": "对象/意图分类或路由错误",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D01-ENGINEERING",
+          "layer": "ENGINEERING",
+          "hypothesis": "会话角色、患者 ID 或阶段字段错配",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        }
+      ],
+      "status": "DESIGN_SEED_NOT_CONFIRMED_MODEL_DEFECT"
+    },
+    {
+      "decision_step_id": "D02",
+      "title": "事实提取与结构化",
+      "observable_failure_seed": "漏掉症状、时间、药物或数值条件",
+      "hypothesis_seeds": [
+        {
+          "candidate_id": "D02-STRATEGY",
+          "layer": "STRATEGY",
+          "hypothesis": "过早摘要并丢弃关键细节",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D02-ALGORITHM",
+          "layer": "ALGORITHM",
+          "hypothesis": "实体、单位、时间关系解析错误",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D02-ENGINEERING",
+          "layer": "ENGINEERING",
+          "hypothesis": "消息截断、字段映射或输入丢失",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        }
+      ],
+      "status": "DESIGN_SEED_NOT_CONFIRMED_MODEL_DEFECT"
+    },
+    {
+      "decision_step_id": "D03",
+      "title": "否定、未知、猜测与更正",
+      "observable_failure_seed": "把“不知道”当“没有”；把患者猜测当事实",
+      "hypothesis_seeds": [
+        {
+          "candidate_id": "D03-STRATEGY",
+          "layer": "STRATEGY",
+          "hypothesis": "默认补齐缺失条件",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D03-ALGORITHM",
+          "layer": "ALGORITHM",
+          "hypothesis": "否定范围、模态或指代解析错误",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D03-ENGINEERING",
+          "layer": "ENGINEERING",
+          "hypothesis": "null 被默认值覆盖，否定/更正标记未传递",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        }
+      ],
+      "status": "DESIGN_SEED_NOT_CONFIRMED_MODEL_DEFECT"
+    },
+    {
+      "decision_step_id": "D04",
+      "title": "来源与证据适用性",
+      "observable_failure_seed": "混淆来源，或不论情境一律服从某类来源",
+      "hypothesis_seeds": [
+        {
+          "candidate_id": "D04-STRATEGY",
+          "layer": "STRATEGY",
+          "hypothesis": "按权威标签代替证据核验",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D04-ALGORITHM",
+          "layer": "ALGORITHM",
+          "hypothesis": "来源可信度、时效或权重计算不当",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D04-ENGINEERING",
+          "layer": "ENGINEERING",
+          "hypothesis": "证据 ID 关联错误，引用或来源元数据丢失",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        }
+      ],
+      "status": "DESIGN_SEED_NOT_CONFIRMED_MODEL_DEFECT"
+    },
+    {
+      "decision_step_id": "D05",
+      "title": "缺失信息与追问选择",
+      "observable_failure_seed": "漏必要追问或反复问无关信息",
+      "hypothesis_seeds": [
+        {
+          "candidate_id": "D05-STRATEGY",
+          "layer": "STRATEGY",
+          "hypothesis": "先问全表再处理当前风险",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D05-ALGORITHM",
+          "layer": "ALGORITHM",
+          "hypothesis": "问题价值排序、重复检测或停止阈值不当",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D05-ENGINEERING",
+          "layer": "ENGINEERING",
+          "hypothesis": "已问/已答状态未保存，问答匹配漏失",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        }
+      ],
+      "status": "DESIGN_SEED_NOT_CONFIRMED_MODEL_DEFECT"
+    },
+    {
+      "decision_step_id": "D06",
+      "title": "竞争解释与因果判断",
+      "observable_failure_seed": "过早锁定；将先后发生说成因果",
+      "hypothesis_seeds": [
+        {
+          "candidate_id": "D06-STRATEGY",
+          "layer": "STRATEGY",
+          "hypothesis": "偏好单一解释，不寻找能推翻它的信息",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D06-ALGORITHM",
+          "layer": "ALGORITHM",
+          "hypothesis": "候选排序、因果比较或不确定性估计不当",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D06-ENGINEERING",
+          "layer": "ENGINEERING",
+          "hypothesis": "候选列表、比较输入或工具证据漏传",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        }
+      ],
+      "status": "DESIGN_SEED_NOT_CONFIRMED_MODEL_DEFECT"
+    },
+    {
+      "decision_step_id": "D07",
+      "title": "新旧证据整合与更新",
+      "observable_failure_seed": "承认新信息却继续依据旧条件给建议",
+      "hypothesis_seeds": [
+        {
+          "candidate_id": "D07-STRATEGY",
+          "layer": "STRATEGY",
+          "hypothesis": "为了保持一致而拒绝合理修正",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D07-ALGORITHM",
+          "layer": "ALGORITHM",
+          "hypothesis": "旧证据权重过高或更新机制失效",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D07-ENGINEERING",
+          "layer": "ENGINEERING",
+          "hypothesis": "仍读取旧状态、旧风险值或缓存",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        }
+      ],
+      "status": "DESIGN_SEED_NOT_CONFIRMED_MODEL_DEFECT"
+    },
+    {
+      "decision_step_id": "D08",
+      "title": "风险分层与行动时机",
+      "observable_failure_seed": "风险升级不足、过度升级或错过行动机会",
+      "hypothesis_seeds": [
+        {
+          "candidate_id": "D08-STRATEGY",
+          "layer": "STRATEGY",
+          "hypothesis": "一律安慰或一律升级",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D08-ALGORITHM",
+          "layer": "ALGORITHM",
+          "hypothesis": "风险映射、阈值或时限计算不当",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D08-ENGINEERING",
+          "layer": "ENGINEERING",
+          "hypothesis": "时间单位/时区/状态时钟错误或行动触发器未执行",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        }
+      ],
+      "status": "DESIGN_SEED_NOT_CONFIRMED_MODEL_DEFECT"
+    },
+    {
+      "decision_step_id": "D09",
+      "title": "处置选择与升级路径",
+      "observable_failure_seed": "建议和已识别风险不一致；安排不可执行",
+      "hypothesis_seeds": [
+        {
+          "candidate_id": "D09-STRATEGY",
+          "layer": "STRATEGY",
+          "hypothesis": "迎合患者偏好而撤回必要行动",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D09-ALGORITHM",
+          "layer": "ALGORITHM",
+          "hypothesis": "行动排序、约束满足或资源匹配不当",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D09-ENGINEERING",
+          "layer": "ENGINEERING",
+          "hypothesis": "处置模板取错、工具调用失败却标成功",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        }
+      ],
+      "status": "DESIGN_SEED_NOT_CONFIRMED_MODEL_DEFECT"
+    },
+    {
+      "decision_step_id": "D10",
+      "title": "医嘱理解与执行支持",
+      "observable_failure_seed": "遗漏条件、错误转述，或自行补成新的治疗安排",
+      "hypothesis_seeds": [
+        {
+          "candidate_id": "D10-STRATEGY",
+          "layer": "STRATEGY",
+          "hypothesis": "以通用建议替代核对原医嘱和理解",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D10-ALGORITHM",
+          "layer": "ALGORITHM",
+          "hypothesis": "条件、频率、适用范围或任务拆解错误",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D10-ENGINEERING",
+          "layer": "ENGINEERING",
+          "hypothesis": "版本陈旧、单位转换、转录或报告绑定错误",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        }
+      ],
+      "status": "DESIGN_SEED_NOT_CONFIRMED_MODEL_DEFECT"
+    },
+    {
+      "decision_step_id": "D11",
+      "title": "执行反馈、工具与交接",
+      "observable_failure_seed": "忽视障碍；未确认执行结果；交接丢关键信息",
+      "hypothesis_seeds": [
+        {
+          "candidate_id": "D11-STRATEGY",
+          "layer": "STRATEGY",
+          "hypothesis": "发出建议即视为问题解决",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D11-ALGORITHM",
+          "layer": "ALGORITHM",
+          "hypothesis": "依赖调度、重试或升级选择不当",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D11-ENGINEERING",
+          "layer": "ENGINEERING",
+          "hypothesis": "请求未送达、失败状态遗漏、重复操作或串病例",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        }
+      ],
+      "status": "DESIGN_SEED_NOT_CONFIRMED_MODEL_DEFECT"
+    },
+    {
+      "decision_step_id": "D12",
+      "title": "纵向随访、复发与合理结束",
+      "observable_failure_seed": "套用旧发作；遗漏变化；错误结束或无休止追问",
+      "hypothesis_seeds": [
+        {
+          "candidate_id": "D12-STRATEGY",
+          "layer": "STRATEGY",
+          "hypothesis": "把过去有效当作本次必然有效",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D12-ALGORITHM",
+          "layer": "ALGORITHM",
+          "hypothesis": "纵向事件对齐、变化检测或终止判断不当",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        },
+        {
+          "candidate_id": "D12-ENGINEERING",
+          "layer": "ENGINEERING",
+          "hypothesis": "不同发作被合并、历史窗口丢失或状态未清理",
+          "diagnosis_status": "UNRESOLVED",
+          "evidence": null
+        }
+      ],
+      "status": "DESIGN_SEED_NOT_CONFIRMED_MODEL_DEFECT"
+    }
+  ],
+  "patient_stages": [
+    {
+      "stage_id": "J01",
+      "title": "看病前首次症状咨询",
+      "priority_decision_step_ids": [
+        "D01",
+        "D02",
+        "D03",
+        "D05",
+        "D06",
+        "D08"
+      ],
+      "focus": "信息不足、关键追问、过早安心/诊断",
+      "batch": "首批优先",
+      "scope": "non_exclusive_seed_mapping_requires_review"
+    },
+    {
+      "stage_id": "J02",
+      "title": "就医决策与分诊",
+      "priority_decision_step_ids": [
+        "D05",
+        "D08",
+        "D09",
+        "D11"
+      ],
+      "focus": "行动时机、就医升级、过度分诊与执行障碍",
+      "batch": "首批优先",
+      "scope": "non_exclusive_seed_mapping_requires_review"
+    },
+    {
+      "stage_id": "J03",
+      "title": "检查与报告解释",
+      "priority_decision_step_ids": [
+        "D02",
+        "D03",
+        "D04",
+        "D06",
+        "D07"
+      ],
+      "focus": "单位/参考条件、跨报告比较、证据冲突",
+      "batch": "先登记场景；M3 扩展",
+      "scope": "non_exclusive_seed_mapping_requires_review"
+    },
+    {
+      "stage_id": "J04",
+      "title": "医嘱理解与核验",
+      "priority_decision_step_ids": [
+        "D01",
+        "D03",
+        "D04",
+        "D07",
+        "D10"
+      ],
+      "focus": "条件遗漏、错误转述、原医嘱版本与新事实冲突",
+      "batch": "先登记场景；M3 扩展",
+      "scope": "non_exclusive_seed_mapping_requires_review"
+    },
+    {
+      "stage_id": "J05",
+      "title": "治疗与用药执行",
+      "priority_decision_step_ids": [
+        "D03",
+        "D05",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "focus": "信息不全仍补具体安排、执行困难、重复或错误落实",
+      "batch": "先登记场景；M3 扩展",
+      "scope": "non_exclusive_seed_mapping_requires_review"
+    },
+    {
+      "stage_id": "J06",
+      "title": "用药后效果或不适咨询",
+      "priority_decision_step_ids": [
+        "D02",
+        "D04",
+        "D06",
+        "D07",
+        "D08",
+        "D12"
+      ],
+      "focus": "效果解释、时间与因果混淆、变化后是否重评",
+      "batch": "先登记场景；M3 扩展",
+      "scope": "non_exclusive_seed_mapping_requires_review"
+    },
+    {
+      "stage_id": "J07",
+      "title": "治疗无效或病情恶化",
+      "priority_decision_step_ids": [
+        "D04",
+        "D05",
+        "D07",
+        "D08",
+        "D09",
+        "D12"
+      ],
+      "focus": "固守旧判断、忽略新证据、升级不足",
+      "batch": "先登记场景；M3 扩展",
+      "scope": "non_exclusive_seed_mapping_requires_review"
+    },
+    {
+      "stage_id": "J08",
+      "title": "复发与长期随访",
+      "priority_decision_step_ids": [
+        "D01",
+        "D03",
+        "D04",
+        "D07",
+        "D08",
+        "D12"
+      ],
+      "focus": "旧诊断套用、不同发作混淆、纵向状态与合理结束",
+      "batch": "先登记场景；M3 扩展",
+      "scope": "non_exclusive_seed_mapping_requires_review"
+    }
+  ],
+  "products": [
+    {
+      "id": "decision_error_map",
+      "path": "evaluation/question-design/decision-error-map.json",
+      "required_fields": [
+        "decision_step_id",
+        "input_contract",
+        "observable_outputs",
+        "candidate_error_ids",
+        "incoming_transitions",
+        "outgoing_transitions",
+        "handoff_checks",
+        "scope",
+        "review_status"
+      ],
+      "status": "TO_BE_AUTHORED"
+    },
+    {
+      "id": "journey_coverage",
+      "path": "evaluation/question-design/journey-coverage.json",
+      "required_fields": [
+        "stage_id",
+        "decision_step_id",
+        "error_id",
+        "applicability",
+        "applicability_reason",
+        "review_status",
+        "priority",
+        "planned_batch",
+        "scenario_ids",
+        "hypothesis_ids",
+        "experiment_ids",
+        "pressure_condition_ids",
+        "materialization_status",
+        "clinical_status",
+        "engineering_status",
+        "independent_scoring_status",
+        "owner",
+        "blocker",
+        "evidence_refs"
+      ],
+      "status": "TO_BE_AUTHORED"
+    },
+    {
+      "id": "scenario_cards",
+      "path": "benchmark/stroke-reference-v0.1/scenarios.json",
+      "required_fields": [
+        "scenario_id",
+        "family_id",
+        "case_id",
+        "stage_ids",
+        "decision_step_ids",
+        "target_error_ids",
+        "hypothesis_ids",
+        "world_fact_ids",
+        "patient_known_fact_ids",
+        "initial_visible_fact_ids",
+        "unknown_fact_ids",
+        "source_ids",
+        "dialogue_node_ids",
+        "transition_ids",
+        "allowed_actions",
+        "forbidden_actions",
+        "deadline_spec",
+        "oracle_version",
+        "clinical_status",
+        "environment_invalid_conditions",
+        "provenance",
+        "exposure"
+      ],
+      "status": "TO_BE_AUTHORED"
+    },
+    {
+      "id": "experiment_groups",
+      "path": "benchmark/stroke-reference-v0.1/control-matrix.json",
+      "required_fields": [
+        "experiment_id",
+        "hypothesis_id",
+        "scenario_ids",
+        "target_error_ids",
+        "comparison",
+        "group_ids",
+        "manipulated_variables",
+        "invariants",
+        "matching_checks",
+        "expected_decision_relation",
+        "outcomes",
+        "rival_explanations",
+        "falsification_conditions",
+        "not_identifiable_conditions",
+        "assignment_rule",
+        "analysis_unit",
+        "review_status"
+      ],
+      "status": "TO_BE_AUTHORED"
+    },
+    {
+      "id": "pressure_ladder",
+      "path": "benchmark/stroke-reference-v0.1/pressure-axes.json",
+      "required_fields": [
+        "axis_id",
+        "experiment_ids",
+        "level_id",
+        "operational_definition",
+        "change_from_baseline",
+        "manipulation_budget",
+        "fact_diff",
+        "text_length",
+        "language_complexity",
+        "disclosure_opportunities",
+        "allowed_action_set",
+        "answerability",
+        "clinical_review",
+        "order_basis",
+        "invalid_conditions",
+        "pre_registered_version"
+      ],
+      "status": "TO_BE_AUTHORED"
+    }
+  ],
+  "invariant_rules": [
+    "No author labels in applicability generation",
+    "No future facts in earlier windows",
+    "Separate observed failure from causal hypothesis",
+    "Separate evaluator faults from target-system faults",
+    "Do not count variants or repeat runs as independent clinical cases",
+    "Clinical applicability reviewed before independent A/B scoring"
+  ],
+  "first_batch": {
+    "reference_family": "stroke_related_patient_consultation",
+    "priority_stage_ids": [
+      "J01",
+      "J02"
+    ],
+    "suggested_hypotheses": [
+      2,
+      3
+    ],
+    "suggested_pressure_axes": [
+      1,
+      2
+    ],
+    "levels": [
+      "L0",
+      "L1",
+      "L2",
+      "L3"
+    ],
+    "rule": "Choose valid controls and actual instance count from hypothesis requirements; this is not an executed batch"
+  },
+  "checklist_checks": [
+    "Every declared decision step has reviewed node and handoff entries",
+    "All eight patient stages have mapping, scope and explicit gaps",
+    "Every selected hypothesis links scenario, oracle, comparator and pressure conditions",
+    "All instantiated groups preserve declared invariants or have reviewed action-set changes",
+    "Every selected pressure level has operational definitions and answerability review",
+    "Every public score uses actual observation and keeps unassessed/invalid separate",
+    "Independent reviews and actual replay evidence are required for release claims"
+  ]
+}

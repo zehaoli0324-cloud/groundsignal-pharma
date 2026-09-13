@@ -31,10 +31,11 @@
         "H00"
       ],
       "planned_outputs": [
-        "benchmark/stroke-reference-v0.1/scope.md"
+        "benchmark/stroke-reference-v0.1/scope.md",
+        "evaluation/question-design/patient-stages.json"
       ],
-      "action": "以急性脑卒中相关患者咨询为主试点，定义患者服务对象、地区、首个临床问题和场景边界。第一轮优先首次症状咨询/分诊；绘出二次核验、治疗后变化的后续接口，避免第一轮同时实现所有旅程。",
-      "acceptance": "目标是安全决策与证据更新，不是猜中病名。明确纳入/排除范围、合理替代解释及较低风险对照的需求；后两类旅程明确归 M3。",
+      "action": "先声明完整患者旅程范围：J01 首次症状咨询、J02 就医决策/分诊、J03 检查报告、J04 医嘱理解、J05 治疗/用药执行、J06 用药后效果/不适、J07 无效/恶化、J08 复发/随访。首批以急性脑卒中相关咨询的 J01/J02 为主；明确地区、人群和首试临床问题，其他阶段先登记场景需求与批次。",
+      "acceptance": "总地图覆盖八类阶段，不声称每类题目已实现；阶段与错误多对多。医嘱、执行、疗效、恶化与复发分别登记。首批不将不合临床事实的阶段硬塞进一个脑卒中病例；AP07 保留方法参考。",
       "external_evidence_required": [],
       "status": "TODO",
       "execution_evidence": null,
@@ -43,16 +44,17 @@
     {
       "id": "H02",
       "milestone": "M0",
-      "title": "画决策链并定义可观察节点",
+      "title": "建立决策功能与节点交接地图",
       "depends_on": [
         "H01"
       ],
       "planned_outputs": [
         "benchmark/stroke-reference-v0.1/decision-chain.md",
-        "benchmark/stroke-reference-v0.1/nodes-draft.json"
+        "benchmark/stroke-reference-v0.1/nodes-draft.json",
+        "evaluation/question-design/decision-error-map.json"
       ],
-      "action": "覆盖识别问题、提取事实、肯定/否定/不确定/猜测、来源可靠性、信息缺失、追问、竞争解释、更新、风险分层、处置、升级与持续修正。为每环定义输入、公开行为、允许转换与证据记录。",
-      "acceptance": "节点由事实与行动条件触发，不强制固定轮次或必经顺序；允许跳过、重叠和合理结束。只评价可观察行为，不把模型自述推理当作内部机制真相。",
+      "action": "按出题专用清单的 D01–D12 建立全局决策功能地图，补每个节点的输入、可观察输出、条件转换及节点间交接。重点查“上一节点识别正确、下一节点未使用”的信息或状态丢失。再把脑卒中场景的对话状态映射到这些功能节点。",
+      "acceptance": "decision_step_id 表示决策功能，dialogue_node_id 表示场景中的可见信息窗口/状态，两者不混用。覆盖对象、事实、否定/未知、来源、追问、解释、更新、风险、处置、医嘱、执行与随访；允许跳过、重叠、循环，未覆盖处有理由。",
       "external_evidence_required": [],
       "status": "TODO",
       "execution_evidence": null,
@@ -79,16 +81,18 @@
     {
       "id": "H04",
       "milestone": "M0",
-      "title": "建立可复核的失败分类 v0.1",
+      "title": "建立分层错误目录与患者阶段覆盖矩阵",
       "depends_on": [
+        "H01",
         "H02"
       ],
       "planned_outputs": [
         "evaluation/taxonomy-v0.1.json",
-        "evaluation/taxonomy-examples.md"
+        "evaluation/taxonomy-examples.md",
+        "evaluation/question-design/journey-coverage.json"
       ],
-      "action": "将失败类型挂到决策环节，分别记录观察到的行为、潜在临床后果和策略/算法/工程归因假设。每类给定义、正例、反例、边界、证据要求和可能重叠类别。",
-      "acceptance": "允许多标签和 UNRESOLVED；不能仅凭一个错误处置就认定风险阈值算法出错。独立评分一致性与分类改版进入 H36。",
+      "action": "为 D01–D12 及其交接分别提炼可观察错误和策略/算法/工程原因假设，给正反例、边界、识别实验与反证。填 J01–J08×决策节点×错误的多对多覆盖矩阵，为适用组合绑定候选场景、优先级、批次与责任主体。",
+      "acceptance": "逐节点审阅三层原因，不为凑三类伪造归因；可标不适用或 UNRESOLVED 并说明。工程责任区分被测系统、患者模拟器、调用服务和评分器。覆盖矩阵分开可适用性、题目制作、临床审核、工程验证、独立评分；“已规划”不能算“已测到”。",
       "external_evidence_required": [],
       "status": "TODO",
       "execution_evidence": null,
@@ -107,8 +111,8 @@
         "benchmark/stroke-reference-v0.1/hypotheses.json",
         "docs/clinical-benchmark/claims-register.md"
       ],
-      "action": "从决策链选少量可检验假设，建议第一轮优先 2–3 个，不机械穷举。每个主张写目标行为、观测量、预期方向、至少三个竞争解释、可推翻条件、对照和结论允许范围。",
-      "acceptance": "登记发生在看真实模型结果之前；“错误随压力增加”只是假设。长度、语言复杂度、证据充分性、模拟器漏匹配和裁判偏差均有排查位置；阴性结果同样可报告。",
+      "action": "从已映射的患者阶段、决策节点与错误候选中选择首批 2–3 个失败假设，绑定具体场景与可观察变量。每个主张写原因假设、至少三个竞争解释、可推翻条件、对照需求和结论允许范围；明确哪些只能观察行为而不能确认内部算法。",
+      "acceptance": "选择理由来自患者风险、可观测性、可回答性和对照可行性；不是预先断定模型有缺陷。长文本、语言复杂度、证据不足、模拟器与裁判偏差有排查位置。低风险对照与合理替代行为有计划，阴性结果可交付。",
       "external_evidence_required": [],
       "status": "TODO",
       "execution_evidence": null,
@@ -136,17 +140,19 @@
     {
       "id": "H07",
       "milestone": "M0",
-      "title": "建立实验网络与标识体系",
+      "title": "将场景、假设与实验连成可追溯网络",
       "depends_on": [
         "H02",
         "H05",
-        "H06"
+        "H06",
+        "H10",
+        "H12"
       ],
       "planned_outputs": [
         "benchmark/stroke-reference-v0.1/experiment-network.json"
       ],
-      "action": "实现“决策链→错误类型→假设→实验族→对照实验→实例→节点→重复运行”的关联。给完整版、信息不足版、反事实分叉、无关信息、表述扰动与共享早期表现的不同结局各自明确角色。",
-      "acceptance": "ID、父关系和版本可检验；分叉前患者可见信息完全一致；独立实例不能共享模型上下文。报告能分开病例族数、实例数、运行数，避免虚增规模。",
+      "action": "以 H10 已写好的基线场景和 H12 节点判据草稿为输入，建立决策功能→错误/原因假设→患者阶段→场景→实验族→对照→实例→对话窗口→重复运行的关联。可见事实与评分机会可沿任一实例追溯，角色相同的实例可复用但不重复计数。",
+      "acceptance": "无孤立题卡、无无法定位的目标错误、无靠作者预期决定适用项的映射。区分 D 决策功能与临床对话状态。为每个选定假设绑定基线、目标条件与排除竞争解释的组，不先造大量题再贴错误标签。",
       "external_evidence_required": [],
       "status": "TODO",
       "execution_evidence": null,
@@ -155,15 +161,17 @@
     {
       "id": "H08",
       "milestone": "M0",
-      "title": "设计能排除混杂的配对对照",
+      "title": "按目标错误设计实验分组与比较",
       "depends_on": [
-        "H07"
+        "H07",
+        "H10",
+        "H12"
       ],
       "planned_outputs": [
         "benchmark/stroke-reference-v0.1/control-matrix.json"
       ],
-      "action": "为无关信息设计原病例、医学无关追加、等长度相关追加、等长度中性追加四组；为既往意见设计无意见/正确/错误/不确定对照。补事实不变表述扰动和只改关键临床条件的配对。",
-      "acceptance": "写明每个对比实际估计什么。相关信息追加可能改变证据量，不能自动成为纯长度对照；中性信息也需验证。匹配长度、可读性、有效事实和披露机会，残余混杂进入报告。",
+      "action": "逐假设填写实验分组合同：比较目标、操纵变量、不变条件、预期处置应变/不变关系、观测量、统计单位和不可识别情况。按需要使用单因素、关键条件配对、来源/意见、更新/不更新、披露路径和工程故障对照；不能给每题机械套同一分组。",
+      "acceptance": "明确每个对比能支持什么结论及至少三个竞争解释怎样排除。长度/语言/证据量匹配有记录；“相关追加”不自动等于纯长度对照。工程故障与临床内容改变分开；未知事实未发送时不能把模型没使用它当能力错误。",
       "external_evidence_required": [],
       "status": "TODO",
       "execution_evidence": null,
@@ -172,17 +180,22 @@
     {
       "id": "H09",
       "milestone": "M0",
-      "title": "操作化 L0–L3 压力梯度",
+      "title": "生成 L0–L3 压力实例并核对可回答性",
       "depends_on": [
         "H07",
-        "H08"
+        "H08",
+        "H10",
+        "H12"
       ],
       "planned_outputs": [
         "benchmark/stroke-reference-v0.1/pressure-axes.json",
-        "benchmark/stroke-reference-v0.1/answerability-review.md"
+        "benchmark/stroke-reference-v0.1/answerability-review.md",
+        "benchmark/stroke-reference-v0.1/instance-manifest.json",
+        "benchmark/stroke-reference-v0.1/variant-diffs.json",
+        "scripts/clinical_benchmark/build_question_pack.py"
       ],
-      "action": "登记信息缺失、噪声、无关信息、冲突证据、时序长度、更正、表述、多任务、工具/工程九类压力轴。第一轮只实现优先假设需要的 1–2 条轴，其余明确待扩展；每级定义变化量、事实可得性、期望行为和判错条件。",
-      "acceptance": "一次改变一个主要变量；L0 清楚、L1 有限扰动、L2 需整合、L3 高压但仍有可接受决策路径。压力顺序依据操作量与独立审阅，不按模型错误率事后排序；不可回答另列，不能当 L3。",
+      "action": "把压力轴挂到已定义的实验。首批实现 1–2 条轴的 L0–L3，逐级记录操作量、基线差异、事实充分性、文本长度/语言、披露机会、允许行为与无效条件。登记其余压力轴。由固定基线与显式变化生成独立实例、差异清单、版本及去重关系。",
+      "acceptance": "一次只改一个主要压力变量；不按模型错误率事后排序。新增或缺失临床关键事实时重审允许行为，不能沿用同一答案。不可回答与高压力分开；构建可重放，不覆写基线；所有等级必须覆盖选定假设的适用窗口，低风险对照不能悄悄变成高风险。",
       "external_evidence_required": [],
       "status": "TODO",
       "execution_evidence": null,
@@ -191,19 +204,21 @@
     {
       "id": "H10",
       "milestone": "M0",
-      "title": "建设病例事实与证据数据库",
+      "title": "先制作基线场景卡与固定事实",
       "depends_on": [
+        "H01",
         "H02",
         "H03",
-        "H07",
-        "H09"
+        "H05"
       ],
       "planned_outputs": [
         "benchmark/stroke-reference-v0.1/cases.json",
-        "benchmark/stroke-reference-v0.1/evidence.json"
+        "benchmark/stroke-reference-v0.1/evidence.json",
+        "benchmark/stroke-reference-v0.1/scenarios.json",
+        "evaluation/question-design/scenario-backlog.json"
       ],
-      "action": "结构化症状、时间、检查、否定事实、既往史、用药、患者知道/不知道、来源、时间戳、冲突与更正。明确病例世界事实、患者可说信息、助手已见事实、裁判可见材料四层。",
-      "acceptance": "合成病例如实标记；未知不同于阴性；患者猜测不同于确认事实；更正保留旧值与事件。来源、许可及脱敏状态可追溯，隐藏事实不进入模型提示。",
+      "action": "在实验分组之前制作有来源的基线场景卡与固定病例事实：患者阶段、目标节点/错误/假设、患者原话、已知/未知、合法披露和更正、执行障碍、停止与环境失效条件。区分固定世界事实、患者可说信息和助手实际已见事实；为每个阶段至少登记候选场景概要与后续批次。",
+      "acceptance": "先有可理解且可审查的基线，再由 H08/H09派生变体。首批选定场景卡必须实际填写，不能只交模板。基线事实与来源版本独立保存；未知不同于阴性。场景中的临床行为边界经 H12 草拟、H15 获审，不从作者回答反推真值。",
       "external_evidence_required": [],
       "status": "TODO",
       "execution_evidence": null,
@@ -214,6 +229,7 @@
       "milestone": "M0",
       "title": "实现脚本、状态机和确定性患者模板",
       "depends_on": [
+        "H09",
         "H10"
       ],
       "planned_outputs": [
@@ -221,7 +237,7 @@
         "benchmark/stroke-reference-v0.1/patient-fsm.json",
         "tests/clinical_benchmark/test_patient_fsm.py"
       ],
-      "action": "复用现有患者模块，按真实追问、建议、执行障碍、纠正和结束选择合法分支；维护披露日志与模板。支持不同问法、顺序和一次多问，保证同条件状态转移可复现。",
+      "action": "复用现有患者模块，按真实追问、建议、执行障碍、纠正和结束选择合法分支；维护披露日志与模板。支持不同问法、顺序和一次多问，保证同条件状态转移可复现。 以 H09 的实例差异为输入，核对所有基线/分组/压力等级的实际披露路径，禁止患者模拟器暗中补回被移除的信息。",
       "acceptance": "第一版不用自由生成患者。不能补造病史、泄露未来或把模型带回标准路线；合理问法漏匹配标环境待复核。用分支可达、否定、更正、越权索取隐藏信息、跨病例状态隔离和合理结束验证。",
       "external_evidence_required": [],
       "status": "TODO",
@@ -242,7 +258,7 @@
         "clinical_oracle/stroke-v0.1/applicability.md",
         "clinical_oracle/stroke-v0.1/uncertainty-register.md"
       ],
-      "action": "每节点写可见/未知事实、需识别风险、必要与可选追问、可立即建议、可接受处置集合、禁止结论/行为、行动时限及更新触发。区分必要行为、充分行为、合理替代路线、严重性与适用范围。",
+      "action": "每节点写可见/未知事实、需识别风险、必要与可选追问、可立即建议、可接受处置集合、禁止结论/行为、行动时限及更新触发。区分必要行为、充分行为、合理替代路线、严重性与适用范围。 按患者阶段与决策功能绑定场景的对话窗口；先给基线可接受空间，再逐组/逐级核对是否应变化，禁止用单一病名答案覆盖全过程。",
       "acceptance": "不限定唯一答案或固定问法；来源冲突、指南与实践差异、地区资源和审核不确定性有记录。行动时限区分临床真实时间、对话机会和程序耗时，不用模型 API 延迟冒充患者延误。",
       "external_evidence_required": [],
       "status": "TODO",
@@ -254,6 +270,8 @@
       "milestone": "M0",
       "title": "补全合理、边界和危险回答样本",
       "depends_on": [
+        "H08",
+        "H09",
         "H12"
       ],
       "planned_outputs": [
@@ -261,7 +279,7 @@
         "clinical_oracle/stroke-v0.1/author-only/expected-labels.json"
       ],
       "action": "按关键判据覆盖合理替代路线、必要追问、无谓拖延、确定性越界、危险让步、证据不足与先错后改。设置“结果碰巧正确但当时过程越界”样本，并附只改变关键条件的对照。",
-      "acceptance": "作者预期单独存放且保持开发假设；不能为让某回答失败而临时扩张规则。适用评分项从可见状态独立推导，删掉或打乱作者标签不改变其枚举。",
+      "acceptance": "作者预期单独存放且保持开发假设；不能为让某回答失败而临时扩张规则。适用评分项从可见状态独立推导，删掉或打乱作者标签不改变其枚举。 样本必须覆盖首批各目标错误、关键对照和压力等级的边界；压力升高不自动要求相同处置或不同处置，以获审可见条件为准。",
       "external_evidence_required": [],
       "status": "TODO",
       "execution_evidence": null,
@@ -294,6 +312,9 @@
       "title": "完成真实临床适用性与规则审核",
       "depends_on": [
         "H03",
+        "H08",
+        "H09",
+        "H10",
         "H12",
         "H13",
         "H14"
@@ -302,7 +323,7 @@
         "clinical_oracle/stroke-v0.1/reviews/clinical-node-review.json",
         "clinical_oracle/stroke-v0.1/reviews/open-issues.json"
       ],
-      "action": "Hermes 准备节点、来源适用性、行动时机、时限、严重性、合理处置空间及样本边界的审核包。由实际具备相关能力的审核者填写；记录角色、范围、规则版本、证据、分歧与签署时间。",
+      "action": "Hermes 准备节点、来源适用性、行动时机、时限、严重性、合理处置空间及样本边界的审核包。由实际具备相关能力的审核者填写；记录角色、范围、规则版本、证据、分歧与签署时间。 同时审核分组的临床可比性、各压力等级可回答性、低风险对照和医嘱/随访场景适用性；未做这些审核的格子保持待审。",
       "acceptance": "先审节点与医学适用条件，后进入 A/B。关键规则未决则保留阻断；可以继续通用工程准备，不能自行把 clinical_approval 改为 true。不能照搬 AP07 腹痛医学规则到脑卒中。",
       "external_evidence_required": [
         "实际临床审核记录"
@@ -478,6 +499,12 @@
       "milestone": "M0",
       "title": "验收单家族离线 Oracle 闭环",
       "depends_on": [
+        "H07",
+        "H08",
+        "H09",
+        "H10",
+        "H11",
+        "H15",
         "H16",
         "H18",
         "H19",
@@ -487,10 +514,12 @@
       ],
       "planned_outputs": [
         "reports/stroke-m0/acceptance.md",
-        "reports/stroke-m0/evidence-manifest.json"
+        "reports/stroke-m0/evidence-manifest.json",
+        "reports/stroke-m0/question-authoring-audit.json",
+        "scripts/clinical_benchmark/audit_question_pack.py"
       ],
-      "action": "用固定独立样本串起病例→患者→窗口→获审 Oracle→评分→检查器→报告；检查不同合理路线、先错后改、未评状态、模拟器失效与严重事件。复用现有离线核心验证并记录新增覆盖。",
-      "acceptance": "工程可运行、节点获审、真实独立评审和评分器校准分别有证据。M0 通过不等于真实模型有效性已证明；一项未做就保持待完成，不能用作者脚本通关替代。",
+      "action": "用固定独立样本串起病例→患者→窗口→获审 Oracle→评分→检查器→报告；检查不同合理路线、先错后改、未评状态、模拟器失效与严重事件。复用现有离线核心验证并记录新增覆盖。 按出题专用清单逐行审计五项交付、ID 关联、每个选定假设的完整实验链及覆盖状态；分别出全范围地图完整性与首批实验完整性报告。",
+      "acceptance": "工程可运行、节点获审、真实独立评审和评分器校准分别有证据。M0 通过不等于真实模型有效性已证明；一项未做就保持待完成，不能用作者脚本通关替代。 首批每个已选假设必须有基线场景、对照、预定压力条件、获审判据、实际合法路径、评分样本与重放证据；下一批只标计划。不允许用 14 题、47 个任务或单家族通过代表全旅程覆盖。",
       "external_evidence_required": [],
       "status": "TODO",
       "execution_evidence": null,
@@ -529,7 +558,7 @@
       "planned_outputs": [
         "evaluation/freezes/stroke-m1-v0.1.json"
       ],
-      "action": "在首次真实模型试跑前固定病例、分支、事实、Oracle、评分、检查器、分类、压力定义、停止条件、重复次数、模型与裁判配置、主要比较和预算，并记录摘要。",
+      "action": "在首次真实模型试跑前固定病例、分支、事实、Oracle、评分、检查器、分类、压力定义、停止条件、重复次数、模型与裁判配置、主要比较和预算，并记录摘要。 冻结五项出题交付、实例/差异清单及首批覆盖范围；冻结后不按模型回答改事实、分组或压力顺序。",
       "acceptance": "这是一轮实验快照，M2 才冻结经过试测验证的可复用接口规范。M1 中修题/修规则必须新版本另跑；保留初次快照与结果，不能拿改后标准回写原成绩。",
       "external_evidence_required": [],
       "status": "TODO",
@@ -620,16 +649,17 @@
     {
       "id": "H31",
       "milestone": "M3",
-      "title": "扩展二次核验与治疗后变化旅程",
+      "title": "逐阶段扩展报告、医嘱、用药、恶化与复发",
       "depends_on": [
+        "H04",
         "H30"
       ],
       "planned_outputs": [
         "benchmark/patient-journeys-v0.1/",
         "clinical_oracle/patient-journeys-v0.1/"
       ],
-      "action": "沿相同失败假设骨架加入已有医生判断/检查后的二次核验，以及治疗后变化、恶化与再就医。分别设计来源冲突、既往判断锚定、纵向记忆、更新和行动调整。",
-      "acceptance": "新增医学条件重新审核，不能把不同阶段拼成没有临床依据的长剧情。明确患者在每时点知道什么与新证据改变什么；复制实验结构而非换题干疾病名。",
+      "action": "按 H04 覆盖矩阵逐步扩展 J03 报告解释、J04 医嘱理解、J05 治疗/用药执行、J06 效果/不适、J07 无效/恶化、J08 复发/随访。每个阶段重新选择适用错误、写完整场景卡、对照与压力条件；必要时使用不同病例家族，不强行拼成一条脑卒中长剧情。",
+      "acceptance": "每阶段都有具体场景或明确不适用/延期理由，阶段标签不等于覆盖证据。新增医学条件、原医嘱范围、效果/因果及复发时序均重新审核；只能复用实验结构和接口，不能照搬旧临床答案。",
       "external_evidence_required": [
         "新增病例的真实临床审核"
       ],
@@ -642,13 +672,14 @@
       "milestone": "M3",
       "title": "迁移到其他病例家族并补压力轴",
       "depends_on": [
+        "H04",
         "H30"
       ],
       "planned_outputs": [
         "benchmark/family-transfer-v0.1/",
         "reports/family-transfer-v0.1.md"
       ],
-      "action": "按实测价值逐项补 H09 尚未实现的压力轴及跨病种实验重复；新增家族复用判据接口与检查器，独立定义事实、适用性和病例特有风险。按需复用 AP07 方法与旧真实候选来源。",
+      "action": "按实测价值逐项补 H09 尚未实现的压力轴及跨病种实验重复；新增家族复用判据接口与检查器，独立定义事实、适用性和病例特有风险。按需复用 AP07 方法与旧真实候选来源。 每次扩家族同步更新阶段×节点×错误映射及五项出题交付，显式记录新增的独立临床背景与共享的变体。",
       "acceptance": "按内容覆盖和错误机制选病例，不追求 12→24→72 数量；新增变体不算新疾病证据。保留许可证、病例来源及审核阻断，逐家族检验可回答性与跨病种适用性。",
       "external_evidence_required": [
         "新增病例审核"
@@ -670,7 +701,7 @@
         "evaluation/formal-pilot-analysis-plan.md"
       ],
       "action": "选择已审核小集合与可比模型，预先固定主要终点、严重事件定义、实例/模型配置、运行随机顺序、重复数、裁判版本、分组与预算。设校准、开发与未用于调题的正式测试分区。",
-      "acceptance": "选择模型和样本的理由公开；以病例族/实验的依赖结构计算不确定性，预定多重比较处理及停止规则。不能用同一个已调过题的集合宣称正式外部泛化。",
+      "acceptance": "选择模型和样本的理由公开；以病例族/实验的依赖结构计算不确定性，预定多重比较处理及停止规则。不能用同一个已调过题的集合宣称正式外部泛化。 正式范围内的适用格子须有已制作实例和相应审核/验证；范围外及未决项单列，不能通过填“不适用”虚增覆盖率。",
       "external_evidence_required": [],
       "status": "TODO",
       "execution_evidence": null,
@@ -710,7 +741,7 @@
         "reports/formal-pilot/figures/",
         "reports/formal-pilot/analysis.py"
       ],
-      "action": "生成按模型、压力轴、决策环节和错误类型分层的发生率/严重度曲线，给样本数与不确定性。并列总体成绩、节点成绩、均值、离散、最差运行和任一严重事件，说明条件分母及缺失。",
+      "action": "生成按模型、压力轴、决策环节和错误类型分层的发生率/严重度曲线，给样本数与不确定性。并列总体成绩、节点成绩、均值、离散、最差运行和任一严重事件，说明条件分母及缺失。 按患者阶段×决策功能×错误类型显示实际覆盖、审核状态和失稳结果；一项错误的跨阶段表现与同场景多标签分别报告。",
       "acceptance": "只有证据足够且预定义时才估计失稳阈值；非单调与无差异如实展示。低重复数、未评项或不同严重度不能压成一个漂亮总分；必要时按事先规则加重复，诊断性加跑另标。",
       "external_evidence_required": [],
       "status": "TODO",
@@ -730,7 +761,7 @@
         "reports/formal-pilot/taxonomy-reliability.md",
         "reports/formal-pilot/measurement-validity.md"
       ],
-      "action": "让独立评审者对相同轨迹分类，检查类别边界、多标签和 UNRESOLVED；报告覆盖率、分歧与适当一致性统计。评估构念/内容/判别效度、重测信度、项目区分度、天花板/地板及裁判漂移。",
+      "action": "让独立评审者对相同轨迹分类，检查类别边界、多标签和 UNRESOLVED；报告覆盖率、分歧与适当一致性统计。评估构念/内容/判别效度、重测信度、项目区分度、天花板/地板及裁判漂移。 检验跨阶段是否在测同一类错误，审查阶段标签、节点间交接和原因归因的独立一致性；暂不能归因的行为错误仍保留。",
       "acceptance": "高一致率不等于医学正确；低一致性触发分类修订并版本化重评。区分“分数与模型差异相关”和“测到目标能力”；未有外部结局时不能把分数校准成真实患者风险概率。",
       "external_evidence_required": [
         "独立分类与复核记录"
@@ -927,7 +958,7 @@
         "docs/clinical-benchmark/CHANGELOG.md"
       ],
       "action": "每完成一个小任务更新 ID、状态、输入版本、输出路径、实际命令、结果、阻断、人工待办和下一步。采用按任务的小提交/小 PR，目标为当前核心分支；引用旧迁移目录而不盲目恢复大模块。",
-      "acceptance": "每个完成项都有证据；模板/方案已写不等于对应实验已做。保留首次运行与失败；不擅自开启定时收费运行。下一个执行者只读 NEXT_ACTION 就能继续。",
+      "acceptance": "每个完成项都有证据；模板/方案已写不等于对应实验已做。保留首次运行与失败；不擅自开启定时收费运行。下一个执行者只读 NEXT_ACTION 就能继续。 五项出题交付必须链接实际文件与审核状态；全旅程地图完成、题卡已写、工程可运行、临床获审、模型已测试是五个不同进度。",
       "external_evidence_required": [],
       "status": "TODO",
       "execution_evidence": null,
@@ -1243,6 +1274,74 @@
         "H08",
         "H29",
         "H46"
+      ]
+    }
+  ],
+  "revision": "0.2-question-authoring",
+  "revision_basis": "User requested an executable question-authoring chain across decision nodes, strategy/algorithm/engineering errors, patient stages, scenarios, groups and pressure gradients.",
+  "revision_parent_commit": "24846c4d9073ca5e91a29eaa45200698b4962093",
+  "authoring_checklist": "docs/taskbooks/question-authoring-hermes-v0.1.md",
+  "authoring_contract": "docs/taskbooks/question-authoring-contract-v0.1.json",
+  "authoring_requirement_coverage": [
+    {
+      "requirement": "决策节点及节点间交接",
+      "tasks": [
+        "H02",
+        "H04"
+      ]
+    },
+    {
+      "requirement": "可观察错误及策略/算法/工程原因假设",
+      "tasks": [
+        "H04",
+        "H05",
+        "H28"
+      ]
+    },
+    {
+      "requirement": "八类患者阶段的多对多覆盖",
+      "tasks": [
+        "H01",
+        "H04",
+        "H31"
+      ]
+    },
+    {
+      "requirement": "先写具体场景与临床判据",
+      "tasks": [
+        "H10",
+        "H12",
+        "H15"
+      ]
+    },
+    {
+      "requirement": "按错误选择实验分组并排除竞争解释",
+      "tasks": [
+        "H07",
+        "H08"
+      ]
+    },
+    {
+      "requirement": "生成受控压力梯度与实际实例",
+      "tasks": [
+        "H09",
+        "H11"
+      ]
+    },
+    {
+      "requirement": "地图完整与首批实验完整分别验收",
+      "tasks": [
+        "H24",
+        "H26",
+        "H35",
+        "H46"
+      ]
+    },
+    {
+      "requirement": "节点适用性审核先于独立评分",
+      "tasks": [
+        "H15",
+        "H21"
       ]
     }
   ]

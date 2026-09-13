@@ -6,6 +6,7 @@
 
 ## 从这里开始
 
+- **让 Hermes 开始出题**：[出题专用清单](docs/taskbooks/question-authoring-hermes-v0.1.md)。按决策节点与交接 → 三层错误假设 → 8 类患者阶段 → 基线场景 → 实验分组 → 压力实例推进，交付五项设计产物。
 - **Hermes 当前执行入口**：[完整任务清单 H00–H46](docs/taskbooks/clinical-benchmark-hermes-tasks-v0.1.md)。覆盖脑卒中试点、临床 Oracle、受控实验、压力梯度和测量验证；按依赖先做首轮设计与审核材料。
 - **最新设计依据**：[完整临床 Benchmark 提案](docs/proposals/clinical-benchmark-design-v0.1.md)。先审核节点与医学适用条件，再由 A/B 独立填写；原 [AP07 任务说明](docs/AP07_NEXT_TASK.md)作为方法参考。
 - **历史模块复用**：[迁移来源与任务卡](docs/HERMES_MIGRATION.md)。与新任务清单配合使用，不再默认要求 AP07 先完成。
@@ -24,7 +25,7 @@
 | `benchmark/multiturn-factors-v1/` | AP07 的 4 个模糊/干扰验收变体 | 单独轨道；尚未接入完整模型批跑 |
 | `medical/patient-eval/app-pilot-v1/` | 12 张题卡的人工采集入口 | 兼容已有采集流程，不等于上述 14 题版本 |
 | `research/ap07-oracle-draft-v1/` | 最新节点、回答样本、空白 A/B 表与作者材料 | 原样归档的候选草稿；现有 ZIP 不可直接发起正式盲评 |
-| `docs/proposals/`、`docs/taskbooks/` | 完整提案与 47 项 Hermes 任务；另存早期方案 | 规划；所有新任务初始为待执行，不冒充现有实现 |
+| `docs/proposals/`、`docs/taskbooks/` | 完整提案、47 项 Hermes 任务和出题专用合同 | 已补 12 节点/8 阶段候选地图与五项出题交付要求；实际题卡、审核和实测仍待执行 |
 | `docs/migration/` | 固定版本来源、复制清单、完整路径版本索引 | 供 Hermes 按模块迁移 |
 
 ## 最小运行

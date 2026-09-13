@@ -35,6 +35,8 @@ python -m scripts.benchmark_checks difficulty-review --out runs/first-difficulty
 
 ## 4. 真实模型联合试测前
 
+出题准备先按 [出题专用清单](taskbooks/question-authoring-hermes-v0.1.md) 交付错误地图、阶段覆盖、场景卡、分组和压力记录，并在 H24 分别核对全范围地图与首批实验链；现有题量及工程通过不能替代这项验收。
+
 新主线按 [完整任务清单](taskbooks/clinical-benchmark-hermes-tasks-v0.1.md) 完成脑卒中临床与评审门槛，再按 H26 冻结题库、分支、判据、停止条件、模型配置与调用预算。现有模型调用入口仍面向当前 14 题开发底座，可用 `python -m scripts.medical_dialogue_bench run --help` 检查参数；脑卒中资产与接入尚待建设，不能把现有命令当成已完成的新试点。
 
 第一次真实试测分别报告模拟器有效性、常规咨询表现、高风险错误、过度分诊、评分争议与未评数量。每题独立会话，同一比较条件使用一致的模型设置和预算。无需先做排行榜或单一总分。
