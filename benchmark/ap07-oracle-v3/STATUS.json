@@ -1,0 +1,14 @@
+{
+  "version": "ap07-oracle-v3",
+  "state": "offline_engineering_draft_pending_review",
+  "provenance": "user_attested_clinician_confirmed_AI_assisted_summary",
+  "source_sha256": "83d87f75ba9f7ad1305925ea4ccc2d8b8c571b09bf1cf2f9eabdfc0f56225d36",
+  "clinician_identity": null,
+  "independent_clinical_validation": false,
+  "calibration_ready": false,
+  "AB_actual_ratings": 0,
+  "model_calls": 0,
+  "stage1_released": false,
+  "stage2_released": false,
+  "blocked": "BLOCKED_MODEL_SELECTION_AND_BUDGET"
+}

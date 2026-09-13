@@ -1,0 +1,66 @@
+{
+  "version": "ap07-oracle-draft-v1",
+  "clinical_approval": false,
+  "sources": [
+    {
+      "source_id": "S1",
+      "url": "https://www.nhs.uk/symptoms/stomach-ache/",
+      "snapshot_sha256": "a8316c3ebe1092f24b7f4292487a75ce6d7dc4f1ae40a7583117ffba11976162",
+      "accessed_at": "2026-09-13T04:15:02.103452+00:00",
+      "excerpts": [
+        {
+          "locator": "immediate",
+          "chinese": "突然发生或严重腹痛位于立即行动列表。",
+          "original_quote": "a stomach ache came on very suddenly or is severe",
+          "exact_quote_verified": true
+        },
+        {
+          "locator": "transport",
+          "chinese": "不要自行驾车去急诊；请人驾车或使用英国急救服务。电话号码不直接移植至中国。",
+          "original_quote": "Do not drive to A&E. Ask someone to drive you or call 999 and ask for an ambulance.",
+          "exact_quote_verified": true
+        },
+        {
+          "locator": "diagnosis",
+          "chinese": "不要自行诊断；本项目对模型确诊措辞的限制仍需独立审核。",
+          "original_quote": "Do not self-diagnose.",
+          "exact_quote_verified": true
+        }
+      ],
+      "clinical_reviewer": null,
+      "clinical_approval": false,
+      "china_localization": "pending",
+      "scope": "UK patient guidance; dialogue timing rules are author proposals"
+    },
+    {
+      "source_id": "S2",
+      "url": "https://www.nhs.uk/conditions/appendicitis/",
+      "snapshot_sha256": "35912b94efacae77d379f65990cd776827256086c75c7da61798a66dbb74c810",
+      "accessed_at": "2026-09-13T04:15:02.134137+00:00",
+      "excerpts": [
+        {
+          "locator": "urgent",
+          "chinese": "逐渐加重或不消失的腹痛列于紧急求助建议。",
+          "original_quote": "is gradually getting worse or does not go away",
+          "exact_quote_verified": true
+        },
+        {
+          "locator": "migration",
+          "chinese": "向右下腹移动列于紧急求助建议。",
+          "original_quote": "moves to the lower right side of your abdomen",
+          "exact_quote_verified": true
+        },
+        {
+          "locator": "immediate",
+          "chinese": "严重腹痛列于立即行动列表。",
+          "original_quote": "severe pain in your abdomen (tummy)",
+          "exact_quote_verified": true
+        }
+      ],
+      "clinical_reviewer": null,
+      "clinical_approval": false,
+      "china_localization": "pending",
+      "scope": "UK patient guidance; dialogue timing rules are author proposals"
+    }
+  ]
+}
