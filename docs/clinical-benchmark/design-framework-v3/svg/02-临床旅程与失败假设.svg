@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1300" viewBox="0 0 1800 1300">
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#687481"/></marker>
+<marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#A74444"/></marker>
+</defs>
+<rect width="1800" height="1300" fill="#FFFFFF"/>
+<text x="60" y="62" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="34" font-weight="700" fill="#17324D">V3 临床世界：旅程提供场景，决策链提供可定位的失效环节</text>
+<text x="60" y="98" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#687481">疾病名不是出题骨架；每个 Failure Hypothesis 必须绑定一个 canonical stage</text>
+<rect x="60" y="125" width="280" height="38" rx="19" fill="#2C6E9F"/>
+<text x="200.0" y="151" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">A 第一版三段患者旅程</text>
+<rect x="60" y="185" width="510" height="150" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="78" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#17324D">J01 首次咨询</text>
+<text x="78" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="78" dy="0">信息不足 → 关键追问</tspan><tspan x="78" dy="24.3">风险升级 / 是否立即就医</tspan></text>
+<line x1="570" y1="260" x2="605" y2="260" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="620" y="185" width="510" height="150" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="638" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#17324D">J02 二次核验</text>
+<text x="638" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="638" dy="0">已有判断 / 检查结果</tspan><tspan x="638" dy="24.3">来源权重 / 冲突处理</tspan></text>
+<line x1="1130" y1="260" x2="1165" y2="260" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1180" y="185" width="510" height="150" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="1198" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#17324D">J03 治疗后变化</text>
+<text x="1198" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="1198" dy="0">恶化 / 再就医</tspan><tspan x="1198" dy="24.3">纵向状态 / 新证据更新</tspan></text>
+<rect x="60" y="390" width="280" height="38" rx="19" fill="#2E7D5B"/>
+<text x="200.0" y="416" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">B 可观察决策过程链</text>
+<rect x="60" y="450" width="240" height="135" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="78" y="484" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">S1 事实提取</text>
+<text x="78" y="516" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#243746"><tspan x="78" dy="0">读全了吗</tspan></text>
+<line x1="300" y1="518" x2="325" y2="518" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="340" y="450" width="240" height="135" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="358" y="484" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">S2 问题分解</text>
+<text x="358" y="516" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#243746"><tspan x="358" dy="0">拆对了吗</tspan></text>
+<line x1="580" y1="518" x2="605" y2="518" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="620" y="450" width="240" height="135" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="638" y="484" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">S3 证据处理</text>
+<text x="638" y="516" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#243746"><tspan x="638" dy="0">算对了吗</tspan></text>
+<line x1="860" y1="518" x2="885" y2="518" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="900" y="450" width="240" height="135" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="918" y="484" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">S4 决策选择</text>
+<text x="918" y="516" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#243746"><tspan x="918" dy="0">选对了吗</tspan></text>
+<line x1="1140" y1="518" x2="1165" y2="518" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1180" y="450" width="240" height="135" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="1198" y="484" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">S5 工具执行</text>
+<text x="1198" y="516" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#243746"><tspan x="1198" dy="0">做对了吗</tspan></text>
+<line x1="1420" y1="518" x2="1445" y2="518" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1460" y="450" width="240" height="135" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="1478" y="484" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">S6 复核输出</text>
+<text x="1478" y="516" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#243746"><tspan x="1478" dy="0">说对了吗</tspan></text>
+<rect x="60" y="650" width="310" height="38" rx="19" fill="#B76820"/>
+<text x="215.0" y="676" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">C Failure Hypothesis 生成</text>
+<rect x="60" y="710" width="500" height="180" rx="16" fill="#FBE9D7" stroke="#B76820" stroke-width="2"/>
+<text x="78" y="744" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">一个 hypothesis 必填</text>
+<text x="78" y="776" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="78" dy="0">目标 journey + canonical stage</tspan><tspan x="78" dy="24.3">可观察错误 + 目标压力</tspan><tspan x="78" dy="24.3">竞争解释 + 预期方向</tspan></text>
+<rect x="650" y="710" width="500" height="180" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="668" y="744" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">允许归因</text>
+<text x="668" y="776" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="668" dy="0">决策：看见但选错行动</tspan><tspan x="668" dy="24.3">算法：信息处理/更新错误</tspan><tspan x="668" dy="24.3">工程：状态/工具执行偏离</tspan></text>
+<rect x="1240" y="710" width="500" height="180" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="1258" y="744" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">禁止偷换</text>
+<text x="1258" y="776" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="1258" dy="0">输出错误 ≠ 读到内部思维</tspan><tspan x="1258" dy="24.3">无法排除上游传播时</tspan><tspan x="1258" dy="24.3">状态必须是 UNRESOLVED</tspan></text>
+<rect x="60" y="955" width="350" height="38" rx="19" fill="#237B75"/>
+<text x="235.0" y="981" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">D 当前脑卒中 reference family</text>
+<rect x="60" y="1015" width="510" height="165" rx="16" fill="#DDF2F0" stroke="#237B75" stroke-width="2"/>
+<text x="78" y="1049" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">H1 风险升级</text>
+<text x="78" y="1081" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="78" dy="0">短暂改善 / 锚定 / 阻力</tspan><tspan x="78" dy="24.3">不应推迟 120 路径</tspan></text>
+<rect x="620" y="1015" width="510" height="165" rx="16" fill="#DDF2F0" stroke="#237B75" stroke-width="2"/>
+<text x="638" y="1049" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">H2 时间状态</text>
+<text x="638" y="1081" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="638" dy="0">发病时间 vs 最后正常时间</tspan><tspan x="638" dy="24.3">跨轮不得丢失或补造</tspan></text>
+<rect x="1180" y="1015" width="510" height="165" rx="16" fill="#DDF2F0" stroke="#237B75" stroke-width="2"/>
+<text x="1198" y="1049" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">H3 来源权重</text>
+<text x="1198" y="1081" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="1198" dy="0">相同 claim 改来源标签</tspan><tspan x="1198" dy="24.3">结论强度应有可解释变化</tspan></text>
+<text x="900" y="1245" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#A74444">三条是假设，不是已证实模型规律；当前只有 H1 的一个 clinical instance 已实例化。</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1390" viewBox="0 0 1800 1390">
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#687481"/></marker>
+<marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#A74444"/></marker>
+</defs>
+<rect width="1800" height="1390" fill="#FFFFFF"/>
+<text x="60" y="62" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="34" font-weight="700" fill="#17324D">V3 测量仪器：Oracle、Rubric、Verifier 各自只做一件事</text>
+<text x="60" y="98" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#687481">评分系统不是 clinical gold；工程 PASS 不能冒充科学或临床批准</text>
+<rect x="60" y="125" width="330" height="38" rx="19" fill="#2C6E9F"/>
+<text x="225.0" y="151" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">A Clinical World Contract</text>
+<rect x="60" y="185" width="520" height="190" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="78" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">病例真值 + FSM</text>
+<text x="78" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="78" dy="0">当前可见 / 未知 / 未来事实</tspan><tspan x="78" dy="24.3">披露路径 / deadline / 节点状态</tspan></text>
+<rect x="640" y="185" width="520" height="190" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="658" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">适用范围</text>
+<text x="658" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="658" dy="0">地区 / 语言 / 人群 / 资源假设</tspan><tspan x="658" dy="24.3">病例性质 / 隐私 / 数据流向</tspan></text>
+<rect x="1220" y="185" width="520" height="190" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="1238" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">临床依据</text>
+<text x="1238" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="1238" dy="0">current guideline / evidence version</tspan><tspan x="1238" dy="24.3">独立审核 / 分歧仲裁 / 置信度</tspan></text>
+<rect x="60" y="430" width="270" height="38" rx="19" fill="#6B52A3"/>
+<text x="195.0" y="456" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">B 三层测量架构</text>
+<rect x="60" y="490" width="500" height="185" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="78" y="524" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#17324D">Oracle：允许什么</text>
+<text x="78" y="556" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="78" dy="0">可接受处置集合</tspan><tspan x="78" dy="24.3">必须 / 禁止 / 时序 / 条件</tspan></text>
+<line x1="560" y1="582" x2="625" y2="582" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="650" y="490" width="500" height="185" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="668" y="524" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#17324D">Rubric：看哪些维度</text>
+<text x="668" y="556" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="668" dy="0">证据来源 / 权重 / 更新</tspan><tspan x="668" dy="24.3">风险升级 / 行动匹配 / 边界</tspan></text>
+<line x1="1150" y1="582" x2="1215" y2="582" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1240" y="490" width="500" height="185" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="1258" y="524" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#17324D">Verifier：怎样裁决</text>
+<text x="1258" y="556" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="1258" dy="0">Deterministic first</tspan><tspan x="1258" dy="24.3">受约束 Judge 只做语义窄判</tspan></text>
+<rect x="60" y="730" width="330" height="38" rx="19" fill="#A74444"/>
+<text x="225.0" y="756" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">C 两层结果，不做总分遮蔽</text>
+<rect x="60" y="790" width="800" height="190" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="78" y="824" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#17324D">Safety Gate</text>
+<text x="78" y="856" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="78" dy="0">延误 / 禁忌 / 未来信息 / 明确危险行动</tspan><tspan x="78" dy="24.3">任何 Critical 事件单列；不能被平均分抵消</tspan></text>
+<rect x="940" y="790" width="800" height="190" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="958" y="824" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#17324D">Capability Profile</text>
+<text x="958" y="856" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="958" dy="0">决策环节 × failure type × pressure</tspan><tspan x="958" dy="24.3">同时报告 usefulness，防全急诊 / 全弃权</tspan></text>
+<rect x="60" y="1035" width="310" height="38" rx="19" fill="#17324D"/>
+<text x="215.0" y="1061" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">D 全链版本与证据绑定</text>
+<rect x="60" y="1095" width="1680" height="180" rx="16" fill="#F4F6F8" stroke="#8091A0" stroke-width="2"/>
+<text x="90" y="1140" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="400" fill="#243746"><tspan x="90" dy="0">case / truth / FSM / pressure generator / Oracle / Rubric / Checker / Judge prompt</tspan><tspan x="90" dy="27.6">subject model / system prompt / decoding / RAG snapshot / tools / runner / code commit / environment manifest</tspan><tspan x="90" dy="27.6">每个 Failure Report 必须能回到原始 trajectory、裁决依据和版本 hash。</tspan></text>
+<text x="900" y="1340" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#A74444">临床审核者签 clinical approval；模型、runner、Judge 和 verifier 都无权自我批准。</text>
+</svg>
