@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1450" viewBox="0 0 1800 1450">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7885"/></marker></defs>
+<rect width="1800" height="1450" fill="#FFFFFF"/>
+<text x="60" y="62" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="34" font-weight="700" fill="#17324D">V4 数量体系：资产账、执行账、测量账分别计算</text>
+<text x="60" y="98" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#6B7885">不再用一个“题目数”同时表示患者世界、probe 配置和模型调用</text>
+<rect x="60" y="150" width="300" height="165" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="78" y="184" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">N_scenario</text>
+<text x="78" y="216" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">独立患者世界</tspan><tspan x="78" dy="20.7">按 lineage 判断独立性</tspan></text>
+<rect x="400" y="150" width="300" height="165" rx="16" fill="#FBE9D7" stroke="#B76820" stroke-width="2"/>
+<text x="418" y="184" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">N_execution_spec</text>
+<text x="418" y="216" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#263847"><tspan x="418" dy="0.0">唯一模型可见条件</tspan><tspan x="418" dy="20.7">决定是否需要新 episode</tspan></text>
+<rect x="740" y="150" width="300" height="165" rx="16" fill="#DDF2F0" stroke="#237B75" stroke-width="2"/>
+<text x="758" y="184" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">N_episode</text>
+<text x="758" y="216" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#263847"><tspan x="758" dy="0.0">实际独立模型运行</tspan><tspan x="758" dy="20.7">含 model config 与 repeats</tspan></text>
+<rect x="1080" y="150" width="300" height="165" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="1098" y="184" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">N_probe_binding</text>
+<text x="1098" y="216" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#263847"><tspan x="1098" dy="0.0">目标×病例×节点×条件的合法绑定</tspan><tspan x="1098" dy="20.7">可以远多于 episode</tspan></text>
+<rect x="1420" y="150" width="300" height="165" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="1438" y="184" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">N_judgment</text>
+<text x="1438" y="216" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#263847"><tspan x="1438" dy="0.0">verifier 原子裁决总数</tspan><tspan x="1438" dy="20.7">一个 probe 可有多个 judgment</tspan></text>
+<rect x="60" y="375" width="280" height="38" rx="19" fill="#6B52A3"/>
+<text x="200.0" y="401" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">A 设计账：角色与绑定</text>
+<rect x="60" y="435" width="1680" height="150" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="900" y="485" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="30" font-weight="700" fill="#17324D">N_design = Σ_h ( |C_h| + Σ_p |L_h,p| )</text>
+<text x="900" y="535" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="400" fill="#263847">记录目标、对照、压力和 probe binding；相同输入承担两种角色时，角色都保留，但证据不独立。</text>
+<rect x="60" y="645" width="280" height="38" rx="19" fill="#B76820"/>
+<text x="200.0" y="671" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">B 执行账：只看模型可见差异</text>
+<rect x="60" y="705" width="1680" height="150" rx="16" fill="#FBE9D7" stroke="#B76820" stroke-width="2"/>
+<text x="900" y="755" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="30" font-weight="700" fill="#17324D">N_planned_runs = Σ_execution_spec repeats(spec)</text>
+<text x="900" y="805" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="400" fill="#263847">新增后台 probe 不增加 run；改变输入、protocol、condition、tools 或 model config 才产生新 execution spec。</text>
+<rect x="60" y="915" width="300" height="38" rx="19" fill="#237B75"/>
+<text x="210.0" y="941" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">C 联调计数例：不要误乘 probe</text>
+<rect x="60" y="975" width="520" height="220" rx="16" fill="#DDF2F0" stroke="#237B75" stroke-width="2"/>
+<text x="78" y="1009" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">模型运行</text>
+<text x="78" y="1041" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">1 scenario × 1 protocol</tspan><tspan x="78" dy="26.2">× 2 conditions × 2 models × 3 repeats</tspan><tspan x="78" dy="26.2">= 12 episodes</tspan></text>
+<rect x="640" y="975" width="520" height="220" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="658" y="1009" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Probe 执行位置</text>
+<text x="658" y="1041" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="400" fill="#263847"><tspan x="658" dy="0.0">每 episode 挂 3 probes</tspan><tspan x="658" dy="26.2">12 × 3</tspan><tspan x="658" dy="26.2">= 36 probe-results positions</tspan></text>
+<rect x="1220" y="975" width="520" height="220" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="1238" y="1009" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Verifier Judgments</text>
+<text x="1238" y="1041" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="400" fill="#263847"><tspan x="1238" dy="0.0">若每 probe 平均 2 verifiers</tspan><tspan x="1238" dy="26.2">36 × 2</tspan><tspan x="1238" dy="26.2">= 72 atomic judgments</tspan></text>
+<text x="900" y="1270" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#A74444">三者仍然只有 1 个 scenario；12 次模型运行，不是 36 或 72 次。</text>
+<text x="900" y="1345" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">“3150”可描述 probe-condition 设计空间，但病例数与实际 run 必须由编排器按兼容关系重新求和。</text>
+</svg>

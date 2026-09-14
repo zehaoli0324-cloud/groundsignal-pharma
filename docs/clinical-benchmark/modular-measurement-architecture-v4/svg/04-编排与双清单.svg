@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1400" viewBox="0 0 1800 1400">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7885"/></marker></defs>
+<rect width="1800" height="1400" fill="#FFFFFF"/>
+<text x="60" y="62" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="34" font-weight="700" fill="#17324D">V4 编排器：Bind → Validate → Compile → Run → Re-score</text>
+<text x="60" y="98" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#6B7885">执行清单与测量清单分离，隐藏答案不能进入模型可见包</text>
+<rect x="60" y="160" width="300" height="175" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="78" y="194" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">1 Bind</text>
+<text x="78" y="226" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">scenario / protocol / condition</tspan><tspan x="78" dy="22.1">task / probe / verifier 参数</tspan></text>
+<line x1="360" y1="248" x2="385" y2="248" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="400" y="160" width="300" height="175" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="418" y="194" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">2 Validate</text>
+<text x="418" y="226" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="418" dy="0.0">临床适用 / 节点可达</tspan><tspan x="418" dy="22.1">机会可观察 / 版本相容</tspan></text>
+<line x1="700" y1="248" x2="725" y2="248" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="740" y="160" width="300" height="175" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="758" y="194" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">3 Compile</text>
+<text x="758" y="226" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="758" dy="0.0">执行清单：模型可见</tspan><tspan x="758" dy="22.1">测量清单：隐藏规则</tspan></text>
+<line x1="1040" y1="248" x2="1065" y2="248" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1080" y="160" width="300" height="175" rx="16" fill="#DDF2F0" stroke="#237B75" stroke-width="2"/>
+<text x="1098" y="194" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">4 Run</text>
+<text x="1098" y="226" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1098" dy="0.0">episode + trajectory</tspan><tspan x="1098" dy="22.1">append-only events + receipt</tspan></text>
+<line x1="1380" y1="248" x2="1405" y2="248" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1420" y="160" width="300" height="175" rx="16" fill="#DDF2F0" stroke="#237B75" stroke-width="2"/>
+<text x="1438" y="194" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">5 Measure</text>
+<text x="1438" y="226" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1438" dy="0.0">opportunity → judgments</tspan><tspan x="1438" dy="22.1">probe result + evidence</tspan></text>
+<rect x="60" y="395" width="300" height="38" rx="19" fill="#B76820"/>
+<text x="210.0" y="421" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">执行复用判定：必须完全等价</text>
+<rect x="60" y="455" width="1680" height="210" rx="16" fill="#FBE9D7" stroke="#B76820" stroke-width="2"/>
+<text x="90" y="500" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="400" fill="#263847"><tspan x="90" dy="0.0">患者世界版本、物化输入、task contract、interaction protocol、condition、tools / memory、</tspan><tspan x="90" dy="30.0">model config、stop rule、repeat requirement 全部兼容 → 多个 probe bindings 可共用一次执行。</tspan><tspan x="90" dy="30.0">任何模型可见条件不同 → 新 execution_spec；即使输入相同，预注册独立重复也不能被去重。</tspan></text>
+<rect x="60" y="725" width="280" height="38" rx="19" fill="#6B52A3"/>
+<text x="200.0" y="751" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">旧轨迹何时可以重评</text>
+<rect x="60" y="785" width="380" height="160" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="78" y="819" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">只新增后台 Probe</text>
+<text x="78" y="851" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">可以重评</tspan><tspan x="78" dy="22.1">不产生新模型行为</tspan></text>
+<rect x="480" y="785" width="380" height="160" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="498" y="819" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">只修改 Verifier</text>
+<text x="498" y="851" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="498" dy="0.0">可以生成新 judgment version</tspan><tspan x="498" dy="22.1">旧裁决保留</tspan></text>
+<rect x="900" y="785" width="380" height="160" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="918" y="819" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">改变模型可见压力</text>
+<text x="918" y="851" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="918" dy="0.0">必须重跑</tspan><tspan x="918" dy="22.1">旧 trajectory 不可冒充</tspan></text>
+<rect x="1320" y="785" width="380" height="160" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="1338" y="819" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">改变患者响应规则</text>
+<text x="1338" y="851" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1338" dy="0.0">必须重跑</tspan><tspan x="1338" dy="22.1">protocol identity 已改变</tspan></text>
+<rect x="60" y="1010" width="300" height="38" rx="19" fill="#17324D"/>
+<text x="210.0" y="1036" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">机会状态与裁决状态分离</text>
+<rect x="60" y="1070" width="510" height="190" rx="16" fill="#F4F6F8" stroke="#8091A0" stroke-width="2"/>
+<text x="78" y="1104" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Run Validity</text>
+<text x="78" y="1136" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">VALID / INVALID / PARTIAL</tspan><tspan x="78" dy="24.8">平台故障不直接算模型失败</tspan></text>
+<rect x="645" y="1070" width="510" height="190" rx="16" fill="#F4F6F8" stroke="#8091A0" stroke-width="2"/>
+<text x="663" y="1104" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Opportunity</text>
+<text x="663" y="1136" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#263847"><tspan x="663" dy="0.0">TRIGGERED / NOT_REACHED / NOT_APPLICABLE</tspan><tspan x="663" dy="24.8">模型合理避开分支 ≠ 自动失败</tspan></text>
+<rect x="1230" y="1070" width="510" height="190" rx="16" fill="#F4F6F8" stroke="#8091A0" stroke-width="2"/>
+<text x="1248" y="1104" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Adjudication</text>
+<text x="1248" y="1136" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#263847"><tspan x="1248" dy="0.0">PASS / FAIL / UNRESOLVED / UNASSESSED</tspan><tspan x="1248" dy="24.8">未评审绝不默认为 PASS</tspan></text>
+<text x="900" y="1340" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#A74444">执行复用节省调用；重新评分节省调用；二者都不能伪造新的行为证据。</text>
+</svg>
