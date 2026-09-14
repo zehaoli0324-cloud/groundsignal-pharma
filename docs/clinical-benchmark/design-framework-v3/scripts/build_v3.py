@@ -85,7 +85,7 @@ def overview():
     s.text(900, 168, "核心对象不是一道题，而是：一个可证伪 Claim 经过实验、测量、复现与攻防后形成的证据包", 22, C["ink"], 700, "middle")
     cards = [
         ("1 临床世界", ["患者旅程 + 决策链", "定义真实要解决的问题"], C["blue_bg"], C["blue"]),
-        ("2 实验网络", ["Hypothesis + Estimand", "C0–C4 + P0–P4"], C["green_bg"], C["green"]),
+        ("2 实验网络", ["Hypothesis + Estimand", "C0–C4 + 6 axes × L0–L4"], C["green_bg"], C["green"]),
         ("3 测量仪器", ["Oracle + Rubric", "Checker + Judge"], C["purple_bg"], C["purple"]),
         ("4 执行与复现", ["FSM + Episode", "seed ⊂ instance ⊂ family"], C["teal_bg"], C["teal"]),
         ("5 对抗验证", ["Red → Blue → Purple", "CAUGHT / SURVIVED / VOID"], C["red_bg"], C["red"]),
@@ -117,41 +117,40 @@ def overview():
 
 
 def quantity():
-    s = SVG(1800, 1250, "V3 题量：72 个受控 query，而不是 72 个独立病例", "先冻结“题”的单位，再计算运行预算")
-    s.pill(60,125,300,"A 五层单位不能混算",C["blue"])
-    labels=[
-        ("Hypothesis", "可证伪失败机制"), ("Clinical instance", "同机制的真实 sibling"),
-        ("Variant / Query", "一份受控题面"), ("Episode", "一次完整多轮咨询"), ("Run / Seed", "同题随机重复"),
+    s = SVG(1800, 1460, "V3 题量：完整网络是稀疏张量，72 只是一条 Pilot 切片", "按非空错误类型总数 N 计算；不存在的 stage × mechanism 组合不造题")
+    s.pill(60,125,300,"A 先定义稀疏错误网络",C["blue"])
+    s.card(60,185,500,155,"6 个 Process Stages",["S1 信息提取 → S6 复核输出","每个错误必须绑定一个 stage"],C["blue_bg"],C["blue"],21,17)
+    s.line(560,262,625,262)
+    s.card(650,185,500,155,"3 个 Attribution Layers",["Decision / Algorithm / Engineering","不是每个 stage 都必须三类齐全"],C["purple_bg"],C["purple"],21,17)
+    s.line(1150,262,1215,262)
+    s.card(1240,185,500,155,"n(s,m) 个 Error Types",["每个非空格可有多个具体错误","N = Σ n(s,m)"],C["orange_bg"],C["orange"],21,17)
+    s.text(900,385,"只有 18 个格全部非空且每格同为 n 个错误时，才可写成 N = 6 × 3 × n。",21,C["red"],700,"middle")
+
+    s.pill(60,430,350,"B 每个错误类型的实验槽位",C["green"])
+    s.card(60,490,500,170,"Control Block",["5 个成组对照：C0–C4","用于干预 / 特异性 / 检出 / 救援"],C["green_bg"],C["green"],22,18)
+    s.text(610,580,"+",34,C["ink"],700,"middle")
+    s.card(650,490,500,170,"Pressure Block",["6 个独立 pressure axes","每轴 L0–L4 共 5 个梯度"],C["teal_bg"],C["teal"],22,18)
+    s.text(1200,580,"=",34,C["ink"],700,"middle")
+    s.card(1240,490,500,170,"35 Planned Slots",["5 + 6 × 5 = 35","压力与对照在设计矩阵中分列"],C["yellow_bg"],C["yellow"],22,18)
+    s.text(900,705,"若六轴共享同一个 L0 基线：独特题面 = 5 + 6 × (5−1) = 29；重复 L0 属运行槽位，不虚增题库。",20,C["ink"],700,"middle")
+
+    s.pill(60,755,310,"C 乘 clinical instances",C["purple"])
+    s.rect(60,815,1680,150,C["purple_bg"],C["purple"])
+    s.text(900,865,"完整题库：Q_slots = 35 × I × N    ｜    Q_unique = 29 × I × N",29,C["ink"],700,"middle")
+    s.text(900,915,"推荐 I = 3 个 genuine sibling instances：Q_slots = 105N；Q_unique = 87N",23,C["text"],700,"middle")
+
+    scenarios=[
+        ("稠密下界 n=1",["N=18","1890 slots / 1566 unique","5670 episodes/模型（3 runs）"]),
+        ("稠密 n=2",["N=36","3780 slots / 3132 unique","11340 episodes/模型（3 runs）"]),
+        ("稠密 n=3",["N=54","5670 slots / 4698 unique","17010 episodes/模型（3 runs）"]),
     ]
-    for i,(a,b) in enumerate(labels):
-        x=60+i*330
-        s.card(x,185,285,120,a,[b],C["blue_bg"],C["blue"],19,16)
-        if i<4:s.line(x+285,245,x+315,245)
-    s.text(900,350,"只有 Variant / Query 计入“出多少题”；Episode、turn、seed 都是运行量，不是新题。",21,C["red"],700,"middle")
-
-    s.pill(60,400,310,"B 每个 hypothesis 的题组",C["green"])
-    items=[("C0/P0","基线"),("C1/P1","弱压力"),("C1/P2","中压力"),("C1/P3","强压力"),("C2","阴性对照"),("C3","阳性对照"),("C4","救援/反转")]
-    for i,(a,b) in enumerate(items):
-        x=60+i*240
-        s.card(x,460,210,105,a,[b],C["green_bg"],C["green"],20,15)
-    s.text(60,610,"核心包 = 7 query；P0 已在 C0，不重复计算。可选 P4 组合压力另加 1 query，只估 interaction。",20,C["ink"],700)
-
-    s.pill(60,660,320,"C 当前 reference family",C["purple"])
-    s.rect(60,720,1680,145,C["purple_bg"],C["purple"])
-    s.text(900,770,"3 Hypotheses × 3 Sibling Instances × (7 Core + 1 P4) = 72 Queries",30,C["ink"],700,"middle")
-    s.text(900,820,"H1 风险升级｜H2 时间状态｜H3 来源权重；每条假设用 3 个真正不同临床实例复现",19,C["text"],400,"middle")
-
-    tiers=[
-        ("M0 最小闭环","1假设 × 2实例 × 7题面","14 query","42 episodes/模型"),
-        ("M1 当前目标","3假设 × 3实例 × 8题面","72 query","216 episodes/模型"),
-        ("M4 三旅程最小","6假设 × 3实例 × 8题面","144 query","432 episodes/模型"),
-    ]
-    for i,(a,b,c,d) in enumerate(tiers):
+    for i,(a,b) in enumerate(scenarios):
         x=60+i*560
-        fill=[C["gray_bg"],C["yellow_bg"],C["orange_bg"]][i]
-        stroke=[C["line"],C["yellow"],C["orange"]][i]
-        s.card(x,920,520,190,a,[b,c,d+"（3 runs）"],fill,stroke,22,19)
-    s.text(900,1170,"当前仓库：1 hypothesis × 1 instance × 8 variants；这些 variant 不能冒充 8 个独立病例。",20,C["red"],700,"middle")
+        s.card(x,1025,510,195,a,b,[C["gray_bg"],C["yellow_bg"],C["orange_bg"]][i],[C["line"],C["yellow"],C["orange"]][i],22,18)
+
+    s.pill(60,1275,280,"D 72 的正确定位",C["red"])
+    s.rect(60,1335,1680,80,C["red_bg"],C["red"])
+    s.text(900,1385,"72 = 旧版 H1–H3 最小 Pilot 切片；不是完整 stage × mechanism × error-type 网络总题量。",21,C["red"],700,"middle")
     return s.save("01-题量计算与单位.svg")
 
 
@@ -209,9 +208,9 @@ def causal():
         s.card(x,470,290,120,a,[b],C["green_bg"],C["green"],22,17)
     s.text(900,635,"actual_diff_paths 必须机械证明：除预注册目标字段外，其余语义不变量没有漂移。",19,C["red"],700,"middle")
 
-    s.pill(60,680,330,"C 单轴压力与嵌套复现",C["teal"])
-    s.card(60,740,520,160,"Pressure",["P0 基线 → P1 → P2 → P3","P4 双轴交互单列，不并入斜率"],C["teal_bg"],C["teal"],22,18)
-    s.card(640,740,520,160,"Calibration",["development pilot → 冻结","held-out 不得按结果回调"],C["teal_bg"],C["teal"],22,18)
+    s.pill(60,680,330,"C 压力轴与嵌套复现",C["teal"])
+    s.card(60,740,520,160,"Pressure",["6 个 axes，各自 L0 → L4","axis interaction 另开 factorial 实验"],C["teal_bg"],C["teal"],22,18)
+    s.card(640,740,520,160,"Calibration",["每条轴在 development pilot 校准","冻结后 held-out 不得按结果回调"],C["teal_bg"],C["teal"],22,18)
     s.card(1220,740,520,160,"Replication",["run/seed ⊂ variant ⊂ instance","⊂ family；seed 不是独立题"],C["teal_bg"],C["teal"],22,18)
 
     s.pill(60,955,290,"D G0–G7 串行门",C["purple"])
@@ -320,9 +319,9 @@ def release():
 
     s.pill(60,470,280,"B M0–M5 路线重排",C["orange"])
     phases=[
-        ("M0","14 query","单 hypothesis 因果闭环"),("M1","72 query","脑卒中 reference family"),
-        ("M2","冻结","合同 / 数据分区 / 版本"),("M3","复制骨架","不复制未验证缺陷"),
-        ("M4","144+ query","三旅程正式 Pilot"),("M5","独立复测","held-out / 外部验证"),
+        ("M0","35 slots / error","单错误类型测量闭环"),("M1","盘点 N","冻结稀疏错误网络"),
+        ("M2","105N slots","3 sibling instances / error"),("M3","冻结","合同 / 分区 / 版本"),
+        ("M4","完整 Pilot","35 × I × N；不把 run 当题"),("M5","独立复测","held-out / 外部验证"),
     ]
     for i,(a,b,c) in enumerate(phases):
         row=i//3; col=i%3; x=60+col*560; y=530+row*190
@@ -344,80 +343,121 @@ def release():
 
 
 def docs():
-    count_md = """# GroundSignal 出题网络题量计算 V3
+    count_md = """# GroundSignal 出题网络题量计算 V3.1
 
 > 团队内部讨论稿。题量是设计合同，不是已完成数量，也不是统计功效结论。
 
-## 结论
+## 1. 纠正后的总公式
 
-当前脑卒中 reference family 目标为 **72 个受控 query**：
-
-```text
-3 hypotheses × 3 sibling clinical instances × (7 core variants + 1 P4 interaction) = 72 queries
-```
-
-每个 query 独立运行 3 次：
+完整出题网络不是固定三个 hypothesis，而是一个稀疏张量：
 
 ```text
-72 queries × 3 runs = 216 episodes / model
-2 models = 432 episodes
+N = Σ n(s,m)
 ```
 
-run/seed、对话 turn、checker judgment 均不计为新题。
+- `s`：6 个 process stages；
+- `m`：Decision / Algorithm / Engineering 三个归因层；
+- `n(s,m)`：某个 stage × mechanism 格子中实际存在的错误类型数量；
+- 不存在的组合记 0，不为凑全笛卡尔积而造题。
 
-## 每个 hypothesis 的 7 个核心题面
+只有 18 个格全部非空且每格恰有相同的 `n` 个错误类型时，才可简写：
 
-1. C0/P0 基线；
-2. C1/P1 弱压力；
-3. C1/P2 中压力；
-4. C1/P3 强压力；
-5. C2 阴性对照；
-6. C3 阳性对照；
-7. C4 救援/反转。
+```text
+N = 6 × 3 × n
+```
 
-P0 已由 C0 承担，不重复计数。P4 是两个已经独立验证的压力轴组合，只用于估计 interaction，因此每个 sibling 可选增加 1 个 query。
+## 2. 每个错误类型的实验槽位
 
-## 三级规模
+对照与压力分开：
 
-- M0 最小闭环：`1H × 2I × 7 = 14 query`；3 runs = 42 episodes/模型。
-- M1 当前目标：`3H × 3I × 8 = 72 query`；3 runs = 216 episodes/模型。
-- M4 三旅程最小 Pilot：`6H × 3I × 8 = 144 query`；3 runs = 432 episodes/模型。
+```text
+5 个成组对照 + 6 个 pressure axes × 5 个 levels = 35 个计划实验槽位
+```
 
-## 当前仓库与缺口
+这里的五级压力记为 `L0–L4`。axis interaction 是额外 factorial 实验，不把它叫作第五梯度。
 
-当前 artifact 是 1 hypothesis、1 clinical instance、8 variants。8 variants 都挂在同一个 instance 上，且现有 L1/L2/L3 混合了不同压力因素，因此不能解释为 8 个独立病例，也不能直接宣称已完成 V3 七臂合同。
+如果六条压力轴共享同一个完全相同的 L0 基线，则不重复的题面为：
 
-当前扩题顺序：
+```text
+5 + 6 × (5−1) = 29 个独特题面
+```
 
-1. 先把 H1 重构为单轴 C0–C4，并补第 2、3 个 sibling instance；
-2. 再实现 H2 与 H3，各补 3 个 sibling instances；
-3. 核心 63 query 通过 G0–G6 后，再加 9 个 P4 interaction query；
-4. 72 query 通过 G7 攻防后，才扩到 J03 与 144 query。
+因此同时报告两种口径：
 
-## 为什么不直接上 216 个 query
+- `planned slots`：35，表示预注册实验矩阵的槽位；
+- `unique prompts`：29，表示共享 L0 后去重的实际题面。
 
-当前尚未证明：Oracle 可裁决、压力轴可校准、不同 sibling 真正独立、Verifier 同时控制 False Accept 与 False Reject。此时扩题会复制测量缺陷，而不是增加科学证据。
+## 3. 乘 clinical instances
+
+设每个错误类型使用 `I` 个 genuine sibling clinical instances：
+
+```text
+Q_slots  = 35 × I × N
+Q_unique = 29 × I × N
+```
+
+推荐 `I=3` 时：
+
+```text
+Q_slots  = 105N
+Q_unique = 87N
+```
+
+只要总错误类型 `N≥10`，计划槽位就超过 1000；`N≥12` 时，即使共享 L0 去重，独特题面也超过 1000。
+
+## 4. 稠密网络示例
+
+假设 6×3 的所有格子都非空：
+
+- 每格 `n=1`：`N=18`；1890 planned slots；1566 unique prompts；3 runs 为 5670 episodes/模型。
+- 每格 `n=2`：`N=36`；3780 planned slots；3132 unique prompts；3 runs 为 11340 episodes/模型。
+- 每格 `n=3`：`N=54`；5670 planned slots；4698 unique prompts；3 runs 为 17010 episodes/模型。
+
+## 5. 为什么仍不能直接报一个固定总数
+
+用户指出的“几千道题”在完整网络和 3 个 sibling instances 下是正确量级，但精确总数仍取决于错误类型清单：
+
+```text
+先冻结 6×3 稀疏矩阵中的 n(s,m)
+→ 得到 N
+→ 再计算 105N planned slots / 87N unique prompts
+```
+
+`n` 不能凭直觉统一填入；每个错误类型必须满足：可观察、可证伪、可构造对照、可被 verifier 裁决、与相邻错误类型可区分。
+
+## 6. 72 的正确定位
+
+旧版 `3 hypotheses × 3 instances × 8 variants = 72` 只是 H1–H3 的最小 Pilot 切片，不是完整出题网络总量。它可用于先校准测量仪器，但不能代表整个 stage × mechanism × error-type 空间。
+
+## 7. run 不算新题
+
+一次 query 的不同 seed、对话 turn、checker judgment、Judge 重评都属于运行与测量，不增加独立题数。运行预算另算：
+
+```text
+episodes / model = Q_slots × repeated runs
+```
 """
     (DOCS_DIR/"题量计算-V3.md").write_text(count_md,encoding="utf-8")
-    note = """# 出题网络设计框架 V3
+    note = """# 出题网络设计框架 V3.1
 
-V3 按用户要求从 v0.4 纲要重构：一张高度概括总图，六个复杂模块分别拆图。
+V3.1 根据完整出题网络纠正题量：一张高度概括总图，六个复杂模块分别拆图。
 
 ## 图册
 
 1. `00-高度概括总图.svg`：六模块总框架。
-2. `01-题量计算与单位.svg`：72 query 的计算与口径。
-3. `02-临床旅程与失败假设.svg`：旅程、决策链、H1–H3。
-4. `03-因果实验网络.svg`：Estimand、C0–C4、P0–P4、G0–G7。
+2. `01-题量计算与单位.svg`：稀疏错误网络与千题级计算。
+3. `02-临床旅程与失败假设.svg`：旅程、决策链、H1–H3 示例。
+4. `03-因果实验网络.svg`：Estimand、C0–C4、6 压力轴×L0–L4、G0–G7。
 5. `04-测量仪器与临床治理.svg`：Oracle、Rubric、Verifier 与治理。
 6. `05-红蓝紫攻防与极限测试.svg`：攻击面、防御层、紫队闭环。
 7. `06-准入门与边界输出.svg`：工程、科学、临床准入分离。
 
-## 设计边界
+## 题量边界
 
-- 图中数字 72 是推荐设计目标，不是已完成题数或功效分析结果。
-- 当前仓库仍是 1 hypothesis / 1 clinical instance / 8 variants。
-- 图中 C0–C4、G0–G7、红蓝紫攻防是 v0.4 基础上的 V3 形式化补充。
+- 完整题量使用 `N = Σ n(s,m)`，不存在的 stage × mechanism 格子记 0。
+- 每个错误类型有 35 个 planned slots；共享六轴 L0 后为 29 个 unique prompts。
+- 三个 sibling instances 时为 `105N slots / 87N unique`。
+- 72 仅是旧版 H1–H3 Pilot 切片，不是完整网络总题量。
 - clinical approval 只能由真人临床审核者签署。
 - 本图册不含 author truth、Oracle 明细、Rubric 阈值或隐藏病例答案，可作为公开白名单候选。
 """
@@ -429,7 +469,7 @@ def html_index(files):
     for f in files:
         title=f.stem
         cards.append(f'''<article><h2>{escape(title)}</h2><object data="svg/{escape(f.name)}" type="image/svg+xml"></object><p><a href="svg/{escape(f.name)}">单独打开可编辑 SVG</a></p></article>''')
-    html=f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GroundSignal 出题网络设计框架 V3</title><style>body{{font-family:Microsoft YaHei,Noto Sans CJK SC,sans-serif;margin:0;background:#eef2f5;color:#17324D}}header{{padding:32px 5vw;background:#17324D;color:white}}main{{max-width:1500px;margin:28px auto;padding:0 24px}}article{{background:white;border-radius:16px;padding:20px;margin:24px 0;box-shadow:0 4px 18px #0001}}object{{width:100%;height:760px;border:1px solid #d8e0e6;background:white}}a{{color:#2C6E9F}}.lead{{font-size:20px;line-height:1.7}}</style></head><body><header><h1>GroundSignal 出题网络设计框架 V3</h1><p>总图高度概括，复杂模块分图展开。当前题量目标：72 个受控 query。</p></header><main><p class="lead">推荐阅读顺序：总图 → 题量 → 临床过程 → 因果实验 → 测量仪器 → 攻防 → 准入。</p>{''.join(cards)}</main></body></html>'''
+    html=f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GroundSignal 出题网络设计框架 V3</title><style>body{{font-family:Microsoft YaHei,Noto Sans CJK SC,sans-serif;margin:0;background:#eef2f5;color:#17324D}}header{{padding:32px 5vw;background:#17324D;color:white}}main{{max-width:1500px;margin:28px auto;padding:0 24px}}article{{background:white;border-radius:16px;padding:20px;margin:24px 0;box-shadow:0 4px 18px #0001}}object{{width:100%;height:760px;border:1px solid #d8e0e6;background:white}}a{{color:#2C6E9F}}.lead{{font-size:20px;line-height:1.7}}</style></head><body><header><h1>GroundSignal 出题网络设计框架 V3</h1><p>总图高度概括，复杂模块分图展开。完整题量按稀疏错误网络计算；72 仅是旧版 Pilot 切片。</p></header><main><p class="lead">推荐阅读顺序：总图 → 题量 → 临床过程 → 因果实验 → 测量仪器 → 攻防 → 准入。</p>{''.join(cards)}</main></body></html>'''
     (ROOT/"出题网络-设计框架-V3.html").write_text(html,encoding="utf-8")
 
 

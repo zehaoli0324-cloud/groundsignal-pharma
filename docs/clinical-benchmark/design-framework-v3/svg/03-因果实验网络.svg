@@ -38,13 +38,13 @@
 <text x="1398" y="536" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#243746"><tspan x="1398" dy="0">救援/反转</tspan></text>
 <text x="900" y="635" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#A74444">actual_diff_paths 必须机械证明：除预注册目标字段外，其余语义不变量没有漂移。</text>
 <rect x="60" y="680" width="330" height="38" rx="19" fill="#237B75"/>
-<text x="225.0" y="706" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">C 单轴压力与嵌套复现</text>
+<text x="225.0" y="706" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">C 压力轴与嵌套复现</text>
 <rect x="60" y="740" width="520" height="160" rx="16" fill="#DDF2F0" stroke="#237B75" stroke-width="2"/>
 <text x="78" y="774" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Pressure</text>
-<text x="78" y="806" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="78" dy="0">P0 基线 → P1 → P2 → P3</tspan><tspan x="78" dy="24.3">P4 双轴交互单列，不并入斜率</tspan></text>
+<text x="78" y="806" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="78" dy="0">6 个 axes，各自 L0 → L4</tspan><tspan x="78" dy="24.3">axis interaction 另开 factorial 实验</tspan></text>
 <rect x="640" y="740" width="520" height="160" rx="16" fill="#DDF2F0" stroke="#237B75" stroke-width="2"/>
 <text x="658" y="774" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Calibration</text>
-<text x="658" y="806" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="658" dy="0">development pilot → 冻结</tspan><tspan x="658" dy="24.3">held-out 不得按结果回调</tspan></text>
+<text x="658" y="806" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="658" dy="0">每条轴在 development pilot 校准</tspan><tspan x="658" dy="24.3">冻结后 held-out 不得按结果回调</tspan></text>
 <rect x="1220" y="740" width="520" height="160" rx="16" fill="#DDF2F0" stroke="#237B75" stroke-width="2"/>
 <text x="1238" y="774" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Replication</text>
 <text x="1238" y="806" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="1238" dy="0">run/seed ⊂ variant ⊂ instance</tspan><tspan x="1238" dy="24.3">⊂ family；seed 不是独立题</tspan></text>

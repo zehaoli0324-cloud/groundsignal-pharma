@@ -1,39 +1,43 @@
 {
   "README.md": {
-    "bytes": 2624,
-    "sha256": "c13ac62766ae6d466b665745265ae0be35ce0f9f9772a5266da10fe917babb45"
+    "bytes": 3292,
+    "sha256": "d2b801e225a501166b3552a22f865152568bf61d5cde588b33de9ad22aebbdbe"
   },
   "出题网络-设计框架-V3.html": {
-    "bytes": 2490,
-    "sha256": "e64e6951ca60d088503bfd6cc737495d101f278fb1984bc18b4bdd6caacfa47e"
+    "bytes": 2521,
+    "sha256": "4589f9c5efaa3cdf3c8f18411974456d9164b6d7fd21f8c8ee652b446b832bd7"
   },
   "docs/设计说明.md": {
-    "bytes": 1109,
-    "sha256": "42dbfcf507fa106ca22791859043d303b7f37a9a24fbf07b1a4a440763980dab"
+    "bytes": 1210,
+    "sha256": "872426f56abc729f61d6521f506ebdc4047ad24266a9e7f30b0226f93a77195b"
   },
   "docs/题量计算-V3.md": {
-    "bytes": 2001,
-    "sha256": "4f733bdc946c6694da0934d17839baa9d3698285f7e780614220c9d5bccd2576"
+    "bytes": 2974,
+    "sha256": "96e023352ccd719de669a9e291d4093e7bbc1f2e06d5efecaf71156186847c53"
   },
   "scripts/build_v3.py": {
-    "bytes": 26666,
-    "sha256": "42e9eb26668bba7db05f2dab5842a1bece87acc3690796d958561c61f817c608"
+    "bytes": 28260,
+    "sha256": "c32e345acc31b06859470c3d732191f1b451a4141dba4df94eb52960c93634d8"
+  },
+  "scripts/validate_v3.py": {
+    "bytes": 2730,
+    "sha256": "28e60e62280fafc5ad805b56c99a9b054cca867bbc0e9cac04d0f0902e4f8627"
   },
   "svg/00-高度概括总图.svg": {
-    "bytes": 8345,
-    "sha256": "5b3b98684940230a5774dd741d1fad059904f3ae64fb4e5aec286ebca5d8ebd0"
+    "bytes": 8355,
+    "sha256": "c818690f5aaa1bbac01d08ec19254d6f2ba9fa6dd4dd506e0bdaabb62932baa1"
   },
   "svg/01-题量计算与单位.svg": {
-    "bytes": 10964,
-    "sha256": "054af797ad1f4e1550e5074aeab06037b327b6acf60461dec05ebdbed6ab4b40"
+    "bytes": 9130,
+    "sha256": "bf12d99c13f6347dd85e70ee7171cf137e6e6be942178646d076426b35b41612"
   },
   "svg/02-临床旅程与失败假设.svg": {
     "bytes": 11072,
     "sha256": "0932b78b5e6fedf69c7525dbca3cbaca00e472b0549757fb0cb45212e6e19de1"
   },
   "svg/03-因果实验网络.svg": {
-    "bytes": 13301,
-    "sha256": "73859bb186da953b78fd3612dd1e186347f20ec7e70642f5cbdb04cbde526538"
+    "bytes": 13317,
+    "sha256": "980e4db131bfa32d9fbd893fcd36f4e20133e9685f634daf11f18fc3cc3269d3"
   },
   "svg/04-测量仪器与临床治理.svg": {
     "bytes": 7652,
@@ -44,7 +48,7 @@
     "sha256": "5a848fe35d4c635c5c37e9a4d1004b2738223559b303fa411a31fc7ae2736d16"
   },
   "svg/06-准入门与边界输出.svg": {
-    "bytes": 8916,
-    "sha256": "21d0bac5f4047a9b0ef20b9221f4d4a76aed32679b17cd67c52bff334ed13d14"
+    "bytes": 8930,
+    "sha256": "46713267467918e44e19f376226c9fba57d5220ee6cefd709ccc1f3d4a9df4ad"
   }
 }

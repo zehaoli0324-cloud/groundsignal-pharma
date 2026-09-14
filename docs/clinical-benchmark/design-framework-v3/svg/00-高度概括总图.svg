@@ -14,7 +14,7 @@
 <line x1="310" y1="365.0" x2="336" y2="365.0" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
 <rect x="344" y="270" width="250" height="190" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
 <text x="362" y="304" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">2 实验网络</text>
-<text x="362" y="336" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#243746"><tspan x="362" dy="0">Hypothesis + Estimand</tspan><tspan x="362" dy="23.0">C0–C4 + P0–P4</tspan></text>
+<text x="362" y="336" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#243746"><tspan x="362" dy="0">Hypothesis + Estimand</tspan><tspan x="362" dy="23.0">C0–C4 + 6 axes × L0–L4</tspan></text>
 <line x1="594" y1="365.0" x2="620" y2="365.0" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
 <rect x="628" y="270" width="250" height="190" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
 <text x="646" y="304" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">3 测量仪器</text>
