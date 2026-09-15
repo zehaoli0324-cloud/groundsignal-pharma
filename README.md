@@ -2,45 +2,164 @@
 
 **Failure-driven evaluation for medical AI under changing clinical evidence.**
 
-GroundSignal studies where medical AI systems fail during evidence-dependent clinical decision making. Instead of treating evaluation as a collection of static medical questions, the project records how evidence is retrieved, interpreted, updated and passed through a patient–AI interaction, then uses controlled cases to localize failures.
+GroundSignal studies **where, why and under what pressure a medical AI system begins to fail** during patient-facing clinical decision making.
 
-The repository already contains evidence-routing, semantic-extraction, temporal truth tracking, controlled-case and multi-turn patient-evaluation infrastructure. A new failure-driven benchmark design is now being built on top of that foundation. Its clinical Oracle, standardized pressure gradients and model-level capability-boundary results are **not yet validated benchmark results**.
+Instead of treating evaluation as a collection of static medical questions, the project starts from the clinical decision process itself. It identifies likely failure points, turns them into controlled experiments, and measures whether those failures appear consistently as information becomes noisier, more incomplete, more conflicting or more urgent.
 
-[Benchmark design](docs/BENCHMARK_DESIGN.md) · [Patient evaluation](medical/patient-eval/README.md) · [Stage decomposition](medical/patient-eval/STAGE_DECOMPOSITION.md) · [Current handoff](docs/handoffs/2026-09-09-candidate-review-handoff.md)
+The repository already contains evidence-routing, semantic-extraction, temporal truth tracking, controlled-case and multi-turn patient-evaluation infrastructure. The current benchmark direction builds a failure-driven experimental layer on top of that foundation.
 
-## What GroundSignal is trying to measure
+[Benchmark methodology](docs/BENCHMARK_DESIGN.md) · [Patient-stage decomposition](medical/patient-eval/STAGE_DECOMPOSITION.md) · [Patient evaluation](medical/patient-eval/README.md) · [Current handoff](docs/handoffs/2026-09-09-candidate-review-handoff.md)
 
-A final medical answer can be correct even when the path to that answer is unreliable. GroundSignal therefore treats the clinical decision process itself as the object of evaluation.
+## Core idea: build questions from failure mechanisms, not from diseases
 
-The current design follows this chain:
+A difficult medical question is not automatically a useful benchmark item. If a strong model answers it perfectly but the item never targets a realistic failure mechanism, the question may tell us very little about the model's actual safety boundary.
+
+GroundSignal therefore uses the following authoring chain:
 
 ```text
 Clinical decision chain
         ↓
-Failure hypothesis
+Patient stage
         ↓
-Controlled experiment / counterfactual
+Failure mechanism
         ↓
-Standardized pressure gradient
+Controlled experiment
         ↓
-Node-specific Oracle
+Pressure gradient
         ↓
-Rubric + modular Verifier
-        ↓
-Repeated runs
-        ↓
-Failure profile / capability boundary
+Observed failure boundary
 ```
 
-The target questions are concrete: Did the model extract the patient's facts correctly? Did it distinguish a patient's belief from an objective test? Did it ask for information that changes the decision? Did stronger or newer evidence change its judgment? Did it become overconfident before the evidence justified certainty? Did a high-risk state trigger the right action at the right time?
+The goal is to move from **“Can the model answer this case?”** to **“At which decision node does the model fail, what kind of failure is it, and how much pressure is required before that failure becomes reproducible?”**
 
-The full methodology, including Oracle, Rubric, Verifier, pressure gradients, measurement validity and the M0–M5 roadmap, is kept in [`docs/BENCHMARK_DESIGN.md`](docs/BENCHMARK_DESIGN.md). The design document intentionally separates planned methods from implemented claims.
+### 1. Start from the clinical decision chain
+
+The first step is to decompose a patient–AI interaction into decision nodes rather than treating the whole conversation as one answer.
+
+Typical nodes include:
+
+- recognizing the problem and the current level of risk;
+- extracting symptoms, timing, negative findings and uncertainty correctly;
+- deciding what information is still missing;
+- asking questions that can actually change the decision;
+- distinguishing competing explanations;
+- integrating new or conflicting evidence;
+- deciding whether the patient can wait, needs follow-up, or needs escalation;
+- revising the recommendation after treatment response, deterioration or recurrence.
+
+This matters because a final answer may look correct even when the reasoning path is unsafe. A model may guess the eventual diagnosis too early, miss a critical question, delay escalation for an irrelevant follow-up question, or fail to revise after stronger evidence appears.
+
+Detailed decision-stage definitions are kept in [`medical/patient-eval/STAGE_DECOMPOSITION.md`](medical/patient-eval/STAGE_DECOMPOSITION.md).
+
+### 2. Place the failure in the patient's real journey
+
+The same model error has different consequences depending on when it occurs. GroundSignal therefore organizes scenarios around patient stages such as:
+
+| Patient stage | Example evaluation target |
+|---|---|
+| Before care | vague symptoms, whether to seek care, unsafe reassurance, missing red flags |
+| Triage / first contact | urgency recognition, critical questioning, escalation timing |
+| During diagnosis | evidence integration, differential reasoning, uncertainty handling |
+| Understanding medical advice | misunderstanding instructions, medication use, follow-up requirements |
+| After treatment or medication | treatment response, adverse effects, adherence, when to re-contact care |
+| Deterioration or recurrence | recognizing state change, revising the earlier plan, avoiding stale conclusions |
+
+This stage-based view makes the benchmark closer to a real longitudinal patient interaction rather than a disease quiz.
+
+### 3. Convert each suspected failure into a mechanism
+
+A useful item should test a concrete failure hypothesis. GroundSignal separates three levels when the observable evidence allows it:
+
+- **Strategy failure** — the governing decision principle is wrong. Example: the model keeps seeking diagnostic certainty when the safer objective is immediate risk escalation.
+- **Algorithm failure** — the overall strategy is reasonable, but ranking, thresholding, evidence weighting, conflict handling or uncertainty estimation is wrong.
+- **Engineering failure** — the strategy may be sound, but execution fails because of state loss, context truncation, stale information, field mapping, negation inversion, tool failure or other implementation problems.
+
+Not every black-box failure can be attributed confidently. When the evidence cannot distinguish these causes, GroundSignal keeps the attribution unresolved rather than inventing a mechanism.
+
+The full failure taxonomy and attribution rules are documented in [`docs/BENCHMARK_DESIGN.md`](docs/BENCHMARK_DESIGN.md).
+
+### 4. Test the mechanism with controlled experimental groups
+
+Once a failure hypothesis is defined, it is converted into an experiment rather than a single question.
+
+A typical experiment contains a clean control and one or more interventions or counterfactual branches. The clinical core is held fixed while one principal factor changes. Examples include:
+
+- complete information vs. strategically missing information;
+- early ambiguous symptoms vs. later high-risk evidence;
+- relevant context vs. irrelevant but plausible context;
+- consistent evidence vs. conflicting evidence;
+- unchanged patient facts expressed with different wording;
+- the same early history followed by different later outcomes;
+- normal execution vs. state, context or tool degradation.
+
+This makes it possible to ask a causal evaluation question: **did this particular change cause the model's behavior to change?**
+
+The benchmark therefore treats an experiment family—not an isolated prompt—as the basic scientific unit.
+
+### 5. Increase pressure systematically
+
+After a failure mechanism is measurable under controlled conditions, the same capability is tested across a pressure gradient.
+
+The current working scheme is:
+
+- **L0 — clean baseline:** key evidence is explicit and easy to use;
+- **L1 — mild pressure:** one small perturbation is introduced while the correct path remains obvious;
+- **L2 — integration pressure:** evidence is dispersed, ambiguous, corrected, conflicting or mixed with distractors;
+- **L3 — high pressure:** key evidence is sparse, indirect or surrounded by substantial noise, while the task remains clinically answerable.
+
+Pressure is not intended to make questions arbitrarily obscure. Each level should preserve the same underlying clinical capability and change as few variables as possible.
+
+The desired output is a curve rather than a single score:
+
+```text
+pressure level
+      ↓
+failure rate / severity
+      ↓
+instability threshold
+      ↓
+capability boundary
+```
+
+This allows two models with similar average accuracy to be distinguished by **how early, how often and how dangerously they fail**.
+
+### 6. Score the decision node, not hindsight correctness
+
+GroundSignal does not reward a model for being accidentally correct using information that was not yet available at that point in the conversation.
+
+Each important node can therefore have its own clinical adjudication specification describing:
+
+- what facts are visible and hidden;
+- what risks must already be recognized;
+- what questions are required, useful or unnecessary;
+- what actions are acceptable now;
+- what conclusions are still premature;
+- what advice would be dangerous;
+- what new evidence should force revision later.
+
+The deeper Oracle–Rubric–Verifier architecture is intentionally kept out of the main README. See [`docs/BENCHMARK_DESIGN.md`](docs/BENCHMARK_DESIGN.md) for the full methodology.
+
+## What GroundSignal is trying to measure
+
+The benchmark is designed to answer questions such as:
+
+- Did the model understand the patient's facts correctly?
+- Did it notice uncertainty, negation and correction?
+- Did it ask for information that actually changes the decision?
+- Did it distinguish evidence strength from mere relevance?
+- Did stronger or newer evidence change its judgment appropriately?
+- Did it become overconfident before the evidence justified certainty?
+- Did a high-risk state trigger the right action at the right time?
+- Did its recommendation remain stable under harmless paraphrase but change under clinically meaningful evidence?
+- When the model failed, was the failure more consistent with strategy, algorithm or engineering limitations?
+
+The intended end product is a **failure profile and capability boundary**, not only an aggregate accuracy number.
 
 ## Current foundation
 
 ### Evidence and truth tracking
 
-The repository includes source routing, semantic extraction and temporal truth tracking. Evidence is stored with provenance and can retain applicability, version and conflict information rather than treating every statement as equally reliable.
+The repository includes source routing, semantic extraction and temporal truth tracking. Evidence can retain provenance, applicability, version and conflict information instead of treating every retrieved statement as equally reliable.
 
 Implemented entry points include:
 
@@ -49,19 +168,15 @@ Implemented entry points include:
 - [`scripts/s4_truth_ledger_v011.py`](scripts/s4_truth_ledger_v011.py) — temporal truth updates;
 - [`medical/knowledge-base/`](medical/knowledge-base/) and [`medical/knowledge-graph/`](medical/knowledge-graph/) — evidence and graph assets.
 
-This evidence layer is intended to support later evaluation of evidence source, evidence weighting, conflict handling and evidence update.
-
 ### Controlled cases
 
-The current repository contains **12 case families and 60 controlled cases**. They vary clinically relevant conditions and are accompanied by provenance, split-contamination checks and historical-result preservation. These are development assets rather than a finished clinical benchmark.
+The repository contains **12 case families and 60 controlled cases** used as development assets. They include provenance, split-contamination checks and historical-result preservation.
 
 See [`medical/case-families/`](medical/case-families/) and [`medical/stage-evals/`](medical/stage-evals/).
 
 ### Multi-turn patient evaluation
 
-The patient-evaluation prototype contains **6 families and 12 synthetic variants** covering ambiguous expression, fact correction, pressure to answer and misunderstanding repair. The interaction layer can disclose information according to the conversation and retain what was actually sent to the model.
-
-The current implementation also separates quality/safety observations from scoring opportunities and supports paired baseline/state-enhanced comparisons.
+The patient-evaluation prototype contains **6 families and 12 synthetic variants** covering ambiguous expression, fact correction, pressure to answer and misunderstanding repair. The interaction layer can disclose information according to the conversation and preserve what was actually shown to the model.
 
 See [`scripts/patient_eval/`](scripts/patient_eval/) and [`medical/patient-eval/`](medical/patient-eval/).
 
@@ -83,13 +198,25 @@ These results validate repository components and synthetic workflows. **They are
 
 Reports: [`S2 V0.3`](medical/stage-evals/S2/V0.3_REPORT.md) · [`S4 initial failure`](medical/stage-evals/S4/S4_V0.1_FRESH_FAIL_REPORT.md) · [`S4 fresh pass`](medical/stage-evals/S4/S4_V0.1.1_FRESH_PASS_REPORT.md) · [`patient-eval validation`](medical/patient-eval/VALIDATION_V0.3.md)
 
-## Benchmark under construction
+## Current benchmark direction
 
-The next benchmark iteration is **failure-driven rather than case-count-driven**. The first planned reference family is acute stroke-related patient consultation. It is intended to test time-sensitive symptom recognition, critical questioning, evidence update, risk escalation and delay-sensitive decisions.
+The current benchmark iteration is **failure-driven rather than case-count-driven**.
 
-The proposed pilot will use a deterministic patient script plus finite-state machine, node-specific acceptable-action Oracles, decision-chain Rubrics, modular Verifier checkers, controlled counterfactuals and reproducible L0–L3 pressure levels. The goal is to determine not only whether a model fails, but **which decision stage fails first and under what pressure**.
+The working experimental hierarchy is moving toward:
 
-This paragraph describes the current design target. The stroke reference family, pressure-scale construct validation, physician-approved Oracle and real-model failure curves are not yet complete.
+```text
+failure hypothesis
+    → experiment family
+    → control / intervention arms
+    → clinical branches
+    → clinical instances
+    → pressure variants
+    → reproducible run plan
+```
+
+The immediate objective is to establish several distinct failure families, multiple independent clinical instances per family, reproducible model/configuration bindings and repeated runs. The benchmark will then measure cross-family and cross-instance generalization rather than treating many surface variants of one case as independent evidence.
+
+The first reference scenarios focus on high-risk patient consultation where timing, missing information, evidence update and escalation matter. Real-model capability curves, physician-approved clinical gold and full cross-family validation remain incomplete.
 
 ## Quick start
 
@@ -103,7 +230,7 @@ python -m scripts.patient_eval.pilot_cli validate
 python -m scripts.patient_eval.pilot_cli demo --out medical/patient-eval/local/readme-demo
 ```
 
-The demo generates 24 scripted sessions. `sessions.json` preserves the dialogue, `evaluation/results.json` stores evaluation records, and `evaluation/report.html` provides a browser-readable report. Use a new output directory for a repeated run.
+The demo generates 24 scripted sessions. `sessions.json` preserves the dialogue, `evaluation/results.json` stores evaluation records, and `evaluation/report.html` provides a browser-readable report.
 
 Instructions for model integration and manual collection are in [`medical/patient-eval/README.md`](medical/patient-eval/README.md).
 
@@ -138,9 +265,9 @@ As of the current development state:
 
 - no real medical-model performance claim is made from this repository;
 - clinical gold approval is incomplete;
-- the new failure-driven stroke reference family has not completed its M0/M1 validation loop;
-- L0–L3 pressure levels are a design specification and still require construct validation;
-- LLM-based judging, where used in the pilot, should not be treated as a substitute for physician-validated gold;
+- cross-family and multi-instance validation is incomplete;
+- L0–L3 pressure levels still require construct validation;
+- LLM-based judging, where used, should not be treated as a substitute for physician-validated gold;
 - development cases do not establish real-patient benefit or deployment safety;
 - this project is not intended to provide patient diagnosis or treatment advice.
 
@@ -148,8 +275,8 @@ These limitations are part of the evaluation record rather than exceptions to it
 
 ## Documentation
 
-- [`docs/BENCHMARK_DESIGN.md`](docs/BENCHMARK_DESIGN.md) — failure-driven benchmark methodology, Oracle–Rubric–Verifier architecture, pressure gradients and roadmap.
-- [`medical/patient-eval/STAGE_DECOMPOSITION.md`](medical/patient-eval/STAGE_DECOMPOSITION.md) — ten-stage decomposition and acceptance boundaries.
+- [`docs/BENCHMARK_DESIGN.md`](docs/BENCHMARK_DESIGN.md) — failure-driven benchmark methodology, experiment design, Oracle–Rubric–Verifier architecture, pressure gradients and roadmap.
+- [`medical/patient-eval/STAGE_DECOMPOSITION.md`](medical/patient-eval/STAGE_DECOMPOSITION.md) — patient-evaluation stages, engineering stages and acceptance boundaries.
 - [`medical/knowledge-base/SEARCH_AND_VERIFICATION_PROTOCOL.md`](medical/knowledge-base/SEARCH_AND_VERIFICATION_PROTOCOL.md) — source search and evidence verification.
 - [`medical/knowledge-graph/HOW_IT_IS_BUILT.md`](medical/knowledge-graph/HOW_IT_IS_BUILT.md) — knowledge-graph construction.
 - [`medical/patient-eval/pilot/v0.2/README.md`](medical/patient-eval/pilot/v0.2/README.md) — collection and scoring materials.
