@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1440" viewBox="0 0 1800 1440">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7885"/></marker></defs>
+<rect width="1800" height="1440" fill="#FFFFFF"/>
+<text x="60" y="62" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="34" font-weight="700" fill="#17324D">V4 对象模型：设计资产、执行证据、测量裁决必须有不同身份</text>
+<text x="60" y="98" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#6B7885">七个 ID 不够：Evaluation Task、Interaction Protocol 和 Episode/Run 也需要主键</text>
+<rect x="60" y="125" width="260" height="38" rx="19" fill="#2C6E9F"/>
+<text x="190.0" y="151" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">A 设计侧静态对象</text>
+<rect x="60" y="185" width="380" height="105" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="78" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#17324D">scenario_id</text>
+<text x="78" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">患者世界</tspan></text>
+<rect x="480" y="185" width="380" height="105" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="498" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#17324D">protocol_id</text>
+<text x="498" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="498" dy="0.0">交互协议</tspan></text>
+<rect x="900" y="185" width="380" height="105" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="918" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#17324D">condition_id</text>
+<text x="918" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="918" dy="0.0">实验条件</tspan></text>
+<rect x="1320" y="185" width="380" height="105" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="1338" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#17324D">task_id</text>
+<text x="1338" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1338" dy="0.0">模型任务合同</tspan></text>
+<rect x="60" y="320" width="380" height="105" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="78" y="354" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#17324D">failure_type_id</text>
+<text x="78" y="386" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">错误定义</tspan></text>
+<rect x="480" y="320" width="380" height="105" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="498" y="354" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#17324D">probe_template_id</text>
+<text x="498" y="386" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="498" dy="0.0">通用探针模板</tspan></text>
+<rect x="900" y="320" width="380" height="105" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="918" y="354" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#17324D">probe_binding_id</text>
+<text x="918" y="386" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="918" dy="0.0">病例/节点/条件绑定</tspan></text>
+<rect x="1320" y="320" width="380" height="105" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="1338" y="354" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#17324D">verifier_id</text>
+<text x="1338" y="386" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1338" dy="0.0">参数化验证模块</tspan></text>
+<rect x="60" y="500" width="260" height="38" rx="19" fill="#B76820"/>
+<text x="190.0" y="526" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">B 编译与运行对象</text>
+<rect x="60" y="560" width="380" height="155" rx="16" fill="#FBE9D7" stroke="#B76820" stroke-width="2"/>
+<text x="78" y="594" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">execution_spec_id</text>
+<text x="78" y="626" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">模型可见输入 + protocol + condition</tspan><tspan x="78" dy="22.1">工具 / stop rule / model config</tspan></text>
+<line x1="440" y1="638" x2="465" y2="638" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="480" y="560" width="380" height="155" rx="16" fill="#FBE9D7" stroke="#B76820" stroke-width="2"/>
+<text x="498" y="594" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">episode_id / run_id</text>
+<text x="498" y="626" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="498" dy="0.0">一次独立执行</tspan><tspan x="498" dy="22.1">重复、重试和父运行可追溯</tspan></text>
+<line x1="860" y1="638" x2="885" y2="638" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="900" y="560" width="380" height="155" rx="16" fill="#FBE9D7" stroke="#B76820" stroke-width="2"/>
+<text x="918" y="594" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">trajectory_id</text>
+<text x="918" y="626" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="918" dy="0.0">实际发生的对话轨迹</tspan><tspan x="918" dy="22.1">不是预写交互脚本</tspan></text>
+<line x1="1280" y1="638" x2="1305" y2="638" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1320" y="560" width="380" height="155" rx="16" fill="#FBE9D7" stroke="#B76820" stroke-width="2"/>
+<text x="1338" y="594" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">event_id / node_id</text>
+<text x="1338" y="626" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1338" dy="0.0">可观察事件与决策快照</tspan><tspan x="1338" dy="22.1">当时可见事实明确</tspan></text>
+<rect x="60" y="775" width="250" height="38" rx="19" fill="#6B52A3"/>
+<text x="185.0" y="801" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">C 裁决与结论对象</text>
+<rect x="60" y="835" width="380" height="155" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="78" y="869" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#17324D">opportunity_id</text>
+<text x="78" y="901" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">probe 是否真正有机会被触发</tspan><tspan x="78" dy="22.1">not_reached ≠ fail</tspan></text>
+<line x1="440" y1="913" x2="465" y2="913" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="480" y="835" width="380" height="155" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="498" y="869" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#17324D">judgment_id</text>
+<text x="498" y="901" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="498" dy="0.0">某 verifier invocation 的原子判断</tspan><tspan x="498" dy="22.1">evidence span + version</tspan></text>
+<line x1="860" y1="913" x2="885" y2="913" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="900" y="835" width="380" height="155" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="918" y="869" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#17324D">probe_result_id</text>
+<text x="918" y="901" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="918" dy="0.0">多个 judgment 的预注册聚合</tspan><tspan x="918" dy="22.1">PASS / FAIL / UNRESOLVED</tspan></text>
+<line x1="1280" y1="913" x2="1305" y2="913" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1320" y="835" width="380" height="155" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="1338" y="869" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#17324D">experiment_result_id</text>
+<text x="1338" y="901" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1338" dy="0.0">跨条件/病例/运行比较</tspan><tspan x="1338" dy="22.1">支持有限范围 claim</tspan></text>
+<rect x="60" y="1060" width="1680" height="260" rx="16" fill="#F4F6F8" stroke="#8091A0" stroke-width="2"/>
+<text x="90" y="1100" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#17324D">两条硬关系</text>
+<text x="90" y="1145" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="400" fill="#263847"><tspan x="90" dy="0.0">1. 一个 execution_spec 可以挂多个 probe_bindings；只有后台测量不同，才能共用一次 episode。</tspan><tspan x="90" dy="30.0">2. 一个 probe 可以调用多个 verifiers；同一 verifier 也可在多个 probe 中参数化复用。</tspan><tspan x="90" dy="30.0">改变模型可见输入、交互规则、工具或 condition → 新 execution_spec → 必须重新运行。</tspan><tspan x="90" dy="30.0">只新增后台 probe/verifier → 可重评旧 trajectory，但必须生成新 judgment_version。</tspan></text>
+<text x="900" y="1380" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#A74444">model_config_id 与全部版本 hash 绑定 execution_spec；否则同名 trajectory 不能复现。</text>
+</svg>

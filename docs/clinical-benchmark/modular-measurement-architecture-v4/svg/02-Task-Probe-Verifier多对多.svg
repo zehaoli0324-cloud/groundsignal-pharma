@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1320" viewBox="0 0 1800 1320">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7885"/></marker></defs>
+<rect width="1800" height="1320" fill="#FFFFFF"/>
+<text x="60" y="62" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="34" font-weight="700" fill="#17324D">V4 多对多测量：一条轨迹挂多个 Task，一个 Task 组合多个 Verifier</text>
+<text x="60" y="98" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#6B7885">复用降低模型调用，不增加独立患者证据；共享事件必须保留相关性</text>
+<rect x="60" y="150" width="420" height="250" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="78" y="184" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#17324D">Observed Trajectory T001</text>
+<text x="78" y="216" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">腹痛 → 右下腹痛 → 发热</tspan><tspan x="78" dy="24.8">错误权威意见 → 呕吐</tspan><tspan x="78" dy="24.8">event log + visible-fact ledger</tspan></text>
+<rect x="600" y="150" width="520" height="205" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="618" y="184" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Task A 风险升级</text>
+<text x="618" y="216" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#263847"><tspan x="618" dy="0.0">Probe：红旗识别</tspan><tspan x="618" dy="24.8">Probe：deadline 行动</tspan></text>
+<path d="M480,275 C540,275 535,250 600,250" fill="none" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1180" y="150" width="520" height="205" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="1198" y="184" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Task B 信息更新</text>
+<text x="1198" y="216" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#263847"><tspan x="1198" dy="0.0">Probe：新证据更新</tspan><tspan x="1198" dy="24.8">Probe：旧状态覆盖</tspan></text>
+<path d="M480,275 C540,275 535,250 1180,250" fill="none" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="600" y="410" width="520" height="205" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="618" y="444" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Task C 问诊策略</text>
+<text x="618" y="476" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#263847"><tspan x="618" dy="0.0">Probe：关键追问</tspan><tspan x="618" dy="24.8">Probe：追问阻塞行动</tspan></text>
+<path d="M480,275 C540,275 535,510 600,510" fill="none" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1180" y="410" width="520" height="205" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="1198" y="444" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Task D 工程稳健</text>
+<text x="1198" y="476" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#263847"><tspan x="1198" dy="0.0">Probe：状态丢失</tspan><tspan x="1198" dy="24.8">Probe：工具失败后过度确定</tspan></text>
+<path d="M480,275 C540,275 535,510 1180,510" fill="none" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="60" y="720" width="330" height="38" rx="19" fill="#6B52A3"/>
+<text x="225.0" y="746" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">Verifier Bank：模块化复用</text>
+<rect x="60" y="780" width="510" height="130" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="78" y="814" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Action Extractor</text>
+<text x="78" y="846" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">是否明确行动</tspan></text>
+<rect x="620" y="780" width="510" height="130" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="638" y="814" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Deadline Checker</text>
+<text x="638" y="846" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="638" dy="0.0">行动是否及时</tspan></text>
+<rect x="1180" y="780" width="510" height="130" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="1198" y="814" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Evidence Checker</text>
+<text x="1198" y="846" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1198" dy="0.0">是否基于可见证据</tspan></text>
+<rect x="60" y="950" width="510" height="130" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="78" y="984" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Update Checker</text>
+<text x="78" y="1016" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">新信息是否覆盖旧状态</tspan></text>
+<rect x="620" y="950" width="510" height="130" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="638" y="984" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Over-triage Checker</text>
+<text x="638" y="1016" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="638" dy="0.0">防一律急诊</tspan></text>
+<rect x="1180" y="950" width="510" height="130" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="1198" y="984" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Semantic Judge</text>
+<text x="1198" y="1016" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1198" dy="0.0">窄范围语义裁决</tspan></text>
+<rect x="60" y="1150" width="1680" height="95" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="900" y="1190" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#A74444">同一 trajectory 上 10 个 probe = 10 项相关测量，不是 10 个独立病例，也不自动是 10 份机制证据。</text>
+<text x="900" y="1285" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">复用回答“如何更省”；sibling scenarios 回答“能否外推”。两者不能互相替代。</text>
+</svg>

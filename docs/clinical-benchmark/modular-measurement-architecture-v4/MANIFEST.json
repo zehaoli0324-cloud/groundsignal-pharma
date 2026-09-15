@@ -1,0 +1,46 @@
+{
+  "README.md": {
+    "bytes": 2794,
+    "sha256": "c242595239057a61e58a91b6c7da6d1b90d94d8292f876e892b5717a243f91f7"
+  },
+  "GroundSignal-模块化测量架构-V4.html": {
+    "bytes": 2016,
+    "sha256": "4fc488f90d97ea17775fef6f2c1ea6fda974fd50720dedfdf18749cd5c603fc5"
+  },
+  "docs/架构修改说明.md": {
+    "bytes": 568,
+    "sha256": "3cae6fd9c6388bf286cf7ab6d5f8e9b796cccf9509daf86e2833c58551b3da8c"
+  },
+  "scripts/build_v4.py": {
+    "bytes": 23466,
+    "sha256": "9957948cc889fefd325e70938260ddeae4a43b4fa1f990cc3a263fcd468455c0"
+  },
+  "scripts/validate_v4.py": {
+    "bytes": 2107,
+    "sha256": "19cda4bbd4600b95d7228b3bf78206fd0f0f9c8d9285aa3e34ed81192673be8f"
+  },
+  "svg/00-模块化测量总图.svg": {
+    "bytes": 8833,
+    "sha256": "041c20fd66dd27cfda60202d90375ad0cf1275f636a68a2ebeb15452f454219d"
+  },
+  "svg/01-对象模型与ID.svg": {
+    "bytes": 11771,
+    "sha256": "764e6a3f2539e67204dc0d4957bc6543d42c7c6cb0ae29ef6124415a436e15df"
+  },
+  "svg/02-Task-Probe-Verifier多对多.svg": {
+    "bytes": 7978,
+    "sha256": "8034e9917231d20accec30f921ddfbf17c80fd820fa4e6cccc77e40fd916a437"
+  },
+  "svg/03-数量账本与运行复用.svg": {
+    "bytes": 7860,
+    "sha256": "e0c1c60b1040c98736808aef4150e6e602536dd8c1fc183f67f61ff71fde432a"
+  },
+  "svg/04-编排与双清单.svg": {
+    "bytes": 9567,
+    "sha256": "17eebbaa8839f8e9539e9f9825735bea6373f61ba0d78a385b15ccf106ea1776"
+  },
+  "svg/05-双闭环与失败路由.svg": {
+    "bytes": 11384,
+    "sha256": "96769a906ad3daa3a3f5115308e93fbe88f8e620546486b60db6073c38bbbc4d"
+  }
+}

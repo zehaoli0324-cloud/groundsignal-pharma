@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1180" viewBox="0 0 1800 1180">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7885"/></marker></defs>
+<rect width="1800" height="1180" fill="#FFFFFF"/>
+<text x="60" y="62" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="34" font-weight="700" fill="#17324D">V4 总框架：GroundSignal 是测量编排系统，不是静态题库</text>
+<text x="60" y="98" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#6B7885">患者材料、测量任务、探针和验证器分层；一次运行可产生多项裁决</text>
+<rect x="60" y="125" width="1680" height="72" rx="16" fill="#FFF3C9" stroke="#9A7212" stroke-width="2"/>
+<text x="900" y="170" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#17324D">Clinical World 产生行为机会；Measurement Bank 对已发生的可观察事件做模块化裁决</text>
+<rect x="60" y="255" width="370" height="165" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="78" y="289" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#17324D">1 Clinical World</text>
+<text x="78" y="321" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">Scenario + facts + FSM</tspan><tspan x="78" dy="23.5">患者世界不含标准答案</tspan></text>
+<line x1="430" y1="338" x2="465" y2="338" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="480" y="255" width="370" height="165" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="498" y="289" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#17324D">2 Interaction Protocol</text>
+<text x="498" y="321" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#263847"><tspan x="498" dy="0.0">运行前披露与分支规则</tspan><tspan x="498" dy="23.5">不等于实际对话</tspan></text>
+<line x1="850" y1="338" x2="885" y2="338" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="900" y="255" width="370" height="165" rx="16" fill="#FBE9D7" stroke="#B76820" stroke-width="2"/>
+<text x="918" y="289" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#17324D">3 Execution Spec</text>
+<text x="918" y="321" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#263847"><tspan x="918" dy="0.0">Condition + task + model config</tspan><tspan x="918" dy="23.5">决定能否共用一次执行</tspan></text>
+<line x1="1270" y1="338" x2="1305" y2="338" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1320" y="255" width="370" height="165" rx="16" fill="#DDF2F0" stroke="#237B75" stroke-width="2"/>
+<text x="1338" y="289" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#17324D">4 Episode / Trajectory</text>
+<text x="1338" y="321" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#263847"><tspan x="1338" dy="0.0">模型真实行为 + event log</tspan><tspan x="1338" dy="23.5">一次运行产生一条证据链</tspan></text>
+<line x1="900" y1="420" x2="900" y2="475" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="60" y="495" width="1680" height="285" rx="18" fill="#ECE4F7" stroke="#6B52A3" stroke-width="3"/>
+<text x="90" y="535" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="25" font-weight="700" fill="#6B52A3">5 Modular Measurement Bank</text>
+<rect x="90" y="575" width="360" height="150" rx="16" fill="#FFFFFF" stroke="#6B52A3" stroke-width="2"/>
+<text x="108" y="609" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Evaluation Task</text>
+<text x="108" y="641" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="108" dy="0.0">要测什么能力</tspan><tspan x="108" dy="22.1">task_id</tspan></text>
+<line x1="450" y1="650" x2="480" y2="650" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="495" y="575" width="360" height="150" rx="16" fill="#FFFFFF" stroke="#6B52A3" stroke-width="2"/>
+<text x="513" y="609" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Failure Probe</text>
+<text x="513" y="641" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="513" dy="0.0">观察哪个失败条件</tspan><tspan x="513" dy="22.1">probe_template + binding</tspan></text>
+<line x1="855" y1="650" x2="885" y2="650" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="900" y="575" width="360" height="150" rx="16" fill="#FFFFFF" stroke="#6B52A3" stroke-width="2"/>
+<text x="918" y="609" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Verifier Bundle</text>
+<text x="918" y="641" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="918" dy="0.0">多个 checker / Judge</tspan><tspan x="918" dy="22.1">many-to-many</tspan></text>
+<line x1="1260" y1="650" x2="1290" y2="650" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1305" y="575" width="360" height="150" rx="16" fill="#FFFFFF" stroke="#6B52A3" stroke-width="2"/>
+<text x="1323" y="609" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Judgment</text>
+<text x="1323" y="641" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1323" dy="0.0">带机会、证据和版本</tspan><tspan x="1323" dy="22.1">不等于独立机制</tspan></text>
+<line x1="900" y1="780" x2="900" y2="835" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="60" y="855" width="520" height="170" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="78" y="889" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">6 Failure Attribution</text>
+<text x="78" y="921" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">观察事实 ≠ 机制归因</tspan><tspan x="78" dy="24.8">共享事件保留 dependency_id</tspan></text>
+<line x1="580" y1="940" x2="640" y2="940" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="660" y="855" width="520" height="170" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="678" y="889" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">7 Capability Profile</text>
+<text x="678" y="921" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#263847"><tspan x="678" dy="0.0">stage × failure × condition</tspan><tspan x="678" dy="24.8">边界、未决和证据范围</tspan></text>
+<line x1="1180" y1="940" x2="1240" y2="940" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1260" y="855" width="480" height="170" rx="16" fill="#FBE9D7" stroke="#B76820" stroke-width="2"/>
+<text x="1278" y="889" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">8 Deployment Boundary</text>
+<text x="1278" y="921" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#263847"><tspan x="1278" dy="0.0">允许自主 / 必须复核 / 禁止</tspan><tspan x="1278" dy="24.8">临床准入另行签署</tspan></text>
+<text x="900" y="1100" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#6B7885">横向层：版本、来源、隐私、Attack Registry、运行收据、G0–G7 与 Release Gate</text>
+</svg>

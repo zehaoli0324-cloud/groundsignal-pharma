@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1510" viewBox="0 0 1800 1510">
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#687481"/></marker>
+<marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#A74444"/></marker>
+</defs>
+<rect width="1800" height="1510" fill="#FFFFFF"/>
+<text x="60" y="62" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="34" font-weight="700" fill="#17324D">V3 极限测试：红队打穿，蓝队封堵，紫队固化为回归门</text>
+<text x="60" y="98" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#687481">只攻击自有 benchmark sandbox；目标是发现“表面高分 ≠ 目标能力”的路径</text>
+<rect x="60" y="125" width="270" height="38" rx="19" fill="#A74444"/>
+<text x="195.0" y="151" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">A Red Team 攻击面</text>
+<rect x="60" y="185" width="290" height="155" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="78" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">策略投机</text>
+<text x="78" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#243746"><tspan x="78" dy="0">全急诊 / 全弃权</tspan><tspan x="78" dy="20.2">超长万金油</tspan></text>
+<rect x="390" y="185" width="290" height="155" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="408" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Judge Gaming</text>
+<text x="408" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#243746"><tspan x="408" dy="0">指令注入 / rubric 模仿</tspan><tspan x="408" dy="20.2">事后编漂亮 reasoning</tspan></text>
+<rect x="720" y="185" width="290" height="155" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="738" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Proxy / 污染</text>
+<text x="738" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#243746"><tspan x="738" dy="0">metadata / 文件名 / class prior</tspan><tspan x="738" dy="20.2">sentinel 识别 / canary 命中</tspan></text>
+<rect x="1050" y="185" width="290" height="155" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="1068" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">Verifier 绕过</text>
+<text x="1068" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#243746"><tspan x="1068" dy="0">空 checker / 非法状态</tspan><tspan x="1068" dy="20.2">NaN / 重复 / 缺失 / 阈值</tspan></text>
+<rect x="1380" y="185" width="290" height="155" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="1398" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">运行污染</text>
+<text x="1398" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#243746"><tspan x="1398" dy="0">跨 run 缓存 / 重试计数</tspan><tspan x="1398" dy="20.2">旧版本 / 工具伪造 / 状态串病例</tspan></text>
+<rect x="60" y="395" width="280" height="38" rx="19" fill="#2C6E9F"/>
+<text x="200.0" y="421" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">B Blue Team 五层防线</text>
+<rect x="60" y="455" width="290" height="125" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="78" y="489" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">L1 隔离</text>
+<text x="78" y="521" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#243746"><tspan x="78" dy="0">separate verifier</tspan></text>
+<rect x="390" y="455" width="290" height="125" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="408" y="489" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">L2 信息边界</text>
+<text x="408" y="521" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#243746"><tspan x="408" dy="0">FSM + held-out</tspan></text>
+<rect x="720" y="455" width="290" height="125" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="738" y="489" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">L3 评分完整性</text>
+<text x="738" y="521" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#243746"><tspan x="738" dy="0">blocker + coverage</tspan></text>
+<rect x="1050" y="455" width="290" height="125" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="1068" y="489" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">L4 构念效度</text>
+<text x="1068" y="521" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#243746"><tspan x="1068" dy="0">反事实 + proxy probe</tspan></text>
+<rect x="1380" y="455" width="290" height="125" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="1398" y="489" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">L5 测量质量</text>
+<text x="1398" y="521" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#243746"><tspan x="1398" dy="0">mutation + false reject</tspan></text>
+<rect x="60" y="635" width="300" height="38" rx="19" fill="#6B52A3"/>
+<text x="210.0" y="661" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">C Purple Team 证据闭环</text>
+<rect x="60" y="695" width="290" height="135" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="78" y="729" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">REGISTER</text>
+<text x="78" y="761" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#243746"><tspan x="78" dy="0">登记攻击与目标属性</tspan></text>
+<line x1="350" y1="763" x2="375" y2="763" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="390" y="695" width="290" height="135" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="408" y="729" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">LAND</text>
+<text x="408" y="761" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#243746"><tspan x="408" dy="0">证明 mutation/攻击落地</tspan></text>
+<line x1="680" y1="763" x2="705" y2="763" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="720" y="695" width="290" height="135" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="738" y="729" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">RUN</text>
+<text x="738" y="761" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#243746"><tspan x="738" dy="0">保存 receipt 与原始输出</tspan></text>
+<line x1="1010" y1="763" x2="1035" y2="763" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1050" y="695" width="290" height="135" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="1068" y="729" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">CLASSIFY</text>
+<text x="1068" y="761" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#243746"><tspan x="1068" dy="0">CAUGHT / SURVIVED / VOID</tspan></text>
+<line x1="1340" y1="763" x2="1365" y2="763" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1380" y="695" width="290" height="135" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="1398" y="729" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">FIX + REPLAY</text>
+<text x="1398" y="761" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#243746"><tspan x="1398" dy="0">修复后同攻击重放</tspan></text>
+<rect x="60" y="890" width="390" height="38" rx="19" fill="#2E7D5B"/>
+<text x="255.0" y="916" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">D Verifier 五基线攻击矩阵</text>
+<rect x="60" y="950" width="290" height="125" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="78" y="984" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Oracle</text>
+<text x="78" y="1016" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="400" fill="#243746"><tspan x="78" dy="0">PASS</tspan></text>
+<rect x="390" y="950" width="290" height="125" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="408" y="984" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">独立科学正确实现</text>
+<text x="408" y="1016" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="400" fill="#243746"><tspan x="408" dy="0">PASS</tspan></text>
+<rect x="720" y="950" width="290" height="125" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="738" y="984" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Naive baseline</text>
+<text x="738" y="1016" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="400" fill="#243746"><tspan x="738" dy="0">FAIL</tspan></text>
+<rect x="1050" y="950" width="290" height="125" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="1068" y="984" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">合理但方法错误</text>
+<text x="1068" y="1016" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="400" fill="#243746"><tspan x="1068" dy="0">FAIL</tspan></text>
+<rect x="1380" y="950" width="290" height="125" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="1398" y="984" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Cheat agent</text>
+<text x="1398" y="1016" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="400" fill="#243746"><tspan x="1398" dy="0">FAIL</tspan></text>
+<rect x="60" y="1130" width="300" height="38" rx="19" fill="#17324D"/>
+<text x="210.0" y="1156" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">E 极限测试 Release Gate</text>
+<rect x="60" y="1190" width="1680" height="205" rx="16" fill="#F4F6F8" stroke="#17324D" stroke-width="2"/>
+<text x="90" y="1235" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="400" fill="#243746"><tspan x="90" dy="0">所有 Critical 攻击已实际落地且被抓；所有未落地攻击标 VOID，不得计作防御成功；</tspan><tspan x="90" dy="30.0">独立正确实现不被误杀；每条防线有阳性和阴性对照；修复后可重放；</tspan><tspan x="90" dy="30.0">运行隔离、版本、provenance 与恢复 hash 完整；任何 Critical SURVIVED 均阻断发布。</tspan></text>
+<text x="900" y="1460" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#A74444">Sentinel = 科学哨兵；Canary = 污染探针。二者不能混用，也不能只测误报而不测有效题召回。</text>
+</svg>

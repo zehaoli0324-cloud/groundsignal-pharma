@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1380" viewBox="0 0 1800 1380">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7885"/></marker></defs>
+<rect width="1800" height="1380" fill="#FFFFFF"/>
+<text x="60" y="62" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="34" font-weight="700" fill="#17324D">V4 双闭环：既测模型，也测测量平台</text>
+<text x="60" y="98" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#6B7885">模型失败与平台失效分别归因；修复后用原攻击和独立正确材料回放</text>
+<rect x="60" y="125" width="260" height="38" rx="19" fill="#2E7D5B"/>
+<text x="190.0" y="151" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">A 模型测量闭环</text>
+<rect x="60" y="185" width="300" height="125" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="78" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Hypothesis</text>
+<text x="78" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">测什么失败</tspan></text>
+<line x1="360" y1="248" x2="385" y2="248" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="400" y="185" width="300" height="125" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="418" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Controlled Execution</text>
+<text x="418" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="418" dy="0.0">制造行为机会</tspan></text>
+<line x1="700" y1="248" x2="725" y2="248" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="740" y="185" width="300" height="125" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="758" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Observed Events</text>
+<text x="758" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="758" dy="0.0">记录实际行为</tspan></text>
+<line x1="1040" y1="248" x2="1065" y2="248" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1080" y="185" width="300" height="125" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="1098" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Probe Judgments</text>
+<text x="1098" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1098" dy="0.0">局部裁决</tspan></text>
+<line x1="1380" y1="248" x2="1405" y2="248" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1420" y="185" width="300" height="125" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="1438" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Bounded Claim</text>
+<text x="1438" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1438" dy="0.0">限制结论范围</tspan></text>
+<rect x="60" y="370" width="260" height="38" rx="19" fill="#A74444"/>
+<text x="190.0" y="396" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">B 平台验证闭环</text>
+<rect x="60" y="430" width="300" height="125" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="78" y="464" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Correct Alternative</text>
+<text x="78" y="496" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">应通过</tspan></text>
+<line x1="360" y1="493" x2="385" y2="493" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="400" y="430" width="300" height="125" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="418" y="464" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Known Error</text>
+<text x="418" y="496" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="418" dy="0.0">应失败</tspan></text>
+<line x1="700" y1="493" x2="725" y2="493" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="740" y="430" width="300" height="125" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="758" y="464" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Cheat Strategy</text>
+<text x="758" y="496" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="758" dy="0.0">不应刷分</tspan></text>
+<line x1="1040" y1="493" x2="1065" y2="493" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1080" y="430" width="300" height="125" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="1098" y="464" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Fault Injection</text>
+<text x="1098" y="496" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1098" dy="0.0">平台应识别</tspan></text>
+<line x1="1380" y1="493" x2="1405" y2="493" stroke="#6B7885" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1420" y="430" width="300" height="125" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="1438" y="464" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">Replay Regression</text>
+<text x="1438" y="496" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#263847"><tspan x="1438" dy="0.0">修复后重放</tspan></text>
+<rect x="60" y="620" width="320" height="38" rx="19" fill="#6B52A3"/>
+<text x="220.0" y="646" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">C 失败路由：送回真正责任系统</text>
+<rect x="60" y="680" width="300" height="150" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="78" y="714" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">临床争议</text>
+<text x="78" y="746" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#263847"><tspan x="78" dy="0.0">Clinical World / Oracle</tspan><tspan x="78" dy="20.7">返回临床审核</tspan></text>
+<rect x="400" y="680" width="300" height="150" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="418" y="714" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">交互失真</text>
+<text x="418" y="746" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#263847"><tspan x="418" dy="0.0">Protocol / Simulator</tspan><tspan x="418" dy="20.7">修分支和披露</tspan></text>
+<rect x="740" y="680" width="300" height="150" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="758" y="714" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">条件混杂</text>
+<text x="758" y="746" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#263847"><tspan x="758" dy="0.0">Condition Generator</tspan><tspan x="758" dy="20.7">重做对照</tspan></text>
+<rect x="1080" y="680" width="300" height="150" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="1098" y="714" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">运行污染</text>
+<text x="1098" y="746" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#263847"><tspan x="1098" dy="0.0">Runner / Tool Adapter</tspan><tspan x="1098" dy="20.7">修隔离与收据</tspan></text>
+<rect x="1420" y="680" width="300" height="150" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="1438" y="714" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#17324D">测量偏差</text>
+<text x="1438" y="746" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="400" fill="#263847"><tspan x="1438" dy="0.0">Probe / Verifier</tspan><tspan x="1438" dy="20.7">重校 False Accept/Reject</tspan></text>
+<rect x="60" y="900" width="1680" height="280" rx="16" fill="#F4F6F8" stroke="#8091A0" stroke-width="2"/>
+<text x="90" y="945" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#17324D">独立性纪律</text>
+<text x="90" y="990" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="400" fill="#263847"><tspan x="90" dy="0.0">同一 scenario 的多 trajectory / variant / probe 增加的是内部观测，不增加独立患者证据；</tspan><tspan x="90" dy="30.0">同一 event 引发多个 probe failure，应保留 shared_event_id，不能重复计为多个独立机制；</tspan><tspan x="90" dy="30.0">多个 seed 只估计运行波动；跨 sibling scenarios 与独立 experiment families 才扩大证据范围；</tspan><tspan x="90" dy="30.0">强模型全部通过允许得到“在本范围未观察到失败”，不得反向制造失败或偷偷调难度。</tspan></text>
+<text x="900" y="1290" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#17324D">输出分三层：Observed Behavior ｜ Supported Attribution ｜ Remaining Alternatives</text>
+<text x="900" y="1335" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#A74444">总分不能替代 Failure Profile、Capability Boundary 与 Human Oversight。</text>
+</svg>

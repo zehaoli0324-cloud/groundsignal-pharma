@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1460" viewBox="0 0 1800 1460">
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#687481"/></marker>
+<marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#A74444"/></marker>
+</defs>
+<rect width="1800" height="1460" fill="#FFFFFF"/>
+<text x="60" y="62" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="34" font-weight="700" fill="#17324D">V3 题量：完整网络是稀疏张量，72 只是一条 Pilot 切片</text>
+<text x="60" y="98" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#687481">按非空错误类型总数 N 计算；不存在的 stage × mechanism 组合不造题</text>
+<rect x="60" y="125" width="300" height="38" rx="19" fill="#2C6E9F"/>
+<text x="210.0" y="151" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">A 先定义稀疏错误网络</text>
+<rect x="60" y="185" width="500" height="155" rx="16" fill="#DCEAF7" stroke="#2C6E9F" stroke-width="2"/>
+<text x="78" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#17324D">6 个 Process Stages</text>
+<text x="78" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#243746"><tspan x="78" dy="0">S1 信息提取 → S6 复核输出</tspan><tspan x="78" dy="23.0">每个错误必须绑定一个 stage</tspan></text>
+<line x1="560" y1="262" x2="625" y2="262" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="650" y="185" width="500" height="155" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="668" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#17324D">3 个 Attribution Layers</text>
+<text x="668" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#243746"><tspan x="668" dy="0">Decision / Algorithm / Engineering</tspan><tspan x="668" dy="23.0">不是每个 stage 都必须三类齐全</tspan></text>
+<line x1="1150" y1="262" x2="1215" y2="262" stroke="#687481" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1240" y="185" width="500" height="155" rx="16" fill="#FBE9D7" stroke="#B76820" stroke-width="2"/>
+<text x="1258" y="219" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#17324D">n(s,m) 个 Error Types</text>
+<text x="1258" y="251" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#243746"><tspan x="1258" dy="0">每个非空格可有多个具体错误</tspan><tspan x="1258" dy="23.0">N = Σ n(s,m)</tspan></text>
+<text x="900" y="385" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#A74444">只有 18 个格全部非空且每格同为 n 个错误时，才可写成 N = 6 × 3 × n。</text>
+<rect x="60" y="430" width="350" height="38" rx="19" fill="#2E7D5B"/>
+<text x="235.0" y="456" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">B 每个错误类型的实验槽位</text>
+<rect x="60" y="490" width="500" height="170" rx="16" fill="#E1F1E8" stroke="#2E7D5B" stroke-width="2"/>
+<text x="78" y="524" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Control Block</text>
+<text x="78" y="556" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="78" dy="0">5 个成组对照：C0–C4</tspan><tspan x="78" dy="24.3">用于干预 / 特异性 / 检出 / 救援</tspan></text>
+<text x="610" y="580" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="34" font-weight="700" fill="#17324D">+</text>
+<rect x="650" y="490" width="500" height="170" rx="16" fill="#DDF2F0" stroke="#237B75" stroke-width="2"/>
+<text x="668" y="524" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">Pressure Block</text>
+<text x="668" y="556" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="668" dy="0">6 个独立 pressure axes</tspan><tspan x="668" dy="24.3">每轴 L0–L4 共 5 个梯度</tspan></text>
+<text x="1200" y="580" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="34" font-weight="700" fill="#17324D">=</text>
+<rect x="1240" y="490" width="500" height="170" rx="16" fill="#FFF3C9" stroke="#9A7212" stroke-width="2"/>
+<text x="1258" y="524" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">35 Planned Slots</text>
+<text x="1258" y="556" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="1258" dy="0">5 + 6 × 5 = 35</tspan><tspan x="1258" dy="24.3">压力与对照在设计矩阵中分列</tspan></text>
+<text x="900" y="705" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#17324D">若六轴共享同一个 L0 基线：独特题面 = 5 + 6 × (5−1) = 29；重复 L0 属运行槽位，不虚增题库。</text>
+<rect x="60" y="755" width="310" height="38" rx="19" fill="#6B52A3"/>
+<text x="215.0" y="781" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">C 乘 clinical instances</text>
+<rect x="60" y="815" width="1680" height="150" rx="16" fill="#ECE4F7" stroke="#6B52A3" stroke-width="2"/>
+<text x="900" y="865" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="29" font-weight="700" fill="#17324D">完整题库：Q_slots = 35 × I × N    ｜    Q_unique = 29 × I × N</text>
+<text x="900" y="915" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="700" fill="#243746">推荐 I = 3 个 genuine sibling instances：Q_slots = 105N；Q_unique = 87N</text>
+<rect x="60" y="1025" width="510" height="195" rx="16" fill="#F4F6F8" stroke="#8091A0" stroke-width="2"/>
+<text x="78" y="1059" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">稠密下界 n=1</text>
+<text x="78" y="1091" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="78" dy="0">N=18</tspan><tspan x="78" dy="24.3">1890 slots / 1566 unique</tspan><tspan x="78" dy="24.3">5670 episodes/模型（3 runs）</tspan></text>
+<rect x="620" y="1025" width="510" height="195" rx="16" fill="#FFF3C9" stroke="#9A7212" stroke-width="2"/>
+<text x="638" y="1059" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">稠密 n=2</text>
+<text x="638" y="1091" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="638" dy="0">N=36</tspan><tspan x="638" dy="24.3">3780 slots / 3132 unique</tspan><tspan x="638" dy="24.3">11340 episodes/模型（3 runs）</tspan></text>
+<rect x="1180" y="1025" width="510" height="195" rx="16" fill="#FBE9D7" stroke="#B76820" stroke-width="2"/>
+<text x="1198" y="1059" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#17324D">稠密 n=3</text>
+<text x="1198" y="1091" text-anchor="start" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#243746"><tspan x="1198" dy="0">N=54</tspan><tspan x="1198" dy="24.3">5670 slots / 4698 unique</tspan><tspan x="1198" dy="24.3">17010 episodes/模型（3 runs）</tspan></text>
+<rect x="60" y="1275" width="280" height="38" rx="19" fill="#A74444"/>
+<text x="200.0" y="1301" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">D 72 的正确定位</text>
+<rect x="60" y="1335" width="1680" height="80" rx="16" fill="#F8DEDE" stroke="#A74444" stroke-width="2"/>
+<text x="900" y="1385" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#A74444">72 = 旧版 H1–H3 最小 Pilot 切片；不是完整 stage × mechanism × error-type 网络总题量。</text>
+</svg>

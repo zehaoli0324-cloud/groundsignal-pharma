@@ -1,0 +1,54 @@
+{
+  "README.md": {
+    "bytes": 3292,
+    "sha256": "d2b801e225a501166b3552a22f865152568bf61d5cde588b33de9ad22aebbdbe"
+  },
+  "出题网络-设计框架-V3.html": {
+    "bytes": 2521,
+    "sha256": "4589f9c5efaa3cdf3c8f18411974456d9164b6d7fd21f8c8ee652b446b832bd7"
+  },
+  "docs/设计说明.md": {
+    "bytes": 1210,
+    "sha256": "872426f56abc729f61d6521f506ebdc4047ad24266a9e7f30b0226f93a77195b"
+  },
+  "docs/题量计算-V3.md": {
+    "bytes": 2974,
+    "sha256": "96e023352ccd719de669a9e291d4093e7bbc1f2e06d5efecaf71156186847c53"
+  },
+  "scripts/build_v3.py": {
+    "bytes": 28260,
+    "sha256": "c32e345acc31b06859470c3d732191f1b451a4141dba4df94eb52960c93634d8"
+  },
+  "scripts/validate_v3.py": {
+    "bytes": 2730,
+    "sha256": "28e60e62280fafc5ad805b56c99a9b054cca867bbc0e9cac04d0f0902e4f8627"
+  },
+  "svg/00-高度概括总图.svg": {
+    "bytes": 8355,
+    "sha256": "c818690f5aaa1bbac01d08ec19254d6f2ba9fa6dd4dd506e0bdaabb62932baa1"
+  },
+  "svg/01-题量计算与单位.svg": {
+    "bytes": 9130,
+    "sha256": "bf12d99c13f6347dd85e70ee7171cf137e6e6be942178646d076426b35b41612"
+  },
+  "svg/02-临床旅程与失败假设.svg": {
+    "bytes": 11072,
+    "sha256": "0932b78b5e6fedf69c7525dbca3cbaca00e472b0549757fb0cb45212e6e19de1"
+  },
+  "svg/03-因果实验网络.svg": {
+    "bytes": 13317,
+    "sha256": "980e4db131bfa32d9fbd893fcd36f4e20133e9685f634daf11f18fc3cc3269d3"
+  },
+  "svg/04-测量仪器与临床治理.svg": {
+    "bytes": 7652,
+    "sha256": "d8d81870c5a3dc208108d61b3a5de987ce3a7e2c66311150d2af46fc44f71871"
+  },
+  "svg/05-红蓝紫攻防与极限测试.svg": {
+    "bytes": 13574,
+    "sha256": "5a848fe35d4c635c5c37e9a4d1004b2738223559b303fa411a31fc7ae2736d16"
+  },
+  "svg/06-准入门与边界输出.svg": {
+    "bytes": 8930,
+    "sha256": "46713267467918e44e19f376226c9fba57d5220ee6cefd709ccc1f3d4a9df4ad"
+  }
+}
